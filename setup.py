@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(name='django-countries',
-      version='1.0a1',
+      version='1.0a2',
       description='Provides a country field for Django models.',
       author='Chris Beaven',
       author_email='smileychris@gmail.com',
