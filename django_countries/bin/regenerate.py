@@ -35,16 +35,14 @@ def _cmp_value(value):
     with the basic English letter equivalent.
 
     """
-    value = value.replace(u'\u0439', 'e').replace(u'\u0444', 'o')
-    if value.startswith(u'\u0415'):
-        value = 'A%s' % value[1:]
-    if value.startswith(u'\u0415'):
+    value = value.replace(u'\xe9', 'e').replace(u'\xf4', 'o')
+    if value.startswith(u'\xc5'):
         value = 'A%s' % value[1:]
     return value
 
 
 def regenerate(location='http://www.iso.org/iso/list-en1-semic-3.txt',
-               filename=None, default_encoding='windows-1251'):
+               filename=None, default_encoding='ISO-8859-1'):
     """
     Generate the countries Python module from a semicolon delimited file.
     
