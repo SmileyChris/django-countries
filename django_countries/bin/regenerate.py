@@ -26,8 +26,8 @@ OFFICIAL_COUNTRIES = {
 OFFICIAL_COUNTRIES_LINE = u'    %(code)r: %(name)r,'
 COUNTRIES_LINE = u'    (%(code)r, _(%(name)r)),'
 RE_VALID_LINE = re.compile(r'\s*(?P<name>.+);(?P<code>[A-Z]{2})\s*$')
-RE_ACRONYM = re.compile('\b[A-Z](\.[A-Z])+\b')
-
+RE_ACRONYM = re.compile(r'\b[A-Z](\.[A-Z])+\b')
+RE_MC = re.compile(r'\b(Mc)(\w)')
 
 def _cmp_value(value):
     """
@@ -79,10 +79,16 @@ def regenerate(location='http://www.iso.org/iso/list-en1-semic-3.txt',
             # Temporarily add on a space so titlecase doesn't think that ending
             # shortwords should be titled.
             rest = titlecase('%s ' % rest)[:-1]
-            countries_plus.append(('%s %s' % (rest, important), code))
+            plus_name = '%s %s' % (rest, important)
+            plus_name = RE_MC.sub(lambda match: '%s%s' %
+                                     (match.group(1), match.group(2).upper()),
+                                  plus_name)
+            countries_plus.append((plus_name, code))
             name = '%s, %s' % (important, rest)
         else:
             name = titlecase(name)
+        name = RE_MC.sub(lambda match: '%s%s' % (match.group(1),
+                                                 match.group(2).upper()), name)
         country_data['name'] = name
         countries_lines.append(COUNTRIES_LINE % country_data)
         countries_plus.append((name, code))
