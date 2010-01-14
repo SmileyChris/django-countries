@@ -3,9 +3,10 @@ from setuptools import setup, find_packages
 
 setup(name='django-countries',
       version='1.0a1',
-      description="Python Port of John Gruber's titlecase.pl",
+      description='Provides a country field for Django models.',
       author='Chris Beaven',
       author_email='smileychris@gmail.com',
+      url='http://bitbucket.org/smileychris/django-countries/',
       packages=find_packages(),
       package_data={'django_countries': ['bin/*.py', 'media/*.*']},
       # titlecase PYPI is broken, copied the module directly for now (in /bin)
