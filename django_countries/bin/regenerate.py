@@ -1,4 +1,14 @@
 #!/usr/bin/env python
+"""
+This module can be used to regenerate the ``django_countries.countries``
+module.
+
+To regenerate that module to contain the latest list of ISO 3166-1 countries,
+either call this module directly from the command line
+(``python regenenerate.py``), or call the ``regenerate`` method.
+
+"""
+
 import os
 import re
 import string

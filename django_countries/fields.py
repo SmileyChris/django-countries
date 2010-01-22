@@ -3,7 +3,7 @@ from django.utils.encoding import force_unicode
 from django_countries import settings
 
 
-class FieldCountry(object):
+class Country(object):
     def __init__(self, code):
         self.code = code
     
@@ -50,8 +50,8 @@ class FieldCountry(object):
 
 class CountryDescriptor(object):
     """
-    A descriptor for country fields on a model instance. Returns a FieldCountry
-    when accessed so you can do stuff like::
+    A descriptor for country fields on a model instance. Returns a Country when
+    accessed so you can do stuff like::
 
         >>> instance.country.name
         u'New Zealand'
@@ -67,7 +67,7 @@ class CountryDescriptor(object):
             raise AttributeError(
                 "The '%s' attribute can only be accessed from %s instances."
                 % (self.field.name, owner.__name__))
-        return FieldCountry(code=instance.__dict__[self.field.name])
+        return Country(code=instance.__dict__[self.field.name])
 
     def __set__(self, instance, value):
         instance.__dict__[self.field.name] = force_unicode(value)
@@ -109,7 +109,7 @@ class CountryField(CharField):
 
     def get_prep_value(self, value):
         "Returns field's value prepared for saving into a database."
-        # Convert the FieldCountry to unicode for database insertion.
+        # Convert the Country to unicode for database insertion.
         if value is None:
             return None
         return unicode(value)
