@@ -36,7 +36,7 @@ get details of the person's country:
 
 >>> person = Person(name='Chris', country='NZ')
 >>> person.country
-<person
+Country(code='NZ')
 >>> person.country.name
 u'New Zealand'
 >>> person.country.flag
