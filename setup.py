@@ -18,14 +18,14 @@ def long_description():
 
 
 setup(name='django-countries',
-      version='1.0',
+      version='1.0.1',
       description='Provides a country field for Django models.',
       long_description=long_description(),
       author='Chris Beaven',
       author_email='smileychris@gmail.com',
       url='http://bitbucket.org/smileychris/django-countries/',
       packages=find_packages(),
-      package_data={'django_countries': ['bin/*.py', 'media/*.*']},
+      package_data={'django_countries': ['bin/*.py', 'media/flags/*.gif']},
       # titlecase PYPI is broken, copied the module directly for now (in /bin)
 #      requires=['titlecase'],
       classifiers=[
