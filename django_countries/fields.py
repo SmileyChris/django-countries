@@ -113,3 +113,9 @@ class CountryField(CharField):
         if value is None:
             return None
         return unicode(value)
+
+try:
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules([], ['^django_countries\.fields\.CountryField'])
+except ImportError:
+    pass
