@@ -114,6 +114,9 @@ class CountryField(CharField):
             return None
         return unicode(value)
 
+
+# If south is installed, ensure that CountryField will be introspected just
+# like a normal CharField.
 try:
     from south.modelsinspector import add_introspection_rules
     add_introspection_rules([], ['^django_countries\.fields\.CountryField'])
