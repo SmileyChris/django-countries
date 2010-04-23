@@ -1,1 +1,2 @@
+include LICENSE
 recursive-include django_countries/media/flags *.gif
