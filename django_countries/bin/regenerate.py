@@ -36,7 +36,7 @@ OFFICIAL_COUNTRIES = {
 OFFICIAL_COUNTRIES_LINE = u'    %(code)r: %(name)r,'
 COUNTRIES_LINE = u'    (%(code)r, _(%(name)r)),'
 RE_VALID_LINE = re.compile(r'\s*(?P<name>.+);(?P<code>[A-Z]{2})\s*$')
-RE_ACRONYM = re.compile(r'\b[A-Z](\.[A-Z])+\b')
+RE_ACRONYM = re.compile(r'\b[A-Z](\.[A-Za-z])+\b')
 RE_MC = re.compile(r'\b(Mc)(\w)')
 
 def _cmp_value(value):
