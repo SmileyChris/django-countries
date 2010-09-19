@@ -29,7 +29,7 @@ class Country(StrAndUnicode):
         return bool(self.code)
 
     def __len__(self):
-        return self.code.size
+        return len(unicode(self))
     
     @property
     def name(self):

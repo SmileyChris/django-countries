@@ -44,3 +44,10 @@ class TestCountryField(TempAppTestCase):
 
         person = Person.objects.get(pk=person.pk)
         self.assertEqual(person.country, '')
+
+    def test_len(self):
+        person = self.create_person()
+        self.assertEqual(len(person.country), 2)
+
+        person = self.create_person(country=None)
+        self.assertEqual(len(person.country), 0)
