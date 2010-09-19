@@ -1,9 +1,9 @@
 from django.db.models.fields import CharField
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_unicode, StrAndUnicode
 from django_countries import settings
 
 
-class Country(object):
+class Country(StrAndUnicode):
     def __init__(self, code):
         self.code = code
     
@@ -11,19 +11,19 @@ class Country(object):
         return force_unicode(self.code or u'')
 
     def __eq__(self, other):
-        return self.code == force_unicode(other)
+        return unicode(self) == force_unicode(other)
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __cmp__(self, other):
-        return cmp(self.code, force_unicode(other))
+        return cmp(unicode(self), force_unicode(other))
 
     def __hash__(self):
-        return hash(self.code)
+        return hash(unicode(self))
 
     def __repr__(self):
-        return "%s(code=%r)" % (self.__class__.__name__, self.code)
+        return "%s(code=%r)" % (self.__class__.__name__, unicode(self))
 
     def __nonzero__(self):
         return bool(self.code)
@@ -70,7 +70,9 @@ class CountryDescriptor(object):
         return Country(code=instance.__dict__[self.field.name])
 
     def __set__(self, instance, value):
-        instance.__dict__[self.field.name] = force_unicode(value)
+        if value is not None:
+            value = force_unicode(value)
+        instance.__dict__[self.field.name] = value
 
 
 class CountryField(CharField):
