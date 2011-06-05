@@ -5,9 +5,8 @@ django-countries
 A Django application which provides country choices for use with forms, and
 a country field for models.
 
-To use the flags, you will want to copy the flags directory of
-``django_countries/media`` to your static files directory, or use the
-`django-staticfiles`_ application.
+To use the flags, use the ``django.contrib.staticfiles`` app added in Django
+1.3 (or `django-staticfiles`_ application for previous Django versions).
 
 .. _django-staticfiles: http://pypi.python.org/pypi/django-staticfiles/
 
