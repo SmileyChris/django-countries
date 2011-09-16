@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.net
+
+[django-countries.djangopo]
+file_filter = django_countries/locale/<lang>/LC_MESSAGES/django.po
+source_file = django_countries/locale/en/LC_MESSAGES/django.po
+source_lang = en
+
