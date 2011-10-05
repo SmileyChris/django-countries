@@ -17,24 +17,30 @@ def long_description():
         readme.close()
 
 
-setup(name='django-countries',
-      version='1.0.7',
-      description='Provides a country field for Django models.',
-      long_description=long_description(),
-      author='Chris Beaven',
-      author_email='smileychris@gmail.com',
-      url='http://bitbucket.org/smileychris/django-countries/',
-      packages=find_packages(),
-      package_data={'django_countries': ['bin/*.py', 'media/flags/*.gif']},
-      # titlecase PYPI is broken, copied the module directly for now (in /bin)
-#      requires=['titlecase'],
-      classifiers=[
-          'Development Status :: 4 - Beta',
-          'Environment :: Web Environment',
-          'Intended Audience :: Developers',
-          'License :: OSI Approved :: MIT License',
-          'Operating System :: OS Independent',
-          'Programming Language :: Python',
-          'Framework :: Django',
-      ],
+setup(
+    name='django-countries',
+    version='1.1',
+    description='Provides a country field for Django models.',
+    long_description=long_description(),
+    author='Chris Beaven',
+    author_email='smileychris@gmail.com',
+    url='http://bitbucket.org/smileychris/django-countries/',
+    packages=find_packages(),
+    zip_safe=False,
+    package_data={'django_countries': [
+        'bin/*.py',
+        'static/flags/*.gif',
+        'locale/*/LC_MESSAGES/*',
+    ]},
+    # titlecase PYPI is broken, copied the module directly for now (in /bin)
+    #      requires=['titlecase'],
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Web Environment',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Framework :: Django',
+    ],
 )

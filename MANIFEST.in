@@ -1,2 +1,4 @@
 include LICENSE
-recursive-include django_countries/media/flags *.gif
+recursive-include django_countries/static/flags *.gif
+recursive-include django_countries/bin *.py
+recursive-include django_countries/locale *
