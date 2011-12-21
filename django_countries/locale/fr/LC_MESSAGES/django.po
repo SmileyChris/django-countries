@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Sebastien Fievet <zyegfryed>, 2011.
 #   <zyegfryed@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
-"Report-Msgid-Bugs-To: http://bitbucket.org/smileychris/django-countries/issues\n"
-"POT-Creation-Date: 2011-09-16 12:45+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-21 17:30+0000\n"
 "PO-Revision-Date: 2011-10-04 09:01+0000\n"
 "Last-Translator: zyegfryed <zyegfryed@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1078,5 +1078,3 @@ msgstr "Îles Vierges des États-Unis"
 #: countries.py:509
 msgid "United Republic of Tanzania"
 msgstr "tanzanie"
-
-
