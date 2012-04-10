@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-21 17:30+0000\n"
-"PO-Revision-Date: 2011-12-21 17:22+0000\n"
+"Report-Msgid-Bugs-To: http://bitbucket.org/smileychris/django-countries/issues\n"
+"POT-Creation-Date: 2012-04-11 10:47+1200\n"
+"PO-Revision-Date: 2012-04-10 22:48+0000\n"
 "Last-Translator: SmileyChris <smileychris@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -522,8 +522,8 @@ msgid "Liberia"
 msgstr "Liberia"
 
 #: countries.py:131 countries.py:391
-msgid "Libyan Arab Jamahiriya"
-msgstr "Libia"
+msgid "Libya"
+msgstr ""
 
 #: countries.py:132 countries.py:392
 msgid "Liechtenstein"
