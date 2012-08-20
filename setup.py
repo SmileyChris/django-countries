@@ -7,7 +7,6 @@ def long_description():
     """
     Build the long description from a README file located in the same directory
     as this module.
-
     """
     base_path = os.path.dirname(os.path.realpath(__file__))
     readme = open(os.path.join(base_path, 'README'))
@@ -19,7 +18,7 @@ def long_description():
 
 setup(
     name='django-countries',
-    version='1.2',
+    version='1.2.1',
     description='Provides a country field for Django models.',
     long_description=long_description(),
     author='Chris Beaven',
