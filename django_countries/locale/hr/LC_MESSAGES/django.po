@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Berislav Lopac <berislav@lopac.net>, 2012.
+#   <berislav.lopac@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: http://bitbucket.org/smileychris/django-countries/issues\n"
 "POT-Creation-Date: 2012-04-11 10:47+1200\n"
-"PO-Revision-Date: 2012-04-10 22:48+0000\n"
-"Last-Translator: SmileyChris <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2012-05-26 14:47+0000\n"
+"Last-Translator: berislavlopac <berislav.lopac@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -524,7 +525,7 @@ msgstr "Liberija"
 
 #: countries.py:131 countries.py:391
 msgid "Libya"
-msgstr ""
+msgstr "Libija"
 
 #: countries.py:132 countries.py:392
 msgid "Liechtenstein"
