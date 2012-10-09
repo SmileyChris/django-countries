@@ -9,7 +9,7 @@ def long_description():
     as this module.
     """
     base_path = os.path.dirname(os.path.realpath(__file__))
-    readme = open(os.path.join(base_path, 'README'))
+    readme = open(os.path.join(base_path, 'README.rst'))
     try:
         return readme.read()
     finally:
