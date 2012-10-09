@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Juan Miguel Calcaño <asinox@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: http://bitbucket.org/smileychris/django-countries/issues\n"
 "POT-Creation-Date: 2012-04-11 10:47+1200\n"
-"PO-Revision-Date: 2012-04-10 22:48+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2012-09-02 07:26+0000\n"
+"Last-Translator: Juan Miguel Calcaño <asinox@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: countries.py:5 countries.py:259
 msgid "Afghanistan"
@@ -523,7 +524,7 @@ msgstr "Liberia"
 
 #: countries.py:131 countries.py:391
 msgid "Libya"
-msgstr ""
+msgstr "Libia"
 
 #: countries.py:132 countries.py:392
 msgid "Liechtenstein"
