@@ -1,3 +1,4 @@
+include README.rst
 include LICENSE
 recursive-include django_countries/static/flags *.gif
 recursive-include django_countries/bin *.py
