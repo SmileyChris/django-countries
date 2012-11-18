@@ -24,7 +24,7 @@ msgstr "Afganistán"
 
 #: countries.py:6 countries.py:260
 msgid "Åland Islands"
-msgstr " Islas de Åland"
+msgstr "Islas de Åland"
 
 #: countries.py:7 countries.py:261
 msgid "Albania"
