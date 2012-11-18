@@ -346,7 +346,7 @@ msgstr "Гамбия"
 
 #: countries.py:86 countries.py:345
 msgid "Georgia"
-msgstr "Грузии"
+msgstr "Грузия"
 
 #: countries.py:87 countries.py:346
 msgid "Germany"
