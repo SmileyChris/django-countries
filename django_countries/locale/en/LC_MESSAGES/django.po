@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-11 10:47+1200\n"
+"POT-Creation-Date: 2013-06-25 14:48+1200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -681,179 +681,179 @@ msgstr ""
 msgid "Norway"
 msgstr ""
 
-#: countries.py:171 countries.py:432
+#: countries.py:171 countries.py:431
 msgid "Oman"
 msgstr ""
 
-#: countries.py:172 countries.py:433
+#: countries.py:172 countries.py:432
 msgid "Pakistan"
 msgstr ""
 
-#: countries.py:173 countries.py:434
+#: countries.py:173 countries.py:433
 msgid "Palau"
 msgstr ""
 
-#: countries.py:174 countries.py:435
-msgid "Palestinian Territory, Occupied"
+#: countries.py:174 countries.py:434
+msgid "Palestine, State of"
 msgstr ""
 
-#: countries.py:175 countries.py:436
+#: countries.py:175 countries.py:435
 msgid "Panama"
 msgstr ""
 
-#: countries.py:176 countries.py:437
+#: countries.py:176 countries.py:436
 msgid "Papua New Guinea"
 msgstr ""
 
-#: countries.py:177 countries.py:438
+#: countries.py:177 countries.py:437
 msgid "Paraguay"
 msgstr ""
 
-#: countries.py:178 countries.py:439
+#: countries.py:178 countries.py:438
 msgid "Peru"
 msgstr ""
 
-#: countries.py:179 countries.py:440
+#: countries.py:179 countries.py:439
 msgid "Philippines"
 msgstr ""
 
-#: countries.py:180 countries.py:441
+#: countries.py:180 countries.py:440
 msgid "Pitcairn"
 msgstr ""
 
-#: countries.py:181 countries.py:443
+#: countries.py:181 countries.py:442
 msgid "Poland"
 msgstr ""
 
-#: countries.py:182 countries.py:444
+#: countries.py:182 countries.py:443
 msgid "Portugal"
 msgstr ""
 
-#: countries.py:183 countries.py:446
+#: countries.py:183 countries.py:445
 msgid "Puerto Rico"
 msgstr ""
 
-#: countries.py:184 countries.py:447
+#: countries.py:184 countries.py:446
 msgid "Qatar"
 msgstr ""
 
-#: countries.py:185 countries.py:450
+#: countries.py:185 countries.py:449
 msgid "Réunion"
 msgstr ""
 
-#: countries.py:186 countries.py:451
+#: countries.py:186 countries.py:450
 msgid "Romania"
 msgstr ""
 
-#: countries.py:187 countries.py:452
+#: countries.py:187 countries.py:451
 msgid "Russian Federation"
 msgstr ""
 
-#: countries.py:188 countries.py:453
+#: countries.py:188 countries.py:452
 msgid "Rwanda"
 msgstr ""
 
-#: countries.py:189 countries.py:454
+#: countries.py:189 countries.py:453
 msgid "Saint Barthélemy"
 msgstr ""
 
-#: countries.py:190 countries.py:455
+#: countries.py:190 countries.py:454
 msgid "Saint Helena, Ascension and Tristan Da Cunha"
 msgstr ""
 
-#: countries.py:191 countries.py:456
+#: countries.py:191 countries.py:455
 msgid "Saint Kitts and Nevis"
 msgstr ""
 
-#: countries.py:192 countries.py:457
+#: countries.py:192 countries.py:456
 msgid "Saint Lucia"
 msgstr ""
 
-#: countries.py:193 countries.py:458
+#: countries.py:193 countries.py:457
 msgid "Saint Martin (French Part)"
 msgstr ""
 
-#: countries.py:194 countries.py:459
+#: countries.py:194 countries.py:458
 msgid "Saint Pierre and Miquelon"
 msgstr ""
 
-#: countries.py:195 countries.py:460
+#: countries.py:195 countries.py:459
 msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
-#: countries.py:196 countries.py:461
+#: countries.py:196 countries.py:460
 msgid "Samoa"
 msgstr ""
 
-#: countries.py:197 countries.py:462
+#: countries.py:197 countries.py:461
 msgid "San Marino"
 msgstr ""
 
-#: countries.py:198 countries.py:463
+#: countries.py:198 countries.py:462
 msgid "Sao Tome and Principe"
 msgstr ""
 
-#: countries.py:199 countries.py:464
+#: countries.py:199 countries.py:463
 msgid "Saudi Arabia"
 msgstr ""
 
-#: countries.py:200 countries.py:465
+#: countries.py:200 countries.py:464
 msgid "Senegal"
 msgstr ""
 
-#: countries.py:201 countries.py:466
+#: countries.py:201 countries.py:465
 msgid "Serbia"
 msgstr ""
 
-#: countries.py:202 countries.py:467
+#: countries.py:202 countries.py:466
 msgid "Seychelles"
 msgstr ""
 
-#: countries.py:203 countries.py:468
+#: countries.py:203 countries.py:467
 msgid "Sierra Leone"
 msgstr ""
 
-#: countries.py:204 countries.py:469
+#: countries.py:204 countries.py:468
 msgid "Singapore"
 msgstr ""
 
-#: countries.py:205 countries.py:471
+#: countries.py:205 countries.py:470
 msgid "Sint Maarten (Dutch Part)"
 msgstr ""
 
-#: countries.py:206 countries.py:472
+#: countries.py:206 countries.py:471
 msgid "Slovakia"
 msgstr ""
 
-#: countries.py:207 countries.py:473
+#: countries.py:207 countries.py:472
 msgid "Slovenia"
 msgstr ""
 
-#: countries.py:208 countries.py:474
+#: countries.py:208 countries.py:473
 msgid "Solomon Islands"
 msgstr ""
 
-#: countries.py:209 countries.py:475
+#: countries.py:209 countries.py:474
 msgid "Somalia"
 msgstr ""
 
-#: countries.py:210 countries.py:476
+#: countries.py:210 countries.py:475
 msgid "South Africa"
 msgstr ""
 
-#: countries.py:211 countries.py:477
+#: countries.py:211 countries.py:476
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
 
-#: countries.py:212 countries.py:478
+#: countries.py:212 countries.py:477
 msgid "South Sudan"
 msgstr ""
 
-#: countries.py:213 countries.py:479
+#: countries.py:213 countries.py:478
 msgid "Spain"
 msgstr ""
 
-#: countries.py:214 countries.py:480
+#: countries.py:214 countries.py:479
 msgid "Sri Lanka"
 msgstr ""
 
@@ -1037,28 +1037,28 @@ msgstr ""
 msgid "Islamic Republic of Iran"
 msgstr ""
 
-#: countries.py:431
-msgid "Occupied Palestinian Territory"
-msgstr ""
-
-#: countries.py:442
+#: countries.py:441
 msgid "Plurinational State of Bolivia"
 msgstr ""
 
-#: countries.py:445
+#: countries.py:444
 msgid "Province of China Taiwan"
 msgstr ""
 
-#: countries.py:448
+#: countries.py:447
 msgid "Republic of Korea"
 msgstr ""
 
-#: countries.py:449
+#: countries.py:448
 msgid "Republic of Moldova"
 msgstr ""
 
-#: countries.py:470
+#: countries.py:469
 msgid "Sint Eustatius and Saba Bonaire"
+msgstr ""
+
+#: countries.py:480
+msgid "State of Palestine"
 msgstr ""
 
 #: countries.py:492
