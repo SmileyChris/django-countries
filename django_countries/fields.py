@@ -1,51 +1,52 @@
+from __future__ import unicode_literals
+from django.core.files.storage import default_storage
 from django.db.models.fields import CharField
-from django.utils.encoding import force_unicode, StrAndUnicode
-from django_countries import settings
+from django.utils.encoding import force_text, python_2_unicode_compatible
+from django_countries.conf import settings
 
 
-class Country(StrAndUnicode):
+@python_2_unicode_compatible
+class Country(object):
     def __init__(self, code):
         self.code = code
-    
-    def __unicode__(self):
-        return force_unicode(self.code or u'')
+
+    def __str__(self):
+        return force_text(self.code or '')
 
     def __eq__(self, other):
-        return unicode(self) == force_unicode(other)
+        return force_text(self) == force_text(other)
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
-    def __cmp__(self, other):
-        return cmp(unicode(self), force_unicode(other))
-
     def __hash__(self):
-        return hash(unicode(self))
+        return hash(force_text(self))
 
     def __repr__(self):
-        return "%s(code=%r)" % (self.__class__.__name__, unicode(self))
+        return "%s(code=%s)" % (self.__class__.__name__, self)
 
     def __nonzero__(self):
         return bool(self.code)
 
     def __len__(self):
-        return len(unicode(self))
-    
+        return len(force_text(self))
+
     @property
     def name(self):
-        # Local import so the countries aren't loaded unless they are needed. 
+        # Local import so the countries aren't loaded unless they are needed.
         from django_countries.countries import COUNTRIES
         for code, name in COUNTRIES:
             if self.code == code:
                 return name
         return ''
-    
+
     @property
     def flag(self):
         if not self.code:
             return ''
-        return settings.FLAG_URL % {'code_upper': self.code,
-                                    'code': self.code.lower()}
+        path = settings.COUNTRIES_FLAG_STATIC.format(
+            code_upper=self.code, code=self.code.lower())
+        return default_storage.url(path)
 
 
 class CountryDescriptor(object):
@@ -55,7 +56,7 @@ class CountryDescriptor(object):
 
         >>> instance.country.name
         u'New Zealand'
-        
+
         >>> instance.country.flag
         '/static/flags/nz.gif'
     """
@@ -71,7 +72,7 @@ class CountryDescriptor(object):
 
     def __set__(self, instance, value):
         if value is not None:
-            value = force_unicode(value)
+            value = force_text(value)
         instance.__dict__[self.field.name] = value
 
 
@@ -79,20 +80,19 @@ class CountryField(CharField):
     """
     A country field for Django models that provides all ISO 3166-1 countries as
     choices.
-    
     """
     descriptor_class = CountryDescriptor
- 
+
     def __init__(self, *args, **kwargs):
-        # Local import so the countries aren't loaded unless they are needed. 
-        from django_countries.countries import COUNTRIES 
+        # Local import so the countries aren't loaded unless they are needed.
+        from django_countries.countries import COUNTRIES
 
-        kwargs.setdefault('max_length', 2) 
-        kwargs.setdefault('choices', COUNTRIES) 
+        kwargs.setdefault('max_length', 2)
+        kwargs.setdefault('choices', COUNTRIES)
 
-        super(CharField, self).__init__(*args, **kwargs) 
+        super(CharField, self).__init__(*args, **kwargs)
 
-    def get_internal_type(self): 
+    def get_internal_type(self):
         return "CharField"
 
     def contribute_to_class(self, cls, name):
@@ -114,7 +114,7 @@ class CountryField(CharField):
         # Convert the Country to unicode for database insertion.
         if value is None:
             return None
-        return unicode(value)
+        return force_text(value)
 
 
 # If south is installed, ensure that CountryField will be introspected just
