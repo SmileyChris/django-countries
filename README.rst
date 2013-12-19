@@ -105,10 +105,12 @@ For example::
 Customize the flag URL
 ----------------------
 
-The ``COUNTRIES_FLAG_STATIC`` setting can be used to set the relative static
-file location for the flag image assets. It defaults to::
+The ``COUNTRIES_FLAG_URL`` setting can be used to set the url for the flag
+image assets. It defaults to::
 
-  COUNTRIES_FLAG_STATIC = 'flags/{code}.gif'
+  COUNTRIES_FLAG_URL = 'flags/{code}.gif'
+
+The URL can be relative to the STATIC_URL setting, or an absolute URL.
 
 The location is parsed using Python's string formatting and is passed the
 following arguments:
@@ -116,6 +118,13 @@ following arguments:
     * code
     * code_upper
 
-For example: ``COUNTRIES_FLAG_STATIC = 'flags/16x10/{code_upper}.png'``
+For example: ``COUNTRIES_FLAG_URL = 'flags/16x10/{code_upper}.png'``
 
 No checking is done to ensure that a static flag actually exists.
+
+Alternatively, you can specify a different URL on specific ``CountryField``s::
+
+    class Person(models.Model):
+        name = models.CharField(max_length=100)
+        country = CountryField(
+            countries_flag_url='//flags.example.com/{code}.png')

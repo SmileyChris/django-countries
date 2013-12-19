@@ -17,9 +17,11 @@ class AppSettings(django.conf.BaseSettings):
 
 
 class Settings(AppSettings):
-    COUNTRIES_FLAG_STATIC = 'flags/{code}.gif'
+    COUNTRIES_FLAG_URL = 'flags/{code}.gif'
     """
-    The relative static file location to find flags.
+    The URL for a flag.
+
+    It can either be relative to the static url, or an absolute url.
 
     The location is parsed using Python's string formatting and is passed the
     following arguments:
@@ -27,7 +29,7 @@ class Settings(AppSettings):
         * code
         * code_upper
 
-    For example: ``COUNTRIES_FLAG_STATIC = 'flags/16x10/{code_upper}.png'``
+    For example: ``COUNTRIES_FLAG_URL = 'flags/16x10/{code_upper}.png'``
     """
 
     COUNTRIES_OVERRIDE = {}

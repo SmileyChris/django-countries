@@ -6,4 +6,4 @@ class Person(models.Model):
     name = models.CharField(max_length=50)
     country = CountryField(blank=True)
     other_country = CountryField(
-        blank=True, flag_static_url='//flags.example.com/')
+        blank=True, countries_flag_url='//flags.example.com/{code}.gif')

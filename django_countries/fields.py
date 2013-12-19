@@ -1,4 +1,8 @@
 from __future__ import unicode_literals
+try:
+    from urllib import parse as urlparse
+except ImportError:
+    import urlparse   # Python 2
 
 from django.db.models.fields import CharField
 from django.utils.encoding import force_text, python_2_unicode_compatible
@@ -9,9 +13,9 @@ from django_countries.conf import settings
 
 @python_2_unicode_compatible
 class Country(object):
-    def __init__(self, code, static_url):
+    def __init__(self, code, flag_url):
         self.code = code
-        self.static_url = static_url
+        self.flag_url = flag_url
 
     def __str__(self):
         return force_text(self.code or '')
@@ -44,9 +48,9 @@ class Country(object):
     def flag(self):
         if not self.code:
             return ''
-        path = settings.COUNTRIES_FLAG_STATIC.format(
+        url = self.flag_url.format(
             code_upper=self.code, code=self.code.lower())
-        return self.static_url + path
+        return urlparse.urljoin(settings.STATIC_URL, url)
 
 
 class CountryDescriptor(object):
@@ -73,7 +77,8 @@ class CountryDescriptor(object):
                 % (self.field.name, owner.__name__))
         return Country(
             code=instance.__dict__[self.field.name],
-            static_url=self.field.flag_static_url)
+            flag_url=self.field.countries_flag_url or
+            settings.COUNTRIES_FLAG_URL)
 
     def __set__(self, instance, value):
         if value is not None:
@@ -89,8 +94,7 @@ class CountryField(CharField):
     descriptor_class = CountryDescriptor
 
     def __init__(self, *args, **kwargs):
-        self.flag_static_url = (
-            kwargs.pop('flag_static_url', None) or settings.STATIC_URL)
+        self.countries_flag_url = kwargs.pop('countries_flag_url', None)
         super(CharField, self).__init__(
             max_length=2, choices=countries, *args, **kwargs)
 

@@ -28,16 +28,22 @@ class TestCountryField(TestCase):
         person = Person(name='Chris Beaven', country='NZ')
         self.assertEqual(person.country.flag, '/static-assets/flags/nz.gif')
 
-    def test_flag_custom_static_url(self):
+    def test_custom_field_flag_url(self):
         person = Person(name='Chris Beaven', country='NZ', other_country='US')
         self.assertEqual(
-            person.other_country.flag, '//flags.example.com/flags/us.gif')
+            person.other_country.flag, '//flags.example.com/us.gif')
 
-    def test_countries_flag_static_setting(self):
-        with self.settings(COUNTRIES_FLAG_STATIC='img/flag-{code_upper}.png'):
-            person = Person(name='Chris Beaven', country='NZ')
+    def test_COUNTRIES_FLAG_URL_setting(self):
+        # Custom relative url
+        person = Person(name='Chris Beaven', country='NZ')
+        with self.settings(COUNTRIES_FLAG_URL='img/flag-{code_upper}.png'):
             self.assertEqual(
                 person.country.flag, '/static-assets/img/flag-NZ.png')
+        # Custom absolute url
+        with self.settings(COUNTRIES_FLAG_URL='https://flags.example.com/'
+                           '{code_upper}.PNG'):
+            self.assertEqual(
+                person.country.flag, 'https://flags.example.com/NZ.PNG')
 
     def test_blank(self):
         person = Person.objects.create(name='The Outsider', country=None)
