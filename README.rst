@@ -21,7 +21,7 @@ corresponding to the official ISO 3166-1 list of countries (with a default
 Consider the following model using a ``CountryField``::
 
     from django.db import models
-    from django_countries import CountryField
+    from django_countries.fields import CountryField
 
     class Person(models.Model):
         name = models.CharField(max_length=100)
