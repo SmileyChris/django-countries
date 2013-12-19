@@ -76,6 +76,8 @@ For example::
     Albania (AL)
 
 Country names are translated using Django's standard ``ugettext``.
+If you would like to help by adding a translation, please visit
+https://www.transifex.com/projects/p/django-countries/
 
 
 Customization
