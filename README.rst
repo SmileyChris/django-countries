@@ -5,8 +5,6 @@ Django Countries
 A Django application that provides country choices for use with forms, flag
 icons static files, and a country field for models.
 
-.. _django-staticfiles: http://pypi.python.org/pypi/django-staticfiles/
-
 
 CountryField
 ============
@@ -60,7 +58,8 @@ flag
 Get the countries from Python
 =============================
 
-Use the ``django_countries.countries`` object instance as an iterator of ISO 3166-1 country codes and names (sorted by name).
+Use the ``django_countries.countries`` object instance as an iterator of ISO
+3166-1 country codes and names (sorted by name).
 
 For example::
 
@@ -87,7 +86,8 @@ Customize the country list
 --------------------------
 
 Country names are taken from the official ISO 3166-1 list. If your project
-requires the use of alternative names, the inclusion or exclusion of specific countries then use the ``COUNTRIES_OVERRIDE`` setting.
+requires the use of alternative names, the inclusion or exclusion of specific
+countries then use the ``COUNTRIES_OVERRIDE`` setting.
 
 A dictionary of names to override the defaults.
 
