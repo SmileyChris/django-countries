@@ -10,9 +10,9 @@ from django_countries.conf import settings
 
 @python_2_unicode_compatible
 class Country(object):
-    def __init__(self, code, storage):
+    def __init__(self, code, static_url):
         self.code = code
-        self.storage = storage
+        self.static_url = static_url
 
     def __str__(self):
         return force_text(self.code or '')
@@ -47,7 +47,7 @@ class Country(object):
             return ''
         path = settings.COUNTRIES_FLAG_STATIC.format(
             code_upper=self.code, code=self.code.lower())
-        return self.storage.url(path)
+        return self.static_url + path
 
 
 class CountryDescriptor(object):
@@ -74,7 +74,7 @@ class CountryDescriptor(object):
                 % (self.field.name, owner.__name__))
         return Country(
             code=instance.__dict__[self.field.name],
-            storage=self.field.flag_storage)
+            static_url=self.field.flag_static_url)
 
     def __set__(self, instance, value):
         if value is not None:
@@ -90,7 +90,8 @@ class CountryField(CharField):
     descriptor_class = CountryDescriptor
 
     def __init__(self, *args, **kwargs):
-        self.flag_storage = kwargs.pop('flag_storage', None) or default_storage
+        self.flag_static_url = (
+            kwargs.pop('flag_static_url', None) or settings.STATIC_URL)
         super(CharField, self).__init__(
             max_length=2, choices=countries, *args, **kwargs)
 
