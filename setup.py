@@ -23,12 +23,10 @@ setup(
     long_description=long_description(),
     author='Chris Beaven',
     author_email='smileychris@gmail.com',
-    url='http://bitbucket.org/smileychris/django-countries/',
+    url='https://github.com/SmileyChris/django-countries/',
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
-    # titlecase PYPI is broken, copied the module directly for now (in /bin)
-    #      requires=['titlecase'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
