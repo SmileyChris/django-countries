@@ -122,7 +122,7 @@ For example: ``COUNTRIES_FLAG_URL = 'flags/16x10/{code_upper}.png'``
 
 No checking is done to ensure that a static flag actually exists.
 
-Alternatively, you can specify a different URL on specific ``CountryField``s::
+Alternatively, you can specify a different URL on a specific ``CountryField``::
 
     class Person(models.Model):
         name = models.CharField(max_length=100)
