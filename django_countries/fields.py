@@ -29,8 +29,10 @@ class Country(object):
     def __repr__(self):
         return "%s(code=%s)" % (self.__class__.__name__, self)
 
-    def __nonzero__(self):
+    def __bool__(self):
         return bool(self.code)
+
+    __nonzero__ = __bool__   # Python 2 compatibility.
 
     def __len__(self):
         return len(force_text(self))
@@ -51,12 +53,15 @@ class Country(object):
 class CountryDescriptor(object):
     """
     A descriptor for country fields on a model instance. Returns a Country when
-    accessed so you can do stuff like::
+    accessed so you can do things like::
 
-        >>> instance.country.name
+        >>> from people import Person
+        >>> person = Person.object.get(name='Chris')
+
+        >>> person.country.name
         u'New Zealand'
 
-        >>> instance.country.flag
+        >>> person.country.flag
         '/static/flags/nz.gif'
     """
     def __init__(self, field):
