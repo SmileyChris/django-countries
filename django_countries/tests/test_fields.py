@@ -6,17 +6,11 @@ from django.utils.encoding import force_text
 
 class TestCountryField(TestCase):
 
-    def create_person(self, country='NZ'):
-        return Person.objects.create(name='Chris Beaven', country='NZ')
-
     def test_logic(self):
         person = Person(name='Chris Beaven', country='NZ')
 
         self.assertEqual(person.country, 'NZ')
         self.assertNotEqual(person.country, 'ZZ')
-
-        self.assertTrue(person.country < 'OA')
-        self.assertTrue(person.country > 'NY')
 
         self.assertTrue(person.country)
         person.country = ''
@@ -32,7 +26,18 @@ class TestCountryField(TestCase):
 
     def test_flag(self):
         person = Person(name='Chris Beaven', country='NZ')
-        self.assertEqual(person.country.flag, '/static/flags/nz.gif')
+        self.assertEqual(person.country.flag, '/static-assets/flags/nz.gif')
+
+    def test_flag_custom_static_url(self):
+        person = Person(name='Chris Beaven', country='NZ', other_country='US')
+        self.assertEqual(
+            person.other_country.flag, '//flags.example.com/flags/us.gif')
+
+    def test_countries_flag_static_setting(self):
+        with self.settings(COUNTRIES_FLAG_STATIC='img/flag-{code_upper}.png'):
+            person = Person(name='Chris Beaven', country='NZ')
+            self.assertEqual(
+                person.country.flag, '/static-assets/img/flag-NZ.png')
 
     def test_blank(self):
         person = Person.objects.create(name='The Outsider', country=None)
