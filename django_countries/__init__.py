@@ -19,7 +19,7 @@ class Countries(object):
         """
         # Local import so that countries aren't loaded into memory until first
         # used.
-        from django_countries.countries import COUNTRIES
+        from django_countries.data import COUNTRIES
 
         if not hasattr(self, '_countries'):
             self._countries = []
