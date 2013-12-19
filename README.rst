@@ -1,12 +1,9 @@
 ================
-django-countries
+Django Countries
 ================
 
-A Django application which provides country choices for use with forms, and
-a country field for models.
-
-To use the flags, use the ``django.contrib.staticfiles`` app added in Django
-1.3 (or `django-staticfiles`_ application for previous Django versions).
+A Django application that provides country choices for use with forms, flag
+icons static files, and a country field for models.
 
 .. _django-staticfiles: http://pypi.python.org/pypi/django-staticfiles/
 
@@ -31,15 +28,15 @@ Consider the following model using a ``CountryField``::
         country = CountryField()
 
 Any ``Person`` instance will have a ``country`` attribute that you can use to
-get details of the person's country:
+get details of the person's country::
 
->>> person = Person(name='Chris', country='NZ')
->>> person.country
-Country(code='NZ')
->>> person.country.name
-u'New Zealand'
->>> person.country.flag
-u'/static/flags/nz.gif'
+    >>> person = Person(name='Chris', country='NZ')
+    >>> person.country
+    Country(code='NZ')
+    >>> person.country.name
+    'New Zealand'
+    >>> person.country.flag
+    '/static/flags/nz.gif'
 
 This object (``person.country`` in the example) is a ``Country`` instance,
 which is described below.
@@ -51,31 +48,72 @@ An object used to represent a country, instanciated with a two character
 country code.
 
 It can be compared to other objects as if it was a string containing the
-country code, and it's ``__unicode__`` method returns the country code.  
+country code and when evaluated as text, returns the country code.  
 
 name
   Contains the full country name.
 
 flag
-  Contains a URL to the flag. ``'flags/[lowercasecountrycode].gif'`` is
-  appended to the ``STATIC_URL`` setting, or if that isn't set, the
-  ``MEDIA_URL`` setting.
+  Contains a URL to the flag.
 
 
-Country Choices
-===============
+Get the countries from Python
+=============================
 
-The ``django_countries.countries`` module contains some constants which can be
-used to generate choices lists for a Django ``Select`` form field.
+Use the ``django_countries.countries`` object instance as an iterator of ISO 3166-1 country codes and names (sorted by name).
 
-``COUNTRIES``
-  A tuple of two part tuples, each consisting of a country code and the
-  corresponding nicely titled (and translatable) country name.
+For example::
 
-``COUNTRIES_PLUS``
-  A tuple, similar to ``COUNTRIES``, but also includes duplicates for countries
-  that contain a comma (i.e. the non-comma'd version).
+    >>> from django_countries import countries
+    >>> dict(countries)['NZ']
+    'New Zealand'
 
-``OFFICIAL_COUNTRIES``
-  A dictionary where each key is a country code and each value is the
-  corresponding official capitalised ISO 3166-1 English country name.
+    >>> for code, name in list(countries)[:3]:
+    ...     print("{name} ({code})".format(name=name, code=code))
+    ...
+    Afghanistan (AF)
+    Åland Islands (AX)
+    Albania (AL)
+
+Country names are translated using Django's standard ``ugettext``.
+
+
+Customization
+=============
+
+Customize the country list
+--------------------------
+
+Country names are taken from the official ISO 3166-1 list. If your project
+requires the use of alternative names, the inclusion or exclusion of specific countries then use the ``COUNTRIES_OVERRIDE`` setting.
+
+A dictionary of names to override the defaults.
+
+Note that you will need to handle translation of customised country names.
+
+Setting a country's name to ``None`` will exclude it from the country list.
+For example::
+
+    COUNTRIES_OVERRIDE = {
+        'NZ': _('Middle Earth'),
+        'AU': None
+    }
+
+
+Customize the flag URL
+----------------------
+
+The ``COUNTRIES_FLAG_STATIC`` setting can be used to set the relative static
+file location for the flag image assets. It defaults to::
+
+  COUNTRIES_FLAG_STATIC = 'flags/{code}.png'
+
+The location is parsed using Python's string formatting and is passed the
+following arguments:
+
+    * code
+    * code_upper
+
+For example: ``COUNTRIES_FLAG_STATIC = 'flags/16x10/{code_upper}.png'``
+
+No checking is done to ensure that a static flag actually exists.
