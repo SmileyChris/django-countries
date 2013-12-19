@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 
-from django.core.files.storage import default_storage
 from django.db.models.fields import CharField
 from django.utils.encoding import force_text, python_2_unicode_compatible
 
