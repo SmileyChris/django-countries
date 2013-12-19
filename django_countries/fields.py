@@ -10,8 +10,9 @@ from django_countries.conf import settings
 
 @python_2_unicode_compatible
 class Country(object):
-    def __init__(self, code):
+    def __init__(self, code, storage):
         self.code = code
+        self.storage = storage
 
     def __str__(self):
         return force_text(self.code or '')
@@ -44,7 +45,7 @@ class Country(object):
             return ''
         path = settings.COUNTRIES_FLAG_STATIC.format(
             code_upper=self.code, code=self.code.lower())
-        return default_storage.url(path)
+        return self.storage.url(path)
 
 
 class CountryDescriptor(object):
@@ -66,7 +67,9 @@ class CountryDescriptor(object):
             raise AttributeError(
                 "The '%s' attribute can only be accessed from %s instances."
                 % (self.field.name, owner.__name__))
-        return Country(code=instance.__dict__[self.field.name])
+        return Country(
+            code=instance.__dict__[self.field.name],
+            storage=self.field.flag_storage)
 
     def __set__(self, instance, value):
         if value is not None:
