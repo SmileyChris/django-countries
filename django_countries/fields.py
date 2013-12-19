@@ -1,7 +1,10 @@
 from __future__ import unicode_literals
+
 from django.core.files.storage import default_storage
 from django.db.models.fields import CharField
 from django.utils.encoding import force_text, python_2_unicode_compatible
+
+from django_countries import countries
 from django_countries.conf import settings
 
 
@@ -33,12 +36,7 @@ class Country(object):
 
     @property
     def name(self):
-        # Local import so the countries aren't loaded unless they are needed.
-        from django_countries.countries import COUNTRIES
-        for code, name in COUNTRIES:
-            if self.code == code:
-                return name
-        return ''
+        return countries.name(self.code)
 
     @property
     def flag(self):
@@ -84,13 +82,9 @@ class CountryField(CharField):
     descriptor_class = CountryDescriptor
 
     def __init__(self, *args, **kwargs):
-        # Local import so the countries aren't loaded unless they are needed.
-        from django_countries.countries import COUNTRIES
-
-        kwargs.setdefault('max_length', 2)
-        kwargs.setdefault('choices', COUNTRIES)
-
-        super(CharField, self).__init__(*args, **kwargs)
+        self.flag_storage = kwargs.pop('flag_storage', None) or default_storage
+        super(CharField, self).__init__(
+            max_length=2, choices=countries, *args, **kwargs)
 
     def get_internal_type(self):
         return "CharField"
