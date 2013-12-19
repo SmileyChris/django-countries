@@ -7,10 +7,10 @@ from django.utils.encoding import force_text
 class TestCountryField(TestCase):
 
     def create_person(self, country='NZ'):
-        return Person.objects.create(name='Chris Beaven', country=country)
+        return Person.objects.create(name='Chris Beaven', country='NZ')
 
     def test_logic(self):
-        person = self.create_person()
+        person = Person(name='Chris Beaven', country='NZ')
 
         self.assertEqual(person.country, 'NZ')
         self.assertNotEqual(person.country, 'ZZ')
@@ -22,28 +22,28 @@ class TestCountryField(TestCase):
         person.country = ''
         self.assertFalse(person.country)
 
-    def test_unicode(self):
-        person = self.create_person()
+    def test_text(self):
+        person = Person(name='Chris Beaven', country='NZ')
         self.assertEqual(force_text(person.country), 'NZ')
 
     def test_name(self):
-        person = self.create_person()
+        person = Person(name='Chris Beaven', country='NZ')
         self.assertEqual(person.country.name, u'New Zealand')
 
     def test_flag(self):
-        person = self.create_person()
+        person = Person(name='Chris Beaven', country='NZ')
         self.assertEqual(person.country.flag, '/static/flags/nz.gif')
 
     def test_blank(self):
-        person = self.create_person(country=None)
+        person = Person.objects.create(name='The Outsider', country=None)
         self.assertEqual(person.country, '')
 
         person = Person.objects.get(pk=person.pk)
         self.assertEqual(person.country, '')
 
     def test_len(self):
-        person = self.create_person()
+        person = Person(name='Chris Beaven', country='NZ')
         self.assertEqual(len(person.country), 2)
 
-        person = self.create_person(country=None)
+        person = Person(name='The Outsider', country=None)
         self.assertEqual(len(person.country), 0)
