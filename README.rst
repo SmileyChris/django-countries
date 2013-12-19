@@ -108,7 +108,7 @@ Customize the flag URL
 The ``COUNTRIES_FLAG_STATIC`` setting can be used to set the relative static
 file location for the flag image assets. It defaults to::
 
-  COUNTRIES_FLAG_STATIC = 'flags/{code}.png'
+  COUNTRIES_FLAG_STATIC = 'flags/{code}.gif'
 
 The location is parsed using Python's string formatting and is passed the
 following arguments:
