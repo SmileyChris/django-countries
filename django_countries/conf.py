@@ -10,14 +10,14 @@ class AppSettings(django.conf.BaseSettings):
     def __getattribute__(self, attr):
         if attr == attr.upper():
             try:
-                return getattr(django.conf.django_settings, attr)
+                return getattr(django.conf.settings, attr)
             except AttributeError:
                 pass
         return super(AppSettings, self).__getattribute__(attr)
 
 
 class Settings(AppSettings):
-    COUNTRIES_FLAG_STATIC = 'flags/{code}.png'
+    COUNTRIES_FLAG_STATIC = 'flags/{code}.gif'
     """
     The relative static file location to find flags.
 
