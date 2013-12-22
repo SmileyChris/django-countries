@@ -95,8 +95,11 @@ class CountryField(CharField):
 
     def __init__(self, *args, **kwargs):
         self.countries_flag_url = kwargs.pop('countries_flag_url', None)
-        super(CharField, self).__init__(
-            max_length=2, choices=countries, *args, **kwargs)
+        kwargs.update({
+            'max_length': 2,
+            'choices': countries,
+        })
+        super(CharField, self).__init__(*args, **kwargs)
 
     def get_internal_type(self):
         return "CharField"
