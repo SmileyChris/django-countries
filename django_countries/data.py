@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import glob
+import os
 
 try:
     from django.utils.translation import ugettext_lazy as _
@@ -261,14 +263,18 @@ COUNTRIES = {
     "ZW": _("Zimbabwe"),
 }
 
-# The following code can be used for self-generation of this file.
-# It requires a UTF-8 CSV file containing the short ISO name and two letter
-# country code as the first two columns.
-if __name__ == '__main__':
+
+def self_generate(output_filename, filename='iso3166-1.csv'):
+    """
+    The following code can be used for self-generation of this file.
+
+    It requires a UTF-8 CSV file containing the short ISO name and two letter
+    country code as the first two columns.
+    """
     import csv
     import re
     countries = []
-    with open('iso3166-1.csv', 'rb') as csv_file:
+    with open(filename, 'rb') as csv_file:
         for row in csv.reader(csv_file):
             name = row[0].decode('utf-8').rstrip('*')
             name = re.sub(r'\(the\)', '', name)
@@ -286,6 +292,45 @@ if __name__ == '__main__':
     content = bits[0]
     content += '\n'.join(country_list).encode('utf-8')
     content += bits[2]
-    with open(__file__, 'wb') as source_file:
-        source_file.write(content)
+    with open(output_filename, 'wb') as output_file:
+        output_file.write(content)
+    return countries
+
+
+def check_flags():
+    files = {}
+    this_dir = os.path.dirname(__file__)
+    for path in glob.glob(os.path.join(this_dir, 'static', 'flags', '*.gif')):
+        files[os.path.basename(os.path.splitext(path)[0]).upper()] = path
+
+    flags_missing = []
+    for code in COUNTRIES:
+        if code not in files:
+            flags_missing.append(code)
+    if flags_missing:
+        flags_missing.sort()
+        print("The following country codes are missing a flag:")
+        for code in flags_missing:
+            print("  {} ({})".format(code, COUNTRIES[code]))
+    else:
+        print("All country codes have flags. :)")
+
+    code_missing = []
+    for code, path in files.items():
+        if code not in COUNTRIES:
+            code_missing.append(path)
+    if code_missing:
+        code_missing.sort()
+        print("")
+        print("The following flags don't have a matching country code:")
+        for path in code_missing:
+            print("  {}".format(path))
+
+
+if __name__ == '__main__':
+    countries = self_generate(__file__)
     print('Wrote {0} countries.'.format(len(countries)))
+
+    # Check flag static files:
+    print("")
+    check_flags()
