@@ -26,7 +26,7 @@ class Countries(object):
             overrides = settings.COUNTRIES_OVERRIDE
             for code, name in COUNTRIES.items():
                 if code in overrides:
-                    name = overrides['code']
+                    name = overrides[code]
                 if name:
                     self.countries.append((code, name))
         return self._countries
