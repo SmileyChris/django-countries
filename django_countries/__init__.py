@@ -26,9 +26,11 @@ class Countries(object):
             overrides = settings.COUNTRIES_OVERRIDE
             for code, name in COUNTRIES.items():
                 if code in overrides:
-                    name = overrides['code']
+                    name = overrides[code]
                 if name:
-                    self.countries.append((code, name))
+                    self._countries.append((code, name))
+            for key in set(overrides) - set(COUNTRIES):
+                self._countries.append((key, overrides[key]))
         return self._countries
 
     @countries.deleter
@@ -37,7 +39,8 @@ class Countries(object):
         Reset the countries cache in case for some crazy reason the settings
         change. But surely no one is crazy enough to do that, right?
         """
-        del self._countries
+        if hasattr(self, '_countries'):
+            del self._countries
 
     def __iter__(self):
         """
