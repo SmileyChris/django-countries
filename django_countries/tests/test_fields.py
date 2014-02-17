@@ -99,3 +99,19 @@ class TestCountryObject(TestCase):
     def test_flag_on_empty_code(self):
         country = fields.Country(code='', flag_url='')
         self.assertEqual(country.flag, '')
+
+    def test_ioc_code(self):
+        country = fields.Country(code='NL', flag_url='')
+        self.assertEqual(country.ioc_code, 'NED')
+
+    def test_country_from_ioc_code(self):
+        country = fields.Country.country_from_ioc('NED')
+        self.assertEqual(country, fields.Country('NL', flag_url=''))
+
+    def test_country_from_blank_ioc_code(self):
+        country = fields.Country.country_from_ioc('')
+        self.assertIsNone(country)
+
+    def test_country_from_nonexistence_ioc_code(self):
+        country = fields.Country.country_from_ioc('XXX')
+        self.assertIsNone(country)
