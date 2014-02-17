@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+from ioc_data import ISO_TO_IOC, IOC_TO_ISO
+
 try:
     from urllib import parse as urlparse
 except ImportError:
@@ -52,6 +54,19 @@ class Country(object):
         url = self.flag_url.format(
             code_upper=self.code, code=self.code.lower())
         return urlparse.urljoin(settings.STATIC_URL, url)
+
+    @staticmethod
+    def country_from_ioc(ioc_code, flag_url=''):
+        code = IOC_TO_ISO.get(ioc_code, '')
+        if code == '':
+            return None
+        return Country(code, flag_url=flag_url)
+
+    @property
+    def ioc_code(self):
+        if not self.code:
+            return ''
+        return ISO_TO_IOC.get(self.code, '')
 
 
 class CountryDescriptor(object):
