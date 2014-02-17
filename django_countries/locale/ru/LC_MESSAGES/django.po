@@ -5,6 +5,7 @@
 # Translators:
 # gennas2 <gennas2@gmail.com>, 2012
 # nefeol <lanior@gmail.com>, 2011
+# m.arnold <lwarxx@gmail.com>, 2014
 # Chris Beaven <smileychris@gmail.com>, 2012
 # victor.mireyev <victor.mireyev@gmail.com>, 2013
 msgid ""
@@ -12,8 +13,8 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-19 14:56+1300\n"
-"PO-Revision-Date: 2013-12-19 02:01+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2014-01-25 07:50+0000\n"
+"Last-Translator: m.arnold <lwarxx@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/django-countries/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -227,7 +228,7 @@ msgstr "Конго"
 
 #: data.py:64
 msgid "Congo (the Democratic Republic of the)"
-msgstr ""
+msgstr "Конго (Демократическая Республика)"
 
 #: data.py:65
 msgid "Cook Islands"
@@ -239,7 +240,7 @@ msgstr "Коста-Рика"
 
 #: data.py:67
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Кот-д'Ивуар"
 
 #: data.py:68
 msgid "Croatia"
@@ -307,7 +308,7 @@ msgstr "Эфиопия"
 
 #: data.py:84
 msgid "Falkland Islands  [Malvinas]"
-msgstr ""
+msgstr "Фолклендские острова [Мальвинские]"
 
 #: data.py:85
 msgid "Faroe Islands"
@@ -343,7 +344,7 @@ msgstr "Габон"
 
 #: data.py:93
 msgid "Gambia (The)"
-msgstr ""
+msgstr "Гамбия"
 
 #: data.py:94
 msgid "Georgia"
@@ -395,7 +396,7 @@ msgstr "Гвинея"
 
 #: data.py:106
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Гвинея-Бисау"
 
 #: data.py:107
 msgid "Guyana"
@@ -411,7 +412,7 @@ msgstr "Остров Херд и Острова Макдоналд"
 
 #: data.py:110
 msgid "Holy See  [Vatican City State]"
-msgstr ""
+msgstr "Святой Престол [Ватикан]"
 
 #: data.py:111
 msgid "Honduras"
@@ -439,7 +440,7 @@ msgstr "Индонезия"
 
 #: data.py:117
 msgid "Iran (the Islamic Republic of)"
-msgstr ""
+msgstr "Иран (Исламская Республика)"
 
 #: data.py:118
 msgid "Iraq"
@@ -491,11 +492,11 @@ msgstr "Кирибати"
 
 #: data.py:130
 msgid "Korea (the Democratic People's Republic of)"
-msgstr ""
+msgstr "Корея (Народно-Демократическая Республика)"
 
 #: data.py:131
 msgid "Korea (the Republic of)"
-msgstr ""
+msgstr "Корея (Республика)"
 
 #: data.py:132
 msgid "Kuwait"
@@ -547,7 +548,7 @@ msgstr "Макао"
 
 #: data.py:144
 msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr ""
+msgstr "Македония (бывшая Югославская Республика)"
 
 #: data.py:145
 msgid "Madagascar"
@@ -599,11 +600,11 @@ msgstr "Мексика"
 
 #: data.py:157
 msgid "Micronesia (the Federated States of)"
-msgstr ""
+msgstr "Микронезия (Федеративные Штаты)"
 
 #: data.py:158
 msgid "Moldova (the Republic of)"
-msgstr ""
+msgstr "Молдова (Республика)"
 
 #: data.py:159
 msgid "Monaco"
@@ -699,7 +700,7 @@ msgstr "Палау"
 
 #: data.py:182
 msgid "Palestine, State of"
-msgstr ""
+msgstr "Палестина, Государство"
 
 #: data.py:183
 msgid "Panama"
@@ -763,7 +764,7 @@ msgstr "Сен-Бартельми"
 
 #: data.py:198
 msgid "Saint Helena, Ascension and Tristan da Cunha"
-msgstr ""
+msgstr "Святой Елены, Вознесения и Тристан-да-Кунья (Острова)"
 
 #: data.py:199
 msgid "Saint Kitts and Nevis"
@@ -775,7 +776,7 @@ msgstr "Сент-Люсия"
 
 #: data.py:201
 msgid "Saint Martin (French part)"
-msgstr ""
+msgstr "Святого Мартина (Остров, французская часть)"
 
 #: data.py:202
 msgid "Saint Pierre and Miquelon"
@@ -823,7 +824,7 @@ msgstr "Сингапур"
 
 #: data.py:213
 msgid "Sint Maarten (Dutch part)"
-msgstr ""
+msgstr "Святого Мартина (Остров, нидерландская часть)"
 
 #: data.py:214
 msgid "Slovakia"
@@ -891,7 +892,7 @@ msgstr "Сирийская Арабская Республика"
 
 #: data.py:230
 msgid "Taiwan (Province of China)"
-msgstr ""
+msgstr "Тайвань (Провинция Китая)"
 
 #: data.py:231
 msgid "Tajikistan"
@@ -907,7 +908,7 @@ msgstr "Таиланд"
 
 #: data.py:234
 msgid "Timor-Leste"
-msgstr ""
+msgstr "Тимор-Лесте"
 
 #: data.py:235
 msgid "Togo"
@@ -991,11 +992,11 @@ msgstr "Вьетнам"
 
 #: data.py:255
 msgid "Virgin Islands (British)"
-msgstr ""
+msgstr "Виргинские Острова (Британские)"
 
 #: data.py:256
 msgid "Virgin Islands (U.S.)"
-msgstr ""
+msgstr "Виргинские Острова (США)"
 
 #: data.py:257
 msgid "Wallis and Futuna"

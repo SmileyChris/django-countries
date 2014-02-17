@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-19 14:56+1300\n"
-"PO-Revision-Date: 2014-01-04 11:00+0000\n"
+"PO-Revision-Date: 2014-01-28 18:50+0000\n"
 "Last-Translator: Γιάννης Ανθυμίδης <yannanth@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/django-countries/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -544,7 +544,7 @@ msgstr "Μακάο"
 
 #: data.py:144
 msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr ""
+msgstr "Μακεδονία (πρώην Γιουγκοσλαβική Δημοκρατία της)"
 
 #: data.py:145
 msgid "Madagascar"
@@ -888,7 +888,7 @@ msgstr "Αραβική Δημοκρατία της Συρίας"
 
 #: data.py:230
 msgid "Taiwan (Province of China)"
-msgstr ""
+msgstr "Ταϊβάν (Περιοχή της Κίνας)"
 
 #: data.py:231
 msgid "Tajikistan"
