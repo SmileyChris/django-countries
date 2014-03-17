@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# ThemeBoy <support@themeboy.com>, 2014
 # whosaysni <whosaysni@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-19 14:56+1300\n"
-"PO-Revision-Date: 2013-12-19 02:01+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2014-03-02 02:21+0000\n"
+"Last-Translator: ThemeBoy <support@themeboy.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/django-countries/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -224,7 +225,7 @@ msgstr "コンゴ共和国"
 
 #: data.py:64
 msgid "Congo (the Democratic Republic of the)"
-msgstr ""
+msgstr "コンゴ(民主共和国)"
 
 #: data.py:65
 msgid "Cook Islands"
@@ -236,7 +237,7 @@ msgstr "コスタリカ"
 
 #: data.py:67
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "コートジボワール"
 
 #: data.py:68
 msgid "Croatia"
@@ -304,7 +305,7 @@ msgstr "エチオピア"
 
 #: data.py:84
 msgid "Falkland Islands  [Malvinas]"
-msgstr ""
+msgstr "フォークランド [マルビナス] 諸島"
 
 #: data.py:85
 msgid "Faroe Islands"
@@ -340,7 +341,7 @@ msgstr "ガボン"
 
 #: data.py:93
 msgid "Gambia (The)"
-msgstr ""
+msgstr "ガンビア(共和国)"
 
 #: data.py:94
 msgid "Georgia"
@@ -392,7 +393,7 @@ msgstr "ギニア"
 
 #: data.py:106
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "ギニアビサウ"
 
 #: data.py:107
 msgid "Guyana"
@@ -408,7 +409,7 @@ msgstr "ハード島およびマクドナルド島"
 
 #: data.py:110
 msgid "Holy See  [Vatican City State]"
-msgstr ""
+msgstr "教皇庁[バチカン市国]"
 
 #: data.py:111
 msgid "Honduras"
@@ -436,7 +437,7 @@ msgstr "インドネシア"
 
 #: data.py:117
 msgid "Iran (the Islamic Republic of)"
-msgstr ""
+msgstr "イラン(イスラム共和国)"
 
 #: data.py:118
 msgid "Iraq"
@@ -488,11 +489,11 @@ msgstr "キリバス"
 
 #: data.py:130
 msgid "Korea (the Democratic People's Republic of)"
-msgstr ""
+msgstr "北朝鮮(朝鮮民主主義人民共和国)"
 
 #: data.py:131
 msgid "Korea (the Republic of)"
-msgstr ""
+msgstr "韓国(大韓民国)"
 
 #: data.py:132
 msgid "Kuwait"
@@ -544,7 +545,7 @@ msgstr "マカオ"
 
 #: data.py:144
 msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr ""
+msgstr "マケドニア(旧ユーゴスラビア共和国)"
 
 #: data.py:145
 msgid "Madagascar"
@@ -596,11 +597,11 @@ msgstr "メキシコ"
 
 #: data.py:157
 msgid "Micronesia (the Federated States of)"
-msgstr ""
+msgstr "ミクロネシア(連邦)"
 
 #: data.py:158
 msgid "Moldova (the Republic of)"
-msgstr ""
+msgstr "モルドバ(共和国)"
 
 #: data.py:159
 msgid "Monaco"
@@ -760,7 +761,7 @@ msgstr "セント・バーソロミュー島"
 
 #: data.py:198
 msgid "Saint Helena, Ascension and Tristan da Cunha"
-msgstr ""
+msgstr "セントヘレナ・アセンションおよびトリスタンダクーニャ"
 
 #: data.py:199
 msgid "Saint Kitts and Nevis"
@@ -772,7 +773,7 @@ msgstr "セントルシア"
 
 #: data.py:201
 msgid "Saint Martin (French part)"
-msgstr ""
+msgstr "セント・マーチン(フランス領)"
 
 #: data.py:202
 msgid "Saint Pierre and Miquelon"
@@ -820,7 +821,7 @@ msgstr "シンガポール"
 
 #: data.py:213
 msgid "Sint Maarten (Dutch part)"
-msgstr ""
+msgstr "セント・マーチン(オランダ領)"
 
 #: data.py:214
 msgid "Slovakia"
@@ -888,7 +889,7 @@ msgstr "シリア・アラブ共和国"
 
 #: data.py:230
 msgid "Taiwan (Province of China)"
-msgstr ""
+msgstr "台湾(中華民国)"
 
 #: data.py:231
 msgid "Tajikistan"
@@ -904,7 +905,7 @@ msgstr "タイ"
 
 #: data.py:234
 msgid "Timor-Leste"
-msgstr ""
+msgstr "東ティモール"
 
 #: data.py:235
 msgid "Togo"
@@ -988,11 +989,11 @@ msgstr "ベトナム"
 
 #: data.py:255
 msgid "Virgin Islands (British)"
-msgstr ""
+msgstr "ヴァージン諸島(イギリス領)"
 
 #: data.py:256
 msgid "Virgin Islands (U.S.)"
-msgstr ""
+msgstr "ヴァージン諸島(アメリカ領)"
 
 #: data.py:257
 msgid "Wallis and Futuna"
