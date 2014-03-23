@@ -64,7 +64,7 @@ class Countries(object):
         this will solve bug related to generating fixtures
         django_dynamic_fixture
         """
-        return len(dict(sorted(self.countries, key=itemgetter(1))))
+        return len(self.countries)
 
 
 countries = Countries()
