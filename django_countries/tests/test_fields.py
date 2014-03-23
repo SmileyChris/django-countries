@@ -84,6 +84,7 @@ class TestCountryField(TestCase):
         Person.objects.create(name='The Outsider', country=None)
         AllowNull.objects.create(country=None)
 
+
 class TestCountryObject(TestCase):
 
     def test_hash(self):
