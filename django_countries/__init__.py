@@ -59,5 +59,12 @@ class Countries(object):
         """
         return dict(self.countries).get(code, '')
 
+    def __len__(self):
+        """ len() used by several third party applications to calculate the length of choices
+        this will solve bug related to generating fixtures
+        django_dynamic_fixture
+        """
+        return len(dict(sorted(self.countries, key=itemgetter(1))))
+
 
 countries = Countries()
