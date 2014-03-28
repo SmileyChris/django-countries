@@ -27,7 +27,7 @@ class Countries(object):
             for code, name in COUNTRIES.items():
                 if code in overrides:
                     name = overrides[code]
-                if name:
+                if name is not None:
                     self._countries.append((code, name))
             for key in set(overrides) - set(COUNTRIES):
                 self._countries.append((key, overrides[key]))
