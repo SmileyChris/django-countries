@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-from ioc_data import ISO_TO_IOC, IOC_TO_ISO
 
 try:
     from urllib import parse as urlparse
@@ -9,7 +8,7 @@ except ImportError:
 from django.db.models.fields import CharField
 from django.utils.encoding import force_text, python_2_unicode_compatible
 
-from django_countries import countries
+from django_countries import countries, ioc_data
 from django_countries.conf import settings
 
 
@@ -57,7 +56,7 @@ class Country(object):
 
     @staticmethod
     def country_from_ioc(ioc_code, flag_url=''):
-        code = IOC_TO_ISO.get(ioc_code, '')
+        code = ioc_data.IOC_TO_ISO.get(ioc_code, '')
         if code == '':
             return None
         return Country(code, flag_url=flag_url)
@@ -66,7 +65,7 @@ class Country(object):
     def ioc_code(self):
         if not self.code:
             return ''
-        return ISO_TO_IOC.get(self.code, '')
+        return ioc_data.ISO_TO_IOC.get(self.code, '')
 
 
 class CountryDescriptor(object):
