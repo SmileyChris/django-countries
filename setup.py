@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 import os
+import sys
 from setuptools import setup, find_packages
 
+if sys.version_info <= (3, ):
+    from codecs import open
 
 def long_description():
     """
@@ -9,7 +12,8 @@ def long_description():
     as this module.
     """
     base_path = os.path.dirname(os.path.realpath(__file__))
-    readme = open(os.path.join(base_path, 'README.rst'))
+    readme = open(os.path.join(base_path, 'README.rst'),
+                  encoding='utf-8')
     try:
         return readme.read()
     finally:
