@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import io
 import os
 from setuptools import setup, find_packages
 
@@ -9,7 +10,7 @@ def long_description():
     as this module.
     """
     base_path = os.path.dirname(os.path.realpath(__file__))
-    readme = open(os.path.join(base_path, 'README.rst'))
+    readme = io.open(os.path.join(base_path, 'README.rst'), encoding='utf-8')
     try:
         return readme.read()
     finally:
