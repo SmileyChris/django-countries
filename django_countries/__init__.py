@@ -1,4 +1,5 @@
 from operator import itemgetter
+from django.conf import settings as django_settings
 
 from django_countries.conf import settings
 
@@ -31,6 +32,15 @@ class Countries(object):
                     self._countries.append((code, name))
             for key in set(overrides) - set(COUNTRIES):
                 self._countries.append((key, overrides[key]))
+            if settings.UNICODE_SORTING:
+                try:
+                    import PyICU
+                    collator = PyICU.Collator.createInstance(PyICU.Locale(django_settings.LANGUAGE_CODE))
+                    self._countries.sort(key=lambda tup: collator.getSortKey(str(tup[1])))
+                except:
+                    self._countries.sort(key=itemgetter(1))
+            else:
+                self._countries.sort(key=itemgetter(1))
         return self._countries
 
     @countries.deleter
@@ -49,7 +59,8 @@ class Countries(object):
         Each country record consists of a tuple of the two letter ISO3166-1
         country code and short name.
         """
-        return iter(sorted(self.countries, key=itemgetter(1)))
+        for country in self.countries:
+            yield country
 
     def name(self, code):
         """

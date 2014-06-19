@@ -1,3 +1,4 @@
 iso3166-1.csv
 .tox/
 dist/
+__pycache__/

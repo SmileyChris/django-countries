@@ -46,6 +46,9 @@ class Settings(AppSettings):
             'AU': None
         }
     """
-
+    UNICODE_SORTING = False
+    """
+    If set to True country list sorting will be unicode-aware. PyICU is required to perform operation.
+    """
 
 settings = Settings()
