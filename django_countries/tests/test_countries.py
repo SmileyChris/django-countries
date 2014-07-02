@@ -24,6 +24,19 @@ class TestCountriesObject(TestCase):
         with self.settings(COUNTRIES_OVERRIDE={'XX': 'Neverland'}):
             self.assertEqual(len(countries), self.EXPECTED_COUNTRY_COUNT + 1)
 
+    def test_countries_getitem(self):
+        try:
+            country = countries[0]
+        except TypeError as e:
+            self.fail(e.message)
+
+    def test_countries_slice(self):
+        try:
+            sliced = countries[10:20:2]
+        except TypeError as e:
+            self.fail(e.message)
+        self.assertEqual(len(sliced), 5)
+
     def test_countries_custom_ugettext_evaluation(self):
 
         class FakeLazyUGetText(object):
