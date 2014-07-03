@@ -23,18 +23,18 @@ class Countries(object):
         from django_countries.data import COUNTRIES
 
         if not hasattr(self, '_countries'):
-            self._countries = []
-            overrides = settings.COUNTRIES_OVERRIDE
-            for code, name in COUNTRIES.items():
-                if code in overrides:
-                    name = overrides[code]
-                if name is not None:
-                    self._countries.append((code, name))
-            for key in set(overrides) - set(COUNTRIES):
-                self._countries.append((key, overrides[key]))
-
             if settings.COUNTRIES_ONLY:
-                self._countries = [(code, name) for code, name in settings.COUNTRIES_ONLY.items()]
+                self._countries = list(settings.COUNTRIES_ONLY)
+            else:
+                self._countries = []
+                overrides = settings.COUNTRIES_OVERRIDE
+                for code, name in COUNTRIES.items():
+                    if code in overrides:
+                        name = overrides[code]
+                    if name is not None:
+                        self._countries.append((code, name))
+                for key in set(overrides) - set(COUNTRIES):
+                    self._countries.append((key, overrides[key]))
 
         return self._countries
 
@@ -67,15 +67,14 @@ class Countries(object):
     def __len__(self):
         """
         len() used by several third party applications to calculate the length
-        of choices this will solve bug related to generating fixtures
-        django_dynamic_fixture
+        of choices this will solve bug related to generating fixtures.
         """
         return len(self.countries)
 
     def __getitem__(self, index):
         """
-        some applications expect to be able to access members of the field
-        choices by index
+        Some applications expect to be able to access members of the field
+        choices by index.
         """
         try:
             return next(islice(self.__iter__(), index, index+1))
