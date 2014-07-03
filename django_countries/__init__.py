@@ -32,8 +32,8 @@ class Countries(object):
             for key in set(overrides) - set(COUNTRIES):
                 self._countries.append((key, overrides[key]))
 
-            if settings.COUNTRIES_INCLUDE:
-                self._countries = [(code, name) for code, name in settings.COUNTRIES_INCLUDE.items()]
+            if settings.COUNTRIES_ONLY:
+                self._countries = [(code, name) for code, name in settings.COUNTRIES_ONLY.items()]
 
         return self._countries
 

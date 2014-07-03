@@ -47,7 +47,7 @@ class Settings(AppSettings):
         }
     """
 
-    COUNTRIES_INCLUDE = {}
+    COUNTRIES_ONLY = {}
     """
     Similar to COUNTRIES_OVERRIDE
     A dictionary of names to include in selection.
@@ -56,7 +56,7 @@ class Settings(AppSettings):
 
     For example::
 
-        COUNTRIES_OVERRIDE = {
+        COUNTRIES_ONLY = {
             'NZ': _('Middle Earth'),
             'AU': _('Desert'),
         }
