@@ -24,3 +24,8 @@ class TestSettings(TestCase):
         with self.settings(COUNTRIES_OVERRIDE={'AU': None}):
             self.assertNotIn('AU', countries.countries)
             self.assertEqual(countries.name('AU'), '')
+
+    def test_override_only(self):
+        with self.settings(COUNTRIES_ONLY={'AU': 'Desert'}):
+            self.assertTrue(len(countries.countries) == 1)
+            self.assertEqual(countries.countries[0], ('AU', 'Desert'))

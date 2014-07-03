@@ -31,6 +31,10 @@ class Countries(object):
                     self._countries.append((code, name))
             for key in set(overrides) - set(COUNTRIES):
                 self._countries.append((key, overrides[key]))
+
+            if settings.COUNTRIES_ONLY:
+                self._countries = [(code, name) for code, name in settings.COUNTRIES_ONLY.items()]
+
         return self._countries
 
     @countries.deleter

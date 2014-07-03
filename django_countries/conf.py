@@ -47,5 +47,19 @@ class Settings(AppSettings):
         }
     """
 
+    COUNTRIES_ONLY = {}
+    """
+    Similar to COUNTRIES_OVERRIDE
+    A dictionary of names to include in selection.
+
+    Note that you will need to handle translation of customised country names.
+
+    For example::
+
+        COUNTRIES_ONLY = {
+            'NZ': _('Middle Earth'),
+            'AU': _('Desert'),
+        }
+    """
 
 settings = Settings()
