@@ -1,3 +1,4 @@
+from itertools import islice
 from operator import itemgetter
 
 from django_countries.conf import settings
@@ -64,11 +65,22 @@ class Countries(object):
         return dict(self.countries).get(code, '')
 
     def __len__(self):
-        """ len() used by several third party applications to calculate the length of choices
-        this will solve bug related to generating fixtures
+        """
+        len() used by several third party applications to calculate the length
+        of choices this will solve bug related to generating fixtures
         django_dynamic_fixture
         """
         return len(self.countries)
 
+    def __getitem__(self, index):
+        """
+        some applications expect to be able to access members of the field
+        choices by index
+        """
+        try:
+            return next(islice(self.__iter__(), index, index+1))
+        except TypeError:
+            return list(islice(self.__iter__(), index.start, index.stop,
+                               index.step))
 
 countries = Countries()
