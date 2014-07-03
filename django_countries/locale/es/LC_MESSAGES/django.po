@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Juan Miguel Calcaño <asinox@gmail.com>, 2012
+# Tadeo Carrier <tadeouy@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-19 14:56+1300\n"
-"PO-Revision-Date: 2013-12-19 02:01+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2014-06-18 15:10+0000\n"
+"Last-Translator: Tadeo Carrier <tadeouy@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/django-countries/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -224,7 +225,7 @@ msgstr "Congo"
 
 #: data.py:64
 msgid "Congo (the Democratic Republic of the)"
-msgstr ""
+msgstr "República Democrática del Congo"
 
 #: data.py:65
 msgid "Cook Islands"
@@ -236,7 +237,7 @@ msgstr "Costa Rica"
 
 #: data.py:67
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Costa de Marfil"
 
 #: data.py:68
 msgid "Croatia"
@@ -304,7 +305,7 @@ msgstr "Etiopia"
 
 #: data.py:84
 msgid "Falkland Islands  [Malvinas]"
-msgstr ""
+msgstr "Islas Malvinas"
 
 #: data.py:85
 msgid "Faroe Islands"
@@ -340,7 +341,7 @@ msgstr "Gabón"
 
 #: data.py:93
 msgid "Gambia (The)"
-msgstr ""
+msgstr "Gambia"
 
 #: data.py:94
 msgid "Georgia"
@@ -392,7 +393,7 @@ msgstr "Guinea"
 
 #: data.py:106
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bisáu"
 
 #: data.py:107
 msgid "Guyana"
@@ -408,7 +409,7 @@ msgstr "Islas Heard y McDonald"
 
 #: data.py:110
 msgid "Holy See  [Vatican City State]"
-msgstr ""
+msgstr "Santa Sede (Ciudad del Vaticano)"
 
 #: data.py:111
 msgid "Honduras"
@@ -436,7 +437,7 @@ msgstr "Indonesia"
 
 #: data.py:117
 msgid "Iran (the Islamic Republic of)"
-msgstr ""
+msgstr "República Islámica de Irán"
 
 #: data.py:118
 msgid "Iraq"
@@ -488,11 +489,11 @@ msgstr "Kiribati"
 
 #: data.py:130
 msgid "Korea (the Democratic People's Republic of)"
-msgstr ""
+msgstr "República Popular Democrática de Corea"
 
 #: data.py:131
 msgid "Korea (the Republic of)"
-msgstr ""
+msgstr "República de Corea"
 
 #: data.py:132
 msgid "Kuwait"
@@ -544,7 +545,7 @@ msgstr "Macao"
 
 #: data.py:144
 msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr ""
+msgstr "República de Macedonia"
 
 #: data.py:145
 msgid "Madagascar"
@@ -596,11 +597,11 @@ msgstr "México"
 
 #: data.py:157
 msgid "Micronesia (the Federated States of)"
-msgstr ""
+msgstr "Estados Federados de Micronesia"
 
 #: data.py:158
 msgid "Moldova (the Republic of)"
-msgstr ""
+msgstr "República de Moldavia"
 
 #: data.py:159
 msgid "Monaco"
@@ -696,7 +697,7 @@ msgstr "Palaos"
 
 #: data.py:182
 msgid "Palestine, State of"
-msgstr ""
+msgstr "Estado de Palestina"
 
 #: data.py:183
 msgid "Panama"
@@ -760,7 +761,7 @@ msgstr "San Bartolomé"
 
 #: data.py:198
 msgid "Saint Helena, Ascension and Tristan da Cunha"
-msgstr ""
+msgstr "Santa Elena, Ascensión y Tristán de Acuña"
 
 #: data.py:199
 msgid "Saint Kitts and Nevis"
@@ -772,7 +773,7 @@ msgstr "Santa Lucía"
 
 #: data.py:201
 msgid "Saint Martin (French part)"
-msgstr ""
+msgstr "San Martín (Parte Francesa)"
 
 #: data.py:202
 msgid "Saint Pierre and Miquelon"
@@ -820,7 +821,7 @@ msgstr "Singapur"
 
 #: data.py:213
 msgid "Sint Maarten (Dutch part)"
-msgstr ""
+msgstr "San Martín (Parte Holandesa)"
 
 #: data.py:214
 msgid "Slovakia"
@@ -888,7 +889,7 @@ msgstr "República Arabe de Siria"
 
 #: data.py:230
 msgid "Taiwan (Province of China)"
-msgstr ""
+msgstr "Provincia de Taiwán"
 
 #: data.py:231
 msgid "Tajikistan"
@@ -904,7 +905,7 @@ msgstr "Tailandia"
 
 #: data.py:234
 msgid "Timor-Leste"
-msgstr ""
+msgstr "Timor Oriental"
 
 #: data.py:235
 msgid "Togo"
@@ -988,11 +989,11 @@ msgstr "Vietnam"
 
 #: data.py:255
 msgid "Virgin Islands (British)"
-msgstr ""
+msgstr "Islas Vírgenes Británicas"
 
 #: data.py:256
 msgid "Virgin Islands (U.S.)"
-msgstr ""
+msgstr "Islas Vírgenes de los Estados Unidos"
 
 #: data.py:257
 msgid "Wallis and Futuna"
