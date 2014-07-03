@@ -2,6 +2,10 @@ from itertools import islice
 from operator import itemgetter
 
 from django_countries.conf import settings
+try:
+    from django.utils.encoding import force_text
+except ImportError:  # Django 1.4
+    from django.utils.encoding import force_unicode as force_text
 
 
 class Countries(object):
@@ -53,8 +57,11 @@ class Countries(object):
 
         Each country record consists of a tuple of the two letter ISO3166-1
         country code and short name.
+
+        The sorting happens based on the thread's current translation.
         """
-        return iter(sorted(self.countries, key=itemgetter(1)))
+        countries = [(code, force_text(name)) for code, name in self.countries]
+        return iter(sorted(countries, key=itemgetter(1)))
 
     def name(self, code):
         """
