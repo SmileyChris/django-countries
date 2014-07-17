@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Ferran Pegueroles <ferran@pegueroles.com>, 2014
 # Juan Miguel Calcaño <asinox@gmail.com>, 2012
 # Tadeo Carrier <tadeouy@gmail.com>, 2014
 msgid ""
@@ -10,8 +11,8 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-19 14:56+1300\n"
-"PO-Revision-Date: 2014-06-18 15:10+0000\n"
-"Last-Translator: Tadeo Carrier <tadeouy@gmail.com>\n"
+"PO-Revision-Date: 2014-07-08 11:51+0000\n"
+"Last-Translator: Ferran Pegueroles <ferran@pegueroles.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/django-countries/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -401,7 +402,7 @@ msgstr "Guyana"
 
 #: data.py:108
 msgid "Haiti"
-msgstr "Hait"
+msgstr "Haití"
 
 #: data.py:109
 msgid "Heard Island and McDonald Islands"
@@ -713,7 +714,7 @@ msgstr "Paraguay"
 
 #: data.py:186
 msgid "Peru"
-msgstr "Per"
+msgstr "Perú"
 
 #: data.py:187
 msgid "Philippines"
