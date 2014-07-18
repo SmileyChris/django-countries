@@ -15,11 +15,13 @@ from django_countries.conf import settings
 @python_2_unicode_compatible
 class Country(object):
     def __init__(self, code, flag_url):
+        if not code:
+            raise ValueError("Country code can not be blank")
         self.code = code
         self.flag_url = flag_url
 
     def __str__(self):
-        return force_text(self.code or '')
+        return force_text(self.code)
 
     def __eq__(self, other):
         return force_text(self) == force_text(other)
@@ -48,8 +50,6 @@ class Country(object):
 
     @property
     def flag(self):
-        if not self.code:
-            return ''
         url = self.flag_url.format(
             code_upper=self.code, code=self.code.lower())
         return urlparse.urljoin(settings.STATIC_URL, url)
@@ -90,8 +90,11 @@ class CountryDescriptor(object):
             raise AttributeError(
                 "The '%s' attribute can only be accessed from %s instances."
                 % (self.field.name, owner.__name__))
+        code = instance.__dict__[self.field.name]
+        if not code:
+            return code
         return Country(
-            code=instance.__dict__[self.field.name],
+            code=code,
             flag_url=self.field.countries_flag_url or
             settings.COUNTRIES_FLAG_URL)
 
@@ -132,13 +135,6 @@ class CountryField(CharField):
         "Returns field's value just before saving."
         value = super(CharField, self).pre_save(*args, **kwargs)
         return self.get_prep_value(value)
-
-    def get_prep_value(self, value):
-        "Returns field's value prepared for saving into a database."
-        # Convert the Country to unicode for database insertion.
-        if value is None:
-            return None
-        return force_text(value)
 
 
 # If south is installed, ensure that CountryField will be introspected just
