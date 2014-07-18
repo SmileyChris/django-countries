@@ -28,4 +28,4 @@ class TestSettings(TestCase):
     def test_override_only(self):
         with self.settings(COUNTRIES_ONLY={'AU': 'Desert'}):
             self.assertTrue(len(countries.countries) == 1)
-            self.assertEqual(countries.countries[0], ('AU', 'Desert'))
+            self.assertEqual(countries.countries[0], 'AU')
