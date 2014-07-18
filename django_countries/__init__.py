@@ -28,7 +28,7 @@ class Countries(object):
 
         if not hasattr(self, '_countries'):
             if settings.COUNTRIES_ONLY:
-                self._countries = list(settings.COUNTRIES_ONLY)
+                self._countries = list(settings.COUNTRIES_ONLY.items())
             else:
                 self._countries = []
                 overrides = settings.COUNTRIES_OVERRIDE
@@ -77,6 +77,15 @@ class Countries(object):
         of choices this will solve bug related to generating fixtures.
         """
         return len(self.countries)
+
+    def __contains__(self, code):
+        """
+        Check to see if the countries contains the given code.
+        """
+        for part in self.countries:
+            if code == part[0]:
+                return True
+        return False
 
     def __getitem__(self, index):
         """
