@@ -7,6 +7,11 @@ try:
 except ImportError:  # Django 1.4
     from django.utils.encoding import force_unicode as force_text
 
+try:
+    import pyuca
+except ImportError:  # pyuca not installed
+    pyuca = None
+
 
 class Countries(object):
     """
@@ -60,8 +65,16 @@ class Countries(object):
         # Force translation before sorting.
         countries = [
             (code, force_text(name)) for code, name in self.countries.items()]
+
+        if pyuca:
+            collator = pyuca.Collator()
+            def key(item):
+                return collator.sort_key(item[1])
+        else:
+            key = itemgetter(1)
+
         # Return sorted country list.
-        return iter(sorted(countries, key=itemgetter(1)))
+        return iter(sorted(countries, key=key))
 
     def name(self, code):
         """
