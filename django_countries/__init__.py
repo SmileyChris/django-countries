@@ -19,27 +19,24 @@ class Countries(object):
     @property
     def countries(self):
         """
-        Return the countries list, modified by any overriding settings.
+        Return the a dictionary of countries, modified by any overriding
+        settings.
+
         The result is cached so future lookups are less work intensive.
         """
-        # Local import so that countries aren't loaded into memory until first
-        # used.
-        from django_countries.data import COUNTRIES
-
         if not hasattr(self, '_countries'):
             if settings.COUNTRIES_ONLY:
-                self._countries = list(settings.COUNTRIES_ONLY.items())
+                self._countries = dict(settings.COUNTRIES_ONLY)
             else:
-                self._countries = []
-                overrides = settings.COUNTRIES_OVERRIDE
-                for code, name in COUNTRIES.items():
-                    if code in overrides:
-                        name = overrides[code]
-                    if name is not None:
-                        self._countries.append((code, name))
-                for key in set(overrides) - set(COUNTRIES):
-                    self._countries.append((key, overrides[key]))
-
+                # Local import so that countries aren't loaded into memory
+                # until first used.
+                from django_countries.data import COUNTRIES
+                self._countries = dict(COUNTRIES)
+                if settings.COUNTRIES_OVERRIDE:
+                    self._countries.update(settings.COUNTRIES_OVERRIDE)
+                    self._countries = dict(
+                        (code, name) for code, name in self._countries.items()
+                        if name is not None)
         return self._countries
 
     @countries.deleter
@@ -60,7 +57,10 @@ class Countries(object):
 
         The sorting happens based on the thread's current translation.
         """
-        countries = [(code, force_text(name)) for code, name in self.countries]
+        # Force translation before sorting.
+        countries = [
+            (code, force_text(name)) for code, name in self.countries.items()]
+        # Return sorted country list.
         return iter(sorted(countries, key=itemgetter(1)))
 
     def name(self, code):
@@ -69,7 +69,7 @@ class Countries(object):
 
         If no match is found, returns an empty string.
         """
-        return dict(self.countries).get(code, '')
+        return self.countries.get(code, '')
 
     def __len__(self):
         """
@@ -82,10 +82,7 @@ class Countries(object):
         """
         Check to see if the countries contains the given code.
         """
-        for part in self.countries:
-            if code == part[0]:
-                return True
-        return False
+        return code in self.countries
 
     def __getitem__(self, index):
         """
