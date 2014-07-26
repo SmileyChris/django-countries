@@ -136,6 +136,10 @@ class CountryField(CharField):
         value = super(CharField, self).pre_save(*args, **kwargs)
         return self.get_prep_value(value)
 
+    def deconstruct(self):
+        name, path, args, kwargs = super(CountryField, self).deconstruct()
+        kwargs.pop('choices')
+        return name, path, args, kwargs
 
 # If south is installed, ensure that CountryField will be introspected just
 # like a normal CharField.
