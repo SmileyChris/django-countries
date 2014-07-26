@@ -11,6 +11,7 @@ from django.utils.encoding import force_text, python_2_unicode_compatible
 from django_countries import countries, ioc_data
 from django_countries.conf import settings
 
+from .widgets import CountrySelectWidget
 
 @python_2_unicode_compatible
 class Country(object):
@@ -135,6 +136,13 @@ class CountryField(CharField):
         "Returns field's value just before saving."
         value = super(CharField, self).pre_save(*args, **kwargs)
         return self.get_prep_value(value)
+
+    def formfield(self, **kwargs):
+        defaults = {
+            'widget': CountrySelectWidget(),
+        }
+        defaults.update(kwargs)
+        return super(CountryField, self).formfield(**defaults)
 
 
 # If south is installed, ensure that CountryField will be introspected just
