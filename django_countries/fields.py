@@ -144,6 +144,10 @@ class CountryField(CharField):
         defaults.update(kwargs)
         return super(CountryField, self).formfield(**defaults)
 
+    def deconstruct(self):
+        name, path, args, kwargs = super(CountryField, self).deconstruct()
+        kwargs.pop('choices')
+        return name, path, args, kwargs
 
 # If south is installed, ensure that CountryField will be introspected just
 # like a normal CharField.
