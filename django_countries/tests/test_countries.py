@@ -48,3 +48,11 @@ class TestCountriesObject(TestCase):
 
         with self.settings(COUNTRIES_OVERRIDE={'AU': FakeLazyUGetText()}):
             countries.countries
+
+    def test_ioc_countries(self):
+        from ..ioc_data import check_ioc_countries
+        check_ioc_countries()
+
+    def test_flags(self):
+        from ..data import check_flags
+        check_flags()
