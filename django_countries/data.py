@@ -1,5 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+This is a self-generating script that contains all of the iso3166-1 data.
+
+To regenerate, a CSV file must be created that contains the latest data. Here's
+how to do that:
+
+1. Visit https://www.iso.org/obp
+2. Click the "Country Codes" radio option and click the search button
+3. Filter by "Officially assigned codes"
+4. Change the results per page to 300
+5. Copy the html table and paste into Libreoffice Calc / Excel
+6. Delete the French name column
+7. Save as a CSV file in django_countires/iso3166-1.csv
+8. Run this script from the command line
+"""
 from __future__ import unicode_literals
 import glob
 import os
