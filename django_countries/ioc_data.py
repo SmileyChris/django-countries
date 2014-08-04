@@ -215,6 +215,6 @@ def check_ioc_countries():
     from django_countries.data import COUNTRIES
 
     print("Checking if all IOC codes map correctly")
-    for key in ISO_TO_IOC.keys():
-        assert COUNTRIES.get(key, '') != '', 'No ISO code for %s' % key
+    for key in ISO_TO_IOC:
+        assert COUNTRIES.get(key), 'No ISO code for %s' % key
     print("Finished checking IOC codes")
