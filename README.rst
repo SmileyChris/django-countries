@@ -8,8 +8,8 @@ icons static files, and a country field for models.
 Installation
 =============================
 
-1. `pip install django-countries`
-2. Add django_countries to `INSTALLED_APPS`
+1. ``pip install django-countries``
+2. Add ``django_countries`` to ``INSTALLED_APPS``
 
 
 CountryField
