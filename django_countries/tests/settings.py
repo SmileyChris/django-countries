@@ -10,3 +10,8 @@ DATABASES = {
 }
 
 STATIC_URL = '/static-assets/'
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+)

@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 from django.db import IntegrityError
+from django.forms import Select
+from django.forms.models import modelform_factory
 from django.test import TestCase
 from django.utils.encoding import force_text
 
@@ -30,7 +32,8 @@ class TestCountryField(TestCase):
     def test_flag(self):
         person = Person(name='Chris Beaven', country='NZ')
         with self.settings(STATIC_URL='/static-assets/'):
-            self.assertEqual(person.country.flag, '/static-assets/flags/nz.gif')
+            self.assertEqual(
+                person.country.flag, '/static-assets/flags/nz.gif')
 
     def test_custom_field_flag_url(self):
         person = Person(name='Chris Beaven', country='NZ', other_country='US')
@@ -97,6 +100,11 @@ class TestCountryField(TestCase):
         self.assertRaises(
             IntegrityError,
             Person.objects.create, name='The Outsider', country=None)
+
+    def test_create_modelform(self):
+        Form = modelform_factory(Person, fields=['country'])
+        form_field = Form().fields['country']
+        self.assertTrue(isinstance(form_field.widget, Select))
 
 
 class TestCountryObject(TestCase):
