@@ -304,27 +304,21 @@ def check_flags():
     for path in glob.glob(os.path.join(this_dir, 'static', 'flags', '*.gif')):
         files[os.path.basename(os.path.splitext(path)[0]).upper()] = path
 
-    flags_missing = []
-    for code in COUNTRIES:
-        if code not in files:
-            flags_missing.append(code)
-    if flags_missing:
-        flags_missing.sort()
+    flags_missing = set(COUNTRIES) - set(files)
+    if flags_missing:  # pragma: no cover
         print("The following country codes are missing a flag:")
-        for code in flags_missing:
+        for code in sorted(flags_missing):
             print("  {} ({})".format(code, COUNTRIES[code]))
     else:
         print("All country codes have flags. :)")
 
-    code_missing = []
-    for code, path in files.items():
-        if code not in COUNTRIES:
-            code_missing.append(path)
-    if code_missing:
-        code_missing.sort()
+    code_missing = set(files) - set(COUNTRIES)
+    # Special-case EU
+    code_missing.discard('EU')
+    if code_missing:  # pragma: no cover
         print("")
         print("The following flags don't have a matching country code:")
-        for path in code_missing:
+        for path in sorted(code_missing):
             print("  {}".format(path))
 
 
