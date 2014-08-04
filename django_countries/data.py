@@ -264,7 +264,8 @@ COUNTRIES = {
 }
 
 
-def self_generate(output_filename, filename='iso3166-1.csv'):
+def self_generate(
+        output_filename, filename='iso3166-1.csv'):  # pragma: no cover
     """
     The following code can be used for self-generation of this file.
 

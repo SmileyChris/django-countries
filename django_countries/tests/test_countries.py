@@ -25,23 +25,17 @@ class TestCountriesObject(TestCase):
             self.assertEqual(len(countries), self.EXPECTED_COUNTRY_COUNT + 1)
 
     def test_countries_getitem(self):
-        try:
-            country = countries[0]
-        except TypeError as e:
-            self.fail(e.message)
+        countries[0]
 
     def test_countries_slice(self):
-        try:
-            sliced = countries[10:20:2]
-        except TypeError as e:
-            self.fail(e.message)
+        sliced = countries[10:20:2]
         self.assertEqual(len(sliced), 5)
 
     def test_countries_custom_ugettext_evaluation(self):
 
         class FakeLazyUGetText(object):
 
-            def __bool__(self):
+            def __bool__(self):  # pragma: no cover
                 raise ValueError("Can't evaluate lazy_ugettext yet")
 
             __nonzero__ = __bool__
