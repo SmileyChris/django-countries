@@ -53,7 +53,7 @@ COUNTRIES = {
     "BJ": _("Benin"),
     "BM": _("Bermuda"),
     "BT": _("Bhutan"),
-    "BO": _("Bolivia, Plurinational State of"),
+    "BO": _("Bolivia"),
     "BQ": _("Bonaire, Sint Eustatius and Saba"),
     "BA": _("Bosnia and Herzegovina"),
     "BW": _("Botswana"),
@@ -78,7 +78,7 @@ COUNTRIES = {
     "CO": _("Colombia"),
     "KM": _("Comoros"),
     "CG": _("Congo"),
-    "CD": _("Congo (the Democratic Republic of the)"),
+    "CD": _("Congo"),
     "CK": _("Cook Islands"),
     "CR": _("Costa Rica"),
     "CI": _("Côte d'Ivoire"),
@@ -131,7 +131,7 @@ COUNTRIES = {
     "IS": _("Iceland"),
     "IN": _("India"),
     "ID": _("Indonesia"),
-    "IR": _("Iran (the Islamic Republic of)"),
+    "IR": _("Iran"),
     "IQ": _("Iraq"),
     "IE": _("Ireland"),
     "IM": _("Isle of Man"),
@@ -144,8 +144,8 @@ COUNTRIES = {
     "KZ": _("Kazakhstan"),
     "KE": _("Kenya"),
     "KI": _("Kiribati"),
-    "KP": _("Korea (the Democratic People's Republic of)"),
-    "KR": _("Korea (the Republic of)"),
+    "KP": _("Korea"),
+    "KR": _("Korea"),
     "KW": _("Kuwait"),
     "KG": _("Kyrgyzstan"),
     "LA": _("Lao People's Democratic Republic"),
@@ -158,7 +158,7 @@ COUNTRIES = {
     "LT": _("Lithuania"),
     "LU": _("Luxembourg"),
     "MO": _("Macao"),
-    "MK": _("Macedonia (the former Yugoslav Republic of)"),
+    "MK": _("Macedonia"),
     "MG": _("Madagascar"),
     "MW": _("Malawi"),
     "MY": _("Malaysia"),
@@ -171,8 +171,8 @@ COUNTRIES = {
     "MU": _("Mauritius"),
     "YT": _("Mayotte"),
     "MX": _("Mexico"),
-    "FM": _("Micronesia (the Federated States of)"),
-    "MD": _("Moldova (the Republic of)"),
+    "FM": _("Micronesia"),
+    "MD": _("Moldova"),
     "MC": _("Monaco"),
     "MN": _("Mongolia"),
     "ME": _("Montenegro"),
@@ -196,7 +196,7 @@ COUNTRIES = {
     "OM": _("Oman"),
     "PK": _("Pakistan"),
     "PW": _("Palau"),
-    "PS": _("Palestine, State of"),
+    "PS": _("Palestine"),
     "PA": _("Panama"),
     "PG": _("Papua New Guinea"),
     "PY": _("Paraguay"),
@@ -244,9 +244,9 @@ COUNTRIES = {
     "SE": _("Sweden"),
     "CH": _("Switzerland"),
     "SY": _("Syrian Arab Republic"),
-    "TW": _("Taiwan (Province of China)"),
+    "TW": _("Taiwan"),
     "TJ": _("Tajikistan"),
-    "TZ": _("Tanzania, United Republic of"),
+    "TZ": _("Tanzania"),
     "TH": _("Thailand"),
     "TL": _("Timor-Leste"),
     "TG": _("Togo"),
@@ -267,7 +267,7 @@ COUNTRIES = {
     "UY": _("Uruguay"),
     "UZ": _("Uzbekistan"),
     "VU": _("Vanuatu"),
-    "VE": _("Venezuela, Bolivarian Republic of"),
+    "VE": _("Venezuela"),
     "VN": _("Viet Nam"),
     "VG": _("Virgin Islands (British)"),
     "VI": _("Virgin Islands (U.S.)"),
@@ -276,6 +276,21 @@ COUNTRIES = {
     "YE": _("Yemen"),
     "ZM": _("Zambia"),
     "ZW": _("Zimbabwe"),
+}
+
+FULL_COUNTRIES = {
+    "BO": _("Bolivia, Plurinational State of"),
+    "CD": _("Congo (the Democratic Republic of the)"),
+    "IR": _("Iran (the Islamic Republic of)"),
+    "KP": _("Korea (the Democratic People's Republic of)"),
+    "KR": _("Korea (the Republic of)"),
+    "MK": _("Macedonia (the former Yugoslav Republic of)"),
+    "FM": _("Micronesia (the Federated States of)"),
+    "MD": _("Moldova (the Republic of)"),
+    "PS": _("Palestine, State of"),
+    "TW": _("Taiwan (Province of China)"),
+    "TZ": _("Tanzania, United Republic of"),
+    "VE": _("Venezuela, Bolivarian Republic of"),
 }
 
 
@@ -290,24 +305,35 @@ def self_generate(
     import csv
     import re
     countries = []
+    full_countries = []
     with open(filename, 'rb') as csv_file:
         for row in csv.reader(csv_file):
             name = row[0].decode('utf-8').rstrip('*')
             name = re.sub(r'\(the\)', '', name)
-            if name:
-                countries.append((name, row[1].decode('utf-8')))
+            truncated = re.sub(r'[(,].*\bof\b.*$', '', name)
+            if truncated:
+                countries.append((truncated, row[1].decode('utf-8')))
+                if truncated != name:
+                    full_countries.append((name, row[1].decode('utf-8')))
     with open(__file__, 'r') as source_file:
         contents = source_file.read()
     bits = re.match(
-        '(.*\nCOUNTRIES = \{\n)(.*)(\n\}.*)', contents, re.DOTALL).groups()
+        '(.*\nCOUNTRIES = \{\n)(.*)(\n\}\n\nFULL_COUNTRIES = \{\n)(.*)(\n\}.*)', contents, re.DOTALL).groups()
     country_list = []
+    full_country_list = []
     for name, code in countries:
         name = name.replace('"', r'\"').strip()
         country_list.append(
             '    "{code}": _("{name}"),'.format(name=name, code=code))
+    for name, code in full_countries:
+        name = name.replace('"', r'\"').strip()
+        full_country_list.append(
+            '    "{code}": _("{name}"),'.format(name=name, code=code))
     content = bits[0]
     content += '\n'.join(country_list).encode('utf-8')
     content += bits[2]
+    content += '\n'.join(full_country_list).encode('utf-8')
+    content += bits[4]
     with open(output_filename, 'wb') as output_file:
         output_file.write(content)
     return countries

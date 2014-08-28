@@ -32,6 +32,9 @@ class Countries(object):
                 # until first used.
                 from django_countries.data import COUNTRIES
                 self._countries = dict(COUNTRIES)
+                if settings.COUNTRIES_USE_FULL:
+                    from django_countries.data import FULL_COUNTRIES
+                    self._countries.update(FULL_COUNTRIES)
                 if settings.COUNTRIES_OVERRIDE:
                     self._countries.update(settings.COUNTRIES_OVERRIDE)
                     self._countries = dict(
