@@ -32,6 +32,13 @@ class Settings(AppSettings):
     For example: ``COUNTRIES_FLAG_URL = 'flags/16x10/{code_upper}.png'``
     """
 
+    COUNTRIES_USE_FULL = False
+    """
+    Whether to use full country names.
+
+    For example: "Bolivia, Plurinational State of" instead of "Bolivia"
+    """
+
     COUNTRIES_OVERRIDE = {}
     """
     A dictionary of names to override the defaults.
