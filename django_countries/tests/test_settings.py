@@ -1,7 +1,8 @@
 from __future__ import unicode_literals
 from django.test import TestCase
+from django.utils import six
 
-from django_countries import countries
+from django_countries import countries, data
 
 
 class TestSettings(TestCase):
@@ -30,3 +31,15 @@ class TestSettings(TestCase):
             self.assertTrue(len(countries.countries) == 1)
             self.assertIn('AU', countries)
             self.assertEqual(countries.name('AU'), 'Desert')
+
+    def test_common_names(self):
+        common_code, common_name = list(data.COMMON_NAMES.items())[0]
+        common_name = six.text_type(common_name)
+        name = six.text_type(countries.countries[common_code])
+        self.assertEqual(name, common_name)
+
+        del countries.countries
+        official_name = six.text_type(data.COUNTRIES[common_code])
+        with self.settings(COUNTRIES_COMMON_NAMES=False):
+            name = six.text_type(countries.countries[common_code])
+            self.assertEqual(name, official_name)

@@ -32,6 +32,17 @@ class Settings(AppSettings):
     For example: ``COUNTRIES_FLAG_URL = 'flags/16x10/{code_upper}.png'``
     """
 
+    COUNTRIES_COMMON_NAMES = True
+    """
+    Whether to use the common names for some countries, as opposed to the
+    official ISO name.
+
+    Some examples:
+        "Bolivia" instead of "Bolivia, Plurinational State of"
+        "South Korea" instead of "Korea (the Republic of)"
+        "Taiwan" instead of "Taiwan (Province of China)"
+    """
+
     COUNTRIES_OVERRIDE = {}
     """
     A dictionary of names to override the defaults.

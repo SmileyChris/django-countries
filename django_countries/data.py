@@ -25,6 +25,22 @@ except ImportError:
     # Allows this module to be executed without Django installed.
     _ = lambda x: x
 
+COMMON_NAMES = {
+    "BN": _("Brunei"),
+    "BO": _("Bolivia"),
+    "IR": _("Iran"),
+    "KP": _("North Korea"),
+    "KR": _("South Korea"),
+    "LA": _("Laos"),
+    "MD": _("Moldovia"),
+    "RU": _("Russia"),
+    "SY": _("Syria"),
+    "TW": _("Taiwan"),
+    "TZ": _("Tanzania"),
+    "VE": _("Venezuela"),
+    "VN": _("Vietnam"),
+}
+
 # Nicely titled (and translatable) country names.
 COUNTRIES = {
     "AF": _("Afghanistan"),
@@ -337,10 +353,21 @@ def check_flags():
             print("  {}".format(path))
 
 
+def check_common_names():
+    common_names_missing = set(COMMON_NAMES) - set(COUNTRIES)
+    if common_names_missing:  # pragma: no cover
+        print("")
+        print(
+            "The following common names do not match an official country "
+            "code:")
+        for code in sorted(common_names_missing):
+            print("  {}".format(code))
+
+
 if __name__ == '__main__':
     countries = self_generate(__file__)
     print('Wrote {0} countries.'.format(len(countries)))
 
-    # Check flag static files:
     print("")
     check_flags()
+    check_common_names()

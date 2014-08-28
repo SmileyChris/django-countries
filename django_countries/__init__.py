@@ -30,8 +30,10 @@ class Countries(object):
             else:
                 # Local import so that countries aren't loaded into memory
                 # until first used.
-                from django_countries.data import COUNTRIES
+                from django_countries.data import COUNTRIES, COMMON_NAMES
                 self._countries = dict(COUNTRIES)
+                if settings.COUNTRIES_COMMON_NAMES:
+                    self._countries.update(COMMON_NAMES)
                 if settings.COUNTRIES_OVERRIDE:
                     self._countries.update(settings.COUNTRIES_OVERRIDE)
                     self._countries = dict(

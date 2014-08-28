@@ -50,3 +50,7 @@ class TestCountriesObject(TestCase):
     def test_flags(self):
         from ..data import check_flags
         check_flags()
+
+    def test_common_names(self):
+        from ..data import check_common_names
+        check_common_names()
