@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-18 16:09+1200\n"
+"POT-Creation-Date: 2014-08-29 12:44+1200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,998 +17,1050 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data.py:15
-msgid "Afghanistan"
-msgstr ""
-
-#: data.py:16
-msgid "Åland Islands"
-msgstr ""
-
-#: data.py:17
-msgid "Albania"
-msgstr ""
-
-#: data.py:18
-msgid "Algeria"
-msgstr ""
-
-#: data.py:19
-msgid "American Samoa"
-msgstr ""
-
-#: data.py:20
-msgid "Andorra"
-msgstr ""
-
-#: data.py:21
-msgid "Angola"
-msgstr ""
-
-#: data.py:22
-msgid "Anguilla"
-msgstr ""
-
-#: data.py:23
-msgid "Antarctica"
-msgstr ""
-
-#: data.py:24
-msgid "Antigua and Barbuda"
-msgstr ""
-
-#: data.py:25
-msgid "Argentina"
-msgstr ""
-
-#: data.py:26
-msgid "Armenia"
-msgstr ""
-
-#: data.py:27
-msgid "Aruba"
-msgstr ""
-
-#: data.py:28
-msgid "Australia"
-msgstr ""
-
 #: data.py:29
-msgid "Austria"
+msgid "Brunei"
 msgstr ""
 
 #: data.py:30
-msgid "Azerbaijan"
+msgid "Bolivia"
 msgstr ""
 
 #: data.py:31
-msgid "Bahamas"
+msgid "Iran"
 msgstr ""
 
 #: data.py:32
-msgid "Bahrain"
+msgid "North Korea"
 msgstr ""
 
 #: data.py:33
-msgid "Bangladesh"
+msgid "South Korea"
 msgstr ""
 
 #: data.py:34
-msgid "Barbados"
+msgid "Laos"
 msgstr ""
 
 #: data.py:35
-msgid "Belarus"
+msgid "Moldovia"
 msgstr ""
 
 #: data.py:36
-msgid "Belgium"
+msgid "Russia"
 msgstr ""
 
 #: data.py:37
-msgid "Belize"
+msgid "Syria"
 msgstr ""
 
 #: data.py:38
-msgid "Benin"
+msgid "Taiwan"
 msgstr ""
 
 #: data.py:39
-msgid "Bermuda"
+msgid "Tanzania"
 msgstr ""
 
 #: data.py:40
-msgid "Bhutan"
+msgid "Venezuela"
 msgstr ""
 
 #: data.py:41
-msgid "Bolivia, Plurinational State of"
-msgstr ""
-
-#: data.py:42
-msgid "Bonaire, Sint Eustatius and Saba"
-msgstr ""
-
-#: data.py:43
-msgid "Bosnia and Herzegovina"
-msgstr ""
-
-#: data.py:44
-msgid "Botswana"
-msgstr ""
-
-#: data.py:45
-msgid "Bouvet Island"
+msgid "Vietnam"
 msgstr ""
 
 #: data.py:46
-msgid "Brazil"
+msgid "Afghanistan"
 msgstr ""
 
 #: data.py:47
-msgid "British Indian Ocean Territory"
+msgid "Åland Islands"
 msgstr ""
 
 #: data.py:48
-msgid "Brunei Darussalam"
+msgid "Albania"
 msgstr ""
 
 #: data.py:49
-msgid "Bulgaria"
+msgid "Algeria"
 msgstr ""
 
 #: data.py:50
-msgid "Burkina Faso"
+msgid "American Samoa"
 msgstr ""
 
 #: data.py:51
-msgid "Burundi"
+msgid "Andorra"
 msgstr ""
 
 #: data.py:52
-msgid "Cabo Verde"
+msgid "Angola"
 msgstr ""
 
 #: data.py:53
-msgid "Cambodia"
+msgid "Anguilla"
 msgstr ""
 
 #: data.py:54
-msgid "Cameroon"
+msgid "Antarctica"
 msgstr ""
 
 #: data.py:55
-msgid "Canada"
+msgid "Antigua and Barbuda"
 msgstr ""
 
 #: data.py:56
-msgid "Cayman Islands"
+msgid "Argentina"
 msgstr ""
 
 #: data.py:57
-msgid "Central African Republic"
+msgid "Armenia"
 msgstr ""
 
 #: data.py:58
-msgid "Chad"
+msgid "Aruba"
 msgstr ""
 
 #: data.py:59
-msgid "Chile"
+msgid "Australia"
 msgstr ""
 
 #: data.py:60
-msgid "China"
+msgid "Austria"
 msgstr ""
 
 #: data.py:61
-msgid "Christmas Island"
+msgid "Azerbaijan"
 msgstr ""
 
 #: data.py:62
-msgid "Cocos (Keeling) Islands"
+msgid "Bahamas"
 msgstr ""
 
 #: data.py:63
-msgid "Colombia"
+msgid "Bahrain"
 msgstr ""
 
 #: data.py:64
-msgid "Comoros"
+msgid "Bangladesh"
 msgstr ""
 
 #: data.py:65
-msgid "Congo"
+msgid "Barbados"
 msgstr ""
 
 #: data.py:66
-msgid "Congo (the Democratic Republic of the)"
+msgid "Belarus"
 msgstr ""
 
 #: data.py:67
-msgid "Cook Islands"
+msgid "Belgium"
 msgstr ""
 
 #: data.py:68
-msgid "Costa Rica"
+msgid "Belize"
 msgstr ""
 
 #: data.py:69
-msgid "Côte d'Ivoire"
+msgid "Benin"
 msgstr ""
 
 #: data.py:70
-msgid "Croatia"
+msgid "Bermuda"
 msgstr ""
 
 #: data.py:71
-msgid "Cuba"
+msgid "Bhutan"
 msgstr ""
 
 #: data.py:72
-msgid "Curaçao"
+msgid "Bolivia, Plurinational State of"
 msgstr ""
 
 #: data.py:73
-msgid "Cyprus"
+msgid "Bonaire, Sint Eustatius and Saba"
 msgstr ""
 
 #: data.py:74
-msgid "Czech Republic"
+msgid "Bosnia and Herzegovina"
 msgstr ""
 
 #: data.py:75
-msgid "Denmark"
+msgid "Botswana"
 msgstr ""
 
 #: data.py:76
-msgid "Djibouti"
+msgid "Bouvet Island"
 msgstr ""
 
 #: data.py:77
-msgid "Dominica"
+msgid "Brazil"
 msgstr ""
 
 #: data.py:78
-msgid "Dominican Republic"
+msgid "British Indian Ocean Territory"
 msgstr ""
 
 #: data.py:79
-msgid "Ecuador"
+msgid "Brunei Darussalam"
 msgstr ""
 
 #: data.py:80
-msgid "Egypt"
+msgid "Bulgaria"
 msgstr ""
 
 #: data.py:81
-msgid "El Salvador"
+msgid "Burkina Faso"
 msgstr ""
 
 #: data.py:82
-msgid "Equatorial Guinea"
+msgid "Burundi"
 msgstr ""
 
 #: data.py:83
-msgid "Eritrea"
+msgid "Cabo Verde"
 msgstr ""
 
 #: data.py:84
-msgid "Estonia"
+msgid "Cambodia"
 msgstr ""
 
 #: data.py:85
-msgid "Ethiopia"
+msgid "Cameroon"
 msgstr ""
 
 #: data.py:86
-msgid "Falkland Islands  [Malvinas]"
+msgid "Canada"
 msgstr ""
 
 #: data.py:87
-msgid "Faroe Islands"
+msgid "Cayman Islands"
 msgstr ""
 
 #: data.py:88
-msgid "Fiji"
+msgid "Central African Republic"
 msgstr ""
 
 #: data.py:89
-msgid "Finland"
+msgid "Chad"
 msgstr ""
 
 #: data.py:90
-msgid "France"
+msgid "Chile"
 msgstr ""
 
 #: data.py:91
-msgid "French Guiana"
+msgid "China"
 msgstr ""
 
 #: data.py:92
-msgid "French Polynesia"
+msgid "Christmas Island"
 msgstr ""
 
 #: data.py:93
-msgid "French Southern Territories"
+msgid "Cocos (Keeling) Islands"
 msgstr ""
 
 #: data.py:94
-msgid "Gabon"
+msgid "Colombia"
 msgstr ""
 
 #: data.py:95
-msgid "Gambia (The)"
+msgid "Comoros"
 msgstr ""
 
 #: data.py:96
-msgid "Georgia"
+msgid "Congo"
 msgstr ""
 
 #: data.py:97
-msgid "Germany"
+msgid "Congo (the Democratic Republic of the)"
 msgstr ""
 
 #: data.py:98
-msgid "Ghana"
+msgid "Cook Islands"
 msgstr ""
 
 #: data.py:99
-msgid "Gibraltar"
+msgid "Costa Rica"
 msgstr ""
 
 #: data.py:100
-msgid "Greece"
+msgid "Côte d'Ivoire"
 msgstr ""
 
 #: data.py:101
-msgid "Greenland"
+msgid "Croatia"
 msgstr ""
 
 #: data.py:102
-msgid "Grenada"
+msgid "Cuba"
 msgstr ""
 
 #: data.py:103
-msgid "Guadeloupe"
+msgid "Curaçao"
 msgstr ""
 
 #: data.py:104
-msgid "Guam"
+msgid "Cyprus"
 msgstr ""
 
 #: data.py:105
-msgid "Guatemala"
+msgid "Czech Republic"
 msgstr ""
 
 #: data.py:106
-msgid "Guernsey"
+msgid "Denmark"
 msgstr ""
 
 #: data.py:107
-msgid "Guinea"
+msgid "Djibouti"
 msgstr ""
 
 #: data.py:108
-msgid "Guinea-Bissau"
+msgid "Dominica"
 msgstr ""
 
 #: data.py:109
-msgid "Guyana"
+msgid "Dominican Republic"
 msgstr ""
 
 #: data.py:110
-msgid "Haiti"
+msgid "Ecuador"
 msgstr ""
 
 #: data.py:111
-msgid "Heard Island and McDonald Islands"
+msgid "Egypt"
 msgstr ""
 
 #: data.py:112
-msgid "Holy See  [Vatican City State]"
+msgid "El Salvador"
 msgstr ""
 
 #: data.py:113
-msgid "Honduras"
+msgid "Equatorial Guinea"
 msgstr ""
 
 #: data.py:114
-msgid "Hong Kong"
+msgid "Eritrea"
 msgstr ""
 
 #: data.py:115
-msgid "Hungary"
+msgid "Estonia"
 msgstr ""
 
 #: data.py:116
-msgid "Iceland"
+msgid "Ethiopia"
 msgstr ""
 
 #: data.py:117
-msgid "India"
+msgid "Falkland Islands  [Malvinas]"
 msgstr ""
 
 #: data.py:118
-msgid "Indonesia"
+msgid "Faroe Islands"
 msgstr ""
 
 #: data.py:119
-msgid "Iran (the Islamic Republic of)"
+msgid "Fiji"
 msgstr ""
 
 #: data.py:120
-msgid "Iraq"
+msgid "Finland"
 msgstr ""
 
 #: data.py:121
-msgid "Ireland"
+msgid "France"
 msgstr ""
 
 #: data.py:122
-msgid "Isle of Man"
+msgid "French Guiana"
 msgstr ""
 
 #: data.py:123
-msgid "Israel"
+msgid "French Polynesia"
 msgstr ""
 
 #: data.py:124
-msgid "Italy"
+msgid "French Southern Territories"
 msgstr ""
 
 #: data.py:125
-msgid "Jamaica"
+msgid "Gabon"
 msgstr ""
 
 #: data.py:126
-msgid "Japan"
+msgid "Gambia (The)"
 msgstr ""
 
 #: data.py:127
-msgid "Jersey"
+msgid "Georgia"
 msgstr ""
 
 #: data.py:128
-msgid "Jordan"
+msgid "Germany"
 msgstr ""
 
 #: data.py:129
-msgid "Kazakhstan"
+msgid "Ghana"
 msgstr ""
 
 #: data.py:130
-msgid "Kenya"
+msgid "Gibraltar"
 msgstr ""
 
 #: data.py:131
-msgid "Kiribati"
+msgid "Greece"
 msgstr ""
 
 #: data.py:132
-msgid "Korea (the Democratic People's Republic of)"
+msgid "Greenland"
 msgstr ""
 
 #: data.py:133
-msgid "Korea (the Republic of)"
+msgid "Grenada"
 msgstr ""
 
 #: data.py:134
-msgid "Kuwait"
+msgid "Guadeloupe"
 msgstr ""
 
 #: data.py:135
-msgid "Kyrgyzstan"
+msgid "Guam"
 msgstr ""
 
 #: data.py:136
-msgid "Lao People's Democratic Republic"
+msgid "Guatemala"
 msgstr ""
 
 #: data.py:137
-msgid "Latvia"
+msgid "Guernsey"
 msgstr ""
 
 #: data.py:138
-msgid "Lebanon"
+msgid "Guinea"
 msgstr ""
 
 #: data.py:139
-msgid "Lesotho"
+msgid "Guinea-Bissau"
 msgstr ""
 
 #: data.py:140
-msgid "Liberia"
+msgid "Guyana"
 msgstr ""
 
 #: data.py:141
-msgid "Libya"
+msgid "Haiti"
 msgstr ""
 
 #: data.py:142
-msgid "Liechtenstein"
+msgid "Heard Island and McDonald Islands"
 msgstr ""
 
 #: data.py:143
-msgid "Lithuania"
+msgid "Holy See  [Vatican City State]"
 msgstr ""
 
 #: data.py:144
-msgid "Luxembourg"
+msgid "Honduras"
 msgstr ""
 
 #: data.py:145
-msgid "Macao"
+msgid "Hong Kong"
 msgstr ""
 
 #: data.py:146
-msgid "Macedonia (the former Yugoslav Republic of)"
+msgid "Hungary"
 msgstr ""
 
 #: data.py:147
-msgid "Madagascar"
+msgid "Iceland"
 msgstr ""
 
 #: data.py:148
-msgid "Malawi"
+msgid "India"
 msgstr ""
 
 #: data.py:149
-msgid "Malaysia"
+msgid "Indonesia"
 msgstr ""
 
 #: data.py:150
-msgid "Maldives"
+msgid "Iran (the Islamic Republic of)"
 msgstr ""
 
 #: data.py:151
-msgid "Mali"
+msgid "Iraq"
 msgstr ""
 
 #: data.py:152
-msgid "Malta"
+msgid "Ireland"
 msgstr ""
 
 #: data.py:153
-msgid "Marshall Islands"
+msgid "Isle of Man"
 msgstr ""
 
 #: data.py:154
-msgid "Martinique"
+msgid "Israel"
 msgstr ""
 
 #: data.py:155
-msgid "Mauritania"
+msgid "Italy"
 msgstr ""
 
 #: data.py:156
-msgid "Mauritius"
+msgid "Jamaica"
 msgstr ""
 
 #: data.py:157
-msgid "Mayotte"
+msgid "Japan"
 msgstr ""
 
 #: data.py:158
-msgid "Mexico"
+msgid "Jersey"
 msgstr ""
 
 #: data.py:159
-msgid "Micronesia (the Federated States of)"
+msgid "Jordan"
 msgstr ""
 
 #: data.py:160
-msgid "Moldova (the Republic of)"
+msgid "Kazakhstan"
 msgstr ""
 
 #: data.py:161
-msgid "Monaco"
+msgid "Kenya"
 msgstr ""
 
 #: data.py:162
-msgid "Mongolia"
+msgid "Kiribati"
 msgstr ""
 
 #: data.py:163
-msgid "Montenegro"
+msgid "Korea (the Democratic People's Republic of)"
 msgstr ""
 
 #: data.py:164
-msgid "Montserrat"
+msgid "Korea (the Republic of)"
 msgstr ""
 
 #: data.py:165
-msgid "Morocco"
+msgid "Kuwait"
 msgstr ""
 
 #: data.py:166
-msgid "Mozambique"
+msgid "Kyrgyzstan"
 msgstr ""
 
 #: data.py:167
-msgid "Myanmar"
+msgid "Lao People's Democratic Republic"
 msgstr ""
 
 #: data.py:168
-msgid "Namibia"
+msgid "Latvia"
 msgstr ""
 
 #: data.py:169
-msgid "Nauru"
+msgid "Lebanon"
 msgstr ""
 
 #: data.py:170
-msgid "Nepal"
+msgid "Lesotho"
 msgstr ""
 
 #: data.py:171
-msgid "Netherlands"
+msgid "Liberia"
 msgstr ""
 
 #: data.py:172
-msgid "New Caledonia"
+msgid "Libya"
 msgstr ""
 
 #: data.py:173
-msgid "New Zealand"
+msgid "Liechtenstein"
 msgstr ""
 
 #: data.py:174
-msgid "Nicaragua"
+msgid "Lithuania"
 msgstr ""
 
 #: data.py:175
-msgid "Niger"
+msgid "Luxembourg"
 msgstr ""
 
 #: data.py:176
-msgid "Nigeria"
+msgid "Macao"
 msgstr ""
 
 #: data.py:177
-msgid "Niue"
+msgid "Macedonia (the former Yugoslav Republic of)"
 msgstr ""
 
 #: data.py:178
-msgid "Norfolk Island"
+msgid "Madagascar"
 msgstr ""
 
 #: data.py:179
-msgid "Northern Mariana Islands"
+msgid "Malawi"
 msgstr ""
 
 #: data.py:180
-msgid "Norway"
+msgid "Malaysia"
 msgstr ""
 
 #: data.py:181
-msgid "Oman"
+msgid "Maldives"
 msgstr ""
 
 #: data.py:182
-msgid "Pakistan"
+msgid "Mali"
 msgstr ""
 
 #: data.py:183
-msgid "Palau"
+msgid "Malta"
 msgstr ""
 
 #: data.py:184
-msgid "Palestine, State of"
+msgid "Marshall Islands"
 msgstr ""
 
 #: data.py:185
-msgid "Panama"
+msgid "Martinique"
 msgstr ""
 
 #: data.py:186
-msgid "Papua New Guinea"
+msgid "Mauritania"
 msgstr ""
 
 #: data.py:187
-msgid "Paraguay"
+msgid "Mauritius"
 msgstr ""
 
 #: data.py:188
-msgid "Peru"
+msgid "Mayotte"
 msgstr ""
 
 #: data.py:189
-msgid "Philippines"
+msgid "Mexico"
 msgstr ""
 
 #: data.py:190
-msgid "Pitcairn"
+msgid "Micronesia (the Federated States of)"
 msgstr ""
 
 #: data.py:191
-msgid "Poland"
+msgid "Moldova (the Republic of)"
 msgstr ""
 
 #: data.py:192
-msgid "Portugal"
+msgid "Monaco"
 msgstr ""
 
 #: data.py:193
-msgid "Puerto Rico"
+msgid "Mongolia"
 msgstr ""
 
 #: data.py:194
-msgid "Qatar"
+msgid "Montenegro"
 msgstr ""
 
 #: data.py:195
-msgid "Réunion"
+msgid "Montserrat"
 msgstr ""
 
 #: data.py:196
-msgid "Romania"
+msgid "Morocco"
 msgstr ""
 
 #: data.py:197
-msgid "Russian Federation"
+msgid "Mozambique"
 msgstr ""
 
 #: data.py:198
-msgid "Rwanda"
+msgid "Myanmar"
 msgstr ""
 
 #: data.py:199
-msgid "Saint Barthélemy"
+msgid "Namibia"
 msgstr ""
 
 #: data.py:200
-msgid "Saint Helena, Ascension and Tristan da Cunha"
+msgid "Nauru"
 msgstr ""
 
 #: data.py:201
-msgid "Saint Kitts and Nevis"
+msgid "Nepal"
 msgstr ""
 
 #: data.py:202
-msgid "Saint Lucia"
+msgid "Netherlands"
 msgstr ""
 
 #: data.py:203
-msgid "Saint Martin (French part)"
+msgid "New Caledonia"
 msgstr ""
 
 #: data.py:204
-msgid "Saint Pierre and Miquelon"
+msgid "New Zealand"
 msgstr ""
 
 #: data.py:205
-msgid "Saint Vincent and the Grenadines"
+msgid "Nicaragua"
 msgstr ""
 
 #: data.py:206
-msgid "Samoa"
+msgid "Niger"
 msgstr ""
 
 #: data.py:207
-msgid "San Marino"
+msgid "Nigeria"
 msgstr ""
 
 #: data.py:208
-msgid "Sao Tome and Principe"
+msgid "Niue"
 msgstr ""
 
 #: data.py:209
-msgid "Saudi Arabia"
+msgid "Norfolk Island"
 msgstr ""
 
 #: data.py:210
-msgid "Senegal"
+msgid "Northern Mariana Islands"
 msgstr ""
 
 #: data.py:211
-msgid "Serbia"
+msgid "Norway"
 msgstr ""
 
 #: data.py:212
-msgid "Seychelles"
+msgid "Oman"
 msgstr ""
 
 #: data.py:213
-msgid "Sierra Leone"
+msgid "Pakistan"
 msgstr ""
 
 #: data.py:214
-msgid "Singapore"
+msgid "Palau"
 msgstr ""
 
 #: data.py:215
-msgid "Sint Maarten (Dutch part)"
+msgid "Palestine, State of"
 msgstr ""
 
 #: data.py:216
-msgid "Slovakia"
+msgid "Panama"
 msgstr ""
 
 #: data.py:217
-msgid "Slovenia"
+msgid "Papua New Guinea"
 msgstr ""
 
 #: data.py:218
-msgid "Solomon Islands"
+msgid "Paraguay"
 msgstr ""
 
 #: data.py:219
-msgid "Somalia"
+msgid "Peru"
 msgstr ""
 
 #: data.py:220
-msgid "South Africa"
+msgid "Philippines"
 msgstr ""
 
 #: data.py:221
-msgid "South Georgia and the South Sandwich Islands"
+msgid "Pitcairn"
 msgstr ""
 
 #: data.py:222
-msgid "South Sudan"
+msgid "Poland"
 msgstr ""
 
 #: data.py:223
-msgid "Spain"
+msgid "Portugal"
 msgstr ""
 
 #: data.py:224
-msgid "Sri Lanka"
+msgid "Puerto Rico"
 msgstr ""
 
 #: data.py:225
-msgid "Sudan"
+msgid "Qatar"
 msgstr ""
 
 #: data.py:226
-msgid "Suriname"
+msgid "Réunion"
 msgstr ""
 
 #: data.py:227
-msgid "Svalbard and Jan Mayen"
+msgid "Romania"
 msgstr ""
 
 #: data.py:228
-msgid "Swaziland"
+msgid "Russian Federation"
 msgstr ""
 
 #: data.py:229
-msgid "Sweden"
+msgid "Rwanda"
 msgstr ""
 
 #: data.py:230
-msgid "Switzerland"
+msgid "Saint Barthélemy"
 msgstr ""
 
 #: data.py:231
-msgid "Syrian Arab Republic"
+msgid "Saint Helena, Ascension and Tristan da Cunha"
 msgstr ""
 
 #: data.py:232
-msgid "Taiwan (Province of China)"
+msgid "Saint Kitts and Nevis"
 msgstr ""
 
 #: data.py:233
-msgid "Tajikistan"
+msgid "Saint Lucia"
 msgstr ""
 
 #: data.py:234
-msgid "Tanzania, United Republic of"
+msgid "Saint Martin (French part)"
 msgstr ""
 
 #: data.py:235
-msgid "Thailand"
+msgid "Saint Pierre and Miquelon"
 msgstr ""
 
 #: data.py:236
-msgid "Timor-Leste"
+msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
 #: data.py:237
-msgid "Togo"
+msgid "Samoa"
 msgstr ""
 
 #: data.py:238
-msgid "Tokelau"
+msgid "San Marino"
 msgstr ""
 
 #: data.py:239
-msgid "Tonga"
+msgid "Sao Tome and Principe"
 msgstr ""
 
 #: data.py:240
-msgid "Trinidad and Tobago"
+msgid "Saudi Arabia"
 msgstr ""
 
 #: data.py:241
-msgid "Tunisia"
+msgid "Senegal"
 msgstr ""
 
 #: data.py:242
-msgid "Turkey"
+msgid "Serbia"
 msgstr ""
 
 #: data.py:243
-msgid "Turkmenistan"
+msgid "Seychelles"
 msgstr ""
 
 #: data.py:244
-msgid "Turks and Caicos Islands"
+msgid "Sierra Leone"
 msgstr ""
 
 #: data.py:245
-msgid "Tuvalu"
+msgid "Singapore"
 msgstr ""
 
 #: data.py:246
-msgid "Uganda"
+msgid "Sint Maarten (Dutch part)"
 msgstr ""
 
 #: data.py:247
-msgid "Ukraine"
+msgid "Slovakia"
 msgstr ""
 
 #: data.py:248
-msgid "United Arab Emirates"
+msgid "Slovenia"
 msgstr ""
 
 #: data.py:249
-msgid "United Kingdom"
+msgid "Solomon Islands"
 msgstr ""
 
 #: data.py:250
-msgid "United States"
+msgid "Somalia"
 msgstr ""
 
 #: data.py:251
-msgid "United States Minor Outlying Islands"
+msgid "South Africa"
 msgstr ""
 
 #: data.py:252
-msgid "Uruguay"
+msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
 
 #: data.py:253
-msgid "Uzbekistan"
+msgid "South Sudan"
 msgstr ""
 
 #: data.py:254
-msgid "Vanuatu"
+msgid "Spain"
 msgstr ""
 
 #: data.py:255
-msgid "Venezuela, Bolivarian Republic of"
+msgid "Sri Lanka"
 msgstr ""
 
 #: data.py:256
-msgid "Viet Nam"
+msgid "Sudan"
 msgstr ""
 
 #: data.py:257
-msgid "Virgin Islands (British)"
+msgid "Suriname"
 msgstr ""
 
 #: data.py:258
-msgid "Virgin Islands (U.S.)"
+msgid "Svalbard and Jan Mayen"
 msgstr ""
 
 #: data.py:259
-msgid "Wallis and Futuna"
+msgid "Swaziland"
 msgstr ""
 
 #: data.py:260
-msgid "Western Sahara"
+msgid "Sweden"
 msgstr ""
 
 #: data.py:261
-msgid "Yemen"
+msgid "Switzerland"
 msgstr ""
 
 #: data.py:262
-msgid "Zambia"
+msgid "Syrian Arab Republic"
 msgstr ""
 
 #: data.py:263
+msgid "Taiwan (Province of China)"
+msgstr ""
+
+#: data.py:264
+msgid "Tajikistan"
+msgstr ""
+
+#: data.py:265
+msgid "Tanzania, United Republic of"
+msgstr ""
+
+#: data.py:266
+msgid "Thailand"
+msgstr ""
+
+#: data.py:267
+msgid "Timor-Leste"
+msgstr ""
+
+#: data.py:268
+msgid "Togo"
+msgstr ""
+
+#: data.py:269
+msgid "Tokelau"
+msgstr ""
+
+#: data.py:270
+msgid "Tonga"
+msgstr ""
+
+#: data.py:271
+msgid "Trinidad and Tobago"
+msgstr ""
+
+#: data.py:272
+msgid "Tunisia"
+msgstr ""
+
+#: data.py:273
+msgid "Turkey"
+msgstr ""
+
+#: data.py:274
+msgid "Turkmenistan"
+msgstr ""
+
+#: data.py:275
+msgid "Turks and Caicos Islands"
+msgstr ""
+
+#: data.py:276
+msgid "Tuvalu"
+msgstr ""
+
+#: data.py:277
+msgid "Uganda"
+msgstr ""
+
+#: data.py:278
+msgid "Ukraine"
+msgstr ""
+
+#: data.py:279
+msgid "United Arab Emirates"
+msgstr ""
+
+#: data.py:280
+msgid "United Kingdom"
+msgstr ""
+
+#: data.py:281
+msgid "United States"
+msgstr ""
+
+#: data.py:282
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+#: data.py:283
+msgid "Uruguay"
+msgstr ""
+
+#: data.py:284
+msgid "Uzbekistan"
+msgstr ""
+
+#: data.py:285
+msgid "Vanuatu"
+msgstr ""
+
+#: data.py:286
+msgid "Venezuela, Bolivarian Republic of"
+msgstr ""
+
+#: data.py:287
+msgid "Viet Nam"
+msgstr ""
+
+#: data.py:288
+msgid "Virgin Islands (British)"
+msgstr ""
+
+#: data.py:289
+msgid "Virgin Islands (U.S.)"
+msgstr ""
+
+#: data.py:290
+msgid "Wallis and Futuna"
+msgstr ""
+
+#: data.py:291
+msgid "Western Sahara"
+msgstr ""
+
+#: data.py:292
+msgid "Yemen"
+msgstr ""
+
+#: data.py:293
+msgid "Zambia"
+msgstr ""
+
+#: data.py:294
 msgid "Zimbabwe"
 msgstr ""
