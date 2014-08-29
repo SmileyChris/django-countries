@@ -6,7 +6,7 @@ COUNTRY_CHANGE_HANDLER = """
 this.nextSibling.src = this.nextSibling.src.replace(/[a-z_]*\.gif/, (this.value.toLowerCase() || '__') + '.gif');
 """
 
-FLAG_IMAGE = """<img style="margin: 6px 4px; position: absolute;" src="%sflags/%s.gif" id="%s-flag">"""
+FLAG_IMAGE = """<img style="margin: 6px 4px; position: absolute;" src="%s" id="%%s-flag">"""
 
 
 class CountrySelectWidget(widgets.Select):
@@ -14,7 +14,7 @@ class CountrySelectWidget(widgets.Select):
         attrs = attrs or {}
         attrs['onchange'] = COUNTRY_CHANGE_HANDLER
         data = super(CountrySelectWidget, self).render(name, value, attrs)
-        data += mark_safe(FLAG_IMAGE % (
+        data += mark_safe((FLAG_IMAGE % settings.COUNTRIES_FLAG_URL) % (
             settings.STATIC_URL,
             unicode(value).lower() or '__',
             attrs['id']
