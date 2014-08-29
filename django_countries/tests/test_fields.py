@@ -117,7 +117,7 @@ class TestCountryObject(TestCase):
         country = fields.Country(code='XX', flag_url='')
         self.assertEqual(
             repr(country),
-            'Country(code={}, flag_url={})'.format(repr('XX'), repr('')))
+            'Country(code={0}, flag_url={1})'.format(repr('XX'), repr('')))
 
     def test_ioc_code(self):
         country = fields.Country(code='NL', flag_url='')

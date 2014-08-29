@@ -33,7 +33,7 @@ class Country(object):
         return hash(force_text(self))
 
     def __repr__(self):
-        return "{}(code={}, flag_url={})".format(
+        return "{0}(code={1}, flag_url={2})".format(
             self.__class__.__name__, repr(self.code), repr(self.flag_url))
 
     def __bool__(self):

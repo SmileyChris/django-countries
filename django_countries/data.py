@@ -21,7 +21,7 @@ import os
 
 try:
     from django.utils.translation import ugettext_lazy as _
-except ImportError:
+except ImportError:  # pragma: no cover
     # Allows this module to be executed without Django installed.
     _ = lambda x: x
 
@@ -339,7 +339,7 @@ def check_flags():
     if flags_missing:  # pragma: no cover
         print("The following country codes are missing a flag:")
         for code in sorted(flags_missing):
-            print("  {} ({})".format(code, COUNTRIES[code]))
+            print("  {0} ({1})".format(code, COUNTRIES[code]))
     else:
         print("All country codes have flags. :)")
 
@@ -350,7 +350,7 @@ def check_flags():
         print("")
         print("The following flags don't have a matching country code:")
         for path in sorted(code_missing):
-            print("  {}".format(path))
+            print("  {0}".format(path))
 
 
 def check_common_names():
@@ -361,10 +361,10 @@ def check_common_names():
             "The following common names do not match an official country "
             "code:")
         for code in sorted(common_names_missing):
-            print("  {}".format(code))
+            print("  {0}".format(code))
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     countries = self_generate(__file__)
     print('Wrote {0} countries.'.format(len(countries)))
 
