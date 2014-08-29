@@ -45,11 +45,11 @@ class TestCountriesObject(TestCase):
 
     def test_ioc_countries(self):
         from ..ioc_data import check_ioc_countries
-        check_ioc_countries()
+        check_ioc_countries(verbosity=0)
 
     def test_flags(self):
         from ..data import check_flags
-        check_flags()
+        check_flags(verbosity=0)
 
     def test_common_names(self):
         from ..data import check_common_names

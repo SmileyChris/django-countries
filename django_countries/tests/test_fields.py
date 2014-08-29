@@ -1,9 +1,14 @@
 from __future__ import unicode_literals
+import django
 from django.db import IntegrityError
 from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase
 from django.utils.encoding import force_text
+try:
+    from unittest import skipIf
+except:
+    from django.utils.unittest import skipIf
 
 from django_countries import fields
 from django_countries.tests.models import Person, AllowNull
@@ -20,6 +25,18 @@ class TestCountryField(TestCase):
         self.assertTrue(person.country)
         person.country = ''
         self.assertFalse(person.country)
+
+    def test_only_from_instance(self):
+        self.assertRaises(AttributeError, lambda: Person.country)
+
+    @skipIf(
+        django.VERSION < (1, 7), "Field.deconstruct introduced in Django 1.7")
+    def test_deconstruct(self):
+        field = Person._meta.get_field('country')
+        self.assertEqual(
+            field.deconstruct(),
+            ('country', 'django_countries.fields.CountryField', [],
+             {'max_length': 2}))
 
     def test_text(self):
         person = Person(name='Chris Beaven', country='NZ')
@@ -118,6 +135,9 @@ class TestCountryObject(TestCase):
         self.assertEqual(
             repr(country),
             'Country(code={0}, flag_url={1})'.format(repr('XX'), repr('')))
+
+    def test_no_blank_code(self):
+        self.assertRaises(ValueError, fields.Country, code='', flag_url='')
 
     def test_ioc_code(self):
         country = fields.Country(code='NL', flag_url='')

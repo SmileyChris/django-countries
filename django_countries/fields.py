@@ -63,8 +63,6 @@ class Country(object):
 
     @property
     def ioc_code(self):
-        if not self.code:
-            return ''
         return ioc_data.ISO_TO_IOC.get(self.code, '')
 
 
@@ -137,13 +135,17 @@ class CountryField(CharField):
         return self.get_prep_value(value)
 
     def deconstruct(self):
+        """
+        Remove choices from deconstructed field, as this is the country list
+        and not user editable.
+        """
         name, path, args, kwargs = super(CountryField, self).deconstruct()
         kwargs.pop('choices')
         return name, path, args, kwargs
 
 # If south is installed, ensure that CountryField will be introspected just
 # like a normal CharField.
-try:
+try:  # pragma: no cover
     from south.modelsinspector import add_introspection_rules
     add_introspection_rules([], ['^django_countries\.fields\.CountryField'])
 except ImportError:

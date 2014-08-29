@@ -208,13 +208,15 @@ IOC_TO_ISO = {
 ISO_TO_IOC = dict((iso, ioc) for ioc, iso in IOC_TO_ISO.items())
 
 
-def check_ioc_countries():
+def check_ioc_countries(verbosity=1):
     """
     Check if all IOC codes map to ISO codes correctly
     """
     from django_countries.data import COUNTRIES
 
-    print("Checking if all IOC codes map correctly")
+    if verbosity:  # pragma: no cover
+        print("Checking if all IOC codes map correctly")
     for key in ISO_TO_IOC:
         assert COUNTRIES.get(key), 'No ISO code for %s' % key
-    print("Finished checking IOC codes")
+    if verbosity:  # pragma: no cover
+        print("Finished checking IOC codes")

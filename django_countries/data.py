@@ -329,7 +329,7 @@ def self_generate(
     return countries
 
 
-def check_flags():
+def check_flags(verbosity=1):
     files = {}
     this_dir = os.path.dirname(__file__)
     for path in glob.glob(os.path.join(this_dir, 'static', 'flags', '*.gif')):
@@ -340,7 +340,7 @@ def check_flags():
         print("The following country codes are missing a flag:")
         for code in sorted(flags_missing):
             print("  {0} ({1})".format(code, COUNTRIES[code]))
-    else:
+    elif verbosity:  # pragma: no cover
         print("All country codes have flags. :)")
 
     code_missing = set(files) - set(COUNTRIES)

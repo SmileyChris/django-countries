@@ -2,10 +2,7 @@ from itertools import islice
 from operator import itemgetter
 
 from django_countries.conf import settings
-try:
-    from django.utils.encoding import force_text
-except ImportError:  # Django 1.4
-    from django.utils.encoding import force_unicode as force_text
+from django.utils.encoding import force_text
 
 
 class Countries(object):
