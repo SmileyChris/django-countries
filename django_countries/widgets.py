@@ -3,7 +3,7 @@ from django.forms import widgets
 from django.utils.safestring import mark_safe
 
 COUNTRY_CHANGE_HANDLER = """
-this.nextSibling.src = this.nextSibling.src.replace(/[a-z_]*\.gif/, (this.value.toLowerCase() || '__') + '.gif');
+this.nextSibling.src = this.nextSibling.src.replace(/[a-z_]{2}(\.[a-zA-Z]*)$/, (this.value.toLowerCase() || '__') + '$1');
 """
 
 FLAG_IMAGE = """<img style="margin: 6px 4px; position: absolute;" src="%s" id="%%s-flag">"""
