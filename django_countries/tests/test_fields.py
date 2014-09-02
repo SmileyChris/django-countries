@@ -123,6 +123,10 @@ class TestCountryField(TestCase):
         form_field = Form().fields['country']
         self.assertTrue(isinstance(form_field.widget, Select))
 
+    def test_render_form(self):
+        Form = modelform_factory(Person, fields=['country'])
+        Form().as_p()
+
 
 class TestCountryObject(TestCase):
 
