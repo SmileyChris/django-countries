@@ -19,6 +19,11 @@ class TestCountrySelectWidget(TestCase):
     def tearDown(self):
         del countries.countries
 
+    def test_not_default_widget(self):
+        Form = modelform_factory(Person, fields=['country'])
+        widget = Form().fields['country'].widget
+        self.assertFalse(isinstance(widget, widgets.CountrySelectWidget))
+
     def test_render_contains_flag_url(self):
         with self.settings(COUNTRIES_ONLY={'AU': 'Desert'}):
             html = self.Form().as_p()
