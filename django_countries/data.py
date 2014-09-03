@@ -344,8 +344,9 @@ def check_flags(verbosity=1):
         print("All country codes have flags. :)")
 
     code_missing = set(files) - set(COUNTRIES)
-    # Special-case EU
-    code_missing.discard('EU')
+    # Special-case EU and __
+    for special_code in ('EU', '__'):
+        code_missing.discard(special_code)
     if code_missing:  # pragma: no cover
         print("")
         print("The following flags don't have a matching country code:")
