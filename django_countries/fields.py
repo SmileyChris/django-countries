@@ -11,11 +11,10 @@ from django.utils.encoding import force_text, python_2_unicode_compatible
 from django_countries import countries, ioc_data
 from django_countries.conf import settings
 
-from .widgets import CountrySelectWidget
 
 @python_2_unicode_compatible
 class Country(object):
-    def __init__(self, code, flag_url):
+    def __init__(self, code, flag_url=None):
         if not code:
             raise ValueError("Country code can not be blank")
         self.code = code
@@ -34,7 +33,11 @@ class Country(object):
         return hash(force_text(self))
 
     def __repr__(self):
-        return "{0}(code={1}, flag_url={2})".format(
+        if self.flag_url is None:
+            repr_text = "{0}(code={1})"
+        else:
+            repr_text = "{0}(code={1}, flag_url={2})"
+        return repr_text.format(
             self.__class__.__name__, repr(self.code), repr(self.flag_url))
 
     def __bool__(self):
@@ -51,7 +54,10 @@ class Country(object):
 
     @property
     def flag(self):
-        url = self.flag_url.format(
+        flag_url = self.flag_url
+        if flag_url is None:
+            flag_url = settings.COUNTRIES_FLAG_URL
+        url = flag_url.format(
             code_upper=self.code, code=self.code.lower())
         return urlparse.urljoin(settings.STATIC_URL, url)
 
@@ -94,8 +100,8 @@ class CountryDescriptor(object):
             return code
         return Country(
             code=code,
-            flag_url=self.field.countries_flag_url or
-            settings.COUNTRIES_FLAG_URL)
+            flag_url=self.field.countries_flag_url,
+        )
 
     def __set__(self, instance, value):
         if value is not None:
@@ -135,12 +141,12 @@ class CountryField(CharField):
         value = super(CharField, self).pre_save(*args, **kwargs)
         return self.get_prep_value(value)
 
-    def formfield(self, **kwargs):
-        defaults = {
-            'widget': CountrySelectWidget(),
-        }
-        defaults.update(kwargs)
-        return super(CountryField, self).formfield(**defaults)
+    # def formfield(self, **kwargs):
+    #     defaults = {
+    #         'widget': CountrySelectWidget(),
+    #     }
+    #     defaults.update(kwargs)
+    #     return super(CountryField, self).formfield(**defaults)
 
     def deconstruct(self):
         """

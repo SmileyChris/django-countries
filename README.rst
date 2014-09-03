@@ -60,6 +60,22 @@ name
 flag
   Contains a URL to the flag.
 
+``CountrySelectWidget``
+-----------------------
+
+A widget is included that can show the flag image after the select box
+(updated with JavaScript when the selection changes).
+
+When you create your form, you can use this custom widget like normal::
+
+    from django_countries.widgets import CountrySelectWidget
+
+    class PersonForm(forms.ModelForm):
+        class Meta:
+            model = models.Person
+            fields = ('name', 'country')
+            widgets = {'country': CountrySelectWidget}
+
 
 Get the countries from Python
 =============================

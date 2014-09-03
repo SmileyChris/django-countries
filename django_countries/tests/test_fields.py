@@ -135,9 +135,13 @@ class TestCountryObject(TestCase):
         self.assertEqual(hash(country), hash('XX'))
 
     def test_repr(self):
-        country = fields.Country(code='XX', flag_url='')
+        country1 = fields.Country(code='XX')
+        country2 = fields.Country(code='XX', flag_url='')
         self.assertEqual(
-            repr(country),
+            repr(country1),
+            'Country(code={0})'.format(repr('XX')))
+        self.assertEqual(
+            repr(country2),
             'Country(code={0}, flag_url={1})'.format(repr('XX'), repr('')))
 
     def test_no_blank_code(self):

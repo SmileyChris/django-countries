@@ -1,0 +1,42 @@
+from __future__ import unicode_literals
+from django.forms.models import modelform_factory
+from django.test import TestCase
+from django.utils.html import escape
+
+from django_countries import widgets, countries, fields
+from django_countries.conf import settings
+from django_countries.tests.models import Person
+
+
+class TestCountrySelectWidget(TestCase):
+
+    def setUp(self):
+        del countries.countries
+        self.Form = modelform_factory(
+            Person, fields=['country'],
+            widgets={'country': widgets.CountrySelectWidget})
+
+    def tearDown(self):
+        del countries.countries
+
+    def test_not_default_widget(self):
+        Form = modelform_factory(Person, fields=['country'])
+        widget = Form().fields['country'].widget
+        self.assertFalse(isinstance(widget, widgets.CountrySelectWidget))
+
+    def test_render_contains_flag_url(self):
+        with self.settings(COUNTRIES_ONLY={'AU': 'Desert'}):
+            html = self.Form().as_p()
+            self.assertIn(escape(settings.COUNTRIES_FLAG_URL), html)
+
+    def test_render(self):
+        with self.settings(COUNTRIES_ONLY={'AU': 'Desert'}):
+            html = self.Form().as_p()
+            self.assertIn(fields.Country('__').flag, html)
+            self.assertNotIn(fields.Country('AU').flag, html)
+
+    def test_render_initial(self):
+        with self.settings(COUNTRIES_ONLY={'AU': 'Desert'}):
+            html = self.Form(initial={'country': 'AU'}).as_p()
+            self.assertIn(fields.Country('AU').flag, html)
+            self.assertNotIn(fields.Country('__').flag, html)
