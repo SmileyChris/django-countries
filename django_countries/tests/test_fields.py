@@ -44,7 +44,7 @@ class TestCountryField(TestCase):
 
     def test_name(self):
         person = Person(name='Chris Beaven', country='NZ')
-        self.assertEqual(person.country.name, u'New Zealand')
+        self.assertEqual(person.country.name, 'New Zealand')
 
     def test_flag(self):
         person = Person(name='Chris Beaven', country='NZ')
