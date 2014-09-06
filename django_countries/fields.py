@@ -82,7 +82,7 @@ class CountryDescriptor(object):
         >>> person = Person.object.get(name='Chris')
 
         >>> person.country.name
-        u'New Zealand'
+        'New Zealand'
 
         >>> person.country.flag
         '/static/flags/nz.gif'
