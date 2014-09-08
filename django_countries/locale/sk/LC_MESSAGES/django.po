@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-29 12:44+1200\n"
-"PO-Revision-Date: 2014-08-29 00:45+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2014-09-06 09:30+0000\n"
+"Last-Translator: lukasmatiasko\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/django-countries/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,55 +20,55 @@ msgstr ""
 
 #: data.py:29
 msgid "Brunei"
-msgstr ""
+msgstr "Brunej"
 
 #: data.py:30
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolívia"
 
 #: data.py:31
 msgid "Iran"
-msgstr ""
+msgstr "Irán"
 
 #: data.py:32
 msgid "North Korea"
-msgstr ""
+msgstr "Severná Kórea"
 
 #: data.py:33
 msgid "South Korea"
-msgstr ""
+msgstr "Južná Kórea"
 
 #: data.py:34
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: data.py:35
 msgid "Moldovia"
-msgstr ""
+msgstr "Moldavsko"
 
 #: data.py:36
 msgid "Russia"
-msgstr ""
+msgstr "Rusko"
 
 #: data.py:37
 msgid "Syria"
-msgstr ""
+msgstr "Sýria"
 
 #: data.py:38
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #: data.py:39
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzánia"
 
 #: data.py:40
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
 #: data.py:41
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnam"
 
 #: data.py:46
 msgid "Afghanistan"
@@ -220,7 +220,7 @@ msgstr "Burundi"
 
 #: data.py:83
 msgid "Cabo Verde"
-msgstr ""
+msgstr "Kapverdy"
 
 #: data.py:84
 msgid "Cambodia"
