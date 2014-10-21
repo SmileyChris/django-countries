@@ -1,16 +1,19 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import django
 from django.db import IntegrityError
 from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase
+from django.utils import translation
 from django.utils.encoding import force_text
 try:
     from unittest import skipIf
 except:
     from django.utils.unittest import skipIf
 
-from django_countries import fields
+from django_countries import fields, countries
+from django_countries.tests import forms
 from django_countries.tests.models import Person, AllowNull
 
 
@@ -162,3 +165,17 @@ class TestCountryObject(TestCase):
     def test_country_from_nonexistence_ioc_code(self):
         country = fields.Country.country_from_ioc('XXX')
         self.assertIsNone(country)
+
+
+class TestModelForm(TestCase):
+
+    def test_translated_choices(self):
+        lang = translation.get_language()
+        translation.activate('eo')
+        form = forms.PersonForm()
+        try:
+            self.assertEqual(list(countries)[0][1], 'Afganio')
+            self.assertEqual(
+                form.fields['country'].choices[1][1], 'Afganio')
+        finally:
+            translation.activate(lang)

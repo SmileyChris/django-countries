@@ -1,12 +1,15 @@
 from __future__ import unicode_literals
 
+import inspect
 try:
     from urllib import parse as urlparse
 except ImportError:
     import urlparse   # Python 2
 
-from django.db.models.fields import CharField
+from django import forms
+from django.db.models.fields import Field, CharField
 from django.utils.encoding import force_text, python_2_unicode_compatible
+from django.utils.functional import lazy, Promise
 
 from django_countries import countries, ioc_data
 from django_countries.conf import settings
@@ -109,6 +112,26 @@ class CountryDescriptor(object):
         instance.__dict__[self.field.name] = value
 
 
+class LazyTypedChoiceField(forms.TypedChoiceField):
+    """
+    A form TypedChoiceField that respects choices being a lazy object.
+    """
+
+    @property
+    def choices(self):
+        """
+        When it's time to get the choices, if it was a lazy then figure it out
+        now and memoize the result.
+        """
+        if isinstance(self._choices, Promise):
+            self._choices = list(self._choices)
+        return self._choices
+
+    @choices.setter
+    def choices(self, value):
+        self._choices = value
+
+
 class CountryField(CharField):
     """
     A country field for Django models that provides all ISO 3166-1 countries as
@@ -156,6 +179,18 @@ class CountryField(CharField):
         name, path, args, kwargs = super(CountryField, self).deconstruct()
         kwargs.pop('choices')
         return name, path, args, kwargs
+
+    get_choices = lazy(CharField.get_choices, list)
+
+    def formfield(self, **kwargs):
+        # Newer Django versions use choices_form_class rather than form_class,
+        # so do some dirty inspection to decide which to use.
+        argname = 'choices_form_class'
+        if argname not in inspect.getargspec(Field.formfield)[0]:
+            argname = 'form_class'
+        if argname not in kwargs:
+            kwargs[argname] = LazyTypedChoiceField
+        return super(CharField, self).formfield(**kwargs)
 
 # If south is installed, ensure that CountryField will be introspected just
 # like a normal CharField.
