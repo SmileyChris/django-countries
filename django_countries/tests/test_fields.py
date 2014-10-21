@@ -170,6 +170,34 @@ class TestCountryObject(TestCase):
         country = fields.Country.country_from_ioc('XXX')
         self.assertIsNone(country)
 
+    def test_alpha3(self):
+        country = fields.Country(code='BN')
+        self.assertEqual(country.alpha3, 'BRN')
+
+    def test_alpha3_invalid(self):
+        country = fields.Country(code='XX')
+        self.assertEqual(country.alpha3, '')
+
+    def test_numeric(self):
+        country = fields.Country(code='BN')
+        self.assertEqual(country.numeric, 96)
+
+    def test_numeric_padded(self):
+        country = fields.Country(code='AL')
+        self.assertEqual(country.numeric_padded, '008')
+        country = fields.Country(code='BN')
+        self.assertEqual(country.numeric_padded, '096')
+        country = fields.Country(code='NZ')
+        self.assertEqual(country.numeric_padded, '554')
+
+    def test_numeric_invalid(self):
+        country = fields.Country(code='XX')
+        self.assertEqual(country.numeric, None)
+
+    def test_numeric_padded_invalid(self):
+        country = fields.Country(code='XX')
+        self.assertEqual(country.numeric_padded, None)
+
 
 class TestModelForm(TestCase):
 

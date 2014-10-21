@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import unicode_literals
 from itertools import islice
 
 from django_countries.conf import settings
@@ -54,6 +55,14 @@ class Countries(object):
                         if name is not None)
         return self._countries
 
+    @property
+    def alt_codes(self):
+        if not hasattr(self, '_alt_codes'):
+            # Again, local import so data is not loaded unless it's needed.
+            from django_countries.data import ALT_CODES
+            self._alt_codes = ALT_CODES
+        return self._alt_codes
+
     @countries.deleter
     def countries(self):
         """
@@ -86,6 +95,36 @@ class Countries(object):
         If no match is found, returns an empty string.
         """
         return self.countries.get(code, '')
+
+    def alpha3(self, code):
+        """
+        Return the ISO 3166-1 three letter country code matching the provided
+        two letter country code.
+
+        If no match is found, returns an empty string.
+        """
+        try:
+            return self.alt_codes[code][0]
+        except KeyError:
+            return ''
+
+    def numeric(self, code, padded=False):
+        """
+        Return the ISO 3166-1 numeric country code matching the provided two
+        letter country code.
+
+        If no match is found, returns ``None``.
+
+        :param padded: Pass ``True`` to return a 0-padded three character
+            string, otherwise an integer will be returned.
+        """
+        try:
+            num = self.alt_codes[code][1]
+        except KeyError:
+            return None
+        if padded:
+            return '%03d' % num
+        return num
 
     def __len__(self):
         """

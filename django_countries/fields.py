@@ -55,6 +55,18 @@ class Country(object):
         return countries.name(self.code)
 
     @property
+    def alpha3(self):
+        return countries.alpha3(self.code)
+
+    @property
+    def numeric(self):
+        return countries.numeric(self.code)
+
+    @property
+    def numeric_padded(self):
+        return countries.numeric(self.code, padded=True)
+
+    @property
     def flag(self):
         flag_url = self.flag_url
         if flag_url is None:
