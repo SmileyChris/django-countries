@@ -10,11 +10,8 @@ def long_description():
     as this module.
     """
     base_path = os.path.dirname(os.path.realpath(__file__))
-    readme = io.open(os.path.join(base_path, 'README.rst'), encoding='utf-8')
-    try:
-        return readme.read()
-    finally:
-        readme.close()
+    with io.open(os.path.join(base_path, 'README.rst'), encoding='utf-8') as f:
+        return f.read()
 
 
 setup(
