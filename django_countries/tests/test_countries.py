@@ -64,3 +64,21 @@ class TestCountriesObject(TestCase):
     def test_common_names(self):
         from ..data import check_common_names
         check_common_names()
+
+    def test_alpha2(self):
+        self.assertEqual(countries.alpha2('NZ'), 'NZ')
+        self.assertEqual(countries.alpha2('nZ'), 'NZ')
+        self.assertEqual(countries.alpha2('Nzl'), 'NZ')
+        self.assertEqual(countries.alpha2(554), 'NZ')
+        self.assertEqual(countries.alpha2('554'), 'NZ')
+
+    def test_alpha2_invalid(self):
+        self.assertEqual(countries.alpha2('XX'), '')
+
+    def test_alpha2_override(self):
+        with self.settings(COUNTRIES_OVERRIDE={'AU': None}):
+            self.assertEqual(countries.alpha2('AU'), '')
+
+    def test_alpha2_override_new(self):
+        with self.settings(COUNTRIES_OVERRIDE={'XX': 'Neverland'}):
+            self.assertEqual(countries.alpha2('XX'), 'XX')

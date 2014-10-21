@@ -88,21 +88,49 @@ class Countries(object):
         # Return sorted country list.
         return iter(sorted(countries, key=sort_key))
 
+    def alpha2(self, code):
+        """
+        Return the two letter country code when passed any type of ISO 3166-1
+        country code.
+
+        If no match is found, returns an empty string.
+        """
+        code = force_text(code).upper()
+        if code.isdigit():
+            lookup_code = int(code)
+            find = lambda alt_codes: alt_codes[1] == lookup_code
+        elif len(code) == 3:
+            lookup_code = code
+            find = lambda alt_codes: alt_codes[0] == lookup_code
+        else:
+            find = None
+        if find:
+            code = None
+            for alpha2, alt_codes in self.alt_codes.items():
+                if find(alt_codes):
+                    code = alpha2
+                    break
+        if code in self.countries:
+            return code
+        return ''
+
     def name(self, code):
         """
         Return the name of a country, based on the code.
 
         If no match is found, returns an empty string.
         """
+        code = self.alpha2(code)
         return self.countries.get(code, '')
 
     def alpha3(self, code):
         """
         Return the ISO 3166-1 three letter country code matching the provided
-        two letter country code.
+        country code.
 
         If no match is found, returns an empty string.
         """
+        code = self.alpha2(code)
         try:
             return self.alt_codes[code][0]
         except KeyError:
@@ -110,14 +138,15 @@ class Countries(object):
 
     def numeric(self, code, padded=False):
         """
-        Return the ISO 3166-1 numeric country code matching the provided two
-        letter country code.
+        Return the ISO 3166-1 numeric country code matching the provided
+        country code.
 
         If no match is found, returns ``None``.
 
         :param padded: Pass ``True`` to return a 0-padded three character
             string, otherwise an integer will be returned.
         """
+        code = self.alpha2(code)
         try:
             num = self.alt_codes[code][1]
         except KeyError:
