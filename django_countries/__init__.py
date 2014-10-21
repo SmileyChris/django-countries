@@ -1,13 +1,23 @@
 from itertools import islice
-from operator import itemgetter
 
 from django_countries.conf import settings
 from django.utils.encoding import force_text
 
 try:
     import pyuca
-except ImportError:  # pyuca not installed
+except ImportError:
     pyuca = None
+
+# Use UCA sorting if it's available.
+if pyuca:
+    collator = pyuca.Collator()
+    sort_key = lambda item: collator.sort_key(item[1])
+else:
+    import unicodedata
+    # Cheap and dirty method to sort against ASCII characters only.
+    sort_key = lambda item: (
+        unicodedata.normalize('NFKD', item[1])
+        .encode('ascii', 'ignore').decode('ascii'))
 
 
 class Countries(object):
@@ -65,15 +75,8 @@ class Countries(object):
         countries = [
             (code, force_text(name)) for code, name in self.countries.items()]
 
-        if pyuca:
-            collator = pyuca.Collator()
-            def key(item):
-                return collator.sort_key(item[1])
-        else:
-            key = itemgetter(1)
-
         # Return sorted country list.
-        return iter(sorted(countries, key=key))
+        return iter(sorted(countries, key=sort_key))
 
     def name(self, code):
         """
