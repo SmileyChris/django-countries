@@ -12,7 +12,7 @@ how to do that:
 4. Change the results per page to 300
 5. Copy the html table and paste into Libreoffice Calc / Excel
 6. Delete the French name column
-7. Save as a CSV file in django_countires/iso3166-1.csv
+7. Save as a CSV file in django_countries/iso3166-1.csv
 8. Run this script from the command line
 """
 from __future__ import unicode_literals
