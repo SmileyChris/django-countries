@@ -14,7 +14,11 @@ except:
 
 from django_countries import fields, countries
 from django_countries.tests import forms
-from django_countries.tests.models import Person, AllowNull
+from django_countries.tests.models import Person, AllowNull, en_zed
+
+skipUnlessLegacy = skipIf(
+    django.VERSION >= (1, 5),
+    "Legacy tests only necessary in Django < 1.5")
 
 
 class TestCountryField(TestCase):
@@ -174,8 +178,30 @@ class TestModelForm(TestCase):
         translation.activate('eo')
         form = forms.PersonForm()
         try:
+            # This is just to prove that the language changed.
             self.assertEqual(list(countries)[0][1], 'Afganio')
+            # If the choices aren't lazy, this wouldn't be translated. It's the
+            # second choice because the first one is the initial blank option.
             self.assertEqual(
                 form.fields['country'].choices[1][1], 'Afganio')
         finally:
             translation.activate(lang)
+
+    @skipUnlessLegacy
+    def test_legacy_default(self):
+        self.assertEqual(
+            forms.LegacyForm.base_fields['default'].initial, 'AU')
+
+    @skipUnlessLegacy
+    def test_legacy_default_callable(self):
+        self.assertEqual(
+            forms.LegacyForm.base_fields['default_callable'].initial, en_zed)
+        form = forms.LegacyForm()
+        self.assertEqual(form['default_callable'].value(), 'NZ')
+
+    @skipUnlessLegacy
+    def test_legacy_empty_value(self):
+        self.assertEqual(
+            forms.LegacyForm.base_fields['default'].empty_value, None)
+        self.assertEqual(
+            forms.LegacyForm.base_fields['default_callable'].empty_value, '')
