@@ -33,6 +33,7 @@ COMMON_NAMES = {
     "KR": _("South Korea"),
     "LA": _("Laos"),
     "MD": _("Moldovia"),
+    "MK": _("Macedonia"),
     "RU": _("Russia"),
     "SY": _("Syria"),
     "TW": _("Taiwan"),
