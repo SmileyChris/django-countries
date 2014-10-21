@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.test import TestCase
 
@@ -15,6 +16,15 @@ class TestCountriesObject(TestCase):
 
     def test_countries_len(self):
         self.assertEqual(len(countries), self.EXPECTED_COUNTRY_COUNT)
+
+    def test_countries_sorted(self):
+        self.assertEqual(
+            list(countries)[:3],
+            [
+                ('AF', 'Afghanistan'),
+                ('AX', 'Åland Islands'),
+                ('AL', 'Albania'),
+            ])
 
     def test_countries_custom_removed_len(self):
         with self.settings(COUNTRIES_OVERRIDE={'AU': None}):
