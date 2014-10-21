@@ -60,6 +60,15 @@ name
 flag
   Contains a URL to the flag.
 
+alpha3
+  The three letter country code for this country.
+
+numeric
+  The numeric country code for this country (as an integer).
+
+numeric_padded
+  The numeric country code as a three character 0-padded string.
+
 ``CountrySelectWidget``
 -----------------------
 
