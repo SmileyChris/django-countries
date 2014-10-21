@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from itertools import islice
 
 from django_countries.conf import settings
