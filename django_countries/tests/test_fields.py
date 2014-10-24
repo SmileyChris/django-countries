@@ -113,12 +113,12 @@ class TestCountryField(TestCase):
     def test_save_empty_country(self):
         Person.objects.create(name='The Outsider')
         person = Person.objects.get()
-        self.assertEqual(person.country, '')
+        self.assertEqual(person.country, fields.Country(None))
 
     def test_save_null_country_allowed(self):
         AllowNull.objects.create(country=None)
         nulled = AllowNull.objects.get()
-        self.assertIsNone(nulled.country)
+        self.assertEqual(nulled.country, fields.Country(None))
 
     def test_save_null_country_not_allowed(self):
         self.assertRaises(
@@ -151,8 +151,9 @@ class TestCountryObject(TestCase):
             repr(country2),
             'Country(code={0}, flag_url={1})'.format(repr('XX'), repr('')))
 
-    def test_no_blank_code(self):
-        self.assertRaises(ValueError, fields.Country, code='', flag_url='')
+    def test_blank_code(self):
+        country = fields.Country(code=None)
+        self.assertEqual(country.code, None)
 
     def test_ioc_code(self):
         country = fields.Country(code='NL', flag_url='')
