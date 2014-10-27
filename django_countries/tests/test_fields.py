@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import django
-from django.db import IntegrityError
 from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase
@@ -78,7 +77,7 @@ class TestCountryField(TestCase):
                 person.country.flag, 'https://flags.example.com/NZ.PNG')
 
     def test_blank(self):
-        person = Person.objects.create(name='The Outsider')
+        person = Person.objects.create(name='The Outsider', country=None)
         self.assertEqual(person.country, '')
 
         person = Person.objects.get(pk=person.pk)
@@ -88,7 +87,7 @@ class TestCountryField(TestCase):
         person = Person(name='Chris Beaven', country='NZ')
         self.assertEqual(len(person.country), 2)
 
-        person = Person(name='The Outsider')
+        person = Person(name='The Outsider', country=None)
         self.assertEqual(len(person.country), 0)
 
     def test_lookup_text(self):
@@ -111,19 +110,8 @@ class TestCountryField(TestCase):
         self.assertEqual(list(names), ['Killer everything'])
 
     def test_save_empty_country(self):
-        Person.objects.create(name='The Outsider')
-        person = Person.objects.get()
-        self.assertEqual(person.country, '')
-
-    def test_save_null_country_allowed(self):
+        Person.objects.create(name='The Outsider', country=None)
         AllowNull.objects.create(country=None)
-        nulled = AllowNull.objects.get()
-        self.assertIsNone(nulled.country)
-
-    def test_save_null_country_not_allowed(self):
-        self.assertRaises(
-            IntegrityError,
-            Person.objects.create, name='The Outsider', country=None)
 
     def test_create_modelform(self):
         Form = modelform_factory(Person, fields=['country'])
@@ -153,6 +141,10 @@ class TestCountryObject(TestCase):
 
     def test_no_blank_code(self):
         self.assertRaises(ValueError, fields.Country, code='', flag_url='')
+
+    def test_flag_on_empty_code(self):
+        country = fields.Country(code='', flag_url='')
+        self.assertEqual(country.flag, '')
 
     def test_ioc_code(self):
         country = fields.Country(code='NL', flag_url='')
