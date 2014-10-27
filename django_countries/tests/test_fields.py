@@ -77,11 +77,18 @@ class TestCountryField(TestCase):
                 person.country.flag, 'https://flags.example.com/NZ.PNG')
 
     def test_blank(self):
-        person = Person.objects.create(name='The Outsider', country=None)
+        person = Person.objects.create(name='The Outsider')
         self.assertEqual(person.country, '')
 
         person = Person.objects.get(pk=person.pk)
         self.assertEqual(person.country, '')
+
+    def test_null(self):
+        person = AllowNull.objects.create(country=None)
+        self.assertIsNone(person.country.code)
+
+        person = AllowNull.objects.get(pk=person.pk)
+        self.assertIsNone(person.country.code)
 
     def test_len(self):
         person = Person(name='Chris Beaven', country='NZ')
@@ -110,8 +117,9 @@ class TestCountryField(TestCase):
         self.assertEqual(list(names), ['Killer everything'])
 
     def test_save_empty_country(self):
-        Person.objects.create(name='The Outsider', country=None)
-        AllowNull.objects.create(country=None)
+        Person.objects.create(name='The Outsider')
+        person = Person.objects.get()
+        self.assertEqual(person.country, '')
 
     def test_create_modelform(self):
         Form = modelform_factory(Person, fields=['country'])
@@ -138,9 +146,6 @@ class TestCountryObject(TestCase):
         self.assertEqual(
             repr(country2),
             'Country(code={0}, flag_url={1})'.format(repr('XX'), repr('')))
-
-    def test_no_blank_code(self):
-        self.assertRaises(ValueError, fields.Country, code='', flag_url='')
 
     def test_flag_on_empty_code(self):
         country = fields.Country(code='', flag_url='')

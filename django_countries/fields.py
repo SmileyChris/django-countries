@@ -24,7 +24,7 @@ class Country(object):
         return force_text(self.code or '')
 
     def __eq__(self, other):
-        return force_text(self) == force_text(other)
+        return force_text(self) == force_text(other or '')
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -169,7 +169,7 @@ class CountryField(CharField):
     def get_prep_value(self, value):
         "Returns field's value prepared for saving into a database."
         # Convert the Country to unicode for database insertion.
-        if value is None:
+        if value is None or getattr(value, 'code', '') is None:
             return None
         return force_text(value)
 
