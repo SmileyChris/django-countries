@@ -8,9 +8,9 @@ except ImportError:
 from django import forms
 from django.db.models.fields import CharField
 from django.utils.encoding import force_text, python_2_unicode_compatible
-from django.utils.functional import lazy, Promise
+from django.utils.functional import lazy
 
-from django_countries import countries, ioc_data
+from django_countries import countries, ioc_data, widgets
 from django_countries.conf import settings
 
 
@@ -123,24 +123,18 @@ class CountryDescriptor(object):
         instance.__dict__[self.field.name] = value
 
 
-class LazyTypedChoiceField(forms.TypedChoiceField):
+class LazyTypedChoiceField(widgets.LazyChoicesMixin, forms.TypedChoiceField):
     """
     A form TypedChoiceField that respects choices being a lazy object.
     """
+    widget = widgets.LazySelect
 
-    @property
-    def choices(self):
+    def _set_choices(self, value):
         """
-        When it's time to get the choices, if it was a lazy then figure it out
-        now and memoize the result.
+        Also update the widget's choices.
         """
-        if isinstance(self._choices, Promise):
-            self._choices = list(self._choices)
-        return self._choices
-
-    @choices.setter
-    def choices(self, value):
-        self._choices = value
+        super(LazyTypedChoiceField, self)._set_choices(value)
+        self.widget.choices = value
 
 
 class CountryField(CharField):
@@ -190,8 +184,6 @@ class CountryField(CharField):
         argname = 'choices_form_class'
         if argname not in kwargs:
             kwargs[argname] = LazyTypedChoiceField
-        # if not 'widget' in kwargs:
-        #     kwargs['widget'] = CountrySelectWidget()
         field = super(CharField, self).formfield(**kwargs)
         if not isinstance(field, LazyTypedChoiceField):
             field = self.legacy_formfield(**kwargs)

@@ -212,6 +212,8 @@ class TestModelForm(TestCase):
             # second choice because the first one is the initial blank option.
             self.assertEqual(
                 form.fields['country'].choices[1][1], 'Afganio')
+            self.assertEqual(
+                form.fields['country'].widget.choices[1][1], 'Afganio')
         finally:
             translation.activate(lang)
 

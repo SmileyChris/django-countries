@@ -1,5 +1,6 @@
 from django.forms import widgets
 from django.utils.html import escape
+from django.utils.functional import Promise
 
 from django_countries.conf import settings
 
@@ -13,7 +14,33 @@ FLAG_IMAGE = (
     '<img style="margin: 6px 4px; position: absolute;" src="{0}">')
 
 
-class CountrySelectWidget(widgets.Select):
+class LazyChoicesMixin(object):
+
+    @property
+    def choices(self):
+        """
+        When it's time to get the choices, if it was a lazy then figure it out
+        now and memoize the result.
+        """
+        if isinstance(self._choices, Promise):
+            self._choices = list(self._choices)
+        return self._choices
+
+    @choices.setter
+    def choices(self, value):
+        self._set_choices(value)
+
+    def _set_choices(self, value):
+        self._choices = value
+
+
+class LazySelect(LazyChoicesMixin, widgets.Select):
+    """
+    A form Select widget that respects choices being a lazy object.
+    """
+
+
+class CountrySelectWidget(LazySelect):
 
     def render(self, name, value, attrs=None):
         from django_countries.fields import Country
