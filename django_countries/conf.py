@@ -73,4 +73,24 @@ class Settings(AppSettings):
         }
     """
 
+    COUNTRIES_FIRST = []
+    """
+    Countries matching the country codes provided in this list will be shown
+    first in the countries list (in the order specified) before all the
+    alphanumerically sorted countries.
+    """
+
+    COUNTRIES_FIRST_REPEAT = False
+    """
+    Countries listed in :attr:`COUNTRIES_FIRST` will be repeated again in the
+    alphanumerically sorted list if set to ``True``.
+    """
+
+    COUNTRIES_FIRST_BREAK = None
+    """
+    Countries listed in :attr:`COUNTRIES_FIRST` will be followed by a null
+    choice with this title (if set) before all the alphanumerically sorted
+    countries.
+    """
+
 settings = Settings()

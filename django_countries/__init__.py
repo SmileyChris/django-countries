@@ -53,6 +53,11 @@ class Countries(object):
                     self._countries = dict(
                         (code, name) for code, name in self._countries.items()
                         if name is not None)
+            self.countries_first = []
+            for code in settings.COUNTRIES_FIRST:
+                code = self.alpha2(code)
+                if code in self._countries:
+                    self.countries_first.append(code)
         return self._countries
 
     @property
@@ -74,19 +79,37 @@ class Countries(object):
 
     def __iter__(self):
         """
-        Return an iterator of countries, sorted by name.
+        Iterate through countries, sorted by name.
 
         Each country record consists of a tuple of the two letter ISO3166-1
         country code and short name.
 
         The sorting happens based on the thread's current translation.
+
+        Countries that are in ``settings.COUNTRIES_FIRST`` will be displayed
+        before any sorted countries (in the order provided), and are only
+        repeated in the sorted list if ``settings.COUNTRIES_FIRST_REPEAT`` is
+        ``True``.
+
+        The first countries can be separated from the sorted list by the value
+        provided in ``settings.COUNTRIES_FIRST_BREAK``.
         """
+        # Yield countries that should be displayed first.
+        for code in self.countries_first:
+            yield (code, force_text(self.countries[code]))
+
+        if (self.countries_first and settings.COUNTRIES_FIRST_BREAK):
+            yield ('', force_text(settings.COUNTRIES_FIRST_BREAK))
+
         # Force translation before sorting.
         countries = [
-            (code, force_text(name)) for code, name in self.countries.items()]
+            (code, force_text(name)) for code, name in self.countries.items()
+            if settings.COUNTRIES_FIRST_REPEAT
+            or code not in self.countries_first]
 
         # Return sorted country list.
-        return iter(sorted(countries, key=sort_key))
+        for item in sorted(countries, key=sort_key):
+            yield item
 
     def alpha2(self, code):
         """
@@ -158,9 +181,19 @@ class Countries(object):
     def __len__(self):
         """
         len() used by several third party applications to calculate the length
-        of choices this will solve bug related to generating fixtures.
+        of choices. This will solve a bug related to generating fixtures.
         """
-        return len(self.countries)
+        count = len(self.countries)
+        # Add first countries, and the break if necessary.
+        count += len(self.countries_first)
+        if self.countries_first and settings.COUNTRIES_FIRST_BREAK:
+            count += 1
+        return count
+
+    def __bool__(self):
+        return bool(self.countries)
+
+    __nonzero__ = __bool__
 
     def __contains__(self, code):
         """

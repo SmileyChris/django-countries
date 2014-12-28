@@ -5,8 +5,15 @@ from django.test import TestCase
 from django_countries import countries
 
 
-class TestCountriesObject(TestCase):
-    EXPECTED_COUNTRY_COUNT = 249
+EXPECTED_COUNTRY_COUNT = 249
+FIRST_THREE_COUNTRIES = [
+    ('AF', 'Afghanistan'),
+    ('AX', 'Åland Islands'),
+    ('AL', 'Albania'),
+]
+
+
+class BaseTest(TestCase):
 
     def setUp(self):
         del countries.countries
@@ -14,17 +21,14 @@ class TestCountriesObject(TestCase):
     def tearDown(self):
         del countries.countries
 
+
+class TestCountriesObject(BaseTest):
+
     def test_countries_len(self):
-        self.assertEqual(len(countries), self.EXPECTED_COUNTRY_COUNT)
+        self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT)
 
     def test_countries_sorted(self):
-        self.assertEqual(
-            list(countries)[:3],
-            [
-                ('AF', 'Afghanistan'),
-                ('AX', 'Åland Islands'),
-                ('AL', 'Albania'),
-            ])
+        self.assertEqual(list(countries)[:3], FIRST_THREE_COUNTRIES)
 
     def test_countries_limit(self):
         with self.settings(
@@ -37,11 +41,11 @@ class TestCountriesObject(TestCase):
 
     def test_countries_custom_removed_len(self):
         with self.settings(COUNTRIES_OVERRIDE={'AU': None}):
-            self.assertEqual(len(countries), self.EXPECTED_COUNTRY_COUNT - 1)
+            self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT - 1)
 
     def test_countries_custom_added_len(self):
         with self.settings(COUNTRIES_OVERRIDE={'XX': 'Neverland'}):
-            self.assertEqual(len(countries), self.EXPECTED_COUNTRY_COUNT + 1)
+            self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT + 1)
 
     def test_countries_getitem(self):
         countries[0]
@@ -91,3 +95,69 @@ class TestCountriesObject(TestCase):
     def test_alpha2_override_new(self):
         with self.settings(COUNTRIES_OVERRIDE={'XX': 'Neverland'}):
             self.assertEqual(countries.alpha2('XX'), 'XX')
+
+
+class CountriesFirstTest(BaseTest):
+
+    def test_countries_first(self):
+        with self.settings(COUNTRIES_FIRST=['NZ', 'AU']):
+            self.assertEqual(
+                list(countries)[:5],
+                [
+                    ('NZ', 'New Zealand'),
+                    ('AU', 'Australia'),
+                ] + FIRST_THREE_COUNTRIES)
+
+    def test_countries_first_break(self):
+        with self.settings(COUNTRIES_FIRST=['NZ', 'AU'],
+                           COUNTRIES_FIRST_BREAK='------'):
+            self.assertEqual(
+                list(countries)[:6],
+                [
+                    ('NZ', 'New Zealand'),
+                    ('AU', 'Australia'),
+                    ('', '------'),
+                ] + FIRST_THREE_COUNTRIES)
+
+    def test_countries_first_some_valid(self):
+        with self.settings(COUNTRIES_FIRST=['XX', 'NZ', 'AU'],
+                           COUNTRIES_FIRST_BREAK='------'):
+            countries_list = list(countries)
+        self.assertEqual(
+            countries_list[:6],
+            [
+                ('NZ', 'New Zealand'),
+                ('AU', 'Australia'),
+                ('', '------'),
+            ] + FIRST_THREE_COUNTRIES)
+        self.assertEqual(len(countries_list), EXPECTED_COUNTRY_COUNT + 1)
+
+    def test_countries_first_no_valid(self):
+        with self.settings(COUNTRIES_FIRST=['XX'],
+                           COUNTRIES_FIRST_BREAK='------'):
+            countries_list = list(countries)
+        self.assertEqual(countries_list[:3], FIRST_THREE_COUNTRIES)
+        self.assertEqual(len(countries_list), EXPECTED_COUNTRY_COUNT)
+
+    def test_countries_first_repeat(self):
+        with self.settings(COUNTRIES_FIRST=['NZ', 'AU'],
+                           COUNTRIES_FIRST_REPEAT=True):
+            countries_list = list(countries)
+        self.assertEqual(len(countries_list), EXPECTED_COUNTRY_COUNT + 2)
+        sorted_codes = [item[0] for item in countries_list[2:]]
+        sorted_codes.index('NZ')
+        sorted_codes.index('AU')
+
+    def test_countries_first_len(self):
+        with self.settings(COUNTRIES_FIRST=['NZ', 'AU', 'XX']):
+            self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT + 2)
+
+    def test_countries_first_break_len(self):
+        with self.settings(COUNTRIES_FIRST=['NZ', 'AU', 'XX'],
+                           COUNTRIES_FIRST_BREAK='------'):
+            self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT + 3)
+
+    def test_countries_first_break_len_no_valid(self):
+        with self.settings(COUNTRIES_FIRST=['XX'],
+                           COUNTRIES_FIRST_BREAK='------'):
+            self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT)
