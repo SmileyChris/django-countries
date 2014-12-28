@@ -40,3 +40,7 @@ class TestCountrySelectWidget(TestCase):
             html = self.Form(initial={'country': 'AU'}).as_p()
             self.assertIn(fields.Country('AU').flag, html)
             self.assertNotIn(fields.Country('__').flag, html)
+
+    def test_render_modelform_instance(self):
+        person = Person(country='NZ')
+        self.Form(instance=person).as_p()

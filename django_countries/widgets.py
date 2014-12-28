@@ -48,6 +48,9 @@ class CountrySelectWidget(LazySelect):
         attrs['onchange'] = (
             COUNTRY_CHANGE_HANDLER % settings.COUNTRIES_FLAG_URL)
         data = super(CountrySelectWidget, self).render(name, value, attrs)
-        country = Country(value or '__')
+        if isinstance(value, Country):
+            country = value
+        else:
+            country = Country(value or '__')
         data += FLAG_IMAGE.format(escape(country.flag))
         return data
