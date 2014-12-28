@@ -16,7 +16,7 @@ def long_description():
 
 setup(
     name='django-countries',
-    version='3.0.1',
+    version='3.0.2',
     description='Provides a country field for Django models.',
     long_description=long_description(),
     author='Chris Beaven',
