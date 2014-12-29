@@ -1,24 +1,27 @@
 #!/usr/bin/env python
-import io
-import os
+import codecs
 from setuptools import setup, find_packages
 
 
-def long_description():
+def read_files(*filenames):
     """
-    Build the long description from a README file located in the same directory
-    as this module.
+    Output the contents of one or more files to a single concatenated string.
     """
-    base_path = os.path.dirname(os.path.realpath(__file__))
-    with io.open(os.path.join(base_path, 'README.rst'), encoding='utf-8') as f:
-        return f.read()
+    output = []
+    for filename in filenames:
+        f = codecs.open(filename, encoding='utf-8')
+        try:
+            output.append(f.read())
+        finally:
+            f.close()
+    return '\n\n'.join(output)
 
 
 setup(
     name='django-countries',
     version='3.0.2',
     description='Provides a country field for Django models.',
-    long_description=long_description(),
+    long_description=read_files('README.rst', 'CHANGES.rst'),
     author='Chris Beaven',
     author_email='smileychris@gmail.com',
     url='https://github.com/SmileyChris/django-countries/',
