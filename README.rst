@@ -45,6 +45,11 @@ get details of the person's country::
 This object (``person.country`` in the example) is a ``Country`` instance,
 which is described below.
 
+Use ``blank_label`` to set the label for the initial blank choice shown in
+forms::
+
+    country = CountryField(blank_label='(select country)')
+
 The ``Country`` object
 ----------------------
 

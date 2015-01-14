@@ -11,10 +11,11 @@ class Person(models.Model):
     country = CountryField()
     other_country = CountryField(
         blank=True, countries_flag_url='//flags.example.com/{code}.gif')
+    favourite_country = CountryField(default='NZ')
 
 
 class AllowNull(models.Model):
-    country = CountryField(null=True)
+    country = CountryField(null=True, blank_label='(select country)')
 
 
 class Legacy(models.Model):

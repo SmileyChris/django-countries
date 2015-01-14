@@ -7,6 +7,13 @@ class PersonForm(forms.ModelForm):
 
     class Meta:
         model = models.Person
+        fields = ['country', 'favourite_country']
+
+
+class AllowNullForm(forms.ModelForm):
+
+    class Meta:
+        model = models.AllowNull
         fields = ['country']
 
 

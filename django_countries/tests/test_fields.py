@@ -214,6 +214,20 @@ class TestModelForm(TestCase):
         finally:
             translation.activate(lang)
 
+    def test_blank_choice(self):
+        form = forms.PersonForm()
+        self.assertEqual(form.fields['country'].choices[0], ('', '---------'))
+
+    def test_no_blank_choice(self):
+        form = forms.PersonForm()
+        self.assertEqual(
+            form.fields['favourite_country'].choices[0], ('AF', 'Afghanistan'))
+
+    def test_blank_choice_label(self):
+        form = forms.AllowNullForm()
+        self.assertEqual(
+            form.fields['country'].choices[0], ('', '(select country)'))
+
     @skipUnlessLegacy
     def test_legacy_default(self):
         self.assertEqual(

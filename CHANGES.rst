@@ -15,6 +15,9 @@ HEAD
 * Add a ``COUNTRIES_FIRST`` setting (and some other related ones) to allow for
   specific countries to be shown before the entire alphanumeric list.
 
+* Add a ``blank_label`` argument to ``CountryField`` to allow customization of
+  the label shown in the initial blank choice shown in the select widget.
+
 
 Version 3.0 (22 Oct 2014)
 =========================

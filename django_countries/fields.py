@@ -6,7 +6,7 @@ except ImportError:
     import urlparse   # Python 2
 
 from django import forms
-from django.db.models.fields import CharField
+from django.db.models.fields import CharField, BLANK_CHOICE_DASH
 from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.functional import lazy
 
@@ -143,6 +143,7 @@ class CountryField(CharField):
 
     def __init__(self, *args, **kwargs):
         self.countries_flag_url = kwargs.pop('countries_flag_url', None)
+        self.blank_label = kwargs.pop('blank_label', None)
         kwargs.update({
             'max_length': 2,
             'choices': countries,
@@ -177,12 +178,26 @@ class CountryField(CharField):
         """
         Remove choices from deconstructed field, as this is the country list
         and not user editable.
+
+        Not including the ``blank_label`` property, as this isn't database
+        related.
         """
         name, path, args, kwargs = super(CountryField, self).deconstruct()
         kwargs.pop('choices')
         return name, path, args, kwargs
 
-    get_choices = lazy(CharField.get_choices, list)
+    def get_choices(
+            self, include_blank=True, blank_choice=None, *args, **kwargs):
+        if blank_choice is None:
+            if self.blank_label is None:
+                blank_choice = BLANK_CHOICE_DASH
+            else:
+                blank_choice = [('', self.blank_label)]
+        return super(CountryField, self).get_choices(
+            include_blank=include_blank, blank_choice=blank_choice, *args,
+            **kwargs)
+
+    get_choices = lazy(get_choices, list)
 
     def formfield(self, **kwargs):
         argname = 'choices_form_class'
