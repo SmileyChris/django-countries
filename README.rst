@@ -137,6 +137,29 @@ For example::
         'AU': None
     }
 
+If you have a specific list of countries that should be used, use
+``COUNTRIES_ONLY``::
+
+    COUNTRIES_ONLY = {
+        'NZ': _('Middle Earth'),
+        'AU': _('Desert'),
+    }
+
+
+Show certain countries first
+----------------------------
+
+Provide a list of country codes as the ``COUNTRIES_FIRST`` setting and they
+will be shown first in the countries list (in the order specified) before all
+the alphanumerically sorted countries.
+
+By default, these 'first' countries are not repeated again in the
+alphanumerically sorted list. If you would like them to be repeated, set the
+``COUNTRIES_FIRST_REPEAT`` setting to ``True``.
+
+Finally, you can optionally separate these 'first' countries with an empty
+choice by providing the choice label as the ``COUNTRIES_FIRST_BREAK`` setting.
+
 
 Customize the flag URL
 ----------------------
