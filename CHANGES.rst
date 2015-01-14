@@ -22,7 +22,7 @@ HEAD
 Version 3.0 (22 Oct 2014)
 =========================
 
-Django supported versions is now 1.4 (LTS)
+Django supported versions are now 1.4 (LTS) and 1.6+
 
 * Add ``COUNTRIES_ONLY`` setting to restrict to a specific list of countries.
 
