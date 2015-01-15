@@ -18,6 +18,11 @@ Version 3.1 (15 Jan 2015)
 * Add a ``blank_label`` argument to ``CountryField`` to allow customization of
   the label shown in the initial blank choice shown in the select widget.
 
+Version 3.1.1 (15 Jan 2015)
+---------------------------
+
+* Packaging fix (``CHANGES.rst`` wasn't in the manifest)
+
 
 Version 3.0 (22 Oct 2014)
 =========================
