@@ -7,8 +7,8 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
-HEAD
-====
+Version 3.1 (15 Jan 2015)
+=========================
 
 * Start change log :)
 
