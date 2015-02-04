@@ -1,10 +1,12 @@
+from __future__ import unicode_literals
 try:
     from urllib import parse as urlparse
 except ImportError:
     import urlparse   # Python 2
 
 from django.forms import widgets
-from django.utils.html import escape
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.utils.functional import Promise
 
 from django_countries.conf import settings
@@ -16,7 +18,7 @@ COUNTRY_CHANGE_HANDLER = (
 )
 
 FLAG_IMAGE = (
-    '<img style="margin: 6px 4px; position: absolute;" src="{0}">')
+    '{0}<img style="margin: 6px 4px; position: absolute;" src="{1}">')
 
 
 class LazyChoicesMixin(object):
@@ -58,5 +60,4 @@ class CountrySelectWidget(LazySelect):
             country = value
         else:
             country = Country(value or '__')
-        data += FLAG_IMAGE.format(escape(country.flag))
-        return data
+        return format_html(FLAG_IMAGE, mark_safe(data), country.flag)
