@@ -1,3 +1,8 @@
+try:
+    from urllib import parse as urlparse
+except ImportError:
+    import urlparse   # Python 2
+
 from django.forms import widgets
 from django.utils.html import escape
 from django.utils.functional import Promise
@@ -46,7 +51,8 @@ class CountrySelectWidget(LazySelect):
         from django_countries.fields import Country
         attrs = attrs or {}
         attrs['onchange'] = (
-            COUNTRY_CHANGE_HANDLER % settings.COUNTRIES_FLAG_URL)
+            COUNTRY_CHANGE_HANDLER % urlparse.urljoin(
+                settings.STATIC_URL, settings.COUNTRIES_FLAG_URL))
         data = super(CountrySelectWidget, self).render(name, value, attrs)
         if isinstance(value, Country):
             country = value
