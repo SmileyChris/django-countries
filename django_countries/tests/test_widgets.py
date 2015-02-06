@@ -1,4 +1,9 @@
 from __future__ import unicode_literals
+try:
+    from urllib import parse as urlparse
+except ImportError:
+    import urlparse   # Python 2
+
 from django.forms.models import modelform_factory
 from django.test import TestCase
 from django.utils.html import escape
@@ -27,7 +32,8 @@ class TestCountrySelectWidget(TestCase):
     def test_render_contains_flag_url(self):
         with self.settings(COUNTRIES_ONLY={'AU': 'Desert'}):
             html = self.Form().as_p()
-            self.assertIn(escape(settings.COUNTRIES_FLAG_URL), html)
+            self.assertIn(escape(urlparse.urljoin(
+                settings.STATIC_URL, settings.COUNTRIES_FLAG_URL)), html)
 
     def test_render(self):
         with self.settings(COUNTRIES_ONLY={'AU': 'Desert'}):
