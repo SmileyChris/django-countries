@@ -94,16 +94,19 @@ class Countries(object):
         The first countries can be separated from the sorted list by the value
         provided in ``settings.COUNTRIES_FIRST_BREAK``.
         """
+        # Initializes countries_first, so needs to happen first.
+        countries = self.countries
+
         # Yield countries that should be displayed first.
         for code in self.countries_first:
-            yield (code, force_text(self.countries[code]))
+            yield (code, force_text(countries[code]))
 
         if (self.countries_first and settings.COUNTRIES_FIRST_BREAK):
             yield ('', force_text(settings.COUNTRIES_FIRST_BREAK))
 
         # Force translation before sorting.
         countries = [
-            (code, force_text(name)) for code, name in self.countries.items()
+            (code, force_text(name)) for code, name in countries.items()
             if settings.COUNTRIES_FIRST_REPEAT
             or code not in self.countries_first]
 

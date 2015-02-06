@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.test import TestCase
 
-from django_countries import countries
+from django_countries import countries, Countries
 
 
 EXPECTED_COUNTRY_COUNT = 249
@@ -69,6 +69,10 @@ class TestCountriesObject(BaseTest):
     def test_ioc_countries(self):
         from ..ioc_data import check_ioc_countries
         check_ioc_countries(verbosity=0)
+
+    def test_initial_iter(self):
+        # Use a new instance so nothing is cached
+        dict(Countries())
 
     def test_flags(self):
         from ..data import check_flags
