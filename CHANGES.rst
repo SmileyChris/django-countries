@@ -7,6 +7,14 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
+HEAD
+====
+
+* Fixes initial iteration failing for a fresh ``Countries`` object.
+
+* Fix widget's flag URLs (and use safer HTML encoding for the widget).
+
+
 Version 3.1 (15 Jan 2015)
 =========================
 
