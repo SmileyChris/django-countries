@@ -6,6 +6,7 @@ except ImportError:
 from django.forms import widgets
 from django.utils.html import escape
 from django.utils.functional import Promise
+from django.utils.safestring import mark_safe
 
 from django_countries.conf import settings
 
@@ -59,4 +60,4 @@ class CountrySelectWidget(LazySelect):
         else:
             country = Country(value or '__')
         data += FLAG_IMAGE.format(escape(country.flag))
-        return data
+        return mark_safe(data)

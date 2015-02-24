@@ -6,6 +6,7 @@ except ImportError:
 
 from django.forms.models import modelform_factory
 from django.test import TestCase
+from django.utils import safestring
 from django.utils.html import escape
 
 from django_countries import widgets, countries, fields
@@ -46,6 +47,12 @@ class TestCountrySelectWidget(TestCase):
             html = self.Form(initial={'country': 'AU'}).as_p()
             self.assertIn(fields.Country('AU').flag, html)
             self.assertNotIn(fields.Country('__').flag, html)
+
+    def test_render_escaping(self):
+        output = widgets.CountrySelectWidget().render('test', '<script>')
+        self.assertIn('&lt;script&gt;', output)
+        self.assertNotIn('<script>', output)
+        self.assertTrue(isinstance(output, safestring.SafeData))
 
     def test_render_modelform_instance(self):
         person = Person(country='NZ')
