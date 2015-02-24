@@ -4,6 +4,7 @@ from itertools import islice
 
 from django_countries.conf import settings
 from django.utils.encoding import force_text
+from django.utils.translation import override
 
 try:
     import pyuca
@@ -148,6 +149,21 @@ class Countries(object):
         """
         code = self.alpha2(code)
         return self.countries.get(code, '')
+
+    def by_name(self, country, language='en'):
+        """
+        Fetch a country's ISO3166-1 two letter country code from its name.
+
+        An optional language parameter is also available.
+        Warning: This depends on the quality of the available translations.
+
+        If no match is found, returns an empty string.
+        """
+        with override(language):
+            for code, name in self:
+                if name == country:
+                    return code
+        return ''
 
     def alpha3(self, code):
         """
