@@ -12,7 +12,10 @@ HEAD
 
 * Fixes initial iteration failing for a fresh ``Countries`` object.
 
-* Fix widget's flag URLs (and use safer HTML encoding for the widget).
+* Fix widget's flag URLs (and use ensure widget is HTML encoded safely).
+
+* Add ``countries.by_name(country, language='en')`` method, allowing lookup of
+  a country code by its full country name. Thanks Josh Schneier.
 
 
 Version 3.1 (15 Jan 2015)
