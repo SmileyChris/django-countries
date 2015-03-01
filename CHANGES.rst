@@ -7,6 +7,17 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
+HEAD
+====
+
+* Add the ability to instanciate a ``Countries`` object with options that can
+  override the default settings.
+
+* CountriesField can now be passed a custom countries instance to use, which
+  combined with the previous change allows for different country choices for
+  different fields.
+
+
 Version 3.2 (24 Feb 2015)
 =========================
 

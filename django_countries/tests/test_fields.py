@@ -12,7 +12,7 @@ except:
     from django.utils.unittest import skipIf
 
 from django_countries import fields, countries
-from django_countries.tests import forms
+from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import Person, AllowNull, en_zed
 
 skipUnlessLegacy = skipIf(
@@ -129,6 +129,20 @@ class TestCountryField(TestCase):
     def test_render_form(self):
         Form = modelform_factory(Person, fields=['country'])
         Form().as_p()
+
+    def test_custom_country(self):
+        self.assertEqual(
+            list(Person._meta.get_field('fantasy_countries').choices),
+            [('NV', 'Neverland'), ('NZ', 'New Zealand')])
+
+    @skipIf(
+        django.VERSION < (1, 7), "Field.deconstruct introduced in Django 1.7")
+    def test_custom_country_deconstruct(self):
+        field = Person._meta.get_field('fantasy_countries')
+        self.assertEqual(
+            field.deconstruct(),
+            ('fantasy_countries', 'django_countries.fields.CountryField', [],
+             {'countries': custom_countries.countries, 'max_length': 2}))
 
 
 class TestCountryObject(TestCase):

@@ -30,32 +30,56 @@ class Countries(object):
     Iterating this object will return the countries as tuples (of the country
     code and name), sorted by name.
     """
+    OPTIONS = [
+        'only', 'override', 'common_names',
+        'first', 'first_repeat', 'first_break',
+    ]
+
+    def __init__(self, **kwargs):
+        """
+        Save any keyword arguments as options used to modify the initialization
+        of the country list rather than the related Django project settings.
+        """
+        self.options = kwargs
+
+    def get_option(self, option):
+        """
+        Get a configuration option, trying the options dict first and falling
+        back to a Django project setting.
+        """
+        value = self.options.get(option)
+        if value is not None:
+            return value
+        return getattr(settings, 'COUNTRIES_{0}'.format(option.upper()))
 
     @property
     def countries(self):
         """
         Return the a dictionary of countries, modified by any overriding
-        settings.
+        options.
 
         The result is cached so future lookups are less work intensive.
         """
         if not hasattr(self, '_countries'):
-            if settings.COUNTRIES_ONLY:
-                self._countries = dict(settings.COUNTRIES_ONLY)
+            only = self.get_option('only')
+            if only:
+                self._countries = dict(only)
             else:
                 # Local import so that countries aren't loaded into memory
                 # until first used.
                 from django_countries.data import COUNTRIES, COMMON_NAMES
                 self._countries = dict(COUNTRIES)
-                if settings.COUNTRIES_COMMON_NAMES:
+                if self.get_option('common_names'):
                     self._countries.update(COMMON_NAMES)
-                if settings.COUNTRIES_OVERRIDE:
-                    self._countries.update(settings.COUNTRIES_OVERRIDE)
+                override = self.get_option('override')
+                if override:
+                    self._countries.update(override)
                     self._countries = dict(
                         (code, name) for code, name in self._countries.items()
                         if name is not None)
             self.countries_first = []
-            for code in settings.COUNTRIES_FIRST:
+            first = self.get_option('first') or []
+            for code in first:
                 code = self.alpha2(code)
                 if code in self._countries:
                     self.countries_first.append(code)
@@ -72,8 +96,9 @@ class Countries(object):
     @countries.deleter
     def countries(self):
         """
-        Reset the countries cache in case for some crazy reason the settings
-        change. But surely no one is crazy enough to do that, right?
+        Reset the countries cache in case for some crazy reason the settings or
+        internal options change. But surely no one is crazy enough to do that,
+        right?
         """
         if hasattr(self, '_countries'):
             del self._countries
@@ -102,14 +127,16 @@ class Countries(object):
         for code in self.countries_first:
             yield (code, force_text(countries[code]))
 
-        if (self.countries_first and settings.COUNTRIES_FIRST_BREAK):
-            yield ('', force_text(settings.COUNTRIES_FIRST_BREAK))
+        if self.countries_first:
+            first_break = self.get_option('first_break')
+            if first_break:
+                yield ('', force_text(first_break))
 
         # Force translation before sorting.
+        first_repeat = self.get_option('first_repeat')
         countries = [
             (code, force_text(name)) for code, name in countries.items()
-            if settings.COUNTRIES_FIRST_REPEAT
-            or code not in self.countries_first]
+            if first_repeat or code not in self.countries_first]
 
         # Return sorted country list.
         for item in sorted(countries, key=sort_key):
@@ -205,7 +232,7 @@ class Countries(object):
         count = len(self.countries)
         # Add first countries, and the break if necessary.
         count += len(self.countries_first)
-        if self.countries_first and settings.COUNTRIES_FIRST_BREAK:
+        if self.countries_first and self.get_option('first_break'):
             count += 1
         return count
 

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 
 from django_countries import countries, Countries
+from django_countries.tests import custom_countries
 
 
 EXPECTED_COUNTRY_COUNT = 249
@@ -174,3 +175,13 @@ class CountriesFirstTest(BaseTest):
         with self.settings(COUNTRIES_FIRST=['XX'],
                            COUNTRIES_FIRST_BREAK='------'):
             self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT)
+
+
+class TestCountriesCustom(BaseTest):
+
+    def test_countries_limit(self):
+        self.assertEqual(list(custom_countries.countries), [
+            ('NV', 'Neverland'),
+            ('NZ', 'New Zealand'),
+        ])
+        self.assertEqual(len(custom_countries.countries), 2)
