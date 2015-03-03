@@ -30,10 +30,6 @@ class Countries(object):
     Iterating this object will return the countries as tuples (of the country
     code and name), sorted by name.
     """
-    OPTIONS = [
-        'only', 'override', 'common_names',
-        'first', 'first_repeat', 'first_break',
-    ]
 
     def __init__(self, **kwargs):
         """
