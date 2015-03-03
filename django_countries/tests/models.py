@@ -13,7 +13,8 @@ class Person(models.Model):
     other_country = CountryField(
         blank=True, countries_flag_url='//flags.example.com/{code}.gif')
     favourite_country = CountryField(default='NZ')
-    fantasy_countries = CountryField(countries=custom_countries.countries)
+    fantasy_countries = CountryField(
+        countries=custom_countries.FantasyCountries)
 
 
 class AllowNull(models.Model):

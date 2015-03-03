@@ -10,12 +10,16 @@ release (and any new translations added).
 HEAD
 ====
 
-* Add the ability to instanciate a ``Countries`` object with options that can
-  override the default settings.
+* Add the attributes to ``Countries`` class that can override the default
+  settings.
 
-* CountriesField can now be passed a custom countries instance to use, which
+* CountriesField can now be passed a custom countries subclass to use, which
   combined with the previous change allows for different country choices for
   different fields.
+
+* Allow ``COUNTRIES_ONLY`` to also accepts country codes in its list (rather
+  than only two-tuples), looking up the translatable country name from the
+  full country list.
 
 
 Version 3.2 (24 Feb 2015)

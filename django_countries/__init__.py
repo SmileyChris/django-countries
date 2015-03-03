@@ -32,19 +32,12 @@ class Countries(object):
     code and name), sorted by name.
     """
 
-    def __init__(self, **kwargs):
-        """
-        Save any keyword arguments as options used to modify the initialization
-        of the country list rather than the related Django project settings.
-        """
-        self.options = kwargs
-
     def get_option(self, option):
         """
-        Get a configuration option, trying the options dict first and falling
-        back to a Django project setting.
+        Get a configuration option, trying the options attribute first and
+        falling back to a Django project setting.
         """
-        value = self.options.get(option)
+        value = getattr(self, option, None)
         if value is not None:
             return value
         return getattr(settings, 'COUNTRIES_{0}'.format(option.upper()))

@@ -141,8 +141,15 @@ class TestCountryField(TestCase):
         field = Person._meta.get_field('fantasy_countries')
         self.assertEqual(
             field.deconstruct(),
-            ('fantasy_countries', 'django_countries.fields.CountryField', [],
-             {'countries': custom_countries.countries, 'max_length': 2}))
+            (
+                'fantasy_countries',
+                'django_countries.fields.CountryField',
+                [],
+                {
+                    'countries': custom_countries.FantasyCountries,
+                    'max_length': 2
+                }
+            ))
 
 
 class TestCountryObject(TestCase):

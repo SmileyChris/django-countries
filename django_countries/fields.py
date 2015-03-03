@@ -142,7 +142,8 @@ class CountryField(CharField):
     descriptor_class = CountryDescriptor
 
     def __init__(self, *args, **kwargs):
-        self.countries = kwargs.pop('countries', countries)
+        countries_class = kwargs.pop('countries', None)
+        self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop('countries_flag_url', None)
         self.blank_label = kwargs.pop('blank_label', None)
         kwargs.update({
@@ -186,9 +187,9 @@ class CountryField(CharField):
         name, path, args, kwargs = super(CountryField, self).deconstruct()
         kwargs.pop('choices')
         if self.countries is not countries:
-            # Include the countries keyword if it's not the default countries
+            # Include the countries class if it's not the default countries
             # instance.
-            kwargs['countries'] = self.countries
+            kwargs['countries'] = self.countries.__class__
         return name, path, args, kwargs
 
     def get_choices(

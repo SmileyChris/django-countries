@@ -188,8 +188,9 @@ class CountriesFirstTest(BaseTest):
 class TestCountriesCustom(BaseTest):
 
     def test_countries_limit(self):
-        self.assertEqual(list(custom_countries.countries), [
+        fantasy_countries = custom_countries.FantasyCountries()
+        self.assertEqual(list(fantasy_countries), [
             ('NV', 'Neverland'),
             ('NZ', 'New Zealand'),
         ])
-        self.assertEqual(len(custom_countries.countries), 2)
+        self.assertEqual(len(fantasy_countries), 2)

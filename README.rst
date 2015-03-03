@@ -194,3 +194,28 @@ Alternatively, you can specify a different URL on a specific ``CountryField``::
         name = models.CharField(max_length=100)
         country = CountryField(
             countries_flag_url='//flags.example.com/{code}.png')
+
+
+Single field customization
+--------------------------
+
+To customize an individual field, rather than rely on project level settings,
+create a ``Countries`` subclass which overrides settings.
+
+To override a setting, give the class an attribute matching the lowercased
+setting without the ``COUNTRIES_`` prefix. 
+
+Then just reference this class in a field. For example, this ``CountryField``
+uses a custom country list that only includes the G7 countries::
+
+    from django_countries import Countries
+
+    class G7Countries(Countries):
+        only = [
+            'CA', 'FR', 'DE', 'IT', 'JP', 'RU', 'GB',
+            ('EU', _('European Union')),
+        ]
+
+    class Vote(models.Model):
+        country = CountryField(countries=G7Countries)
+        approve = models.BooleanField()
