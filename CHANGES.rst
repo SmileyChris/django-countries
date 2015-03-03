@@ -17,9 +17,9 @@ HEAD
   combined with the previous change allows for different country choices for
   different fields.
 
-* Allow ``COUNTRIES_ONLY`` to also accepts country codes in its list (rather
-  than only two-tuples), looking up the translatable country name from the
-  full country list.
+* Allow ``COUNTRIES_ONLY`` to also accept just country codes in its list
+  (rather than only two-tuples), looking up the translatable country name from
+  the full country list.
 
 
 Version 3.2 (24 Feb 2015)
