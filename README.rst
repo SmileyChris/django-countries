@@ -6,7 +6,7 @@ A Django application that provides country choices for use with forms, flag
 icons static files, and a country field for models.
 
 Installation
-=============================
+============
 
 1. ``pip install django-countries``
 2. Add ``django_countries`` to ``INSTALLED_APPS``
@@ -140,10 +140,17 @@ For example::
 If you have a specific list of countries that should be used, use
 ``COUNTRIES_ONLY``::
 
-    COUNTRIES_ONLY = {
-        'NZ': _('Middle Earth'),
-        'AU': _('Desert'),
-    }
+    COUNTRIES_ONLY = ['NZ', 'AU']
+
+or to specify your own country names, use a dictionary or two-tuple list
+(string items will use the standard country name)::
+
+    COUNTRIES_ONLY = [
+        'US',
+        'UK'
+        ('NZ', _('Middle Earth')),
+        ('AU', _('Desert')),
+    ]
 
 
 Show certain countries first

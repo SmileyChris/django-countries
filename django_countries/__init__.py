@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from itertools import islice
 
 from django_countries.conf import settings
+from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.translation import override
 
@@ -59,6 +60,13 @@ class Countries(object):
         if not hasattr(self, '_countries'):
             only = self.get_option('only')
             if only:
+                only_choices = True
+                if not isinstance(only, dict):
+                    for item in only:
+                        if isinstance(item, six.string_types):
+                            only_choices = False
+                            break
+            if only and only_choices:
                 self._countries = dict(only)
             else:
                 # Local import so that countries aren't loaded into memory
@@ -73,6 +81,15 @@ class Countries(object):
                     self._countries = dict(
                         (code, name) for code, name in self._countries.items()
                         if name is not None)
+            if only and not only_choices:
+                countries = {}
+                for item in only:
+                    if isinstance(item, six.string_types):
+                        countries[item] = self._countries[item]
+                    else:
+                        key, value = item
+                        countries[key] = value
+                self._countries = countries
             self.countries_first = []
             first = self.get_option('first') or []
             for code in first:

@@ -40,6 +40,14 @@ class TestCountriesObject(BaseTest):
             ])
             self.assertEqual(len(countries), 2)
 
+    def test_countries_limit_codes(self):
+        with self.settings(COUNTRIES_ONLY=['NZ', ('NV', 'Neverland')]):
+            self.assertEqual(list(countries), [
+                ('NV', 'Neverland'),
+                ('NZ', 'New Zealand'),
+            ])
+            self.assertEqual(len(countries), 2)
+
     def test_countries_custom_removed_len(self):
         with self.settings(COUNTRIES_OVERRIDE={'AU': None}):
             self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT - 1)
