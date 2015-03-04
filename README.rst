@@ -206,16 +206,16 @@ To override a setting, give the class an attribute matching the lowercased
 setting without the ``COUNTRIES_`` prefix. 
 
 Then just reference this class in a field. For example, this ``CountryField``
-uses a custom country list that only includes the G7 countries::
+uses a custom country list that only includes the G8 countries::
 
     from django_countries import Countries
 
-    class G7Countries(Countries):
+    class G8Countries(Countries):
         only = [
             'CA', 'FR', 'DE', 'IT', 'JP', 'RU', 'GB',
-            ('EU', _('European Union')),
+            ('EU', _('European Union'))
         ]
 
     class Vote(models.Model):
-        country = CountryField(countries=G7Countries)
+        country = CountryField(countries=G8Countries)
         approve = models.BooleanField()
