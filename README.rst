@@ -88,7 +88,12 @@ When you create your form, you can use this custom widget like normal::
         class Meta:
             model = models.Person
             fields = ('name', 'country')
-            widgets = {'country': CountrySelectWidget}
+            widgets = {'country': CountrySelectWidget()}
+
+Pass a ``layout`` text argument to the widget to change the positioning of the
+flag and widget. The default layout is::
+
+    '{widget}<img class="country-select-flag" id="{flag_id}" style="margin: 6px 4px 0" src="{country.flag}">'
 
 
 Get the countries from Python
