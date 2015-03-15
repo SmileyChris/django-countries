@@ -7,15 +7,15 @@
 # Baptiste Darthenay <baptiste+transifex@darthenay.fr>, 2014
 # Oyabi <mousaka666@hotmail.fr>, 2014
 # Sebastien Fievet <zyegfryed>, 2011
-# Sébastien Fievet <zyegfryed@gmail.com>, 2014
+# Sébastien Fievet <zyegfryed@gmail.com>, 2014-2015
 # Sébastien Fievet <zyegfryed@gmail.com>, 2013
 # Sébastien Fievet <zyegfryed@gmail.com>, 2011,2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-04 12:29+1300\n"
-"PO-Revision-Date: 2015-03-03 23:29+0000\n"
+"POT-Creation-Date: 2015-03-16 10:55+1300\n"
+"PO-Revision-Date: 2015-03-15 21:56+0000\n"
 "Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/django-countries/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Moldavie"
 
 #: data.py:36
 msgid "Macedonia"
-msgstr ""
+msgstr "Macédoine"
 
 #: data.py:37
 msgid "Russia"
@@ -185,8 +185,8 @@ msgid "Bhutan"
 msgstr "Bhoutan"
 
 #: data.py:73
-msgid "Bolivia, Plurinational State of"
-msgstr "Bolivie, État plurinational de"
+msgid "Bolivia (Plurinational State of)"
+msgstr ""
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -281,12 +281,12 @@ msgid "Comoros"
 msgstr "Comores"
 
 #: data.py:97
-msgid "Congo"
-msgstr "Congo"
-
-#: data.py:98
 msgid "Congo (the Democratic Republic of the)"
 msgstr "République démocratique du Congo"
+
+#: data.py:98
+msgid "Congo"
+msgstr "Congo"
 
 #: data.py:99
 msgid "Cook Islands"
@@ -401,8 +401,8 @@ msgid "Gabon"
 msgstr "Gabon"
 
 #: data.py:127
-msgid "Gambia (The)"
-msgstr "Gambie"
+msgid "Gambia"
+msgstr ""
 
 #: data.py:128
 msgid "Georgia"
@@ -469,8 +469,8 @@ msgid "Heard Island and McDonald Islands"
 msgstr "Îles Heard-et-MacDonald"
 
 #: data.py:144
-msgid "Holy See  [Vatican City State]"
-msgstr "Vatican"
+msgid "Holy See"
+msgstr ""
 
 #: data.py:145
 msgid "Honduras"
@@ -497,8 +497,8 @@ msgid "Indonesia"
 msgstr "Indonésie"
 
 #: data.py:151
-msgid "Iran (the Islamic Republic of)"
-msgstr "Iran (République islamique d')"
+msgid "Iran (Islamic Republic of)"
+msgstr ""
 
 #: data.py:152
 msgid "Iraq"
@@ -657,8 +657,8 @@ msgid "Mexico"
 msgstr "Mexique"
 
 #: data.py:191
-msgid "Micronesia (the Federated States of)"
-msgstr "Micronésie (États fédérés de)"
+msgid "Micronesia (Federated States of)"
+msgstr ""
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -1017,16 +1017,16 @@ msgid "United Arab Emirates"
 msgstr "Émirats arabes unis"
 
 #: data.py:281
-msgid "United Kingdom"
-msgstr "Royaume-Uni"
+msgid "United Kingdom of Great Britain and Northern Ireland"
+msgstr ""
 
 #: data.py:282
-msgid "United States"
-msgstr "États-Unis"
-
-#: data.py:283
 msgid "United States Minor Outlying Islands"
 msgstr "Îles mineures éloignées des États-Unis"
+
+#: data.py:283
+msgid "United States of America"
+msgstr ""
 
 #: data.py:284
 msgid "Uruguay"
@@ -1041,8 +1041,8 @@ msgid "Vanuatu"
 msgstr "Vanuatu"
 
 #: data.py:287
-msgid "Venezuela, Bolivarian Republic of"
-msgstr "Vénézuéla, République bolivarienne du"
+msgid "Venezuela (Bolivarian Republic of)"
+msgstr ""
 
 #: data.py:288
 msgid "Viet Nam"

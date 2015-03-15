@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-04 12:29+1300\n"
-"PO-Revision-Date: 2015-03-03 23:29+0000\n"
+"POT-Creation-Date: 2015-03-16 10:55+1300\n"
+"PO-Revision-Date: 2015-03-15 21:56+0000\n"
 "Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/django-countries/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -179,8 +179,8 @@ msgid "Bhutan"
 msgstr "Bhútán"
 
 #: data.py:73
-msgid "Bolivia, Plurinational State of"
-msgstr "Mnohonárodní stát Bolívie"
+msgid "Bolivia (Plurinational State of)"
+msgstr ""
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -275,12 +275,12 @@ msgid "Comoros"
 msgstr "Komory"
 
 #: data.py:97
-msgid "Congo"
-msgstr "Kongo, republika"
-
-#: data.py:98
 msgid "Congo (the Democratic Republic of the)"
 msgstr "Kongo, demokratická republika"
+
+#: data.py:98
+msgid "Congo"
+msgstr "Kongo, republika"
 
 #: data.py:99
 msgid "Cook Islands"
@@ -395,8 +395,8 @@ msgid "Gabon"
 msgstr "Gabon"
 
 #: data.py:127
-msgid "Gambia (The)"
-msgstr "Gambie"
+msgid "Gambia"
+msgstr ""
 
 #: data.py:128
 msgid "Georgia"
@@ -463,8 +463,8 @@ msgid "Heard Island and McDonald Islands"
 msgstr "Heardův ostrov a McDonaldovy ostrovy"
 
 #: data.py:144
-msgid "Holy See  [Vatican City State]"
-msgstr "Svatý stolec (Vatikánský městský stát)"
+msgid "Holy See"
+msgstr ""
 
 #: data.py:145
 msgid "Honduras"
@@ -491,8 +491,8 @@ msgid "Indonesia"
 msgstr "Indonésie"
 
 #: data.py:151
-msgid "Iran (the Islamic Republic of)"
-msgstr "Írán (islámská republika)"
+msgid "Iran (Islamic Republic of)"
+msgstr ""
 
 #: data.py:152
 msgid "Iraq"
@@ -651,8 +651,8 @@ msgid "Mexico"
 msgstr "Mexiko"
 
 #: data.py:191
-msgid "Micronesia (the Federated States of)"
-msgstr "Mikronésie, federativní státy"
+msgid "Micronesia (Federated States of)"
+msgstr ""
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -1011,16 +1011,16 @@ msgid "United Arab Emirates"
 msgstr "Spojené arabské emiráty"
 
 #: data.py:281
-msgid "United Kingdom"
-msgstr "Spojené království"
+msgid "United Kingdom of Great Britain and Northern Ireland"
+msgstr ""
 
 #: data.py:282
-msgid "United States"
-msgstr "Spojené státy"
-
-#: data.py:283
 msgid "United States Minor Outlying Islands"
 msgstr "Menší odlehlé ostrovy USA"
+
+#: data.py:283
+msgid "United States of America"
+msgstr ""
 
 #: data.py:284
 msgid "Uruguay"
@@ -1035,8 +1035,8 @@ msgid "Vanuatu"
 msgstr "Vanuatu"
 
 #: data.py:287
-msgid "Venezuela, Bolivarian Republic of"
-msgstr "Bolívarovská republika Venezuela"
+msgid "Venezuela (Bolivarian Republic of)"
+msgstr ""
 
 #: data.py:288
 msgid "Viet Nam"

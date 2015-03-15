@@ -70,7 +70,7 @@ COUNTRIES = {
     "BJ": _("Benin"),
     "BM": _("Bermuda"),
     "BT": _("Bhutan"),
-    "BO": _("Bolivia, Plurinational State of"),
+    "BO": _("Bolivia (Plurinational State of)"),
     "BQ": _("Bonaire, Sint Eustatius and Saba"),
     "BA": _("Bosnia and Herzegovina"),
     "BW": _("Botswana"),
@@ -94,8 +94,8 @@ COUNTRIES = {
     "CC": _("Cocos (Keeling) Islands"),
     "CO": _("Colombia"),
     "KM": _("Comoros"),
-    "CG": _("Congo"),
     "CD": _("Congo (the Democratic Republic of the)"),
+    "CG": _("Congo"),
     "CK": _("Cook Islands"),
     "CR": _("Costa Rica"),
     "CI": _("Côte d'Ivoire"),
@@ -124,7 +124,7 @@ COUNTRIES = {
     "PF": _("French Polynesia"),
     "TF": _("French Southern Territories"),
     "GA": _("Gabon"),
-    "GM": _("Gambia (The)"),
+    "GM": _("Gambia"),
     "GE": _("Georgia"),
     "DE": _("Germany"),
     "GH": _("Ghana"),
@@ -141,14 +141,14 @@ COUNTRIES = {
     "GY": _("Guyana"),
     "HT": _("Haiti"),
     "HM": _("Heard Island and McDonald Islands"),
-    "VA": _("Holy See  [Vatican City State]"),
+    "VA": _("Holy See"),
     "HN": _("Honduras"),
     "HK": _("Hong Kong"),
     "HU": _("Hungary"),
     "IS": _("Iceland"),
     "IN": _("India"),
     "ID": _("Indonesia"),
-    "IR": _("Iran (the Islamic Republic of)"),
+    "IR": _("Iran (Islamic Republic of)"),
     "IQ": _("Iraq"),
     "IE": _("Ireland"),
     "IM": _("Isle of Man"),
@@ -188,7 +188,7 @@ COUNTRIES = {
     "MU": _("Mauritius"),
     "YT": _("Mayotte"),
     "MX": _("Mexico"),
-    "FM": _("Micronesia (the Federated States of)"),
+    "FM": _("Micronesia (Federated States of)"),
     "MD": _("Moldova (the Republic of)"),
     "MC": _("Monaco"),
     "MN": _("Mongolia"),
@@ -278,13 +278,13 @@ COUNTRIES = {
     "UG": _("Uganda"),
     "UA": _("Ukraine"),
     "AE": _("United Arab Emirates"),
-    "GB": _("United Kingdom"),
-    "US": _("United States"),
+    "GB": _("United Kingdom of Great Britain and Northern Ireland"),
     "UM": _("United States Minor Outlying Islands"),
+    "US": _("United States of America"),
     "UY": _("Uruguay"),
     "UZ": _("Uzbekistan"),
     "VU": _("Vanuatu"),
-    "VE": _("Venezuela, Bolivarian Republic of"),
+    "VE": _("Venezuela (Bolivarian Republic of)"),
     "VN": _("Viet Nam"),
     "VG": _("Virgin Islands (British)"),
     "VI": _("Virgin Islands (U.S.)"),
@@ -575,7 +575,7 @@ def self_generate(
         contents = source_file.read()
     # Write countries.
     bits = re.match(
-        '(.*\nCOUNTRIES = \{\n)(.*)(\n\}.*)', contents, re.DOTALL).groups()
+        '(.*\nCOUNTRIES = \{\n)(.*?)(\n\}.*)', contents, re.DOTALL).groups()
     country_list = []
     for name, code in countries:
         name = name.replace('"', r'\"').strip()
@@ -583,17 +583,16 @@ def self_generate(
             '    "{code}": _("{name}"),'.format(name=name, code=code))
     content = bits[0]
     content += '\n'.join(country_list).encode('utf-8')
-    content += bits[2]
     # Write alt codes.
     alt_bits = re.match(
-        '(.*\nALT_CODES = \{\n)(.*)(\n\}.*)', contents, re.DOTALL).groups()
+        '(.*\nALT_CODES = \{\n)(.*)(\n\}.*)', bits[2], re.DOTALL).groups()
     alt_list = []
     for code, code3, codenum in alt_codes:
         name = name.replace('"', r'\"').strip()
         alt_list.append(
             '    "{code}": ("{code3}", {codenum}),'.format(
                 code=code, code3=code3, codenum=codenum))
-    content = alt_bits[0]
+    content += alt_bits[0]
     content += '\n'.join(alt_list).encode('utf-8')
     content += alt_bits[2]
     # Generate file.

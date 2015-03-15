@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-04 12:29+1300\n"
+"POT-Creation-Date: 2015-03-16 10:55+1300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -178,7 +178,7 @@ msgid "Bhutan"
 msgstr ""
 
 #: data.py:73
-msgid "Bolivia, Plurinational State of"
+msgid "Bolivia (Plurinational State of)"
 msgstr ""
 
 #: data.py:74
@@ -274,11 +274,11 @@ msgid "Comoros"
 msgstr ""
 
 #: data.py:97
-msgid "Congo"
+msgid "Congo (the Democratic Republic of the)"
 msgstr ""
 
 #: data.py:98
-msgid "Congo (the Democratic Republic of the)"
+msgid "Congo"
 msgstr ""
 
 #: data.py:99
@@ -394,7 +394,7 @@ msgid "Gabon"
 msgstr ""
 
 #: data.py:127
-msgid "Gambia (The)"
+msgid "Gambia"
 msgstr ""
 
 #: data.py:128
@@ -462,7 +462,7 @@ msgid "Heard Island and McDonald Islands"
 msgstr ""
 
 #: data.py:144
-msgid "Holy See  [Vatican City State]"
+msgid "Holy See"
 msgstr ""
 
 #: data.py:145
@@ -490,7 +490,7 @@ msgid "Indonesia"
 msgstr ""
 
 #: data.py:151
-msgid "Iran (the Islamic Republic of)"
+msgid "Iran (Islamic Republic of)"
 msgstr ""
 
 #: data.py:152
@@ -650,7 +650,7 @@ msgid "Mexico"
 msgstr ""
 
 #: data.py:191
-msgid "Micronesia (the Federated States of)"
+msgid "Micronesia (Federated States of)"
 msgstr ""
 
 #: data.py:192
@@ -1010,15 +1010,15 @@ msgid "United Arab Emirates"
 msgstr ""
 
 #: data.py:281
-msgid "United Kingdom"
+msgid "United Kingdom of Great Britain and Northern Ireland"
 msgstr ""
 
 #: data.py:282
-msgid "United States"
+msgid "United States Minor Outlying Islands"
 msgstr ""
 
 #: data.py:283
-msgid "United States Minor Outlying Islands"
+msgid "United States of America"
 msgstr ""
 
 #: data.py:284
@@ -1034,7 +1034,7 @@ msgid "Vanuatu"
 msgstr ""
 
 #: data.py:287
-msgid "Venezuela, Bolivarian Republic of"
+msgid "Venezuela (Bolivarian Republic of)"
 msgstr ""
 
 #: data.py:288

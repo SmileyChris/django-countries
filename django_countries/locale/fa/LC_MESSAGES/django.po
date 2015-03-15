@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-04 12:29+1300\n"
-"PO-Revision-Date: 2015-03-03 23:29+0000\n"
+"POT-Creation-Date: 2015-03-16 10:55+1300\n"
+"PO-Revision-Date: 2015-03-15 21:56+0000\n"
 "Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/django-countries/language/fa/)\n"
 "MIME-Version: 1.0\n"
@@ -178,8 +178,8 @@ msgid "Bhutan"
 msgstr "بوتان"
 
 #: data.py:73
-msgid "Bolivia, Plurinational State of"
-msgstr "بولیوی"
+msgid "Bolivia (Plurinational State of)"
+msgstr ""
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -274,12 +274,12 @@ msgid "Comoros"
 msgstr "مجمع‌الجزایر قمر"
 
 #: data.py:97
-msgid "Congo"
-msgstr "کنگو"
-
-#: data.py:98
 msgid "Congo (the Democratic Republic of the)"
 msgstr "جمهوری دموکراتیک کنگو"
+
+#: data.py:98
+msgid "Congo"
+msgstr "کنگو"
 
 #: data.py:99
 msgid "Cook Islands"
@@ -394,8 +394,8 @@ msgid "Gabon"
 msgstr "گابن"
 
 #: data.py:127
-msgid "Gambia (The)"
-msgstr "گامبیا"
+msgid "Gambia"
+msgstr ""
 
 #: data.py:128
 msgid "Georgia"
@@ -462,8 +462,8 @@ msgid "Heard Island and McDonald Islands"
 msgstr "جزیره هرد و جزایر مک‌دونالد"
 
 #: data.py:144
-msgid "Holy See  [Vatican City State]"
-msgstr "واتیکان"
+msgid "Holy See"
+msgstr ""
 
 #: data.py:145
 msgid "Honduras"
@@ -490,8 +490,8 @@ msgid "Indonesia"
 msgstr "اندونزی"
 
 #: data.py:151
-msgid "Iran (the Islamic Republic of)"
-msgstr "ایران (جمهوری اسلامی)"
+msgid "Iran (Islamic Republic of)"
+msgstr ""
 
 #: data.py:152
 msgid "Iraq"
@@ -650,8 +650,8 @@ msgid "Mexico"
 msgstr "مکزیک"
 
 #: data.py:191
-msgid "Micronesia (the Federated States of)"
-msgstr "ایالات فدرال میکرونزی"
+msgid "Micronesia (Federated States of)"
+msgstr ""
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -1010,16 +1010,16 @@ msgid "United Arab Emirates"
 msgstr "امارات متحده عربی"
 
 #: data.py:281
-msgid "United Kingdom"
-msgstr "بریتانیا"
+msgid "United Kingdom of Great Britain and Northern Ireland"
+msgstr ""
 
 #: data.py:282
-msgid "United States"
-msgstr "ایالات متحده آمریکا"
-
-#: data.py:283
 msgid "United States Minor Outlying Islands"
 msgstr "جزایر کوچک حاشیه‌ای ایالات متحده آمریکا"
+
+#: data.py:283
+msgid "United States of America"
+msgstr ""
 
 #: data.py:284
 msgid "Uruguay"
@@ -1034,8 +1034,8 @@ msgid "Vanuatu"
 msgstr "وانواتو"
 
 #: data.py:287
-msgid "Venezuela, Bolivarian Republic of"
-msgstr "ونزوئلا"
+msgid "Venezuela (Bolivarian Republic of)"
+msgstr ""
 
 #: data.py:288
 msgid "Viet Nam"
