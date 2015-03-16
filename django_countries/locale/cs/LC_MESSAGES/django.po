@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Viktor Matys <v.matys@seznam.cz>, 2014
+# Viktor Matys <v.matys@seznam.cz>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-16 10:55+1300\n"
-"PO-Revision-Date: 2015-03-15 21:56+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2015-03-16 08:49+0000\n"
+"Last-Translator: Jan Čermák\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/django-countries/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +49,7 @@ msgstr "Moldávie"
 
 #: data.py:36
 msgid "Macedonia"
-msgstr ""
+msgstr "Makedonie"
 
 #: data.py:37
 msgid "Russia"
@@ -80,7 +81,7 @@ msgstr "Afghánistán"
 
 #: data.py:48
 msgid "Åland Islands"
-msgstr "Alandské ostrovy"
+msgstr "Alandy"
 
 #: data.py:49
 msgid "Albania"
@@ -180,7 +181,7 @@ msgstr "Bhútán"
 
 #: data.py:73
 msgid "Bolivia (Plurinational State of)"
-msgstr ""
+msgstr "Mnohonárodní stát Bolívie"
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -280,7 +281,7 @@ msgstr "Kongo, demokratická republika"
 
 #: data.py:98
 msgid "Congo"
-msgstr "Kongo, republika"
+msgstr "Kongo"
 
 #: data.py:99
 msgid "Cook Islands"
@@ -388,7 +389,7 @@ msgstr "Francouzská Polynésie"
 
 #: data.py:125
 msgid "French Southern Territories"
-msgstr "Francouzská jižní území"
+msgstr "Francouzská jižní a antarktická území"
 
 #: data.py:126
 msgid "Gabon"
@@ -396,7 +397,7 @@ msgstr "Gabon"
 
 #: data.py:127
 msgid "Gambia"
-msgstr ""
+msgstr "Gambie"
 
 #: data.py:128
 msgid "Georgia"
@@ -464,7 +465,7 @@ msgstr "Heardův ostrov a McDonaldovy ostrovy"
 
 #: data.py:144
 msgid "Holy See"
-msgstr ""
+msgstr "Vatikán"
 
 #: data.py:145
 msgid "Honduras"
@@ -492,7 +493,7 @@ msgstr "Indonésie"
 
 #: data.py:151
 msgid "Iran (Islamic Republic of)"
-msgstr ""
+msgstr "Íránská islámská republika"
 
 #: data.py:152
 msgid "Iraq"
@@ -652,7 +653,7 @@ msgstr "Mexiko"
 
 #: data.py:191
 msgid "Micronesia (Federated States of)"
-msgstr ""
+msgstr "Mikronésie"
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -1012,7 +1013,7 @@ msgstr "Spojené arabské emiráty"
 
 #: data.py:281
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr ""
+msgstr "Spojené království Velké Británie a Severního Irska"
 
 #: data.py:282
 msgid "United States Minor Outlying Islands"
@@ -1020,7 +1021,7 @@ msgstr "Menší odlehlé ostrovy USA"
 
 #: data.py:283
 msgid "United States of America"
-msgstr ""
+msgstr "Spojené státy americké"
 
 #: data.py:284
 msgid "Uruguay"
@@ -1036,7 +1037,7 @@ msgstr "Vanuatu"
 
 #: data.py:287
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr ""
+msgstr "Bolívarovská republika Venezuela"
 
 #: data.py:288
 msgid "Viet Nam"

@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-16 10:55+1300\n"
-"PO-Revision-Date: 2015-03-15 21:56+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2015-03-15 22:38+0000\n"
+"Last-Translator: Daniele Tricoli <eriol@mornie.org>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/django-countries/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -182,7 +182,7 @@ msgstr "Bhutan"
 
 #: data.py:73
 msgid "Bolivia (Plurinational State of)"
-msgstr ""
+msgstr "Bolivia (Stato Plurinazionale della)"
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -398,7 +398,7 @@ msgstr "Gabon"
 
 #: data.py:127
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: data.py:128
 msgid "Georgia"
@@ -466,7 +466,7 @@ msgstr "Isole Heard e McDonald"
 
 #: data.py:144
 msgid "Holy See"
-msgstr ""
+msgstr "Santa Sede"
 
 #: data.py:145
 msgid "Honduras"
@@ -494,7 +494,7 @@ msgstr "Indonesia"
 
 #: data.py:151
 msgid "Iran (Islamic Republic of)"
-msgstr ""
+msgstr "Iran (Repubblica Islamica dell')"
 
 #: data.py:152
 msgid "Iraq"
@@ -654,7 +654,7 @@ msgstr "Messico"
 
 #: data.py:191
 msgid "Micronesia (Federated States of)"
-msgstr ""
+msgstr "Micronesia (Stati Federati di)"
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -1014,7 +1014,7 @@ msgstr "Emirati arabi uniti"
 
 #: data.py:281
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr ""
+msgstr "Regno Unito di Gran Bretagna e Irlanda del Nord"
 
 #: data.py:282
 msgid "United States Minor Outlying Islands"
@@ -1022,7 +1022,7 @@ msgstr "Isole minori lontane dagli Stati Uniti"
 
 #: data.py:283
 msgid "United States of America"
-msgstr ""
+msgstr "Stati Uniti d'America"
 
 #: data.py:284
 msgid "Uruguay"
@@ -1038,7 +1038,7 @@ msgstr "Vanuatu"
 
 #: data.py:287
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr ""
+msgstr "Venezuela (Repubblica Bolivariana di)"
 
 #: data.py:288
 msgid "Viet Nam"
