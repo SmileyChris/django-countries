@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-16 10:55+1300\n"
-"PO-Revision-Date: 2015-03-15 21:56+0000\n"
+"PO-Revision-Date: 2015-03-21 22:23+0000\n"
 "Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/django-countries/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -399,7 +399,7 @@ msgstr "Gabun"
 
 #: data.py:127
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: data.py:128
 msgid "Georgia"

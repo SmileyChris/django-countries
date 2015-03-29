@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-16 10:55+1300\n"
-"PO-Revision-Date: 2015-03-15 21:56+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2015-03-21 17:42+0000\n"
+"Last-Translator: Jon <jon@funkbit.no>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/django-countries/language/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -183,7 +183,7 @@ msgstr "Bhutan"
 
 #: data.py:73
 msgid "Bolivia (Plurinational State of)"
-msgstr ""
+msgstr "Bolivia"
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -399,7 +399,7 @@ msgstr "Gabon"
 
 #: data.py:127
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: data.py:128
 msgid "Georgia"
@@ -467,7 +467,7 @@ msgstr "Heard- og McDonaldøyene"
 
 #: data.py:144
 msgid "Holy See"
-msgstr ""
+msgstr "Den hellige stol"
 
 #: data.py:145
 msgid "Honduras"
@@ -495,7 +495,7 @@ msgstr "Indonesia"
 
 #: data.py:151
 msgid "Iran (Islamic Republic of)"
-msgstr ""
+msgstr "Iran (Den islamske republikk)"
 
 #: data.py:152
 msgid "Iraq"
@@ -655,7 +655,7 @@ msgstr "Mexico"
 
 #: data.py:191
 msgid "Micronesia (Federated States of)"
-msgstr ""
+msgstr "Mikronesiaføderasjonen"
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -1015,7 +1015,7 @@ msgstr "De forente arabiske emirater"
 
 #: data.py:281
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr ""
+msgstr "Det forente kongeriket Storbritannia og Nord-Irland"
 
 #: data.py:282
 msgid "United States Minor Outlying Islands"
@@ -1023,7 +1023,7 @@ msgstr "USAs ytre småøyer"
 
 #: data.py:283
 msgid "United States of America"
-msgstr ""
+msgstr "Amerikas forente stater"
 
 #: data.py:284
 msgid "Uruguay"
@@ -1039,7 +1039,7 @@ msgstr "Vanuatu"
 
 #: data.py:287
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr ""
+msgstr "Venezuela"
 
 #: data.py:288
 msgid "Viet Nam"
