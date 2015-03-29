@@ -7,8 +7,8 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
-HEAD
-====
+Version 3.3 (30 Mar 2015)
+=========================
 
 * Add the attributes to ``Countries`` class that can override the default
   settings.
@@ -20,6 +20,11 @@ HEAD
 * Allow ``COUNTRIES_ONLY`` to also accept just country codes in its list
   (rather than only two-tuples), looking up the translatable country name from
   the full country list.
+
+* Fix Montenegro flag size (was 12px high rather than the standard 11px).
+
+* Fix outdated ISO country name formatting for Bolivia, Gambia, Holy See,
+  Iran, Micronesia, and Venezuela.
 
 
 Version 3.2 (24 Feb 2015)
