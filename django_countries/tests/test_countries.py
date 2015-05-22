@@ -110,10 +110,12 @@ class TestCountriesObject(BaseTest):
             self.assertEqual(countries.alpha2('XX'), 'XX')
 
     def test_fetch_by_name(self):
-        self.assertEqual(countries.by_name('United States'), 'US')
+        code = countries.by_name('United States of America')
+        self.assertEqual(code, 'US')
 
     def test_fetch_by_name_i18n(self):
-        self.assertEqual(countries.by_name('Estados Unidos', language='es'), 'US')
+        code = countries.by_name('Estados Unidos', language='es')
+        self.assertEqual(code, 'US')
 
     def test_fetch_by_name_no_match(self):
         self.assertEqual(countries.by_name('Neverland'), '')
