@@ -47,7 +47,10 @@ class Country(object):
         return force_text(getattr(self, self._str_attr) or '')
 
     def __eq__(self, other):
-        return force_text(self.code or '') == force_text(other or '')
+        code = force_text(self.code or '')
+        if code == '':
+            return False
+        return code == force_text(other or '')
 
     def __ne__(self, other):
         return not self.__eq__(other)
