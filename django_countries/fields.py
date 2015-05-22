@@ -8,10 +8,30 @@ except ImportError:
 from django import forms
 from django.db.models.fields import CharField, BLANK_CHOICE_DASH
 from django.utils.encoding import force_text, python_2_unicode_compatible
+from django.utils.html import escape as escape_html
 from django.utils.functional import lazy
 
 from django_countries import countries, ioc_data, widgets
 from django_countries.conf import settings
+
+
+class TemporaryEscape(object):
+    __slots__ = ['country', 'original_escape']
+
+    def __init__(self, country):
+        self.country = country
+
+    def __bool__(self):
+        return self.country._escape
+
+    __nonzero__ = __bool__
+
+    def __enter__(self):
+        self.original_escape = self.country._escape
+        self.country._escape = True
+
+    def __exit__(self, type, value, traceback):
+        self.country._escape = self.original_escape
 
 
 @python_2_unicode_compatible
@@ -19,6 +39,7 @@ class Country(object):
     def __init__(self, code, flag_url=None):
         self.code = code
         self.flag_url = flag_url
+        self._escape = False
 
     def __str__(self):
         return force_text(self.code or '')
@@ -49,8 +70,17 @@ class Country(object):
         return len(force_text(self))
 
     @property
+    def escape(self):
+        return TemporaryEscape(self)
+
+    def maybe_escape(self, text):
+        if not self.escape:
+            return text
+        return escape_html(text)
+
+    @property
     def name(self):
-        return countries.name(self.code)
+        return self.maybe_escape(countries.name(self.code))
 
     @property
     def alpha3(self):
@@ -73,7 +103,8 @@ class Country(object):
             flag_url = settings.COUNTRIES_FLAG_URL
         url = flag_url.format(
             code_upper=self.code, code=self.code.lower())
-        return urlparse.urljoin(settings.STATIC_URL, url)
+        url = urlparse.urljoin(settings.STATIC_URL, url)
+        return self.maybe_escape(url)
 
     @staticmethod
     def country_from_ioc(ioc_code, flag_url=''):

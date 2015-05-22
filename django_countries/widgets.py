@@ -71,5 +71,7 @@ class CountrySelectWidget(LazySelect):
             country = value
         else:
             country = Country(value or '__')
-        return mark_safe(self.layout.format(
-            widget=widget_render, country=country, flag_id=flag_id))
+        with country.escape:
+            return mark_safe(self.layout.format(
+                widget=widget_render, country=country,
+                flag_id=escape(flag_id)))
