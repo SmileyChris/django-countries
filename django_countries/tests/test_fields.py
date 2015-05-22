@@ -8,7 +8,7 @@ from django.utils import translation
 from django.utils.encoding import force_text
 try:
     from unittest import skipIf
-except:
+except ImportError:
     from django.utils.unittest import skipIf
 
 from django_countries import fields, countries
@@ -215,6 +215,10 @@ class TestCountryObject(TestCase):
     def test_numeric_padded_invalid(self):
         country = fields.Country(code='XX')
         self.assertEqual(country.numeric_padded, None)
+
+    def test_empty_flag_url(self):
+        country = fields.Country(code='XX', flag_url='')
+        self.assertEqual(country.flag, '')
 
 
 class TestModelForm(TestCase):

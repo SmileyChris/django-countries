@@ -103,6 +103,8 @@ class Country(object):
             flag_url = settings.COUNTRIES_FLAG_URL
         url = flag_url.format(
             code_upper=self.code, code=self.code.lower())
+        if not url:
+            return ''
         url = urlparse.urljoin(settings.STATIC_URL, url)
         return self.maybe_escape(url)
 
