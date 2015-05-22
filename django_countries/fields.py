@@ -36,16 +36,18 @@ class TemporaryEscape(object):
 
 @python_2_unicode_compatible
 class Country(object):
-    def __init__(self, code, flag_url=None):
+
+    def __init__(self, code, flag_url=None, str_attr='code'):
         self.code = code
         self.flag_url = flag_url
         self._escape = False
+        self._str_attr = str_attr
 
     def __str__(self):
-        return force_text(self.code or '')
+        return force_text(getattr(self, self._str_attr) or '')
 
     def __eq__(self, other):
-        return force_text(self) == force_text(other or '')
+        return force_text(self.code or '') == force_text(other or '')
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -54,12 +56,13 @@ class Country(object):
         return hash(force_text(self))
 
     def __repr__(self):
-        if self.flag_url is None:
-            repr_text = "{0}(code={1})"
-        else:
-            repr_text = "{0}(code={1}, flag_url={2})"
-        return repr_text.format(
-            self.__class__.__name__, repr(self.code), repr(self.flag_url))
+        args = ['code={country.code!r}']
+        if self.flag_url is not None:
+            args.append('flag_url={country.flag_url!r}')
+        if self._str_attr != 'code':
+            args.append('escape={country._str_attr!r}')
+        args = ', '.join(args).format(country=self)
+        return '{name}({args})'.format(name=self.__class__.__name__, args=args)
 
     def __bool__(self):
         return bool(self.code)
