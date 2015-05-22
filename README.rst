@@ -119,6 +119,15 @@ Country names are translated using Django's standard ``ugettext``.
 If you would like to help by adding a translation, please visit
 https://www.transifex.com/projects/p/django-countries/
 
+Template Tags
+=============
+If you have your country code stored in a different place than a `CountryField` you can use the template tag to get a `Country` object and have access to all of its properties:
+
+
+    {% load countries_tags %}
+    {% get_country 'BR' as country %}
+    {{ country.name }}
+
 
 Customization
 =============
