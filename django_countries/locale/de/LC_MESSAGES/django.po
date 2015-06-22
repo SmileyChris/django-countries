@@ -1,81 +1,84 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # berislavlopac <berislav.lopac@gmail.com>, 2012
 # Chris Beaven <smileychris@gmail.com>, 2013
 # Matthias Kestenholz <mk@feinheit.ch>, 2012
 # Nabil <n.nabil@live.de>, 2014
+# Moritz Pfeiffer <moritz.pfeiffer@alp-phone.ch>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-16 10:55+1300\n"
-"PO-Revision-Date: 2015-03-21 22:23+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/django-countries/language/de/)\n"
+"POT-Creation-Date: 2015-06-22 11:27+0200\n"
+"PO-Revision-Date: 2015-06-22 11:25+0100\n"
+"Last-Translator: Moritz Pfeiffer <moritz.pfeiffer@alp-phone.ch>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/django-countries/"
+"language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.1\n"
 
 #: data.py:29
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #: data.py:30
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivien"
 
 #: data.py:31
 msgid "Iran"
-msgstr ""
+msgstr "Iran"
 
 #: data.py:32
 msgid "North Korea"
-msgstr ""
+msgstr "Nordkorea"
 
 #: data.py:33
 msgid "South Korea"
-msgstr ""
+msgstr "Südkorea"
 
 #: data.py:34
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: data.py:35
 msgid "Moldovia"
-msgstr ""
+msgstr "Moldawien"
 
 #: data.py:36
 msgid "Macedonia"
-msgstr ""
+msgstr "Mazedonien"
 
 #: data.py:37
 msgid "Russia"
-msgstr ""
+msgstr "Russland"
 
 #: data.py:38
 msgid "Syria"
-msgstr ""
+msgstr "Syrien"
 
 #: data.py:39
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #: data.py:40
 msgid "Tanzania"
-msgstr ""
+msgstr "Tansania"
 
 #: data.py:41
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
 #: data.py:42
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnam"
 
 #: data.py:47
 msgid "Afghanistan"
@@ -183,7 +186,7 @@ msgstr "Bhutan"
 
 #: data.py:73
 msgid "Bolivia (Plurinational State of)"
-msgstr ""
+msgstr "Bolivien (Plurinationaler Staat)"
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -227,7 +230,7 @@ msgstr "Burundi"
 
 #: data.py:84
 msgid "Cabo Verde"
-msgstr ""
+msgstr "Kap Verde"
 
 #: data.py:85
 msgid "Cambodia"
@@ -295,7 +298,7 @@ msgstr "Costa Rica"
 
 #: data.py:101
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Elfenbeinküste"
 
 #: data.py:102
 msgid "Croatia"
@@ -451,7 +454,7 @@ msgstr "Guinea"
 
 #: data.py:140
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guinea-Bissau"
 
 #: data.py:141
 msgid "Guyana"
@@ -467,7 +470,7 @@ msgstr "Heard und McDonaldinseln"
 
 #: data.py:144
 msgid "Holy See"
-msgstr ""
+msgstr "Heiliger Stuhl"
 
 #: data.py:145
 msgid "Honduras"
@@ -495,7 +498,7 @@ msgstr "Indonesien"
 
 #: data.py:151
 msgid "Iran (Islamic Republic of)"
-msgstr ""
+msgstr "Iran (Islamische Republik)"
 
 #: data.py:152
 msgid "Iraq"
@@ -655,7 +658,7 @@ msgstr "Mexiko"
 
 #: data.py:191
 msgid "Micronesia (Federated States of)"
-msgstr ""
+msgstr "Mikronesien (Föderierte Staaten)"
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -755,7 +758,7 @@ msgstr "Palau"
 
 #: data.py:216
 msgid "Palestine, State of"
-msgstr ""
+msgstr "Palästina, Staat"
 
 #: data.py:217
 msgid "Panama"
@@ -1015,7 +1018,7 @@ msgstr "Vereinigte Arabische Emirate"
 
 #: data.py:281
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr ""
+msgstr "Vereinigtes Königreich Großbritannien und Nordirland"
 
 #: data.py:282
 msgid "United States Minor Outlying Islands"
@@ -1023,7 +1026,7 @@ msgstr "USA - Sonstige Kleine Inseln"
 
 #: data.py:283
 msgid "United States of America"
-msgstr ""
+msgstr "Vereinigte Staaten von Amerika"
 
 #: data.py:284
 msgid "Uruguay"
@@ -1039,7 +1042,7 @@ msgstr "Vanuatu"
 
 #: data.py:287
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr ""
+msgstr "Venezuela (Bolivarische Republik)"
 
 #: data.py:288
 msgid "Viet Nam"
