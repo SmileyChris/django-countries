@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-16 10:55+1300\n"
+"POT-Creation-Date: 2015-07-15 16:18+1200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgid "Laos"
 msgstr ""
 
 #: data.py:35
-msgid "Moldovia"
+msgid "Moldova"
 msgstr ""
 
 #: data.py:36
