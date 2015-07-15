@@ -96,6 +96,22 @@ flag and widget. The default layout is::
     '{widget}<img class="country-select-flag" id="{flag_id}" style="margin: 6px 4px 0" src="{country.flag}">'
 
 
+Custom forms
+============
+
+If you want to use the countries in a custom form, use the following custom
+field to ensure the translatable strings for the country choices are left lazy
+until the widget renders::
+
+    from django_countries.fields import LazyTypedChoiceField
+
+    class CustomForm(forms.Form):
+        country = LazyTypedChoiceField(choices=countries)
+
+You can also use the CountrySelectWidget_ as the widget for this field if you
+want the flag image after the select box.
+
+
 Get the countries from Python
 =============================
 
