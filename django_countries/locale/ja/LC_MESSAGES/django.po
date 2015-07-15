@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Chris Beaven <smileychris@gmail.com>, 2015
+# Koichi Noto <noto.code.life@gmail.com>, 2015
 # ThemeBoy <support@themeboy.com>, 2014
 # ThemeBoy <support@themeboy.com>, 2014
 # Yasushi Masuda <whosaysni@gmail.com>, 2013
@@ -11,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-16 10:55+1300\n"
-"PO-Revision-Date: 2015-03-21 22:23+0000\n"
+"POT-Creation-Date: 2015-07-15 16:18+1200\n"
+"PO-Revision-Date: 2015-07-15 04:20+0000\n"
 "Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
-"Language-Team: Japanese (http://www.transifex.com/projects/p/django-countries/language/ja/)\n"
+"Language-Team: Japanese (http://www.transifex.com/p/django-countries/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -46,8 +47,8 @@ msgid "Laos"
 msgstr "ラオス"
 
 #: data.py:35
-msgid "Moldovia"
-msgstr "モルドヴィア共和国"
+msgid "Moldova"
+msgstr ""
 
 #: data.py:36
 msgid "Macedonia"
@@ -183,7 +184,7 @@ msgstr "ブータン"
 
 #: data.py:73
 msgid "Bolivia (Plurinational State of)"
-msgstr ""
+msgstr "ボリビア"
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -467,7 +468,7 @@ msgstr "ハード島およびマクドナルド島"
 
 #: data.py:144
 msgid "Holy See"
-msgstr ""
+msgstr "バチカン市国"
 
 #: data.py:145
 msgid "Honduras"
@@ -495,7 +496,7 @@ msgstr "インドネシア"
 
 #: data.py:151
 msgid "Iran (Islamic Republic of)"
-msgstr ""
+msgstr "イラン(イスラム共和国)"
 
 #: data.py:152
 msgid "Iraq"
@@ -655,7 +656,7 @@ msgstr "メキシコ"
 
 #: data.py:191
 msgid "Micronesia (Federated States of)"
-msgstr ""
+msgstr "ミクロネシア連邦"
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -1015,7 +1016,7 @@ msgstr "アラブ首長国連邦"
 
 #: data.py:281
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr ""
+msgstr "イギリス"
 
 #: data.py:282
 msgid "United States Minor Outlying Islands"
@@ -1023,7 +1024,7 @@ msgstr "合衆国領有小離島"
 
 #: data.py:283
 msgid "United States of America"
-msgstr ""
+msgstr "アメリカ合衆国"
 
 #: data.py:284
 msgid "Uruguay"
@@ -1039,7 +1040,7 @@ msgstr "バヌアツ"
 
 #: data.py:287
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr ""
+msgstr "ベネズエラ(ボリバル共和国)"
 
 #: data.py:288
 msgid "Viet Nam"

@@ -5,14 +5,15 @@
 # Translators:
 # Bart de Goede <bart@dispectu.com>, 2013
 # tijs <hello@tijs.org>, 2014
+# wadevries <wouter@oxyzen.nl>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-16 10:55+1300\n"
-"PO-Revision-Date: 2015-03-21 22:23+0000\n"
+"POT-Creation-Date: 2015-07-15 16:18+1200\n"
+"PO-Revision-Date: 2015-07-15 04:20+0000\n"
 "Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
-"Language-Team: Dutch (http://www.transifex.com/projects/p/django-countries/language/nl/)\n"
+"Language-Team: Dutch (http://www.transifex.com/p/django-countries/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -44,12 +45,12 @@ msgid "Laos"
 msgstr "Laos"
 
 #: data.py:35
-msgid "Moldovia"
-msgstr "Moldavië"
+msgid "Moldova"
+msgstr ""
 
 #: data.py:36
 msgid "Macedonia"
-msgstr ""
+msgstr "Macedonië"
 
 #: data.py:37
 msgid "Russia"
@@ -181,7 +182,7 @@ msgstr "Bhutan"
 
 #: data.py:73
 msgid "Bolivia (Plurinational State of)"
-msgstr ""
+msgstr "Bolivië (Plurinationale Staat)"
 
 #: data.py:74
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -465,7 +466,7 @@ msgstr "Heard en McDonaldeilanden"
 
 #: data.py:144
 msgid "Holy See"
-msgstr ""
+msgstr "Heilige Stoel"
 
 #: data.py:145
 msgid "Honduras"
@@ -493,7 +494,7 @@ msgstr "Indonesië"
 
 #: data.py:151
 msgid "Iran (Islamic Republic of)"
-msgstr ""
+msgstr "Iran"
 
 #: data.py:152
 msgid "Iraq"
@@ -653,7 +654,7 @@ msgstr "Mexico"
 
 #: data.py:191
 msgid "Micronesia (Federated States of)"
-msgstr ""
+msgstr "Micronesië"
 
 #: data.py:192
 msgid "Moldova (the Republic of)"
@@ -1013,7 +1014,7 @@ msgstr "Verenigde Arabische Emiraten"
 
 #: data.py:281
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr ""
+msgstr "Verenigd Koninkrijk van Groot-Brittannië en Noord-Ierland"
 
 #: data.py:282
 msgid "United States Minor Outlying Islands"
@@ -1021,7 +1022,7 @@ msgstr "Kleine Pacifische eilanden van de Verenigde Staten"
 
 #: data.py:283
 msgid "United States of America"
-msgstr ""
+msgstr "Verenigde Staten van Amerika"
 
 #: data.py:284
 msgid "Uruguay"
@@ -1037,7 +1038,7 @@ msgstr "Vanuatu"
 
 #: data.py:287
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr ""
+msgstr "Venezuela"
 
 #: data.py:288
 msgid "Viet Nam"

@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-16 10:55+1300\n"
-"PO-Revision-Date: 2015-03-21 22:23+0000\n"
+"POT-Creation-Date: 2015-07-15 16:18+1200\n"
+"PO-Revision-Date: 2015-07-15 04:20+0000\n"
 "Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/projects/p/django-countries/language/pt_PT/)\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/p/django-countries/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,7 +42,7 @@ msgid "Laos"
 msgstr ""
 
 #: data.py:35
-msgid "Moldovia"
+msgid "Moldova"
 msgstr ""
 
 #: data.py:36
