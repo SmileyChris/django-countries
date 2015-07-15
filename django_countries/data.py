@@ -28,6 +28,7 @@ except ImportError:  # pragma: no cover
 COMMON_NAMES = {
     "BN": _("Brunei"),
     "BO": _("Bolivia"),
+    "GB": _("United Kingdom"),
     "IR": _("Iran"),
     "KP": _("North Korea"),
     "KR": _("South Korea"),
