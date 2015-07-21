@@ -78,10 +78,10 @@ class TestCountryField(TestCase):
 
     def test_blank(self):
         person = Person.objects.create(name='The Outsider')
-        self.assertEqual(person.country, '')
+        self.assertEqual(person.country.code, '')
 
         person = Person.objects.get(pk=person.pk)
-        self.assertEqual(person.country, '')
+        self.assertEqual(person.country.code, '')
 
     def test_null(self):
         person = AllowNull.objects.create(country=None)
@@ -119,7 +119,7 @@ class TestCountryField(TestCase):
     def test_save_empty_country(self):
         Person.objects.create(name='The Outsider')
         person = Person.objects.get()
-        self.assertEqual(person.country, '')
+        self.assertEqual(person.country.code, '')
 
     def test_create_modelform(self):
         Form = modelform_factory(Person, fields=['country'])
