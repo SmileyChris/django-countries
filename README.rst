@@ -140,7 +140,7 @@ Template Tags
 If you have your country code stored in a different place than a `CountryField` you can use the template tag to get a `Country` object and have access to all of its properties:
 
 
-    {% load countries_tags %}
+    {% load countries %}
     {% get_country 'BR' as country %}
     {{ country.name }}
 

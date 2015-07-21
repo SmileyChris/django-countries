@@ -5,8 +5,8 @@ from django.utils import translation
 
 class TestCountriesTags(TestCase):
 
-    TEMPLATE_COUNTRY = Template("{% load countries_tags %}{% get_country code as country %}{{ country }}")
-    TEMPLATE_NAME = Template("{% load countries_tags %}{% get_country code as country %}{{ country.name }}")
+    TEMPLATE_COUNTRY = Template("{% load countries %}{% get_country code as country %}{{ country }}")
+    TEMPLATE_NAME = Template("{% load countries %}{% get_country code as country %}{{ country.name }}")
 
     def test_country(self):
         rendered = self.TEMPLATE_COUNTRY.render(Context({'code': 'BR'}))
