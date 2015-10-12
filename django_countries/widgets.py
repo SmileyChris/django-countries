@@ -36,7 +36,8 @@ class LazyChoicesMixin(object):
         self._set_choices(value)
 
     def _set_choices(self, value):
-        self._choices = value
+        self._choices = sorted(list(value),
+                               key=lambda country: country[1])
 
 
 class LazySelect(LazyChoicesMixin, widgets.Select):
