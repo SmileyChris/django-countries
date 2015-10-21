@@ -7,6 +7,20 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
+Version 3.4 (22 October 2015)
+=============================
+
+* Extend test suite to cover Django 1.8
+
+* Fix XSS escaping issue in CountrySelectWidget
+
+* Common name changes: fix typo of Moldova, add United Kingdom
+
+* Add ``{% get_country %}`` template tag.
+
+* New ``CountryField`` Django Rest Framework serializer field.
+
+
 Version 3.3 (30 Mar 2015)
 =========================
 
