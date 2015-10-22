@@ -135,6 +135,7 @@ Country names are translated using Django's standard ``ugettext``.
 If you would like to help by adding a translation, please visit
 https://www.transifex.com/projects/p/django-countries/
 
+
 Template Tags
 =============
 If you have your country code stored in a different place than a `CountryField` you can use the template tag to get a `Country` object and have access to all of its properties:
@@ -249,3 +250,35 @@ uses a custom country list that only includes the G8 countries::
     class Vote(models.Model):
         country = CountryField(countries=G8Countries)
         approve = models.BooleanField()
+
+
+Django Rest Framework field
+===========================
+
+Django Countries ships with a ``CountryField`` serializer field to simplify
+the REST interface. For example::
+
+    class PersonSerializer(serializers.ModelSerializer):
+        country = CountryField()
+
+        class Meta:
+            model = models.Person
+            fields = ('name', 'email', 'country')
+
+
+You can optionally instanciate the field with ``countries`` with a custom
+Countries_ instance.
+
+.. _Countries: Single field customization_
+
+REST output format
+------------------
+
+By default, the field will output just the country code. If you would rather
+have more verbose output, instanciate the field with ``country_dict=True``,
+which will result in the field having the following output structure::
+
+    {"code": "NZ", "name": "New Zealand"}
+
+Either the code or this dict output structure are acceptible as input
+irregardless of the ``country_dict`` argument's value.
