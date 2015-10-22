@@ -60,7 +60,7 @@ class Country(object):
         if self.flag_url is not None:
             args.append('flag_url={country.flag_url!r}')
         if self._str_attr != 'code':
-            args.append('escape={country._str_attr!r}')
+            args.append('str_attr={country._str_attr!r}')
         args = ', '.join(args).format(country=self)
         return '{name}({args})'.format(name=self.__class__.__name__, args=args)
 
