@@ -20,6 +20,11 @@ Version 3.4 (22 October 2015)
 
 * New ``CountryField`` Django Rest Framework serializer field.
 
+Version 3.4.1
+-------------
+
+* Fix minor packaging error.
+
 
 Version 3.3 (30 Mar 2015)
 =========================
