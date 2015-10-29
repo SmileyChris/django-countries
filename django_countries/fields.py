@@ -111,6 +111,36 @@ class Country(object):
         url = urlparse.urljoin(settings.STATIC_URL, url)
         return self.maybe_escape(url)
 
+    @property
+    def unicode_flag(self):
+        """Generate a unicode flag for the given country.
+
+        The logic for how these are determined can be found at:
+
+        https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
+
+        """
+        if not self.code:
+            return ''
+
+        # Don't really like magic numbers, but this is the code point for [A]
+        # (Regional Indicator A), minus the code point for ASCII A. By adding
+        # this to the uppercase characters making up the ISO 3166-1 alpha-2 codes
+        # we can get the flag.
+
+        OFFSET = 127397
+        points = map(lambda x: ord(x) + OFFSET, self.code.upper())
+
+        try:
+            # Python 3 is simple: we can just chr() the unicode points.
+            return chr(points[0]) + chr(points[1])
+        except ValueError:
+            # Python 2 requires us to be a bit more creative. We could use unichr(),
+            # but that only works if the python has been compiled with wide unicode
+            # support. This method should always work.
+            return ('\\U%08x\\U%08x' % tuple(points)).decode('unicode-escape')
+
+
     @staticmethod
     def country_from_ioc(ioc_code, flag_url=''):
         code = ioc_data.IOC_TO_ISO.get(ioc_code, '')
