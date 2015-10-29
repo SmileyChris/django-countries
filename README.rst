@@ -57,13 +57,18 @@ An object used to represent a country, instanciated with a two character
 country code.
 
 It can be compared to other objects as if it was a string containing the
-country code and when evaluated as text, returns the country code.  
+country code and when evaluated as text, returns the country code.
 
 name
   Contains the full country name.
 
 flag
   Contains a URL to the flag.
+
+unicode_flag
+  A unicode glyph for the flag for this country. Currently well-supported in
+  iOS and OS X. See https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
+  for details.
 
 alpha3
   The three letter country code for this country.
@@ -234,7 +239,7 @@ To customize an individual field, rather than rely on project level settings,
 create a ``Countries`` subclass which overrides settings.
 
 To override a setting, give the class an attribute matching the lowercased
-setting without the ``COUNTRIES_`` prefix. 
+setting without the ``COUNTRIES_`` prefix.
 
 Then just reference this class in a field. For example, this ``CountryField``
 uses a custom country list that only includes the G8 countries::

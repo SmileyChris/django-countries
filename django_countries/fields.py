@@ -119,6 +119,7 @@ class Country(object):
 
         https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
 
+        Currently, these glyphs appear to only be supported on OS X and iOS.
         """
         if not self.code:
             return ''
