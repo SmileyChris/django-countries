@@ -122,7 +122,7 @@ Get the countries from Python
 
 Use the ``django_countries.countries`` object instance as an iterator of ISO
 3166-1 country codes and names (sorted by name). For better accuracy sorting of
-translated coutry names install ``pyuca`` package.
+translated country names install ``pyuca`` package.
 
 For example::
 
