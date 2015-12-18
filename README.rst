@@ -11,6 +11,11 @@ Installation
 1. ``pip install django-countries``
 2. Add ``django_countries`` to ``INSTALLED_APPS``
 
+For more accurate sorting of translated country names, install the optional
+pyuca_ package.
+
+.. _pyuca: https://pypi.python.org/pypi/pyuca/
+
 
 CountryField
 ============
@@ -121,8 +126,7 @@ Get the countries from Python
 =============================
 
 Use the ``django_countries.countries`` object instance as an iterator of ISO
-3166-1 country codes and names (sorted by name). For better accuracy sorting of
-translated country names install ``pyuca`` package.
+3166-1 country codes and names (sorted by name).
 
 For example::
 
