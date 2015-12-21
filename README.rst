@@ -279,7 +279,7 @@ the REST interface. For example::
 You can optionally instanciate the field with ``countries`` with a custom
 Countries_ instance.
 
-.. _Countries: Single field customization_
+.. _Countries: `Single field customization`_
 
 REST output format
 ------------------
