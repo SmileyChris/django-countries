@@ -393,7 +393,7 @@ msgstr "法属波利尼西亚"
 
 #: data.py:126
 msgid "French Southern Territories"
-msgstr "French Southern Territories"
+msgstr "法属南部领地"
 
 #: data.py:127
 msgid "Gabon"
