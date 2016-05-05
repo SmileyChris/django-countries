@@ -70,6 +70,8 @@ class Countries(object):
                     self._countries.update(COMMON_NAMES)
                 override = self.get_option('override')
                 if override:
+                    if not isinstance(override, dict):
+                        raise TypeError('COUNTRIES_OVERRIDE must be a dictionary')
                     self._countries.update(override)
                     self._countries = dict(
                         (code, name) for code, name in self._countries.items()
