@@ -184,6 +184,24 @@ class CountriesFirstTest(BaseTest):
                            COUNTRIES_FIRST_BREAK='------'):
             self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT)
 
+    def test_sorted_countries_first_english(self):
+        with self.settings(COUNTRIES_FIRST=['YE', 'JO', 'DZ'], COUNTRIES_FIRST_SORT=True, LANGUAGE_CODE='en'):
+            countries_list = list(countries)
+            sorted_codes = [item[0] for item in countries_list[:3]]
+            self.assertEquals(['DZ', 'JO', 'YE'], sorted_codes)
+
+    def test_unsorted_countries_first_english(self):
+        with self.settings(COUNTRIES_FIRST=['YE', 'JO', 'DZ'], COUNTRIES_FIRST_SORT=False, LANGUAGE_CODE='en'):
+            countries_list = list(countries)
+            unsorted_codes = [item[0] for item in countries_list[:3]]
+            self.assertEquals(['YE', 'JO', 'DZ'], unsorted_codes)
+
+    def test_sorted_countries_first_arabic(self):
+        with self.settings(COUNTRIES_FIRST=['YE', 'JO', 'DZ'], COUNTRIES_FIRST_SORT=True, LANGUAGE_CODE='ar'):
+            countries_list = list(countries)
+            sorted_codes = [item[0] for item in countries_list[:3]]
+            self.assertEquals(['JO', 'DZ', 'YE'], sorted_codes)
+
 
 class TestCountriesCustom(BaseTest):
 
