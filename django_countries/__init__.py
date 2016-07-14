@@ -66,8 +66,10 @@ class Countries(object):
                 # until first used.
                 from django_countries.data import COUNTRIES, COMMON_NAMES
                 self._countries = dict(COUNTRIES)
-                if self.get_option('common_names'):
-                    self._countries.update(COMMON_NAMES)
+                common_names = self.get_option('common_names')
+                if not isinstance(common_names, dict):
+                    common_names = COMMON_NAMES
+                self._countries.update(common_names)
                 override = self.get_option('override')
                 if override:
                     self._countries.update(override)
