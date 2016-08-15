@@ -3,6 +3,7 @@ try:
     from urllib import parse as urlparse
 except ImportError:
     import urlparse   # Python 2
+import copy
 
 from django.forms import widgets
 from django.utils.html import escape
@@ -43,6 +44,13 @@ class LazySelect(LazyChoicesMixin, widgets.Select):
     """
     A form Select widget that respects choices being a lazy object.
     """
+
+    def __deepcopy__(self, memo):
+        obj = copy.copy(self)
+        obj.attrs = self.attrs.copy()
+        obj.choices = copy.copy(self._choices)
+        memo[id(self)] = obj
+        return obj
 
 
 class CountrySelectWidget(LazySelect):
