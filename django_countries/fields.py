@@ -275,43 +275,7 @@ class CountryField(CharField):
         if argname not in kwargs:
             kwargs[argname] = LazyTypedChoiceField
         field = super(CharField, self).formfield(**kwargs)
-        if not isinstance(field, LazyTypedChoiceField):
-            field = self.legacy_formfield(**kwargs)
         return field
-
-    def legacy_formfield(self, **kwargs):
-        """
-        Legacy method to fix Django LTS not allowing a custom choices form
-        class.
-        """
-        from django.utils.text import capfirst
-
-        defaults = {'required': not self.blank,
-                    'label': capfirst(self.verbose_name),
-                    'help_text': self.help_text}
-        if self.has_default():
-            if callable(self.default):
-                defaults['initial'] = self.default
-                defaults['show_hidden_initial'] = True
-            else:
-                defaults['initial'] = self.get_default()
-        include_blank = (self.blank or
-                         not (self.has_default() or 'initial' in kwargs))
-        defaults['choices'] = self.get_choices(include_blank=include_blank)
-        defaults['coerce'] = self.to_python
-        if self.null:
-            defaults['empty_value'] = None
-        form_class = LazyTypedChoiceField
-        # Many of the subclass-specific formfield arguments (min_value,
-        # max_value) don't apply for choice fields, so be sure to only pass
-        # the values that TypedChoiceField will understand.
-        for k in kwargs.keys():
-            if k not in ('coerce', 'empty_value', 'choices', 'required',
-                         'widget', 'label', 'initial', 'help_text',
-                         'error_messages', 'show_hidden_initial'):
-                del kwargs[k]
-        defaults.update(kwargs)
-        return form_class(**defaults)
 
 
 # If south is installed, ensure that CountryField will be introspected just

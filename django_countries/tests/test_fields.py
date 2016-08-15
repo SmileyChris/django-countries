@@ -6,18 +6,11 @@ from django.forms.models import modelform_factory
 from django.test import TestCase
 from django.utils import translation
 from django.utils.encoding import force_text
-try:
-    from unittest import skipIf
-except ImportError:
-    from django.utils.unittest import skipIf
+from unittest import skipIf
 
 from django_countries import fields, countries
 from django_countries.tests import forms, custom_countries
-from django_countries.tests.models import Person, AllowNull, en_zed
-
-skipUnlessLegacy = skipIf(
-    django.VERSION >= (1, 5),
-    "Legacy tests only necessary in Django < 1.5")
+from django_countries.tests.models import Person, AllowNull
 
 
 class TestCountryField(TestCase):
@@ -269,22 +262,3 @@ class TestModelForm(TestCase):
         form = forms.AllowNullForm()
         self.assertEqual(
             form.fields['country'].choices[0], ('', '(select country)'))
-
-    @skipUnlessLegacy
-    def test_legacy_default(self):
-        self.assertEqual(
-            forms.LegacyForm.base_fields['default'].initial, 'AU')
-
-    @skipUnlessLegacy
-    def test_legacy_default_callable(self):
-        self.assertEqual(
-            forms.LegacyForm.base_fields['default_callable'].initial, en_zed)
-        form = forms.LegacyForm()
-        self.assertEqual(form['default_callable'].value(), 'NZ')
-
-    @skipUnlessLegacy
-    def test_legacy_empty_value(self):
-        self.assertEqual(
-            forms.LegacyForm.base_fields['default'].empty_value, None)
-        self.assertEqual(
-            forms.LegacyForm.base_fields['default_callable'].empty_value, '')
