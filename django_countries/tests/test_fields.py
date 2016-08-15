@@ -58,8 +58,12 @@ class TestCountryField(TestCase):
 
     def test_unicode_flags(self):
         person = Person(name='Matthew Schinckel', country='AU', other_country='DE')
-        self.assertEqual(person.country.unicode_flag, u'🇦🇺')
-        self.assertEqual(person.other_country.unicode_flag, u'🇩🇪')
+        self.assertEqual(person.country.unicode_flag, '🇦🇺')
+        self.assertEqual(person.other_country.unicode_flag, '🇩🇪')
+
+    def test_unicode_flag_blank(self):
+        person = Person(name='Matthew Schinckel')
+        self.assertEqual(person.country.unicode_flag, '')
 
     def test_COUNTRIES_FLAG_URL_setting(self):
         # Custom relative url
