@@ -7,6 +7,20 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
+Version 4.0 (16 August 2016)
+============================
+
+Django supported versions are now 1.8+
+
+* Drop legacy code
+
+* Fix tests, 100% coverage
+
+* IOS / OSX unicode flags function
+
+* Fix widget choices on Django 1.9+
+
+
 Version 3.4 (22 October 2015)
 =============================
 
