@@ -5,14 +5,14 @@
 # Translators:
 # Baptiste Darthenay <baptiste+transifex@darthenay.fr>, 2014-2015
 # Chris Beaven <smileychris@gmail.com>, 2016
-# Meiyer G <interdist@gmail.com>, 2016
+# Meiyer <interdist@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-15 16:38+1200\n"
-"PO-Revision-Date: 2016-02-15 22:51+0000\n"
-"Last-Translator: Meiyer G <interdist@gmail.com>\n"
+"PO-Revision-Date: 2016-03-04 21:23+0000\n"
+"Last-Translator: Meiyer <interdist@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/smileychris/django-countries/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -470,7 +470,7 @@ msgstr "Herda kaj Makdonaldaj Insuloj"
 
 #: data.py:145
 msgid "Holy See"
-msgstr "Apostola Seĝo"
+msgstr "Apostola Seĝo (Vatikano)"
 
 #: data.py:146
 msgid "Honduras"
@@ -606,7 +606,7 @@ msgstr "Makao"
 
 #: data.py:179
 msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr "Makedonio"
+msgstr "Makedonio (Iama Jugoslavia Respubliko de)"
 
 #: data.py:180
 msgid "Madagascar"

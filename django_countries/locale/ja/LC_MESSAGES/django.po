@@ -5,8 +5,8 @@
 # Translators:
 # Chris Beaven <smileychris@gmail.com>, 2015
 # Koichi Noto <noto.code.life@gmail.com>, 2015
-# ThemeBoy <support@themeboy.com>, 2014
-# ThemeBoy <support@themeboy.com>, 2014
+# ThemeBoy <transifex@themeboy.com>, 2014
+# ThemeBoy <transifex@themeboy.com>, 2014
 # Yasushi Masuda <whosaysni@gmail.com>, 2013
 msgid ""
 msgstr ""
