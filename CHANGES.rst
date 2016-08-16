@@ -22,6 +22,11 @@ Django supported versions are now 1.8+
 
 * Add ``COUNTRIES_FIRST_SORT``. Thanks Edraak!
 
+Version 4.0.1
+-------------
+
+* Fix tests for ``COUNTRIES_FIRST_SORT`` (feature still worked, tests didn't).
+
 
 Version 3.4 (22 October 2015)
 =============================
