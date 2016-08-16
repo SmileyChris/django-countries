@@ -57,3 +57,7 @@ target/
 ehthumbs.db
 Icon?
 Thumbs.db
+
+
+# PyCharm
+/.idea/

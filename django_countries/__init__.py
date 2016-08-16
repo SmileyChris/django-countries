@@ -130,8 +130,15 @@ class Countries(object):
         countries = self.countries
 
         # Yield countries that should be displayed first.
-        for code in self.countries_first:
-            yield (code, force_text(countries[code]))
+        countries_first = [
+            (code, force_text(countries[code])) for code in self.countries_first
+        ]
+
+        if self.get_option('first_sort'):
+            countries_first = sorted(countries_first, key=sort_key)
+
+        for item in countries_first:
+            yield item
 
         if self.countries_first:
             first_break = self.get_option('first_break')

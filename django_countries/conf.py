@@ -93,4 +93,11 @@ class Settings(AppSettings):
     countries.
     """
 
+    COUNTRIES_FIRST_SORT = False
+    """
+    Countries listed in :attr:`COUNTRIES_FIRST` will be alphanumerically
+    sorted based on their translated name instead of relying on their
+    order in :attr:`COUNTRIES_FIRST`.
+    """
+
 settings = Settings()
