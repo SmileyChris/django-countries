@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.test import TestCase
+from django.utils import translation
 
 from django_countries import countries, Countries
 from django_countries.tests import custom_countries
@@ -187,22 +188,31 @@ class CountriesFirstTest(BaseTest):
             self.assertEqual(len(countries), EXPECTED_COUNTRY_COUNT)
 
     def test_sorted_countries_first_english(self):
-        with self.settings(COUNTRIES_FIRST=['YE', 'JO', 'DZ'], COUNTRIES_FIRST_SORT=True, LANGUAGE_CODE='en'):
+        with self.settings(
+                COUNTRIES_FIRST=['GB', 'AF', 'DK'], COUNTRIES_FIRST_SORT=True):
             countries_list = list(countries)
             sorted_codes = [item[0] for item in countries_list[:3]]
-            self.assertEquals(['DZ', 'JO', 'YE'], sorted_codes)
+            self.assertEquals(['AF', 'DK', 'GB'], sorted_codes)
 
     def test_unsorted_countries_first_english(self):
-        with self.settings(COUNTRIES_FIRST=['YE', 'JO', 'DZ'], COUNTRIES_FIRST_SORT=False, LANGUAGE_CODE='en'):
+        with self.settings(
+                COUNTRIES_FIRST=['GB', 'AF', 'DK'],
+                COUNTRIES_FIRST_SORT=False):
             countries_list = list(countries)
             unsorted_codes = [item[0] for item in countries_list[:3]]
-            self.assertEquals(['YE', 'JO', 'DZ'], unsorted_codes)
+            self.assertEquals(['GB', 'AF', 'DK'], unsorted_codes)
 
     def test_sorted_countries_first_arabic(self):
-        with self.settings(COUNTRIES_FIRST=['YE', 'JO', 'DZ'], COUNTRIES_FIRST_SORT=True, LANGUAGE_CODE='ar'):
-            countries_list = list(countries)
-            sorted_codes = [item[0] for item in countries_list[:3]]
-            self.assertEquals(['JO', 'DZ', 'YE'], sorted_codes)
+        with self.settings(
+                COUNTRIES_FIRST=['GB', 'AF', 'DK'], COUNTRIES_FIRST_SORT=True):
+            lang = translation.get_language()
+            translation.activate('eo')
+            try:
+                countries_list = list(countries)
+                sorted_codes = [item[0] for item in countries_list[:3]]
+                self.assertEquals(['AF', 'GB', 'DK'], sorted_codes)
+            finally:
+                translation.activate(lang)
 
 
 class TestCountriesCustom(BaseTest):
