@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import django
 from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase
 from django.utils import translation
 from django.utils.encoding import force_text
-from unittest import skipIf
 
 from django_countries import fields, countries
 from django_countries.tests import forms, custom_countries
@@ -28,8 +26,6 @@ class TestCountryField(TestCase):
     def test_only_from_instance(self):
         self.assertRaises(AttributeError, lambda: Person.country)
 
-    @skipIf(
-        django.VERSION < (1, 7), "Field.deconstruct introduced in Django 1.7")
     def test_deconstruct(self):
         field = Person._meta.get_field('country')
         self.assertEqual(
@@ -137,8 +133,6 @@ class TestCountryField(TestCase):
             list(Person._meta.get_field('fantasy_countries').choices),
             [('NV', 'Neverland'), ('NZ', 'New Zealand')])
 
-    @skipIf(
-        django.VERSION < (1, 7), "Field.deconstruct introduced in Django 1.7")
     def test_custom_country_deconstruct(self):
         field = Person._meta.get_field('fantasy_countries')
         self.assertEqual(
