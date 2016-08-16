@@ -130,9 +130,10 @@ class Countries(object):
         countries = self.countries
 
         # Yield countries that should be displayed first.
-        countries_first = [
-            (code, force_text(countries[code])) for code in self.countries_first
-        ]
+        countries_first = (
+            (code, force_text(countries[code]))
+            for code in self.countries_first
+        )
 
         if self.get_option('first_sort'):
             countries_first = sorted(countries_first, key=sort_key)
@@ -147,9 +148,9 @@ class Countries(object):
 
         # Force translation before sorting.
         first_repeat = self.get_option('first_repeat')
-        countries = [
+        countries = (
             (code, force_text(name)) for code, name in countries.items()
-            if first_repeat or code not in self.countries_first]
+            if first_repeat or code not in self.countries_first)
 
         # Return sorted country list.
         for item in sorted(countries, key=sort_key):
