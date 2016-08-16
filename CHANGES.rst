@@ -20,6 +20,8 @@ Django supported versions are now 1.8+
 
 * Fix widget choices on Django 1.9+
 
+* Add ``COUNTRIES_FIRST_SORT``. Thanks Edraak!
+
 
 Version 3.4 (22 October 2015)
 =============================

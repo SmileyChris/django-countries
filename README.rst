@@ -148,8 +148,10 @@ https://www.transifex.com/projects/p/django-countries/
 
 Template Tags
 =============
-If you have your country code stored in a different place than a `CountryField` you can use the template tag to get a `Country` object and have access to all of its properties:
 
+If you have your country code stored in a different place than a `CountryField`
+you can use the template tag to get a `Country` object and have access to all
+of its properties::
 
     {% load countries %}
     {% get_country 'BR' as country %}
@@ -201,7 +203,10 @@ Provide a list of country codes as the ``COUNTRIES_FIRST`` setting and they
 will be shown first in the countries list (in the order specified) before all
 the alphanumerically sorted countries.
 
-By default, these 'first' countries are not repeated again in the
+If you want to sort these initial countries too, set the
+``COUNTRIES_FIRST_SORT`` setting to ``True``.
+
+By default, these initial countries are not repeated again in the
 alphanumerically sorted list. If you would like them to be repeated, set the
 ``COUNTRIES_FIRST_REPEAT`` setting to ``True``.
 
@@ -215,7 +220,7 @@ Customize the flag URL
 The ``COUNTRIES_FLAG_URL`` setting can be used to set the url for the flag
 image assets. It defaults to::
 
-  COUNTRIES_FLAG_URL = 'flags/{code}.gif'
+    COUNTRIES_FLAG_URL = 'flags/{code}.gif'
 
 The URL can be relative to the STATIC_URL setting, or an absolute URL.
 
