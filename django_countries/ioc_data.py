@@ -161,7 +161,7 @@ IOC_TO_ISO = {
     'SAM': 'WS',
     'SEN': 'SN',
     'SEY': 'SC',
-    'SIN': 'SG',
+    'SGP': 'SG',
     'SKN': 'KN',
     'SLE': 'SL',
     'SLO': 'SI',
