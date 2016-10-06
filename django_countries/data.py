@@ -104,7 +104,7 @@ COUNTRIES = {
     "CU": _("Cuba"),
     "CW": _("Curaçao"),
     "CY": _("Cyprus"),
-    "CZ": _("Czech Republic"),
+    "CZ": _("Czechia"),
     "DK": _("Denmark"),
     "DJ": _("Djibouti"),
     "DM": _("Dominica"),
