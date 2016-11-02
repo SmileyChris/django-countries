@@ -176,7 +176,6 @@ class CountryDescriptor(object):
                 % (self.field.name, owner.__name__))
         # Check in case this field was deferred.
         if self.field.name not in instance.__dict__:
-            # import pdb; pdb.set_trace()
             instance.refresh_from_db(fields=[self.field.name])
         return Country(
             code=instance.__dict__[self.field.name],
