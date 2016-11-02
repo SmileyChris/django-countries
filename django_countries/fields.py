@@ -174,12 +174,18 @@ class CountryDescriptor(object):
             raise AttributeError(
                 "The '%s' attribute can only be accessed from %s instances."
                 % (self.field.name, owner.__name__))
+        # Check in case this field was deferred.
+        if self.field.name not in instance.__dict__:
+            # import pdb; pdb.set_trace()
+            instance.refresh_from_db(fields=[self.field.name])
         return Country(
             code=instance.__dict__[self.field.name],
             flag_url=self.field.countries_flag_url,
         )
 
     def __set__(self, instance, value):
+        if isinstance(value, Country):
+            value = value.code
         if value is not None:
             value = force_text(value)
         instance.__dict__[self.field.name] = value
