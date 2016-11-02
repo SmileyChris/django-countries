@@ -88,6 +88,23 @@ class TestCountryField(TestCase):
         person = AllowNull.objects.get(pk=person.pk)
         self.assertIsNone(person.country.code)
 
+    def test_deferred(self):
+        Person.objects.create(name='Person',
+                              country='NZ')
+        person = Person.objects.defer('country').get(name='Person')
+        self.assertEqual(person.country.code, 'NZ')
+
+    def test_only(self):
+        Person.objects.create(name='Person',
+                              country='NZ')
+        person = Person.objects.only('name').get()
+        self.assertEqual(person.country.code, 'NZ')
+
+    def test_nullable_deferred(self):
+        AllowNull.objects.create(country=None)
+        person = AllowNull.objects.defer('country').get()
+        self.assertIsNone(person.country.code)
+
     def test_len(self):
         person = Person(name='Chris Beaven', country='NZ')
         self.assertEqual(len(person.country), 2)
