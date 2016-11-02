@@ -7,6 +7,14 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
+Version HEAD
+============
+
+* Fix when using a model instance with a deferred country field.
+
+* Allow ``CountryField`` to handle multiple countries at once!
+
+
 Version 4.0 (16 August 2016)
 ============================
 
