@@ -273,6 +273,8 @@ Django Rest Framework field
 Django Countries ships with a ``CountryField`` serializer field to simplify
 the REST interface. For example::
 
+    from django_countries.serializer_fields import CountryField
+
     class PersonSerializer(serializers.ModelSerializer):
         country = CountryField()
 
@@ -281,7 +283,7 @@ the REST interface. For example::
             fields = ('name', 'email', 'country')
 
 
-You can optionally instanciate the field with ``countries`` with a custom
+You can optionally instantiate the field with ``countries`` with a custom
 Countries_ instance.
 
 .. _Countries: `Single field customization`_
@@ -290,10 +292,10 @@ REST output format
 ------------------
 
 By default, the field will output just the country code. If you would rather
-have more verbose output, instanciate the field with ``country_dict=True``,
+have more verbose output, instantiate the field with ``country_dict=True``,
 which will result in the field having the following output structure::
 
     {"code": "NZ", "name": "New Zealand"}
 
-Either the code or this dict output structure are acceptible as input
+Either the code or this dict output structure are acceptable as input
 irregardless of the ``country_dict`` argument's value.
