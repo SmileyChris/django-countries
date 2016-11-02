@@ -8,7 +8,7 @@ from django.utils.encoding import force_text
 
 from django_countries import fields, countries
 from django_countries.tests import forms, custom_countries
-from django_countries.tests.models import Person, AllowNull
+from django_countries.tests.models import Person, AllowNull, MultiCountry
 
 
 class TestCountryField(TestCase):
@@ -53,7 +53,8 @@ class TestCountryField(TestCase):
             person.other_country.flag, '//flags.example.com/us.gif')
 
     def test_unicode_flags(self):
-        person = Person(name='Matthew Schinckel', country='AU', other_country='DE')
+        person = Person(
+            name='Matthew Schinckel', country='AU', other_country='DE')
         self.assertEqual(person.country.unicode_flag, '🇦🇺')
         self.assertEqual(person.other_country.unicode_flag, '🇩🇪')
 
@@ -163,6 +164,56 @@ class TestCountryField(TestCase):
                     'max_length': 2
                 }
             ))
+
+
+class TestCountryMultiple(TestCase):
+
+    def test_empty(self):
+        obj = MultiCountry()
+        self.assertEqual(obj.countries, [])
+
+    def test_empty_save(self):
+        MultiCountry.objects.create()
+
+    def test_single(self):
+        obj = MultiCountry(countries='NZ')
+        self.assertEqual(len(obj.countries), 1)
+        self.assertTrue(isinstance(obj.countries[0], fields.Country))
+        self.assertEqual(obj.countries[0], 'NZ')
+
+    def test_multiple(self):
+        obj = MultiCountry(countries='AU,NZ')
+        self.assertEqual(len(obj.countries), 2)
+        for country in obj.countries:
+            self.assertTrue(isinstance(country, fields.Country))
+        self.assertEqual(obj.countries[0], 'AU')
+        self.assertEqual(obj.countries[1], 'NZ')
+
+    def test_set_text(self):
+        obj = MultiCountry()
+        obj.countries = 'NZ,AU'
+        self.assertEqual(obj.countries, ['NZ', 'AU'])
+
+    def test_set_list(self):
+        obj = MultiCountry()
+        obj.countries = ['NZ', 'AU']
+        self.assertEqual(obj.countries, ['NZ', 'AU'])
+
+    def test_set_country(self):
+        obj = MultiCountry()
+        obj.countries = fields.Country('NZ')
+        self.assertEqual(obj.countries, ['NZ'])
+
+    def test_set_countries(self):
+        obj = MultiCountry()
+        obj.countries = [fields.Country('NZ'), fields.Country('AU')]
+        self.assertEqual(obj.countries, ['NZ', 'AU'])
+
+    def test_all_countries(self):
+        all_codes = list(c[0] for c in countries)
+        MultiCountry.objects.create(countries=all_codes)
+        obj = MultiCountry.objects.get()
+        self.assertEqual(obj.countries, all_codes)
 
 
 class TestCountryObject(TestCase):

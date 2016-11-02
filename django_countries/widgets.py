@@ -40,10 +40,7 @@ class LazyChoicesMixin(object):
         self._choices = value
 
 
-class LazySelect(LazyChoicesMixin, widgets.Select):
-    """
-    A form Select widget that respects choices being a lazy object.
-    """
+class LazySelectMixin(LazyChoicesMixin):
 
     def __deepcopy__(self, memo):
         obj = copy.copy(self)
@@ -51,6 +48,18 @@ class LazySelect(LazyChoicesMixin, widgets.Select):
         obj.choices = copy.copy(self._choices)
         memo[id(self)] = obj
         return obj
+
+
+class LazySelect(LazySelectMixin, widgets.Select):
+    """
+    A form Select widget that respects choices being a lazy object.
+    """
+
+
+class LazySelectMultiple(LazySelectMixin, widgets.SelectMultiple):
+    """
+    A form SelectMultiple widget that respects choices being a lazy object.
+    """
 
 
 class CountrySelectWidget(LazySelect):

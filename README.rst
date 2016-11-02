@@ -55,6 +55,20 @@ forms::
 
     country = CountryField(blank_label='(select country)')
 
+This field can also allow multiple selections of countries (saved as a comma
+separated string). The field will always output a list of countries in this
+mode. For example::
+
+    class Incident(models.Model):
+        title = models.CharField(max_length=100)
+        countries = CountryField(multiple=True)
+
+    >>> for country in Incident.objects.get(title='Pavlova dispute').countries:
+    ...     print(country.name)
+    Australia
+    New Zealand
+
+
 The ``Country`` object
 ----------------------
 

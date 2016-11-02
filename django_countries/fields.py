@@ -4,6 +4,10 @@ try:
     from urllib import parse as urlparse
 except ImportError:
     import urlparse   # Python 2
+try:
+    basestring
+except NameError:
+    basestring = str   # Python 3
 
 from django import forms
 from django.db.models.fields import CharField, BLANK_CHOICE_DASH
@@ -13,6 +17,14 @@ from django.utils.functional import lazy
 
 from django_countries import countries, ioc_data, widgets
 from django_countries.conf import settings
+
+
+def country_to_text(value):
+    if hasattr(value, 'code'):
+        value = value.code
+    if value is None:
+        return None
+    return force_text(value)
 
 
 class TemporaryEscape(object):
@@ -177,16 +189,23 @@ class CountryDescriptor(object):
         # Check in case this field was deferred.
         if self.field.name not in instance.__dict__:
             instance.refresh_from_db(fields=[self.field.name])
-        return Country(
-            code=instance.__dict__[self.field.name],
-            flag_url=self.field.countries_flag_url,
-        )
+        value = instance.__dict__[self.field.name]
+        if self.field.multiple:
+            return [self.country(code) for code in value]
+        return self.country(value)
+
+    def country(self, code):
+        return Country(code=code, flag_url=self.field.countries_flag_url)
 
     def __set__(self, instance, value):
-        if isinstance(value, Country):
-            value = value.code
-        if value is not None:
-            value = force_text(value)
+        if self.field.multiple:
+            if isinstance(value, (basestring, Country)):
+                value = force_text(value).split(',')
+            value = [
+                country_to_text(code) for code in value
+                if country_to_text(code)]
+        else:
+            value = country_to_text(value)
         instance.__dict__[self.field.name] = value
 
 
@@ -204,6 +223,10 @@ class LazyTypedChoiceField(widgets.LazyChoicesMixin, forms.TypedChoiceField):
         self.widget.choices = value
 
 
+class LazyTypedMultipleChoiceField(LazyTypedChoiceField):
+    widget = widgets.LazySelectMultiple
+
+
 class CountryField(CharField):
     """
     A country field for Django models that provides all ISO 3166-1 countries as
@@ -216,8 +239,9 @@ class CountryField(CharField):
         self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop('countries_flag_url', None)
         self.blank_label = kwargs.pop('blank_label', None)
+        self.multiple = kwargs.pop('multiple', None)
         kwargs.update({
-            'max_length': 2,
+            'max_length': 599 if self.multiple else 2,
             'choices': self.countries,
         })
         super(CharField, self).__init__(*args, **kwargs)
@@ -241,10 +265,12 @@ class CountryField(CharField):
 
     def get_prep_value(self, value):
         "Returns field's value prepared for saving into a database."
-        # Convert the Country to unicode for database insertion.
-        if value is None or getattr(value, 'code', '') is None:
-            return None
-        return force_text(value)
+        if not self.multiple:
+            return country_to_text(value)
+        if isinstance(value, basestring):
+            return super(CharField, self).get_prep_value(value)
+        return ','.join(
+            country_to_text(code) for code in value if country_to_text(code))
 
     def deconstruct(self):
         """
@@ -278,7 +304,9 @@ class CountryField(CharField):
     def formfield(self, **kwargs):
         argname = 'choices_form_class'
         if argname not in kwargs:
-            kwargs[argname] = LazyTypedChoiceField
+            kwargs[argname] = (
+                LazyTypedMultipleChoiceField
+                if self.multiple else LazyTypedChoiceField)
         field = super(CharField, self).formfield(**kwargs)
         return field
 
