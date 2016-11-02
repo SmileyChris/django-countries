@@ -1,23 +1,35 @@
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_text
+from django.utils.translation import ugettext as _
 
-class CountryFilter(admin.SimpleListFilter):
+
+class CountryFilter(admin.FieldListFilter):
     """
-    A country filter for Django admin that only returns a list of countries related to the model.
+    A country filter for Django admin that only returns a list of countries
+    related to the model.
     """
     title = _('Country')
-    parameter_name = 'country'
 
-    def lookups(self, request, model_admin):
-        return set([
-            (obj.country, obj.country.name) for obj in model_admin.model.objects.exclude(
-                country__isnull=True
-            ).exclude(country__exact='')
-        ])
+    def expected_parameters(self):
+        return [self.field.name]
 
-    def queryset(self, request, queryset):
-        if self.value():
-            return queryset.filter(country=self.value())
-        else:
-            return queryset
+    def choices(self, changelist):
+        yield {
+            'selected': self.value() is None,
+            'query_string': changelist.get_query_string(
+                {}, [self.field.name]),
+            'display': _('All'),
+        }
+        for lookup, title in self.lookup_choices(changelist):
+            yield {
+                'selected': self.value() == force_text(lookup),
+                'query_string': changelist.get_query_string(
+                    {self.field.name: lookup}, []),
+                'display': title,
+            }
 
+    def lookup_choices(self, changelist):
+        codes = changelist.queryset.values_list(self.field.name, flat=True)
+        for k, v in self.field.get_choices(include_blank=False):
+            if k in codes:
+                yield k, v
