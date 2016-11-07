@@ -282,6 +282,8 @@ class CountryField(CharField):
         """
         name, path, args, kwargs = super(CountryField, self).deconstruct()
         kwargs.pop('choices')
+        if self.multiple:      # multiple determines the length of the field
+            kwargs['multiple'] = self.multiple
         if self.countries is not countries:
             # Include the countries class if it's not the default countries
             # instance.
