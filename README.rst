@@ -204,7 +204,7 @@ or to specify your own country names, use a dictionary or two-tuple list
 
     COUNTRIES_ONLY = [
         'US',
-        'UK'
+        'GB',
         ('NZ', _('Middle Earth')),
         ('AU', _('Desert')),
     ]
