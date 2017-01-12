@@ -163,6 +163,16 @@ class Country(object):
     def ioc_code(self):
         return ioc_data.ISO_TO_IOC.get(self.code, '')
 
+    @property
+    def region(self):
+        return self.countries.region(self.code)
+
+    @property
+    def region_name(self):
+        return self.countries.region_name(self.code)
+
+    def in_region(self, region_code):
+        return self.countries.in_region(self.code, region_code)
 
 class CountryDescriptor(object):
     """

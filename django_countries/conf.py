@@ -100,4 +100,85 @@ class Settings(AppSettings):
     order in :attr:`COUNTRIES_FIRST`.
     """
 
+    COUNTRIES_USE_REGIONS = False
+    """
+    If set to ``False`` regions will not be initiated automatically. If you set
+    the regions attribute of the Countries object explicitly, this setting is ignored.
+
+    Note that other region settings are ignored when this is set to False.
+    """
+
+    COUNTRIES_REGION_ONLY = []
+    """
+    Only countries located in this list of (UN M.49) geographical region codes
+    will  be included in the selection
+    """
+
+    REGIONS_OVERRIDE = {}
+    """
+    A dictionary of names to override the default UN M.49 geographical region names
+
+    Note that you will need to handle translation of customised region names.
+
+    Setting a region's name to ``None`` will exclude it from the country list.
+
+    For example::
+
+        REGIONS_OVERRIDE = {
+            1: _('3rd Rock from the Sun'),
+            53: None
+        }
+    """
+
+    REGIONS_ONLY = {}
+    """
+    A dictionary of names to include as region names
+
+    Note that you will need to handle translation of customised region names.
+
+    Also note that you will probably have to set :attr:`REGIONS_MAP_OVERRIDE`
+    as well when you use this setting
+
+    For example::
+
+        REGIONS_ONLY = {
+            900:_("ITU World"),
+            901: _("ITU Region 1"),
+            902: _("ITU Region 2"),
+            903: _("ITU Region 3"),
+        }
+    """
+
+    REGIONS_MAP_ONLY_LOOKUP = False
+    """
+    If set to ``True`` the values of the new listed region map in :attr:`REGIONS_MAP_ONLY`
+    will be looked up from the default UN M.49 list and be replaced with the list of
+    countries region code that are located in those regions
+
+    Note that you probably can not use this feature if any of your region codes are
+    already used for a M.49 region (you can get circular references). It is advised that when you use this feature
+    you use the region codes 900 to 999 which are reserved for
+    private use (both in UN M.49 as ISO 3166-1)
+
+    You can exclude specific regions/coutries by prefixing the region code with a !
+    """
+
+    REGIONS_MAP_ONLY = {}
+    """
+    A dictionary of region lists to override the default UN M.49 regions
+
+    Note that you have to make sure that your map has no circular references which can
+    cause recursion loops. Region codes should always be an integer
+
+    For example::
+        REGIONS_MAP_ONLY_LOOKUP = True
+
+        REGIONS_MAP_ONLY = {
+            900: [901, 901, 903],
+            901: [2, 143, 145, 150, 496],
+            902: [19],
+            903: [9, 30, 34, 35, "!496"],
+        }
+    """
+
 settings = Settings()
