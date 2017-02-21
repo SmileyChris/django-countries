@@ -109,7 +109,7 @@ IOC_TO_ISO = {
     'LBR': 'LR',
     'LCA': 'LC',
     'LES': 'LS',
-    'LIB': 'LB',
+    'LBN': 'LB',
     'LIE': 'LI',
     'LTU': 'LT',
     'LUX': 'LU',
@@ -255,7 +255,8 @@ IOC_HISTORICAL_TO_ISO = {
     'SAU': 'SA',
     'LYA': 'LY',
     'LBY': 'LY',
-    'LEB': 'LB',
+    'LEB': 'LB',  # Used from 1960-1964
+    'LIB': 'LB',  # Used from 1964-2016
     'LIC': 'LI',
     'LIT': 'LT',
     'MAG': 'MG',
@@ -287,7 +288,7 @@ IOC_HISTORICAL_TO_ISO = {
     'RUM': 'RO',
     'SAF': 'ZA',
     'SGL': 'SN',
-    'SIN': 'SG',
+    'SIN': 'SG',  # Used from 1959-2016
     'SLA': 'SL',
     'SMA': 'SM',
     'CEY': 'LK',
