@@ -215,6 +215,17 @@ class TestCountryMultiple(TestCase):
         obj = MultiCountry.objects.get()
         self.assertEqual(obj.countries, all_codes)
 
+    def test_deconstruct(self):
+        field = MultiCountry._meta.get_field('countries')
+        self.assertEqual(
+            field.deconstruct(),
+            (
+                'countries',
+                'django_countries.fields.CountryField',
+                [],
+                {'max_length': 599, 'multiple': True}
+            ))
+
 
 class TestCountryObject(TestCase):
 
