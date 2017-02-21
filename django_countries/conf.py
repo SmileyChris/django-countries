@@ -1,7 +1,21 @@
+import django
 import django.conf
 
 
-class AppSettings(django.conf.BaseSettings):
+if django.VERSION[0:2] >= (1, 11):
+    class _BaseSettings(object):
+        def __setattr__(self, name, value):
+            if name in ("MEDIA_URL", "STATIC_URL") and value and not value.endswith('/'):
+                raise ImproperlyConfigured("If set, %s must end with a slash" % name)
+            object.__setattr__(self, name, value)
+
+    base_settings_klass = _BaseSettings
+
+else:
+    base_settings_klass = django.conf.BaseSettings
+
+
+class AppSettings(base_settings_klass):
     """
     A holder for app-specific default settings that allows overriding via
     the project's settings.
