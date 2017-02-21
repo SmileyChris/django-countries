@@ -31,7 +31,6 @@ class Countries(object):
     Iterating this object will return the countries as tuples (of the country
     code and name), sorted by name.
     """
-
     def get_option(self, option):
         """
         Get a configuration option, trying the options attribute first and
@@ -82,6 +81,14 @@ class Countries(object):
                     else:
                         key, value = item
                         countries[key] = value
+                self._countries = countries
+            region_only = set(self.get_option('region_only') or [])
+            if region_only and isinstance(self.regions, Regions):
+                countries = {}
+                for country in self._countries:
+                    country_regions = self.parent_regions(country)
+                    if region_only.intersection(country_regions):
+                        countries[country] = self._countries[country]
                 self._countries = countries
             self.countries_first = []
             first = self.get_option('first') or []
@@ -271,5 +278,284 @@ class Countries(object):
         except TypeError:
             return list(islice(self.__iter__(), index.start, index.stop,
                                index.step))
+
+    @property
+    def regions(self):
+        if "_regions" in dir(self):
+            v = getattr(self, "_regions")
+            if isinstance(v, Regions):
+                return v
+        if "regions" in dir(self.__class__):
+            v = getattr(self.__class__, "regions")
+            if isinstance(v, Regions):
+                return v
+        if self.get_option("use_regions"):
+            self.__class__.regions = Regions()
+            return self.__class__.regions
+        return None
+    
+    @regions.setter
+    def regions(self, value):
+        self._values = value
+
+    def region(self, code, parent=None):
+        """
+        Return the region code matching the provided
+        ISO 3166-1 country code.
+
+        Returns None if no match is found,
+
+        :param parent: Pass a region code to match regions
+            up to the passed region code
+        """
+        if self.regions is None: return None
+        code = self.numeric(code)
+        if parent is not None:
+            parents = self.parent_regions(code, parent)
+            return parents.pop()  if len(parents) else None
+        return self.regions.parent(code)
+
+    def region_name(self, code, parent = None):
+        """
+        Return the region name matching the provided
+        ISO 3166-1 country code.
+
+        If no match is found, an empty string is returned
+
+        :param parent: Pass a region code to match regions
+            up to the passed region code
+        """
+        if self.regions is None: return ""
+        code = self.region(code, parent)
+        return self.regions.name(code) or ""
+
+    def parent_regions(self, code = None, parent = None):
+        """
+        Return a list of region codes the provided ISO 3166-1
+        country code is located in.
+
+        Returns an empty list if no match is found
+
+        :param upto: Pass a region code to match regions
+            up to the passed region code
+        """
+        if self.regions is None: return []
+        code = self.numeric(code)
+        return self.regions.parents(code, parent)
+
+    def in_region(self, code, region_code):
+        """
+        Returns True if the ISO 3166-1 country code is located within
+        the provided region code
+        """
+        if self.regions is None: return False
+        code = self.numeric(code)
+        return self.regions.is_subdivision_of(code, region_code)
+
+class Regions(object):
+    """
+    An object containing a list of UN M.49 regions.
+
+    Iterating this object will return the regions as tuples (of the region
+    code and name), sorted by name.
+    """
+    def get_option(self, option):
+        """
+        Get a configuration option, trying the options attribute first and
+        falling back to a Django project setting.
+        """
+        value = getattr(self, option, None)
+        if value is not None:
+            return value
+        return getattr(settings, 'REGIONS_{0}'.format(option.upper()))
+
+    @property
+    def regions(self):
+        """
+        Return a dictionary of regions, modified by any overriding
+        options.
+        The result is cached so future lookups are less work intensive.
+        """
+        if not hasattr(self, '_regions'):
+            only = self.get_option('only')
+            if only:
+                only_choices = True
+                if not isinstance(only, dict):
+                    for item in only:
+                        if isinstance(item, six.string_types):
+                            only_choices = False
+                            break
+            if only and only_choices:
+                self._regions = dict(only)
+            else:
+                from django_countries.region_data import REGIONS
+                self._regions = dict(REGIONS)
+                override = self.get_option('override')
+                if override:
+                    self._regions.update(override)
+                    self._regions = dict(
+                        (code, name) for code, name in self._regions.items()
+                        if name is not None)
+        return self._regions
+
+    @property
+    def region_map(self):
+        """
+        Return a dictionary of the region_map, modified by any overriding
+        options.
+        The result is cached so future lookups are less work intensive.
+        """
+        if not hasattr(self, '_region_map'):
+            only = self.get_option('map_only')
+            if only and not self.get_option('map_only_lookup'):
+                self._region_map = only
+            else:
+                # Local import so that the region_map aren't loaded into memory
+                # until first used.
+                from django_countries.region_data import REGION_MAP
+                self._region_map = dict(REGION_MAP)
+                if only:
+                    regions_map = {}
+                    for region in only:
+                        map = []
+                        exclude = []
+                        for code in only[region]:
+                            if isinstance(code, six.string_types) and code[0] == "!":
+                                codes = self.subdivisions(int(code[1:]), True)
+                                if codes:
+                                    exclude+= codes
+                                else:
+                                    exclude.append(int(code[1:]))
+                            else:
+                                codes = self.subdivisions(code, True)
+                                if codes:
+                                    map+= codes
+                                else:
+                                    map.append(code)
+                        if exclude:
+                            map = list(set(map) - set(exclude))
+                        regions_map[region] = map
+                    self._region_map = regions_map
+        return self._region_map
+
+    @regions.deleter
+    def regions(self):
+        """
+        Reset the regions and map cache in case for some crazy reason the settings or
+        internal options change. But surely no one is crazy enough to do that,
+        right?
+        """
+        if hasattr(self, '_regions'):
+            del self._regions
+        if hasattr(self, '_region_map'):
+            del self._region_map
+
+    def __iter__(self):
+        """
+        Iterate through regions, sorted by name.
+
+        Each region record consists of a tuple of the region code and name
+
+        The sorting happens based on the thread's current translation.
+        """
+        # Return sorted region list.
+        for item in sorted(self.regions, key=sort_key):
+            yield item
+
+    def __len__(self):
+        """
+        len() used by several third party applications to calculate the length
+        of choices. This will solve a bug related to generating fixtures.
+        """
+        count = len(self.regions)
+        return count
+
+    def __bool__(self):
+        return bool(self.regions)
+
+    __nonzero__ = __bool__
+
+    def __contains__(self, code):
+        """
+        Check to see if the regions contains the given code.
+        """
+        return code in self.regions
+
+    def __getitem__(self, index):
+        """
+        Some applications expect to be able to access members of the field
+        choices by index.
+        """
+        try:
+            return next(islice(self.__iter__(), index, index+1))
+        except TypeError:
+            return list(islice(self.__iter__(), index.start, index.stop,
+                               index.step))
+
+    def name(self, code):
+        """
+        Return the name of a region, based on the code.
+
+        If no match is found, returns an empty string.
+        """
+        return self.regions.get(code, '')
+
+    def parent(self, code):
+        """
+        Return the region code the provided
+        region code is a subdivision of
+
+        Returns None if no match is found,
+        """
+        for region_code in self.region_map:
+            if code in self.region_map[region_code]:
+                return region_code
+        return None
+
+    def parents(self, code, upto = None):
+        """
+        Return a list of region codes the provided region code
+        is located in.
+
+        Returns an empty list if no match is found
+
+        :param upto: Pass a region code to match regions
+            up to the passed region code
+        """
+        regions = []
+        code = self.parent(code)
+        while code is not None:
+            regions.append(code)
+            code = self.parent(code)
+            if code == upto:
+                break
+        return regions
+
+    def is_subdivision_of(self, code, region_code):
+        """
+        Returns True if the subdivion region code is located within
+        the provided region code
+        """
+        code = self.parent(code)
+        while code is not None and code != region_code:
+            code = self.parent(code)
+        return code == region_code
+
+    def subdivisions(self, code, countries_only=False):
+        """
+        Returns a list of all region codes that are located
+        within the provided region code
+
+        :param countries_only: Pass ``True`` to only return
+            regions that are countries
+        """
+        region_codes = []
+        if code in self.region_map:
+            for region_code in self.region_map[code]:
+                if code != region_code:
+                    region_codes+= self.subdivisions(region_code, countries_only)
+                if not countries_only or region_code not in self.region_map:
+                    region_codes.append(region_code);
+        return region_codes
 
 countries = Countries()

@@ -3,7 +3,7 @@ Django Countries
 ================
 
 A Django application that provides country choices for use with forms, flag
-icons static files, and a country field for models.
+icons static files, and a country field for models with region support
 
 Installation
 ============
@@ -67,7 +67,6 @@ mode. For example::
     ...     print(country.name)
     Australia
     New Zealand
-
 
 The ``Country`` object
 ----------------------
@@ -313,3 +312,91 @@ which will result in the field having the following output structure::
 
 Either the code or this dict output structure are acceptable as input
 irregardless of the ``country_dict`` argument's value.
+
+Regions
+===========================
+
+You can enable meta information about regions by setting ``COUNTRIES_USE_REGIONS = True``
+
+By default the `UN M.49 geographical region list`_ is used, allowing you to easily limit countries by region.
+
+For example: ``COUNTRIES_REGION_ONLY = [ 9 ]`` would only lists countries located in the Oceania region
+
+The ``Country`` object is extended with the following properties:
+
+region
+    the region code the country is in
+
+region_name
+    the name of the region the country is in
+
+.. _UN M.49 geographical region list: http://unstats.un.org/unsd/methods/m49/m49regin.htm
+
+Customization
+------------------
+
+Just like with countries you can override the default UN M.49 geographcal region list by setting ``REGIONS_OVERRIDE``. For example::
+
+        REGIONS_OVERRIDE = {
+            1: _('3rd Rock from the Sun'),
+            53: None
+        }
+
+
+You can also set your own specific list of regions, use ``REGIONS_ONLY``. Note that if you customize the regions you will probably also have to set ``REGIONS_MAP_ONLY``.
+
+To help you with the custom region map you can set ``REGIONS_MAP_ONLY_LOOKUP = True``, then you can use the default UN M.49 geographcal region list to base your regions on.
+
+It is advised that when you use this feature you use the region codes 900 to 999 which are reserved for private use (both in UN M.49 as ISO 3166-1)
+
+The following example would use the three main `ITU Regions`_::
+
+    REGIONS_ONLY = {
+        900: "ITU World",
+        901: "ITU Region 1",
+        902: "ITU Region 2",
+        903: "ITU Region 3",
+    }
+    REGIONS_MAP_ONLY_LOOKUP = True
+    REGIONS_MAP_ONLY = {
+        900: [901, 901, 903],
+        901: [2, 143, 145, 150, 496],
+        902: [19],
+        903: [9, 30, 34, 35, "!496"],
+    }
+
+
+.. _ITU Regions: https://en.wikipedia.org/wiki/ITU_Region
+
+Single field customization
+--------------------------
+
+You can also customize individual fields by creating   a ``Regions`` subclass which overrides settings. This works the same as for countries
+
+You can set regions both as a static as a class variable, the class variable has preference. If you use single field customisation and explicitly set the regions property there is no need to set ``COUNTRIES_USE_REGIONS``
+
+For example::
+
+    from django_countries import Regions
+
+    class ITURegions(Regions):
+        only = {
+            900: "ITU World",
+            901: "ITU Region 1",
+            902: "ITU Region 2",
+            903: "ITU Region 3",
+        }
+        map_only_lookup = True
+        map_only = {
+            900: [901, 901, 903],
+            901: [2, 143, 145, 150, 496],
+            902: [19],
+            903: [9, 30, 34, 35, "!496"],
+        }
+
+    class MyITUCountries(Countries):
+        regions = ITURegions()
+        regions_only = [901]
+
+    country = CountryField(countries=MyITUCountries)
+
