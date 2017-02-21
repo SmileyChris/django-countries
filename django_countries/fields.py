@@ -49,11 +49,13 @@ class TemporaryEscape(object):
 @python_2_unicode_compatible
 class Country(object):
 
-    def __init__(self, code, flag_url=None, str_attr='code'):
+    def __init__(
+            self, code, flag_url=None, str_attr='code', custom_countries=None):
         self.code = code
         self.flag_url = flag_url
         self._escape = False
         self._str_attr = str_attr
+        self.countries = custom_countries or countries
 
     def __str__(self):
         return force_text(getattr(self, self._str_attr) or '')
@@ -95,19 +97,19 @@ class Country(object):
 
     @property
     def name(self):
-        return self.maybe_escape(countries.name(self.code))
+        return self.maybe_escape(self.countries.name(self.code))
 
     @property
     def alpha3(self):
-        return countries.alpha3(self.code)
+        return self.countries.alpha3(self.code)
 
     @property
     def numeric(self):
-        return countries.numeric(self.code)
+        return self.countries.numeric(self.code)
 
     @property
     def numeric_padded(self):
-        return countries.numeric(self.code, padded=True)
+        return self.countries.numeric(self.code, padded=True)
 
     @property
     def flag(self):
@@ -195,7 +197,9 @@ class CountryDescriptor(object):
         return self.country(value)
 
     def country(self, code):
-        return Country(code=code, flag_url=self.field.countries_flag_url)
+        return Country(
+            code=code, flag_url=self.field.countries_flag_url,
+            custom_countries=self.field.countries)
 
     def __set__(self, instance, value):
         if self.field.multiple:

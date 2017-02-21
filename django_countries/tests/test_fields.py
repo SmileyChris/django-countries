@@ -146,17 +146,24 @@ class TestCountryField(TestCase):
         Form = modelform_factory(Person, fields=['country'])
         Form().as_p()
 
-    def test_custom_country(self):
+
+class TestCountryCustom(TestCase):
+
+    def test_name(self):
+        person = Person(name='Chris Beaven', fantasy_country='NV')
+        self.assertEqual(person.fantasy_country.name, 'Neverland')
+
+    def test_field(self):
         self.assertEqual(
-            list(Person._meta.get_field('fantasy_countries').choices),
+            list(Person._meta.get_field('fantasy_country').choices),
             [('NV', 'Neverland'), ('NZ', 'New Zealand')])
 
-    def test_custom_country_deconstruct(self):
-        field = Person._meta.get_field('fantasy_countries')
+    def test_deconstruct(self):
+        field = Person._meta.get_field('fantasy_country')
         self.assertEqual(
             field.deconstruct(),
             (
-                'fantasy_countries',
+                'fantasy_country',
                 'django_countries.fields.CountryField',
                 [],
                 {
