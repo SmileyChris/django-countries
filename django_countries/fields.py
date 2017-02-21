@@ -161,11 +161,12 @@ class Country(object):
         code = ioc_data.IOC_TO_ISO.get(ioc_code, '')
         if code == '':
             return None
-        return Country(code, flag_url=flag_url, countries_object=self.countries)
+        return Country(code, flag_url=flag_url)
 
     @property
     def ioc_code(self):
         return ioc_data.ISO_TO_IOC.get(self.code, '')
+
 
 class CountryDescriptor(object):
     """
