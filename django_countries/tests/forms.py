@@ -15,3 +15,10 @@ class AllowNullForm(forms.ModelForm):
     class Meta:
         model = models.AllowNull
         fields = ['country']
+
+
+class MultiCountryForm(forms.ModelForm):
+
+    class Meta:
+        model = models.MultiCountry
+        fields = ['countries']

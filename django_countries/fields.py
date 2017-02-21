@@ -10,6 +10,7 @@ except NameError:
     basestring = str   # Python 3
 
 from django import forms
+from django.core import exceptions
 from django.db.models.fields import CharField, BLANK_CHOICE_DASH
 from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.html import escape as escape_html
@@ -213,21 +214,28 @@ class CountryDescriptor(object):
         instance.__dict__[self.field.name] = value
 
 
-class LazyTypedChoiceField(widgets.LazyChoicesMixin, forms.TypedChoiceField):
-    """
-    A form TypedChoiceField that respects choices being a lazy object.
-    """
-    widget = widgets.LazySelect
+class LazyChoicesMixin(widgets.LazyChoicesMixin):
 
     def _set_choices(self, value):
         """
         Also update the widget's choices.
         """
-        super(LazyTypedChoiceField, self)._set_choices(value)
+        super(LazyChoicesMixin, self)._set_choices(value)
         self.widget.choices = value
 
 
-class LazyTypedMultipleChoiceField(LazyTypedChoiceField):
+class LazyTypedChoiceField(LazyChoicesMixin, forms.TypedChoiceField):
+    """
+    A form TypedChoiceField that respects choices being a lazy object.
+    """
+    widget = widgets.LazySelect
+
+
+class LazyTypedMultipleChoiceField(
+        LazyChoicesMixin, forms.TypedMultipleChoiceField):
+    """
+    A form TypedMultipleChoiceField that respects choices being a lazy object.
+    """
     widget = widgets.LazySelectMultiple
 
 
@@ -315,3 +323,29 @@ class CountryField(CharField):
                 if self.multiple else LazyTypedChoiceField)
         field = super(CharField, self).formfield(**kwargs)
         return field
+
+    def validate(self, value, model_instance):
+        """
+        Use custom validation for when in multpe
+        """
+        if not self.multiple:
+            return super(CountryField, self).validate(value, model_instance)
+
+        if not self.editable:
+            # Skip validation for non-editable fields.
+            return
+
+        return
+        if value:
+            choices = [option_key for option_key, option_value in self.choices]
+            for single_value in value:
+                if single_value not in choices:
+                    raise exceptions.ValidationError(
+                        self.error_messages['invalid_choice'],
+                        code='invalid_choice',
+                        params={'value': single_value},
+                    )
+
+        if not self.blank and value in self.empty_values:
+            raise exceptions.ValidationError(
+                self.error_messages['blank'], code='blank')

@@ -233,6 +233,10 @@ class TestCountryMultiple(TestCase):
                 {'max_length': 599, 'multiple': True}
             ))
 
+    def test_modelform(self):
+        form = forms.MultiCountryForm(data={'countries': ['NZ', 'AU']})
+        self.assertEqual(form.errors, {})
+
 
 class TestCountryObject(TestCase):
 
