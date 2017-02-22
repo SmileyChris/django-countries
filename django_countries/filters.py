@@ -14,22 +14,27 @@ class CountryFilter(admin.FieldListFilter):
         return [self.field.name]
 
     def choices(self, changelist):
+        value = self.used_parameters.get(self.field.name)
         yield {
-            'selected': self.value() is None,
+            'selected': value is None,
             'query_string': changelist.get_query_string(
                 {}, [self.field.name]),
             'display': _('All'),
         }
         for lookup, title in self.lookup_choices(changelist):
             yield {
-                'selected': self.value() == force_text(lookup),
+                'selected': value == force_text(lookup),
                 'query_string': changelist.get_query_string(
                     {self.field.name: lookup}, []),
                 'display': title,
             }
 
     def lookup_choices(self, changelist):
-        codes = changelist.queryset.values_list(self.field.name, flat=True)
+        qs = changelist.model._default_manager.all()
+        codes = set(
+            qs.distinct()
+            .order_by(self.field.name)
+            .values_list(self.field.name, flat=True))
         for k, v in self.field.get_choices(include_blank=False):
             if k in codes:
                 yield k, v

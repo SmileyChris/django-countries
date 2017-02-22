@@ -11,12 +11,13 @@ except NameError:
 
 from django import forms
 from django.core import exceptions
+from django.contrib.admin.filters import FieldListFilter
 from django.db.models.fields import CharField, BLANK_CHOICE_DASH
 from django.utils.encoding import force_text, python_2_unicode_compatible
 from django.utils.html import escape as escape_html
 from django.utils.functional import lazy
 
-from django_countries import countries, ioc_data, widgets
+from django_countries import countries, ioc_data, widgets, filters
 from django_countries.conf import settings
 
 
@@ -360,3 +361,7 @@ class CountryField(CharField):
         if not self.blank and value in self.empty_values:
             raise exceptions.ValidationError(
                 self.error_messages['blank'], code='blank')
+
+
+FieldListFilter.register(
+    lambda f: isinstance(f, CountryField), filters.CountryFilter)
