@@ -7,12 +7,21 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
-Version HEAD
-============
+Version 4.1 (22 February 2017)
+==============================
+
+* Better default Django admin filter when filtering a country field in a
+  ``ModelAdmin``.
+
+* Fix settings to support Django 1.11
 
 * Fix when using a model instance with a deferred country field.
 
 * Allow ``CountryField`` to handle multiple countries at once!
+
+* Allow CountryField to still work if Deferred.
+
+* Fix a field with customized country list. Thanks pilmie!
 
 
 Version 4.0 (16 August 2016)
