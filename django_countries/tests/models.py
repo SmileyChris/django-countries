@@ -10,7 +10,10 @@ class Person(models.Model):
         blank=True, countries_flag_url='//flags.example.com/{code}.gif')
     favourite_country = CountryField(default='NZ')
     fantasy_country = CountryField(
-        countries=custom_countries.FantasyCountries)
+        countries=custom_countries.FantasyCountries, blank=True)
+
+    class Meta:
+        ordering = ('name',)
 
 
 class AllowNull(models.Model):
@@ -19,3 +22,4 @@ class AllowNull(models.Model):
 
 class MultiCountry(models.Model):
     countries = CountryField(multiple=True)
+    uneditable_countries = CountryField(multiple=True, editable=False)

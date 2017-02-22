@@ -321,12 +321,24 @@ class CountryField(CharField):
             kwargs[argname] = (
                 LazyTypedMultipleChoiceField
                 if self.multiple else LazyTypedChoiceField)
+        if 'coerce' not in kwargs:
+            kwargs['coerce'] = super(CountryField, self).to_python
         field = super(CharField, self).formfield(**kwargs)
         return field
 
+    def to_python(self, value):
+        if not self.multiple:
+            return super(CountryField, self).to_python(value)
+        if not value:
+            return value
+        output = []
+        for item in value:
+            output.append(super(CountryField, self).to_python(item))
+        return output
+
     def validate(self, value, model_instance):
         """
-        Use custom validation for when in multpe
+        Use custom validation for when using a multiple countries field.
         """
         if not self.multiple:
             return super(CountryField, self).validate(value, model_instance)
@@ -335,7 +347,6 @@ class CountryField(CharField):
             # Skip validation for non-editable fields.
             return
 
-        return
         if value:
             choices = [option_key for option_key, option_value in self.choices]
             for single_value in value:

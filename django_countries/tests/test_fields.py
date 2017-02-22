@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.core import validators
 from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase
@@ -147,6 +148,37 @@ class TestCountryField(TestCase):
         Form().as_p()
 
 
+class TestValidation(TestCase):
+
+    def test_validate(self):
+        person = Person(name='Chris', country='NZ')
+        person.full_clean()
+
+    def test_validate_empty(self):
+        person = Person(name='Chris')
+        self.assertRaises(validators.ValidationError, person.full_clean)
+
+    def test_validate_invalid(self):
+        person = Person(name='Chris', country=':(')
+        self.assertRaises(validators.ValidationError, person.full_clean)
+
+    def test_validate_multiple(self):
+        person = MultiCountry(countries=['NZ', 'AU'])
+        person.full_clean()
+
+    def test_validate_multiple_empty(self):
+        person = MultiCountry()
+        self.assertRaises(validators.ValidationError, person.full_clean)
+
+    def test_validate_multiple_invalid(self):
+        person = MultiCountry(countries=[':(', 'AU'])
+        self.assertRaises(validators.ValidationError, person.full_clean)
+
+    def test_validate_multiple_uneditable(self):
+        person = MultiCountry(countries='NZ', uneditable_countries='xx')
+        person.full_clean()
+
+
 class TestCountryCustom(TestCase):
 
     def test_name(self):
@@ -168,6 +200,7 @@ class TestCountryCustom(TestCase):
                 [],
                 {
                     'countries': custom_countries.FantasyCountries,
+                    'blank': True,
                     'max_length': 2
                 }
             ))
@@ -232,10 +265,6 @@ class TestCountryMultiple(TestCase):
                 [],
                 {'max_length': 599, 'multiple': True}
             ))
-
-    def test_modelform(self):
-        form = forms.MultiCountryForm(data={'countries': ['NZ', 'AU']})
-        self.assertEqual(form.errors, {})
 
 
 class TestCountryObject(TestCase):
@@ -350,3 +379,7 @@ class TestModelForm(TestCase):
         form = forms.AllowNullForm()
         self.assertEqual(
             form.fields['country'].choices[0], ('', '(select country)'))
+
+    def test_validation(self):
+        form = forms.MultiCountryForm(data={'countries': ['NZ', 'AU']})
+        self.assertEqual(form.errors, {})
