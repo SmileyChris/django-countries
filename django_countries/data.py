@@ -23,7 +23,8 @@ try:
     from django.utils.translation import ugettext_lazy as _
 except ImportError:  # pragma: no cover
     # Allows this module to be executed without Django installed.
-    _ = lambda x: x
+    def _(x):
+        return x
 
 COMMON_NAMES = {
     "BN": _("Brunei"),

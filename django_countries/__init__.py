@@ -15,13 +15,17 @@ except ImportError:
 # Use UCA sorting if it's available.
 if pyuca:
     collator = pyuca.Collator()
-    sort_key = lambda item: collator.sort_key(item[1])
+
+    def sort_key(item):
+        return collator.sort_key(item[1])
 else:
     import unicodedata
     # Cheap and dirty method to sort against ASCII characters only.
-    sort_key = lambda item: (
-        unicodedata.normalize('NFKD', item[1])
-        .encode('ascii', 'ignore').decode('ascii'))
+
+    def sort_key(item):
+        return (
+            unicodedata.normalize('NFKD', item[1])
+            .encode('ascii', 'ignore').decode('ascii'))
 
 
 class Countries(object):
@@ -166,10 +170,16 @@ class Countries(object):
         code = force_text(code).upper()
         if code.isdigit():
             lookup_code = int(code)
-            find = lambda alt_codes: alt_codes[1] == lookup_code
+
+            def find(alt_codes):
+                return alt_codes[1] == lookup_code
+
         elif len(code) == 3:
             lookup_code = code
-            find = lambda alt_codes: alt_codes[0] == lookup_code
+
+            def find(alt_codes):
+                return alt_codes[0] == lookup_code
+
         else:
             find = None
         if find:
@@ -271,5 +281,6 @@ class Countries(object):
         except TypeError:
             return list(islice(self.__iter__(), index.start, index.stop,
                                index.step))
+
 
 countries = Countries()

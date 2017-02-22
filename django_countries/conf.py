@@ -100,4 +100,5 @@ class Settings(AppSettings):
     order in :attr:`COUNTRIES_FIRST`.
     """
 
+
 settings = Settings()
