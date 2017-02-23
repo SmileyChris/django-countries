@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from django.test.client import RequestFactory
 from django.contrib import admin
-from django.contrib.admin.views.main import ALL_VAR, SEARCH_VAR, ChangeList
+from django.contrib.admin.views.main import ChangeList
 
 from django_countries import filters
 from django_countries.tests import models
