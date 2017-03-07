@@ -2,6 +2,11 @@
 Django Countries
 ================
 
+.. image:: https://api.travis-ci.org/SmileyChris/django-countries.svg?branch=master
+    :alt: Build Status
+    :target: http://travis-ci.org/SmileyChris/django-countries
+
+
 A Django application that provides country choices for use with forms, flag
 icons static files, and a country field for models.
 
