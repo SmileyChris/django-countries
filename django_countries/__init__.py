@@ -209,6 +209,10 @@ class Countries(object):
         Warning: This depends on the quality of the available translations.
 
         If no match is found, returns an empty string.
+
+        ..warning:: Be cautious about relying on this returning a country code
+            (especially with any hard-coded string) since the ISO names of
+            countries may change over time.
         """
         with override(language):
             for code, name in self:
