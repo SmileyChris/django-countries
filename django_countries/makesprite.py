@@ -36,6 +36,7 @@ def main():
     css_file.write(initial_css % 'sprite.png')
     write_coords(css_file, FLAG_X, FLAG_Y)
     css_hq_file.write(initial_css % 'sprite-hq.png')
+    write_coords(css_hq_file, FLAG_X, FLAG_Y)
     for mult in range(2, 5):
         css_hq_file.write(
             '\n.flag%sx {background-size:%spx %spx}'
