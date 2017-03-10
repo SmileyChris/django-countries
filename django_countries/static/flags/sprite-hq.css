@@ -1,4 +1,4 @@
-.flag-sprite {display: inline-block;width:16px;height:11px;;image-rendering:-moz-crisp-edges;image-rendering:pixelated;image-rendering:-o-crisp-edges;-ms-interpolation-mode:nearest-neighbor;background-image:url('sprite-hq.png')}
+.flag-sprite {display: inline-block;width:16px;height:11px;image-rendering:-moz-crisp-edges;image-rendering:pixelated;image-rendering:-o-crisp-edges;-ms-interpolation-mode:nearest-neighbor;background-image:url('sprite-hq.png')}
 .flag-a {background-position-x:0}
 .flag-_a {background-position-y:0}
 .flag-b {background-position-x:-16px}

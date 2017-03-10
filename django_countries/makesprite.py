@@ -29,7 +29,7 @@ def main():
     css_hq_file = open(os.path.join(flag_path, 'sprite-hq.css'), 'w')
     initial_css = (
         '.flag-sprite {display: inline-block;width:%(x)spx;height:%(y)spx;'
-        ';image-rendering:-moz-crisp-edges;image-rendering:pixelated;'
+        'image-rendering:-moz-crisp-edges;image-rendering:pixelated;'
         'image-rendering:-o-crisp-edges;'
         '-ms-interpolation-mode:nearest-neighbor;'
         "background-image:url('%%s')}" % {'x': FLAG_X, 'y': FLAG_Y})
