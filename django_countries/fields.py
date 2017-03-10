@@ -128,8 +128,24 @@ class Country(object):
         return self.maybe_escape(url)
 
     @property
+    def flag_css(self):
+        """
+        Output the css classes needed to display an HTML element as a flag
+        sprite.
+
+        Requires the use of 'flags/sprite.css' or 'flags/sprite-hq.css'.
+        Usage example::
+
+            <i class="{{ ctry.flag_css }}" aria-label="{{ ctry.code }}></i>
+        """
+        if not self.code:
+            return ''
+        return 'flag-sprite flag-{} flag-_{}'.format(*self.code.lower())
+
+    @property
     def unicode_flag(self):
-        """Generate a unicode flag for the given country.
+        """
+        Generate a unicode flag for the given country.
 
         The logic for how these are determined can be found at:
 
