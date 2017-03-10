@@ -89,6 +89,28 @@ name
 flag
   Contains a URL to the flag.
 
+flag_css
+  Output the css classes needed to display an HTML element as a flag
+  sprite.
+
+  For example::
+
+    <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
+    <i class="{{ country.flag_css }}"></i>
+
+  For multiple flag resolutions, use ``sprite-hq.css`` instead and add the
+  ``flag2x``, ``flag3x``, or ``flag4x`` class. For example::
+
+    <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
+    <i class="2xflag {{ country.flag_css }}"></i>
+
+  You might want to consider using ``aria-label`` for better accessibility::
+
+    <i class="{{ country.flag_css }}"
+        aria-label="{% blocktrans with country_code=country.code %}
+            {{ country_code }} flag
+        {% endblocktrans %}"></i>
+
 unicode_flag
   A unicode glyph for the flag for this country. Currently well-supported in
   iOS and OS X. See https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
