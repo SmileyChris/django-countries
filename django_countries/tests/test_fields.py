@@ -76,6 +76,14 @@ class TestCountryField(TestCase):
             self.assertEqual(
                 person.country.flag, 'https://flags.example.com/NZ.PNG')
 
+    def test_flag_css(self):
+        person = Person(name='Chris Beaven', country='NZ')
+        self.assertEqual(person.country.flag_css, 'flag-sprite flag-n flag-_z')
+
+    def test_flag_css_blank(self):
+        person = Person(name='Chris Beaven')
+        self.assertEqual(person.country.flag_css, '')
+
     def test_blank(self):
         person = Person.objects.create(name='The Outsider')
         self.assertEqual(person.country.code, '')
