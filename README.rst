@@ -91,9 +91,7 @@ flag
 
 flag_css
   Output the css classes needed to display an HTML element as a flag
-  sprite.
-
-  For example::
+  sprite. For example::
 
     <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
     <i class="{{ country.flag_css }}"></i>
@@ -102,9 +100,11 @@ flag_css
   ``flag2x``, ``flag3x``, or ``flag4x`` class. For example::
 
     <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
-    <i class="2xflag {{ country.flag_css }}"></i>
+    Normal: <i class="{{ country.flag_css }}"></i>
+    Bigger: <i class="2xflag {{ country.flag_css }}"></i>
 
-  You might want to consider using ``aria-label`` for better accessibility::
+  You might also want to consider using ``aria-label`` for better
+  accessibility::
 
     <i class="{{ country.flag_css }}"
         aria-label="{% blocktrans with country_code=country.code %}

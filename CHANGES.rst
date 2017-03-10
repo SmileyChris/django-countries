@@ -7,6 +7,13 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
+Version 4.2 (10 March 2017)
+===========================
+
+* Add sprite flag files (and ``Country.flag_css`` property) to help minimize
+  HTTP requests.
+
+
 Version 4.1 (22 February 2017)
 ==============================
 
