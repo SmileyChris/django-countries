@@ -19,30 +19,14 @@ from __future__ import unicode_literals
 import glob
 import os
 
+from .base import CountriesBase
+
 try:
     from django.utils.translation import ugettext_lazy as _
 except ImportError:  # pragma: no cover
     # Allows this module to be executed without Django installed.
     def _(x):
         return x
-
-COMMON_NAMES = {
-    "BN": _("Brunei"),
-    "BO": _("Bolivia"),
-    "GB": _("United Kingdom"),
-    "IR": _("Iran"),
-    "KP": _("North Korea"),
-    "KR": _("South Korea"),
-    "LA": _("Laos"),
-    "MD": _("Moldova"),
-    "MK": _("Macedonia"),
-    "RU": _("Russia"),
-    "SY": _("Syria"),
-    "TW": _("Taiwan"),
-    "TZ": _("Tanzania"),
-    "VE": _("Venezuela"),
-    "VN": _("Vietnam"),
-}
 
 # Nicely titled (and translatable) country names.
 COUNTRIES = {
@@ -629,7 +613,7 @@ def check_flags(verbosity=1):
 
 
 def check_common_names():
-    common_names_missing = set(COMMON_NAMES) - set(COUNTRIES)
+    common_names_missing = set(CountriesBase.COMMON_NAMES) - set(COUNTRIES)
     if common_names_missing:  # pragma: no cover
         print("")
         print(

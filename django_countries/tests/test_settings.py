@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from django.utils import six
 
-from django_countries import countries, data
+from django_countries import countries, data, base
 
 
 class TestSettings(TestCase):
@@ -33,7 +33,8 @@ class TestSettings(TestCase):
             self.assertEqual(countries.name('AU'), 'Desert')
 
     def test_common_names(self):
-        common_code, common_name = list(data.COMMON_NAMES.items())[0]
+        common_code, common_name = (
+            list(base.CountriesBase.COMMON_NAMES.items())[0])
         common_name = six.text_type(common_name)
         name = six.text_type(countries.countries[common_code])
         self.assertEqual(name, common_name)

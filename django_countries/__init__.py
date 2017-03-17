@@ -7,6 +7,8 @@ from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.translation import override
 
+from .base import CountriesBase
+
 try:
     import pyuca
 except ImportError:
@@ -28,7 +30,7 @@ else:
             .encode('ascii', 'ignore').decode('ascii'))
 
 
-class Countries(object):
+class Countries(CountriesBase):
     """
     An object containing a list of ISO3166-1 countries.
 
@@ -68,10 +70,10 @@ class Countries(object):
             else:
                 # Local import so that countries aren't loaded into memory
                 # until first used.
-                from django_countries.data import COUNTRIES, COMMON_NAMES
+                from django_countries.data import COUNTRIES
                 self._countries = dict(COUNTRIES)
                 if self.get_option('common_names'):
-                    self._countries.update(COMMON_NAMES)
+                    self._countries.update(self.COMMON_NAMES)
                 override = self.get_option('override')
                 if override:
                     self._countries.update(override)
@@ -113,6 +115,31 @@ class Countries(object):
         if hasattr(self, '_countries'):
             del self._countries
 
+    def translate_pair(self, code):
+        """
+        Force a country to the current activated translation.
+
+        :returns: 2-tuple of ``(code, translated_country_name)``
+        """
+        name = self.countries[code]
+        if code in self.OLD_NAMES:
+            # Check if there's an older translation available if there's no
+            # translation for the newest name.
+            with override(None):
+                source_name = force_text(name)
+            name = force_text(name)
+            if name == source_name:
+                for old_name in self.OLD_NAMES[code]:
+                    with override(None):
+                        source_old_name = force_text(old_name)
+                    old_name = force_text(old_name)
+                    if old_name != source_old_name:
+                        name = old_name
+                        break
+        else:
+            name = force_text(name)
+        return (code, name)
+
     def __iter__(self):
         """
         Iterate through countries, sorted by name.
@@ -135,7 +162,7 @@ class Countries(object):
 
         # Yield countries that should be displayed first.
         countries_first = (
-            (code, force_text(countries[code]))
+            self.translate_pair(code)
             for code in self.countries_first
         )
 
@@ -153,7 +180,7 @@ class Countries(object):
         # Force translation before sorting.
         first_repeat = self.get_option('first_repeat')
         countries = (
-            (code, force_text(name)) for code, name in countries.items()
+            self.translate_pair(code) for code in countries
             if first_repeat or code not in self.countries_first)
 
         # Return sorted country list.
@@ -218,6 +245,10 @@ class Countries(object):
             for code, name in self:
                 if name == country:
                     return code
+                if code in self.OLD_NAMES:
+                    for old_name in self.OLD_NAMES[code]:
+                        if old_name == country:
+                            return code
         return ''
 
     def alpha3(self, code):
