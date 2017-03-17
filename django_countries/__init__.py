@@ -226,7 +226,9 @@ class Countries(CountriesBase):
         If no match is found, returns an empty string.
         """
         code = self.alpha2(code)
-        return self.countries.get(code, '')
+        if code not in self.countries:
+            return ''
+        return self.translate_pair(code)[1]
 
     def by_name(self, country, language='en'):
         """
