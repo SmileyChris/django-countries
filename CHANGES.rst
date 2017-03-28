@@ -7,6 +7,18 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
+Version 4.3 (29 March 2017)
+===========================
+
+* Handle "Czechia" translations in a nicer way (fall back to "Czech Republic"
+  until new translations are available).
+
+* Fix for an import error in Django 1.9+ due to use of non-lazy ``ugettext`` in
+  the django-countries custom admin filter.
+
+* Back to 100% test coverage.
+
+
 Version 4.2 (10 March 2017)
 ===========================
 
