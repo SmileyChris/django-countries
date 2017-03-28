@@ -87,11 +87,12 @@ name
   Contains the full country name.
 
 flag
-  Contains a URL to the flag.
+  Contains a URL to the flag. If you page could have lots of different flags
+  then consider using ``flag_css`` instead to avoid excessive HTTP requests.
 
 flag_css
-  Output the css classes needed to display an HTML element as a flag
-  sprite. For example::
+  Output the css classes needed to display an HTML element as the correct flag
+  from within a single sprite image that contains all flags. For example::
 
     <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
     <i class="{{ country.flag_css }}"></i>
@@ -101,7 +102,7 @@ flag_css
 
     <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
     Normal: <i class="{{ country.flag_css }}"></i>
-    Bigger: <i class="2xflag {{ country.flag_css }}"></i>
+    Bigger: <i class="flag2x {{ country.flag_css }}"></i>
 
   You might also want to consider using ``aria-label`` for better
   accessibility::
