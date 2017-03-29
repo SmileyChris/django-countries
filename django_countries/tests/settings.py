@@ -1,6 +1,8 @@
 SECRET_KEY = 'test'
 
 INSTALLED_APPS = (
+    'django.contrib.contenttypes',
+    'django.contrib.auth',
     'django_countries',
     'django_countries.tests',
 )

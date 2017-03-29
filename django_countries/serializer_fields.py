@@ -6,13 +6,13 @@ from django.utils.encoding import force_text
 from django_countries import countries
 
 
-class CountryField(serializers.Field):
+class CountryField(serializers.ChoiceField):
 
     def __init__(self, *args, **kwargs):
         self.country_dict = kwargs.pop('country_dict', None)
         countries_class = kwargs.pop('countries', None)
         self.countries = countries_class() if countries_class else countries
-        super(CountryField, self).__init__(*args, **kwargs)
+        super(CountryField, self).__init__(self.countries, *args, **kwargs)
 
     def to_representation(self, obj):
         code = self.countries.alpha2(obj)
