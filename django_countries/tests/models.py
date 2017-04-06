@@ -23,3 +23,16 @@ class AllowNull(models.Model):
 class MultiCountry(models.Model):
     countries = CountryField(multiple=True)
     uneditable_countries = CountryField(multiple=True, editable=False)
+
+
+class WithProp(models.Model):
+    country = CountryField()
+    _private_field = models.CharField(max_length=10)
+
+    @property
+    def public_field(self):
+        return self._private_field
+
+    @public_field.setter
+    def public_field(self, value):
+        self._private_field = value

@@ -203,9 +203,7 @@ class CountryDescriptor(object):
 
     def __get__(self, instance=None, owner=None):
         if instance is None:
-            raise AttributeError(
-                "The '%s' attribute can only be accessed from %s instances."
-                % (self.field.name, owner.__name__))
+            return self
         # Check in case this field was deferred.
         if self.field.name not in instance.__dict__:
             instance.refresh_from_db(fields=[self.field.name])
