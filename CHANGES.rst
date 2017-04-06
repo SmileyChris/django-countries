@@ -7,6 +7,15 @@ versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
 
+Version 4.4 (6 April 2017)
+==========================
+
+* Fix for broken CountryField on certain models in Django 1.11.
+  Thanks aktiur for the test case.
+
+* Update tests to cover Django 1.11
+
+
 Version 4.3 (29 March 2017)
 ===========================
 
