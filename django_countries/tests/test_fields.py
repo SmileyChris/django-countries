@@ -9,7 +9,7 @@ from django.utils.encoding import force_text
 
 from django_countries import fields, countries
 from django_countries.tests import forms, custom_countries
-from django_countries.tests.models import Person, AllowNull, MultiCountry
+from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
 
 
 class TestCountryField(TestCase):
@@ -154,6 +154,12 @@ class TestCountryField(TestCase):
     def test_render_form(self):
         Form = modelform_factory(Person, fields=['country'])
         Form().as_p()
+
+    def test_model_with_prop(self):
+        with_prop = WithProp(country='FR', public_field='test')
+
+        self.assertEqual(with_prop.country.code, 'FR')
+        self.assertEqual(with_prop.public_field, 'test')
 
 
 class TestValidation(TestCase):
