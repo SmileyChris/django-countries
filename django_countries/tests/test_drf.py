@@ -82,9 +82,6 @@ class TestDRFMetadata(TestCase):
             def post(self, request):
                 pass
 
-            def get(self, request):
-                return HttpResponse(request.META['HTTP_ACCEPT_LANGUAGE'])
-
             def get_serializer(self):
                 return PersonSerializer()
 
