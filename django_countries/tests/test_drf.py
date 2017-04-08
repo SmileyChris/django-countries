@@ -1,13 +1,12 @@
 from __future__ import unicode_literals
 
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from django_countries import countries
 from django_countries.tests.models import Person
 from django_countries.tests.custom_countries import FantasyCountries
 from django_countries.serializer_fields import CountryField
 
-from rest_framework.request import Request
 from rest_framework.test import APIRequestFactory
 from rest_framework import serializers, views
 
@@ -83,14 +82,36 @@ class TestDRFMetadata(TestCase):
             def post(self, request):
                 pass
 
+            def get(self, request):
+                return HttpResponse(request.META['HTTP_ACCEPT_LANGUAGE'])
+
             def get_serializer(self):
                 return PersonSerializer()
 
-        request = Request(APIRequestFactory().options('/'))
+        def _choices(response, key):
+            """Helper method for unpacking response JSON."""
+            return response.data['actions']['POST'][key]['choices']
+
         view = ExampleView.as_view()
+
+        factory = APIRequestFactory()
+        request = factory.options('/')
         response = view(request=request)
-        country_choices = response.data['actions']['POST']['country']['choices']
-        favourite_choices = response.data['actions']['POST']['favourite_country']['choices']
+        country_choices = _choices(response, 'country')
+        favourite_choices_en = _choices(response, 'favourite_country')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(country_choices, countries_display(countries))
-        self.assertEqual(favourite_choices, countries_display(FantasyCountries()))
+        self.assertEqual(favourite_choices_en, countries_display(FantasyCountries()))
+
+        with override_settings(LANGUAGE_CODE='fr'):
+            response = view(request=request)
+            favourite_choices_fr = _choices(response, 'favourite_country')
+            self.assertNotEqual(favourite_choices_en, favourite_choices_fr)
+
+        # This test fails - I'm not entirely sure whether it _should_ return the
+        # locale-specific version - the documentation has a cryptic comment:
+        # "client requests will respect the Accept-Language header where possible"
+        request = factory.options('/', HTTP_ACCEPT_LANGUAGE='es')
+        response = view(request=request)
+        favourite_choices_es = _choices(response, 'favourite_country')
+            # self.assertNotEqual(favourite_choices_es, favourite_choices_en)
