@@ -180,7 +180,7 @@ For example::
     ...     print("{name} ({code})".format(name=name, code=code))
     ...
     Afghanistan (AF)
-    Åland Islands (AX)
+    Aland Islands (AX)
     Albania (AL)
 
 Country names are translated using Django's standard ``ugettext``.
