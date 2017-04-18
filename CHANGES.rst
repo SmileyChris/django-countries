@@ -6,6 +6,14 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
+Version 4.5 (18 April 2017)
+===========================
+
+* Change rest framework field to be based on ``ChoiceField``.
+
+* Allow for the rest framework field to deserialize by full country name
+  (specifically the English name for now).
+
 
 Version 4.4 (6 April 2017)
 ==========================
