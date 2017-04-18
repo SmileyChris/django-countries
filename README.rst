@@ -326,7 +326,36 @@ the REST interface. For example::
 
 
 You can optionally instantiate the field with ``countries`` with a custom
-Countries_ instance.
+Countries_ instance. When you request OPTIONS against this resource (using
+the DRF `metadata support <http://www.django-rest-framework.org/api-guide/metadata/>`_) the countries will be returned in the response as choices:
+
+.. code:: text
+
+    OPTIONS /api/address/ HTTP/1.1
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Allow: GET, POST, HEAD, OPTIONS
+
+    {
+    "actions": {
+      "POST": {
+        "country": {
+        "type": "choice",
+        "label": "Country",
+        "choices": [
+          {
+            "display_name": "Australia",
+            "value": "AU"
+          },
+          [...]
+          {
+            "display_name": "United Kingdom",
+            "value": "GB"
+          }
+        ]
+      }
+    }
 
 .. _Countries: `Single field customization`_
 

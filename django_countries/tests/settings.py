@@ -1,6 +1,8 @@
 SECRET_KEY = 'test'
 
 INSTALLED_APPS = (
+    'django.contrib.contenttypes',
+    'django.contrib.auth',
     'django_countries',
     'django_countries.tests',
 )
@@ -14,6 +16,7 @@ STATIC_URL = '/static-assets/'
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 )
 
 TEMPLATES = [
