@@ -25,4 +25,7 @@ class CountryField(serializers.Field):
     def to_internal_value(self, data):
         if isinstance(data, dict):
             data = data.get('code')
-        return self.countries.alpha2(data)
+        country = self.countries.alpha2(data)
+        if data and not country:
+            country = self.countries.by_name(force_text(data))
+        return country

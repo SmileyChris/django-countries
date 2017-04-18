@@ -46,3 +46,9 @@ class TestDRF(TestCase):
             'name': 'Tester', 'country': {'code': 'GB', 'name': 'Anything'}})
         self.assertTrue(serializer.is_valid())
         self.assertEqual(serializer.validated_data['country'], 'GB')
+
+    def test_deserialize_by_name(self):
+        serializer = PersonSerializer(
+            data={'name': 'Chris', 'country': 'New Zealand'})
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(serializer.validated_data['country'], 'NZ')
