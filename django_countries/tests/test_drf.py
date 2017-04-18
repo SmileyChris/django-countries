@@ -93,7 +93,7 @@ class TestDRFMetadata(TestCase):
         class ExampleView(views.APIView):
             """Example view."""
             def post(self, request):
-                pass
+                pass  # pragma: nocover
 
             def get_serializer(self):
                 return PersonSerializer()
