@@ -245,11 +245,11 @@ class Countries(CountriesBase):
         """
         with override(language):
             for code, name in self:
-                if name == country:
+                if name.lower() == country.lower():
                     return code
                 if code in self.OLD_NAMES:
                     for old_name in self.OLD_NAMES[code]:
-                        if old_name == country:
+                        if old_name.lower() == country.lower():
                             return code
         return ''
 
