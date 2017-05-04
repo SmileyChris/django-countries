@@ -28,4 +28,6 @@ class CountryField(serializers.ChoiceField):
         country = self.countries.alpha2(data)
         if data and not country:
             country = self.countries.by_name(force_text(data))
+            if not country:
+                self.fail('invalid_choice', input=data)
         return country

@@ -82,6 +82,18 @@ class TestDRF(TestCase):
         self.assertEqual(serializer.validated_data['country'], 'NZ')
         self.assertEqual(serializer.validated_data['favourite_country'], 'NV')
 
+    def test_deserialize_invalid(self):
+        serializer = PersonSerializer(data={
+            'name': 'Chris',
+            'country': 'No Such Zealand',
+            'favourite_country': 'Neverland',
+        })
+        self.assertFalse(serializer.is_valid())
+        self.assertTrue(
+            '"No Such Zealand" is not a valid choice.' in
+            serializer.errors['country']
+        )
+
 
 class TestDRFMetadata(TestCase):
     """
