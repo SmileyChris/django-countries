@@ -2,9 +2,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # 
-# Translators:
-# Berislav Lopac <berislav@lopac.net>, 2012
-# berislavlopac <berislav.lopac@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
