@@ -10,6 +10,7 @@ except NameError:
     basestring = str   # Python 3
 
 from django import forms
+from django.apps import apps
 from django.core import exceptions
 from django.contrib.admin.filters import FieldListFilter
 from django.db.models.fields import CharField, BLANK_CHOICE_DASH
@@ -52,12 +53,13 @@ class TemporaryEscape(object):
 class Country(object):
 
     def __init__(
-            self, code, flag_url=None, str_attr='code', custom_countries=None):
+            self, code, flag_url=None, str_attr='code', field=None):
         self.code = code
         self.flag_url = flag_url
         self._escape = False
         self._str_attr = str_attr
-        self.countries = custom_countries or countries
+        self._field = field
+        self.countries = field.countries if field is not None else countries
 
     def __str__(self):
         return force_text(getattr(self, self._str_attr) or '')
@@ -87,6 +89,27 @@ class Country(object):
 
     def __len__(self):
         return len(force_text(self))
+
+    def __getstate__(self):
+        # Ensure we don't pickle _field or (potentially huge) countries list
+        # but can re-discover them later after unpickling
+        if self._field is None or self.countries is countries:
+            field_qualname = None
+        else:
+            m = self._field.model._meta
+            field_qualname = '%s.%s.%s' % (m.app_label, m.model_name, self._field.name)
+
+        # Could use a dict here but the tuple makes the pickled string smaller
+        return (self.code, field_qualname, self.flag_url, self._str_attr)
+
+    def __setstate__(self, state):
+        code, field_qualname, flag_url, str_attr = state
+        field = None
+        if field_qualname:
+            model_name, field_name = field_qualname.rsplit('.', 1)
+            field = apps.get_model(model_name)._meta.get_field(field_name)
+
+        self.__init__(code, flag_url=flag_url, str_attr=str_attr, field=field)
 
     @property
     def escape(self):
@@ -215,7 +238,7 @@ class CountryDescriptor(object):
     def country(self, code):
         return Country(
             code=code, flag_url=self.field.countries_flag_url,
-            custom_countries=self.field.countries)
+            field=self.field)
 
     def __set__(self, instance, value):
         if self.field.multiple:

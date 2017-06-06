@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import pickle
+
 from django.core import validators
 from django.forms import Select
 from django.forms.models import modelform_factory
@@ -160,6 +162,7 @@ class TestCountryField(TestCase):
 
         self.assertEqual(with_prop.country.code, 'FR')
         self.assertEqual(with_prop.public_field, 'test')
+
 
 
 class TestValidation(TestCase):
@@ -398,3 +401,31 @@ class TestModelForm(TestCase):
     def test_validation(self):
         form = forms.MultiCountryForm(data={'countries': ['NZ', 'AU']})
         self.assertEqual(form.errors, {})
+
+
+class TestPickling(TestCase):
+    def test_standard_country_pickling(self):
+        chris = Person(name='Chris Beaven', country='NZ')
+        # django uses pickle.HIGHEST_PROTOCOL which is somewhere between 2 and 4,
+        # depending on python version. Let's use 2 for testing.
+        newly_pickled_zealand = pickle.dumps(chris.country, protocol=2)
+        self.assertEqual(len(newly_pickled_zealand), 69)
+
+        unpickled = pickle.loads(newly_pickled_zealand)
+        self.assertEqual(unpickled.code, 'NZ')
+        self.assertEqual(unpickled.name, 'New Zealand')
+        self.assertEqual(unpickled.flag_url, None)
+        self.assertIs(unpickled.countries, countries)
+
+    def test_custom_country_pickling(self):
+        chris = Person(name='Chris Beaven', fantasy_country='NV')
+        # django uses pickle.HIGHEST_PROTOCOL which is somewhere between 2 and 4,
+        # depending on python version. Let's use 2 for testing.
+        pickled_neverland = pickle.dumps(chris.fantasy_country, protocol=2)
+        self.assertEqual(len(pickled_neverland), 103)
+
+        neverland = pickle.loads(pickled_neverland)
+        self.assertEqual(neverland.code, 'NV')
+        self.assertEqual(neverland.name, 'Neverland')
+        self.assertEqual(neverland.flag_url, None)
+        self.assertIsInstance(neverland.countries, custom_countries.FantasyCountries)
