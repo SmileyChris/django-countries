@@ -7,7 +7,7 @@ from django.test import TestCase
 from django.utils import translation
 from django.utils.encoding import force_text
 
-from django_countries import fields, countries
+from django_countries import fields, countries, data
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
 
@@ -271,13 +271,14 @@ class TestCountryMultiple(TestCase):
 
     def test_deconstruct(self):
         field = MultiCountry._meta.get_field('countries')
+        expected_max_length = len(data.COUNTRIES) * 3 - 1
         self.assertEqual(
             field.deconstruct(),
             (
                 'countries',
                 'django_countries.fields.CountryField',
                 [],
-                {'max_length': 599, 'multiple': True}
+                {'max_length': expected_max_length, 'multiple': True}
             ))
 
 

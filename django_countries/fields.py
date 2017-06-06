@@ -267,10 +267,11 @@ class CountryField(CharField):
         self.countries_flag_url = kwargs.pop('countries_flag_url', None)
         self.blank_label = kwargs.pop('blank_label', None)
         self.multiple = kwargs.pop('multiple', None)
-        kwargs.update({
-            'max_length': 599 if self.multiple else 2,
-            'choices': self.countries,
-        })
+        kwargs['choices'] = self.countries
+        if self.multiple:
+            kwargs['max_length'] = len(self.countries) * 3 - 1
+        else:
+            kwargs['max_length'] = 2
         super(CharField, self).__init__(*args, **kwargs)
 
     def get_internal_type(self):
