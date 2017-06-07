@@ -60,6 +60,10 @@ forms::
 
     country = CountryField(blank_label='(select country)')
 
+
+Multi-choice
+------------
+
 This field can also allow multiple selections of countries (saved as a comma
 separated string). The field will always output a list of countries in this
 mode. For example::
@@ -125,6 +129,7 @@ numeric
 
 numeric_padded
   The numeric country code as a three character 0-padded string.
+
 
 ``CountrySelectWidget``
 -----------------------
@@ -309,25 +314,46 @@ uses a custom country list that only includes the G8 countries::
         approve = models.BooleanField()
 
 
-Django Rest Framework field
-===========================
+Django Rest Framework
+=====================
 
-Django Countries ships with a ``CountryField`` serializer field to simplify
-the REST interface. For example::
+Django Countries ships with a ``CountryFieldMixin`` to make the
+`CountryField`_ model field compatible with DRF serializers. Use the following
+mixin with your model serializer::
 
-    from django_countries.serializer_fields import CountryField
+    from django_countries.serializers import CountryFieldMixin
 
-    class PersonSerializer(serializers.ModelSerializer):
-        country = CountryField()
+    class CountrySerializer(CountryFieldMixin, serializers.ModelSerializer):
 
         class Meta:
             model = models.Person
             fields = ('name', 'email', 'country')
 
+This mixin handles both standard and `multi-choice`_ country fields.
+
+
+Django Rest Framework field
+---------------------------
+
+For lower level use (or when not dealing with model fields), you can use the
+included ``CountryField`` serializer field. For example::
+
+    from django_countries.serializer_fields import CountryField
+
+    class CountrySerializer(serializers.Serializer):
+        country = CountryField()
 
 You can optionally instantiate the field with ``countries`` with a custom
-Countries_ instance. When you request OPTIONS against this resource (using
-the DRF `metadata support <http://www.django-rest-framework.org/api-guide/metadata/>`_) the countries will be returned in the response as choices:
+Countries_ instance.
+
+.. _Countries: `Single field customization`_
+
+
+OPTIONS request
+---------------
+
+When you request OPTIONS against a resource (using the DRF `metadata support`_)
+the countries will be returned in the response as choices:
 
 .. code:: text
 
@@ -357,7 +383,8 @@ the DRF `metadata support <http://www.django-rest-framework.org/api-guide/metada
       }
     }
 
-.. _Countries: `Single field customization`_
+.. _metadata support: http://www.django-rest-framework.org/api-guide/metadata/
+
 
 REST output format
 ------------------

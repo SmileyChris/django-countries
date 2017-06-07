@@ -3,9 +3,10 @@ from __future__ import unicode_literals
 from django.test import TestCase, override_settings
 
 from django_countries import countries
-from django_countries.tests.models import Person
+from django_countries.fields import Country
+from django_countries.tests.models import Person, MultiCountry
 from django_countries.tests.custom_countries import FantasyCountries
-from django_countries.serializer_fields import CountryField
+from django_countries.serializers import CountryFieldMixin
 
 from rest_framework.test import APIRequestFactory
 from rest_framework import serializers, views
@@ -18,14 +19,23 @@ def countries_display(countries):
     return [{'display_name': v, 'value': k} for (k, v) in countries]
 
 
-class PersonSerializer(serializers.ModelSerializer):
-    country = CountryField()
-    other_country = CountryField(country_dict=True, required=False)
-    favourite_country = CountryField(countries=FantasyCountries)
+class PersonSerializer(CountryFieldMixin, serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('name', 'country', 'other_country', 'favourite_country')
+        fields = (
+            'name', 'country', 'other_country', 'favourite_country',
+            'fantasy_country')
+        extra_kwargs = {
+            'other_country': {'country_dict': True},
+        }
+
+
+class MultiCountrySerializer(CountryFieldMixin, serializers.ModelSerializer):
+
+    class Meta:
+        model = MultiCountry
+        fields = ('countries',)
 
 
 class TestDRF(TestCase):
@@ -39,7 +49,8 @@ class TestDRF(TestCase):
                 'name': 'Chris Beaven',
                 'country': 'NZ',
                 'other_country': '',
-                'favourite_country': 'NZ'
+                'favourite_country': 'NZ',
+                'fantasy_country': '',
             })
 
     def test_serialize_country_dict(self):
@@ -51,14 +62,15 @@ class TestDRF(TestCase):
                 'name': 'Chris Beaven',
                 'country': '',
                 'other_country': {'code': 'AU', 'name': 'Australia'},
-                'favourite_country': 'NZ'
+                'favourite_country': 'NZ',
+                'fantasy_country': '',
             })
 
     def test_deserialize(self):
         serializer = PersonSerializer(data={
             'name': 'Tester',
             'country': 'US',
-            'favourite_country': 'NV'
+            'fantasy_country': 'NV',
         })
         self.assertTrue(serializer.is_valid())
         self.assertEqual(serializer.validated_data['country'], 'US')
@@ -67,7 +79,7 @@ class TestDRF(TestCase):
         serializer = PersonSerializer(data={
             'name': 'Tester',
             'country': {'code': 'GB', 'name': 'Anything'},
-            'favourite_country': 'NV'
+            'fantasy_country': 'NV'
         })
         self.assertTrue(serializer.is_valid())
         self.assertEqual(serializer.validated_data['country'], 'GB')
@@ -76,23 +88,72 @@ class TestDRF(TestCase):
         serializer = PersonSerializer(data={
             'name': 'Chris',
             'country': 'New Zealand',
-            'favourite_country': 'Neverland',
+            'fantasy_country': 'Neverland',
         })
         self.assertTrue(serializer.is_valid())
         self.assertEqual(serializer.validated_data['country'], 'NZ')
-        self.assertEqual(serializer.validated_data['favourite_country'], 'NV')
+        self.assertEqual(serializer.validated_data['fantasy_country'], 'NV')
 
     def test_deserialize_invalid(self):
         serializer = PersonSerializer(data={
             'name': 'Chris',
             'country': 'No Such Zealand',
-            'favourite_country': 'Neverland',
+            'fantasy_country': 'Neverland',
         })
         self.assertFalse(serializer.is_valid())
         self.assertTrue(
-            '"No Such Zealand" is not a valid choice.' in
-            serializer.errors['country']
-        )
+            serializer.errors['country'],
+            ['"No Such Zealand" is not a valid choice.'])
+
+    def test_multi_serialize(self):
+        mc = MultiCountry(countries='NZ,AU')
+        serializer = MultiCountrySerializer(mc)
+        self.assertEqual(
+            serializer.data,
+            {
+                'countries': ['NZ', 'AU']
+            })
+
+    def test_multi_serialize_empty(self):
+        mc = MultiCountry(countries='')
+        serializer = MultiCountrySerializer(mc)
+        self.assertEqual(
+            serializer.data,
+            {
+                'countries': []
+            })
+
+    def test_multi_deserialize(self):
+        serializer = MultiCountrySerializer(data={
+            'countries': ['NZ', 'AU']
+        })
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(serializer.validated_data['countries'], ['NZ', 'AU'])
+
+    def test_multi_deserialize_by_name(self):
+        serializer = MultiCountrySerializer(data={
+            'countries': ['New Zealand', 'Australia']
+        })
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(serializer.validated_data['countries'], ['NZ', 'AU'])
+
+    def test_multi_deserialize_invalid(self):
+        serializer = MultiCountrySerializer(data={
+            'countries': ['NZ', 'BAD', 'AU']
+        })
+        self.assertFalse(serializer.is_valid())
+        self.assertEqual(
+            serializer.errors['countries'],
+            ['"BAD" is not a valid choice.'])
+
+    def test_multi_deserialize_save(self):
+        serializer = MultiCountrySerializer(data={
+            'countries': ['NZ', 'AU']
+        })
+        self.assertTrue(serializer.is_valid())
+        saved = serializer.save()
+        loaded = MultiCountry.objects.get(pk=saved.pk)
+        self.assertEqual(loaded.countries, [Country('NZ'), Country('AU')])
 
 
 class TestDRFMetadata(TestCase):
@@ -120,13 +181,13 @@ class TestDRFMetadata(TestCase):
         request = factory.options('/')
         response = view(request=request)
         country_choices = _choices(response, 'country')
-        favourite_choices_en = _choices(response, 'favourite_country')
+        fantasy_choices_en = _choices(response, 'fantasy_country')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(country_choices, countries_display(countries))
         self.assertEqual(
-            favourite_choices_en, countries_display(FantasyCountries()))
+            fantasy_choices_en, countries_display(FantasyCountries()))
 
         with override_settings(LANGUAGE_CODE='fr'):
             response = view(request=request)
-            favourite_choices_fr = _choices(response, 'favourite_country')
-            self.assertNotEqual(favourite_choices_en, favourite_choices_fr)
+            fantasy_choices_fr = _choices(response, 'fantasy_country')
+            self.assertNotEqual(fantasy_choices_en, fantasy_choices_fr)
