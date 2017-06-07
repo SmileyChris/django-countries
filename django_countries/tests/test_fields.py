@@ -11,7 +11,8 @@ from django.utils.encoding import force_text
 
 from django_countries import fields, countries, data
 from django_countries.tests import forms, custom_countries
-from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
+from django_countries.tests.models import (
+    Person, AllowNull, MultiCountry, WithProp)
 
 
 class TestCountryField(TestCase):
@@ -384,8 +385,14 @@ class TestModelForm(TestCase):
             translation.activate(lang)
 
     def test_blank_choice(self):
+        blank = ('', '---------')
+
         form = forms.PersonForm()
-        self.assertEqual(form.fields['country'].choices[0], ('', '---------'))
+        self.assertEqual(form.fields['country'].choices[0], blank)
+
+        multi_form = forms.MultiCountryForm()
+        self.assertNotEqual(
+            multi_form.fields['countries'].choices[0], blank)
 
     def test_no_blank_choice(self):
         form = forms.PersonForm()
