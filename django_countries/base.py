@@ -28,3 +28,6 @@ class CountriesBase(object):
     OLD_NAMES = {
         "CZ": [_("Czech Republic")],
     }
+
+    def __getstate__(self):
+        return None

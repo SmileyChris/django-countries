@@ -57,7 +57,9 @@ class Country(object):
         self.flag_url = flag_url
         self._escape = False
         self._str_attr = str_attr
-        self.countries = custom_countries or countries
+        if custom_countries is countries:
+            custom_countries = None
+        self.custom_countries = custom_countries
 
     def __str__(self):
         return force_text(getattr(self, self._str_attr) or '')
@@ -87,6 +89,10 @@ class Country(object):
 
     def __len__(self):
         return len(force_text(self))
+
+    @property
+    def countries(self):
+        return self.custom_countries or countries
 
     @property
     def escape(self):
