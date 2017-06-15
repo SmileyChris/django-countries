@@ -4,7 +4,6 @@ from rest_framework import serializers
 from django.utils.encoding import force_text
 
 from django_countries import countries
-from django_countries.base import CountriesBase
 
 
 class CountryField(serializers.ChoiceField):
