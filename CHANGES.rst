@@ -27,6 +27,11 @@ Version 4.6 (16 June 2017)
 
 * Tests now cover multiple Django Rest Framework versions (back to 3.3).
 
+Version 4.6.1
+-------------
+
+* Fix invalid reStructuredText in CHANGES.
+
 
 Version 4.5 (18 April 2017)
 ===========================
