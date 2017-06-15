@@ -10,7 +10,7 @@ Version 4.6 (16 June 2017)
 ==========================
 
 * Add a ``CountryFieldMixin`` Django Rest Framework serializer mixin that
-  automatically picks the right field type for ``CountryField``s (both single
+  automatically picks the right field type for a ``CountryField`` (both single
   and multi-choice).
 
 * Validation for Django Rest Framework field (thanks Simon Meers).
