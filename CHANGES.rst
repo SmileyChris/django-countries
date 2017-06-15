@@ -6,6 +6,28 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
+Version 4.6 (16 June 2017)
+==========================
+
+* Add a ``CountryFieldMixin`` Django Rest Framework serializer mixin that
+  automatically picks the right field type for ``CountryField``s (both single
+  and multi-choice).
+
+* Validation for Django Rest Framework field (thanks Simon Meers).
+
+* Allow case-insensitive ``.by_name()`` matching (thanks again, Simon).
+
+* Ensure a multiple-choice ``CountryField.max_length`` is enough to hold all
+  countries.
+
+* Fix inefficient pickling of countries (thanks Craig de Stigter for the report
+  and tests).
+
+* Stop adding a blank choice when dealing with a multi-choice ``CountryField``.
+
+* Tests now cover multiple Django Rest Framework versions (back to 3.3).
+
+
 Version 4.5 (18 April 2017)
 ===========================
 
