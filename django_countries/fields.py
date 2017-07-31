@@ -214,17 +214,20 @@ class CountryDescriptor(object):
         if self.field.name not in instance.__dict__:
             instance.refresh_from_db(fields=[self.field.name])
         value = instance.__dict__[self.field.name]
-        if self.field.multiple:
+        if self.field.multiple and not value is None:
             return [self.country(code) for code in value]
         return self.country(value)
 
     def country(self, code):
-        return Country(
+        if code is None:
+            return None
+        else:
+                    return Country(
             code=code, flag_url=self.field.countries_flag_url,
             custom_countries=self.field.countries)
 
     def __set__(self, instance, value):
-        if self.field.multiple:
+        if self.field.multiple and not value is None:
             if isinstance(value, (basestring, Country)):
                 value = force_text(value).split(',')
             value = [
@@ -299,12 +302,15 @@ class CountryField(CharField):
 
     def get_prep_value(self, value):
         "Returns field's value prepared for saving into a database."
-        if not self.multiple:
-            return country_to_text(value)
-        if isinstance(value, basestring):
-            return super(CharField, self).get_prep_value(value)
-        return ','.join(
-            country_to_text(code) for code in value if country_to_text(code))
+        if value is None:
+            return None
+        else:
+            if not self.multiple:
+                return country_to_text(value)
+            if isinstance(value, basestring):
+                return super(CharField, self).get_prep_value(value)
+            return ','.join(
+                country_to_text(code) for code in value if country_to_text(code))
 
     def deconstruct(self):
         """
