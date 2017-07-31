@@ -331,7 +331,7 @@ class CountryField(CharField):
                 blank_choice = BLANK_CHOICE_DASH
             else:
                 blank_choice = [('', self.blank_label)]
-        if self.multiple:
+        if self.multiple and not self.blank:
             include_blank = False
         return super(CountryField, self).get_choices(
             include_blank=include_blank, blank_choice=blank_choice, *args,
