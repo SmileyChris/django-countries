@@ -227,6 +227,16 @@ For example::
         'AU': None
     }
 
+If you have problems with customization as a error:
+
+    name '_' is not defined
+
+import to the top of your settings.py file ugettext_lazy as _
+
+    from django.utils.translation import ugettext_lazy as _
+
+Defining a function called _ is a standard convention for marking strings as translatable, described in the Django docs here: https://docs.djangoproject.com/en/1.11/topics/i18n/translation/
+
 If you have a specific list of countries that should be used, use
 ``COUNTRIES_ONLY``::
 
