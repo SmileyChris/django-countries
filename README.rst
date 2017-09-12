@@ -222,6 +222,8 @@ Note that you will need to handle translation of customised country names.
 Setting a country's name to ``None`` will exclude it from the country list.
 For example::
 
+    from django.utils.translation import ugettext_lazy as _
+
     COUNTRIES_OVERRIDE = {
         'NZ': _('Middle Earth'),
         'AU': None
