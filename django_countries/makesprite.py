@@ -14,7 +14,7 @@ FLAG_X, FLAG_Y = 16, 11
 def main():
     flag_path = os.path.join(os.path.dirname(__file__), 'static', 'flags')
     files = os.listdir(flag_path)
-    img = Image.new('RGB', (26*FLAG_X, 26*FLAG_Y))
+    img = Image.new('RGBA', (26*FLAG_X, 26*FLAG_Y))
     for name in files:
         if not re_flag_file.match(name):
             continue
