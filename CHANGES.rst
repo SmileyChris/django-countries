@@ -32,6 +32,11 @@ Version 4.6.1
 
 * Fix invalid reStructuredText in CHANGES.
 
+Version 4.6.2
+-------------
+
+* Use transparency layer for flag sprites.
+
 
 Version 4.5 (18 April 2017)
 ===========================
