@@ -1,9 +1,12 @@
 from __future__ import unicode_literals
+from unittest import skipIf
 try:
     from urllib import parse as urlparse
 except ImportError:
     import urlparse   # Python 2
 
+from distutils.version import StrictVersion
+import django
 from django.forms.models import modelform_factory
 from django.test import TestCase
 from django.utils import safestring
@@ -57,3 +60,11 @@ class TestCountrySelectWidget(TestCase):
     def test_render_modelform_instance(self):
         person = Person(country='NZ')
         self.Form(instance=person).as_p()
+
+    @skipIf(
+        StrictVersion(django.get_version()) < StrictVersion('1.10'),
+        'required attribute only implemented in 1.10+')
+    def test_required_attribute(self):
+        rendered = self.Form()['country'].as_widget()
+        rendered = rendered[:rendered.find('>')+1]
+        self.assertIn('required', rendered)
