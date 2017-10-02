@@ -12,7 +12,7 @@ from django.utils.encoding import force_text
 from django_countries import fields, countries, data
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import (
-    Person, AllowNull, MultiCountry, WithProp)
+    Person, AllowNull, MultiCountry, WithProp, MultiNullCountry)
 
 
 class TestCountryField(TestCase):
@@ -283,6 +283,16 @@ class TestCountryMultiple(TestCase):
                 [],
                 {'max_length': expected_max_length, 'multiple': True}
             ))
+
+
+class TestMultiNullCountry(TestCase):
+
+    def test_empty(self):
+        obj = MultiNullCountry()
+        self.assertEqual(obj.countries, [])
+
+    def test_empty_save(self):
+        MultiNullCountry.objects.create()
 
 
 class TestCountryObject(TestCase):
