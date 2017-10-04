@@ -25,6 +25,10 @@ class MultiCountry(models.Model):
     uneditable_countries = CountryField(multiple=True, editable=False)
 
 
+class MultiNullCountry(models.Model):
+    countries = CountryField(multiple=True, null=True, blank=True)
+
+
 class WithProp(models.Model):
     country = CountryField()
     _private_field = models.CharField(max_length=10)

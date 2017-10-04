@@ -225,11 +225,14 @@ class CountryDescriptor(object):
 
     def __set__(self, instance, value):
         if self.field.multiple:
-            if isinstance(value, (basestring, Country)):
-                value = force_text(value).split(',')
-            value = [
-                country_to_text(code) for code in value
-                if country_to_text(code)]
+            if value is None:
+                value = []
+            else:
+                if isinstance(value, (basestring, Country)):
+                    value = force_text(value).split(',')
+                value = [
+                    country_to_text(code) for code in value
+                    if country_to_text(code)]
         else:
             value = country_to_text(value)
         instance.__dict__[self.field.name] = value
@@ -303,6 +306,8 @@ class CountryField(CharField):
             return country_to_text(value)
         if isinstance(value, basestring):
             return super(CharField, self).get_prep_value(value)
+        if value is None:
+            return ''
         return ','.join(
             country_to_text(code) for code in value if country_to_text(code))
 
