@@ -10,6 +10,7 @@ from django.utils import translation
 from django.utils.encoding import force_text
 
 from django_countries import fields, countries, data
+from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import (
     Person, AllowNull, MultiCountry, WithProp, MultiNullCountry)
@@ -293,6 +294,11 @@ class TestMultiNullCountry(TestCase):
 
     def test_empty_save(self):
         MultiNullCountry.objects.create()
+
+    def test_get_prep_value(self):
+        country_field_instance = CountryField(multiple=True, null=True, blank=True)
+        prep_value = country_field_instance.get_prep_value(None)
+        self.assertEqual(prep_value, '')
 
 
 class TestCountryObject(TestCase):

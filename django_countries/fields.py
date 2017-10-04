@@ -306,6 +306,8 @@ class CountryField(CharField):
             return country_to_text(value)
         if isinstance(value, basestring):
             return super(CharField, self).get_prep_value(value)
+        if value is None:
+            return ''
         return ','.join(
             country_to_text(code) for code in value if country_to_text(code))
 
