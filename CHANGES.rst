@@ -6,6 +6,14 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
+Version 5.0 (10 October 2017)
+=============================
+
+* No longer allow ``multiple=True`` and ``null=True`` together. This causes
+  problems saving the field, and ``null`` shouldn't really be used anyway
+  because the country field is a subclass of ``CharField``.
+
+
 Version 4.6 (16 June 2017)
 ==========================
 

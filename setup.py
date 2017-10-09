@@ -19,7 +19,7 @@ def read_files(*filenames):
 
 setup(
     name='django-countries',
-    version='4.6.2',
+    version='5.0',
     description='Provides a country field for Django models.',
     long_description=read_files('README.rst', 'CHANGES.rst'),
     author='Chris Beaven',
