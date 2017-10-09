@@ -2,10 +2,11 @@
 from __future__ import unicode_literals
 import pickle
 
-from django.core import validators
+from django.db import models
+from django.core import validators, checks
 from django.forms import Select
 from django.forms.models import modelform_factory
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import translation
 from django.utils.encoding import force_text
 
@@ -100,6 +101,29 @@ class TestCountryField(TestCase):
 
         person = AllowNull.objects.get(pk=person.pk)
         self.assertIsNone(person.country.code)
+
+    @override_settings(SILENCED_SYSTEM_CHECKS=['django_countries.E100'])
+    def test_multi_null_country(self):
+
+        class MultiNullCountry(models.Model):
+            countries = fields.CountryField(
+                multiple=True, null=True, blank=True)
+
+        class MultiNullCountryNoBlank(models.Model):
+            countries = fields.CountryField(
+                multiple=True, null=True)
+
+        errors = checks.run_checks()
+        self.assertEqual([e.id for e in errors], ['django_countries.E100'] * 2)
+        errors_dict = dict((e.obj, e) for e in errors)
+        self.assertFalse(
+            'blank=True' in errors_dict[
+                MultiNullCountry._meta.get_field('countries')
+            ].hint)
+        self.assertTrue(
+            'blank=True' in errors_dict[
+                MultiNullCountryNoBlank._meta.get_field('countries')
+            ].hint)
 
     def test_deferred(self):
         Person.objects.create(name='Person',

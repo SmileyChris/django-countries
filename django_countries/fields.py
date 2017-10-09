@@ -10,7 +10,7 @@ except NameError:
     basestring = str   # Python 3
 
 from django import forms
-from django.core import exceptions
+from django.core import checks, exceptions
 from django.contrib.admin.filters import FieldListFilter
 from django.db.models.fields import CharField, BLANK_CHOICE_DASH
 from django.utils.encoding import force_text, python_2_unicode_compatible
@@ -279,6 +279,29 @@ class CountryField(CharField):
         else:
             kwargs['max_length'] = 2
         super(CharField, self).__init__(*args, **kwargs)
+
+    def check(self, **kwargs):
+        errors = super(CountryField, self).check(**kwargs)
+        errors.extend(self._check_multiple())
+        return errors
+
+    def _check_multiple(self):
+        if not self.multiple or not self.null:
+            return []
+
+        hint = 'Remove null=True argument on the field'
+        if not self.blank:
+            hint += ' (just add blank=True if you want to allow no selection)'
+        hint += '.'
+
+        return [
+            checks.Error(
+                'Field specifies multiple=True, so should not be null.',
+                obj=self,
+                id='django_countries.E100',
+                hint=hint,
+            )
+        ]
 
     def get_internal_type(self):
         return "CharField"
