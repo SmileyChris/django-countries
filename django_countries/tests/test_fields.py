@@ -195,6 +195,10 @@ class TestValidation(TestCase):
         person = Person(name='Chris', country='NZ')
         person.full_clean()
 
+    def test_validate_alpha3(self):
+        person = Person(name='Chris', country='NZL')
+        person.full_clean()
+
     def test_validate_empty(self):
         person = Person(name='Chris')
         self.assertRaises(validators.ValidationError, person.full_clean)
@@ -388,6 +392,22 @@ class TestCountryObject(TestCase):
     def test_empty_flag_url(self):
         country = fields.Country(code='XX', flag_url='')
         self.assertEqual(country.flag, '')
+
+    def test_alpha2_code(self):
+        country = fields.Country(code='NZL')
+        self.assertEqual(country.code, 'NZ')
+
+    def test_alpha2_code_invalid(self):
+        country = fields.Country(code='NZX')
+        self.assertEqual(country.code, 'NZX')
+
+    def test_numeric_code(self):
+        country = fields.Country(code=554)
+        self.assertEqual(country.code, 'NZ')
+
+    def test_numeric_code_invalid(self):
+        country = fields.Country(code=999)
+        self.assertEqual(country.code, 999)
 
 
 class TestModelForm(TestCase):

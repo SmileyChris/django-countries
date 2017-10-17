@@ -53,13 +53,16 @@ class Country(object):
 
     def __init__(
             self, code, flag_url=None, str_attr='code', custom_countries=None):
-        self.code = code
         self.flag_url = flag_url
         self._escape = False
         self._str_attr = str_attr
         if custom_countries is countries:
             custom_countries = None
         self.custom_countries = custom_countries
+        # Attempt to convert the code to the alpha2 equivalent, but this
+        # is not meant to be full validation so use the given code if no
+        # match was found.
+        self.code = self.countries.alpha2(code) or code
 
     def __str__(self):
         return force_text(getattr(self, self._str_attr) or '')
@@ -224,14 +227,7 @@ class CountryDescriptor(object):
             custom_countries=self.field.countries)
 
     def __set__(self, instance, value):
-        if self.field.multiple:
-            if isinstance(value, (basestring, Country)):
-                value = force_text(value).split(',')
-            value = [
-                country_to_text(code) for code in value
-                if country_to_text(code)]
-        else:
-            value = country_to_text(value)
+        value = self.field.get_clean_value(value)
         instance.__dict__[self.field.name] = value
 
 
@@ -311,8 +307,7 @@ class CountryField(CharField):
         setattr(cls, self.name, self.descriptor_class(self))
 
     def get_prep_lookup(self, lookup_type, value):
-        if hasattr(value, 'code'):
-            value = value.code
+        value = country_to_text(value)
         return super(CountryField, self).get_prep_lookup(lookup_type, value)
 
     def pre_save(self, *args, **kwargs):
@@ -322,12 +317,23 @@ class CountryField(CharField):
 
     def get_prep_value(self, value):
         "Returns field's value prepared for saving into a database."
+        value = self.get_clean_value(value)
+        if self.multiple:
+            if value:
+                value = ','.join(value)
+            else:
+                value = ''
+        return super(CharField, self).get_prep_value(value)
+
+    def get_clean_value(self, value):
         if not self.multiple:
             return country_to_text(value)
-        if isinstance(value, basestring):
-            return super(CharField, self).get_prep_value(value)
-        return ','.join(
-            country_to_text(code) for code in value if country_to_text(code))
+        if isinstance(value, (basestring, Country)):
+            if isinstance(value, basestring) and ',' in value:
+                value = value.split(',')
+            else:
+                value = [value]
+        return list(filter(None, [country_to_text(c) for c in value]))
 
     def deconstruct(self):
         """

@@ -11,6 +11,8 @@ HEAD
 
 * Tests now also cover Django Rest Framework 3.7.
 
+* Allow for creating country fields using (valid) alpha-3 or numeric codes.
+
 
 Version 5.0 (10 October 2017)
 =============================
