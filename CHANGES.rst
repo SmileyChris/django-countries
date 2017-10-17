@@ -6,6 +6,12 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
+HEAD
+====
+
+* Tests now also cover Django Rest Framework 3.7.
+
+
 Version 5.0 (10 October 2017)
 =============================
 
