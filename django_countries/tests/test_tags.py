@@ -2,6 +2,8 @@ from django.template import Template, Context
 from django.test import TestCase
 from django.utils import translation
 
+from django_countries import countries
+
 
 class TestCountriesTags(TestCase):
 
@@ -10,6 +12,8 @@ class TestCountriesTags(TestCase):
     TEMPLATE_NAME = Template(
         "{% load countries %}{% get_country code as country %}"
         "{{ country.name }}")
+    TEMPLATE_COUNTRIES = Template(
+        "{% load countries %}{% get_countries as countries_list %}{{ countries_list }}")
 
     def test_country(self):
         rendered = self.TEMPLATE_COUNTRY.render(Context({'code': 'BR'}))
@@ -30,3 +34,8 @@ class TestCountriesTags(TestCase):
 
         rendered = self.TEMPLATE_NAME.render(Context({'code': 'XX'}))
         self.assertEqual(rendered, '')
+
+    def test_countries_displayed_all(self):
+        rendered = self.TEMPLATE_COUNTRIES.render(Context())
+        self.assertEqual(rendered, Template("{{ compared_countries }}").render(
+            Context({'compared_countries':list([(code, name) for code, name in countries])})))
