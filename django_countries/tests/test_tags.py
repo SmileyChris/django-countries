@@ -13,7 +13,8 @@ class TestCountriesTags(TestCase):
         "{% load countries %}{% get_country code as country %}"
         "{{ country.name }}")
     TEMPLATE_COUNTRIES = Template(
-        "{% load countries %}{% get_countries as countries_list %}{{ countries_list }}")
+        "{% load countries %}{% get_countries as countries_list %}"
+        "{{ countries_list }}")
 
     def test_country(self):
         rendered = self.TEMPLATE_COUNTRY.render(Context({'code': 'BR'}))
@@ -37,5 +38,8 @@ class TestCountriesTags(TestCase):
 
     def test_countries_displayed_all(self):
         rendered = self.TEMPLATE_COUNTRIES.render(Context())
-        self.assertEqual(rendered, Template("{{ compared_countries }}").render(
-            Context({'compared_countries':list([(code, name) for code, name in countries])})))
+        self.assertEqual(
+            rendered,
+            Template("{{ expected }}").render(Context(
+                {'expected': [(code, name) for code, name in countries]}))
+        )

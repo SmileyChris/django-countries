@@ -15,6 +15,8 @@ HEAD
 
 * Fix migration error with blank default (thanks Jens Diemer).
 
+* Add a ``{% get_countries %}`` template tag (thanks Matija Čvrk).
+
 
 Version 5.0 (10 October 2017)
 =============================
