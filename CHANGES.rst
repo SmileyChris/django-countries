@@ -13,6 +13,8 @@ HEAD
 
 * Allow for creating country fields using (valid) alpha-3 or numeric codes.
 
+* Fix migration error with blank default (thanks Jens Diemer).
+
 
 Version 5.0 (10 October 2017)
 =============================
