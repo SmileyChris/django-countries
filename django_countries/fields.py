@@ -326,6 +326,8 @@ class CountryField(CharField):
         return super(CharField, self).get_prep_value(value)
 
     def get_clean_value(self, value):
+        if value is None:
+            return None
         if not self.multiple:
             return country_to_text(value)
         if isinstance(value, (basestring, Country)):

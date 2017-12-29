@@ -11,6 +11,7 @@ from django.utils import translation
 from django.utils.encoding import force_text
 
 from django_countries import fields, countries, data
+from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import (
     Person, AllowNull, MultiCountry, WithProp)
@@ -222,6 +223,20 @@ class TestValidation(TestCase):
     def test_validate_multiple_uneditable(self):
         person = MultiCountry(countries='NZ', uneditable_countries='xx')
         person.full_clean()
+
+    def test_get_prep_value_empty_string(self):
+        country_field_instance = CountryField(multiple=True, blank=True)
+        prep_value = country_field_instance.get_prep_value('')
+        self.assertEqual(prep_value, '')
+
+    def test_get_prep_value_none(self):
+        """
+        Note: django migrations will call get_prep_value() with None
+        see: https://github.com/SmileyChris/django-countries/issues/215
+        """
+        country_field_instance = CountryField(multiple=True, blank=True)
+        prep_value = country_field_instance.get_prep_value(None)
+        self.assertEqual(prep_value, '')
 
 
 class TestCountryCustom(TestCase):
