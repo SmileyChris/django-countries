@@ -204,6 +204,16 @@ of its properties::
     {% get_country 'BR' as country %}
     {{ country.name }}
 
+If you need a list of countries, there's also a simple tag for that::
+
+    {% load countries %}
+    {% get_countries as countries %}
+    <select>
+    {% for country in countries %}
+        <option>{{ country.name }}</option>
+    {% endfor %}
+    </select>
+
 
 Customization
 =============
