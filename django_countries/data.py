@@ -19,7 +19,7 @@ from __future__ import unicode_literals
 import glob
 import os
 
-from .base import CountriesBase
+from django_countries.base import CountriesBase
 
 try:
     from django.utils.translation import ugettext_lazy as _
