@@ -9,7 +9,7 @@ release (and any new translations added).
 HEAD
 ====
 
-* Tests now also cover Django Rest Framework 3.7.
+* Tests now also cover Django Rest Framework 3.7 and Django 2.0.
 
 * Allow for creating country fields using (valid) alpha-3 or numeric codes.
 
