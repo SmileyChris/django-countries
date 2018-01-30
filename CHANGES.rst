@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release (and any new translations added).
 
-HEAD
-====
+Version 5.1 (30 January 2018)
+=============================
 
 * Tests now also cover Django Rest Framework 3.7 and Django 2.0.
 
