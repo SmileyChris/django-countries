@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-5.1.1 (unreleased)
-==================
+5.1.1 (31 January 2018)
+=======================
 
 - Fix some translations that were included in 5.1 but not compiled.
 
