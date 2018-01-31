@@ -9,7 +9,7 @@ release, and any new translations added.
 5.1.1 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fix some translations that were included in 5.1 but not compiled.
 
 
 5.1 (30 January 2018)

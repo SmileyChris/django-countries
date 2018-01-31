@@ -29,7 +29,7 @@ setup(
     zip_safe=False,
     include_package_data=True,
     extras_require={
-        'dev': ['transifex-client', 'zest.releaser[recommended]'],
+        'dev': ['transifex-client', 'zest.releaser[recommended]', 'django'],
     },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
