@@ -4,10 +4,10 @@ Change Log
 
 This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
-release (and any new translations added).
+release, and any new translations added.
 
-Version 5.1 (30 January 2018)
-=============================
+5.1 (30 January 2018)
+=====================
 
 * Tests now also cover Django Rest Framework 3.7 and Django 2.0.
 
@@ -18,16 +18,16 @@ Version 5.1 (30 January 2018)
 * Add a ``{% get_countries %}`` template tag (thanks Matija Čvrk).
 
 
-Version 5.0 (10 October 2017)
-=============================
+5.0 (10 October 2017)
+=====================
 
 * No longer allow ``multiple=True`` and ``null=True`` together. This causes
   problems saving the field, and ``null`` shouldn't really be used anyway
   because the country field is a subclass of ``CharField``.
 
 
-Version 4.6 (16 June 2017)
-==========================
+4.6 (16 June 2017)
+==================
 
 * Add a ``CountryFieldMixin`` Django Rest Framework serializer mixin that
   automatically picks the right field type for a ``CountryField`` (both single
@@ -47,19 +47,19 @@ Version 4.6 (16 June 2017)
 
 * Tests now cover multiple Django Rest Framework versions (back to 3.3).
 
-Version 4.6.1
--------------
+4.6.1
+-----
 
 * Fix invalid reStructuredText in CHANGES.
 
-Version 4.6.2
--------------
+4.6.2
+-----
 
 * Use transparency layer for flag sprites.
 
 
-Version 4.5 (18 April 2017)
-===========================
+4.5 (18 April 2017)
+===================
 
 * Change rest framework field to be based on ``ChoiceField``.
 
@@ -67,8 +67,8 @@ Version 4.5 (18 April 2017)
   (specifically the English name for now).
 
 
-Version 4.4 (6 April 2017)
-==========================
+4.4 (6 April 2017)
+==================
 
 * Fix for broken CountryField on certain models in Django 1.11.
   Thanks aktiur for the test case.
@@ -76,8 +76,8 @@ Version 4.4 (6 April 2017)
 * Update tests to cover Django 1.11
 
 
-Version 4.3 (29 March 2017)
-===========================
+4.3 (29 March 2017)
+===================
 
 * Handle "Czechia" translations in a nicer way (fall back to "Czech Republic"
   until new translations are available).
@@ -88,15 +88,15 @@ Version 4.3 (29 March 2017)
 * Back to 100% test coverage.
 
 
-Version 4.2 (10 March 2017)
-===========================
+4.2 (10 March 2017)
+===================
 
 * Add sprite flag files (and ``Country.flag_css`` property) to help minimize
   HTTP requests.
 
 
-Version 4.1 (22 February 2017)
-==============================
+4.1 (22 February 2017)
+======================
 
 * Better default Django admin filter when filtering a country field in a
   ``ModelAdmin``.
@@ -112,8 +112,8 @@ Version 4.1 (22 February 2017)
 * Fix a field with customized country list. Thanks pilmie!
 
 
-Version 4.0 (16 August 2016)
-============================
+4.0 (16 August 2016)
+====================
 
 Django supported versions are now 1.8+
 
@@ -127,14 +127,14 @@ Django supported versions are now 1.8+
 
 * Add ``COUNTRIES_FIRST_SORT``. Thanks Edraak!
 
-Version 4.0.1
--------------
+4.0.1
+-----
 
 * Fix tests for ``COUNTRIES_FIRST_SORT`` (feature still worked, tests didn't).
 
 
-Version 3.4 (22 October 2015)
-=============================
+3.4 (22 October 2015)
+=====================
 
 * Extend test suite to cover Django 1.8
 
@@ -146,14 +146,14 @@ Version 3.4 (22 October 2015)
 
 * New ``CountryField`` Django Rest Framework serializer field.
 
-Version 3.4.1
--------------
+3.4.1
+-----
 
 * Fix minor packaging error.
 
 
-Version 3.3 (30 Mar 2015)
-=========================
+3.3 (30 Mar 2015)
+=================
 
 * Add the attributes to ``Countries`` class that can override the default
   settings.
@@ -172,8 +172,8 @@ Version 3.3 (30 Mar 2015)
   Iran, Micronesia, and Venezuela.
 
 
-Version 3.2 (24 Feb 2015)
-=========================
+3.2 (24 Feb 2015)
+=================
 
 * Fixes initial iteration failing for a fresh ``Countries`` object.
 
@@ -183,8 +183,8 @@ Version 3.2 (24 Feb 2015)
   a country code by its full country name. Thanks Josh Schneier.
 
 
-Version 3.1 (15 Jan 2015)
-=========================
+3.1 (15 Jan 2015)
+=================
 
 * Start change log :)
 
@@ -194,14 +194,14 @@ Version 3.1 (15 Jan 2015)
 * Add a ``blank_label`` argument to ``CountryField`` to allow customization of
   the label shown in the initial blank choice shown in the select widget.
 
-Version 3.1.1 (15 Jan 2015)
----------------------------
+3.1.1 (15 Jan 2015)
+-------------------
 
 * Packaging fix (``CHANGES.rst`` wasn't in the manifest)
 
 
-Version 3.0 (22 Oct 2014)
-=========================
+3.0 (22 Oct 2014)
+=================
 
 Django supported versions are now 1.4 (LTS) and 1.6+
 
@@ -222,44 +222,44 @@ Django supported versions are now 1.4 (LTS) and 1.6+
 
 * Field descriptor now returns ``None`` if no country matches (*reverted in v3.0.1*)
 
-Version 3.0.1 (27 Oct 2014)
----------------------------
+3.0.1 (27 Oct 2014)
+-------------------
 
 * Revert descriptor to always return a Country object.
 
 * Fix the ``CountryField`` widget choices appearing empty due to a translation
   change in v3.0.
 
-Version 3.0.2 (29 Dec 2014)
----------------------------
+3.0.2 (29 Dec 2014)
+-------------------
 
 * Fix ``CountrySelectWidget`` failing when used with a model form that is
   passed a model instance.
 
 
-Version 2.1 (24 Mar 2014)
-=========================
+2.1 (24 Mar 2014)
+=================
 
 * Add IOC (3 letter) country codes.
 
 * Fix bug when loading fixtures.
 
-Version 2.1.1 (28 Mar 2014)
----------------------------
+2.1.1 (28 Mar 2014)
+-------------------
 
 * Fix issue with translations getting evaluated early.
 
-Version 2.1.2 (28 Mar 2014)
----------------------------
+2.1.2 (28 Mar 2014)
+-------------------
 
 * Fix Python 3 compatibility.
 
 
 
-Version 2.0 (18 Feb 2014)
-=========================
+2.0 (18 Feb 2014)
+=================
 
-This is the first entry to the change log. The previous version was 1.5,
+This is the first entry to the change log. The previous was 1.5,
 released 19 Nov 2012.
 
 * Optimized flag images, adding flags missing from original source.
