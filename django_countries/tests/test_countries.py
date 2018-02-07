@@ -204,7 +204,7 @@ class CountriesFirstTest(BaseTest):
                 COUNTRIES_FIRST=['GB', 'AF', 'DK'], COUNTRIES_FIRST_SORT=True):
             countries_list = list(countries)
             sorted_codes = [item[0] for item in countries_list[:3]]
-            self.assertEquals(['AF', 'DK', 'GB'], sorted_codes)
+            self.assertEqual(['AF', 'DK', 'GB'], sorted_codes)
 
     def test_unsorted_countries_first_english(self):
         with self.settings(
@@ -212,7 +212,7 @@ class CountriesFirstTest(BaseTest):
                 COUNTRIES_FIRST_SORT=False):
             countries_list = list(countries)
             unsorted_codes = [item[0] for item in countries_list[:3]]
-            self.assertEquals(['GB', 'AF', 'DK'], unsorted_codes)
+            self.assertEqual(['GB', 'AF', 'DK'], unsorted_codes)
 
     def test_sorted_countries_first_arabic(self):
         with self.settings(
@@ -222,7 +222,7 @@ class CountriesFirstTest(BaseTest):
             try:
                 countries_list = list(countries)
                 sorted_codes = [item[0] for item in countries_list[:3]]
-                self.assertEquals(['AF', 'GB', 'DK'], sorted_codes)
+                self.assertEqual(['AF', 'GB', 'DK'], sorted_codes)
             finally:
                 translation.activate(lang)
 

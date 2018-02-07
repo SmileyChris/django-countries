@@ -9,7 +9,7 @@ release, and any new translations added.
 5.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Ensure Django 2.1 compatibility for ``CountrySelectWidget``.
 
 
 5.1.1 (31 January 2018)
