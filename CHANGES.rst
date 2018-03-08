@@ -11,6 +11,9 @@ release, and any new translations added.
 
 - Ensure Django 2.1 compatibility for ``CountrySelectWidget``.
 
+- Fix regression introduced into 5.1 when using Django 1.8 and certain queryset
+  lookup types (like ``__in``).
+
 
 5.1.1 (31 January 2018)
 =======================

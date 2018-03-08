@@ -189,6 +189,19 @@ class TestCountryField(TestCase):
         self.assertEqual(with_prop.country.code, 'FR')
         self.assertEqual(with_prop.public_field, 'test')
 
+    def test_in(self):
+        Person.objects.create(name='A', country='NZ')
+        Person.objects.create(name='B', country='AU')
+        Person.objects.create(name='C', country='FR')
+        Person.objects.create(name='D', country='NZ')
+
+        self.assertEqual(
+            list(
+                Person.objects.filter(country__in=['AU', 'NZ'])
+                .values_list('name', flat=True)),
+            ['A', 'B', 'D']
+        )
+
 
 class TestValidation(TestCase):
 

@@ -306,10 +306,6 @@ class CountryField(CharField):
         super(CountryField, self).contribute_to_class(cls, name)
         setattr(cls, self.name, self.descriptor_class(self))
 
-    def get_prep_lookup(self, lookup_type, value):
-        value = country_to_text(value)
-        return super(CountryField, self).get_prep_lookup(lookup_type, value)
-
     def pre_save(self, *args, **kwargs):
         "Returns field's value just before saving."
         value = super(CharField, self).pre_save(*args, **kwargs)
