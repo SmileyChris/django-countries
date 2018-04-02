@@ -236,7 +236,7 @@ If you need a list of countries, there's also a simple tag for that:
     {% get_countries as countries %}
     <select>
     {% for country in countries %}
-        <option>{{ country.name }}</option>
+        <option value="{{ country.0 }}">{{ country.1 }}</option>
     {% endfor %}
     </select>
 
