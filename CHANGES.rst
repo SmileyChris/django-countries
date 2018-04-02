@@ -9,7 +9,9 @@ release, and any new translations added.
 5.3 (unreleased)
 ================
 
-- Nothing changed yet.
+- Iterating a ``Countries`` object now returns named tuples. This makes things
+  nicer when using ``{% get_countries %}`` or using the country list elsewhere
+  in your code.
 
 
 5.2 (9 March 2018)

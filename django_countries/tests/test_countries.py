@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from django.utils import translation
 
-from django_countries import countries, Countries
+from django_countries import countries, Countries, CountryTuple
 from django_countries.tests import custom_countries
 
 
@@ -31,6 +31,13 @@ class TestCountriesObject(BaseTest):
 
     def test_countries_sorted(self):
         self.assertEqual(list(countries)[:3], FIRST_THREE_COUNTRIES)
+
+    def test_countries_namedtuple(self):
+        country = list(countries)[0]
+        first_country = FIRST_THREE_COUNTRIES[0]
+        self.assertEqual(country.code, first_country[0])
+        self.assertEqual(country.name, first_country[1])
+        self.assertIsInstance(country, CountryTuple)
 
     def test_countries_limit(self):
         with self.settings(

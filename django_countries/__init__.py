@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from __future__ import unicode_literals
 from itertools import islice
+from collections import namedtuple
 
 from django_countries.conf import settings
 from django.utils import six
@@ -30,12 +31,22 @@ else:
             .encode('ascii', 'ignore').decode('ascii'))
 
 
+class CountryTuple(namedtuple('CountryTupleBase', ['code', 'name'])):
+
+    def __repr__(self):
+        """
+        Display the repr as a standard tuple for better backwards
+        compatibility with outputting this in a template.
+        """
+        return '({this.code!r}, {this.name!r})'.format(this=self)
+
+
 class Countries(CountriesBase):
     """
     An object containing a list of ISO3166-1 countries.
 
-    Iterating this object will return the countries as tuples (of the country
-    code and name), sorted by name.
+    Iterating this object will return the countries as namedtuples (of
+    the country ``code`` and ``name``), sorted by name.
     """
 
     def get_option(self, option):
@@ -119,7 +130,7 @@ class Countries(CountriesBase):
         """
         Force a country to the current activated translation.
 
-        :returns: 2-tuple of ``(code, translated_country_name)``
+        :returns: ``CountryTuple(code, translated_country_name)`` namedtuple
         """
         name = self.countries[code]
         if code in self.OLD_NAMES:
@@ -138,24 +149,24 @@ class Countries(CountriesBase):
                         break
         else:
             name = force_text(name)
-        return (code, name)
+        return CountryTuple(code, name)
 
     def __iter__(self):
         """
         Iterate through countries, sorted by name.
 
-        Each country record consists of a tuple of the two letter ISO3166-1
-        country code and short name.
+        Each country record consists of a namedtuple of the two letter
+        ISO3166-1 country ``code`` and short ``name``.
 
         The sorting happens based on the thread's current translation.
 
-        Countries that are in ``settings.COUNTRIES_FIRST`` will be displayed
-        before any sorted countries (in the order provided), and are only
-        repeated in the sorted list if ``settings.COUNTRIES_FIRST_REPEAT`` is
-        ``True``.
+        Countries that are in ``settings.COUNTRIES_FIRST`` will be
+        displayed before any sorted countries (in the order provided),
+        and are only repeated in the sorted list if
+        ``settings.COUNTRIES_FIRST_REPEAT`` is ``True``.
 
-        The first countries can be separated from the sorted list by the value
-        provided in ``settings.COUNTRIES_FIRST_BREAK``.
+        The first countries can be separated from the sorted list by the
+        value provided in ``settings.COUNTRIES_FIRST_BREAK``.
         """
         # Initializes countries_first, so needs to happen first.
         countries = self.countries
