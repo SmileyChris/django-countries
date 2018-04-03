@@ -174,16 +174,20 @@ flag and widget. The default layout is:
 Custom forms
 ============
 
-If you want to use the countries in a custom form, use the following custom
-field to ensure the translatable strings for the country choices are left lazy
-until the widget renders:
+If you want to use the countries in a custom form, use the model field's custom
+form field to ensure the translatable strings for the country choices are left
+lazy until the widget renders:
 
   .. code:: python
 
-    from django_countries.fields import LazyTypedChoiceField
+    from django_countries.fields import CountryField
 
     class CustomForm(forms.Form):
-        country = LazyTypedChoiceField(choices=countries)
+        country = CountryField().formfield()
+
+Use ``CountryField(blank=True)`` for non-required form fields, and
+``CountryField(blank_label='(Select country)')`` to use a custom label for the
+initial blank option.
 
 You can also use the CountrySelectWidget_ as the widget for this field if you
 want the flag image after the select box.
