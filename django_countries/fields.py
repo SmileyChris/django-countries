@@ -367,11 +367,10 @@ class CountryField(CharField):
     get_choices = lazy(get_choices, list)
 
     def formfield(self, **kwargs):
-        argname = 'choices_form_class'
-        if argname not in kwargs:
-            kwargs[argname] = (
-                LazyTypedMultipleChoiceField
-                if self.multiple else LazyTypedChoiceField)
+        kwargs.setdefault(
+            'choices_form_class',
+            LazyTypedMultipleChoiceField
+            if self.multiple else LazyTypedChoiceField)
         if 'coerce' not in kwargs:
             kwargs['coerce'] = super(CountryField, self).to_python
         field = super(CharField, self).formfield(**kwargs)
