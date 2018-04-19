@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-5.3 (unreleased)
-================
+5.3 (20 April 2018)
+===================
 
 - Iterating a ``Countries`` object now returns named tuples. This makes things
   nicer when using ``{% get_countries %}`` or using the country list elsewhere
