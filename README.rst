@@ -412,8 +412,8 @@ included ``CountryField`` serializer field. For example:
     class CountrySerializer(serializers.Serializer):
         country = CountryField()
 
-You can optionally instantiate the field with ``countries`` with a custom
-Countries_ instance.
+You can optionally instantiate the field with the ``countries`` argument to
+specify a custom Countries_ instance.
 
 .. _Countries: `Single field customization`_
 
