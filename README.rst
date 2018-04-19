@@ -20,6 +20,7 @@ icons static files, and a country field for models.
 
 .. contents::
     :local:
+    :backlinks: none
 
 
 Installation
@@ -46,7 +47,7 @@ corresponding to the official ISO 3166-1 list of countries (with a default
 
 Consider the following model using a ``CountryField``:
 
-  .. code:: python
+.. code:: python
 
     from django.db import models
     from django_countries.fields import CountryField
@@ -58,7 +59,7 @@ Consider the following model using a ``CountryField``:
 Any ``Person`` instance will have a ``country`` attribute that you can use to
 get details of the person's country:
 
-  .. code:: python
+.. code:: python
 
     >>> person = Person(name='Chris', country='NZ')
     >>> person.country
@@ -74,7 +75,7 @@ which is described below.
 Use ``blank_label`` to set the label for the initial blank choice shown in
 forms:
 
-  .. code:: python
+.. code:: python
 
     country = CountryField(blank_label='(select country)')
 
@@ -86,7 +87,7 @@ This field can also allow multiple selections of countries (saved as a comma
 separated string). The field will always output a list of countries in this
 mode. For example:
 
-  .. code:: python
+.. code:: python
 
     class Incident(models.Model):
         title = models.CharField(max_length=100)
@@ -118,7 +119,7 @@ flag_css
   Output the css classes needed to display an HTML element as the correct flag
   from within a single sprite image that contains all flags. For example:
 
-  .. code:: jinja
+.. code:: jinja
 
     <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
     <i class="{{ country.flag_css }}"></i>
@@ -126,7 +127,7 @@ flag_css
   For multiple flag resolutions, use ``sprite-hq.css`` instead and add the
   ``flag2x``, ``flag3x``, or ``flag4x`` class. For example:
 
-  .. code:: jinja
+.. code:: jinja
 
     <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
     Normal: <i class="{{ country.flag_css }}"></i>
@@ -135,7 +136,7 @@ flag_css
   You might also want to consider using ``aria-label`` for better
   accessibility:
 
-  .. code:: jinja
+.. code:: jinja
 
     <i class="{{ country.flag_css }}"
         aria-label="{% blocktrans with country_code=country.code %}
@@ -165,7 +166,7 @@ A widget is included that can show the flag image after the select box
 
 When you create your form, you can use this custom widget like normal:
 
-  .. code:: python
+.. code:: python
 
     from django_countries.widgets import CountrySelectWidget
 
@@ -178,7 +179,7 @@ When you create your form, you can use this custom widget like normal:
 Pass a ``layout`` text argument to the widget to change the positioning of the
 flag and widget. The default layout is:
 
-  .. code:: python
+.. code:: python
 
     '{widget}<img class="country-select-flag" id="{flag_id}" style="margin: 6px 4px 0" src="{country.flag}">'
 
@@ -190,7 +191,7 @@ If you want to use the countries in a custom form, use the model field's custom
 form field to ensure the translatable strings for the country choices are left
 lazy until the widget renders:
 
-  .. code:: python
+.. code:: python
 
     from django_countries.fields import CountryField
 
@@ -213,7 +214,7 @@ Use the ``django_countries.countries`` object instance as an iterator of ISO
 
 For example:
 
-  .. code:: python
+.. code:: python
 
     >>> from django_countries import countries
     >>> dict(countries)['NZ']
@@ -238,7 +239,7 @@ If you have your country code stored in a different place than a `CountryField`
 you can use the template tag to get a `Country` object and have access to all
 of its properties:
 
-  .. code:: jinja
+.. code:: jinja
 
     {% load countries %}
     {% get_country 'BR' as country %}
@@ -246,7 +247,7 @@ of its properties:
 
 If you need a list of countries, there's also a simple tag for that:
 
-  .. code:: jinja
+.. code:: jinja
 
     {% load countries %}
     {% get_countries as countries %}
@@ -274,7 +275,7 @@ Note that you will need to handle translation of customised country names.
 Setting a country's name to ``None`` will exclude it from the country list.
 For example:
 
-  .. code:: python
+.. code:: python
 
     from django.utils.translation import ugettext_lazy as _
 
@@ -286,14 +287,14 @@ For example:
 If you have a specific list of countries that should be used, use
 ``COUNTRIES_ONLY``:
 
-  .. code:: python
+.. code:: python
 
     COUNTRIES_ONLY = ['NZ', 'AU']
 
 or to specify your own country names, use a dictionary or two-tuple list
 (string items will use the standard country name):
 
-  .. code:: python
+.. code:: python
 
     COUNTRIES_ONLY = [
         'US',
@@ -343,7 +344,7 @@ No checking is done to ensure that a static flag actually exists.
 
 Alternatively, you can specify a different URL on a specific ``CountryField``:
 
-  .. code:: python
+.. code:: python
 
     class Person(models.Model):
         name = models.CharField(max_length=100)
@@ -363,7 +364,7 @@ setting without the ``COUNTRIES_`` prefix.
 Then just reference this class in a field. For example, this ``CountryField``
 uses a custom country list that only includes the G8 countries:
 
-  .. code:: python
+.. code:: python
 
     from django_countries import Countries
 
@@ -385,7 +386,7 @@ Django Countries ships with a ``CountryFieldMixin`` to make the
 `CountryField`_ model field compatible with DRF serializers. Use the following
 mixin with your model serializer:
 
-  .. code:: python
+.. code:: python
 
     from django_countries.serializers import CountryFieldMixin
 
@@ -404,7 +405,7 @@ Django Rest Framework field
 For lower level use (or when not dealing with model fields), you can use the
 included ``CountryField`` serializer field. For example:
 
-  .. code:: python
+.. code:: python
 
     from django_countries.serializer_fields import CountryField
 
