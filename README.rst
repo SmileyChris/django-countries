@@ -18,7 +18,8 @@ Django Countries
 A Django application that provides country choices for use with forms, flag
 icons static files, and a country field for models.
 
-.. contents:: Topics
+.. contents::
+    :local:
 
 
 Installation
