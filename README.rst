@@ -119,7 +119,7 @@ flag_css
   Output the css classes needed to display an HTML element as the correct flag
   from within a single sprite image that contains all flags. For example:
 
-.. code:: jinja
+  .. code:: jinja
 
     <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
     <i class="{{ country.flag_css }}"></i>
@@ -127,7 +127,7 @@ flag_css
   For multiple flag resolutions, use ``sprite-hq.css`` instead and add the
   ``flag2x``, ``flag3x``, or ``flag4x`` class. For example:
 
-.. code:: jinja
+  .. code:: jinja
 
     <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
     Normal: <i class="{{ country.flag_css }}"></i>
@@ -136,7 +136,7 @@ flag_css
   You might also want to consider using ``aria-label`` for better
   accessibility:
 
-.. code:: jinja
+  .. code:: jinja
 
     <i class="{{ country.flag_css }}"
         aria-label="{% blocktrans with country_code=country.code %}
@@ -417,6 +417,20 @@ specify a custom Countries_ instance.
 
 .. _Countries: `Single field customization`_
 
+REST output format
+^^^^^^^^^^^^^^^^^^
+
+By default, the field will output just the country code. If you would rather
+have more verbose output, instantiate the field with ``country_dict=True``,
+which will result in the field having the following output structure:
+
+.. code:: json
+
+    {"code": "NZ", "name": "New Zealand"}
+
+Either the code or this dict output structure are acceptable as input
+irregardless of the ``country_dict`` argument's value.
+
 
 OPTIONS request
 ---------------
@@ -453,16 +467,3 @@ the countries will be returned in the response as choices:
     }
 
 .. _metadata support: http://www.django-rest-framework.org/api-guide/metadata/
-
-
-REST output format
-------------------
-
-By default, the field will output just the country code. If you would rather
-have more verbose output, instantiate the field with ``country_dict=True``,
-which will result in the field having the following output structure::
-
-    {"code": "NZ", "name": "New Zealand"}
-
-Either the code or this dict output structure are acceptable as input
-irregardless of the ``country_dict`` argument's value.
