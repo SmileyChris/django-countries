@@ -103,7 +103,7 @@ The ``Country`` object
 ----------------------
 
 An object used to represent a country, instanciated with a two character
-country code.
+country code, three character code, or numeric code.
 
 It can be compared to other objects as if it was a string containing the
 country code and when evaluated as text, returns the country code.
@@ -149,7 +149,7 @@ unicode_flag
   for details.
 
 code
-  The two letter country code for this country. (The code this country was instantiated with.)
+  The two letter country code for this country.
 
 alpha3
   The three letter country code for this country.
