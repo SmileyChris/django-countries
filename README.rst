@@ -103,7 +103,7 @@ The ``Country`` object
 ----------------------
 
 An object used to represent a country, instanciated with a two character
-country code.
+country code, three character code, or numeric code.
 
 It can be compared to other objects as if it was a string containing the
 country code and when evaluated as text, returns the country code.
@@ -147,6 +147,9 @@ unicode_flag
   A unicode glyph for the flag for this country. Currently well-supported in
   iOS and OS X. See https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
   for details.
+
+code
+  The two letter country code for this country.
 
 alpha3
   The three letter country code for this country.
@@ -253,7 +256,7 @@ If you need a list of countries, there's also a simple tag for that:
     {% get_countries as countries %}
     <select>
     {% for country in countries %}
-        <option>{{ country.name }}</option>
+        <option value="{{ country.code }}">{{ country.name }}</option>
     {% endfor %}
     </select>
 
