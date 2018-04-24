@@ -148,6 +148,9 @@ unicode_flag
   iOS and OS X. See https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
   for details.
 
+code
+  The two letter country code for this country. (The code this country was instantiated with.)
+
 alpha3
   The three letter country code for this country.
 
@@ -253,7 +256,7 @@ If you need a list of countries, there's also a simple tag for that:
     {% get_countries as countries %}
     <select>
     {% for country in countries %}
-        <option>{{ country.name }}</option>
+        <option value="{{ country.code }}">{{ country.name }}</option>
     {% endfor %}
     </select>
 
