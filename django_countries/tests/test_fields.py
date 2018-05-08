@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import io
 import pickle
 import tempfile
 
@@ -135,7 +134,6 @@ class TestCountryField(TestCase):
             test_config = apps.get_app_config('django_countries_tests')
             test_config.models.pop('multinullcountry')
             test_config.models.pop('multinullcountrynoblank')
-
 
     def test_deferred(self):
         Person.objects.create(name='Person',
