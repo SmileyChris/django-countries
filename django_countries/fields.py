@@ -381,6 +381,8 @@ class CountryField(CharField):
             return super(CountryField, self).to_python(value)
         if not value:
             return value
+        if isinstance(value, basestring):
+            value = value.split(',')
         output = []
         for item in value:
             output.append(super(CountryField, self).to_python(item))
@@ -410,6 +412,13 @@ class CountryField(CharField):
         if not self.blank and value in self.empty_values:
             raise exceptions.ValidationError(
                 self.error_messages['blank'], code='blank')
+
+    def value_to_string(self, obj):
+        """
+        Ensure data is serialized correctly.
+        """
+        value = self.value_from_object(obj)
+        return self.get_prep_value(value)
 
 
 FieldListFilter.register(

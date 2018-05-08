@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import io
 import pickle
+import tempfile
 
 from django.db import models
 from django.core import validators, checks
+from django.core.management import call_command
 from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase, override_settings
@@ -105,26 +108,34 @@ class TestCountryField(TestCase):
 
     @override_settings(SILENCED_SYSTEM_CHECKS=['django_countries.E100'])
     def test_multi_null_country(self):
+        try:
 
-        class MultiNullCountry(models.Model):
-            countries = fields.CountryField(
-                multiple=True, null=True, blank=True)
+            class MultiNullCountry(models.Model):
+                countries = fields.CountryField(
+                    multiple=True, null=True, blank=True)
 
-        class MultiNullCountryNoBlank(models.Model):
-            countries = fields.CountryField(
-                multiple=True, null=True)
+            class MultiNullCountryNoBlank(models.Model):
+                countries = fields.CountryField(
+                    multiple=True, null=True)
 
-        errors = checks.run_checks()
-        self.assertEqual([e.id for e in errors], ['django_countries.E100'] * 2)
-        errors_dict = dict((e.obj, e) for e in errors)
-        self.assertFalse(
-            'blank=True' in errors_dict[
-                MultiNullCountry._meta.get_field('countries')
-            ].hint)
-        self.assertTrue(
-            'blank=True' in errors_dict[
-                MultiNullCountryNoBlank._meta.get_field('countries')
-            ].hint)
+            errors = checks.run_checks()
+            self.assertEqual(
+                [e.id for e in errors], ['django_countries.E100'] * 2)
+            errors_dict = dict((e.obj, e) for e in errors)
+            self.assertFalse(
+                'blank=True' in errors_dict[
+                    MultiNullCountry._meta.get_field('countries')
+                ].hint)
+            self.assertTrue(
+                'blank=True' in errors_dict[
+                    MultiNullCountryNoBlank._meta.get_field('countries')
+                ].hint)
+        finally:
+            from django.apps import apps
+            test_config = apps.get_app_config('django_countries_tests')
+            test_config.models.pop('multinullcountry')
+            test_config.models.pop('multinullcountrynoblank')
+
 
     def test_deferred(self):
         Person.objects.create(name='Person',
@@ -516,3 +527,21 @@ class TestPickling(TestCase):
         self.assertEqual(neverland.flag_url, None)
         self.assertIsInstance(
             neverland.countries, custom_countries.FantasyCountries)
+
+
+class TestLoadData(TestCase):
+
+    def test_basic(self):
+        single = Person.objects.create(name='Chris Beaven', country='NZ')
+        multi = MultiCountry.objects.create(countries=['NZ', 'AU'])
+        with tempfile.NamedTemporaryFile(suffix=".json", mode='w+') as capture:
+            call_command('dumpdata', 'django_countries_tests', stdout=capture)
+            single.delete()
+            multi.delete()
+            capture.flush()
+            capture.seek(0)
+            call_command('loaddata', capture.name, '-v', '0')
+        self.assertEqual(Person.objects.get().country, 'NZ')
+        countries = MultiCountry.objects.get().countries
+        countries = [country.code for country in countries]
+        self.assertEqual(countries, ['NZ', 'AU'])

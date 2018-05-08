@@ -9,7 +9,7 @@ release, and any new translations added.
 5.4 (unreleased)
 ================
 
-- Nothing changed yet.
+- Fix ``dumpdata`` and ``loaddata`` for ``CountryField(multiple=True)``.
 
 
 5.3 (20 April 2018)
