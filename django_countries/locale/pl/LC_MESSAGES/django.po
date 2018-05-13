@@ -7,6 +7,7 @@
 # berislavlopac <berislav.lopac@gmail.com>, 2012
 # Dariusz Czech <dczech@gmail.com>, 2016
 # vericule <fenuks@o2.pl>, 2014
+# Jastrzebowski <karol.jastrzebowski@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
@@ -1083,8 +1084,8 @@ msgstr "Zimbabwe"
 
 #: filters.py:11
 msgid "Country"
-msgstr ""
+msgstr "Kraj"
 
 #: filters.py:22
 msgid "All"
-msgstr ""
+msgstr "Wszystkie"
