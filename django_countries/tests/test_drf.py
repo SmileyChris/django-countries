@@ -142,9 +142,12 @@ class TestDRF(TestCase):
             'countries': ['NZ', 'BAD', 'AU']
         })
         self.assertFalse(serializer.is_valid())
-        self.assertEqual(
-            serializer.errors['countries'],
-            ['"BAD" is not a valid choice.'])
+        errors = serializer.errors['countries']
+        if isinstance(errors, dict):
+            # djangorestframework >= 3.8.0 returns errors as dict
+            # with integers as keys
+            errors = errors[1]
+        self.assertEqual(errors, ['"BAD" is not a valid choice.'])
 
     def test_multi_deserialize_save(self):
         serializer = MultiCountrySerializer(data={
