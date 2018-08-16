@@ -667,7 +667,7 @@ msgstr "Mexique"
 
 #: data.py:177
 msgid "Micronesia (Federated States of)"
-msgstr "Micronésie (Etats Fédérés de)"
+msgstr "Micronésie (États Fédérés de)"
 
 #: data.py:178
 msgid "Moldova (the Republic of)"
@@ -1035,7 +1035,7 @@ msgstr "Îles mineures éloignées des États-Unis"
 
 #: data.py:269
 msgid "United States of America"
-msgstr "Etats Unis d'Amérique"
+msgstr "États-Unis d'Amérique"
 
 #: data.py:270
 msgid "Uruguay"
@@ -1051,7 +1051,7 @@ msgstr "Vanuatu"
 
 #: data.py:273
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr "Vénézuéla (République Bolivarienne du)"
+msgstr "Venezuela (République Bolivarienne du)"
 
 #: data.py:274
 msgid "Viet Nam"
