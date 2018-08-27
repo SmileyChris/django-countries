@@ -9,7 +9,7 @@ release, and any new translations added.
 5.3.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Tests for Django 2.1 and Django Rest Framework 3.8.
 
 
 5.3.1 (12 June 2018)
