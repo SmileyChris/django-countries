@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 from django.contrib import admin
 from django.contrib.admin.views.main import ChangeList
+from django.contrib.auth.models import AnonymousUser
 
 from django_countries import filters
 from django_countries.tests import models
@@ -23,7 +24,7 @@ class TestCountryFilter(TestCase):
 
     def get_changelist_args(self, **kwargs):
         m = self.person_admin
-        args = (
+        args = [
             kwargs.pop('list_display', m.list_display),
             kwargs.pop('list_display_links', m.list_display_links),
             kwargs.pop('list_filter', m.list_filter),
@@ -34,7 +35,9 @@ class TestCountryFilter(TestCase):
             kwargs.pop('list_max_show_all', m.list_max_show_all),
             kwargs.pop('list_editable', m.list_editable),
             m,
-        )
+        ]
+        if hasattr(m, 'sortable_by'):   # Django 2.1+
+            args.append(kwargs.pop('sortable_by', m.sortable_by))
         assert not kwargs, "Unexpected kwarg %s" % kwargs
         return args
 
@@ -46,6 +49,7 @@ class TestCountryFilter(TestCase):
 
     def test_filter_none(self):
         request = RequestFactory().get('/person/')
+        request.user = AnonymousUser()
         cl = ChangeList(request, models.Person, *self.get_changelist_args())
         cl.get_results(request)
         self.assertEqual(
@@ -53,6 +57,7 @@ class TestCountryFilter(TestCase):
 
     def test_filter_country(self):
         request = RequestFactory().get('/person/', data={'country': 'NZ'})
+        request.user = AnonymousUser()
         cl = ChangeList(request, models.Person, *self.get_changelist_args())
         cl.get_results(request)
         self.assertEqual(
@@ -62,6 +67,7 @@ class TestCountryFilter(TestCase):
 
     def test_choices(self):
         request = RequestFactory().get('/person/', data={'country': 'NZ'})
+        request.user = AnonymousUser()
         cl = ChangeList(request, models.Person, *self.get_changelist_args())
         choices = list(cl.filter_specs[0].choices(cl))
         self.assertEqual(
