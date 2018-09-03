@@ -101,6 +101,7 @@ COUNTRIES = {
     "GQ": _("Equatorial Guinea"),
     "ER": _("Eritrea"),
     "EE": _("Estonia"),
+    "SZ": _("Eswatini"),
     "ET": _("Ethiopia"),
     "FK": _("Falkland Islands  [Malvinas]"),
     "FO": _("Faroe Islands"),
@@ -244,7 +245,6 @@ COUNTRIES = {
     "SD": _("Sudan"),
     "SR": _("Suriname"),
     "SJ": _("Svalbard and Jan Mayen"),
-    "SZ": _("Swaziland"),
     "SE": _("Sweden"),
     "CH": _("Switzerland"),
     "SY": _("Syrian Arab Republic"),
@@ -353,6 +353,7 @@ ALT_CODES = {
     "GQ": ("GNQ", 226),
     "ER": ("ERI", 232),
     "EE": ("EST", 233),
+    "SZ": ("SWZ", 748),
     "ET": ("ETH", 231),
     "FK": ("FLK", 238),
     "FO": ("FRO", 234),
@@ -496,7 +497,6 @@ ALT_CODES = {
     "SD": ("SDN", 729),
     "SR": ("SUR", 740),
     "SJ": ("SJM", 744),
-    "SZ": ("SWZ", 748),
     "SE": ("SWE", 752),
     "CH": ("CHE", 756),
     "SY": ("SYR", 760),
@@ -547,15 +547,13 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
 
     countries = []
     alt_codes = []
-    with open(filename, "rb") as csv_file:
+    with open(filename, "r") as csv_file:
         for row in csv.reader(csv_file):
-            name = row[0].decode("utf-8").rstrip("*")
+            name = row[0].rstrip("*")
             name = re.sub(r"\(the\)", "", name)
             if name:
-                countries.append((name, row[1].decode("utf-8")))
-                alt_codes.append(
-                    (row[1].decode("utf-8"), row[2].decode("utf-8"), int(row[3]))
-                )
+                countries.append((name, row[1]))
+                alt_codes.append((row[1], row[2], int(row[3])))
     with open(__file__, "r") as source_file:
         contents = source_file.read()
     # Write countries.
@@ -565,7 +563,7 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
         name = name.replace('"', r"\"").strip()
         country_list.append('    "{code}": _("{name}"),'.format(name=name, code=code))
     content = bits[0]
-    content += "\n".join(country_list).encode("utf-8")
+    content += "\n".join(country_list)
     # Write alt codes.
     alt_bits = re.match(
         "(.*\nALT_CODES = \{\n)(.*)(\n\}.*)", bits[2], re.DOTALL
@@ -579,10 +577,10 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
             )
         )
     content += alt_bits[0]
-    content += "\n".join(alt_list).encode("utf-8")
+    content += "\n".join(alt_list)
     content += alt_bits[2]
     # Generate file.
-    with open(output_filename, "wb") as output_file:
+    with open(output_filename, "w") as output_file:
         output_file.write(content)
     return countries
 
