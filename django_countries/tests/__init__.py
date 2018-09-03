@@ -1,1 +1,1 @@
-default_app_config = 'django_countries.tests.apps.TestConfig'
+default_app_config = "django_countries.tests.apps.TestConfig"

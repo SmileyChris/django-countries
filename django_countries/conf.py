@@ -17,7 +17,7 @@ class AppSettings(object):
 
 
 class Settings(AppSettings):
-    COUNTRIES_FLAG_URL = 'flags/{code}.gif'
+    COUNTRIES_FLAG_URL = "flags/{code}.gif"
     """
     The URL for a flag.
 

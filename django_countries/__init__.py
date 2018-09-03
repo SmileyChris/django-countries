@@ -21,24 +21,28 @@ if pyuca:
 
     def sort_key(item):
         return collator.sort_key(item[1])
+
+
 else:
     import unicodedata
+
     # Cheap and dirty method to sort against ASCII characters only.
 
     def sort_key(item):
         return (
-            unicodedata.normalize('NFKD', item[1])
-            .encode('ascii', 'ignore').decode('ascii'))
+            unicodedata.normalize("NFKD", item[1])
+            .encode("ascii", "ignore")
+            .decode("ascii")
+        )
 
 
-class CountryTuple(namedtuple('CountryTupleBase', ['code', 'name'])):
-
+class CountryTuple(namedtuple("CountryTupleBase", ["code", "name"])):
     def __repr__(self):
         """
         Display the repr as a standard tuple for better backwards
         compatibility with outputting this in a template.
         """
-        return '({this.code!r}, {this.name!r})'.format(this=self)
+        return "({this.code!r}, {this.name!r})".format(this=self)
 
 
 class Countries(CountriesBase):
@@ -57,7 +61,7 @@ class Countries(CountriesBase):
         value = getattr(self, option, None)
         if value is not None:
             return value
-        return getattr(settings, 'COUNTRIES_{0}'.format(option.upper()))
+        return getattr(settings, "COUNTRIES_{0}".format(option.upper()))
 
     @property
     def countries(self):
@@ -67,8 +71,8 @@ class Countries(CountriesBase):
 
         The result is cached so future lookups are less work intensive.
         """
-        if not hasattr(self, '_countries'):
-            only = self.get_option('only')
+        if not hasattr(self, "_countries"):
+            only = self.get_option("only")
             if only:
                 only_choices = True
                 if not isinstance(only, dict):
@@ -82,15 +86,18 @@ class Countries(CountriesBase):
                 # Local import so that countries aren't loaded into memory
                 # until first used.
                 from django_countries.data import COUNTRIES
+
                 self._countries = dict(COUNTRIES)
-                if self.get_option('common_names'):
+                if self.get_option("common_names"):
                     self._countries.update(self.COMMON_NAMES)
-                override = self.get_option('override')
+                override = self.get_option("override")
                 if override:
                     self._countries.update(override)
                     self._countries = dict(
-                        (code, name) for code, name in self._countries.items()
-                        if name is not None)
+                        (code, name)
+                        for code, name in self._countries.items()
+                        if name is not None
+                    )
             if only and not only_choices:
                 countries = {}
                 for item in only:
@@ -101,7 +108,7 @@ class Countries(CountriesBase):
                         countries[key] = value
                 self._countries = countries
             self.countries_first = []
-            first = self.get_option('first') or []
+            first = self.get_option("first") or []
             for code in first:
                 code = self.alpha2(code)
                 if code in self._countries:
@@ -110,9 +117,10 @@ class Countries(CountriesBase):
 
     @property
     def alt_codes(self):
-        if not hasattr(self, '_alt_codes'):
+        if not hasattr(self, "_alt_codes"):
             # Again, local import so data is not loaded unless it's needed.
             from django_countries.data import ALT_CODES
+
             self._alt_codes = ALT_CODES
         return self._alt_codes
 
@@ -123,7 +131,7 @@ class Countries(CountriesBase):
         internal options change. But surely no one is crazy enough to do that,
         right?
         """
-        if hasattr(self, '_countries'):
+        if hasattr(self, "_countries"):
             del self._countries
 
     def translate_pair(self, code):
@@ -172,27 +180,26 @@ class Countries(CountriesBase):
         countries = self.countries
 
         # Yield countries that should be displayed first.
-        countries_first = (
-            self.translate_pair(code)
-            for code in self.countries_first
-        )
+        countries_first = (self.translate_pair(code) for code in self.countries_first)
 
-        if self.get_option('first_sort'):
+        if self.get_option("first_sort"):
             countries_first = sorted(countries_first, key=sort_key)
 
         for item in countries_first:
             yield item
 
         if self.countries_first:
-            first_break = self.get_option('first_break')
+            first_break = self.get_option("first_break")
             if first_break:
-                yield ('', force_text(first_break))
+                yield ("", force_text(first_break))
 
         # Force translation before sorting.
-        first_repeat = self.get_option('first_repeat')
+        first_repeat = self.get_option("first_repeat")
         countries = (
-            self.translate_pair(code) for code in countries
-            if first_repeat or code not in self.countries_first)
+            self.translate_pair(code)
+            for code in countries
+            if first_repeat or code not in self.countries_first
+        )
 
         # Return sorted country list.
         for item in sorted(countries, key=sort_key):
@@ -228,7 +235,7 @@ class Countries(CountriesBase):
                     break
         if code in self.countries:
             return code
-        return ''
+        return ""
 
     def name(self, code):
         """
@@ -238,10 +245,10 @@ class Countries(CountriesBase):
         """
         code = self.alpha2(code)
         if code not in self.countries:
-            return ''
+            return ""
         return self.translate_pair(code)[1]
 
-    def by_name(self, country, language='en'):
+    def by_name(self, country, language="en"):
         """
         Fetch a country's ISO3166-1 two letter country code from its name.
 
@@ -262,7 +269,7 @@ class Countries(CountriesBase):
                     for old_name in self.OLD_NAMES[code]:
                         if old_name.lower() == country.lower():
                             return code
-        return ''
+        return ""
 
     def alpha3(self, code):
         """
@@ -275,7 +282,7 @@ class Countries(CountriesBase):
         try:
             return self.alt_codes[code][0]
         except KeyError:
-            return ''
+            return ""
 
     def numeric(self, code, padded=False):
         """
@@ -293,7 +300,7 @@ class Countries(CountriesBase):
         except KeyError:
             return None
         if padded:
-            return '%03d' % num
+            return "%03d" % num
         return num
 
     def __len__(self):
@@ -304,7 +311,7 @@ class Countries(CountriesBase):
         count = len(self.countries)
         # Add first countries, and the break if necessary.
         count += len(self.countries_first)
-        if self.countries_first and self.get_option('first_break'):
+        if self.countries_first and self.get_option("first_break"):
             count += 1
         return count
 
@@ -325,10 +332,9 @@ class Countries(CountriesBase):
         choices by index.
         """
         try:
-            return next(islice(self.__iter__(), index, index+1))
+            return next(islice(self.__iter__(), index, index + 1))
         except TypeError:
-            return list(islice(self.__iter__(), index.start, index.stop,
-                               index.step))
+            return list(islice(self.__iter__(), index.start, index.stop, index.step))
 
 
 countries = Countries()

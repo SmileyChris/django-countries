@@ -28,6 +28,7 @@ except ImportError:  # pragma: no cover
     def _(x):
         return x
 
+
 # Nicely titled (and translatable) country names.
 COUNTRIES = {
     "AF": _("Afghanistan"),
@@ -534,8 +535,7 @@ ALT_CODES = {
 }
 
 
-def self_generate(
-        output_filename, filename='iso3166-1.csv'):  # pragma: no cover
+def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cover
     """
     The following code can be used for self-generation of this file.
 
@@ -544,45 +544,45 @@ def self_generate(
     """
     import csv
     import re
+
     countries = []
     alt_codes = []
-    with open(filename, 'rb') as csv_file:
+    with open(filename, "rb") as csv_file:
         for row in csv.reader(csv_file):
-            name = row[0].decode('utf-8').rstrip('*')
-            name = re.sub(r'\(the\)', '', name)
+            name = row[0].decode("utf-8").rstrip("*")
+            name = re.sub(r"\(the\)", "", name)
             if name:
-                countries.append((name, row[1].decode('utf-8')))
-                alt_codes.append((
-                    row[1].decode('utf-8'),
-                    row[2].decode('utf-8'),
-                    int(row[3]),
-                ))
-    with open(__file__, 'r') as source_file:
+                countries.append((name, row[1].decode("utf-8")))
+                alt_codes.append(
+                    (row[1].decode("utf-8"), row[2].decode("utf-8"), int(row[3]))
+                )
+    with open(__file__, "r") as source_file:
         contents = source_file.read()
     # Write countries.
-    bits = re.match(
-        '(.*\nCOUNTRIES = \{\n)(.*?)(\n\}.*)', contents, re.DOTALL).groups()
+    bits = re.match("(.*\nCOUNTRIES = \{\n)(.*?)(\n\}.*)", contents, re.DOTALL).groups()
     country_list = []
     for name, code in countries:
-        name = name.replace('"', r'\"').strip()
-        country_list.append(
-            '    "{code}": _("{name}"),'.format(name=name, code=code))
+        name = name.replace('"', r"\"").strip()
+        country_list.append('    "{code}": _("{name}"),'.format(name=name, code=code))
     content = bits[0]
-    content += '\n'.join(country_list).encode('utf-8')
+    content += "\n".join(country_list).encode("utf-8")
     # Write alt codes.
     alt_bits = re.match(
-        '(.*\nALT_CODES = \{\n)(.*)(\n\}.*)', bits[2], re.DOTALL).groups()
+        "(.*\nALT_CODES = \{\n)(.*)(\n\}.*)", bits[2], re.DOTALL
+    ).groups()
     alt_list = []
     for code, code3, codenum in alt_codes:
-        name = name.replace('"', r'\"').strip()
+        name = name.replace('"', r"\"").strip()
         alt_list.append(
             '    "{code}": ("{code3}", {codenum}),'.format(
-                code=code, code3=code3, codenum=codenum))
+                code=code, code3=code3, codenum=codenum
+            )
+        )
     content += alt_bits[0]
-    content += '\n'.join(alt_list).encode('utf-8')
+    content += "\n".join(alt_list).encode("utf-8")
     content += alt_bits[2]
     # Generate file.
-    with open(output_filename, 'wb') as output_file:
+    with open(output_filename, "wb") as output_file:
         output_file.write(content)
     return countries
 
@@ -590,7 +590,7 @@ def self_generate(
 def check_flags(verbosity=1):
     files = {}
     this_dir = os.path.dirname(__file__)
-    for path in glob.glob(os.path.join(this_dir, 'static', 'flags', '*.gif')):
+    for path in glob.glob(os.path.join(this_dir, "static", "flags", "*.gif")):
         files[os.path.basename(os.path.splitext(path)[0]).upper()] = path
 
     flags_missing = set(COUNTRIES) - set(files)
@@ -603,7 +603,7 @@ def check_flags(verbosity=1):
 
     code_missing = set(files) - set(COUNTRIES)
     # Special-case EU and __
-    for special_code in ('EU', '__'):
+    for special_code in ("EU", "__"):
         code_missing.discard(special_code)
     if code_missing:  # pragma: no cover
         print("")
@@ -616,16 +616,14 @@ def check_common_names():
     common_names_missing = set(CountriesBase.COMMON_NAMES) - set(COUNTRIES)
     if common_names_missing:  # pragma: no cover
         print("")
-        print(
-            "The following common names do not match an official country "
-            "code:")
+        print("The following common names do not match an official country code:")
         for code in sorted(common_names_missing):
             print("  {0}".format(code))
 
 
-if __name__ == '__main__':  # pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
     countries = self_generate(__file__)
-    print('Wrote {0} countries.'.format(len(countries)))
+    print("Wrote {0} countries.".format(len(countries)))
 
     print("")
     check_flags()

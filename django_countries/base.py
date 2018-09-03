@@ -25,9 +25,7 @@ class CountriesBase(object):
         "VN": _("Vietnam"),
     }
 
-    OLD_NAMES = {
-        "CZ": [_("Czech Republic")],
-    }
+    OLD_NAMES = {"CZ": [_("Czech Republic")]}
 
     def __getstate__(self):
         return None

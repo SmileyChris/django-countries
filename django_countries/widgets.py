@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
+
 try:
     from urllib import parse as urlparse
 except ImportError:
-    import urlparse   # Python 2
+    import urlparse  # Python 2
 import copy
 
 from django.forms import widgets
@@ -21,7 +22,6 @@ COUNTRY_CHANGE_HANDLER = (
 
 
 class LazyChoicesMixin(object):
-
     @property
     def choices(self):
         """
@@ -41,7 +41,6 @@ class LazyChoicesMixin(object):
 
 
 class LazySelectMixin(LazyChoicesMixin):
-
     def __deepcopy__(self, memo):
         obj = copy.copy(self)
         obj.attrs = self.attrs.copy()
@@ -63,9 +62,8 @@ class LazySelectMultiple(LazySelectMixin, widgets.SelectMultiple):
 
 
 class CountrySelectWidget(LazySelect):
-
     def __init__(self, *args, **kwargs):
-        self.layout = kwargs.pop('layout', None) or (
+        self.layout = kwargs.pop("layout", None) or (
             '{widget}<img class="country-select-flag" id="{flag_id}" '
             'style="margin: 6px 4px 0" '
             'src="{country.flag}">'
@@ -74,23 +72,28 @@ class CountrySelectWidget(LazySelect):
 
     def render(self, name, value, attrs=None, renderer=None):
         from django_countries.fields import Country
+
         attrs = attrs or {}
-        widget_id = attrs and attrs.get('id')
+        widget_id = attrs and attrs.get("id")
         if widget_id:
-            flag_id = 'flag_{id}'.format(id=widget_id)
-            attrs['onchange'] = COUNTRY_CHANGE_HANDLER % urlparse.urljoin(
-                settings.STATIC_URL, settings.COUNTRIES_FLAG_URL)
+            flag_id = "flag_{id}".format(id=widget_id)
+            attrs["onchange"] = COUNTRY_CHANGE_HANDLER % urlparse.urljoin(
+                settings.STATIC_URL, settings.COUNTRIES_FLAG_URL
+            )
         else:
-            flag_id = ''
+            flag_id = ""
         # Renderer argument only added in 1.11, keeping backwards compat.
-        kwargs = {'renderer': renderer} if renderer else {}
+        kwargs = {"renderer": renderer} if renderer else {}
         widget_render = super(CountrySelectWidget, self).render(
-            name, value, attrs, **kwargs)
+            name, value, attrs, **kwargs
+        )
         if isinstance(value, Country):
             country = value
         else:
-            country = Country(value or '__')
+            country = Country(value or "__")
         with country.escape:
-            return mark_safe(self.layout.format(
-                widget=widget_render, country=country,
-                flag_id=escape(flag_id)))
+            return mark_safe(
+                self.layout.format(
+                    widget=widget_render, country=country, flag_id=escape(flag_id)
+                )
+            )

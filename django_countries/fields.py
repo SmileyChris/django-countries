@@ -3,11 +3,11 @@ from __future__ import unicode_literals
 try:
     from urllib import parse as urlparse
 except ImportError:
-    import urlparse   # Python 2
+    import urlparse  # Python 2
 try:
     basestring
 except NameError:
-    basestring = str   # Python 3
+    basestring = str  # Python 3
 
 from django import forms
 from django.core import checks, exceptions
@@ -22,7 +22,7 @@ from django_countries.conf import settings
 
 
 def country_to_text(value):
-    if hasattr(value, 'code'):
+    if hasattr(value, "code"):
         value = value.code
     if value is None:
         return None
@@ -30,7 +30,7 @@ def country_to_text(value):
 
 
 class TemporaryEscape(object):
-    __slots__ = ['country', 'original_escape']
+    __slots__ = ["country", "original_escape"]
 
     def __init__(self, country):
         self.country = country
@@ -50,9 +50,7 @@ class TemporaryEscape(object):
 
 @python_2_unicode_compatible
 class Country(object):
-
-    def __init__(
-            self, code, flag_url=None, str_attr='code', custom_countries=None):
+    def __init__(self, code, flag_url=None, str_attr="code", custom_countries=None):
         self.flag_url = flag_url
         self._escape = False
         self._str_attr = str_attr
@@ -65,10 +63,10 @@ class Country(object):
         self.code = self.countries.alpha2(code) or code
 
     def __str__(self):
-        return force_text(getattr(self, self._str_attr) or '')
+        return force_text(getattr(self, self._str_attr) or "")
 
     def __eq__(self, other):
-        return force_text(self.code or '') == force_text(other or '')
+        return force_text(self.code or "") == force_text(other or "")
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -77,18 +75,18 @@ class Country(object):
         return hash(force_text(self))
 
     def __repr__(self):
-        args = ['code={country.code!r}']
+        args = ["code={country.code!r}"]
         if self.flag_url is not None:
-            args.append('flag_url={country.flag_url!r}')
-        if self._str_attr != 'code':
-            args.append('str_attr={country._str_attr!r}')
-        args = ', '.join(args).format(country=self)
-        return '{name}({args})'.format(name=self.__class__.__name__, args=args)
+            args.append("flag_url={country.flag_url!r}")
+        if self._str_attr != "code":
+            args.append("str_attr={country._str_attr!r}")
+        args = ", ".join(args).format(country=self)
+        return "{name}({args})".format(name=self.__class__.__name__, args=args)
 
     def __bool__(self):
         return bool(self.code)
 
-    __nonzero__ = __bool__   # Python 2 compatibility.
+    __nonzero__ = __bool__  # Python 2 compatibility.
 
     def __len__(self):
         return len(force_text(self))
@@ -125,14 +123,13 @@ class Country(object):
     @property
     def flag(self):
         if not self.code:
-            return ''
+            return ""
         flag_url = self.flag_url
         if flag_url is None:
             flag_url = settings.COUNTRIES_FLAG_URL
-        url = flag_url.format(
-            code_upper=self.code, code=self.code.lower())
+        url = flag_url.format(code_upper=self.code, code=self.code.lower())
         if not url:
-            return ''
+            return ""
         url = urlparse.urljoin(settings.STATIC_URL, url)
         return self.maybe_escape(url)
 
@@ -148,8 +145,8 @@ class Country(object):
             <i class="{{ ctry.flag_css }}" aria-label="{{ ctry.code }}></i>
         """
         if not self.code:
-            return ''
-        return 'flag-sprite flag-{} flag-_{}'.format(*self.code.lower())
+            return ""
+        return "flag-sprite flag-{} flag-_{}".format(*self.code.lower())
 
     @property
     def unicode_flag(self):
@@ -163,7 +160,7 @@ class Country(object):
         Currently, these glyphs appear to only be supported on OS X and iOS.
         """
         if not self.code:
-            return ''
+            return ""
 
         # Don't really like magic numbers, but this is the code point for [A]
         # (Regional Indicator A), minus the code point for ASCII A. By adding
@@ -179,18 +176,18 @@ class Country(object):
             # Python 2 requires us to be a bit more creative. We could use
             # unichr(), but that only works if the python has been compiled
             # with wide unicode support. This method should always work.
-            return ('\\U%08x\\U%08x' % tuple(points)).decode('unicode-escape')
+            return ("\\U%08x\\U%08x" % tuple(points)).decode("unicode-escape")
 
     @staticmethod
-    def country_from_ioc(ioc_code, flag_url=''):
-        code = ioc_data.IOC_TO_ISO.get(ioc_code, '')
-        if code == '':
+    def country_from_ioc(ioc_code, flag_url=""):
+        code = ioc_data.IOC_TO_ISO.get(ioc_code, "")
+        if code == "":
             return None
         return Country(code, flag_url=flag_url)
 
     @property
     def ioc_code(self):
-        return ioc_data.ISO_TO_IOC.get(self.code, '')
+        return ioc_data.ISO_TO_IOC.get(self.code, "")
 
 
 class CountryDescriptor(object):
@@ -207,6 +204,7 @@ class CountryDescriptor(object):
         >>> person.country.flag
         '/static/flags/nz.gif'
     """
+
     def __init__(self, field):
         self.field = field
 
@@ -223,8 +221,10 @@ class CountryDescriptor(object):
 
     def country(self, code):
         return Country(
-            code=code, flag_url=self.field.countries_flag_url,
-            custom_countries=self.field.countries)
+            code=code,
+            flag_url=self.field.countries_flag_url,
+            custom_countries=self.field.countries,
+        )
 
     def __set__(self, instance, value):
         value = self.field.get_clean_value(value)
@@ -232,7 +232,6 @@ class CountryDescriptor(object):
 
 
 class LazyChoicesMixin(widgets.LazyChoicesMixin):
-
     def _set_choices(self, value):
         """
         Also update the widget's choices.
@@ -245,14 +244,15 @@ class LazyTypedChoiceField(LazyChoicesMixin, forms.TypedChoiceField):
     """
     A form TypedChoiceField that respects choices being a lazy object.
     """
+
     widget = widgets.LazySelect
 
 
-class LazyTypedMultipleChoiceField(
-        LazyChoicesMixin, forms.TypedMultipleChoiceField):
+class LazyTypedMultipleChoiceField(LazyChoicesMixin, forms.TypedMultipleChoiceField):
     """
     A form TypedMultipleChoiceField that respects choices being a lazy object.
     """
+
     widget = widgets.LazySelectMultiple
 
 
@@ -261,19 +261,20 @@ class CountryField(CharField):
     A country field for Django models that provides all ISO 3166-1 countries as
     choices.
     """
+
     descriptor_class = CountryDescriptor
 
     def __init__(self, *args, **kwargs):
-        countries_class = kwargs.pop('countries', None)
+        countries_class = kwargs.pop("countries", None)
         self.countries = countries_class() if countries_class else countries
-        self.countries_flag_url = kwargs.pop('countries_flag_url', None)
-        self.blank_label = kwargs.pop('blank_label', None)
-        self.multiple = kwargs.pop('multiple', None)
-        kwargs['choices'] = self.countries
+        self.countries_flag_url = kwargs.pop("countries_flag_url", None)
+        self.blank_label = kwargs.pop("blank_label", None)
+        self.multiple = kwargs.pop("multiple", None)
+        kwargs["choices"] = self.countries
         if self.multiple:
-            kwargs['max_length'] = len(self.countries) * 3 - 1
+            kwargs["max_length"] = len(self.countries) * 3 - 1
         else:
-            kwargs['max_length'] = 2
+            kwargs["max_length"] = 2
         super(CharField, self).__init__(*args, **kwargs)
 
     def check(self, **kwargs):
@@ -285,16 +286,16 @@ class CountryField(CharField):
         if not self.multiple or not self.null:
             return []
 
-        hint = 'Remove null=True argument on the field'
+        hint = "Remove null=True argument on the field"
         if not self.blank:
-            hint += ' (just add blank=True if you want to allow no selection)'
-        hint += '.'
+            hint += " (just add blank=True if you want to allow no selection)"
+        hint += "."
 
         return [
             checks.Error(
-                'Field specifies multiple=True, so should not be null.',
+                "Field specifies multiple=True, so should not be null.",
                 obj=self,
-                id='django_countries.E100',
+                id="django_countries.E100",
                 hint=hint,
             )
         ]
@@ -316,9 +317,9 @@ class CountryField(CharField):
         value = self.get_clean_value(value)
         if self.multiple:
             if value:
-                value = ','.join(value)
+                value = ",".join(value)
             else:
-                value = ''
+                value = ""
         return super(CharField, self).get_prep_value(value)
 
     def get_clean_value(self, value):
@@ -327,8 +328,8 @@ class CountryField(CharField):
         if not self.multiple:
             return country_to_text(value)
         if isinstance(value, (basestring, Country)):
-            if isinstance(value, basestring) and ',' in value:
-                value = value.split(',')
+            if isinstance(value, basestring) and "," in value:
+                value = value.split(",")
             else:
                 value = [value]
         return list(filter(None, [country_to_text(c) for c in value]))
@@ -342,37 +343,36 @@ class CountryField(CharField):
         related.
         """
         name, path, args, kwargs = super(CountryField, self).deconstruct()
-        kwargs.pop('choices')
-        if self.multiple:      # multiple determines the length of the field
-            kwargs['multiple'] = self.multiple
+        kwargs.pop("choices")
+        if self.multiple:  # multiple determines the length of the field
+            kwargs["multiple"] = self.multiple
         if self.countries is not countries:
             # Include the countries class if it's not the default countries
             # instance.
-            kwargs['countries'] = self.countries.__class__
+            kwargs["countries"] = self.countries.__class__
         return name, path, args, kwargs
 
-    def get_choices(
-            self, include_blank=True, blank_choice=None, *args, **kwargs):
+    def get_choices(self, include_blank=True, blank_choice=None, *args, **kwargs):
         if blank_choice is None:
             if self.blank_label is None:
                 blank_choice = BLANK_CHOICE_DASH
             else:
-                blank_choice = [('', self.blank_label)]
+                blank_choice = [("", self.blank_label)]
         if self.multiple:
             include_blank = False
         return super(CountryField, self).get_choices(
-            include_blank=include_blank, blank_choice=blank_choice, *args,
-            **kwargs)
+            include_blank=include_blank, blank_choice=blank_choice, *args, **kwargs
+        )
 
     get_choices = lazy(get_choices, list)
 
     def formfield(self, **kwargs):
         kwargs.setdefault(
-            'choices_form_class',
-            LazyTypedMultipleChoiceField
-            if self.multiple else LazyTypedChoiceField)
-        if 'coerce' not in kwargs:
-            kwargs['coerce'] = super(CountryField, self).to_python
+            "choices_form_class",
+            LazyTypedMultipleChoiceField if self.multiple else LazyTypedChoiceField,
+        )
+        if "coerce" not in kwargs:
+            kwargs["coerce"] = super(CountryField, self).to_python
         field = super(CharField, self).formfield(**kwargs)
         return field
 
@@ -382,7 +382,7 @@ class CountryField(CharField):
         if not value:
             return value
         if isinstance(value, basestring):
-            value = value.split(',')
+            value = value.split(",")
         output = []
         for item in value:
             output.append(super(CountryField, self).to_python(item))
@@ -404,14 +404,13 @@ class CountryField(CharField):
             for single_value in value:
                 if single_value not in choices:
                     raise exceptions.ValidationError(
-                        self.error_messages['invalid_choice'],
-                        code='invalid_choice',
-                        params={'value': single_value},
+                        self.error_messages["invalid_choice"],
+                        code="invalid_choice",
+                        params={"value": single_value},
                     )
 
         if not self.blank and value in self.empty_values:
-            raise exceptions.ValidationError(
-                self.error_messages['blank'], code='blank')
+            raise exceptions.ValidationError(self.error_messages["blank"], code="blank")
 
     def value_to_string(self, obj):
         """
@@ -421,5 +420,4 @@ class CountryField(CharField):
         return self.get_prep_value(value)
 
 
-FieldListFilter.register(
-    lambda f: isinstance(f, CountryField), filters.CountryFilter)
+FieldListFilter.register(lambda f: isinstance(f, CountryField), filters.CountryFilter)

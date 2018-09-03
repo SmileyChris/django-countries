@@ -261,7 +261,8 @@ Django supported versions are now 1.4 (LTS) and 1.6+
 * Support both IOC and numeric country codes, allowing more flexible lookup of
   countries and specific code types.
 
-* Field descriptor now returns ``None`` if no country matches (*reverted in v3.0.1*)
+* Field descriptor now returns ``None`` if no country matches (*reverted in
+  v3.0.1*)
 
 3.0.1 (27 Oct 2014)
 -------------------
