@@ -770,7 +770,7 @@ msgstr "Estado de Palestina"
 
 #: data.py:203
 msgid "Panama"
-msgstr "Panam"
+msgstr "Panamá"
 
 #: data.py:204
 msgid "Papua New Guinea"
@@ -814,7 +814,7 @@ msgstr "Reunión"
 
 #: data.py:214
 msgid "Romania"
-msgstr "Romania"
+msgstr "Rumanía"
 
 #: data.py:215
 msgid "Russian Federation"
