@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# lukasmatiasko, 2014
+# lukasmatiasko, 2014,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-17 22:08+1300\n"
-"PO-Revision-Date: 2017-09-19 23:01+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2019-01-24 16:00+0000\n"
+"Last-Translator: lukasmatiasko\n"
 "Language-Team: Slovak (http://www.transifex.com/smileychris/django-countries/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #: base.py:11
 msgid "Brunei"
@@ -48,11 +48,11 @@ msgstr "Laos"
 
 #: base.py:18
 msgid "Moldova"
-msgstr ""
+msgstr "Moldavsko"
 
 #: base.py:19
 msgid "Macedonia"
-msgstr ""
+msgstr "Macedónsko"
 
 #: base.py:20
 msgid "Russia"
@@ -188,7 +188,7 @@ msgstr "Bután"
 
 #: data.py:59
 msgid "Bolivia (Plurinational State of)"
-msgstr ""
+msgstr "Bolívia (Bolívijský mnohonárodný štát)"
 
 #: data.py:60
 msgid "Bonaire, Sint Eustatius and Saba"
@@ -320,7 +320,7 @@ msgstr "Cyprus"
 
 #: data.py:92
 msgid "Czechia"
-msgstr ""
+msgstr "Česko"
 
 #: data.py:93
 msgid "Denmark"
@@ -404,7 +404,7 @@ msgstr "Gabon"
 
 #: data.py:113
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #: data.py:114
 msgid "Georgia"
@@ -472,7 +472,7 @@ msgstr "Heardov ostrov"
 
 #: data.py:130
 msgid "Holy See"
-msgstr ""
+msgstr "Svätá stolica"
 
 #: data.py:131
 msgid "Honduras"
@@ -500,7 +500,7 @@ msgstr "Indonézia"
 
 #: data.py:137
 msgid "Iran (Islamic Republic of)"
-msgstr ""
+msgstr "Irán (Iránska islamská republika)"
 
 #: data.py:138
 msgid "Iraq"
@@ -660,7 +660,7 @@ msgstr "Mexiko"
 
 #: data.py:177
 msgid "Micronesia (Federated States of)"
-msgstr ""
+msgstr "Mikronézia (Mikronézske federatívne štáty)"
 
 #: data.py:178
 msgid "Moldova (the Republic of)"
@@ -1020,7 +1020,7 @@ msgstr "Spojené arabské emiráty"
 
 #: data.py:267
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr ""
+msgstr "Spojené kráľovstvo Veľkej Británie a Severného Írska"
 
 #: data.py:268
 msgid "United States Minor Outlying Islands"
@@ -1028,7 +1028,7 @@ msgstr "Menšie odľahlé ostrovy USA"
 
 #: data.py:269
 msgid "United States of America"
-msgstr ""
+msgstr "Spojené štáty americké"
 
 #: data.py:270
 msgid "Uruguay"
@@ -1044,7 +1044,7 @@ msgstr "Vanuatu"
 
 #: data.py:273
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr ""
+msgstr "Venezuela (Venezuelská bolívarovská republika)"
 
 #: data.py:274
 msgid "Viet Nam"
@@ -1080,8 +1080,8 @@ msgstr "Zimbabwe"
 
 #: filters.py:11
 msgid "Country"
-msgstr ""
+msgstr "Krajina"
 
 #: filters.py:22
 msgid "All"
-msgstr ""
+msgstr "Všetko"
