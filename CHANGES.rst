@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-5.3.3 (unreleased)
-==================
+5.3.3 (16 February 2019)
+========================
 
 - Add test coverage for Django Rest Framework 3.9.
 
