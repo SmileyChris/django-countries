@@ -9,7 +9,7 @@ release, and any new translations added.
 5.3.3 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Completed translations for pt_PT
 
 
 5.3.2 (27 August 2018)
