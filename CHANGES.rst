@@ -9,7 +9,7 @@ release, and any new translations added.
 5.3.4 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Confirm Django 2.2 support
 
 
 5.3.3 (16 February 2019)
