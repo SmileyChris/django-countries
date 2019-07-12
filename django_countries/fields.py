@@ -121,6 +121,10 @@ class Country(object):
         return self.countries.numeric(self.code, padded=True)
 
     @property
+    def calling_code(self):
+        return self.countries.calling_code(self.code)
+
+    @property
     def flag(self):
         if not self.code:
             return ""

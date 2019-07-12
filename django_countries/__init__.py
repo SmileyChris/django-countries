@@ -303,6 +303,19 @@ class Countries(CountriesBase):
             return "%03d" % num
         return num
 
+    def calling_code(self, code):
+        """
+        Return the country calling code matching the provided
+        country code.
+
+        If no match is found, returns ``0``.
+        """
+        code = self.alpha2(code)
+        try:
+            return self.alt_codes[code][2]
+        except KeyError:
+            return 0
+
     def __len__(self):
         """
         len() used by several third party applications to calculate the length

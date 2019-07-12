@@ -420,6 +420,14 @@ class TestCountryObject(TestCase):
         country = fields.Country(code="XX")
         self.assertEqual(country.numeric_padded, None)
 
+    def test_calling_code(self):
+        country = fields.Country(code="PA")
+        self.assertEqual(country.calling_code, 507)
+
+    def test_calling_code_invalid(self):
+        country = fields.Country(code="XX")
+        self.assertEqual(country.calling_code, 0)
+
     def test_empty_flag_url(self):
         country = fields.Country(code="XX", flag_url="")
         self.assertEqual(country.flag, "")
