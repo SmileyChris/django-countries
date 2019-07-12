@@ -7,6 +7,7 @@ except ImportError:
 import copy
 
 from django.forms import widgets
+from django.templatetags.static import static
 from django.utils.html import escape
 from django.utils.functional import Promise
 from django.utils.safestring import mark_safe
@@ -97,3 +98,19 @@ class CountrySelectWidget(LazySelect):
                     widget=widget_render, country=country, flag_id=escape(flag_id)
                 )
             )
+
+
+class CountryCallingCodeSelectWidget(LazySelect):
+    class Media:
+        js = (static("django_countries/js/country_calling_code_select_widget.js"), )
+
+    def create_option(self, name, value, *args, **kwargs):
+        from django_countries.fields import Country
+        option = super().create_option(name, value, *args, **kwargs)
+        if value:
+            country = Country(code=value)
+            calling_code = '+' + str(country.calling_code)
+            option["label"] = calling_code
+            option["attrs"]["name"] = country.name
+            option["attrs"]["calling_code"] = calling_code
+        return option

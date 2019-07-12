@@ -2,5 +2,6 @@ include *.rst
 include LICENSE
 include tox.ini
 graft django_countries/static/flags
+graft django_countries/static/django_countries
 graft django_countries/locale
 graft .tx
