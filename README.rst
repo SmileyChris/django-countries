@@ -102,7 +102,7 @@ mode. For example:
 The ``Country`` object
 ----------------------
 
-An object used to represent a country, instanciated with a two character
+An object used to represent a country, instantiated with a two character
 country code, three character code, or numeric code.
 
 It can be compared to other objects as if it was a string containing the
