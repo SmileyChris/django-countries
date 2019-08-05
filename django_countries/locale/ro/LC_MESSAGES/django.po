@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Romanian (using Google Place ID)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-17 22:08+1300\n"
-"PO-Revision-Date: 2019-08-05 00:00-0300\n"
+"PO-Revision-Date: 2019-08-05 00:07-0300\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr "Moldova"
 
 #: base.py:19
 msgid "Macedonia"
-msgstr ""
+msgstr "Macedonia"
 
 #: base.py:20
 msgid "Russia"
@@ -608,7 +608,7 @@ msgstr "Macao"
 
 #: data.py:164
 msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr ""
+msgstr "Macedonia"
 
 #: data.py:165
 msgid "Madagascar"
@@ -1080,7 +1080,7 @@ msgstr "Zimbabwe"
 
 #: filters.py:11
 msgid "Country"
-msgstr ""
+msgstr "Țară"
 
 #: filters.py:22
 msgid "All"
