@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Bruno Alla <bruno.alla@festicket.com>, 2019
 # timmeh <tim@webnerd.io>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-17 22:08+1300\n"
-"PO-Revision-Date: 2019-02-15 16:41+0000\n"
-"Last-Translator: timmeh <tim@webnerd.io>\n"
+"PO-Revision-Date: 2019-04-11 14:43+0000\n"
+"Last-Translator: Bruno Alla <bruno.alla@festicket.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/smileychris/django-countries/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgstr "Reino Unido"
 
 #: base.py:14
 msgid "Iran"
-msgstr "Irã"
+msgstr "Irão"
 
 #: base.py:15
 msgid "North Korea"
@@ -52,7 +53,7 @@ msgstr "Moldávia"
 
 #: base.py:19
 msgid "Macedonia"
-msgstr "Macedônia"
+msgstr "Macedónia"
 
 #: base.py:20
 msgid "Russia"
@@ -116,7 +117,7 @@ msgstr "Anguilla"
 
 #: data.py:41
 msgid "Antarctica"
-msgstr "Antárctida"
+msgstr "Antártida"
 
 #: data.py:42
 msgid "Antigua and Barbuda"
@@ -164,7 +165,7 @@ msgstr "Barbados"
 
 #: data.py:53
 msgid "Belarus"
-msgstr "Bielorússia"
+msgstr "Bielorrússia"
 
 #: data.py:54
 msgid "Belgium"
@@ -180,7 +181,7 @@ msgstr "Benim"
 
 #: data.py:57
 msgid "Bermuda"
-msgstr "Bermuda"
+msgstr "Bermudas"
 
 #: data.py:58
 msgid "Bhutan"
@@ -196,7 +197,7 @@ msgstr "Bonaire, Saba e Santo Eustáquio"
 
 #: data.py:61
 msgid "Bosnia and Herzegovina"
-msgstr "Bósnia-Herzegóvina"
+msgstr "Bósnia e Herzegovina"
 
 #: data.py:62
 msgid "Botswana"
@@ -500,7 +501,7 @@ msgstr "Indonésia"
 
 #: data.py:137
 msgid "Iran (Islamic Republic of)"
-msgstr "Irã (República Islâmica do)"
+msgstr "Irão (República Islâmica do)"
 
 #: data.py:138
 msgid "Iraq"
@@ -608,7 +609,7 @@ msgstr "Macau"
 
 #: data.py:164
 msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr "Macedônia (Antiga República Iugoslava da)"
+msgstr "Macedónia (Antiga República Iugoslava da)"
 
 #: data.py:165
 msgid "Madagascar"
@@ -1068,7 +1069,7 @@ msgstr "Sahara Ocidental"
 
 #: data.py:279
 msgid "Yemen"
-msgstr "Yémen"
+msgstr "Iémen"
 
 #: data.py:280
 msgid "Zambia"
