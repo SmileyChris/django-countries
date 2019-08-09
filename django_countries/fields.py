@@ -332,6 +332,11 @@ class CountryField(CharField):
                 value = value.split(",")
             else:
                 value = [value]
+        else:
+            try:
+                iter(value)
+            except TypeError:
+                value = [value]
         return list(filter(None, [country_to_text(c) for c in value]))
 
     def deconstruct(self):
