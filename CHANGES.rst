@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-5.3.4 (unreleased)
-==================
+5.4 (11 August 2019)
+====================
 
 - Renamed Macedonia -> North Macedonia.
 
