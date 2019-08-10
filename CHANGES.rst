@@ -9,7 +9,14 @@ release, and any new translations added.
 5.3.4 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Renamed Macedonia -> North Macedonia.
+
+- Fix an outlying ``makemigrations`` error.
+
+- Pulled in new translations which were provided but missing from previous
+  version.
+
+- Fixed Simplified Chinese translation (needed to be ``locale/zh_Hans``).
 
 
 5.3.3 (16 February 2019)
