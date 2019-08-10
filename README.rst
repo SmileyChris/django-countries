@@ -271,7 +271,8 @@ Country names are taken from the official ISO 3166-1 list. If your project
 requires the use of alternative names, the inclusion or exclusion of specific
 countries then use the ``COUNTRIES_OVERRIDE`` setting.
 
-A dictionary of names to override the defaults.
+A dictionary of names to override the defaults. The values can also use a more
+`complex dictionary format`_.
 
 Note that you will need to handle translation of customised country names.
 
@@ -284,7 +285,11 @@ For example:
 
     COUNTRIES_OVERRIDE = {
         'NZ': _('Middle Earth'),
-        'AU': None
+        'AU': None,
+        'US': {'names': [
+            _('United States of America'),
+            _('America'),
+        ],
     }
 
 If you have a specific list of countries that should be used, use
@@ -380,6 +385,29 @@ uses a custom country list that only includes the G8 countries:
     class Vote(models.Model):
         country = CountryField(countries=G8Countries)
         approve = models.BooleanField()
+
+
+Complex dictionary format
+-------------------------
+
+For ``COUNTRIES_ONLY`` and ``COUNTRIES_OVERRIDE``, you can also provide a
+dictionary rather than just a translatable string for the country name.
+
+The options within the dictionary are:
+
+``name`` or ``names`` (required)
+  Either a single translatable name for this country or a list of multiple
+  translatable names. If using multiple names, the first name takes preference
+  when using ``COUNTRIES_FIRST`` or the ``Country.name``.
+
+``alpha3`` (optional)
+  An ISO 3166-1 three character code (or an empty string to nullify an existing
+  code for this country.
+
+``numeric`` (optional)
+  An ISO 3166-1 numeric country code (or ``None`` to nullify an existing code
+  for this country. The numeric codes 900 to 999 are left available by the
+  standard for user-assignment.
 
 
 Django Rest Framework

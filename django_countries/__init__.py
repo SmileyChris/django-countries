@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from __future__ import unicode_literals
-from itertools import islice
+import itertools
 from collections import namedtuple
 
 from django_countries.conf import settings
@@ -122,6 +122,20 @@ class Countries(CountriesBase):
             from django_countries.data import ALT_CODES
 
             self._alt_codes = ALT_CODES
+            altered = False
+            for code, country in self.countries.items():
+                if isinstance(country, dict) and (
+                    "alpha3" in country or "numeric" in country
+                ):
+                    if not altered:
+                        self._alt_codes = self._alt_codes.copy()
+                        altered = True
+                    alt_codes = list(self._alt_codes.get(code, (None, None)))
+                    if "alpha3" in country:
+                        alt_codes[0] = country["alpha3"]
+                    if "numeric" in country:
+                        alt_codes[1] = country["numeric"]
+                    self._alt_codes[code] = tuple(alt_codes)
         return self._alt_codes
 
     @countries.deleter
@@ -133,14 +147,37 @@ class Countries(CountriesBase):
         """
         if hasattr(self, "_countries"):
             del self._countries
+        if hasattr(self, "_alt_codes"):
+            del self._alt_codes
 
-    def translate_pair(self, code):
+    def translate_code(self, code, ignore_first=None):
+        """
+        Return translated countries for a country code.
+        """
+        country = self.countries[code]
+        if isinstance(country, dict):
+            if "names" in country:
+                names = country["names"]
+            else:
+                names = [country["name"]]
+        else:
+            names = [country]
+        if ignore_first and code in ignore_first:
+            names = names[1:]
+        for name in names:
+            yield self.translate_pair(code, name)
+
+    def translate_pair(self, code, name=None):
         """
         Force a country to the current activated translation.
 
         :returns: ``CountryTuple(code, translated_country_name)`` namedtuple
         """
-        name = self.countries[code]
+        if name is None:
+            name = self.countries[code]
+            if isinstance(name, dict):
+                if "names" in name:
+                    name = name["names"][0]
         if code in self.OLD_NAMES:
             # Check if there's an older translation available if there's no
             # translation for the newest name.
@@ -194,11 +231,11 @@ class Countries(CountriesBase):
                 yield ("", force_text(first_break))
 
         # Force translation before sorting.
-        first_repeat = self.get_option("first_repeat")
-        countries = (
-            self.translate_pair(code)
-            for code in countries
-            if first_repeat or code not in self.countries_first
+        ignore_first = None if self.get_option("first_repeat") else self.countries_first
+        countries = tuple(
+            itertools.chain.from_iterable(
+                self.translate_code(code, ignore_first) for code in countries
+            )
         )
 
         # Return sorted country list.
@@ -332,9 +369,11 @@ class Countries(CountriesBase):
         choices by index.
         """
         try:
-            return next(islice(self.__iter__(), index, index + 1))
+            return next(itertools.islice(self.__iter__(), index, index + 1))
         except TypeError:
-            return list(islice(self.__iter__(), index.start, index.stop, index.step))
+            return list(
+                itertools.islice(self.__iter__(), index.start, index.stop, index.step)
+            )
 
 
 countries = Countries()

@@ -18,6 +18,10 @@ release, and any new translations added.
 
 - Fixed Simplified Chinese translation (needed to be ``locale/zh_Hans``).
 
+- Introduce an optional complex format for ``COUNTRIES_ONLY`` and
+  ``COUNTRIES_OVERRIDE`` to allow for multiple names for a country, a custom
+  three character code, and a custom numeric country code.
+
 
 5.3.3 (16 February 2019)
 ========================
