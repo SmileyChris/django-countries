@@ -254,6 +254,11 @@ class TestValidation(TestCase):
         prep_value = country_field_instance.get_prep_value(None)
         self.assertEqual(prep_value, "")
 
+    def test_get_prep_value_invalid_type(self):
+        country_field_instance = CountryField(multiple=True, blank=True)
+        prep_value = country_field_instance.get_prep_value(0)
+        self.assertEqual(prep_value, "0")
+
 
 class TestCountryCustom(TestCase):
     def test_name(self):
