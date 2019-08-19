@@ -19,14 +19,7 @@ from __future__ import unicode_literals
 import glob
 import os
 
-from django_countries.base import CountriesBase
-
-try:
-    from django.utils.translation import ugettext_lazy as _
-except ImportError:  # pragma: no cover
-    # Allows this module to be executed without Django installed.
-    def _(x):
-        return x
+from django_countries.base import CountriesBase, _
 
 
 # Nicely titled (and translatable) country names.

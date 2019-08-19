@@ -100,5 +100,10 @@ class Settings(AppSettings):
     order in :attr:`COUNTRIES_FIRST`.
     """
 
+    COUNTRIES_TRANSLATE = True
+    """
+    Whether to use the translate country name.  
+    """
+
 
 settings = Settings()
