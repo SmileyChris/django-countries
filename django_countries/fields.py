@@ -9,11 +9,12 @@ try:
 except NameError:
     basestring = str  # Python 3
 
+import six
 from django import forms
 from django.core import checks, exceptions
 from django.contrib.admin.filters import FieldListFilter
 from django.db.models.fields import CharField, BLANK_CHOICE_DASH
-from django.utils.encoding import force_text, python_2_unicode_compatible
+from django.utils.encoding import force_text
 from django.utils.html import escape as escape_html
 from django.utils.functional import lazy
 
@@ -48,7 +49,7 @@ class TemporaryEscape(object):
         self.country._escape = self.original_escape
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class Country(object):
     def __init__(self, code, flag_url=None, str_attr="code", custom_countries=None):
         self.flag_url = flag_url

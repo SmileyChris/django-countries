@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
+import six
 from django.test import TestCase
-from django.utils import six
 
 from django_countries import countries, data, base
 

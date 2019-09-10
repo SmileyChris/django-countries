@@ -9,7 +9,7 @@ release, and any new translations added.
 5.5 (unreleased)
 ================
 
-- Nothing changed yet.
+- Django 3.0 compatibility.
 
 
 5.4 (11 August 2019)

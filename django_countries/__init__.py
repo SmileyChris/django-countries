@@ -3,15 +3,15 @@ from __future__ import unicode_literals
 import itertools
 from collections import namedtuple
 
+import six
 from django_countries.conf import settings
-from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.translation import override
 
 from .base import CountriesBase
 
 try:
-    import pyuca
+    import pyuca  # noqa
 except ImportError:
     pyuca = None
 
