@@ -11,6 +11,8 @@ release, and any new translations added.
 
 - Django 3.0 compatibility.
 
+- Plugin system for extending the ``Country`` object.
+
 
 5.4 (11 August 2019)
 ====================

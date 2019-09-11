@@ -1,5 +1,18 @@
 from __future__ import unicode_literals
 
+import pkg_resources
+import six
+from django import forms
+from django.contrib.admin.filters import FieldListFilter
+from django.core import checks, exceptions
+from django.db.models.fields import BLANK_CHOICE_DASH, CharField
+from django.utils.encoding import force_text
+from django.utils.functional import lazy
+from django.utils.html import escape as escape_html
+
+from django_countries import countries, filters, ioc_data, widgets
+from django_countries.conf import settings
+
 try:
     from urllib import parse as urlparse
 except ImportError:
@@ -9,17 +22,10 @@ try:
 except NameError:
     basestring = str  # Python 3
 
-import six
-from django import forms
-from django.core import checks, exceptions
-from django.contrib.admin.filters import FieldListFilter
-from django.db.models.fields import CharField, BLANK_CHOICE_DASH
-from django.utils.encoding import force_text
-from django.utils.html import escape as escape_html
-from django.utils.functional import lazy
-
-from django_countries import countries, ioc_data, widgets, filters
-from django_countries.conf import settings
+EXTENSIONS = dict(
+    (ep.name, ep.load())
+    for ep in pkg_resources.iter_entry_points('django_countries.Country')
+)
 
 
 def country_to_text(value):
@@ -189,6 +195,11 @@ class Country(object):
     @property
     def ioc_code(self):
         return ioc_data.ISO_TO_IOC.get(self.code, "")
+
+    def __getattr__(self, attr):
+        if attr in EXTENSIONS:
+            return EXTENSIONS[attr](self)
+        raise AttributeError()
 
 
 class CountryDescriptor(object):

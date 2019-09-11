@@ -410,6 +410,32 @@ The options within the dictionary are:
   standard for user-assignment.
 
 
+``Country`` object external plugins
+-----------------------------------
+
+Other Python packages can add attributes to the Country_ object by using entry
+points in their setup script.
+
+.. _Country: `The Country object`_
+
+For example, you could create a ``django_countries_phone`` package which had a
+with the following entry point in the ``setup.py`` file. The entry point name
+(``phone``) will be the new attribute name on the Country object. The attribute
+value will be the return value of the ``get_phone`` function (called with the
+Country instance as the sole argument).
+
+.. code:: python
+
+  setup(
+      ...
+      entry_points={
+          'django_countries.Country': 'phone = django_countries_phone.get_phone'
+      },
+      ...
+  )
+
+
+
 Django Rest Framework
 =====================
 
