@@ -178,6 +178,8 @@ class Countries(CountriesBase):
             if isinstance(name, dict):
                 if "names" in name:
                     name = name["names"][0]
+                else:
+                    name = name["name"]
         if code in self.OLD_NAMES:
             # Check if there's an older translation available if there's no
             # translation for the newest name.
