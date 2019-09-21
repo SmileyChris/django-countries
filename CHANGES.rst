@@ -11,7 +11,10 @@ release, and any new translations added.
 
 - Make DRF CountryField respect ``blank=False``. This is a backwards incompatible change since blank input will now
   return a validation error (unless ``blank`` is explicitly set to ``True``).
+
 - Fix ``COUNTRIES_OVERRIDE`` when using the complex dictionary format and a single name.
+
+- Add bandit to the test suite for basic security analysis.
 
 
 5.5 (11 September 2019)
