@@ -9,7 +9,8 @@ release, and any new translations added.
 5.6 (unreleased)
 ================
 
-- Nothing changed yet.
+- Make DRF CountryField respect ``blank=False``. This is a backwards incompatible change since blank input will now
+  return a validation error (unless ``blank`` is explicitly set to ``True``). 
 
 
 5.5 (11 September 2019)
