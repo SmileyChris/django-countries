@@ -92,7 +92,7 @@ class CountrySelectWidget(LazySelect):
         else:
             country = Country(value or "__")
         with country.escape:
-            return mark_safe(
+            return mark_safe(  # nosec
                 self.layout.format(
                     widget=widget_render, country=country, flag_id=escape(flag_id)
                 )

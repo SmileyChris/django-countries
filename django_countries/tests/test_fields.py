@@ -17,6 +17,11 @@ from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
 
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
 
 class TestCountryField(TestCase):
     def test_logic(self):
@@ -254,6 +259,11 @@ class TestValidation(TestCase):
         prep_value = country_field_instance.get_prep_value(None)
         self.assertEqual(prep_value, "")
 
+    def test_get_prep_value_invalid_type(self):
+        country_field_instance = CountryField(multiple=True, blank=True)
+        prep_value = country_field_instance.get_prep_value(0)
+        self.assertEqual(prep_value, "0")
+
 
 class TestCountryCustom(TestCase):
     def test_name(self):
@@ -439,6 +449,11 @@ class TestCountryObject(TestCase):
     def test_numeric_code_invalid(self):
         country = fields.Country(code=999)
         self.assertEqual(country.code, 999)
+
+    def test_extensions(self):
+        with mock.patch.object(fields, 'EXTENSIONS', {'codex2': lambda c: c.code * 2}):
+            country = fields.Country(code='NZ')
+            self.assertEqual(country.codex2, 'NZNZ')
 
 
 class TestModelForm(TestCase):

@@ -109,6 +109,30 @@ class TestCountriesObject(BaseTest):
         with self.settings(COUNTRIES_OVERRIDE={"AU": None}):
             self.assertEqual(countries.alpha2("AU"), "")
 
+    def test_alpha3_override(self):
+        with self.settings(
+            COUNTRIES_OVERRIDE={
+                "AU": None,
+                "NZ": {"alpha3": ""},
+                "US": {"alpha3": "XXX"},
+            }
+        ):
+            self.assertEqual(countries.alpha3("AU"), "")
+            self.assertEqual(countries.alpha3("NZ"), "")
+            self.assertEqual(countries.alpha3("US"), "XXX")
+
+    def test_numeric_override(self):
+        with self.settings(
+            COUNTRIES_OVERRIDE={
+                "AU": None,
+                "NZ": {"numeric": None},
+                "US": {"numeric": 900},
+            }
+        ):
+            self.assertEqual(countries.numeric("AU"), None)
+            self.assertEqual(countries.numeric("NZ"), None)
+            self.assertEqual(countries.numeric("US"), 900)
+
     def test_alpha2_override_new(self):
         with self.settings(COUNTRIES_OVERRIDE={"XX": "Neverland"}):
             self.assertEqual(countries.alpha2("XX"), "XX")
@@ -135,6 +159,25 @@ class TestCountriesObject(BaseTest):
 
     def test_fetch_by_name_no_match(self):
         self.assertEqual(countries.by_name("Neverland"), "")
+
+    def test_multiple_labels(self):
+        with self.settings(
+            COUNTRIES_ONLY={
+                "NZ": {"names": ["New Zealand", "Hobbiton"]},
+                "AU": {"name": "Oz"},
+                "NV": "Neverland",
+            }
+        ):
+            list_countries = list(countries)
+        self.assertEqual(
+            list_countries,
+            [
+                ("NZ", "Hobbiton"),
+                ("NV", "Neverland"),
+                ("NZ", "New Zealand"),
+                ("AU", "Oz"),
+            ],
+        )
 
 
 class CountriesFirstTest(BaseTest):
@@ -223,6 +266,26 @@ class CountriesFirstTest(BaseTest):
                 self.assertEqual(["AF", "GB", "DK"], sorted_codes)
             finally:
                 translation.activate(lang)
+
+    def test_first_multiple_labels(self):
+        with self.settings(
+            COUNTRIES_FIRST=["NZ"],
+            COUNTRIES_FIRST_BREAK="------",
+            COUNTRIES_ONLY={
+                "NZ": {"names": ["New Zealand", "Hobbiton"]},
+                "NV": "Neverland",
+            },
+        ):
+            countries_list = list(countries)
+        self.assertEqual(
+            countries_list,
+            [
+                ("NZ", "New Zealand"),
+                ("", "------"),
+                ("NZ", "Hobbiton"),
+                ("NV", "Neverland"),
+            ],
+        )
 
 
 class TestCountriesCustom(BaseTest):

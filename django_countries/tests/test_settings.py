@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
+import six
 from django.test import TestCase
-from django.utils import six
 
 from django_countries import countries, data, base
 
@@ -15,6 +15,20 @@ class TestSettings(TestCase):
     def test_override_additional(self):
         with self.settings(COUNTRIES_OVERRIDE={"XX": "New"}):
             self.assertEqual(countries.name("XX"), "New")
+
+    def test_override_complex(self):
+        with self.settings(
+            COUNTRIES_OVERRIDE={
+                "XX": {"names": ["New", "Newer"], "alpha3": "XXX", "numeric": 900},
+                "YY": {"name": "y", "numeric": 950},
+            }
+        ):
+            self.assertEqual(countries.name("XX"), "New")
+            self.assertEqual(countries.alpha3("XX"), "XXX")
+            self.assertEqual(countries.numeric("XX"), 900)
+            self.assertEqual(countries.name("YY"), "y")
+            self.assertEqual(countries.alpha3("YY"), None)
+            self.assertEqual(countries.numeric("YY"), 950)
 
     def test_override_replace(self):
         with self.settings(COUNTRIES_OVERRIDE={"NZ": "Middle Earth"}):

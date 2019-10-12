@@ -1,5 +1,18 @@
 from __future__ import unicode_literals
 
+import pkg_resources
+import six
+from django import forms
+from django.contrib.admin.filters import FieldListFilter
+from django.core import checks, exceptions
+from django.db.models.fields import BLANK_CHOICE_DASH, CharField
+from django.utils.encoding import force_text
+from django.utils.functional import lazy
+from django.utils.html import escape as escape_html
+
+from django_countries import countries, filters, ioc_data, widgets
+from django_countries.conf import settings
+
 try:
     from urllib import parse as urlparse
 except ImportError:
@@ -9,16 +22,10 @@ try:
 except NameError:
     basestring = str  # Python 3
 
-from django import forms
-from django.core import checks, exceptions
-from django.contrib.admin.filters import FieldListFilter
-from django.db.models.fields import CharField, BLANK_CHOICE_DASH
-from django.utils.encoding import force_text, python_2_unicode_compatible
-from django.utils.html import escape as escape_html
-from django.utils.functional import lazy
-
-from django_countries import countries, ioc_data, widgets, filters
-from django_countries.conf import settings
+EXTENSIONS = dict(
+    (ep.name, ep.load())
+    for ep in pkg_resources.iter_entry_points('django_countries.Country')
+)
 
 
 def country_to_text(value):
@@ -48,7 +55,7 @@ class TemporaryEscape(object):
         self.country._escape = self.original_escape
 
 
-@python_2_unicode_compatible
+@six.python_2_unicode_compatible
 class Country(object):
     def __init__(self, code, flag_url=None, str_attr="code", custom_countries=None):
         self.flag_url = flag_url
@@ -188,6 +195,11 @@ class Country(object):
     @property
     def ioc_code(self):
         return ioc_data.ISO_TO_IOC.get(self.code, "")
+
+    def __getattr__(self, attr):
+        if attr in EXTENSIONS:
+            return EXTENSIONS[attr](self)
+        raise AttributeError()
 
 
 class CountryDescriptor(object):
@@ -331,6 +343,11 @@ class CountryField(CharField):
             if isinstance(value, basestring) and "," in value:
                 value = value.split(",")
             else:
+                value = [value]
+        else:
+            try:
+                iter(value)
+            except TypeError:
                 value = [value]
         return list(filter(None, [country_to_text(c) for c in value]))
 

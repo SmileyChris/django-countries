@@ -8,10 +8,10 @@ how to do that:
 
 1. Visit https://www.iso.org/obp
 2. Click the "Country Codes" radio option and click the search button
-3. Filter by "Officially assigned codes"
-4. Change the results per page to 300
-5. Copy the html table and paste into Libreoffice Calc / Excel
-6. Delete the French name column
+3. Change the results per page to 300
+4. Copy the html table and paste into Libreoffice Calc / Excel
+5. Delete the French short name column
+6. Delete the heading row.
 7. Save as a CSV file in django_countries/iso3166-1.csv
 8. Run this script from the command line
 """
@@ -163,7 +163,6 @@ COUNTRIES = {
     "LT": _("Lithuania"),
     "LU": _("Luxembourg"),
     "MO": _("Macao"),
-    "MK": _("Macedonia (the former Yugoslav Republic of)"),
     "MG": _("Madagascar"),
     "MW": _("Malawi"),
     "MY": _("Malaysia"),
@@ -196,6 +195,7 @@ COUNTRIES = {
     "NG": _("Nigeria"),
     "NU": _("Niue"),
     "NF": _("Norfolk Island"),
+    "MK": _("North Macedonia"),
     "MP": _("Northern Mariana Islands"),
     "NO": _("Norway"),
     "OM": _("Oman"),
@@ -250,7 +250,7 @@ COUNTRIES = {
     "SY": _("Syrian Arab Republic"),
     "TW": _("Taiwan (Province of China)"),
     "TJ": _("Tajikistan"),
-    "TZ": _("Tanzania, United Republic of"),
+    "TZ": _("Tanzania, the United Republic of"),
     "TH": _("Thailand"),
     "TL": _("Timor-Leste"),
     "TG": _("Togo"),
@@ -415,7 +415,6 @@ ALT_CODES = {
     "LT": ("LTU", 440),
     "LU": ("LUX", 442),
     "MO": ("MAC", 446),
-    "MK": ("MKD", 807),
     "MG": ("MDG", 450),
     "MW": ("MWI", 454),
     "MY": ("MYS", 458),
@@ -448,6 +447,7 @@ ALT_CODES = {
     "NG": ("NGA", 566),
     "NU": ("NIU", 570),
     "NF": ("NFK", 574),
+    "MK": ("MKD", 807),
     "MP": ("MNP", 580),
     "NO": ("NOR", 578),
     "OM": ("OMN", 512),

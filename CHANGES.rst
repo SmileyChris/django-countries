@@ -6,10 +6,40 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-5.3.4 (unreleased)
-==================
+5.6 (unreleased)
+================
 
-- Nothing changed yet.
+- Make DRF CountryField respect ``blank=False``. This is a backwards incompatible change since blank input will now
+  return a validation error (unless ``blank`` is explicitly set to ``True``).
+
+- Fix ``COUNTRIES_OVERRIDE`` when using the complex dictionary format and a single name.
+
+- Add bandit to the test suite for basic security analysis.
+
+
+5.5 (11 September 2019)
+=======================
+
+- Django 3.0 compatibility.
+
+- Plugin system for extending the ``Country`` object.
+
+
+5.4 (11 August 2019)
+====================
+
+- Renamed Macedonia -> North Macedonia.
+
+- Fix an outlying ``makemigrations`` error.
+
+- Pulled in new translations which were provided but missing from previous
+  version.
+
+- Fixed Simplified Chinese translation (needed to be ``locale/zh_Hans``).
+
+- Introduce an optional complex format for ``COUNTRIES_ONLY`` and
+  ``COUNTRIES_OVERRIDE`` to allow for multiple names for a country, a custom
+  three character code, and a custom numeric country code.
 
 
 5.3.3 (16 February 2019)

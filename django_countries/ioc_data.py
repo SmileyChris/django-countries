@@ -324,6 +324,7 @@ def check_ioc_countries(verbosity=1):
     if verbosity:  # pragma: no cover
         print("Checking if all IOC codes map correctly")
     for key in ISO_TO_IOC:
-        assert COUNTRIES.get(key), "No ISO code for %s" % key
+        if not COUNTRIES.get(key):
+            raise KeyError("No ISO code for %s" % key)
     if verbosity:  # pragma: no cover
         print("Finished checking IOC codes")
