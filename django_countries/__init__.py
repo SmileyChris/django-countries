@@ -5,7 +5,7 @@ from collections import namedtuple
 
 import six
 from django_countries.conf import settings
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import override
 
 from .base import CountriesBase
@@ -184,18 +184,18 @@ class Countries(CountriesBase):
             # Check if there's an older translation available if there's no
             # translation for the newest name.
             with override(None):
-                source_name = force_text(name)
-            name = force_text(name)
+                source_name = force_str(name)
+            name = force_str(name)
             if name == source_name:
                 for old_name in self.OLD_NAMES[code]:
                     with override(None):
-                        source_old_name = force_text(old_name)
-                    old_name = force_text(old_name)
+                        source_old_name = force_str(old_name)
+                    old_name = force_str(old_name)
                     if old_name != source_old_name:
                         name = old_name
                         break
         else:
-            name = force_text(name)
+            name = force_str(name)
         return CountryTuple(code, name)
 
     def __iter__(self):
@@ -230,7 +230,7 @@ class Countries(CountriesBase):
         if self.countries_first:
             first_break = self.get_option("first_break")
             if first_break:
-                yield ("", force_text(first_break))
+                yield ("", force_str(first_break))
 
         # Force translation before sorting.
         ignore_first = None if self.get_option("first_repeat") else self.countries_first
@@ -251,7 +251,7 @@ class Countries(CountriesBase):
 
         If no match is found, returns an empty string.
         """
-        code = force_text(code).upper()
+        code = force_str(code).upper()
         if code.isdigit():
             lookup_code = int(code)
 

@@ -6,7 +6,7 @@ from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
 from django.db.models.fields import BLANK_CHOICE_DASH, CharField
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.functional import lazy
 from django.utils.html import escape as escape_html
 
@@ -33,7 +33,7 @@ def country_to_text(value):
         value = value.code
     if value is None:
         return None
-    return force_text(value)
+    return force_str(value)
 
 
 class TemporaryEscape(object):
@@ -70,16 +70,16 @@ class Country(object):
         self.code = self.countries.alpha2(code) or code
 
     def __str__(self):
-        return force_text(getattr(self, self._str_attr) or "")
+        return force_str(getattr(self, self._str_attr) or "")
 
     def __eq__(self, other):
-        return force_text(self.code or "") == force_text(other or "")
+        return force_str(self.code or "") == force_str(other or "")
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __hash__(self):
-        return hash(force_text(self))
+        return hash(force_str(self))
 
     def __repr__(self):
         args = ["code={country.code!r}"]
@@ -96,7 +96,7 @@ class Country(object):
     __nonzero__ = __bool__  # Python 2 compatibility.
 
     def __len__(self):
-        return len(force_text(self))
+        return len(force_str(self))
 
     @property
     def countries(self):
