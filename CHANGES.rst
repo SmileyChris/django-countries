@@ -16,6 +16,8 @@ release, and any new translations added.
 
 - Add bandit to the test suite for basic security analysis.
 
+- Avoid deprecation warnings when using django-countries with Django 3.0.
+
 
 5.5 (11 September 2019)
 =======================
