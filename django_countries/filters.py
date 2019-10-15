@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class CountryFilter(admin.FieldListFilter):

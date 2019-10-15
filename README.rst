@@ -230,7 +230,7 @@ For example:
     Åland Islands (AX)
     Albania (AL)
 
-Country names are translated using Django's standard ``ugettext``.
+Country names are translated using Django's standard ``gettext``.
 If you would like to help by adding a translation, please visit
 https://www.transifex.com/projects/p/django-countries/
 
@@ -281,7 +281,7 @@ For example:
 
 .. code:: python
 
-    from django.utils.translation import ugettext_lazy as _
+    from django.utils.translation import gettext_lazy as _
 
     COUNTRIES_OVERRIDE = {
         'NZ': _('Middle Earth'),
