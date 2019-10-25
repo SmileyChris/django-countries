@@ -23,6 +23,11 @@ class TestCountrySelectWidget(TestCase):
         del countries.countries
 
     def setup_form(self):
+        """
+        Setup form for use in tests
+
+        Note that this isn't in setUp so that we can call it inside of a settings override scope.
+        """
         self.Form = modelform_factory(
             Person, fields=["country"], widgets={"country": widgets.CountrySelectWidget}
         )
