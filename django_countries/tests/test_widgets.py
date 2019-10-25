@@ -46,12 +46,14 @@ class TestCountrySelectWidget(TestCase):
     def test_render(self):
         with self.settings(COUNTRIES_ONLY={"AU": "Desert"}):
             html = self.Form().as_p()
+            self.assertInHTML("""<option value="AU">Desert</option>""", html, count=1)
             self.assertIn(fields.Country("__").flag, html)
             self.assertNotIn(fields.Country("AU").flag, html)
 
     def test_render_initial(self):
         with self.settings(COUNTRIES_ONLY={"AU": "Desert"}):
             html = self.Form(initial={"country": "AU"}).as_p()
+            self.assertInHTML("""<option value="AU" selected>Desert</option>""", html, count=1)
             self.assertIn(fields.Country("AU").flag, html)
             self.assertNotIn(fields.Country("__").flag, html)
 
