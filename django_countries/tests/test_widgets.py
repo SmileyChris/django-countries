@@ -64,7 +64,6 @@ class TestCountrySelectWidget(TestCase):
         with self.settings(COUNTRIES_ONLY={"AU": "Desert"}):
             self.setup_form()
             html = self.Form(initial={"country": "AU"}).as_p()
-            print(html)
             self.assertInHTML("""<option value="AU" selected>Desert</option>""", html, count=1)
             self.assertIn(fields.Country("AU").flag, html)
             self.assertNotIn(fields.Country("__").flag, html)
