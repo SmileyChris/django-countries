@@ -1,10 +1,6 @@
-from __future__ import unicode_literals
-from unittest import skipIf
+from urllib import parse as urlparse
 
-try:
-    from urllib import parse as urlparse
-except ImportError:
-    import urlparse  # Python 2
+from unittest import skipIf
 
 from distutils.version import StrictVersion
 import django

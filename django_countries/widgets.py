@@ -1,10 +1,5 @@
-from __future__ import unicode_literals
-
-try:
-    from urllib import parse as urlparse
-except ImportError:
-    import urlparse  # Python 2
 import copy
+from urllib import parse as urlparse
 
 from django.forms import widgets
 from django.utils.html import escape

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from rest_framework import serializers
 from django.utils.encoding import force_text
 

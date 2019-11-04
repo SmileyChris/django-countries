@@ -1,7 +1,6 @@
-from __future__ import unicode_literals
-
 import pkg_resources
-import six
+from urllib import parse as urlparse
+
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
@@ -13,14 +12,6 @@ from django.utils.html import escape as escape_html
 from django_countries import countries, filters, ioc_data, widgets
 from django_countries.conf import settings
 
-try:
-    from urllib import parse as urlparse
-except ImportError:
-    import urlparse  # Python 2
-try:
-    basestring
-except NameError:
-    basestring = str  # Python 3
 
 EXTENSIONS = dict(
     (ep.name, ep.load())
@@ -55,7 +46,6 @@ class TemporaryEscape(object):
         self.country._escape = self.original_escape
 
 
-@six.python_2_unicode_compatible
 class Country(object):
     def __init__(self, code, flag_url=None, str_attr="code", custom_countries=None):
         self.flag_url = flag_url
@@ -339,8 +329,8 @@ class CountryField(CharField):
             return None
         if not self.multiple:
             return country_to_text(value)
-        if isinstance(value, (basestring, Country)):
-            if isinstance(value, basestring) and "," in value:
+        if isinstance(value, (str, Country)):
+            if isinstance(value, str) and "," in value:
                 value = value.split(",")
             else:
                 value = [value]
@@ -398,7 +388,7 @@ class CountryField(CharField):
             return super(CountryField, self).to_python(value)
         if not value:
             return value
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             value = value.split(",")
         output = []
         for item in value:

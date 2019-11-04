@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 This is a self-generating script that contains all of the iso3166-1 data.
@@ -15,7 +15,6 @@ how to do that:
 7. Save as a CSV file in django_countries/iso3166-1.csv
 8. Run this script from the command line
 """
-from __future__ import unicode_literals
 import glob
 import os
 
@@ -557,7 +556,7 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
     with open(__file__, "r") as source_file:
         contents = source_file.read()
     # Write countries.
-    bits = re.match("(.*\nCOUNTRIES = \{\n)(.*?)(\n\}.*)", contents, re.DOTALL).groups()
+    bits = re.match(r"(.*\nCOUNTRIES = \{\n)(.*?)(\n\}.*)", contents, re.DOTALL).groups()
     country_list = []
     for name, code in countries:
         name = name.replace('"', r"\"").strip()
@@ -566,7 +565,7 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
     content += "\n".join(country_list)
     # Write alt codes.
     alt_bits = re.match(
-        "(.*\nALT_CODES = \{\n)(.*)(\n\}.*)", bits[2], re.DOTALL
+        r"(.*\nALT_CODES = \{\n)(.*)(\n\}.*)", bits[2], re.DOTALL
     ).groups()
     alt_list = []
     for code, code3, codenum in alt_codes:

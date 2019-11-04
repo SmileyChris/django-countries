@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-from __future__ import unicode_literals
+
 import itertools
 from collections import namedtuple
 
-import six
 from django_countries.conf import settings
 from django.utils.encoding import force_text
 from django.utils.translation import override
@@ -77,7 +76,7 @@ class Countries(CountriesBase):
                 only_choices = True
                 if not isinstance(only, dict):
                     for item in only:
-                        if isinstance(item, six.string_types):
+                        if isinstance(item, str):
                             only_choices = False
                             break
             if only and only_choices:
@@ -101,7 +100,7 @@ class Countries(CountriesBase):
             if only and not only_choices:
                 countries = {}
                 for item in only:
-                    if isinstance(item, six.string_types):
+                    if isinstance(item, str):
                         countries[item] = self._countries[item]
                     else:
                         key, value = item
