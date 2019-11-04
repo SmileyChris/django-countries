@@ -36,8 +36,6 @@ class TemporaryEscape(object):
     def __bool__(self):
         return self.country._escape
 
-    __nonzero__ = __bool__
-
     def __enter__(self):
         self.original_escape = self.country._escape
         self.country._escape = True
@@ -82,8 +80,6 @@ class Country(object):
 
     def __bool__(self):
         return bool(self.code)
-
-    __nonzero__ = __bool__  # Python 2 compatibility.
 
     def __len__(self):
         return len(force_text(self))
