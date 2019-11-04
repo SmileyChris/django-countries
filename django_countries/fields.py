@@ -161,15 +161,7 @@ class Country(object):
         # codes we can get the flag.
         OFFSET = 127397
         points = [ord(x) + OFFSET for x in self.code.upper()]
-
-        try:
-            # Python 3 is simple: we can just chr() the unicode points.
-            return chr(points[0]) + chr(points[1])
-        except ValueError:
-            # Python 2 requires us to be a bit more creative. We could use
-            # unichr(), but that only works if the python has been compiled
-            # with wide unicode support. This method should always work.
-            return ("\\U%08x\\U%08x" % tuple(points)).decode("unicode-escape")
+        return chr(points[0]) + chr(points[1])
 
     @staticmethod
     def country_from_ioc(ioc_code, flag_url=""):

@@ -1,5 +1,6 @@
 import pickle
 import tempfile
+from unittest import mock
 
 from django.db import models
 from django.core import validators, checks
@@ -15,10 +16,6 @@ from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
 
-try:
-    from unittest import mock
-except ImportError:
-    import mock
 
 
 class TestCountryField(TestCase):
