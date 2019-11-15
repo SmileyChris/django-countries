@@ -283,10 +283,11 @@ class CountryField(CharField):
         self.blank_label = kwargs.pop("blank_label", None)
         self.multiple = kwargs.pop("multiple", None)
         kwargs["choices"] = self.countries
-        if self.multiple:
-            kwargs["max_length"] = len(self.countries) * 3 - 1
-        else:
-            kwargs["max_length"] = 2
+        if "max_length" not in kwargs:
+            if self.multiple:
+                kwargs["max_length"] = len(self.countries) * 3 - 1
+            else:
+                kwargs["max_length"] = 2
         super(CharField, self).__init__(*args, **kwargs)
 
     def check(self, **kwargs):
