@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import pickle
 import tempfile
+from unittest import mock
 
 from django.db import models
 from django.core import validators, checks
@@ -10,17 +9,13 @@ from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase, override_settings
 from django.utils import translation
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from django_countries import fields, countries, data
 from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
 
-try:
-    from unittest import mock
-except ImportError:
-    import mock
 
 
 class TestCountryField(TestCase):
@@ -46,7 +41,7 @@ class TestCountryField(TestCase):
 
     def test_text(self):
         person = Person(name="Chris Beaven", country="NZ")
-        self.assertEqual(force_text(person.country), "NZ")
+        self.assertEqual(force_str(person.country), "NZ")
 
     def test_name(self):
         person = Person(name="Chris Beaven", country="NZ")

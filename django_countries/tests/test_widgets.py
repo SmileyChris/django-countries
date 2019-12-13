@@ -1,12 +1,7 @@
-from __future__ import unicode_literals
-from unittest import skipIf
-
-try:
-    from urllib import parse as urlparse
-except ImportError:
-    import urlparse  # Python 2
-
 from distutils.version import StrictVersion
+from unittest import skipIf
+from urllib import parse as urlparse
+
 import django
 from django.forms.models import modelform_factory
 from django.test import TestCase

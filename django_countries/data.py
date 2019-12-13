@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
 This is a self-generating script that contains all of the iso3166-1 data.
 
@@ -15,7 +14,6 @@ how to do that:
 7. Save as a CSV file in django_countries/iso3166-1.csv
 8. Run this script from the command line
 """
-from __future__ import unicode_literals
 import glob
 import os
 

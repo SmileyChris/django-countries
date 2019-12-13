@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -23,7 +23,7 @@ class CountryFilter(admin.FieldListFilter):
         }
         for lookup, title in self.lookup_choices(changelist):
             yield {
-                "selected": value == force_text(lookup),
+                "selected": value == force_str(lookup),
                 "query_string": changelist.get_query_string(
                     {self.field.name: lookup}, []
                 ),
