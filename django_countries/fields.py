@@ -237,7 +237,7 @@ class LazyChoicesMixin(widgets.LazyChoicesMixin):
         """
         Also update the widget's choices.
         """
-        super(LazyChoicesMixin, self)._set_choices(value)
+        super()._set_choices(value)
         self.widget.choices = value
 
 
@@ -276,10 +276,10 @@ class CountryField(CharField):
             kwargs["max_length"] = len(self.countries) * 3 - 1
         else:
             kwargs["max_length"] = 2
-        super(CharField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def check(self, **kwargs):
-        errors = super(CountryField, self).check(**kwargs)
+        errors = super().check(**kwargs)
         errors.extend(self._check_multiple())
         return errors
 
@@ -305,12 +305,12 @@ class CountryField(CharField):
         return "CharField"
 
     def contribute_to_class(self, cls, name):
-        super(CountryField, self).contribute_to_class(cls, name)
+        super().contribute_to_class(cls, name)
         setattr(cls, self.name, self.descriptor_class(self))
 
     def pre_save(self, *args, **kwargs):
         "Returns field's value just before saving."
-        value = super(CharField, self).pre_save(*args, **kwargs)
+        value = super().pre_save(*args, **kwargs)
         return self.get_prep_value(value)
 
     def get_prep_value(self, value):
@@ -321,7 +321,7 @@ class CountryField(CharField):
                 value = ",".join(value)
             else:
                 value = ""
-        return super(CharField, self).get_prep_value(value)
+        return super().get_prep_value(value)
 
     def get_clean_value(self, value):
         if value is None:
@@ -348,7 +348,7 @@ class CountryField(CharField):
         Not including the ``blank_label`` property, as this isn't database
         related.
         """
-        name, path, args, kwargs = super(CountryField, self).deconstruct()
+        name, path, args, kwargs = super().deconstruct()
         kwargs.pop("choices")
         if self.multiple:  # multiple determines the length of the field
             kwargs["multiple"] = self.multiple
@@ -366,7 +366,7 @@ class CountryField(CharField):
                 blank_choice = [("", self.blank_label)]
         if self.multiple:
             include_blank = False
-        return super(CountryField, self).get_choices(
+        return super().get_choices(
             include_blank=include_blank, blank_choice=blank_choice, *args, **kwargs
         )
 
@@ -378,20 +378,20 @@ class CountryField(CharField):
             LazyTypedMultipleChoiceField if self.multiple else LazyTypedChoiceField,
         )
         if "coerce" not in kwargs:
-            kwargs["coerce"] = super(CountryField, self).to_python
-        field = super(CharField, self).formfield(**kwargs)
+            kwargs["coerce"] = super().to_python
+        field = super().formfield(**kwargs)
         return field
 
     def to_python(self, value):
         if not self.multiple:
-            return super(CountryField, self).to_python(value)
+            return super().to_python(value)
         if not value:
             return value
         if isinstance(value, str):
             value = value.split(",")
         output = []
         for item in value:
-            output.append(super(CountryField, self).to_python(item))
+            output.append(super().to_python(item))
         return output
 
     def validate(self, value, model_instance):
@@ -399,7 +399,7 @@ class CountryField(CharField):
         Use custom validation for when using a multiple countries field.
         """
         if not self.multiple:
-            return super(CountryField, self).validate(value, model_instance)
+            return super().validate(value, model_instance)
 
         if not self.editable:
             # Skip validation for non-editable fields.

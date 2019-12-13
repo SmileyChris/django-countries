@@ -63,7 +63,7 @@ class CountrySelectWidget(LazySelect):
             'style="margin: 6px 4px 0" '
             'src="{country.flag}">'
         )
-        super(CountrySelectWidget, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def render(self, name, value, attrs=None, renderer=None):
         from django_countries.fields import Country
@@ -79,7 +79,7 @@ class CountrySelectWidget(LazySelect):
             flag_id = ""
         # Renderer argument only added in 1.11, keeping backwards compat.
         kwargs = {"renderer": renderer} if renderer else {}
-        widget_render = super(CountrySelectWidget, self).render(
+        widget_render = super().render(
             name, value, attrs, **kwargs
         )
         if isinstance(value, Country):

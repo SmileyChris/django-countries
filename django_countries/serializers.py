@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 class CountryFieldMixin(object):
     def build_standard_field(self, field_name, model_field):
-        field_class, field_kwargs = super(CountryFieldMixin, self).build_standard_field(
+        field_class, field_kwargs = super().build_standard_field(
             field_name, model_field
         )
         if (

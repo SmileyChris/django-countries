@@ -13,7 +13,7 @@ class AppSettings(object):
                 return getattr(django.conf.settings, attr)
             except AttributeError:
                 pass
-        return super(AppSettings, self).__getattribute__(attr)
+        return super().__getattribute__(attr)
 
 
 class Settings(AppSettings):

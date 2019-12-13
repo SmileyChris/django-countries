@@ -9,7 +9,7 @@ class CountryField(serializers.ChoiceField):
         self.country_dict = kwargs.pop("country_dict", None)
         field_countries = kwargs.pop("countries", None)
         self.countries = field_countries if field_countries else countries
-        super(CountryField, self).__init__(self.countries, *args, **kwargs)
+        super().__init__(self.countries, *args, **kwargs)
 
     def to_representation(self, obj):
         code = self.countries.alpha2(obj)
