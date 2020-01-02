@@ -64,14 +64,14 @@ class TestCountriesObject(BaseTest):
         sliced = countries[10:20:2]
         self.assertEqual(len(sliced), 5)
 
-    def test_countries_custom_ugettext_evaluation(self):
-        class FakeLazyUGetText(object):
+    def test_countries_custom_gettext_evaluation(self):
+        class FakeLazyGetText(object):
             def __bool__(self):  # pragma: no cover
-                raise ValueError("Can't evaluate lazy_ugettext yet")
+                raise ValueError("Can't evaluate lazy_gettext yet")
 
             __nonzero__ = __bool__
 
-        with self.settings(COUNTRIES_OVERRIDE={"AU": FakeLazyUGetText()}):
+        with self.settings(COUNTRIES_OVERRIDE={"AU": FakeLazyGetText()}):
             countries.countries
 
     def test_ioc_countries(self):
