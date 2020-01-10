@@ -2,7 +2,7 @@ from . import fields, serializer_fields
 from rest_framework import serializers
 
 
-class CountryFieldMixin(object):
+class CountryFieldMixin:
     def build_standard_field(self, field_name, model_field):
         field_class, field_kwargs = super().build_standard_field(
             field_name, model_field

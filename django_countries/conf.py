@@ -1,7 +1,7 @@
 import django.conf
 
 
-class AppSettings(object):
+class AppSettings:
     """
     A holder for app-specific default settings that allows overriding via
     the project's settings.

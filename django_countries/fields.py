@@ -26,7 +26,7 @@ def country_to_text(value):
     return force_str(value)
 
 
-class TemporaryEscape(object):
+class TemporaryEscape:
     __slots__ = ["country", "original_escape"]
 
     def __init__(self, country):
@@ -45,7 +45,7 @@ class TemporaryEscape(object):
         self.country._escape = self.original_escape
 
 
-class Country(object):
+class Country:
     def __init__(self, code, flag_url=None, str_attr="code", custom_countries=None):
         self.flag_url = flag_url
         self._escape = False
@@ -191,7 +191,7 @@ class Country(object):
         raise AttributeError()
 
 
-class CountryDescriptor(object):
+class CountryDescriptor:
     """
     A descriptor for country fields on a model instance. Returns a Country when
     accessed so you can do things like::

@@ -6,7 +6,7 @@ except ImportError:  # pragma: no cover
         return x
 
 
-class CountriesBase(object):
+class CountriesBase:
     COMMON_NAMES = {
         "BN": _("Brunei"),
         "BO": _("Bolivia"),

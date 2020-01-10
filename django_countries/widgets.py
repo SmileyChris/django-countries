@@ -16,7 +16,7 @@ COUNTRY_CHANGE_HANDLER = (
 )
 
 
-class LazyChoicesMixin(object):
+class LazyChoicesMixin:
     @property
     def choices(self):
         """
