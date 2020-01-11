@@ -77,11 +77,7 @@ class CountrySelectWidget(LazySelect):
             )
         else:
             flag_id = ""
-        # Renderer argument only added in 1.11, keeping backwards compat.
-        kwargs = {"renderer": renderer} if renderer else {}
-        widget_render = super().render(
-            name, value, attrs, **kwargs
-        )
+        widget_render = super().render(name, value, attrs, renderer=renderer)
         if isinstance(value, Country):
             country = value
         else:

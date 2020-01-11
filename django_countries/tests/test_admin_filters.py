@@ -32,8 +32,7 @@ class TestCountryFilter(TestCase):
             kwargs.pop("list_editable", m.list_editable),
             m,
         ]
-        if hasattr(m, "sortable_by"):  # Django 2.1+
-            args.append(kwargs.pop("sortable_by", m.sortable_by))
+        args.append(kwargs.pop("sortable_by", m.sortable_by))
         assert not kwargs, "Unexpected kwarg %s" % kwargs
         return args
 
