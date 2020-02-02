@@ -18,6 +18,8 @@ release, and any new translations added.
 
 - Drop Python 2.7 and Python 3.4 support.
 
+- Add Rest Framework 3.10 and 3.11 to the test matrix, remove 3.8.
+
 
 5.5 (11 September 2019)
 =======================
