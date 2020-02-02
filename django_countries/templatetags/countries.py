@@ -4,12 +4,7 @@ from django_countries.fields import Country, countries
 
 
 register = template.Library()
-
-if django.VERSION < (1, 9):
-    # Support older versions without implicit assignment support in simple_tag.
-    simple_tag = register.assignment_tag
-else:
-    simple_tag = register.simple_tag
+simple_tag = register.simple_tag
 
 
 @simple_tag
