@@ -1,7 +1,6 @@
-from __future__ import unicode_literals
-
 import pkg_resources
 import six
+from urllib import parse as urlparse
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
@@ -12,15 +11,6 @@ from django.utils.html import escape as escape_html
 
 from django_countries import countries, filters, ioc_data, widgets
 from django_countries.conf import settings
-
-try:
-    from urllib import parse as urlparse
-except ImportError:
-    import urlparse  # Python 2
-try:
-    basestring
-except NameError:
-    basestring = str  # Python 3
 
 EXTENSIONS = dict(
     (ep.name, ep.load())
@@ -92,8 +82,6 @@ class Country(object):
 
     def __bool__(self):
         return bool(self.code)
-
-    __nonzero__ = __bool__  # Python 2 compatibility.
 
     def __len__(self):
         return len(force_text(self))
@@ -176,14 +164,7 @@ class Country(object):
         OFFSET = 127397
         points = [ord(x) + OFFSET for x in self.code.upper()]
 
-        try:
-            # Python 3 is simple: we can just chr() the unicode points.
-            return chr(points[0]) + chr(points[1])
-        except ValueError:
-            # Python 2 requires us to be a bit more creative. We could use
-            # unichr(), but that only works if the python has been compiled
-            # with wide unicode support. This method should always work.
-            return ("\\U%08x\\U%08x" % tuple(points)).decode("unicode-escape")
+        return chr(points[0]) + chr(points[1])
 
     @staticmethod
     def country_from_ioc(ioc_code, flag_url=""):
@@ -339,8 +320,8 @@ class CountryField(CharField):
             return None
         if not self.multiple:
             return country_to_text(value)
-        if isinstance(value, (basestring, Country)):
-            if isinstance(value, basestring) and "," in value:
+        if isinstance(value, (str, Country)):
+            if isinstance(value, str) and "," in value:
                 value = value.split(",")
             else:
                 value = [value]
@@ -398,7 +379,7 @@ class CountryField(CharField):
             return super(CountryField, self).to_python(value)
         if not value:
             return value
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             value = value.split(",")
         output = []
         for item in value:

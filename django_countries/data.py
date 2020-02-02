@@ -15,7 +15,6 @@ how to do that:
 7. Save as a CSV file in django_countries/iso3166-1.csv
 8. Run this script from the command line
 """
-from __future__ import unicode_literals
 import glob
 import os
 

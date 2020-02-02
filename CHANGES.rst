@@ -6,7 +6,7 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-5.6 (unreleased)
+6.0 (unreleased)
 ================
 
 - Make DRF CountryField respect ``blank=False``. This is a backwards incompatible change since blank input will now
@@ -15,6 +15,8 @@ release, and any new translations added.
 - Fix ``COUNTRIES_OVERRIDE`` when using the complex dictionary format and a single name.
 
 - Add bandit to the test suite for basic security analysis.
+
+- Drop Python 2.7 and Python 3.4 support.
 
 
 5.5 (11 September 2019)

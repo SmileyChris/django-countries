@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.test import TestCase, override_settings
 
 from django_countries import countries
