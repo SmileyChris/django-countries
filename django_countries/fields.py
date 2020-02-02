@@ -35,8 +35,6 @@ class TemporaryEscape(object):
     def __bool__(self):
         return self.country._escape
 
-    __nonzero__ = __bool__
-
     def __enter__(self):
         self.original_escape = self.country._escape
         self.country._escape = True

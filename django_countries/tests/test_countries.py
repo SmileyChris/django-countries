@@ -70,8 +70,6 @@ class TestCountriesObject(BaseTest):
             def __bool__(self):  # pragma: no cover
                 raise ValueError("Can't evaluate lazy_ugettext yet")
 
-            __nonzero__ = __bool__
-
         with self.settings(COUNTRIES_OVERRIDE={"AU": FakeLazyUGetText()}):
             countries.countries
 

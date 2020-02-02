@@ -356,8 +356,6 @@ class Countries(CountriesBase):
     def __bool__(self):
         return bool(self.countries)
 
-    __nonzero__ = __bool__
-
     def __contains__(self, code):
         """
         Check to see if the countries contains the given code.
