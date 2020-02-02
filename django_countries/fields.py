@@ -263,6 +263,9 @@ class CountryField(CharField):
         self.multiple = kwargs.pop("multiple", None)
         kwargs["choices"] = self.countries
         if "max_length" not in kwargs:
+            # Allow explicit max_length so migrations can correctly identify
+            # changes in the multiple CountryField fields when new countries are
+            # added to the available countries dictionary.
             if self.multiple:
                 kwargs["max_length"] = len(self.countries) * 3 - 1
             else:
