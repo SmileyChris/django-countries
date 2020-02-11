@@ -14,7 +14,7 @@ from django_countries.conf import settings
 
 EXTENSIONS = dict(
     (ep.name, ep.load())
-    for ep in pkg_resources.iter_entry_points('django_countries.Country')
+    for ep in pkg_resources.iter_entry_points("django_countries.Country")
 )
 
 

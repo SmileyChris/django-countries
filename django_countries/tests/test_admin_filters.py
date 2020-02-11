@@ -23,7 +23,7 @@ class TestCountryFilter(TestCase):
     def get_changelist_kwargs(self):
         m = self.person_admin
         sig = inspect.signature(ChangeList.__init__)
-        kwargs = {'model_admin': m}
+        kwargs = {"model_admin": m}
         for arg in list(sig.parameters)[2:]:
             if hasattr(m, arg):
                 kwargs[arg] = getattr(m, arg)

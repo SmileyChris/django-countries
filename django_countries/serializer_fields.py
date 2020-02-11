@@ -20,7 +20,7 @@ class CountryField(serializers.ChoiceField):
         return {"code": code, "name": force_str(self.countries.name(obj))}
 
     def to_internal_value(self, data):
-        if not self.allow_blank and data == '':
+        if not self.allow_blank and data == "":
             self.fail("invalid_choice", input=data)
 
         if isinstance(data, dict):

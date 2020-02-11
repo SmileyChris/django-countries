@@ -445,9 +445,9 @@ class TestCountryObject(TestCase):
         self.assertEqual(country.code, 999)
 
     def test_extensions(self):
-        with mock.patch.object(fields, 'EXTENSIONS', {'codex2': lambda c: c.code * 2}):
-            country = fields.Country(code='NZ')
-            self.assertEqual(country.codex2, 'NZNZ')
+        with mock.patch.object(fields, "EXTENSIONS", {"codex2": lambda c: c.code * 2}):
+            country = fields.Country(code="NZ")
+            self.assertEqual(country.codex2, "NZNZ")
 
 
 class TestModelForm(TestCase):
