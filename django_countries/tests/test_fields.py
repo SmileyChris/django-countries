@@ -10,7 +10,7 @@ from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase, override_settings
 from django.utils import translation
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from django_countries import fields, countries, data
 from django_countries.fields import CountryField
@@ -41,7 +41,7 @@ class TestCountryField(TestCase):
 
     def test_text(self):
         person = Person(name="Chris Beaven", country="NZ")
-        self.assertEqual(force_text(person.country), "NZ")
+        self.assertEqual(force_str(person.country), "NZ")
 
     def test_name(self):
         person = Person(name="Chris Beaven", country="NZ")

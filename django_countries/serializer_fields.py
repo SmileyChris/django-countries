@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from django_countries import countries
 
@@ -17,7 +17,7 @@ class CountryField(serializers.ChoiceField):
             return ""
         if not self.country_dict:
             return code
-        return {"code": code, "name": force_text(self.countries.name(obj))}
+        return {"code": code, "name": force_str(self.countries.name(obj))}
 
     def to_internal_value(self, data):
         if not self.allow_blank and data == '':
@@ -27,7 +27,7 @@ class CountryField(serializers.ChoiceField):
             data = data.get("code")
         country = self.countries.alpha2(data)
         if data and not country:
-            country = self.countries.by_name(force_text(data))
+            country = self.countries.by_name(force_str(data))
             if not country:
                 self.fail("invalid_choice", input=data)
         return country
