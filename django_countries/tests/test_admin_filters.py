@@ -1,3 +1,5 @@
+import inspect
+
 from django.test import TestCase
 from django.test.client import RequestFactory
 from django.contrib import admin
@@ -18,23 +20,14 @@ test_site.register(models.Person, PersonAdmin)
 
 
 class TestCountryFilter(TestCase):
-    def get_changelist_args(self, **kwargs):
+    def get_changelist_kwargs(self):
         m = self.person_admin
-        args = [
-            kwargs.pop("list_display", m.list_display),
-            kwargs.pop("list_display_links", m.list_display_links),
-            kwargs.pop("list_filter", m.list_filter),
-            kwargs.pop("date_hierarchy", m.date_hierarchy),
-            kwargs.pop("search_fields", m.search_fields),
-            kwargs.pop("list_select_related", m.list_select_related),
-            kwargs.pop("list_per_page", m.list_per_page),
-            kwargs.pop("list_max_show_all", m.list_max_show_all),
-            kwargs.pop("list_editable", m.list_editable),
-            m,
-            kwargs.pop("sortable_by", m.sortable_by),
-        ]
-        assert not kwargs, "Unexpected kwarg %s" % kwargs
-        return args
+        sig = inspect.signature(ChangeList.__init__)
+        kwargs = {'model_admin': m}
+        for arg in list(sig.parameters)[2:]:
+            if hasattr(m, arg):
+                kwargs[arg] = getattr(m, arg)
+        return kwargs
 
     def setUp(self):
         models.Person.objects.create(name="Alice", country="NZ")
@@ -45,14 +38,14 @@ class TestCountryFilter(TestCase):
     def test_filter_none(self):
         request = RequestFactory().get("/person/")
         request.user = AnonymousUser()
-        cl = ChangeList(request, models.Person, *self.get_changelist_args())
+        cl = ChangeList(request, **self.get_changelist_kwargs())
         cl.get_results(request)
         self.assertEqual(list(cl.result_list), list(models.Person.objects.all()))
 
     def test_filter_country(self):
         request = RequestFactory().get("/person/", data={"country": "NZ"})
         request.user = AnonymousUser()
-        cl = ChangeList(request, models.Person, *self.get_changelist_args())
+        cl = ChangeList(request, **self.get_changelist_kwargs())
         cl.get_results(request)
         self.assertEqual(
             list(cl.result_list), list(models.Person.objects.exclude(country="AU"))
@@ -61,7 +54,7 @@ class TestCountryFilter(TestCase):
     def test_choices(self):
         request = RequestFactory().get("/person/", data={"country": "NZ"})
         request.user = AnonymousUser()
-        cl = ChangeList(request, models.Person, *self.get_changelist_args())
+        cl = ChangeList(request, **self.get_changelist_kwargs())
         choices = list(cl.filter_specs[0].choices(cl))
         self.assertEqual(
             [c["display"] for c in choices], ["All", "Australia", "New Zealand"]
