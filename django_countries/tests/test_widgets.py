@@ -1,8 +1,5 @@
-from unittest import skipIf
 from urllib import parse as urlparse
 
-from distutils.version import StrictVersion
-import django
 from django.forms.models import modelform_factory
 from django.test import TestCase
 from django.utils import safestring
@@ -60,10 +57,6 @@ class TestCountrySelectWidget(TestCase):
         person = Person(country="NZ")
         self.Form(instance=person).as_p()
 
-    @skipIf(
-        StrictVersion(django.get_version()) < StrictVersion("1.10"),
-        "required attribute only implemented in 1.10+",
-    )
     def test_required_attribute(self):
         rendered = self.Form()["country"].as_widget()
         rendered = rendered[: rendered.find(">") + 1]

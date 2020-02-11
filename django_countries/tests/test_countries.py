@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.test import TestCase
 from django.utils import translation
 
@@ -66,7 +65,7 @@ class TestCountriesObject(BaseTest):
         self.assertEqual(len(sliced), 5)
 
     def test_countries_custom_gettext_evaluation(self):
-        class FakeLazyGetText(object):
+        class FakeLazyGetText:
             def __bool__(self):  # pragma: no cover
                 raise ValueError("Can't evaluate lazy_gettext yet")
 

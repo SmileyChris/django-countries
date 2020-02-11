@@ -16,7 +16,7 @@ COUNTRY_CHANGE_HANDLER = (
 )
 
 
-class LazyChoicesMixin(object):
+class LazyChoicesMixin:
     @property
     def choices(self):
         """
@@ -63,7 +63,7 @@ class CountrySelectWidget(LazySelect):
             'style="margin: 6px 4px 0" '
             'src="{country.flag}">'
         )
-        super(CountrySelectWidget, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def render(self, name, value, attrs=None, renderer=None):
         from django_countries.fields import Country
@@ -77,11 +77,7 @@ class CountrySelectWidget(LazySelect):
             )
         else:
             flag_id = ""
-        # Renderer argument only added in 1.11, keeping backwards compat.
-        kwargs = {"renderer": renderer} if renderer else {}
-        widget_render = super(CountrySelectWidget, self).render(
-            name, value, attrs, **kwargs
-        )
+        widget_render = super().render(name, value, attrs, renderer=renderer)
         if isinstance(value, Country):
             country = value
         else:

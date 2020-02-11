@@ -1,6 +1,6 @@
 import pkg_resources
-import six
 from urllib import parse as urlparse
+
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
@@ -26,7 +26,7 @@ def country_to_text(value):
     return force_str(value)
 
 
-class TemporaryEscape(object):
+class TemporaryEscape:
     __slots__ = ["country", "original_escape"]
 
     def __init__(self, country):
@@ -43,8 +43,7 @@ class TemporaryEscape(object):
         self.country._escape = self.original_escape
 
 
-@six.python_2_unicode_compatible
-class Country(object):
+class Country:
     def __init__(self, code, flag_url=None, str_attr="code", custom_countries=None):
         self.flag_url = flag_url
         self._escape = False
@@ -161,7 +160,6 @@ class Country(object):
         # codes we can get the flag.
         OFFSET = 127397
         points = [ord(x) + OFFSET for x in self.code.upper()]
-
         return chr(points[0]) + chr(points[1])
 
     @staticmethod
@@ -181,7 +179,7 @@ class Country(object):
         raise AttributeError()
 
 
-class CountryDescriptor(object):
+class CountryDescriptor:
     """
     A descriptor for country fields on a model instance. Returns a Country when
     accessed so you can do things like::
@@ -227,7 +225,7 @@ class LazyChoicesMixin(widgets.LazyChoicesMixin):
         """
         Also update the widget's choices.
         """
-        super(LazyChoicesMixin, self)._set_choices(value)
+        super()._set_choices(value)
         self.widget.choices = value
 
 
@@ -273,7 +271,7 @@ class CountryField(CharField):
         super(CharField, self).__init__(*args, **kwargs)
 
     def check(self, **kwargs):
-        errors = super(CountryField, self).check(**kwargs)
+        errors = super().check(**kwargs)
         errors.extend(self._check_multiple())
         return errors
 
@@ -299,7 +297,7 @@ class CountryField(CharField):
         return "CharField"
 
     def contribute_to_class(self, cls, name):
-        super(CountryField, self).contribute_to_class(cls, name)
+        super().contribute_to_class(cls, name)
         setattr(cls, self.name, self.descriptor_class(self))
 
     def pre_save(self, *args, **kwargs):
@@ -342,7 +340,7 @@ class CountryField(CharField):
         Not including the ``blank_label`` property, as this isn't database
         related.
         """
-        name, path, args, kwargs = super(CountryField, self).deconstruct()
+        name, path, args, kwargs = super().deconstruct()
         kwargs.pop("choices")
         if self.multiple:  # multiple determines the length of the field
             kwargs["multiple"] = self.multiple
@@ -360,7 +358,7 @@ class CountryField(CharField):
                 blank_choice = [("", self.blank_label)]
         if self.multiple:
             include_blank = False
-        return super(CountryField, self).get_choices(
+        return super().get_choices(
             include_blank=include_blank, blank_choice=blank_choice, *args, **kwargs
         )
 
@@ -372,20 +370,20 @@ class CountryField(CharField):
             LazyTypedMultipleChoiceField if self.multiple else LazyTypedChoiceField,
         )
         if "coerce" not in kwargs:
-            kwargs["coerce"] = super(CountryField, self).to_python
-        field = super(CharField, self).formfield(**kwargs)
+            kwargs["coerce"] = super().to_python
+        field = super().formfield(**kwargs)
         return field
 
     def to_python(self, value):
         if not self.multiple:
-            return super(CountryField, self).to_python(value)
+            return super().to_python(value)
         if not value:
             return value
         if isinstance(value, str):
             value = value.split(",")
         output = []
         for item in value:
-            output.append(super(CountryField, self).to_python(item))
+            output.append(super().to_python(item))
         return output
 
     def validate(self, value, model_instance):
@@ -393,7 +391,7 @@ class CountryField(CharField):
         Use custom validation for when using a multiple countries field.
         """
         if not self.multiple:
-            return super(CountryField, self).validate(value, model_instance)
+            return super().validate(value, model_instance)
 
         if not self.editable:
             # Skip validation for non-editable fields.

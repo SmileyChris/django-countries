@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
 This is a self-generating script that contains all of the iso3166-1 data.
 

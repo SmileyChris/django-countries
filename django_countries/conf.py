@@ -1,7 +1,7 @@
 import django.conf
 
 
-class AppSettings(object):
+class AppSettings:
     """
     A holder for app-specific default settings that allows overriding via
     the project's settings.
@@ -13,7 +13,7 @@ class AppSettings(object):
                 return getattr(django.conf.settings, attr)
             except AttributeError:
                 pass
-        return super(AppSettings, self).__getattribute__(attr)
+        return super().__getattribute__(attr)
 
 
 class Settings(AppSettings):
