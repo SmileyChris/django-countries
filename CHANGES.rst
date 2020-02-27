@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-6.0 (unreleased)
-================
+6.0 (28 February 2020)
+======================
 
 - Make DRF CountryField respect ``blank=False``. This is a backwards incompatible change since blank input will now
   return a validation error (unless ``blank`` is explicitly set to ``True``).
