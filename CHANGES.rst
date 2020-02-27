@@ -20,6 +20,8 @@ release, and any new translations added.
 
 - Add Rest Framework 3.10 and 3.11 to the test matrix, remove 3.8.
 
+- Fix a memory leak when using PyUCA. Thanks Meiyer (aka interDist)!
+
 
 5.5 (11 September 2019)
 =======================
