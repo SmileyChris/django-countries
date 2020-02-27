@@ -12,26 +12,8 @@ try:
     import pyuca  # noqa
 except ImportError:
     pyuca = None
-
-# Use UCA sorting if it's available.
-if pyuca:
-    collator = pyuca.Collator()
-
-    def sort_key(item):
-        return collator.sort_key(item[1])
-
-
-else:
+    # Fallback if the UCA sorting is not available.
     import unicodedata
-
-    # Cheap and dirty method to sort against ASCII characters only.
-
-    def sort_key(item):
-        return (
-            unicodedata.normalize("NFKD", item[1])
-            .encode("ascii", "ignore")
-            .decode("ascii")
-        )
 
 
 class CountryTuple(namedtuple("CountryTupleBase", ["code", "name"])):
@@ -218,6 +200,22 @@ class Countries(CountriesBase):
 
         # Yield countries that should be displayed first.
         countries_first = (self.translate_pair(code) for code in self.countries_first)
+
+        # Define the sorting method.
+        if pyuca:
+            collator = pyuca.Collator()
+
+            # Use UCA sorting if it's available.
+            def sort_key(item):
+                return collator.sort_key(item[1])
+        else:
+            # Cheap and dirty method to sort against ASCII characters only.
+            def sort_key(item):
+                return (
+                    unicodedata.normalize("NFKD", item[1])
+                    .encode("ascii", "ignore")
+                    .decode("ascii")
+                )
 
         if self.get_option("first_sort"):
             countries_first = sorted(countries_first, key=sort_key)
