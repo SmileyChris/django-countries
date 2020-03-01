@@ -524,3 +524,32 @@ the countries will be returned in the response as choices:
     }
 
 .. _metadata support: http://www.django-rest-framework.org/api-guide/metadata/
+
+
+
+GraphQL
+=======
+
+A ``Country`` graphene object type is included that can be used when generating
+your schema.
+
+.. code:: python
+
+    import graphene
+    from graphene_django.types import DjangoObjectType
+    from django_countries.graphql.types import Country
+
+    class Person(ObjectType):
+        country = graphene.Field(Country)
+
+        class Meta:
+            model = models.Person
+            fields = ["name", "country"]
+
+The object type has the following fields available:
+
+* ``name`` for the full country name
+* ``code`` for the ISO 3166-1 two character country code
+* ``alpha3`` for the ISO 3166-1 three character country code
+* ``numeric`` for the ISO 3166-1 numeric country code
+* ``iocCode`` for the International Olympic Committee country code

@@ -9,7 +9,7 @@ release, and any new translations added.
 6.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Add a GraphQL object type for a django `Country` object.
 
 
 6.0 (28 February 2020)
