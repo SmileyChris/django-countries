@@ -10,9 +10,8 @@ class CountryFieldMixin:
         if (
             # Only deal with CountryFields.
             not isinstance(model_field, fields.CountryField)
-            or
             # Some other mixin has changed the field class already!
-            field_class is not serializers.ChoiceField
+            or field_class is not serializers.ChoiceField
         ):
             return field_class, field_kwargs
         field_kwargs["countries"] = model_field.countries

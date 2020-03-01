@@ -9,10 +9,9 @@ from django_countries import widgets, countries, fields
 from django_countries.conf import settings
 from django_countries.tests.models import Person
 
+
 def person_form(widgets={"country": widgets.CountrySelectWidget}, **kwargs):
-    return modelform_factory(
-        Person, fields=["country"], widgets=widgets, **kwargs
-    )
+    return modelform_factory(Person, fields=["country"], widgets=widgets, **kwargs)
 
 
 class TestCountrySelectWidget(TestCase):

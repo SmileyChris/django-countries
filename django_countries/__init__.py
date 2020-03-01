@@ -208,6 +208,7 @@ class Countries(CountriesBase):
             # Use UCA sorting if it's available.
             def sort_key(item):
                 return collator.sort_key(item[1])
+
         else:
             # Cheap and dirty method to sort against ASCII characters only.
             def sort_key(item):

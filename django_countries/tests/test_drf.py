@@ -148,7 +148,7 @@ class TestDRF(TestCase):
         self.assertEqual(loaded.countries, [Country("NZ"), Country("AU")])
 
     def test_deserialize_blank_invalid(self):
-        serializer = PersonSerializer(data={"name": "Chris", "country": "",})
+        serializer = PersonSerializer(data={"name": "Chris", "country": ""})
         self.assertFalse(serializer.is_valid())
         self.assertEqual(serializer.errors["country"], ['"" is not a valid choice.'])
 

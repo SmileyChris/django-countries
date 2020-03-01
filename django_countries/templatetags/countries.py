@@ -1,4 +1,3 @@
-import django
 from django import template
 
 from django_countries.fields import Country, countries
