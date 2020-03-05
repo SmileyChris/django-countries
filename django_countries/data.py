@@ -101,7 +101,7 @@ COUNTRIES = {
     "EE": _("Estonia"),
     "SZ": _("Eswatini"),
     "ET": _("Ethiopia"),
-    "FK": _("Falkland Islands  [Malvinas]"),
+    "FK": _("Falkland Islands [Malvinas]"),
     "FO": _("Faroe Islands"),
     "FJ": _("Fiji"),
     "FI": _("Finland"),
