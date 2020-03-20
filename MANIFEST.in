@@ -3,4 +3,5 @@ include LICENSE
 include tox.ini
 graft django_countries/static/flags
 graft django_countries/locale
+graft django_countries/graphql
 graft .tx
