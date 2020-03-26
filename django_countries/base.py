@@ -29,6 +29,7 @@ class CountriesBase:
         "MK": [_("Macedonia"), _("Macedonia (the former Yugoslav Republic of)")],
         "SZ": [_("Swaziland")],
         "TZ": [_("Tanzania, the United Republic of")],
+        "FK": [_("Falkland Islands  [Malvinas]")],
     }
 
     def __getstate__(self):

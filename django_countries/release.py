@@ -45,3 +45,7 @@ def fix_locale_paths():
             if os.path.exists(new_path):
                 shutil.rmtree(new_path)
             os.rename(os.path.join(lpath, name), new_path)
+
+
+if __name__ == "__main__":
+    translations({"name": "django-countries"})
