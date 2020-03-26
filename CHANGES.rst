@@ -9,7 +9,7 @@ release, and any new translations added.
 6.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Change ISO country import so that "Falkland Islands  [Malvinas]" => "Falkland Islands (Malvinas)".
 
 
 6.1 (20 March 2020)
