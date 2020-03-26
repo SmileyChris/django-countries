@@ -9,7 +9,7 @@ release, and any new translations added.
 6.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Fix Python 3.5 syntax error (no f-strings just yet...).
 
 
 6.1.1 (26 March 2020)

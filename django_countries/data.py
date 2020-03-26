@@ -572,7 +572,7 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
     country_list = []
     for row in countries:
         name = row[0].replace('"', r"\"").strip()
-        country_list.append(f'    "{row[1]}": _("{name}"),')
+        country_list.append('    "{code}": _("{name}"),'.format(code=row[1], name=name))
     content = bits[0]
     content += "\n".join(country_list)
     # Write alt codes.
@@ -582,7 +582,11 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
     alt_list = []
     for row in countries:
         name = name.replace('"', r"\"").strip()
-        alt_list.append(f'    "{row[1]}": ("{row[2]}", {row[3]}),')
+        alt_list.append(
+            '    "{code}": ("{code3}", {codenum}),'.format(
+                code=row[1], code3=row[2], codenum=row[3]
+            )
+        )
     content += alt_bits[0]
     content += "\n".join(alt_list)
     content += alt_bits[2]
