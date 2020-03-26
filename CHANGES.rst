@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-6.2 (unreleased)
-================
+6.1.1 (26 March 2020)
+=====================
 
 - Change ISO country import so that "Falkland Islands  [Malvinas]" => "Falkland Islands (Malvinas)".
 
