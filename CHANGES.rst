@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-6.2 (unreleased)
-================
+6.1.2 (26 March 2020)
+=====================
 
 - Fix Python 3.5 syntax error (no f-strings just yet...).
 
