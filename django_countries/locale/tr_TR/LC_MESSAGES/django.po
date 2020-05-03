@@ -1033,7 +1033,7 @@ msgstr "Birleşik Arap Emirlikleri"
 
 #: data.py:266
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr ""
+msgstr "Büyük Britanya ve Kuzey İrlanda Birleşik Krallığı"
 
 #: data.py:267
 msgid "United States Minor Outlying Islands"
