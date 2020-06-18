@@ -200,6 +200,7 @@ IOC_TO_ISO = {
     "VEN": "VE",
     "VIE": "VN",
     "VIN": "VC",
+    "XKX": "XK",
     "YEM": "YE",
     "ZAM": "ZM",
     "ZIM": "ZW",

@@ -5,7 +5,7 @@ from django_countries import countries, Countries, CountryTuple
 from django_countries.tests import custom_countries
 
 
-EXPECTED_COUNTRY_COUNT = 249
+EXPECTED_COUNTRY_COUNT = 250
 FIRST_THREE_COUNTRIES = [
     ("AF", "Afghanistan"),
     ("AX", "Åland Islands"),
