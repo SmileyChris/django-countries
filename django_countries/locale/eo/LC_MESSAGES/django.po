@@ -6,13 +6,14 @@
 # Baptiste Darthenay <baptiste+transifex@darthenay.fr>, 2014-2015,2017,2019
 # Chris Beaven <smileychris@gmail.com>, 2016
 # Meiyer <interdist+translations@gmail.com>, 2016
+# Robin van der Vliet <info@robinvandervliet.nl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-26 14:14+1300\n"
-"PO-Revision-Date: 2020-03-26 01:43+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2020-08-06 01:10+0000\n"
+"Last-Translator: Robin van der Vliet <info@robinvandervliet.nl>\n"
 "Language-Team: Esperanto (http://www.transifex.com/smileychris/django-countries/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +31,7 @@ msgstr "Bolivio"
 
 #: base.py:13
 msgid "United Kingdom"
-msgstr "Britio"
+msgstr "Unuiĝinta Reĝlando"
 
 #: base.py:14
 msgid "Iran"
@@ -94,11 +95,11 @@ msgstr "Svazilando"
 
 #: base.py:31 data.py:251
 msgid "Tanzania, the United Republic of"
-msgstr ""
+msgstr "Tanzanio"
 
 #: base.py:32
 msgid "Falkland Islands  [Malvinas]"
-msgstr "Falklandaj Insuloj, Malvinoj"
+msgstr "Falklandaj Insuloj"
 
 #: data.py:32
 msgid "Afghanistan"
@@ -118,7 +119,7 @@ msgstr "Alĝerio"
 
 #: data.py:36
 msgid "American Samoa"
-msgstr "Samoo Usona (Orienta)"
+msgstr "Usona Samoo"
 
 #: data.py:37
 msgid "Andorra"
@@ -134,11 +135,11 @@ msgstr "Angvilo"
 
 #: data.py:40
 msgid "Antarctica"
-msgstr "Antarktiko"
+msgstr "Antarkto"
 
 #: data.py:41
 msgid "Antigua and Barbuda"
-msgstr "Antigvo-Barbudo"
+msgstr "Antigvo kaj Barbudo"
 
 #: data.py:42
 msgid "Argentina"
@@ -370,7 +371,7 @@ msgstr "Salvadoro"
 
 #: data.py:99
 msgid "Equatorial Guinea"
-msgstr "Gvineo Ekvatora"
+msgstr "Ekvatora Gvineo"
 
 #: data.py:100
 msgid "Eritrea"
@@ -382,7 +383,7 @@ msgstr "Estonio"
 
 #: data.py:102
 msgid "Eswatini"
-msgstr ""
+msgstr "Svazilando"
 
 #: data.py:103
 msgid "Ethiopia"
@@ -390,7 +391,7 @@ msgstr "Etiopio"
 
 #: data.py:104
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Falklandaj Insuloj"
 
 #: data.py:105
 msgid "Faroe Islands"
@@ -574,7 +575,7 @@ msgstr "Kiribato"
 
 #: data.py:150
 msgid "Korea (the Democratic People's Republic of)"
-msgstr "Nord-Koreio (Demokratia Popola Respubliko)"
+msgstr "Nord-Koreio"
 
 #: data.py:151
 msgid "Korea (the Republic of)"
@@ -758,7 +759,7 @@ msgstr "Norfolkinsulo"
 
 #: data.py:196
 msgid "North Macedonia"
-msgstr ""
+msgstr "Nord-Makedonio"
 
 #: data.py:197
 msgid "Northern Mariana Islands"
@@ -842,31 +843,31 @@ msgstr "Ruando"
 
 #: data.py:217
 msgid "Saint Barthélemy"
-msgstr "Sankta-Bartolomeo"
+msgstr "Sankta Bartolomeo"
 
 #: data.py:218
 msgid "Saint Helena, Ascension and Tristan da Cunha"
-msgstr "Sankta-Heleno"
+msgstr "Sankta Heleno"
 
 #: data.py:219
 msgid "Saint Kitts and Nevis"
-msgstr "Sankta-Kito kaj Neviso"
+msgstr "Sankta Kristoforo kaj Neviso"
 
 #: data.py:220
 msgid "Saint Lucia"
-msgstr "Sankta-Lucio"
+msgstr "Sankta Lucio"
 
 #: data.py:221
 msgid "Saint Martin (French part)"
-msgstr "Sankta-Marteno (Franca parto)"
+msgstr "Sankta Marteno (franca parto)"
 
 #: data.py:222
 msgid "Saint Pierre and Miquelon"
-msgstr "Sankta-Piero kaj Mikelono"
+msgstr "Sankta Piero kaj Mikelono"
 
 #: data.py:223
 msgid "Saint Vincent and the Grenadines"
-msgstr "Sankta-Vincento kaj Grenadinoj"
+msgstr "Sankta Vincento kaj Grenadinoj"
 
 #: data.py:224
 msgid "Samoa"
@@ -874,7 +875,7 @@ msgstr "Samoo"
 
 #: data.py:225
 msgid "San Marino"
-msgstr "San-Marino"
+msgstr "Sanmarino"
 
 #: data.py:226
 msgid "Sao Tome and Principe"
@@ -882,7 +883,7 @@ msgstr "Sao-Tomeo kaj Principeo"
 
 #: data.py:227
 msgid "Saudi Arabia"
-msgstr "Saŭda Arabio"
+msgstr "Sauda Arabio"
 
 #: data.py:228
 msgid "Senegal"
@@ -898,7 +899,7 @@ msgstr "Sejŝeloj"
 
 #: data.py:231
 msgid "Sierra Leone"
-msgstr "Siera-Leono"
+msgstr "Sieraleono"
 
 #: data.py:232
 msgid "Singapore"
@@ -906,7 +907,7 @@ msgstr "Singapuro"
 
 #: data.py:233
 msgid "Sint Maarten (Dutch part)"
-msgstr "Sankta-Marteno (Nederlanda parto)"
+msgstr "Sankta Marteno (Nederlanda parto)"
 
 #: data.py:234
 msgid "Slovakia"
@@ -942,7 +943,7 @@ msgstr "Hispanio"
 
 #: data.py:242
 msgid "Sri Lanka"
-msgstr "Sri-Lanko"
+msgstr "Srilanko"
 
 #: data.py:243
 msgid "Sudan"
@@ -1066,11 +1067,11 @@ msgstr "Vjetnamio"
 
 #: data.py:274
 msgid "Virgin Islands (British)"
-msgstr "Virgulininsuloj (Britaj)"
+msgstr "Britaj Virgulinsuloj"
 
 #: data.py:275
 msgid "Virgin Islands (U.S.)"
-msgstr "Virgulininsuloj (Usonaj)"
+msgstr "Usonaj Virgulinsuloj"
 
 #: data.py:276
 msgid "Wallis and Futuna"
