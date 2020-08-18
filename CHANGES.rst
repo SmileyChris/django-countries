@@ -9,7 +9,9 @@ release, and any new translations added.
 6.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Update flag of Mauritania.
+
+- Add flag for Kosovo (under its temporary code of XK).
 
 
 6.1.2 (26 March 2020)
