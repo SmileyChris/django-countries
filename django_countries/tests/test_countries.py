@@ -259,7 +259,7 @@ class CountriesFirstTest(BaseTest):
             try:
                 countries_list = list(countries)
                 sorted_codes = [item[0] for item in countries_list[:3]]
-                self.assertEqual(["AF", "GB", "DK"], sorted_codes)
+                self.assertEqual(["AF", "DK", "GB"], sorted_codes)
             finally:
                 translation.activate(lang)
 
