@@ -236,30 +236,32 @@ class CountriesFirstTest(BaseTest):
 
     def test_sorted_countries_first_english(self):
         with self.settings(
-            COUNTRIES_FIRST=["GB", "AF", "DK"], COUNTRIES_FIRST_SORT=True
+            COUNTRIES_FIRST=["NZ", "CA", "YE"], COUNTRIES_FIRST_SORT=True
         ):
             countries_list = list(countries)
             sorted_codes = [item[0] for item in countries_list[:3]]
-            self.assertEqual(["AF", "DK", "GB"], sorted_codes)
+            # Canada, New Zealand, Yemen
+            self.assertEqual(["CA", "NZ", "YE"], sorted_codes)
 
     def test_unsorted_countries_first_english(self):
         with self.settings(
-            COUNTRIES_FIRST=["GB", "AF", "DK"], COUNTRIES_FIRST_SORT=False
+            COUNTRIES_FIRST=["NZ", "CA", "YE"], COUNTRIES_FIRST_SORT=False
         ):
             countries_list = list(countries)
             unsorted_codes = [item[0] for item in countries_list[:3]]
-            self.assertEqual(["GB", "AF", "DK"], unsorted_codes)
+            self.assertEqual(["NZ", "CA", "YE"], unsorted_codes)
 
-    def test_sorted_countries_first_arabic(self):
+    def test_sorted_countries_first_translated(self):
         with self.settings(
-            COUNTRIES_FIRST=["GB", "AF", "DK"], COUNTRIES_FIRST_SORT=True
+            COUNTRIES_FIRST=["NZ", "CA", "YE"], COUNTRIES_FIRST_SORT=True
         ):
             lang = translation.get_language()
             translation.activate("eo")
             try:
                 countries_list = list(countries)
                 sorted_codes = [item[0] for item in countries_list[:3]]
-                self.assertEqual(["AF", "GB", "DK"], sorted_codes)
+                # Jemeno, Kanado, Nov-Zelando
+                self.assertEqual(["YE", "CA", "NZ"], sorted_codes)
             finally:
                 translation.activate(lang)
 
