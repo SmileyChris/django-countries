@@ -9,7 +9,8 @@ release, and any new translations added.
 6.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Add ``name_only`` as an option to the Django Rest Framework serializer field
+  (thanks Miguel Marques).
 
 
 6.1.3 (18 August 2020)

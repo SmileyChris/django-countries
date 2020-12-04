@@ -7,6 +7,7 @@ from django_countries import countries
 class CountryField(serializers.ChoiceField):
     def __init__(self, *args, **kwargs):
         self.country_dict = kwargs.pop("country_dict", None)
+        self.name_only = kwargs.pop("name_only", None)
         field_countries = kwargs.pop("countries", None)
         self.countries = field_countries if field_countries else countries
         super().__init__(self.countries, *args, **kwargs)
@@ -15,6 +16,8 @@ class CountryField(serializers.ChoiceField):
         code = self.countries.alpha2(obj)
         if not code:
             return ""
+        if self.name_only:
+            return force_str(self.countries.name(obj))
         if not self.country_dict:
             return code
         return {"code": code, "name": force_str(self.countries.name(obj))}

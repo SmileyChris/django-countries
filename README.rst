@@ -477,9 +477,12 @@ specify a custom Countries_ instance.
 REST output format
 ^^^^^^^^^^^^^^^^^^
 
-By default, the field will output just the country code. If you would rather
-have more verbose output, instantiate the field with ``country_dict=True``,
-which will result in the field having the following output structure:
+By default, the field will output just the country code. To output the full
+country name instead, instanciate the field with ``name_only=True``.
+
+If you would rather have more verbose output, instantiate the field with
+``country_dict=True``, which will result in the field having the following
+output structure:
 
 .. code:: json
 
