@@ -27,7 +27,10 @@ class PersonSerializer(CountryFieldMixin, serializers.ModelSerializer):
             "favourite_country",
             "fantasy_country",
         )
-        extra_kwargs = {"other_country": {"country_dict": True}}
+        extra_kwargs = {
+            "other_country": {"country_dict": True},
+            "favourite_country": {"name_only": True},
+        }
 
 
 class MultiCountrySerializer(CountryFieldMixin, serializers.ModelSerializer):
@@ -46,7 +49,7 @@ class TestDRF(TestCase):
                 "name": "Chris Beaven",
                 "country": "NZ",
                 "other_country": "",
-                "favourite_country": "NZ",
+                "favourite_country": "New Zealand",
                 "fantasy_country": "",
             },
         )
@@ -60,7 +63,7 @@ class TestDRF(TestCase):
                 "name": "Chris Beaven",
                 "country": "",
                 "other_country": {"code": "AU", "name": "Australia"},
-                "favourite_country": "NZ",
+                "favourite_country": "New Zealand",
                 "fantasy_country": "",
             },
         )
