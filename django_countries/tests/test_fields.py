@@ -358,23 +358,21 @@ class TestCountryObject(TestCase):
         country1 = fields.Country(code="XX")
         country2 = fields.Country(code="XX", flag_url="")
         country3 = fields.Country(code="XX", str_attr="name")
-        self.assertEqual(repr(country1), "Country(code={0})".format(repr("XX")))
+        self.assertEqual(repr(country1), f"Country(code={'XX'!r})")
         self.assertEqual(
-            repr(country2),
-            "Country(code={0}, flag_url={1})".format(repr("XX"), repr("")),
+            repr(country2), f"Country(code={'XX'!r}, flag_url={''!r})",
         )
         self.assertEqual(
-            repr(country3),
-            "Country(code={0}, str_attr={1})".format(repr("XX"), repr("name")),
+            repr(country3), f"Country(code={'XX'!r}, str_attr={'name'!r})",
         )
 
     def test_str(self):
         country = fields.Country(code="NZ")
-        self.assertEqual("%s" % country, "NZ")
+        self.assertEqual(str(country), "NZ")
 
     def test_str_attr(self):
         country = fields.Country(code="NZ", str_attr="name")
-        self.assertEqual("%s" % country, "New Zealand")
+        self.assertEqual(str(country), "New Zealand")
 
     def test_flag_on_empty_code(self):
         country = fields.Country(code="", flag_url="")

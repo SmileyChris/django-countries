@@ -5,7 +5,7 @@ Builds all flags into a single sprite image (along with some css).
 import os
 import re
 
-from PIL import Image
+from PIL import Image  # type: ignore
 
 re_flag_file = re.compile(r"[a-z]{2}.gif$")
 FLAG_X, FLAG_Y = 16, 11
@@ -60,9 +60,9 @@ def write_coords(css_file, width, height, prefix=""):
     for i in range(26):
         x, y = i * width, i * height
         if x:
-            x = "-{}px".format(x)
+            x = f"-{x}px"
         if y:
-            y = "-{}px".format(y)
+            y = f"-{y}px"
         code = chr(i + 97)
         css_file.write("\n%s.flag-%s {background-position-x:%s}" % (prefix, code, x))
         css_file.write("\n%s.flag-_%s {background-position-y:%s}" % (prefix, code, y))

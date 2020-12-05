@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import itertools
 from collections import namedtuple
+from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Tuple, Union
 
 from django_countries.conf import settings
 from django.utils.encoding import force_str
@@ -9,20 +10,26 @@ from django.utils.translation import override
 from .base import CountriesBase
 
 try:
-    import pyuca  # noqa
+    import pyuca  # type: ignore
 except ImportError:
     pyuca = None
     # Fallback if the UCA sorting is not available.
     import unicodedata
 
+CountryCode = Union[str, int, None]
+AltCodes = Tuple[Optional[str], Optional[int]]
 
-class CountryTuple(namedtuple("CountryTupleBase", ["code", "name"])):
+
+class CountryTuple(NamedTuple):
+    code: str
+    name: str
+
     def __repr__(self):
         """
         Display the repr as a standard tuple for better backwards
         compatibility with outputting this in a template.
         """
-        return "({this.code!r}, {this.name!r})".format(this=self)
+        return f"({self.code!r}, {self.name!r})"
 
 
 class Countries(CountriesBase):
@@ -33,7 +40,10 @@ class Countries(CountriesBase):
     the country ``code`` and ``name``), sorted by name.
     """
 
-    def get_option(self, option):
+    _countries: Dict[str, Union[str, Dict]]
+    countries_first: List[str]
+
+    def get_option(self, option: str):
         """
         Get a configuration option, trying the options attribute first and
         falling back to a Django project setting.
@@ -41,10 +51,10 @@ class Countries(CountriesBase):
         value = getattr(self, option, None)
         if value is not None:
             return value
-        return getattr(settings, "COUNTRIES_{0}".format(option.upper()))
+        return getattr(settings, f"COUNTRIES_{option.upper()}")
 
     @property
-    def countries(self):
+    def countries(self) -> Dict[str, Union[str, dict]]:
         """
         Return the a dictionary of countries, modified by any overriding
         options.
@@ -52,16 +62,16 @@ class Countries(CountriesBase):
         The result is cached so future lookups are less work intensive.
         """
         if not hasattr(self, "_countries"):
-            only = self.get_option("only")
+            only: Iterable[Union[str, Tuple[str, str]]] = self.get_option("only")
+            only_choices = True
             if only:
-                only_choices = True
                 if not isinstance(only, dict):
                     for item in only:
                         if isinstance(item, str):
                             only_choices = False
                             break
             if only and only_choices:
-                self._countries = dict(only)
+                self._countries = dict(only)  # type: ignore
             else:
                 # Local import so that countries aren't loaded into memory
                 # until first used.
@@ -70,7 +80,7 @@ class Countries(CountriesBase):
                 self._countries = dict(COUNTRIES)
                 if self.get_option("common_names"):
                     self._countries.update(self.COMMON_NAMES)
-                override = self.get_option("override")
+                override: Dict[str, str] = self.get_option("override")
                 if override:
                     self._countries.update(override)
                     self._countries = dict(
@@ -88,35 +98,12 @@ class Countries(CountriesBase):
                         countries[key] = value
                 self._countries = countries
             self.countries_first = []
-            first = self.get_option("first") or []
+            first: List[str] = self.get_option("first") or []
             for code in first:
                 code = self.alpha2(code)
                 if code in self._countries:
                     self.countries_first.append(code)
         return self._countries
-
-    @property
-    def alt_codes(self):
-        if not hasattr(self, "_alt_codes"):
-            # Again, local import so data is not loaded unless it's needed.
-            from django_countries.data import ALT_CODES
-
-            self._alt_codes = ALT_CODES
-            altered = False
-            for code, country in self.countries.items():
-                if isinstance(country, dict) and (
-                    "alpha3" in country or "numeric" in country
-                ):
-                    if not altered:
-                        self._alt_codes = self._alt_codes.copy()
-                        altered = True
-                    alt_codes = list(self._alt_codes.get(code, (None, None)))
-                    if "alpha3" in country:
-                        alt_codes[0] = country["alpha3"]
-                    if "numeric" in country:
-                        alt_codes[1] = country["numeric"]
-                    self._alt_codes[code] = tuple(alt_codes)
-        return self._alt_codes
 
     @countries.deleter
     def countries(self):
@@ -130,7 +117,31 @@ class Countries(CountriesBase):
         if hasattr(self, "_alt_codes"):
             del self._alt_codes
 
-    def translate_code(self, code, ignore_first=None):
+    @property
+    def alt_codes(self) -> Dict[str, AltCodes]:
+        if not hasattr(self, "_alt_codes"):
+            # Again, local import so data is not loaded unless it's needed.
+            from django_countries.data import ALT_CODES
+
+            self._alt_codes = ALT_CODES
+            altered = False
+            for code, country in self.countries.items():
+                if isinstance(country, dict) and (
+                    "alpha3" in country or "numeric" in country
+                ):
+                    if not altered:
+                        self._alt_codes = self._alt_codes.copy()
+                        altered = True
+                    alpha3, numeric = self._alt_codes.get(code, (None, None))
+                    if "alpha3" in country:
+                        alpha3 = country["alpha3"]
+                    if "numeric" in country:
+                        numeric = country["numeric"]
+                    new_alt_codes: AltCodes = (alpha3, numeric)
+                    self._alt_codes[code] = new_alt_codes
+        return self._alt_codes
+
+    def translate_code(self, code: str, ignore_first: List[str] = None):
         """
         Return translated countries for a country code.
         """
@@ -147,7 +158,7 @@ class Countries(CountriesBase):
         for name in names:
             yield self.translate_pair(code, name)
 
-    def translate_pair(self, code, name=None):
+    def translate_pair(self, code: str, name: Union[str, Dict] = None):
         """
         Force a country to the current activated translation.
 
@@ -227,7 +238,7 @@ class Countries(CountriesBase):
         if self.countries_first:
             first_break = self.get_option("first_break")
             if first_break:
-                yield ("", force_str(first_break))
+                yield CountryTuple("", force_str(first_break))
 
         # Force translation before sorting.
         ignore_first = None if self.get_option("first_repeat") else self.countries_first
@@ -241,25 +252,26 @@ class Countries(CountriesBase):
         for item in sorted(countries, key=sort_key):
             yield item
 
-    def alpha2(self, code):
+    def alpha2(self, code: CountryCode) -> str:
         """
         Return the two letter country code when passed any type of ISO 3166-1
         country code.
 
         If no match is found, returns an empty string.
         """
+        find: Optional[Callable]
         code = force_str(code).upper()
         if code.isdigit():
-            lookup_code = int(code)
+            lookup_numeric = int(code)
 
             def find(alt_codes):
-                return alt_codes[1] == lookup_code
+                return alt_codes[1] == lookup_numeric
 
         elif len(code) == 3:
-            lookup_code = code
+            lookup_alpha3 = code
 
             def find(alt_codes):
-                return alt_codes[0] == lookup_code
+                return alt_codes[0] == lookup_alpha3
 
         else:
             find = None
@@ -273,18 +285,18 @@ class Countries(CountriesBase):
             return code
         return ""
 
-    def name(self, code):
+    def name(self, code: CountryCode) -> str:
         """
         Return the name of a country, based on the code.
 
         If no match is found, returns an empty string.
         """
-        code = self.alpha2(code)
-        if code not in self.countries:
+        alpha2 = self.alpha2(code)
+        if alpha2 not in self.countries:
             return ""
-        return self.translate_pair(code)[1]
+        return self.translate_pair(alpha2)[1]
 
-    def by_name(self, country, language="en"):
+    def by_name(self, country: str, language: str = "en") -> str:
         """
         Fetch a country's ISO3166-1 two letter country code from its name.
 
@@ -307,20 +319,21 @@ class Countries(CountriesBase):
                             return code
         return ""
 
-    def alpha3(self, code):
+    def alpha3(self, code: CountryCode):
         """
         Return the ISO 3166-1 three letter country code matching the provided
         country code.
 
         If no match is found, returns an empty string.
         """
-        code = self.alpha2(code)
+        alpha2 = self.alpha2(code)
         try:
-            return self.alt_codes[code][0]
+            alpha3 = self.alt_codes[alpha2][0]
         except KeyError:
-            return ""
+            alpha3 = None
+        return alpha3 or ""
 
-    def numeric(self, code, padded=False):
+    def numeric(self, code: Union[str, int, None], padded=False):
         """
         Return the ISO 3166-1 numeric country code matching the provided
         country code.
@@ -330,10 +343,12 @@ class Countries(CountriesBase):
         :param padded: Pass ``True`` to return a 0-padded three character
             string, otherwise an integer will be returned.
         """
-        code = self.alpha2(code)
+        alpha2 = self.alpha2(code)
         try:
-            num = self.alt_codes[code][1]
+            num = self.alt_codes[alpha2][1]
         except KeyError:
+            num = None
+        if num is None:
             return None
         if padded:
             return "%03d" % num

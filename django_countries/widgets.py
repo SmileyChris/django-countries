@@ -1,4 +1,5 @@
 import copy
+from typing import List, Union, overload
 from urllib import parse as urlparse
 
 from django.forms import widgets
@@ -15,23 +16,25 @@ COUNTRY_CHANGE_HANDLER = (
     ".replace('{code_upper}', this.value.toUpperCase() || '__');"
 )
 
+ChoiceList = List[List[Union[int, str]]]
+
 
 class LazyChoicesMixin:
-    @property
-    def choices(self):
+    def get_choices(self) -> ChoiceList:
         """
         When it's time to get the choices, if it was a lazy then figure it out
         now and memoize the result.
         """
         if isinstance(self._choices, Promise):
-            self._choices = list(self._choices)
+            self._choices: ChoiceList = list(self._choices)
         return self._choices
 
-    @choices.setter
-    def choices(self, value):
+    def set_choices(self, value: ChoiceList):
         self._set_choices(value)
 
-    def _set_choices(self, value):
+    choices = property(get_choices, set_choices)
+
+    def _set_choices(self, value: ChoiceList):
         self._choices = value
 
 
@@ -44,13 +47,13 @@ class LazySelectMixin(LazyChoicesMixin):
         return obj
 
 
-class LazySelect(LazySelectMixin, widgets.Select):
+class LazySelect(LazySelectMixin, widgets.Select):  # type: ignore
     """
     A form Select widget that respects choices being a lazy object.
     """
 
 
-class LazySelectMultiple(LazySelectMixin, widgets.SelectMultiple):
+class LazySelectMultiple(LazySelectMixin, widgets.SelectMultiple):  # type: ignore
     """
     A form SelectMultiple widget that respects choices being a lazy object.
     """
@@ -71,7 +74,7 @@ class CountrySelectWidget(LazySelect):
         attrs = attrs or {}
         widget_id = attrs and attrs.get("id")
         if widget_id:
-            flag_id = "flag_{id}".format(id=widget_id)
+            flag_id = f"flag_{widget_id}"
             attrs["onchange"] = COUNTRY_CHANGE_HANDLER % urlparse.urljoin(
                 settings.STATIC_URL, settings.COUNTRIES_FLAG_URL
             )

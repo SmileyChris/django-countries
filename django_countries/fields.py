@@ -1,3 +1,4 @@
+from typing import Any, Iterable, Tuple, Union
 import pkg_resources
 from urllib import parse as urlparse
 
@@ -69,13 +70,13 @@ class Country:
         return hash(force_str(self))
 
     def __repr__(self):
-        args = ["code={country.code!r}"]
+        args = [f"code={self.code!r}"]
         if self.flag_url is not None:
-            args.append("flag_url={country.flag_url!r}")
+            args.append(f"flag_url={self.flag_url!r}")
         if self._str_attr != "code":
-            args.append("str_attr={country._str_attr!r}")
-        args = ", ".join(args).format(country=self)
-        return "{name}({args})".format(name=self.__class__.__name__, args=args)
+            args.append(f"str_attr={self._str_attr!r}")
+        args = ", ".join(args)
+        return f"{self.__class__.__name__}({args})"
 
     def __bool__(self):
         return bool(self.code)
@@ -138,7 +139,8 @@ class Country:
         """
         if not self.code:
             return ""
-        return "flag-sprite flag-{} flag-_{}".format(*self.code.lower())
+        x, y = self.code.lower()
+        return f"flag-sprite flag-{x} flag-_{y}"
 
     @property
     def unicode_flag(self):
@@ -229,11 +231,17 @@ class LazyChoicesMixin(widgets.LazyChoicesMixin):
         self.widget.choices = value
 
 
+_Choice = Tuple[Any, str]
+_ChoiceNamedGroup = Tuple[str, Iterable[_Choice]]
+_FieldChoices = Iterable[Union[_Choice, _ChoiceNamedGroup]]
+
+
 class LazyTypedChoiceField(LazyChoicesMixin, forms.TypedChoiceField):
     """
     A form TypedChoiceField that respects choices being a lazy object.
     """
 
+    choices: Any
     widget = widgets.LazySelect
 
 
@@ -242,6 +250,7 @@ class LazyTypedMultipleChoiceField(LazyChoicesMixin, forms.TypedMultipleChoiceFi
     A form TypedMultipleChoiceField that respects choices being a lazy object.
     """
 
+    choices: Any
     widget = widgets.LazySelectMultiple
 
 

@@ -1,4 +1,4 @@
-from graphene.test import Client
+from graphene.test import Client  # type: ignore
 from django_countries.tests.graphql.schema import schema
 from django_countries.tests.models import Person
 

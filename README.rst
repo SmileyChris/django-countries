@@ -224,7 +224,7 @@ For example:
     'New Zealand'
 
     >>> for code, name in list(countries)[:3]:
-    ...     print("{name} ({code})".format(name=name, code=code))
+    ...     print(f"{name} ({code})")
     ...
     Afghanistan (AF)
     Åland Islands (AX)

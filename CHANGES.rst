@@ -6,11 +6,15 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-6.2 (unreleased)
+7.0 (unreleased)
 ================
 
 - Add ``name_only`` as an option to the Django Rest Framework serializer field
   (thanks Miguel Marques).
+
+- Add in Python typing.
+
+- Drop Python 3.5 support.
 
 
 6.1.3 (18 August 2020)

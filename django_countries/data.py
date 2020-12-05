@@ -16,6 +16,7 @@ how to do that:
 """
 import glob
 import os
+from typing import Dict, Optional, Tuple
 
 from django_countries.base import CountriesBase
 
@@ -280,7 +281,7 @@ COUNTRIES = {
     "ZW": _("Zimbabwe"),
 }
 
-ALT_CODES = {
+ALT_CODES: Dict[str, Tuple[Optional[str], Optional[int]]] = {
     "AF": ("AFG", 4),
     "AX": ("ALA", 248),
     "AL": ("ALB", 8),
@@ -533,7 +534,9 @@ ALT_CODES = {
 }
 
 
-def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cover
+def self_generate(
+    output_filename: str, filename: str = "iso3166-1.csv"
+):  # pragma: no cover
     """
     The following code can be used for self-generation of this file.
 
@@ -566,26 +569,25 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
     countries = sorted(countries, key=sort_key)
 
     # Write countries.
-    bits = re.match(
-        r"(.*\nCOUNTRIES = \{\n)(.*?)(\n\}.*)", contents, re.DOTALL
-    ).groups()
+    match = re.match(r"(.*\nCOUNTRIES = \{\n)(.*?)(\n\}.*)", contents, re.DOTALL)
+    if not match:
+        raise ValueError('Expected a "COUNTRIES =" section in the source file!')
+    bits = match.groups()
     country_list = []
-    for row in countries:
-        name = row[0].replace('"', r"\"").strip()
-        country_list.append('    "{code}": _("{name}"),'.format(code=row[1], name=name))
+    for country_row in countries:
+        name = country_row[0].replace('"', r"\"").strip()
+        country_list.append(f'    "{country_row[1]}": _("{name}"),')
     content = bits[0]
     content += "\n".join(country_list)
     # Write alt codes.
-    alt_bits = re.match(
-        r"(.*\nALT_CODES = \{\n)(.*)(\n\}.*)", bits[2], re.DOTALL
-    ).groups()
+    alt_match = re.match(r"(.*\nALT_CODES = \{\n)(.*)(\n\}.*)", bits[2], re.DOTALL)
+    if not alt_match:
+        raise ValueError('Expected an "ALT_CODES =" section in the source file!')
+    alt_bits = alt_match.groups()
     alt_list = []
-    for row in countries:
-        name = name.replace('"', r"\"").strip()
+    for country_row in countries:
         alt_list.append(
-            '    "{code}": ("{code3}", {codenum}),'.format(
-                code=row[1], code3=row[2], codenum=row[3]
-            )
+            f'    "{country_row[1]}": ("{country_row[2]}", {country_row[3]}),'
         )
     content += alt_bits[0]
     content += "\n".join(alt_list)
@@ -596,7 +598,7 @@ def self_generate(output_filename, filename="iso3166-1.csv"):  # pragma: no cove
     return countries
 
 
-def check_flags(verbosity=1):
+def check_flags(verbosity: int = 1):
     files = {}
     this_dir = os.path.dirname(__file__)
     for path in glob.glob(os.path.join(this_dir, "static", "flags", "*.gif")):
@@ -606,7 +608,7 @@ def check_flags(verbosity=1):
     if flags_missing:  # pragma: no cover
         print("The following country codes are missing a flag:")
         for code in sorted(flags_missing):
-            print("  {0} ({1})".format(code, COUNTRIES[code]))
+            print(f"  {code} ({COUNTRIES[code]})")
     elif verbosity:  # pragma: no cover
         print("All country codes have flags. :)")
 
@@ -618,7 +620,7 @@ def check_flags(verbosity=1):
         print("")
         print("The following flags don't have a matching country code:")
         for path in sorted(code_missing):
-            print("  {0}".format(path))
+            print(f"  {path}")
 
 
 def check_common_names():
@@ -627,12 +629,12 @@ def check_common_names():
         print("")
         print("The following common names do not match an official country code:")
         for code in sorted(common_names_missing):
-            print("  {0}".format(code))
+            print(f"  {code}")
 
 
 if __name__ == "__main__":  # pragma: no cover
     countries = self_generate(__file__)
-    print("Wrote {0} countries.".format(len(countries)))
+    print(f"Wrote {len(countries)} countries.")
 
     print("")
     check_flags()
