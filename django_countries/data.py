@@ -576,9 +576,7 @@ def self_generate(
     country_list = []
     for country_row in countries:
         name = country_row[0].replace('"', r"\"").strip()
-        country_list.append(
-            '    "{code}": _("{name}"),'.format(code=country_row[1], name=name)
-        )
+        country_list.append(f'    "{country_row[1]}": _("{name}"),')
     content = bits[0]
     content += "\n".join(country_list)
     # Write alt codes.
@@ -589,9 +587,7 @@ def self_generate(
     alt_list = []
     for country_row in countries:
         alt_list.append(
-            '    "{code}": ("{code3}", {codenum}),'.format(
-                code=country_row[1], code3=country_row[2], codenum=country_row[3]
-            )
+            f'    "{country_row[1]}": ("{country_row[2]}", {country_row[3]}),'
         )
     content += alt_bits[0]
     content += "\n".join(alt_list)
@@ -612,7 +608,7 @@ def check_flags(verbosity: int = 1):
     if flags_missing:  # pragma: no cover
         print("The following country codes are missing a flag:")
         for code in sorted(flags_missing):
-            print("  {0} ({1})".format(code, COUNTRIES[code]))
+            print(f"  {code} ({COUNTRIES[code]})")
     elif verbosity:  # pragma: no cover
         print("All country codes have flags. :)")
 
@@ -624,7 +620,7 @@ def check_flags(verbosity: int = 1):
         print("")
         print("The following flags don't have a matching country code:")
         for path in sorted(code_missing):
-            print("  {0}".format(path))
+            print(f"  {path}")
 
 
 def check_common_names():
@@ -633,12 +629,12 @@ def check_common_names():
         print("")
         print("The following common names do not match an official country code:")
         for code in sorted(common_names_missing):
-            print("  {0}".format(code))
+            print(f"  {code}")
 
 
 if __name__ == "__main__":  # pragma: no cover
     countries = self_generate(__file__)
-    print("Wrote {0} countries.".format(len(countries)))
+    print(f"Wrote {len(countries)} countries.")
 
     print("")
     check_flags()

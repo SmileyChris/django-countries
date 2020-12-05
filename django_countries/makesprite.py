@@ -60,9 +60,9 @@ def write_coords(css_file, width, height, prefix=""):
     for i in range(26):
         x, y = i * width, i * height
         if x:
-            x = "-{}px".format(x)
+            x = f"-{x}px"
         if y:
-            y = "-{}px".format(y)
+            y = f"-{y}px"
         code = chr(i + 97)
         css_file.write("\n%s.flag-%s {background-position-x:%s}" % (prefix, code, x))
         css_file.write("\n%s.flag-_%s {background-position-y:%s}" % (prefix, code, y))

@@ -29,7 +29,7 @@ class CountryTuple(NamedTuple):
         Display the repr as a standard tuple for better backwards
         compatibility with outputting this in a template.
         """
-        return "({this.code!r}, {this.name!r})".format(this=self)
+        return f"({self.code!r}, {self.name!r})"
 
 
 class Countries(CountriesBase):
@@ -51,7 +51,7 @@ class Countries(CountriesBase):
         value = getattr(self, option, None)
         if value is not None:
             return value
-        return getattr(settings, "COUNTRIES_{0}".format(option.upper()))
+        return getattr(settings, f"COUNTRIES_{option.upper()}")
 
     @property
     def countries(self) -> Dict[str, Union[str, dict]]:

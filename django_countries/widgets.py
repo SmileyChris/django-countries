@@ -74,7 +74,7 @@ class CountrySelectWidget(LazySelect):
         attrs = attrs or {}
         widget_id = attrs and attrs.get("id")
         if widget_id:
-            flag_id = "flag_{id}".format(id=widget_id)
+            flag_id = f"flag_{widget_id}"
             attrs["onchange"] = COUNTRY_CHANGE_HANDLER % urlparse.urljoin(
                 settings.STATIC_URL, settings.COUNTRIES_FLAG_URL
             )
