@@ -1,6 +1,7 @@
 include *.rst
 include LICENSE
 include tox.ini
+include django_countries/py.typed
 graft django_countries/static/flags
 graft django_countries/locale
 graft .tx
