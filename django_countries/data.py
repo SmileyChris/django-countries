@@ -281,7 +281,7 @@ COUNTRIES = {
     "ZW": _("Zimbabwe"),
 }
 
-ALT_CODES: Dict[str, Tuple[Optional[str], Optional[int]]] = {
+ALT_CODES = {
     "AF": ("AFG", 4),
     "AX": ("ALA", 248),
     "AL": ("ALB", 8),

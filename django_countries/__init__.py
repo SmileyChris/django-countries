@@ -17,7 +17,11 @@ except ImportError:
     import unicodedata
 
 CountryCode = Union[str, int, None]
-AltCodes = Tuple[Optional[str], Optional[int]]
+
+
+class AltCodes(NamedTuple):
+    alpha3: str
+    numeric: Optional[int]
 
 
 class CountryTuple(NamedTuple):
@@ -41,7 +45,7 @@ class Countries(CountriesBase):
     """
 
     _countries: Dict[str, Union[str, Dict]]
-    countries_first: List[str]
+    _alt_codes: Dict[str, AltCodes]
 
     def get_option(self, option: str):
         """
@@ -123,7 +127,7 @@ class Countries(CountriesBase):
             # Again, local import so data is not loaded unless it's needed.
             from django_countries.data import ALT_CODES
 
-            self._alt_codes = ALT_CODES
+            self._alt_codes = ALT_CODES  # type: ignore
             altered = False
             for code, country in self.countries.items():
                 if isinstance(country, dict) and (
@@ -132,13 +136,12 @@ class Countries(CountriesBase):
                     if not altered:
                         self._alt_codes = self._alt_codes.copy()
                         altered = True
-                    alpha3, numeric = self._alt_codes.get(code, (None, None))
+                    alpha3, numeric = self._alt_codes.get(code, ("", None))
                     if "alpha3" in country:
                         alpha3 = country["alpha3"]
                     if "numeric" in country:
                         numeric = country["numeric"]
-                    new_alt_codes: AltCodes = (alpha3, numeric)
-                    self._alt_codes[code] = new_alt_codes
+                    self._alt_codes[code] = AltCodes(alpha3, numeric)
         return self._alt_codes
 
     def translate_code(self, code: str, ignore_first: List[str] = None):
@@ -260,15 +263,15 @@ class Countries(CountriesBase):
         If no match is found, returns an empty string.
         """
         find: Optional[Callable]
-        code = force_str(code).upper()
-        if code.isdigit():
-            lookup_numeric = int(code)
+        code_str = force_str(code).upper()
+        if code_str.isdigit():
+            lookup_numeric = int(code_str)
 
             def find(alt_codes):
                 return alt_codes[1] == lookup_numeric
 
-        elif len(code) == 3:
-            lookup_alpha3 = code
+        elif len(code_str) == 3:
+            lookup_alpha3 = code_str
 
             def find(alt_codes):
                 return alt_codes[0] == lookup_alpha3
@@ -276,13 +279,13 @@ class Countries(CountriesBase):
         else:
             find = None
         if find:
-            code = None
+            code_str = ""
             for alpha2, alt_codes in self.alt_codes.items():
                 if find(alt_codes):
-                    code = alpha2
+                    code_str = alpha2
                     break
-        if code in self.countries:
-            return code
+        if code_str in self.countries:
+            return code_str
         return ""
 
     def name(self, code: CountryCode) -> str:
@@ -330,7 +333,7 @@ class Countries(CountriesBase):
         try:
             alpha3 = self.alt_codes[alpha2][0]
         except KeyError:
-            alpha3 = None
+            alpha3 = ""
         return alpha3 or ""
 
     def numeric(self, code: Union[str, int, None], padded=False):
