@@ -14,6 +14,8 @@ release, and any new translations added.
 
 - Add in Python typing.
 
+- Add Python 3.9, Django 3.1, and Django Rest Framework 3.12 support.
+
 - Drop Python 3.5 support.
 
 
