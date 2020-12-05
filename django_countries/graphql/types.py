@@ -1,4 +1,4 @@
-import graphene
+import graphene  # type: ignore
 
 
 class Country(graphene.ObjectType):

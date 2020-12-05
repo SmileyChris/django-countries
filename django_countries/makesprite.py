@@ -5,7 +5,7 @@ Builds all flags into a single sprite image (along with some css).
 import os
 import re
 
-from PIL import Image
+from PIL import Image  # type: ignore
 
 re_flag_file = re.compile(r"[a-z]{2}.gif$")
 FLAG_X, FLAG_Y = 16, 11

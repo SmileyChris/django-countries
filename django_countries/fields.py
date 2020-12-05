@@ -1,3 +1,4 @@
+from typing import Any, Iterable, Tuple, Union
 import pkg_resources
 from urllib import parse as urlparse
 
@@ -229,11 +230,17 @@ class LazyChoicesMixin(widgets.LazyChoicesMixin):
         self.widget.choices = value
 
 
+_Choice = Tuple[Any, str]
+_ChoiceNamedGroup = Tuple[str, Iterable[_Choice]]
+_FieldChoices = Iterable[Union[_Choice, _ChoiceNamedGroup]]
+
+
 class LazyTypedChoiceField(LazyChoicesMixin, forms.TypedChoiceField):
     """
     A form TypedChoiceField that respects choices being a lazy object.
     """
 
+    choices: Any
     widget = widgets.LazySelect
 
 
@@ -242,6 +249,7 @@ class LazyTypedMultipleChoiceField(LazyChoicesMixin, forms.TypedMultipleChoiceFi
     A form TypedMultipleChoiceField that respects choices being a lazy object.
     """
 
+    choices: Any
     widget = widgets.LazySelectMultiple
 
 

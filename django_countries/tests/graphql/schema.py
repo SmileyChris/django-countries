@@ -1,5 +1,5 @@
-import graphene
-import graphene_django
+import graphene  # type: ignore
+import graphene_django  # type: ignore
 from django_countries.fields import Country
 from django_countries.graphql.types import Country as CountryType
 from django_countries.tests import models
