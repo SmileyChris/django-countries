@@ -133,6 +133,49 @@ class TestCountriesObject(BaseTest):
         with self.settings(COUNTRIES_OVERRIDE={"XX": "Neverland"}):
             self.assertEqual(countries.alpha2("XX"), "XX")
 
+    def test_ioc_code(self):
+        self.assertEqual(countries.ioc_code("BS"), "BAH")
+
+    def test_ioc_code_override(self):
+        with self.settings(
+            COUNTRIES_OVERRIDE={
+                "BS": "Bahamas in Pajamas",
+                "AU": None,
+                "NZ": {"ioc_code": ""},
+                "XX": "Neverland",
+                "US": {"ioc_code": "XXX"},
+                "XK": {"name": "Kosovo", "ioc_code": "KOS"},
+            }
+        ):
+            self.assertEqual(
+                countries.ioc_code("BS"),
+                "BAH",
+                "Should still use built-in code if only name changed",
+            )
+            self.assertEqual(
+                countries.ioc_code("AU"),
+                "",
+                "Should be empty since country was marked not present",
+            )
+            self.assertEqual(
+                countries.ioc_code("NZ"),
+                "",
+                "Should be empty since country exists but IOC code cleared",
+            )
+            self.assertEqual(
+                countries.ioc_code("XX"),
+                "",
+                "Should be empty for a custom country with no IOC code",
+            )
+            self.assertEqual(
+                countries.ioc_code("US"), "XXX", "Should use provided custom IOC code"
+            )
+            self.assertEqual(
+                countries.ioc_code("XK"),
+                "KOS",
+                "Should use IOC code for a custom country that provides a code",
+            )
+
     def test_fetch_by_name(self):
         code = countries.by_name("United States of America")
         self.assertEqual(code, "US")

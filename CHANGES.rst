@@ -18,6 +18,9 @@ release, and any new translations added.
 
 - Drop Python 3.5 support.
 
+- Improve IOC code functionality, allowing them to be overridden in
+  ``COUNTRIES_OVERRIDE`` using the complex dictionary format.
+
 
 6.1.3 (18 August 2020)
 ======================

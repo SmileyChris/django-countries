@@ -160,6 +160,9 @@ numeric
 numeric_padded
   The numeric country code as a three character 0-padded string.
 
+ioc_code
+  The three letter International Olympic Committee country code.
+
 
 ``CountrySelectWidget``
 -----------------------
@@ -409,6 +412,10 @@ The options within the dictionary are:
   for this country. The numeric codes 900 to 999 are left available by the
   standard for user-assignment.
 
+``ioc_code`` (optional)
+  The country's International Olympic Committee code (or an empty string to
+  nullify an existing code).
+  
 
 ``Country`` object external plugins
 -----------------------------------

@@ -120,6 +120,8 @@ class Countries(CountriesBase):
             del self._countries
         if hasattr(self, "_alt_codes"):
             del self._alt_codes
+        if hasattr(self, "_ioc_codes"):
+            del self._ioc_codes
 
     @property
     def alt_codes(self) -> Dict[str, AltCodes]:
@@ -143,6 +145,21 @@ class Countries(CountriesBase):
                         numeric = country["numeric"]
                     self._alt_codes[code] = AltCodes(alpha3, numeric)
         return self._alt_codes
+
+    @property
+    def ioc_codes(self) -> Dict[str, str]:
+        if not hasattr(self, "_ioc_codes"):
+            from django_countries.ioc_data import ISO_TO_IOC
+
+            self._ioc_codes = ISO_TO_IOC
+            altered = False
+            for code, country in self.countries.items():
+                if isinstance(country, dict) and "ioc_code" in country:
+                    if not altered:
+                        self._ioc_codes = self._ioc_codes.copy()
+                        altered = True
+                    self._ioc_codes[code] = country["ioc_code"]
+        return self._ioc_codes
 
     def translate_code(self, code: str, ignore_first: List[str] = None):
         """
@@ -356,6 +373,16 @@ class Countries(CountriesBase):
         if padded:
             return "%03d" % num
         return num
+
+    def ioc_code(self, code: CountryCode) -> str:
+        """
+        Return the International Olympic Committee three letter code matching
+        the provided ISO 3166-1 country code.
+
+        If no match is found, returns an empty string.
+        """
+        alpha2 = self.alpha2(code)
+        return self.ioc_codes.get(alpha2, "")
 
     def __len__(self):
         """

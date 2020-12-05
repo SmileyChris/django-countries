@@ -173,7 +173,7 @@ class Country:
 
     @property
     def ioc_code(self):
-        return ioc_data.ISO_TO_IOC.get(self.code, "")
+        return self.countries.ioc_code(self.code)
 
     def __getattr__(self, attr):
         if attr in EXTENSIONS:
