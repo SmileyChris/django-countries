@@ -3,6 +3,8 @@ import itertools
 from collections import namedtuple
 from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Tuple, Union
 
+from django.utils.functional import cached_property
+
 from django_countries.conf import settings
 from django.utils.encoding import force_str
 from django.utils.translation import override
@@ -11,10 +13,26 @@ from .base import CountriesBase
 
 try:
     import pyuca  # type: ignore
+
+    collator = pyuca.Collator()
+
+    # Use UCA sorting if it's available.
+    def sort_key(item):
+        return collator.sort_key(item[1])
+
+
 except ImportError:
-    pyuca = None
     # Fallback if the UCA sorting is not available.
     import unicodedata
+
+    # Cheap and dirty method to sort against ASCII characters only.
+    def sort_key(item):
+        return (
+            unicodedata.normalize("NFKD", item[1])
+            .encode("ascii", "ignore")
+            .decode("ascii")
+        )
+
 
 CountryCode = Union[str, int, None]
 
@@ -231,23 +249,6 @@ class Countries(CountriesBase):
 
         # Yield countries that should be displayed first.
         countries_first = (self.translate_pair(code) for code in self.countries_first)
-
-        # Define the sorting method.
-        if pyuca:
-            collator = pyuca.Collator()
-
-            # Use UCA sorting if it's available.
-            def sort_key(item):
-                return collator.sort_key(item[1])
-
-        else:
-            # Cheap and dirty method to sort against ASCII characters only.
-            def sort_key(item):
-                return (
-                    unicodedata.normalize("NFKD", item[1])
-                    .encode("ascii", "ignore")
-                    .decode("ascii")
-                )
 
         if self.get_option("first_sort"):
             countries_first = sorted(countries_first, key=sort_key)
