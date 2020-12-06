@@ -7,7 +7,7 @@ from django.utils.functional import cached_property
 
 from django_countries.conf import settings
 from django.utils.encoding import force_str
-from django.utils.translation import override
+from django.utils.translation import get_language, override
 
 from .base import CountriesBase
 
@@ -87,11 +87,13 @@ class Countries(CountriesBase):
             only: Iterable[Union[str, Tuple[str, str]]] = self.get_option("only")
             only_choices = True
             if only:
+                # Originally used ``only`` as a dict, still supported.
                 if not isinstance(only, dict):
                     for item in only:
                         if isinstance(item, str):
                             only_choices = False
                             break
+            self._shadowed_names: Dict[str, List[str]] = {}
             if only and only_choices:
                 self._countries = dict(only)  # type: ignore
             else:
@@ -99,10 +101,22 @@ class Countries(CountriesBase):
                 # until first used.
                 from django_countries.data import COUNTRIES
 
-                self._countries = dict(COUNTRIES)
+                countries_dict = dict(COUNTRIES)
+                if only:
+                    self._countries = {}
+                    for item in only:
+                        if isinstance(item, str):
+                            self._countries[item] = countries_dict[item]
+                        else:
+                            key, value = item
+                            self._countries[key] = value
+                else:
+                    self._countries = countries_dict.copy()  # type: ignore
                 if self.get_option("common_names"):
-                    self._countries.update(self.COMMON_NAMES)
-                override: Dict[str, str] = self.get_option("override")
+                    for code, name in self.COMMON_NAMES.items():
+                        if code in self._countries:
+                            self._countries[code] = name
+                override: Dict[str, Union[str, dict]] = self.get_option("override")
                 if override:
                     self._countries.update(override)
                     self._countries = dict(
@@ -110,15 +124,16 @@ class Countries(CountriesBase):
                         for code, name in self._countries.items()
                         if name is not None
                     )
-            if only and not only_choices:
-                countries = {}
-                for item in only:
-                    if isinstance(item, str):
-                        countries[item] = self._countries[item]
-                    else:
-                        key, value = item
-                        countries[key] = value
-                self._countries = countries
+
+                if self.get_option("common_names"):
+                    for code in self.COMMON_NAMES:
+                        if code in self._countries and code not in override:
+                            self._shadowed_names[code] = [countries_dict[code]]
+                for code, names in self.OLD_NAMES.items():
+                    if code in self._countries and code not in override:
+                        country_shadowed = self._shadowed_names.setdefault(code, [])
+                        country_shadowed.extend(names)
+
             self.countries_first = []
             first: List[str] = self.get_option("first") or []
             for code in first:
@@ -140,6 +155,8 @@ class Countries(CountriesBase):
             del self._alt_codes
         if hasattr(self, "_ioc_codes"):
             del self._ioc_codes
+        if hasattr(self, "_shadowed_names"):
+            del self._shadowed_names
 
     @property
     def alt_codes(self) -> Dict[str, AltCodes]:
@@ -179,6 +196,13 @@ class Countries(CountriesBase):
                     self._ioc_codes[code] = country["ioc_code"]
         return self._ioc_codes
 
+    @property
+    def shadowed_names(self):
+        if not getattr(self, "_shadowed_names", False):
+            # Getting countries populates shadowed names.
+            self.countries
+        return self._shadowed_names
+
     def translate_code(self, code: str, ignore_first: List[str] = None):
         """
         Return translated countries for a country code.
@@ -204,28 +228,34 @@ class Countries(CountriesBase):
         """
         if name is None:
             name = self.countries[code]
-            if isinstance(name, dict):
-                if "names" in name:
-                    name = name["names"][0]
-                else:
-                    name = name["name"]
-        if code in self.OLD_NAMES:
+        if isinstance(name, dict):
+            if "names" in name:
+                country_name: str = name["names"][0]
+                fallback_names: List[str] = name["names"][1:]
+            else:
+                country_name = name["name"]
+                fallback_names = []
+        else:
+            country_name = name
+            fallback_names = self.shadowed_names.get(code, [])
+        language = get_language()
+        if language and language.split("-")[0] != "en" and fallback_names:
             # Check if there's an older translation available if there's no
             # translation for the newest name.
-            with override(None):
-                source_name = force_str(name)
-            name = force_str(name)
-            if name == source_name:
-                for old_name in self.OLD_NAMES[code]:
-                    with override(None):
-                        source_old_name = force_str(old_name)
-                    old_name = force_str(old_name)
-                    if old_name != source_old_name:
-                        name = old_name
+            with override("en"):
+                source_name = force_str(country_name)
+            country_name = force_str(country_name)
+            if country_name == source_name:
+                for fallback_name in fallback_names:
+                    with override("en"):
+                        source_fallback_name = force_str(fallback_name)
+                    fallback_name = force_str(fallback_name)
+                    if fallback_name != source_fallback_name:
+                        country_name = fallback_name
                         break
         else:
-            name = force_str(name)
-        return CountryTuple(code, name)
+            country_name = force_str(country_name)
+        return CountryTuple(code, country_name)
 
     def __iter__(self):
         """
@@ -331,12 +361,20 @@ class Countries(CountriesBase):
             countries may change over time.
         """
         with override(language):
-            for code, name in self:
-                if name.lower() == country.lower():
-                    return code
-                if code in self.OLD_NAMES:
-                    for old_name in self.OLD_NAMES[code]:
-                        if old_name.lower() == country.lower():
+            for code, check_country in self.countries.items():
+                if isinstance(check_country, dict):
+                    if "names" in check_country:
+                        check_names: List[str] = check_country["names"]
+                    else:
+                        check_names = [check_country["name"]]
+                else:
+                    check_names = [check_country]
+                for name in check_names:
+                    if name.lower() == country.lower():
+                        return code
+                if code in self.shadowed_names:
+                    for shadowed_name in self.shadowed_names[code]:
+                        if shadowed_name.lower() == country.lower():
                             return code
         return ""
 
