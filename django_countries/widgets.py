@@ -1,5 +1,5 @@
 import copy
-from typing import List, Union, overload
+from typing import List, Union
 from urllib import parse as urlparse
 
 from django.forms import widgets

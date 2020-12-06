@@ -16,7 +16,6 @@ how to do that:
 """
 import glob
 import os
-from typing import Dict, Optional, Tuple
 
 from django_countries.base import CountriesBase
 

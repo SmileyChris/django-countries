@@ -181,7 +181,8 @@ class TestCountriesObject(BaseTest):
         self.assertEqual(code, "BN")
 
     def test_fetch_by_name_official(self):
-        code = countries.by_name("brunei darussalam", "BN")
+        code = countries.by_name("brunei darussalam")
+        self.assertEqual(code, "BN")
 
     def test_fetch_by_name_case_insensitive(self):
         code = countries.by_name("bRuNeI")

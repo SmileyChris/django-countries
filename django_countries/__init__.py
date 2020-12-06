@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 import itertools
-from collections import namedtuple
 from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Tuple, Union
-
-from django.utils.functional import cached_property
 
 from django_countries.conf import settings
 from django.utils.encoding import force_str
