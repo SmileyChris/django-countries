@@ -26,7 +26,7 @@ var/
 *.egg
 
 # PyInstaller
-#  Usually these files are written by a python script from a template 
+#  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
@@ -60,6 +60,9 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
-
 # PyCharm
 /.idea/
+
+# Virtual environment
+venv/
+virtualenv/
