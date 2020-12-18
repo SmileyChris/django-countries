@@ -55,6 +55,10 @@ class TestCountryField(TestCase):
         person = Person(name="Chris Beaven", country="NZ", other_country="US")
         self.assertEqual(person.other_country.flag, "//flags.example.com/us.gif")
 
+    def test_custom_field_str_attr(self):
+        person = Person(name="Quentin Coumes", country="FR", str_attr_country="ES")
+        self.assertEqual(str(person.str_attr_country), "Spain")
+
     def test_unicode_flags(self):
         person = Person(name="Matthew Schinckel", country="AU", other_country="DE")
         self.assertEqual(person.country.unicode_flag, "🇦🇺")

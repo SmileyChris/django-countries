@@ -9,6 +9,7 @@ class Person(models.Model):
     other_country = CountryField(
         blank=True, countries_flag_url="//flags.example.com/{code}.gif"
     )
+    str_attr_country = CountryField(blank=True, countries_str_attr="name")
     favourite_country = CountryField(default="NZ")
     fantasy_country = CountryField(
         countries=custom_countries.FantasyCountries, blank=True

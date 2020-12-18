@@ -214,6 +214,7 @@ class CountryDescriptor:
         return Country(
             code=code,
             flag_url=self.field.countries_flag_url,
+            str_attr=self.field.countries_str_attr,
             custom_countries=self.field.countries,
         )
 
@@ -266,6 +267,7 @@ class CountryField(CharField):
         countries_class = kwargs.pop("countries", None)
         self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop("countries_flag_url", None)
+        self.countries_str_attr = kwargs.pop("countries_str_attr", "code")
         self.blank_label = kwargs.pop("blank_label", None)
         self.multiple = kwargs.pop("multiple", None)
         kwargs["choices"] = self.countries
