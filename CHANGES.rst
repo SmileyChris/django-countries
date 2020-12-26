@@ -9,7 +9,9 @@ release, and any new translations added.
 7.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Allow customising the ``str_attr`` of Country objects returned from a
+  CountryField via a new ``countries_str_attr`` keyword argument (thanks C.
+  Quentin).
 
 
 7.0 (5 December 2020)
