@@ -351,7 +351,7 @@ class CountryField(CharField):
         Not including the ``blank_label`` property, as this isn't database
         related.
         """
-        name, path, args, kwargs = super().deconstruct()
+        name, path, args, kwargs = super(CharField, self).deconstruct()
         kwargs.pop("choices")
         if self.multiple:  # multiple determines the length of the field
             kwargs["multiple"] = self.multiple
