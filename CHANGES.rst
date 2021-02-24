@@ -13,6 +13,9 @@ release, and any new translations added.
   CountryField via a new ``countries_str_attr`` keyword argument (thanks C.
   Quentin).
 
+- Add ``pyuca`` as an extra dependency, so that it can be installed like
+  ``pip install django-countries[pyuca]``.
+
 
 7.0 (5 December 2020)
 =====================
