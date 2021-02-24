@@ -27,10 +27,13 @@ Installation
 ============
 
 1. ``pip install django-countries``
-2. Add ``django_countries`` to ``INSTALLED_APPS``
 
-For more accurate sorting of translated country names, install the optional
-pyuca_ package.
+   For more accurate sorting of translated country names, install it with the
+   optional pyuca_ package:
+
+   ``pip install django-countries[pyuca]``
+
+2. Add ``django_countries`` to ``INSTALLED_APPS``
 
 .. _pyuca: https://pypi.python.org/pypi/pyuca/
 
