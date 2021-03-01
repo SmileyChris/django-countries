@@ -279,7 +279,7 @@ class CountryField(CharField):
                 kwargs["max_length"] = len(self.countries) * 3 - 1
             else:
                 kwargs["max_length"] = 2
-        super(CharField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def check(self, **kwargs):
         errors = super().check(**kwargs)
@@ -313,7 +313,7 @@ class CountryField(CharField):
 
     def pre_save(self, *args, **kwargs):
         "Returns field's value just before saving."
-        value = super(CharField, self).pre_save(*args, **kwargs)
+        value = super().pre_save(*args, **kwargs)
         return self.get_prep_value(value)
 
     def get_prep_value(self, value):
@@ -324,7 +324,7 @@ class CountryField(CharField):
                 value = ",".join(value)
             else:
                 value = ""
-        return super(CharField, self).get_prep_value(value)
+        return super().get_prep_value(value)
 
     def get_clean_value(self, value):
         if value is None:
@@ -351,7 +351,7 @@ class CountryField(CharField):
         Not including the ``blank_label`` property, as this isn't database
         related.
         """
-        name, path, args, kwargs = super(CharField, self).deconstruct()
+        name, path, args, kwargs = super().deconstruct()
         kwargs.pop("choices")
         if self.multiple:  # multiple determines the length of the field
             kwargs["multiple"] = self.multiple
