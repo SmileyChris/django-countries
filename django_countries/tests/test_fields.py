@@ -1,6 +1,6 @@
 import pickle
 import tempfile
-from unittest import mock, skipUnless
+from unittest import mock
 
 import django
 from django.db import models
@@ -11,16 +11,16 @@ from django.forms.models import modelform_factory
 from django.test import TestCase, override_settings
 from django.utils import translation
 from django.utils.encoding import force_str
-from packaging import version
 
 from django_countries import fields, countries, data
 from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
 
-
-def has_db_collation() -> bool:
-    return version.parse(django.get_version()) >= version.parse("3.2")
+# Django 3.2 introduced a db_collation attr on fields.
+def has_db_collation():
+    major, minor = django.VERSION[0:2]
+    return (major > 3) or (major==3 and minor >=2)
 
 
 class TestCountryField(TestCase):
