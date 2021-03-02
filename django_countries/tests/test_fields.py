@@ -1,5 +1,6 @@
 import pickle
 import tempfile
+from packaging import version
 from unittest import mock
 
 import django
@@ -17,10 +18,9 @@ from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
 
-# Django 3.2 introduced a db_collation attr on fields.
-def has_db_collation():
-    major, minor = django.VERSION[0:2]
-    return (major > 3) or (major==3 and minor >=2)
+# Django introduced a db_collation attr on CharFields in 3.2
+DJANGO_VERSION = version.parse(django.get_version())
+HAS_DB_COLLATION = DJANGO_VERSION >= version.parse("3.2a1")
 
 
 class TestCountryField(TestCase):
@@ -28,7 +28,7 @@ class TestCountryField(TestCase):
     def test_db_collation(self):
         # test fix for issue 338
         country = fields.CountryField()
-        self.assertEqual(hasattr(country, "db_collation"), has_db_collation())
+        self.assertEqual(hasattr(country, "db_collation"), HAS_DB_COLLATION)
 
     def test_logic(self):
         person = Person(name="Chris Beaven", country="NZ")
