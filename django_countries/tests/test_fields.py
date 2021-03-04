@@ -1,7 +1,7 @@
 import pickle
 import tempfile
-from packaging import version
 from unittest import mock
+from unittest.case import skipUnless
 
 import django
 from django.db import models
@@ -18,17 +18,20 @@ from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
 from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
 
-# Django introduced a db_collation attr on CharFields in 3.2
-DJANGO_VERSION = version.parse(django.get_version())
-HAS_DB_COLLATION = DJANGO_VERSION >= version.parse("3.2a1")
+
+# Django 3.2 introduced a db_collation attr on fields.
+def has_db_collation():
+    major, minor = django.VERSION[0:2]
+    return (major > 3) or (major==3 and minor >=2)
 
 
 class TestCountryField(TestCase):
 
+    @skipUnless(has_db_collation(), "Django version < 3.2")
     def test_db_collation(self):
         # test fix for issue 338
         country = fields.CountryField()
-        self.assertEqual(hasattr(country, "db_collation"), HAS_DB_COLLATION)
+        self.assertTrue(hasattr(country, "db_collation"))
 
     def test_logic(self):
         person = Person(name="Chris Beaven", country="NZ")
