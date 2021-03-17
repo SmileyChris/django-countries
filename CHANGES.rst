@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.1 (unreleased)
-================
+7.1 (17 March 2021)
+===================
 
 - Allow customising the ``str_attr`` of Country objects returned from a
   CountryField via a new ``countries_str_attr`` keyword argument (thanks C.
@@ -15,6 +15,8 @@ release, and any new translations added.
 
 - Add ``pyuca`` as an extra dependency, so that it can be installed like
   ``pip install django-countries[pyuca]``.
+
+- Add Django 3.2 support.
 
 
 7.0 (5 December 2020)

@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Jae Joon Kim, 2020
 # Kyuhyeok Park <kh2000park@gmail.com>, 2017
 # Sunghwan Kim <thesunghwan@gmail.com>, 2017
 msgid ""
@@ -10,8 +11,8 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-26 14:14+1300\n"
-"PO-Revision-Date: 2020-03-26 01:43+0000\n"
-"Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
+"PO-Revision-Date: 2020-12-08 01:08+0000\n"
+"Last-Translator: Jae Joon Kim\n"
 "Language-Team: Korean (Korea) (http://www.transifex.com/smileychris/django-countries/language/ko_KR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +94,7 @@ msgstr "스와질랜드"
 
 #: base.py:31 data.py:251
 msgid "Tanzania, the United Republic of"
-msgstr ""
+msgstr "탄자니아"
 
 #: base.py:32
 msgid "Falkland Islands  [Malvinas]"
@@ -381,7 +382,7 @@ msgstr "에스토니아"
 
 #: data.py:102
 msgid "Eswatini"
-msgstr ""
+msgstr "에스와티니"
 
 #: data.py:103
 msgid "Ethiopia"
@@ -389,7 +390,7 @@ msgstr "에티오피아"
 
 #: data.py:104
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "포클랜드 제도(말비나스 군도)"
 
 #: data.py:105
 msgid "Faroe Islands"
@@ -757,7 +758,7 @@ msgstr "노퍽 섬"
 
 #: data.py:196
 msgid "North Macedonia"
-msgstr ""
+msgstr "북마케도니아"
 
 #: data.py:197
 msgid "Northern Mariana Islands"

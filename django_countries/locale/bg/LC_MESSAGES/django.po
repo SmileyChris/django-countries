@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-26 14:14+1300\n"
-"PO-Revision-Date: 2020-03-26 01:43+0000\n"
+"PO-Revision-Date: 2021-02-23 22:42+0000\n"
 "Last-Translator: Chris Beaven <smileychris@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/smileychris/django-countries/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr "Свазиленд"
 
 #: base.py:31 data.py:251
 msgid "Tanzania, the United Republic of"
-msgstr ""
+msgstr "Обединена република Танзания"
 
 #: base.py:32
 msgid "Falkland Islands  [Malvinas]"
@@ -380,7 +380,7 @@ msgstr "Естония"
 
 #: data.py:102
 msgid "Eswatini"
-msgstr ""
+msgstr "Кралство Есватини"
 
 #: data.py:103
 msgid "Ethiopia"
@@ -388,7 +388,7 @@ msgstr "Етиопия"
 
 #: data.py:104
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Фолкландските острови (Малвински острови)"
 
 #: data.py:105
 msgid "Faroe Islands"
@@ -756,7 +756,7 @@ msgstr "Остров Норфолк"
 
 #: data.py:196
 msgid "North Macedonia"
-msgstr ""
+msgstr "Северна Македония"
 
 #: data.py:197
 msgid "Northern Mariana Islands"
