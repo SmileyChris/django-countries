@@ -265,6 +265,7 @@ class CountryField(CharField):
 
     def __init__(self, *args, **kwargs):
         countries_class = kwargs.pop("countries", None)
+        self.db_collation = kwargs.pop("db_collation", None)
         self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop("countries_flag_url", None)
         self.countries_str_attr = kwargs.pop("countries_str_attr", "code")
