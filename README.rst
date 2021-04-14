@@ -273,12 +273,17 @@ Customization
 Customize the country list
 --------------------------
 
-Country names are taken from the official ISO 3166-1 list. If your project
-requires the use of alternative names, the inclusion or exclusion of specific
-countries then use the ``COUNTRIES_OVERRIDE`` setting.
+Country names are taken from the official ISO 3166-1 list, with some country
+names being replaced with their more common usage (such as "Bolivia" instead
+of "Bolivia, Plurinational State of").
 
-A dictionary of names to override the defaults. The values can also use a more
-`complex dictionary format`_.
+To retain the official ISO 3166-1 naming for all fields, set the
+``COUNTRIES_COMMON_NAMES`` setting to ``False``.
+
+If your project requires the use of alternative names, the inclusion or
+exclusion of specific countries then set the ``COUNTRIES_OVERRIDE`` setting to
+a dictionary of names which override the defaults. The values can also use a
+more `complex dictionary format`_.
 
 Note that you will need to handle translation of customised country names.
 
