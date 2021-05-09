@@ -2,9 +2,10 @@
 import itertools
 from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Tuple, Union
 
-from django_countries.conf import settings
 from django.utils.encoding import force_str
 from django.utils.translation import get_language, override
+
+from django_countries.conf import settings
 
 from .base import CountriesBase
 
@@ -302,8 +303,12 @@ class Countries(CountriesBase):
 
     def alpha2(self, code: CountryCode) -> str:
         """
-        Return the two letter country code when passed any type of ISO 3166-1
+        Return the normalized country code when passed any type of ISO 3166-1
         country code.
+
+        Overridden countries objects may actually have country codes that are
+        not two characters (for example, "GB-WLS"), so the returned length of
+        the code is not guaranteed.
 
         If no match is found, returns an empty string.
         """

@@ -1,7 +1,7 @@
-from typing import Any, Iterable, Tuple, Union
-import pkg_resources
+from typing import Any, Iterable, Tuple, Type, Union
 from urllib import parse as urlparse
 
+import pkg_resources
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
@@ -10,7 +10,7 @@ from django.utils.encoding import force_str
 from django.utils.functional import lazy
 from django.utils.html import escape as escape_html
 
-from django_countries import countries, filters, ioc_data, widgets
+from django_countries import Countries, countries, filters, ioc_data, widgets
 from django_countries.conf import settings
 
 EXTENSIONS = dict(
@@ -264,7 +264,7 @@ class CountryField(CharField):
     descriptor_class = CountryDescriptor
 
     def __init__(self, *args, **kwargs):
-        countries_class = kwargs.pop("countries", None)
+        countries_class: Type[Countries] = kwargs.pop("countries", None)
         self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop("countries_flag_url", None)
         self.countries_str_attr = kwargs.pop("countries_str_attr", "code")
@@ -276,9 +276,15 @@ class CountryField(CharField):
             # changes in the multiple CountryField fields when new countries are
             # added to the available countries dictionary.
             if self.multiple:
-                kwargs["max_length"] = len(self.countries) * 3 - 1
+                kwargs["max_length"] = (
+                    len(self.countries)
+                    - 1
+                    + sum(len(code) for code in self.countries.countries)
+                )
             else:
-                kwargs["max_length"] = 2
+                kwargs["max_length"] = max(
+                    len(code) for code in self.countries.countries
+                )
         super().__init__(*args, **kwargs)
 
     def check(self, **kwargs):

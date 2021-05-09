@@ -4,29 +4,27 @@ from unittest import mock
 from unittest.case import skipUnless
 
 import django
-from django.db import models
-from django.core import validators, checks
+from django.core import checks, validators
 from django.core.management import call_command
+from django.db import models
 from django.forms import Select
 from django.forms.models import modelform_factory
 from django.test import TestCase, override_settings
 from django.utils import translation
 from django.utils.encoding import force_str
-
-from django_countries import fields, countries, data
+from django_countries import countries, data, fields
 from django_countries.fields import CountryField
-from django_countries.tests import forms, custom_countries
-from django_countries.tests.models import Person, AllowNull, MultiCountry, WithProp
+from django_countries.tests import custom_countries, forms
+from django_countries.tests.models import AllowNull, MultiCountry, Person, WithProp
 
 
 # Django 3.2 introduced a db_collation attr on fields.
 def has_db_collation():
     major, minor = django.VERSION[0:2]
-    return (major > 3) or (major==3 and minor >=2)
+    return (major > 3) or (major == 3 and minor >= 2)
 
 
 class TestCountryField(TestCase):
-
     @skipUnless(has_db_collation(), "Django version < 3.2")
     def test_db_collation(self):
         # test fix for issue 338
@@ -306,6 +304,36 @@ class TestCountryCustom(TestCase):
         )
 
 
+def test_longer_country_code_deconstruction():
+    field = CountryField(countries=custom_countries.GBRegionCountries)
+    assert field.deconstruct() == (
+        None,
+        "django_countries.fields.CountryField",
+        [],
+        {"countries": custom_countries.GBRegionCountries, "max_length": 6},
+    )
+
+
+def test_longer_country_code_multiple_deconstruction():
+    field = CountryField(countries=custom_countries.GBRegionCountries, multiple=True)
+    expected_max_length = (
+        # Commas
+        (len(field.countries) - 1)
+        # Country codes
+        + sum(len(code) for code in field.countries.countries)
+    )
+    assert field.deconstruct() == (
+        None,
+        "django_countries.fields.CountryField",
+        [],
+        {
+            "countries": custom_countries.GBRegionCountries,
+            "max_length": expected_max_length,
+            "multiple": True,
+        },
+    )
+
+
 class TestCountryMultiple(TestCase):
     def test_empty(self):
         obj = MultiCountry()
@@ -379,10 +407,12 @@ class TestCountryObject(TestCase):
         country3 = fields.Country(code="XX", str_attr="name")
         self.assertEqual(repr(country1), f"Country(code={'XX'!r})")
         self.assertEqual(
-            repr(country2), f"Country(code={'XX'!r}, flag_url={''!r})",
+            repr(country2),
+            f"Country(code={'XX'!r}, flag_url={''!r})",
         )
         self.assertEqual(
-            repr(country3), f"Country(code={'XX'!r}, str_attr={'name'!r})",
+            repr(country3),
+            f"Country(code={'XX'!r}, str_attr={'name'!r})",
         )
 
     def test_str(self):
