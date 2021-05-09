@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.2 (unreleased)
-================
+7.2 (10 May 2021)
+=================
 
 - Allow the character field to work with custom country codes that are not 2
   characters (such as "GB-WLS").
