@@ -9,7 +9,10 @@ release, and any new translations added.
 7.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Allow the character field to work with custom country codes that are not 2
+  characters (such as "GB-WLS").
+
+- Fix compatibility with ``django-migrations-ignore-attrs`` library.
 
 
 7.1 (17 March 2021)
