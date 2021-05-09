@@ -352,7 +352,7 @@ class CountryField(CharField):
         related.
         """
         name, path, args, kwargs = super(CharField, self).deconstruct()
-        kwargs.pop("choices")
+        kwargs.pop("choices", None)
         if self.multiple:  # multiple determines the length of the field
             kwargs["multiple"] = self.multiple
         if self.countries is not countries:
