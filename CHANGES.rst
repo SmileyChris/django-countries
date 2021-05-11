@@ -6,10 +6,10 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.3 (unreleased)
-================
+7.2.1 (11 May 2021)
+===================
 
-- Nothing changed yet.
+- Fix Latin translations.
 
 
 7.2 (10 May 2021)
