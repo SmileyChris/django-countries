@@ -27,7 +27,6 @@ def translations(data):
         cmd_pull(argv=["-a", "--minimum-perc=60"], path_to_tx=find_dot_tx())
     finally:
         logger.handlers = _handlers
-    fix_locale_paths()
     _cwd = os.getcwd()
     os.chdir(os.path.dirname(django_countries.__file__))
     try:
@@ -35,16 +34,6 @@ def translations(data):
         execute_command(["git", "add", "locale"])
     finally:
         os.chdir(_cwd)
-
-
-def fix_locale_paths():
-    lpath = os.path.join(os.path.dirname(django_countries.__file__), "locale")
-    for name in os.listdir(lpath):
-        if re.match(r"\w\w-\w{3}", name):
-            new_path = os.path.join(lpath, name.replace("-", "_", 1))
-            if os.path.exists(new_path):
-                shutil.rmtree(new_path)
-            os.rename(os.path.join(lpath, name), new_path)
 
 
 if __name__ == "__main__":
