@@ -4,9 +4,9 @@
 # 
 # Translators:
 # Jesse Nieminen <jesse.nieminen41@gmail.com>, 2017
-# Jon <jon@kolonial.no>, 2015
-# Jon <jon@kolonial.no>, 2014
-# Jon <jon@kolonial.no>, 2020
+# Jon, 2015
+# Jon, 2014
+# Jon, 2020
 # Lars Åge Kamfjord <lars-transifex@kamfjord.org>, 2014
 # Mathias Bøhn Grytemark <mathias@grytemark.no>, 2014
 msgid ""

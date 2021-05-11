@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Šarūnas <sharasss@gmail.com>, 2019
+# Baltuonis <sharasss@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"

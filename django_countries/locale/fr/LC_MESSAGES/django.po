@@ -5,8 +5,8 @@
 # Translators:
 # Aristide Grange <chewingword@wingi.net>, 2018
 # Arthur Cheysson <arthur@cheysson.fr>, 2017
-# Baptiste Darthenay <baptiste+transifex@darthenay.fr>, 2013
-# Baptiste Darthenay <baptiste+transifex@darthenay.fr>, 2014
+# Batist D 🐍 <baptiste+transifex@darthenay.fr>, 2013
+# Batist D 🐍 <baptiste+transifex@darthenay.fr>, 2014
 # Bruno Alla <bruno.alla@festicket.com>, 2019
 # Gaël Kijko <gael@caravan.coop>, 2020
 # Oyabi <mousaka666@hotmail.fr>, 2014
