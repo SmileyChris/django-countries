@@ -116,7 +116,7 @@ msgstr "Albania"
 
 #: data.py:35
 msgid "Algeria"
-msgstr "Algeria"
+msgstr "Algieria"
 
 #: data.py:36
 msgid "American Samoa"
