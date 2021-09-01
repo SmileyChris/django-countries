@@ -6,9 +6,9 @@ Django Countries
     :alt: PyPI version
     :target: https://badge.fury.io/py/django-countries
 
-.. image:: https://travis-ci.org/SmileyChris/django-countries.svg?branch=master
+.. image:: https://img.shields.io/github/workflow/status/SmileyChris/django-countries/CI?label=CI&logo=github
     :alt: Build status
-    :target: http://travis-ci.org/SmileyChris/django-countries
+    :target: https://github.com/SmileyChris/django-countries/actions?query=workflow%3ACI
 
 .. image:: https://codecov.io/gh/SmileyChris/django-countries/branch/master/graph/badge.svg
     :alt: Coverage status
