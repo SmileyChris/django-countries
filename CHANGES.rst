@@ -9,7 +9,8 @@ release, and any new translations added.
 7.2.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Make full English country names work in database lookups, for example,
+  ``Person.objects.filter(country__icontains="zealand")``.
 
 
 7.2.1 (11 May 2021)

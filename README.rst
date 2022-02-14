@@ -82,6 +82,15 @@ forms:
 
     country = CountryField(blank_label='(select country)')
 
+You can filter using the full English country names, even though only the
+country codes are stored in the database (using exact, contains, startswith,
+endswith, regex, and their case insensitive versions):
+
+.. code:: python
+
+    >>> Person.objects.filter(country__icontains="zealand").count()
+    1
+
 
 Multi-choice
 ------------

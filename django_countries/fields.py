@@ -1,3 +1,4 @@
+import re
 from typing import Any, Iterable, Tuple, Type, Union
 from urllib import parse as urlparse
 
@@ -5,6 +6,7 @@ import pkg_resources
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
+from django.db.models import lookups
 from django.db.models.fields import BLANK_CHOICE_DASH, CharField
 from django.utils.encoding import force_str
 from django.utils.functional import lazy
@@ -24,7 +26,8 @@ def country_to_text(value):
         value = value.code
     if value is None:
         return None
-    return force_str(value)
+    value = force_str(value)
+    return countries.by_name(value) or value
 
 
 class TemporaryEscape:
@@ -433,6 +436,95 @@ class CountryField(CharField):
         """
         value = self.value_from_object(obj)
         return self.get_prep_value(value)
+
+    def get_lookup(self, lookup_name):
+        if not self.multiple and lookup_name in (
+            "contains",
+            "icontains",
+            "startswith",
+            "istartswith",
+            "endswith",
+            "iendswith",
+            "regex",
+            "iregex",
+        ):
+            lookup_name = f"country_{lookup_name}"
+        return super().get_lookup(lookup_name)
+
+
+class FullNameLookupMixin:
+    def get_prep_lookup(self):
+        if isinstance(self.rhs, str):
+            value = self.expr.format(
+                text=re.escape(self.rhs) if self.escape_regex else self.rhs
+            )
+            return self.lhs.output_field.countries.by_name(
+                value, regex=True, insensitive=self.insensitive
+            )
+        return super().get_prep_lookup()
+
+
+class FullNameLookup(FullNameLookupMixin, lookups.In):
+    expr: str
+    insensitive: bool = False
+    escape_regex: bool = True
+
+    def get_prep_lookup(self):
+        if isinstance(self.rhs, str):
+            value = self.expr.format(
+                text=re.escape(self.rhs) if self.escape_regex else self.rhs
+            )
+            return countries.by_name(value, regex=True, insensitive=self.insensitive)
+        return super().get_prep_lookup()
+
+
+@CountryField.register_lookup
+class CountryContains(FullNameLookup):
+    lookup_name = "country_contains"
+    expr = r"{text}"
+
+
+@CountryField.register_lookup
+class CountryIContains(CountryContains):
+    lookup_name = "country_icontains"
+    insensitive = True
+
+
+@CountryField.register_lookup
+class CountryStartswith(FullNameLookup):
+    lookup_name = "country_startswith"
+    expr = r"^{text}"
+
+
+@CountryField.register_lookup
+class CountryIStartswith(CountryStartswith):
+    lookup_name = "country_istartswith"
+    insensitive = True
+
+
+@CountryField.register_lookup
+class CountryEndswith(FullNameLookup):
+    lookup_name = "country_endswith"
+    expr = r"{text}$"
+
+
+@CountryField.register_lookup
+class CountryIEndswith(CountryEndswith):
+    lookup_name = "country_iendswith"
+    insensitive = True
+
+
+@CountryField.register_lookup
+class CountryRegex(FullNameLookup):
+    lookup_name = "country_regex"
+    expr = r"{text}"
+    escape_regex = False
+
+
+@CountryField.register_lookup
+class CountryIRegex(CountryRegex):
+    lookup_name = "country_iregex"
+    insensitive = True
 
 
 FieldListFilter.register(lambda f: isinstance(f, CountryField), filters.CountryFilter)

@@ -222,6 +222,59 @@ class TestCountryField(TestCase):
             ["A", "B", "D"],
         )
 
+    def test_by_country_name(self):
+        p = Person.objects.create(name="A", country="NZ")
+        self.assertEqual(list(Person.objects.filter(country__exact="New Zealand")), [p])
+
+    def test_by_country_name_contains(self):
+        p = Person.objects.create(name="A", country="NZ")
+        pp = Person.objects.create(name="A", country="NC")
+        self.assertEqual(list(Person.objects.filter(country__contains="ew")), [p, pp])
+        self.assertEqual(list(Person.objects.filter(country__contains="EW")), [])
+        self.assertEqual(list(Person.objects.filter(country__icontains="EW")), [p, pp])
+        # No longer works with codes.
+        self.assertEqual(list(Person.objects.filter(country__contains="NZ")), [])
+        self.assertEqual(list(Person.objects.filter(country__icontains="nz")), [])
+
+    def test_by_country_name_startswith(self):
+        p = Person.objects.create(name="A", country="ZA")  # South Africa
+        pp = Person.objects.create(
+            name="A", country="TF"
+        )  # French Southern Territories
+        self.assertEqual(set(Person.objects.filter(country__contains="South")), {p, pp})
+        self.assertEqual(list(Person.objects.filter(country__startswith="South")), [p])
+        self.assertEqual(list(Person.objects.filter(country__startswith="south")), [])
+        self.assertEqual(list(Person.objects.filter(country__istartswith="south")), [p])
+        # No longer works with codes.
+        self.assertEqual(list(Person.objects.filter(country__startswith="ZA")), [])
+        self.assertEqual(list(Person.objects.filter(country__istartswith="za")), [])
+
+    def test_by_country_name_endswith(self):
+        p = Person.objects.create(name="A", country="AS")  # American Samoa
+        pp = Person.objects.create(name="A", country="US")  # United States of America
+        self.assertEqual(
+            set(Person.objects.filter(country__contains="America")), {p, pp}
+        )
+        self.assertEqual(list(Person.objects.filter(country__endswith="America")), [pp])
+        self.assertEqual(list(Person.objects.filter(country__endswith="america")), [])
+        self.assertEqual(
+            list(Person.objects.filter(country__iendswith="america")), [pp]
+        )
+        # No longer works with codes.
+        self.assertEqual(list(Person.objects.filter(country__endswith="US")), [])
+        self.assertEqual(list(Person.objects.filter(country__iendswith="us")), [])
+
+    def test_by_country_name_regex(self):
+        p = Person.objects.create(name="A", country="MK")  # North Macedonia
+        pp = Person.objects.create(name="A", country="MP")  # Northern Mariana Islands
+        self.assertEqual(set(Person.objects.filter(country__contains="North")), {p, pp})
+        self.assertEqual(list(Person.objects.filter(country__regex=r"North\b")), [p])
+        self.assertEqual(list(Person.objects.filter(country__regex=r"north\b")), [])
+        self.assertEqual(list(Person.objects.filter(country__iregex=r"north\b")), [p])
+        # No longer works with codes.
+        self.assertEqual(list(Person.objects.filter(country__regex="MP")), [])
+        self.assertEqual(list(Person.objects.filter(country__iregex="mp")), [])
+
 
 class TestValidation(TestCase):
     def test_validate(self):
@@ -394,6 +447,11 @@ class TestCountryMultiple(TestCase):
                 {"max_length": expected_max_length, "multiple": True},
             ),
         )
+
+    def test_contains(self):
+        obj = MultiCountry.objects.create(countries=["NZ", "AU"])
+        qs = MultiCountry.objects.filter(countries__contains="NZ")
+        self.assertEqual(list(qs), [obj])
 
 
 class TestCountryObject(TestCase):

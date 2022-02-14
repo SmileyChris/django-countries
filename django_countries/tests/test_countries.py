@@ -214,6 +214,11 @@ class TestCountriesObject(BaseTest):
             self.assertEqual(countries.by_name("New Zealand"), "NZ")
             self.assertEqual(countries.by_name("Hobbiton"), "NZ")
 
+    def test_fetch_by_name_regex(self):
+        codes = countries.by_name(r"([ao])\1", regex=True)
+        # Cook Islands, Cameroon, Sint Maarten
+        self.assertEqual(set(codes), {"CK", "CM", "SX"})
+
     def test_multiple_labels(self):
         with self.settings(
             COUNTRIES_ONLY={

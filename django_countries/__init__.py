@@ -1,6 +1,18 @@
 #!/usr/bin/env python
 import itertools
-from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Tuple, Union
+import re
+from typing import (
+    Callable,
+    Dict,
+    Iterable,
+    List,
+    Literal,
+    NamedTuple,
+    Optional,
+    Tuple,
+    Union,
+    overload,
+)
 
 from django.utils.encoding import force_str
 from django.utils.translation import get_language, override
@@ -17,7 +29,6 @@ try:
     # Use UCA sorting if it's available.
     def sort_key(item):
         return collator.sort_key(item[1])
-
 
 except ImportError:
     # Fallback if the UCA sorting is not available.
@@ -349,19 +360,57 @@ class Countries(CountriesBase):
             return ""
         return self.translate_pair(alpha2)[1]
 
-    def by_name(self, country: str, language: str = "en") -> str:
+    @overload
+    def by_name(
+        self,
+        country: str,
+        language: str = "en",
+        insensitive: bool = True,
+        regex: Literal[False] = False,
+    ) -> str:
+        ...
+
+    @overload
+    def by_name(
+        self,
+        country: str,
+        language: str = "en",
+        insensitive: bool = True,
+        regex: Literal[True] = False,
+    ) -> set[str]:
+        ...
+
+    def by_name(
+        self,
+        country: str,
+        language: str = "en",
+        insensitive: bool = True,
+        regex: bool = False,
+    ) -> Union[str, set[str]]:
         """
         Fetch a country's ISO3166-1 two letter country code from its name.
 
-        An optional language parameter is also available.
-        Warning: This depends on the quality of the available translations.
+        An optional language parameter is also available. Warning: This depends
+        on the quality of the available translations.
 
         If no match is found, returns an empty string.
+
+        If ``regex`` is set to True, then rather than returning a string
+        containing the matching country code or an empty stirng, a set of
+        matching country codes is returned.
+
+        If ``insensitive`` is set to False (True by default), then the search
+        will be case sensitive.
 
         ..warning:: Be cautious about relying on this returning a country code
             (especially with any hard-coded string) since the ISO names of
             countries may change over time.
         """
+        code_list = set()
+        if regex:
+            re_match = re.compile(country, insensitive and re.IGNORECASE)
+        elif insensitive:
+            country = country.lower()
         with override(language):
             for code, check_country in self.countries.items():
                 if isinstance(check_country, dict):
@@ -372,12 +421,26 @@ class Countries(CountriesBase):
                 else:
                     check_names = [check_country]
                 for name in check_names:
-                    if name.lower() == country.lower():
-                        return code
+                    if regex:
+                        if re_match.search(str(name)):
+                            code_list.add(code)
+                    else:
+                        if insensitive:
+                            name = name.lower()
+                        if country == name:
+                            return code
                 if code in self.shadowed_names:
                     for shadowed_name in self.shadowed_names[code]:
-                        if shadowed_name.lower() == country.lower():
-                            return code
+                        if regex:
+                            if re_match.search(str(shadowed_name)):
+                                code_list.add(code)
+                        else:
+                            if insensitive:
+                                shadowed_name = shadowed_name.lower()
+                            if country == shadowed_name:
+                                return code
+        if regex:
+            return code_list
         return ""
 
     def alpha3(self, code: CountryCode):
