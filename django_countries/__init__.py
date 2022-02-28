@@ -9,6 +9,7 @@ from typing import (
     Literal,
     NamedTuple,
     Optional,
+    Set,
     Tuple,
     Union,
     overload,
@@ -377,7 +378,7 @@ class Countries(CountriesBase):
         language: str = "en",
         insensitive: bool = True,
         regex: Literal[True] = False,
-    ) -> set[str]:
+    ) -> Set[str]:
         ...
 
     def by_name(
@@ -386,7 +387,7 @@ class Countries(CountriesBase):
         language: str = "en",
         insensitive: bool = True,
         regex: bool = False,
-    ) -> Union[str, set[str]]:
+    ) -> Union[str, Set[str]]:
         """
         Fetch a country's ISO3166-1 two letter country code from its name.
 
