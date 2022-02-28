@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.3 (unreleased)
-================
+7.3 (28 February 2022)
+======================
 
 - Make full English country names work in database lookups, for example,
   ``Person.objects.filter(country__icontains="zealand")``.

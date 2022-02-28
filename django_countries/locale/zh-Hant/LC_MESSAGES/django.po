@@ -3,1099 +3,1097 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Alex Dutch <soft@email.ua>, 2020-2021
-# Oleksandr Vasylenko <al.vasilenko@gmail.com>, 2020
-# Yaroslav Rudenok <yaroslavprogrammer@gmail.com>, 2015
+# Tom Lai <laitom227@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-26 14:14+1300\n"
-"PO-Revision-Date: 2021-07-07 19:19+0000\n"
-"Last-Translator: Alex Dutch <soft@email.ua>\n"
-"Language-Team: Ukrainian (http://www.transifex.com/smileychris/django-countries/language/uk/)\n"
+"PO-Revision-Date: 2021-06-16 12:35+0000\n"
+"Last-Translator: Tom Lai <laitom227@gmail.com>\n"
+"Language-Team: Chinese Traditional (http://www.transifex.com/smileychris/django-countries/language/zh-Hant/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+"Language: zh-Hant\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: base.py:11
 msgid "Brunei"
-msgstr "Бруней"
+msgstr "汶萊"
 
 #: base.py:12
 msgid "Bolivia"
-msgstr "Болівія"
+msgstr "玻利維亞"
 
 #: base.py:13
 msgid "United Kingdom"
-msgstr "Велика Британія"
+msgstr "英國"
 
 #: base.py:14
 msgid "Iran"
-msgstr "Іран"
+msgstr "伊朗"
 
 #: base.py:15
 msgid "North Korea"
-msgstr "Північна Корея"
+msgstr "北韓"
 
 #: base.py:16
 msgid "South Korea"
-msgstr "Південна Корея"
+msgstr "南韓"
 
 #: base.py:17
 msgid "Laos"
-msgstr "Лаос"
+msgstr "老撾"
 
 #: base.py:18
 msgid "Moldova"
-msgstr "Молдова"
+msgstr "摩爾多瓦"
 
 #: base.py:19
 msgid "Russia"
-msgstr "Росія"
+msgstr "俄羅斯"
 
 #: base.py:20
 msgid "Syria"
-msgstr "Сирія"
+msgstr "敘利亞"
 
 #: base.py:21
 msgid "Taiwan"
-msgstr "Тайвань"
+msgstr "台灣"
 
 #: base.py:22
 msgid "Tanzania"
-msgstr "Танзанія"
+msgstr "坦尚尼亞"
 
 #: base.py:23
 msgid "Venezuela"
-msgstr "Венесуела"
+msgstr "委內瑞拉"
 
 #: base.py:24
 msgid "Vietnam"
-msgstr "В'єтнам"
+msgstr "越南"
 
 #: base.py:28
 msgid "Czech Republic"
-msgstr "Чеська Республіка"
+msgstr "捷克"
 
 #: base.py:29
 msgid "Macedonia"
-msgstr "Македонія"
+msgstr "馬其頓"
 
 #: base.py:29
 msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr "Македонія (колишня югославська Республіка)"
+msgstr "馬其頓社會主義共和國"
 
 #: base.py:30
 msgid "Swaziland"
-msgstr "Свазіленд"
+msgstr "史瓦帝尼"
 
 #: base.py:31 data.py:251
 msgid "Tanzania, the United Republic of"
-msgstr "Об'єднана Республіка Танзанія"
+msgstr "坦尚尼亞"
 
 #: base.py:32
 msgid "Falkland Islands  [Malvinas]"
-msgstr "Фолклендські острови [Мальвінські]"
+msgstr "福克蘭群島"
 
 #: data.py:32
 msgid "Afghanistan"
-msgstr "Афганістан"
+msgstr "阿富汗"
 
 #: data.py:33
 msgid "Åland Islands"
-msgstr "Аландські острови"
+msgstr "奧蘭"
 
 #: data.py:34
 msgid "Albania"
-msgstr "Албанія"
+msgstr "阿爾巴尼亞"
 
 #: data.py:35
 msgid "Algeria"
-msgstr "Алжир"
+msgstr "阿爾及利亞"
 
 #: data.py:36
 msgid "American Samoa"
-msgstr "Американське Самоа"
+msgstr "美屬薩摩亞"
 
 #: data.py:37
 msgid "Andorra"
-msgstr "Андорра"
+msgstr "安道爾"
 
 #: data.py:38
 msgid "Angola"
-msgstr "Ангола"
+msgstr "安哥拉"
 
 #: data.py:39
 msgid "Anguilla"
-msgstr "Ангілья"
+msgstr "安吉拉"
 
 #: data.py:40
 msgid "Antarctica"
-msgstr "Антарктида"
+msgstr "南極"
 
 #: data.py:41
 msgid "Antigua and Barbuda"
-msgstr "Антигуа і Барбуда"
+msgstr "安地卡及巴布達"
 
 #: data.py:42
 msgid "Argentina"
-msgstr "Аргентина"
+msgstr "阿根廷"
 
 #: data.py:43
 msgid "Armenia"
-msgstr "Вірменія"
+msgstr "亞美尼亞"
 
 #: data.py:44
 msgid "Aruba"
-msgstr "Аруба"
+msgstr "阿魯巴"
 
 #: data.py:45
 msgid "Australia"
-msgstr "Австралія"
+msgstr "澳洲"
 
 #: data.py:46
 msgid "Austria"
-msgstr "Австрія"
+msgstr "奧地利"
 
 #: data.py:47
 msgid "Azerbaijan"
-msgstr "Азербайджан"
+msgstr "亞塞拜然"
 
 #: data.py:48
 msgid "Bahamas"
-msgstr "Багамські острови"
+msgstr "巴哈馬"
 
 #: data.py:49
 msgid "Bahrain"
-msgstr "Бахрейн"
+msgstr "巴林"
 
 #: data.py:50
 msgid "Bangladesh"
-msgstr "Бангладеш"
+msgstr "孟加拉"
 
 #: data.py:51
 msgid "Barbados"
-msgstr "Барбадос"
+msgstr "巴巴多斯"
 
 #: data.py:52
 msgid "Belarus"
-msgstr "Білорусь"
+msgstr "白羅斯"
 
 #: data.py:53
 msgid "Belgium"
-msgstr "Бельгія"
+msgstr "比利時"
 
 #: data.py:54
 msgid "Belize"
-msgstr "Беліз"
+msgstr "貝里斯"
 
 #: data.py:55
 msgid "Benin"
-msgstr "Бенін"
+msgstr "貝南"
 
 #: data.py:56
 msgid "Bermuda"
-msgstr "Бермудські острови"
+msgstr "百慕達"
 
 #: data.py:57
 msgid "Bhutan"
-msgstr "Бутан"
+msgstr "不丹"
 
 #: data.py:58
 msgid "Bolivia (Plurinational State of)"
-msgstr "Болівія (Багатонаціональне Держава)"
+msgstr "玻利維亞"
 
 #: data.py:59
 msgid "Bonaire, Sint Eustatius and Saba"
-msgstr "Бонайре, Сінт-Естатіус і Саба"
+msgstr "波奈、聖佑達修斯及荷屬沙巴"
 
 #: data.py:60
 msgid "Bosnia and Herzegovina"
-msgstr "Боснія і Герцеговина"
+msgstr "波士尼亞與赫塞哥維納"
 
 #: data.py:61
 msgid "Botswana"
-msgstr "Ботсвана"
+msgstr "波札那"
 
 #: data.py:62
 msgid "Bouvet Island"
-msgstr "Острів Буве"
+msgstr "布威島"
 
 #: data.py:63
 msgid "Brazil"
-msgstr "Бразилія"
+msgstr "巴西"
 
 #: data.py:64
 msgid "British Indian Ocean Territory"
-msgstr "Британська територія Індійського океану"
+msgstr "英屬印度洋領地"
 
 #: data.py:65
 msgid "Brunei Darussalam"
-msgstr "Бруней-Даруссалам"
+msgstr "汶萊"
 
 #: data.py:66
 msgid "Bulgaria"
-msgstr "Болгарія"
+msgstr "保加利亞"
 
 #: data.py:67
 msgid "Burkina Faso"
-msgstr "Буркіна-Фасо"
+msgstr "布吉納法索"
 
 #: data.py:68
 msgid "Burundi"
-msgstr "Бурунді"
+msgstr "蒲隆地"
 
 #: data.py:69
 msgid "Cabo Verde"
-msgstr "Кабо-Верде"
+msgstr "維德角"
 
 #: data.py:70
 msgid "Cambodia"
-msgstr "Камбоджа"
+msgstr "柬埔寨"
 
 #: data.py:71
 msgid "Cameroon"
-msgstr "Камерун"
+msgstr "喀麥隆"
 
 #: data.py:72
 msgid "Canada"
-msgstr "Канада"
+msgstr "加拿大"
 
 #: data.py:73
 msgid "Cayman Islands"
-msgstr "Кайманові острови"
+msgstr "開曼群島"
 
 #: data.py:74
 msgid "Central African Republic"
-msgstr "Центрально-Африканська Республіка"
+msgstr "中非"
 
 #: data.py:75
 msgid "Chad"
-msgstr "Чад"
+msgstr "查德"
 
 #: data.py:76
 msgid "Chile"
-msgstr "Чилі"
+msgstr "智利"
 
 #: data.py:77
 msgid "China"
-msgstr "Китай"
+msgstr "中國"
 
 #: data.py:78
 msgid "Christmas Island"
-msgstr "Острів Різдва"
+msgstr "聖誕島"
 
 #: data.py:79
 msgid "Cocos (Keeling) Islands"
-msgstr "Кокосові (Кілінг) острови"
+msgstr "科科斯（基林）群島"
 
 #: data.py:80
 msgid "Colombia"
-msgstr "Колумбія"
+msgstr "哥倫比亞"
 
 #: data.py:81
 msgid "Comoros"
-msgstr "Коморські острови"
+msgstr "葛摩"
 
 #: data.py:82
 msgid "Congo"
-msgstr "Конго"
+msgstr "剛果共和國"
 
 #: data.py:83
 msgid "Congo (the Democratic Republic of the)"
-msgstr "Конго (Демократична Республіка)"
+msgstr "剛果民主共和國"
 
 #: data.py:84
 msgid "Cook Islands"
-msgstr "Острови Кука"
+msgstr "庫克群島"
 
 #: data.py:85
 msgid "Costa Rica"
-msgstr "Коста-Ріка"
+msgstr "哥斯大黎加"
 
 #: data.py:86
 msgid "Côte d'Ivoire"
-msgstr "Берег Слонової Кістки"
+msgstr "科特迪瓦"
 
 #: data.py:87
 msgid "Croatia"
-msgstr "Хорватія"
+msgstr "克羅地亞"
 
 #: data.py:88
 msgid "Cuba"
-msgstr "Куба"
+msgstr "古巴"
 
 #: data.py:89
 msgid "Curaçao"
-msgstr "Кюрасао"
+msgstr "古拉索"
 
 #: data.py:90
 msgid "Cyprus"
-msgstr "Кіпр"
+msgstr "賽普勒斯"
 
 #: data.py:91
 msgid "Czechia"
-msgstr "Чехія"
+msgstr "捷克"
 
 #: data.py:92
 msgid "Denmark"
-msgstr "Данія"
+msgstr "丹麥"
 
 #: data.py:93
 msgid "Djibouti"
-msgstr "Джибуті"
+msgstr "吉布地"
 
 #: data.py:94
 msgid "Dominica"
-msgstr "Домініка"
+msgstr "多米尼克"
 
 #: data.py:95
 msgid "Dominican Republic"
-msgstr "Домініканська Республіка"
+msgstr "多明尼加"
 
 #: data.py:96
 msgid "Ecuador"
-msgstr "Еквадор"
+msgstr "厄瓜多"
 
 #: data.py:97
 msgid "Egypt"
-msgstr "Єгипет"
+msgstr "埃及"
 
 #: data.py:98
 msgid "El Salvador"
-msgstr "Сальвадор"
+msgstr "薩爾瓦多"
 
 #: data.py:99
 msgid "Equatorial Guinea"
-msgstr "Екваторіальна Гвінея"
+msgstr "赤道幾內亞"
 
 #: data.py:100
 msgid "Eritrea"
-msgstr "Еритрея"
+msgstr "厄利垂亞"
 
 #: data.py:101
 msgid "Estonia"
-msgstr "Естонія"
+msgstr "愛沙尼亞"
 
 #: data.py:102
 msgid "Eswatini"
-msgstr "Есватіні"
+msgstr "史瓦帝尼"
 
 #: data.py:103
 msgid "Ethiopia"
-msgstr "Ефіопія"
+msgstr "衣索比亞"
 
 #: data.py:104
 msgid "Falkland Islands (Malvinas)"
-msgstr "Фолклендські (Мальвінські) острови"
+msgstr "福克蘭群島"
 
 #: data.py:105
 msgid "Faroe Islands"
-msgstr "Фарерські острови"
+msgstr "法羅群島"
 
 #: data.py:106
 msgid "Fiji"
-msgstr "Фіджі"
+msgstr "斐濟"
 
 #: data.py:107
 msgid "Finland"
-msgstr "Фінляндія"
+msgstr "芬蘭"
 
 #: data.py:108
 msgid "France"
-msgstr "Франція"
+msgstr "法國"
 
 #: data.py:109
 msgid "French Guiana"
-msgstr "Французька Гвіана"
+msgstr "法屬圭亞那"
 
 #: data.py:110
 msgid "French Polynesia"
-msgstr "Французька Полінезія"
+msgstr "法屬玻里尼西亞"
 
 #: data.py:111
 msgid "French Southern Territories"
-msgstr "Французькі Південні Території"
+msgstr "法屬南部領地"
 
 #: data.py:112
 msgid "Gabon"
-msgstr "Габон"
+msgstr "加彭"
 
 #: data.py:113
 msgid "Gambia"
-msgstr "Гамбія"
+msgstr "甘比亞"
 
 #: data.py:114
 msgid "Georgia"
-msgstr "Грузія"
+msgstr "喬治亞"
 
 #: data.py:115
 msgid "Germany"
-msgstr "Німеччина"
+msgstr "德國"
 
 #: data.py:116
 msgid "Ghana"
-msgstr "Гана"
+msgstr "迦納"
 
 #: data.py:117
 msgid "Gibraltar"
-msgstr "Гібралтар"
+msgstr "直布羅陀"
 
 #: data.py:118
 msgid "Greece"
-msgstr "Греція"
+msgstr "希臘"
 
 #: data.py:119
 msgid "Greenland"
-msgstr "Гренландія"
+msgstr "冰島"
 
 #: data.py:120
 msgid "Grenada"
-msgstr "Гренада"
+msgstr "格瑞那達"
 
 #: data.py:121
 msgid "Guadeloupe"
-msgstr "Гваделупа"
+msgstr "瓜地洛普"
 
 #: data.py:122
 msgid "Guam"
-msgstr "Гуам"
+msgstr "關島"
 
 #: data.py:123
 msgid "Guatemala"
-msgstr "Гватемала"
+msgstr "瓜地馬拉"
 
 #: data.py:124
 msgid "Guernsey"
-msgstr "Гернсі"
+msgstr "根西"
 
 #: data.py:125
 msgid "Guinea"
-msgstr "Гвінея"
+msgstr "幾內亞"
 
 #: data.py:126
 msgid "Guinea-Bissau"
-msgstr "Гвінея-Бісау"
+msgstr "幾內亞比索"
 
 #: data.py:127
 msgid "Guyana"
-msgstr "Гайана"
+msgstr "蓋亞那"
 
 #: data.py:128
 msgid "Haiti"
-msgstr "Гаїті"
+msgstr "海地"
 
 #: data.py:129
 msgid "Heard Island and McDonald Islands"
-msgstr "Острів Херд і острови Макдональд"
+msgstr "赫德島和麥克唐納群島"
 
 #: data.py:130
 msgid "Holy See"
-msgstr "Папський престол"
+msgstr "聖座"
 
 #: data.py:131
 msgid "Honduras"
-msgstr "Гондурас"
+msgstr "宏都拉斯"
 
 #: data.py:132
 msgid "Hong Kong"
-msgstr "Гонконг"
+msgstr "香港"
 
 #: data.py:133
 msgid "Hungary"
-msgstr "Угорщина"
+msgstr "匈牙利"
 
 #: data.py:134
 msgid "Iceland"
-msgstr "Ісландія"
+msgstr "冰島"
 
 #: data.py:135
 msgid "India"
-msgstr "Індія"
+msgstr "印度"
 
 #: data.py:136
 msgid "Indonesia"
-msgstr "Індонезія"
+msgstr "印尼"
 
 #: data.py:137
 msgid "Iran (Islamic Republic of)"
-msgstr "Іран (Ісламська Республіка)"
+msgstr "伊朗"
 
 #: data.py:138
 msgid "Iraq"
-msgstr "Ірак"
+msgstr "伊拉克"
 
 #: data.py:139
 msgid "Ireland"
-msgstr "Ірландія"
+msgstr "愛爾蘭"
 
 #: data.py:140
 msgid "Isle of Man"
-msgstr "Острів Мен"
+msgstr "曼島"
 
 #: data.py:141
 msgid "Israel"
-msgstr "Ізраїль"
+msgstr "以色列"
 
 #: data.py:142
 msgid "Italy"
-msgstr "Італія"
+msgstr "義大利"
 
 #: data.py:143
 msgid "Jamaica"
-msgstr "Ямайка"
+msgstr "牙買加"
 
 #: data.py:144
 msgid "Japan"
-msgstr "Японія"
+msgstr "日本"
 
 #: data.py:145
 msgid "Jersey"
-msgstr "Джерсі"
+msgstr "澤西行政區"
 
 #: data.py:146
 msgid "Jordan"
-msgstr "Йорданія"
+msgstr "約旦"
 
 #: data.py:147
 msgid "Kazakhstan"
-msgstr "Казахстан"
+msgstr "哈薩克"
 
 #: data.py:148
 msgid "Kenya"
-msgstr "Кенія"
+msgstr "肯亞"
 
 #: data.py:149
 msgid "Kiribati"
-msgstr "Кірібаті"
+msgstr "吉里巴斯"
 
 #: data.py:150
 msgid "Korea (the Democratic People's Republic of)"
-msgstr "Корея (Корейська Народно-Демократична Республіка)"
+msgstr "北韓"
 
 #: data.py:151
 msgid "Korea (the Republic of)"
-msgstr "Корея (Республіка)"
+msgstr "南韓"
 
 #: data.py:152
 msgid "Kuwait"
-msgstr "Кувейт"
+msgstr "科威特"
 
 #: data.py:153
 msgid "Kyrgyzstan"
-msgstr "Киргизія"
+msgstr "吉爾吉斯"
 
 #: data.py:154
 msgid "Lao People's Democratic Republic"
-msgstr "Лаоська Народно-Демократична Республіка"
+msgstr "寮國"
 
 #: data.py:155
 msgid "Latvia"
-msgstr "Латвія"
+msgstr "拉脫維亞"
 
 #: data.py:156
 msgid "Lebanon"
-msgstr "Ліван"
+msgstr "黎巴嫩"
 
 #: data.py:157
 msgid "Lesotho"
-msgstr "Лесото"
+msgstr "賴索托"
 
 #: data.py:158
 msgid "Liberia"
-msgstr "Ліберія"
+msgstr "賴比瑞亞"
 
 #: data.py:159
 msgid "Libya"
-msgstr "Лівія"
+msgstr "利比亞"
 
 #: data.py:160
 msgid "Liechtenstein"
-msgstr "Ліхтенштейн"
+msgstr "列支敦斯登"
 
 #: data.py:161
 msgid "Lithuania"
-msgstr "Литва"
+msgstr "立陶宛"
 
 #: data.py:162
 msgid "Luxembourg"
-msgstr "Люксембург"
+msgstr "盧森堡"
 
 #: data.py:163
 msgid "Macao"
-msgstr "Макао"
+msgstr "澳門"
 
 #: data.py:164
 msgid "Madagascar"
-msgstr "Мадагаскар"
+msgstr "馬達加斯加"
 
 #: data.py:165
 msgid "Malawi"
-msgstr "Малаві"
+msgstr "馬拉威"
 
 #: data.py:166
 msgid "Malaysia"
-msgstr "Малайзія"
+msgstr "馬來西亞"
 
 #: data.py:167
 msgid "Maldives"
-msgstr "Мальдіви"
+msgstr "馬爾地夫"
 
 #: data.py:168
 msgid "Mali"
-msgstr "Малі"
+msgstr "馬利"
 
 #: data.py:169
 msgid "Malta"
-msgstr "Мальта"
+msgstr "馬爾他"
 
 #: data.py:170
 msgid "Marshall Islands"
-msgstr "Маршаллові острови"
+msgstr "馬紹爾群島"
 
 #: data.py:171
 msgid "Martinique"
-msgstr "Мартинюк"
+msgstr "茅利塔尼亞"
 
 #: data.py:172
 msgid "Mauritania"
-msgstr "Мавританія"
+msgstr "茅利塔尼亞"
 
 #: data.py:173
 msgid "Mauritius"
-msgstr "Маврикій"
+msgstr "模里西斯"
 
 #: data.py:174
 msgid "Mayotte"
-msgstr "Майотта"
+msgstr "馬約特"
 
 #: data.py:175
 msgid "Mexico"
-msgstr "Мексика"
+msgstr "墨西哥"
 
 #: data.py:176
 msgid "Micronesia (Federated States of)"
-msgstr "Мікронезія (Федеральні Штати)"
+msgstr "密克羅尼西亞聯邦"
 
 #: data.py:177
 msgid "Moldova (the Republic of)"
-msgstr "Молдова (Республіка)"
+msgstr "摩爾多瓦"
 
 #: data.py:178
 msgid "Monaco"
-msgstr "Монако"
+msgstr "摩納哥"
 
 #: data.py:179
 msgid "Mongolia"
-msgstr "Монголія"
+msgstr "蒙古"
 
 #: data.py:180
 msgid "Montenegro"
-msgstr "Чорногорія"
+msgstr "蒙特內哥羅"
 
 #: data.py:181
 msgid "Montserrat"
-msgstr "Монтсеррат"
+msgstr "蒙哲臘"
 
 #: data.py:182
 msgid "Morocco"
-msgstr "Марокко"
+msgstr "摩洛哥"
 
 #: data.py:183
 msgid "Mozambique"
-msgstr "Мозамбік"
+msgstr "莫三比克"
 
 #: data.py:184
 msgid "Myanmar"
-msgstr "М'янма"
+msgstr "緬甸"
 
 #: data.py:185
 msgid "Namibia"
-msgstr "Намібія"
+msgstr "納米比亞"
 
 #: data.py:186
 msgid "Nauru"
-msgstr "Науру"
+msgstr "諾魯"
 
 #: data.py:187
 msgid "Nepal"
-msgstr "Непал"
+msgstr "尼泊爾"
 
 #: data.py:188
 msgid "Netherlands"
-msgstr "Нідерланди"
+msgstr "荷蘭"
 
 #: data.py:189
 msgid "New Caledonia"
-msgstr "Нова Каледонія"
+msgstr "新喀里多尼亞"
 
 #: data.py:190
 msgid "New Zealand"
-msgstr "Нова Зеландія"
+msgstr "紐西蘭"
 
 #: data.py:191
 msgid "Nicaragua"
-msgstr "Нікарагуа"
+msgstr "尼加拉瓜"
 
 #: data.py:192
 msgid "Niger"
-msgstr "Нігер"
+msgstr "尼日"
 
 #: data.py:193
 msgid "Nigeria"
-msgstr "Нігерія"
+msgstr "奈及利亞"
 
 #: data.py:194
 msgid "Niue"
-msgstr "Ніуе"
+msgstr "紐埃"
 
 #: data.py:195
 msgid "Norfolk Island"
-msgstr "Острів Норфолк"
+msgstr "諾福克島"
 
 #: data.py:196
 msgid "North Macedonia"
-msgstr "Північна Македонія"
+msgstr "北馬其頓"
 
 #: data.py:197
 msgid "Northern Mariana Islands"
-msgstr "Північні Маріанські острови"
+msgstr "北馬利安納群島"
 
 #: data.py:198
 msgid "Norway"
-msgstr "Норвегія"
+msgstr "挪威"
 
 #: data.py:199
 msgid "Oman"
-msgstr "Оман"
+msgstr "阿曼"
 
 #: data.py:200
 msgid "Pakistan"
-msgstr "Пакистан"
+msgstr "巴基斯坦"
 
 #: data.py:201
 msgid "Palau"
-msgstr "Palau"
+msgstr "帛琉"
 
 #: data.py:202
 msgid "Palestine, State of"
-msgstr "Палестина, Держава"
+msgstr "巴勒斯坦"
 
 #: data.py:203
 msgid "Panama"
-msgstr "Панама"
+msgstr "巴拿馬"
 
 #: data.py:204
 msgid "Papua New Guinea"
-msgstr "Папуа-Нова Гвінея"
+msgstr "巴布亞紐幾內亞"
 
 #: data.py:205
 msgid "Paraguay"
-msgstr "Парагвай"
+msgstr "巴拉圭"
 
 #: data.py:206
 msgid "Peru"
-msgstr "Перу"
+msgstr "秘魯"
 
 #: data.py:207
 msgid "Philippines"
-msgstr "Філіппіни"
+msgstr "菲律賓"
 
 #: data.py:208
 msgid "Pitcairn"
-msgstr "Піткерн"
+msgstr "皮特肯群島"
 
 #: data.py:209
 msgid "Poland"
-msgstr "Польща"
+msgstr "波蘭"
 
 #: data.py:210
 msgid "Portugal"
-msgstr "Португалія"
+msgstr "葡萄牙"
 
 #: data.py:211
 msgid "Puerto Rico"
-msgstr "Пуерто-Ріко"
+msgstr "波多黎各"
 
 #: data.py:212
 msgid "Qatar"
-msgstr "Катар"
+msgstr "卡塔爾"
 
 #: data.py:213
 msgid "Réunion"
-msgstr "Реюньйон"
+msgstr "留尼旺"
 
 #: data.py:214
 msgid "Romania"
-msgstr "Румунія"
+msgstr "羅馬尼亞"
 
 #: data.py:215
 msgid "Russian Federation"
-msgstr "Росія"
+msgstr "俄羅斯"
 
 #: data.py:216
 msgid "Rwanda"
-msgstr "Руанда"
+msgstr "盧安達"
 
 #: data.py:217
 msgid "Saint Barthélemy"
-msgstr "Сен-Бартельмі"
+msgstr "聖巴瑟米"
 
 #: data.py:218
 msgid "Saint Helena, Ascension and Tristan da Cunha"
-msgstr "Острів Святої Єлени, Вознесіння і Трістан-да-Кунья"
+msgstr "聖海蓮娜、阿森松和特里斯坦-達庫尼亞"
 
 #: data.py:219
 msgid "Saint Kitts and Nevis"
-msgstr "Сент-Кітс і Невіс"
+msgstr "聖克里斯多福及尼維斯"
 
 #: data.py:220
 msgid "Saint Lucia"
-msgstr "Сент-Люсія"
+msgstr "聖露西亞"
 
 #: data.py:221
 msgid "Saint Martin (French part)"
-msgstr "Сен-Мартен (французька частина)"
+msgstr "法屬聖馬丁"
 
 #: data.py:222
 msgid "Saint Pierre and Miquelon"
-msgstr "Сен-П'єр і Мікелон"
+msgstr "聖皮埃與密克隆群島"
 
 #: data.py:223
 msgid "Saint Vincent and the Grenadines"
-msgstr "Сент-Вінсент і Гренадіни"
+msgstr "聖文森及格瑞那丁"
 
 #: data.py:224
 msgid "Samoa"
-msgstr "Самоа"
+msgstr "薩摩亞"
 
 #: data.py:225
 msgid "San Marino"
-msgstr "Сан - Маріно"
+msgstr "聖馬利諾"
 
 #: data.py:226
 msgid "Sao Tome and Principe"
-msgstr "Сан-Томе і Принсіпі"
+msgstr "聖多美普林西比"
 
 #: data.py:227
 msgid "Saudi Arabia"
-msgstr "Саудівська Аравія"
+msgstr "沙烏地阿拉伯"
 
 #: data.py:228
 msgid "Senegal"
-msgstr "Сенегал"
+msgstr "塞內加爾"
 
 #: data.py:229
 msgid "Serbia"
-msgstr "Сербія"
+msgstr "塞爾維亞"
 
 #: data.py:230
 msgid "Seychelles"
-msgstr "Сейшельські острови"
+msgstr "塞席爾"
 
 #: data.py:231
 msgid "Sierra Leone"
-msgstr "Сьєрра-Леоне"
+msgstr "獅子山"
 
 #: data.py:232
 msgid "Singapore"
-msgstr "Сінгапур"
+msgstr "新加坡"
 
 #: data.py:233
 msgid "Sint Maarten (Dutch part)"
-msgstr "Сінт-Мартен (голландський частина)"
+msgstr "荷屬聖馬丁"
 
 #: data.py:234
 msgid "Slovakia"
-msgstr "Словаччина"
+msgstr "斯洛伐克"
 
 #: data.py:235
 msgid "Slovenia"
-msgstr "Словенія"
+msgstr "斯洛維尼亞"
 
 #: data.py:236
 msgid "Solomon Islands"
-msgstr "Соломонові острови"
+msgstr "索羅門群島"
 
 #: data.py:237
 msgid "Somalia"
-msgstr "Сомалі"
+msgstr "索馬利亞"
 
 #: data.py:238
 msgid "South Africa"
-msgstr "ПАР"
+msgstr "南非"
 
 #: data.py:239
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Південна Джорджія та Південні Сандвічеві острови"
+msgstr "南喬治亞與南桑威奇群島"
 
 #: data.py:240
 msgid "South Sudan"
-msgstr "Південний Судан"
+msgstr "南蘇丹"
 
 #: data.py:241
 msgid "Spain"
-msgstr "Іспанія"
+msgstr "西班牙"
 
 #: data.py:242
 msgid "Sri Lanka"
-msgstr "Шрі Ланка"
+msgstr "斯里蘭卡"
 
 #: data.py:243
 msgid "Sudan"
-msgstr "Судан"
+msgstr "蘇丹"
 
 #: data.py:244
 msgid "Suriname"
-msgstr "Сурінам"
+msgstr "蘇利南"
 
 #: data.py:245
 msgid "Svalbard and Jan Mayen"
-msgstr "Шпіцберген і Ян-Маєн"
+msgstr "斯瓦爾巴及揚馬延"
 
 #: data.py:246
 msgid "Sweden"
-msgstr "Швеція"
+msgstr "瑞典"
 
 #: data.py:247
 msgid "Switzerland"
-msgstr "Швейцарія"
+msgstr "瑞士"
 
 #: data.py:248
 msgid "Syrian Arab Republic"
-msgstr "Сирійська Арабська Республіка"
+msgstr "敘利亞"
 
 #: data.py:249
 msgid "Taiwan (Province of China)"
-msgstr "Тайвань (провінція Китаю)"
+msgstr "台灣（中國省份）"
 
 #: data.py:250
 msgid "Tajikistan"
-msgstr "Таджикистан"
+msgstr "塔吉克"
 
 #: data.py:252
 msgid "Thailand"
-msgstr "Таїланд"
+msgstr "泰國"
 
 #: data.py:253
 msgid "Timor-Leste"
-msgstr "Тимор-Лешті"
+msgstr "東帝汶"
 
 #: data.py:254
 msgid "Togo"
-msgstr "Того"
+msgstr "多哥"
 
 #: data.py:255
 msgid "Tokelau"
-msgstr "Токелау"
+msgstr "托克勞"
 
 #: data.py:256
 msgid "Tonga"
-msgstr "Тонга"
+msgstr "東加"
 
 #: data.py:257
 msgid "Trinidad and Tobago"
-msgstr "Тринідад і Тобаго"
+msgstr "千里達及托巴哥"
 
 #: data.py:258
 msgid "Tunisia"
-msgstr "Туніс"
+msgstr "突尼西亞"
 
 #: data.py:259
 msgid "Turkey"
-msgstr "Туреччина"
+msgstr "土耳其"
 
 #: data.py:260
 msgid "Turkmenistan"
-msgstr "Туркменістан"
+msgstr "土庫曼"
 
 #: data.py:261
 msgid "Turks and Caicos Islands"
-msgstr "Теркс і Кайкос острова"
+msgstr "特克斯與凱科斯群島"
 
 #: data.py:262
 msgid "Tuvalu"
-msgstr "Тувалу"
+msgstr "吐瓦魯"
 
 #: data.py:263
 msgid "Uganda"
-msgstr "Уганда"
+msgstr "烏干達"
 
 #: data.py:264
 msgid "Ukraine"
-msgstr "Україна"
+msgstr "烏克蘭"
 
 #: data.py:265
 msgid "United Arab Emirates"
-msgstr "Об'єднані Арабські Емірати"
+msgstr "阿聯酋"
 
 #: data.py:266
 msgid "United Kingdom of Great Britain and Northern Ireland"
-msgstr "Сполучене Королівство Великобританії та Північної Ірландії"
+msgstr "英國"
 
 #: data.py:267
 msgid "United States Minor Outlying Islands"
-msgstr "Зовнішні малі острови США"
+msgstr "美國本土外小島嶼"
 
 #: data.py:268
 msgid "United States of America"
-msgstr "Сполучені Штати Америки"
+msgstr "美國"
 
 #: data.py:269
 msgid "Uruguay"
-msgstr "Уругвай"
+msgstr "烏拉圭"
 
 #: data.py:270
 msgid "Uzbekistan"
-msgstr "Узбекистан"
+msgstr "烏茲別克"
 
 #: data.py:271
 msgid "Vanuatu"
-msgstr "Вануату"
+msgstr "萬那杜"
 
 #: data.py:272
 msgid "Venezuela (Bolivarian Republic of)"
-msgstr "Венесуела (Боліваріанська Республіка)"
+msgstr "委內瑞拉"
 
 #: data.py:273
 msgid "Viet Nam"
-msgstr "В'єтнам"
+msgstr "越南"
 
 #: data.py:274
 msgid "Virgin Islands (British)"
-msgstr "Віргінські острови (Британські)"
+msgstr "英屬維京群島"
 
 #: data.py:275
 msgid "Virgin Islands (U.S.)"
-msgstr "Віргінські острови (США)"
+msgstr "美屬維京群島"
 
 #: data.py:276
 msgid "Wallis and Futuna"
-msgstr "Уолліс Футуна"
+msgstr "瓦利斯和富圖那"
 
 #: data.py:277
 msgid "Western Sahara"
-msgstr "Західна Сахара"
+msgstr "西撒哈拉"
 
 #: data.py:278
 msgid "Yemen"
-msgstr "Ємен"
+msgstr "也門"
 
 #: data.py:279
 msgid "Zambia"
-msgstr "Замбія"
+msgstr "尚比亞"
 
 #: data.py:280
 msgid "Zimbabwe"
-msgstr "Зімбабве"
+msgstr "辛巴威"
 
 #: filters.py:12
 msgid "Country"
-msgstr "Країна"
+msgstr "國家"
 
 #: filters.py:22
 msgid "All"
-msgstr "Всі"
+msgstr "全部國家"
