@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.4 (unreleased)
-================
+7.3.1 (1 March 2022)
+====================
 
 - Typing compatibility fixes for Python <3.9.
 
