@@ -364,9 +364,10 @@ class Countries(CountriesBase):
     def by_name(
         self,
         country: str,
+        *,
+        regex: Literal[False] = False,
         language: str = "en",
         insensitive: bool = True,
-        regex: Literal[False] = False,
     ) -> str:
         ...
 
@@ -374,18 +375,20 @@ class Countries(CountriesBase):
     def by_name(
         self,
         country: str,
+        *,
+        regex: Literal[True],
         language: str = "en",
         insensitive: bool = True,
-        regex: Literal[True] = False,
     ) -> set[str]:
         ...
 
     def by_name(
         self,
         country: str,
+        *,
+        regex: bool = False,
         language: str = "en",
         insensitive: bool = True,
-        regex: bool = False,
     ) -> Union[str, set[str]]:
         """
         Fetch a country's ISO3166-1 two letter country code from its name.
