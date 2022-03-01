@@ -241,30 +241,11 @@ class Countries(CountriesBase):
         if isinstance(name, dict):
             if "names" in name:
                 country_name: str = name["names"][0]
-                fallback_names: List[str] = name["names"][1:]
             else:
                 country_name = name["name"]
-                fallback_names = []
         else:
             country_name = name
-            fallback_names = self.shadowed_names.get(code, [])
-        language = get_language()
-        if language and language.split("-")[0] != "en" and fallback_names:
-            # Check if there's an older translation available if there's no
-            # translation for the newest name.
-            with override("en"):
-                source_name = force_str(country_name)
-            country_name = force_str(country_name)
-            if country_name == source_name:
-                for fallback_name in fallback_names:
-                    with override("en"):
-                        source_fallback_name = force_str(fallback_name)
-                    fallback_name = force_str(fallback_name)
-                    if fallback_name != source_fallback_name:
-                        country_name = fallback_name
-                        break
-        else:
-            country_name = force_str(country_name)
+        country_name = force_str(country_name)
         return CountryTuple(code, country_name)
 
     def __iter__(self):

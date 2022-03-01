@@ -328,58 +328,15 @@ class CountriesFirstTest(BaseTest):
             finally:
                 translation.activate(lang)
 
-    def test_translation_fallback_from_common_name(self):
-        trans_fall_countries = custom_countries.TranslationFallbackCountries()
-        self.assertEqual(trans_fall_countries.name("YE"), "YYYemen")
+    def test_translation_common_name(self):
+        self.assertEqual(countries.name("VE"), "Venezuela")
         lang = translation.get_language()
-        translation.activate("eo")
-        try:
-            self.assertEqual(trans_fall_countries.name("YE"), "Jemeno")
-        finally:
-            translation.activate(lang)
-
-    def test_translation_fallback_from_old_name(self):
-        trans_fall_countries = custom_countries.TranslationFallbackCountries()
-        trans_fall_countries.countries["NZ"] = "Old Zealand"
-
-        self.assertEqual(trans_fall_countries.name("NZ"), "Old Zealand")
-        lang = translation.get_language()
-        translation.activate("eo")
-        try:
-            self.assertEqual(trans_fall_countries.name("NZ"), "Nov-Zelando")
-        finally:
-            translation.activate(lang)
-
-    def test_translation_fallback_no_override(self):
-        lang = translation.get_language()
-        translation.activate("eo")
+        translation.activate("de")
 
         try:
-            self.assertEqual(countries.name("NZ"), "Nov-Zelando")
-            self.assertEqual(countries.name("YE"), "Jemeno")
-
-            with self.settings(COUNTRIES_OVERRIDE={"NZ": "Hobbiton", "YE": "YYemen"}):
-                del countries.countries
-                self.assertEqual(countries.name("NZ"), "Hobbiton")
-                self.assertEqual(countries.name("YE"), "YYemen")
+            self.assertEqual(countries.name("VE"), "Venezuela")
         finally:
             translation.activate(lang)
-
-    def test_translation_fallback_override_names(self):
-        with self.settings(
-            COUNTRIES_OVERRIDE={
-                "NZ": {"names": ["Hobbiton", translation.gettext_lazy("New Zealand")]}
-            }
-        ):
-
-            self.assertEqual(countries.name("NZ"), "Hobbiton")
-            lang = translation.get_language()
-            translation.activate("eo")
-
-            try:
-                self.assertEqual(countries.name("NZ"), "Nov-Zelando")
-            finally:
-                translation.activate(lang)
 
     def test_first_multiple_labels(self):
         with self.settings(

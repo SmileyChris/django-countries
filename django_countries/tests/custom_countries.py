@@ -6,11 +6,6 @@ class FantasyCountries(Countries):
     only = ["NZ", ("NV", "Neverland")]
 
 
-class TranslationFallbackCountries(Countries):
-    COMMON_NAMES = {"YE": "YYYemen"}
-    OLD_NAMES = {"NZ": [_("New Zealand")]}
-
-
 class GBRegionCountries(Countries):
     override = {
         "GB": None,
