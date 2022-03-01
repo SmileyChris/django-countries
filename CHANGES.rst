@@ -9,7 +9,7 @@ release, and any new translations added.
 7.4 (unreleased)
 ================
 
-- Nothing changed yet.
+- Typing compatibility fixes for Python <3.9.
 
 
 7.3 (28 February 2022)
