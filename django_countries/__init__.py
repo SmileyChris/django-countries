@@ -6,9 +6,9 @@ from typing import (
     Dict,
     Iterable,
     List,
-    Literal,
     NamedTuple,
     Optional,
+    Set,
     Tuple,
     Union,
     overload,
@@ -16,6 +16,7 @@ from typing import (
 
 from django.utils.encoding import force_str
 from django.utils.translation import get_language, override
+from typing_extensions import Literal
 
 from django_countries.conf import settings
 
@@ -379,7 +380,7 @@ class Countries(CountriesBase):
         regex: Literal[True],
         language: str = "en",
         insensitive: bool = True,
-    ) -> set[str]:
+    ) -> Set[str]:
         ...
 
     def by_name(
@@ -389,7 +390,7 @@ class Countries(CountriesBase):
         regex: bool = False,
         language: str = "en",
         insensitive: bool = True,
-    ) -> Union[str, set[str]]:
+    ) -> Union[str, Set[str]]:
         """
         Fetch a country's ISO3166-1 two letter country code from its name.
 
