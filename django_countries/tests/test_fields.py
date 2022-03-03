@@ -222,9 +222,22 @@ class TestCountryField(TestCase):
             ["A", "B", "D"],
         )
 
+    def test_exact(self):
+        p = Person.objects.create(name="A", country="NZ")
+        self.assertEqual(list(Person.objects.filter(country__exact="NZ")), [p])
+        self.assertEqual(list(Person.objects.filter(country__exact="nz")), [])
+        self.assertEqual(list(Person.objects.filter(country__exact="New Zealand")), [])
+
+    def test_iexact(self):
+        p = Person.objects.create(name="A", country="NZ")
+        self.assertEqual(list(Person.objects.filter(country__iexact="nz")), [p])
+
     def test_by_country_name(self):
         p = Person.objects.create(name="A", country="NZ")
-        self.assertEqual(list(Person.objects.filter(country__exact="New Zealand")), [p])
+        self.assertEqual(list(Person.objects.filter(country__name="New Zealand")), [p])
+        self.assertEqual(list(Person.objects.filter(country__name="new zealand")), [])
+        self.assertEqual(list(Person.objects.filter(country__iname="new zealand")), [p])
+        self.assertEqual(list(Person.objects.filter(country__iname="new z")), [])
 
     def test_by_country_name_contains(self):
         p = Person.objects.create(name="A", country="NZ")

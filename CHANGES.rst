@@ -9,7 +9,10 @@ release, and any new translations added.
 7.4 (unreleased)
 ================
 
-- Nothing changed yet.
+- Fix slowdown introduced in v7.3 caused by always using country name lookups
+  for field comparisons. ``filter(country="New Zealand")`` will no longer match
+  now, but instead new ``__name`` and ``__iname`` filters have been added to
+  achieve this.
 
 
 7.3.1 (1 March 2022)

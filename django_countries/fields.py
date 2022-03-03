@@ -1,5 +1,5 @@
 import re
-from typing import Any, Iterable, Tuple, Type, Union
+from typing import Any, Iterable, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
 import pkg_resources
@@ -19,15 +19,6 @@ EXTENSIONS = dict(
     (ep.name, ep.load())
     for ep in pkg_resources.iter_entry_points("django_countries.Country")
 )
-
-
-def country_to_text(value):
-    if hasattr(value, "code"):
-        value = value.code
-    if value is None:
-        return None
-    value = force_str(value)
-    return countries.by_name(value) or value
 
 
 class TemporaryEscape:
@@ -335,11 +326,18 @@ class CountryField(CharField):
                 value = ""
         return super(CharField, self).get_prep_value(value)
 
+    def country_to_text(self, value):
+        if hasattr(value, "code"):
+            value = value.code
+        if value is None:
+            return None
+        return force_str(value)
+
     def get_clean_value(self, value):
         if value is None:
             return None
         if not self.multiple:
-            return country_to_text(value)
+            return self.country_to_text(value)
         if isinstance(value, (str, Country)):
             if isinstance(value, str) and "," in value:
                 value = value.split(",")
@@ -350,7 +348,7 @@ class CountryField(CharField):
                 iter(value)
             except TypeError:
                 value = [value]
-        return list(filter(None, [country_to_text(c) for c in value]))
+        return list(filter(None, [self.country_to_text(c) for c in value]))
 
     def deconstruct(self):
         """
@@ -447,24 +445,34 @@ class CountryField(CharField):
             "iendswith",
             "regex",
             "iregex",
+            "name",
+            "iname",
         ):
             lookup_name = f"country_{lookup_name}"
         return super().get_lookup(lookup_name)
 
 
-class FullNameLookupMixin:
+@CountryField.register_lookup
+class ExactNameLookup(lookups.Exact):
+    lookup_name = "country_name"
+    insensitive: bool = False
+
     def get_prep_lookup(self):
-        if isinstance(self.rhs, str):
-            value = self.expr.format(
-                text=re.escape(self.rhs) if self.escape_regex else self.rhs
-            )
-            return self.lhs.output_field.countries.by_name(
-                value, regex=True, insensitive=self.insensitive
-            )
-        return super().get_prep_lookup()
+        return cast(CountryField, self.lhs.output_field).countries.by_name(
+            force_str(self.rhs), insensitive=self.insensitive
+        )
+
+    def get_rhs_op(self, connection, rhs):
+        return connection.operators['exact'] % rhs
 
 
-class FullNameLookup(FullNameLookupMixin, lookups.In):
+@CountryField.register_lookup
+class IExactNameLookup(ExactNameLookup):
+    lookup_name = "country_iname"
+    insensitive: bool = True
+
+
+class FullNameLookup(lookups.In):
     expr: str
     insensitive: bool = False
     escape_regex: bool = True
@@ -474,7 +482,9 @@ class FullNameLookup(FullNameLookupMixin, lookups.In):
             value = self.expr.format(
                 text=re.escape(self.rhs) if self.escape_regex else self.rhs
             )
-            return countries.by_name(value, regex=True, insensitive=self.insensitive)
+            return cast(CountryField, self.lhs.output_field).countries.by_name(
+                value, regex=True, insensitive=self.insensitive
+            )
         return super().get_prep_lookup()
 
 
