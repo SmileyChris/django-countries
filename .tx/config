@@ -1,6 +1,6 @@
 [main]
 host = https://www.transifex.com
-lang_map = sr@latin:sr_Latn, sr_BA@latin:sr_Latn_BA, zh-Hans:zh_Hans
+lang_map = sr@latin:sr_Latn, sr_BA@latin:sr_Latn_BA, zh-Hans:zh_Hans, zh-Hant:zh_Hant
 
 [django-countries.djangopo]
 file_filter = django_countries/locale/<lang>/LC_MESSAGES/django.po
