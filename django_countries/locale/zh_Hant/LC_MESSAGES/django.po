@@ -11,11 +11,11 @@ msgstr ""
 "POT-Creation-Date: 2020-03-26 14:14+1300\n"
 "PO-Revision-Date: 2021-06-16 12:35+0000\n"
 "Last-Translator: Tom Lai <laitom227@gmail.com>\n"
-"Language-Team: Chinese Traditional (http://www.transifex.com/smileychris/django-countries/language/zh-Hant/)\n"
+"Language-Team: Chinese Traditional (http://www.transifex.com/smileychris/django-countries/language/zh_Hant/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh-Hant\n"
+"Language: zh_Hant\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: base.py:11
