@@ -9,7 +9,9 @@ release, and any new translations added.
 7.4 (unreleased)
 ================
 
-- Nothing changed yet.
+- Fixed Traditional Chinese translation (needed to be ``locale/zh_Hant``).
+
+- Update flag of Honduras.
 
 
 7.3.2 (4 March 2022)
