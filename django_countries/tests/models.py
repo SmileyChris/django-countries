@@ -20,7 +20,7 @@ class Person(models.Model):
 
 
 class AllowNull(models.Model):
-    country = CountryField(null=True, blank_label="(select country)")
+    country = CountryField(null=True, blank=True, blank_label="(select country)")
 
 
 class MultiCountry(models.Model):

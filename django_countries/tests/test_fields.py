@@ -588,9 +588,15 @@ class TestModelForm(TestCase):
 
         form = forms.PersonForm()
         self.assertEqual(form.fields["country"].choices[0], blank)
+        html = str(form["country"]).split(">", 1)[0]
+        self.assertEqual(html, '<select name="country" required id="id_country"')
 
         multi_form = forms.MultiCountryForm()
         self.assertNotEqual(multi_form.fields["countries"].choices[0], blank)
+        html = str(multi_form["countries"]).split(">", 1)[0]
+        self.assertEqual(
+            html, '<select name="countries" required id="id_countries" multiple'
+        )
 
     def test_no_blank_choice(self):
         form = forms.PersonForm()
@@ -601,6 +607,8 @@ class TestModelForm(TestCase):
     def test_blank_choice_label(self):
         form = forms.AllowNullForm()
         self.assertEqual(form.fields["country"].choices[0], ("", "(select country)"))
+        html = str(form["country"]).split(">", 1)[0]
+        self.assertEqual(html, '<select name="country" id="id_country"')
 
     def test_validation(self):
         form = forms.MultiCountryForm(data={"countries": ["NZ", "AU"]})
