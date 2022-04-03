@@ -257,7 +257,7 @@ class CountryField(CharField):
 
     descriptor_class = CountryDescriptor
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         countries_class: Type[Countries] = kwargs.pop("countries", None)
         self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop("countries_flag_url", None)
