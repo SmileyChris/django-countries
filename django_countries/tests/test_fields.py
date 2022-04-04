@@ -594,9 +594,10 @@ class TestModelForm(TestCase):
         multi_form = forms.MultiCountryForm()
         self.assertNotEqual(multi_form.fields["countries"].choices[0], blank)
         html = str(multi_form["countries"]).split(">", 1)[0]
-        self.assertEqual(
-            html, '<select name="countries" required id="id_countries" multiple'
-        )
+        expected = '<select name="countries" required id="id_countries" multiple'
+        if django.VERSION < (2,):  # Django 1.11
+            expected += '="multiple"'
+        self.assertEqual(html, expected)
 
     def test_no_blank_choice(self):
         form = forms.PersonForm()
