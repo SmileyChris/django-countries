@@ -622,7 +622,7 @@ def check_flags(verbosity: int = 1):
             print(f"  {path}")
 
 
-def check_common_names():
+def check_common_names() -> None:
     common_names_missing = set(CountriesBase.COMMON_NAMES) - set(COUNTRIES)
     if common_names_missing:  # pragma: no cover
         print("")

@@ -4,6 +4,7 @@ Builds all flags into a single sprite image (along with some css).
 """
 import os
 import re
+from typing import IO
 
 from PIL import Image  # type: ignore
 
@@ -11,7 +12,7 @@ re_flag_file = re.compile(r"[a-z]{2}.gif$")
 FLAG_X, FLAG_Y = 16, 11
 
 
-def main():
+def main() -> None:
     flag_path = os.path.join(os.path.dirname(__file__), "static", "flags")
     files = os.listdir(flag_path)
     img = Image.new("RGBA", (26 * FLAG_X, 26 * FLAG_Y))
@@ -56,16 +57,16 @@ def main():
         )
 
 
-def write_coords(css_file, width, height, prefix=""):
+def write_coords(css_file: IO[str], width: int, height: int, prefix: str = "") -> None:
     for i in range(26):
         x, y = i * width, i * height
-        if x:
-            x = f"-{x}px"
-        if y:
-            y = f"-{y}px"
         code = chr(i + 97)
-        css_file.write("\n%s.flag-%s {background-position-x:%s}" % (prefix, code, x))
-        css_file.write("\n%s.flag-_%s {background-position-y:%s}" % (prefix, code, y))
+        css_file.write(
+            "\n%s.flag-%s {background-position-x:%s}" % (prefix, code, x and f"-{x}px")
+        )
+        css_file.write(
+            "\n%s.flag-_%s {background-position-y:%s}" % (prefix, code, y and f"-{y}px")
+        )
 
 
 if __name__ == "__main__":

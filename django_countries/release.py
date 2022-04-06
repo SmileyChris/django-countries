@@ -14,7 +14,7 @@ from django.core.management import call_command
 import django_countries
 
 
-def translations(data):
+def translations(data) -> None:
     if data["name"] != "django-countries":
         return
 

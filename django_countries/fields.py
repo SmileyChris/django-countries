@@ -1,5 +1,5 @@
 import re
-from typing import Any, Iterable, Tuple, Type, Union, cast
+from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
 import pkg_resources
@@ -39,7 +39,13 @@ class TemporaryEscape:
 
 
 class Country:
-    def __init__(self, code, flag_url=None, str_attr="code", custom_countries=None):
+    def __init__(
+        self,
+        code: str,
+        flag_url: Optional[str] = None,
+        str_attr: str = "code",
+        custom_countries: Optional[Countries] = None,
+    ):
         self.flag_url = flag_url
         self._escape = False
         self._str_attr = str_attr
@@ -69,8 +75,7 @@ class Country:
             args.append(f"flag_url={self.flag_url!r}")
         if self._str_attr != "code":
             args.append(f"str_attr={self._str_attr!r}")
-        args = ", ".join(args)
-        return f"{self.__class__.__name__}({args})"
+        return f"{self.__class__.__name__}({', '.join(args)})"
 
     def __bool__(self):
         return bool(self.code)
@@ -86,29 +91,29 @@ class Country:
     def escape(self):
         return TemporaryEscape(self)
 
-    def maybe_escape(self, text):
+    def maybe_escape(self, text) -> str:
         if not self.escape:
             return text
         return escape_html(text)
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self.maybe_escape(self.countries.name(self.code))
 
     @property
-    def alpha3(self):
+    def alpha3(self) -> str:
         return self.countries.alpha3(self.code)
 
     @property
-    def numeric(self):
+    def numeric(self) -> Optional[int]:
         return self.countries.numeric(self.code)
 
     @property
-    def numeric_padded(self):
+    def numeric_padded(self) -> Optional[str]:
         return self.countries.numeric(self.code, padded=True)
 
     @property
-    def flag(self):
+    def flag(self) -> str:
         if not self.code:
             return ""
         flag_url = self.flag_url
@@ -121,7 +126,7 @@ class Country:
         return self.maybe_escape(url)
 
     @property
-    def flag_css(self):
+    def flag_css(self) -> str:
         """
         Output the css classes needed to display an HTML element as a flag
         sprite.
@@ -133,7 +138,7 @@ class Country:
         """
         if not self.code:
             return ""
-        x, y = self.code.lower()
+        x, y = list(self.code.lower())
         return f"flag-sprite flag-{x} flag-_{y}"
 
     @property
@@ -257,7 +262,7 @@ class CountryField(CharField):
 
     descriptor_class = CountryDescriptor
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any):
         countries_class: Type[Countries] = kwargs.pop("countries", None)
         self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop("countries_flag_url", None)
@@ -463,7 +468,7 @@ class ExactNameLookup(lookups.Exact):
         )
 
     def get_rhs_op(self, connection, rhs):
-        return connection.operators['exact'] % rhs
+        return connection.operators["exact"] % rhs
 
 
 @CountryField.register_lookup

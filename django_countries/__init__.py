@@ -2,6 +2,7 @@
 import itertools
 import re
 from typing import (
+    Any,
     Callable,
     Dict,
     Iterable,
@@ -11,12 +12,13 @@ from typing import (
     Set,
     Tuple,
     Union,
+    cast,
     overload,
 )
 
 from django.utils.encoding import force_str
 from django.utils.translation import get_language, override
-from typing_extensions import Literal
+from typing_extensions import Literal, TypedDict
 
 from django_countries.conf import settings
 
@@ -28,7 +30,7 @@ try:
     collator = pyuca.Collator()
 
     # Use UCA sorting if it's available.
-    def sort_key(item):
+    def sort_key(item: Tuple[str, str]) -> Any:
         return collator.sort_key(item[1])
 
 except ImportError:
@@ -36,7 +38,7 @@ except ImportError:
     import unicodedata
 
     # Cheap and dirty method to sort against ASCII characters only.
-    def sort_key(item):
+    def sort_key(item: Tuple[str, str]) -> Any:
         return (
             unicodedata.normalize("NFKD", item[1])
             .encode("ascii", "ignore")
@@ -44,6 +46,15 @@ except ImportError:
         )
 
 
+class ComplexCountryName(TypedDict):
+    name: str
+    names: List[str]
+    alpha3: str
+    numeric: int
+    ioc_code: str
+
+
+CountryName = Union[str, ComplexCountryName]
 CountryCode = Union[str, int, None]
 
 
@@ -56,7 +67,7 @@ class CountryTuple(NamedTuple):
     code: str
     name: str
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Display the repr as a standard tuple for better backwards
         compatibility with outputting this in a template.
@@ -72,7 +83,7 @@ class Countries(CountriesBase):
     the country ``code`` and ``name``), sorted by name.
     """
 
-    _countries: Dict[str, Union[str, Dict]]
+    _countries: Dict[str, CountryName]
     _alt_codes: Dict[str, AltCodes]
 
     def get_option(self, option: str):
@@ -86,7 +97,7 @@ class Countries(CountriesBase):
         return getattr(settings, f"COUNTRIES_{option.upper()}")
 
     @property
-    def countries(self) -> Dict[str, Union[str, dict]]:
+    def countries(self) -> Dict[str, CountryName]:
         """
         Return the a dictionary of countries, modified by any overriding
         options.
@@ -126,12 +137,17 @@ class Countries(CountriesBase):
                     for code, name in self.COMMON_NAMES.items():
                         if code in self._countries:
                             self._countries[code] = name
-                override: Dict[str, Union[str, dict]] = self.get_option("override")
+                override: Dict[str, Union[CountryName, None]] = self.get_option(
+                    "override"
+                )
                 if override:
-                    self._countries.update(override)
+                    _countries = cast(
+                        Dict[str, Union[CountryName, None]], self._countries.copy()
+                    )
+                    _countries.update(override)
                     self._countries = dict(
                         (code, name)
-                        for code, name in self._countries.items()
+                        for code, name in _countries.items()
                         if name is not None
                     )
 
@@ -230,7 +246,7 @@ class Countries(CountriesBase):
         for name in names:
             yield self.translate_pair(code, name)
 
-    def translate_pair(self, code: str, name: Union[str, Dict] = None):
+    def translate_pair(self, code: str, name: Optional[CountryName] = None):
         """
         Force a country to the current activated translation.
 
@@ -447,7 +463,7 @@ class Countries(CountriesBase):
             return code_list
         return ""
 
-    def alpha3(self, code: CountryCode):
+    def alpha3(self, code: CountryCode) -> str:
         """
         Return the ISO 3166-1 three letter country code matching the provided
         country code.
@@ -461,7 +477,19 @@ class Countries(CountriesBase):
             alpha3 = ""
         return alpha3 or ""
 
-    def numeric(self, code: Union[str, int, None], padded=False):
+    @overload
+    def numeric(
+        self, code: Union[str, int, None], padded: Literal[False] = False
+    ) -> Optional[int]:
+        ...
+
+    @overload
+    def numeric(
+        self, code: Union[str, int, None], padded: Literal[True]
+    ) -> Optional[str]:
+        ...
+
+    def numeric(self, code: Union[str, int, None], padded: bool = False):
         """
         Return the ISO 3166-1 numeric country code matching the provided
         country code.

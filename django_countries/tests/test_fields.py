@@ -19,7 +19,7 @@ from django_countries.tests.models import AllowNull, MultiCountry, Person, WithP
 
 
 # Django 3.2 introduced a db_collation attr on fields.
-def has_db_collation():
+def has_db_collation() -> bool:
     major, minor = django.VERSION[0:2]
     return (major > 3) or (major == 3 and minor >= 2)
 
