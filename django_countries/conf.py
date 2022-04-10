@@ -1,3 +1,4 @@
+import contextlib
 from typing import Any, Dict, List
 import django.conf
 
@@ -10,10 +11,8 @@ class AppSettings:
 
     def __getattribute__(self, attr: str):
         if attr == attr.upper():
-            try:
+            with contextlib.suppress(AttributeError):
                 return getattr(django.conf.settings, attr)
-            except AttributeError:
-                pass
         return super().__getattribute__(attr)
 
 

@@ -81,10 +81,7 @@ class CountrySelectWidget(LazySelect):
         else:
             flag_id = ""
         widget_render = super().render(name, value, attrs, renderer=renderer)
-        if isinstance(value, Country):
-            country = value
-        else:
-            country = Country(value or "__")
+        country = value if isinstance(value, Country) else Country(value or "__")
         with country.escape:
             return mark_safe(  # nosec
                 self.layout.format(

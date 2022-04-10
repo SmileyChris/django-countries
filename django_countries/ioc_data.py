@@ -312,7 +312,7 @@ IOC_HISTORICAL_TO_ISO = {
     "RHO": "ZW",
 }
 
-ISO_TO_IOC = dict((iso, ioc) for ioc, iso in IOC_TO_ISO.items())
+ISO_TO_IOC = {iso: ioc for ioc, iso in IOC_TO_ISO.items()}
 
 
 def check_ioc_countries(verbosity=1):
