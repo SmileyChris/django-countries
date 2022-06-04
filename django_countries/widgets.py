@@ -60,7 +60,7 @@ class LazySelectMultiple(LazySelectMixin, widgets.SelectMultiple):  # type: igno
 
 
 class CountrySelectWidget(LazySelect):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         self.layout = kwargs.pop("layout", None) or (
             '{widget}<img class="country-select-flag" id="{flag_id}" '
             'style="margin: 6px 4px 0" '
