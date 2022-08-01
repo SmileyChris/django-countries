@@ -165,7 +165,7 @@ IOC_TO_ISO = {
     "SLE": "SL",
     "SLO": "SI",
     "SMR": "SM",
-    "SNG": "SG",
+    "SGP": "SG",
     "SOL": "SB",
     "SOM": "SO",
     "SRB": "RS",
