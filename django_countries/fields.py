@@ -1,4 +1,5 @@
 import re
+from collections import OrderedDict
 from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
@@ -353,6 +354,7 @@ class CountryField(CharField):
                 iter(value)
             except TypeError:
                 value = [value]
+        value = list(OrderedDict.fromkeys(value))  # remove duplicates while maintaining order
         return list(filter(None, [self.country_to_text(c) for c in value]))
 
     def deconstruct(self):

@@ -422,6 +422,15 @@ class TestCountryMultiple(TestCase):
         self.assertEqual(obj.countries[0], "AU")
         self.assertEqual(obj.countries[1], "NZ")
 
+    def test_multiple_with_duplicates(self):
+        obj = MultiCountry(countries="AU,NZ,AU")
+        for country in obj.countries:
+            self.assertTrue(isinstance(country, fields.Country))
+        self.assertEqual(obj.countries, ["AU", "NZ"])
+
+        obj = MultiCountry(countries="")
+        self.assertEqual(obj.countries, [])
+
     def test_set_text(self):
         obj = MultiCountry()
         obj.countries = "NZ,AU"
