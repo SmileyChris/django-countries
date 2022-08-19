@@ -326,7 +326,7 @@ class CountryField(CharField):
         value = self.get_clean_value(value)
         if self.multiple:
             if value:
-                value = ",".join(value)
+                value = ",".join(sorted(set(value)))
             else:
                 value = ""
         return super(CharField, self).get_prep_value(value)
