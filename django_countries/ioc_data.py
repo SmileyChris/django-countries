@@ -315,7 +315,7 @@ IOC_HISTORICAL_TO_ISO = {
 ISO_TO_IOC = dict((iso, ioc) for ioc, iso in IOC_TO_ISO.items())
 
 
-def check_ioc_countries(verbosity=1):
+def check_ioc_countries(verbosity: int = 1) -> None:
     """
     Check if all IOC codes map to ISO codes correctly
     """

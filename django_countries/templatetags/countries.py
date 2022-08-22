@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_country(code):
+def get_country(code: str) -> Country:
     return Country(code=code)
 
 

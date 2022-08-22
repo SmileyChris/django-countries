@@ -32,5 +32,5 @@ class CountriesBase:
         "FK": [_("Falkland Islands  [Malvinas]")],
     }
 
-    def __getstate__(self):
+    def __getstate__(self) -> None:
         return None

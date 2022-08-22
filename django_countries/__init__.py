@@ -5,6 +5,7 @@ from typing import (
     Any,
     Callable,
     Dict,
+    Generator,
     Iterable,
     List,
     NamedTuple,
@@ -86,7 +87,7 @@ class Countries(CountriesBase):
     _countries: Dict[str, CountryName]
     _alt_codes: Dict[str, AltCodes]
 
-    def get_option(self, option: str):
+    def get_option(self, option: str) -> Any:
         """
         Get a configuration option, trying the options attribute first and
         falling back to a Django project setting.
@@ -169,7 +170,7 @@ class Countries(CountriesBase):
         return self._countries
 
     @countries.deleter
-    def countries(self):
+    def countries(self) -> None:
         """
         Reset the countries cache in case for some crazy reason the settings or
         internal options change. But surely no one is crazy enough to do that,
@@ -223,13 +224,15 @@ class Countries(CountriesBase):
         return self._ioc_codes
 
     @property
-    def shadowed_names(self):
+    def shadowed_names(self) -> Dict[str, List[str]]:
         if not getattr(self, "_shadowed_names", False):
             # Getting countries populates shadowed names.
             self.countries
         return self._shadowed_names
 
-    def translate_code(self, code: str, ignore_first: List[str] = None):
+    def translate_code(
+        self, code: str, ignore_first: Optional[List[str]] = None
+    ) -> Generator[CountryTuple, None, None]:
         """
         Return translated countries for a country code.
         """
@@ -246,7 +249,9 @@ class Countries(CountriesBase):
         for name in names:
             yield self.translate_pair(code, name)
 
-    def translate_pair(self, code: str, name: Optional[CountryName] = None):
+    def translate_pair(
+        self, code: str, name: Optional[CountryName] = None
+    ) -> CountryTuple:
         """
         Force a country to the current activated translation.
 
@@ -283,7 +288,7 @@ class Countries(CountriesBase):
             country_name = force_str(country_name)
         return CountryTuple(code, country_name)
 
-    def __iter__(self):
+    def __iter__(self) -> Generator[CountryTuple, None, None]:
         """
         Iterate through countries, sorted by name.
 
@@ -304,7 +309,9 @@ class Countries(CountriesBase):
         countries = self.countries
 
         # Yield countries that should be displayed first.
-        countries_first = (self.translate_pair(code) for code in self.countries_first)
+        countries_first: Iterable[CountryTuple] = (
+            self.translate_pair(code) for code in self.countries_first
+        )
 
         if self.get_option("first_sort"):
             countries_first = sorted(countries_first, key=sort_key)
@@ -319,15 +326,13 @@ class Countries(CountriesBase):
 
         # Force translation before sorting.
         ignore_first = None if self.get_option("first_repeat") else self.countries_first
-        countries = tuple(
+        country_list = list(
             itertools.chain.from_iterable(
                 self.translate_code(code, ignore_first) for code in countries
             )
         )
-
-        # Return sorted country list.
-        for item in sorted(countries, key=sort_key):
-            yield item
+        country_list.sort(key=sort_key)
+        yield from country_list
 
     def alpha2(self, code: CountryCode) -> str:
         """
@@ -340,18 +345,18 @@ class Countries(CountriesBase):
 
         If no match is found, returns an empty string.
         """
-        find: Optional[Callable]
+        find: Optional[Callable[[AltCodes], bool]]
         code_str = force_str(code).upper()
         if code_str.isdigit():
             lookup_numeric = int(code_str)
 
-            def find(alt_codes):
+            def find(alt_codes: AltCodes) -> bool:
                 return alt_codes[1] == lookup_numeric
 
         elif len(code_str) == 3:
             lookup_alpha3 = code_str
 
-            def find(alt_codes):
+            def find(alt_codes: AltCodes) -> bool:
                 return alt_codes[0] == lookup_alpha3
 
         else:
@@ -489,7 +494,9 @@ class Countries(CountriesBase):
     ) -> Optional[str]:
         ...
 
-    def numeric(self, code: Union[str, int, None], padded: bool = False):
+    def numeric(
+        self, code: Union[str, int, None], padded: bool = False
+    ) -> Union[Optional[int], Optional[str]]:
         """
         Return the ISO 3166-1 numeric country code matching the provided
         country code.
@@ -520,7 +527,7 @@ class Countries(CountriesBase):
         alpha2 = self.alpha2(code)
         return self.ioc_codes.get(alpha2, "")
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         len() used by several third party applications to calculate the length
         of choices. This will solve a bug related to generating fixtures.
@@ -532,16 +539,18 @@ class Countries(CountriesBase):
             count += 1
         return count
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return bool(self.countries)
 
-    def __contains__(self, code):
+    def __contains__(self, code: str) -> bool:
         """
         Check to see if the countries contains the given code.
         """
         return code in self.countries
 
-    def __getitem__(self, index):
+    def __getitem__(
+        self, index: Union[int, slice]
+    ) -> Union[CountryTuple, List[CountryTuple]]:
         """
         Some applications expect to be able to access members of the field
         choices by index.

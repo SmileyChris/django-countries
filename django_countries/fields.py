@@ -262,7 +262,7 @@ class CountryField(CharField):
 
     descriptor_class = CountryDescriptor
 
-    def __init__(self, *args: Any, **kwargs: Any):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         countries_class: Type[Countries] = kwargs.pop("countries", None)
         self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop("countries_flag_url", None)
@@ -286,7 +286,7 @@ class CountryField(CharField):
                 )
         super().__init__(*args, **kwargs)
 
-    def check(self, **kwargs):
+    def check(self, **kwargs: Any) -> list[checks.CheckMessage]:
         errors = super().check(**kwargs)
         errors.extend(self._check_multiple())
         return errors
