@@ -1,11 +1,12 @@
 import copy
-from typing import List, Union
+from typing import Any, Dict, List, Optional, TypeVar, Union
 from urllib import parse as urlparse
 
 from django.forms import widgets
+from django.forms.renderers import BaseRenderer
 from django.utils.html import escape
 from django.utils.functional import Promise
-from django.utils.safestring import mark_safe
+from django.utils.safestring import SafeString, mark_safe
 
 from django_countries.conf import settings
 
@@ -29,20 +30,23 @@ class LazyChoicesMixin:
             self._choices: ChoiceList = list(self._choices)
         return self._choices
 
-    def set_choices(self, value: ChoiceList):
+    def set_choices(self, value: ChoiceList) -> None:
         self._set_choices(value)
 
     choices = property(get_choices, set_choices)
 
-    def _set_choices(self, value: ChoiceList):
+    def _set_choices(self, value: ChoiceList) -> None:
         self._choices = value
 
 
+Self = TypeVar("Self")
+
+
 class LazySelectMixin(LazyChoicesMixin):
-    def __deepcopy__(self, memo):
+    def __deepcopy__(self: Self, memo: dict[int, Any]) -> Self:
         obj = copy.copy(self)
-        obj.attrs = self.attrs.copy()
-        obj.choices = copy.copy(self._choices)
+        obj.attrs = self.attrs.copy()  # type: ignore [attr-defined]
+        obj.choices = copy.copy(self._choices)  # type: ignore [attr-defined]
         memo[id(self)] = obj
         return obj
 
@@ -60,7 +64,7 @@ class LazySelectMultiple(LazySelectMixin, widgets.SelectMultiple):  # type: igno
 
 
 class CountrySelectWidget(LazySelect):
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.layout = kwargs.pop("layout", None) or (
             '{widget}<img class="country-select-flag" id="{flag_id}" '
             'style="margin: 6px 4px 0" '
@@ -68,7 +72,13 @@ class CountrySelectWidget(LazySelect):
         )
         super().__init__(*args, **kwargs)
 
-    def render(self, name, value, attrs=None, renderer=None):
+    def render(
+        self,
+        name: str,
+        value: Any,
+        attrs: Optional[Dict[str, Any]] = None,
+        renderer: Optional[BaseRenderer] = None,
+    ) -> SafeString:
         from django_countries.fields import Country
 
         attrs = attrs or {}

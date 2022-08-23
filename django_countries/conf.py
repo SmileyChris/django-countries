@@ -8,7 +8,7 @@ class AppSettings:
     the project's settings.
     """
 
-    def __getattribute__(self, attr: str):
+    def __getattribute__(self, attr: str) -> Any:
         if attr == attr.upper():
             try:
                 return getattr(django.conf.settings, attr)

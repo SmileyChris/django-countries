@@ -1,12 +1,24 @@
 import re
-from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
+from types import TracebackType
+from typing import (
+    Any,
+    Iterable,
+    List,
+    Mapping,
+    Optional,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 from urllib import parse as urlparse
 
 import pkg_resources
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
-from django.db.models import lookups
+from django.db.backends.base.base import BaseDatabaseWrapper
+from django.db.models import Lookup, Model, lookups
 from django.db.models.fields import BLANK_CHOICE_DASH, CharField
 from django.utils.encoding import force_str
 from django.utils.functional import lazy
@@ -24,17 +36,22 @@ EXTENSIONS = dict(
 class TemporaryEscape:
     __slots__ = ["country", "original_escape"]
 
-    def __init__(self, country):
+    def __init__(self, country: "Country") -> None:
         self.country = country
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return self.country._escape
 
-    def __enter__(self):
+    def __enter__(self) -> None:
         self.original_escape = self.country._escape
         self.country._escape = True
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(
+        self,
+        exc_type: Type[BaseException] | None,
+        exc_val: BaseException | None,
+        exc_tb: TracebackType | None,
+    ) -> None:
         self.country._escape = self.original_escape
 
 
@@ -57,19 +74,19 @@ class Country:
         # match was found.
         self.code = self.countries.alpha2(code) or code
 
-    def __str__(self):
+    def __str__(self) -> str:
         return force_str(getattr(self, self._str_attr) or "")
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         return force_str(self.code or "") == force_str(other or "")
 
-    def __ne__(self, other):
+    def __ne__(self, other: Any) -> bool:
         return not self.__eq__(other)
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(force_str(self))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         args = [f"code={self.code!r}"]
         if self.flag_url is not None:
             args.append(f"flag_url={self.flag_url!r}")
@@ -77,21 +94,21 @@ class Country:
             args.append(f"str_attr={self._str_attr!r}")
         return f"{self.__class__.__name__}({', '.join(args)})"
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return bool(self.code)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(force_str(self))
 
     @property
-    def countries(self):
+    def countries(self) -> Countries:
         return self.custom_countries or countries
 
     @property
-    def escape(self):
+    def escape(self) -> TemporaryEscape:
         return TemporaryEscape(self)
 
-    def maybe_escape(self, text) -> str:
+    def maybe_escape(self, text: str) -> str:
         if not self.escape:
             return text
         return escape_html(text)
@@ -142,7 +159,7 @@ class Country:
         return f"flag-sprite flag-{x} flag-_{y}"
 
     @property
-    def unicode_flag(self):
+    def unicode_flag(self) -> str:
         """
         Generate a unicode flag for the given country.
 
@@ -164,17 +181,17 @@ class Country:
         return chr(points[0]) + chr(points[1])
 
     @staticmethod
-    def country_from_ioc(ioc_code, flag_url=""):
+    def country_from_ioc(ioc_code: str, flag_url: str = "") -> Optional["Country"]:
         code = ioc_data.IOC_TO_ISO.get(ioc_code, "")
         if code == "":
             return None
         return Country(code, flag_url=flag_url)
 
     @property
-    def ioc_code(self):
+    def ioc_code(self) -> str:
         return self.countries.ioc_code(self.code)
 
-    def __getattr__(self, attr):
+    def __getattr__(self, attr: str) -> Any:
         if attr in EXTENSIONS:
             return EXTENSIONS[attr](self)
         raise AttributeError()
@@ -195,10 +212,12 @@ class CountryDescriptor:
         '/static/flags/nz.gif'
     """
 
-    def __init__(self, field):
+    def __init__(self, field: "CountryField") -> None:
         self.field = field
 
-    def __get__(self, instance=None, owner=None):
+    def __get__(
+        self, instance: Optional[Model] = None, owner: Optional[type[Model]] = None
+    ) -> Union["CountryDescriptor", Country, List[Country]]:
         if instance is None:
             return self
         # Check in case this field was deferred.
@@ -209,7 +228,7 @@ class CountryDescriptor:
             return [self.country(code) for code in value]
         return self.country(value)
 
-    def country(self, code):
+    def country(self, code: str) -> Country:
         return Country(
             code=code,
             flag_url=self.field.countries_flag_url,
@@ -217,18 +236,18 @@ class CountryDescriptor:
             custom_countries=self.field.countries,
         )
 
-    def __set__(self, instance, value):
+    def __set__(self, instance: Model, value: Country) -> None:
         value = self.field.get_clean_value(value)
         instance.__dict__[self.field.name] = value
 
 
 class LazyChoicesMixin(widgets.LazyChoicesMixin):
-    def _set_choices(self, value):
+    def _set_choices(self, value: widgets.ChoiceList) -> None:
         """
         Also update the widget's choices.
         """
         super()._set_choices(value)
-        self.widget.choices = value
+        self.widget.choices = value  # type: ignore [attr-defined]
 
 
 _Choice = Tuple[Any, str]
@@ -291,7 +310,7 @@ class CountryField(CharField):
         errors.extend(self._check_multiple())
         return errors
 
-    def _check_multiple(self):
+    def _check_multiple(self) -> list[checks.CheckMessage]:
         if not self.multiple or not self.null:
             return []
 
@@ -309,19 +328,21 @@ class CountryField(CharField):
             )
         ]
 
-    def get_internal_type(self):
+    def get_internal_type(self) -> str:
         return "CharField"
 
-    def contribute_to_class(self, cls, name):
+    def contribute_to_class(
+        self, cls: Type[Model], name: str, private_only: bool = False
+    ) -> None:
         super().contribute_to_class(cls, name)
         setattr(cls, self.name, self.descriptor_class(self))
 
-    def pre_save(self, *args, **kwargs):
+    def pre_save(self, model_instance: Model, add: bool) -> Any:
         "Returns field's value just before saving."
-        value = super(CharField, self).pre_save(*args, **kwargs)
+        value = super(CharField, self).pre_save(model_instance, add)
         return self.get_prep_value(value)
 
-    def get_prep_value(self, value):
+    def get_prep_value(self, value: Any) -> Any:
         "Returns field's value prepared for saving into a database."
         value = self.get_clean_value(value)
         if self.multiple:
@@ -331,14 +352,15 @@ class CountryField(CharField):
                 value = ""
         return super(CharField, self).get_prep_value(value)
 
-    def country_to_text(self, value):
+    def country_to_text(self, value: Any) -> Optional[str]:
         if hasattr(value, "code"):
             value = value.code
         if value is None:
             return None
-        return force_str(value)
+        result: str = force_str(value)
+        return result
 
-    def get_clean_value(self, value):
+    def get_clean_value(self, value: Any) -> Any:
         if value is None:
             return None
         if not self.multiple:
@@ -355,7 +377,7 @@ class CountryField(CharField):
                 value = [value]
         return list(filter(None, [self.country_to_text(c) for c in value]))
 
-    def deconstruct(self):
+    def deconstruct(self) -> Any:
         """
         Remove choices from deconstructed field, as this is the country list
         and not user editable.
@@ -387,17 +409,25 @@ class CountryField(CharField):
 
     get_choices = lazy(get_choices, list)
 
-    def formfield(self, **kwargs):
-        kwargs.setdefault(
-            "choices_form_class",
-            LazyTypedMultipleChoiceField if self.multiple else LazyTypedChoiceField,
-        )
+    def formfield(
+        self,
+        form_class: Optional[Any] = None,
+        choices_form_class: Optional[Any] = None,
+        **kwargs: Any,
+    ) -> Any:
+        if choices_form_class is None:
+            if self.multiple:
+                choices_form_class = LazyTypedMultipleChoiceField
+            else:
+                choices_form_class = LazyTypedChoiceField
         if "coerce" not in kwargs:
             kwargs["coerce"] = super().to_python
-        field = super().formfield(**kwargs)
+        field = super().formfield(
+            form_class=form_class, choices_form_class=choices_form_class, **kwargs
+        )
         return field
 
-    def to_python(self, value):
+    def to_python(self, value: Any) -> Any:
         if not self.multiple:
             return super().to_python(value)
         if not value:
@@ -409,7 +439,7 @@ class CountryField(CharField):
             output.append(super().to_python(item))
         return output
 
-    def validate(self, value, model_instance):
+    def validate(self, value: Any, model_instance: Optional[Model]) -> None:
         """
         Use custom validation for when using a multiple countries field.
         """
@@ -433,14 +463,15 @@ class CountryField(CharField):
         if not self.blank and value in self.empty_values:
             raise exceptions.ValidationError(self.error_messages["blank"], code="blank")
 
-    def value_to_string(self, obj):
+    def value_to_string(self, obj: Model) -> str:
         """
         Ensure data is serialized correctly.
         """
         value = self.value_from_object(obj)
-        return self.get_prep_value(value)
+        result: str = self.get_prep_value(value)
+        return result
 
-    def get_lookup(self, lookup_name):
+    def get_lookup(self, lookup_name: str) -> Optional[Type[Lookup]]:
         if not self.multiple and lookup_name in (
             "contains",
             "icontains",
@@ -462,13 +493,16 @@ class ExactNameLookup(lookups.Exact):
     lookup_name = "country_name"
     insensitive: bool = False
 
-    def get_prep_lookup(self):
+    def get_prep_lookup(self) -> Any:
         return cast(CountryField, self.lhs.output_field).countries.by_name(
             force_str(self.rhs), insensitive=self.insensitive
         )
 
-    def get_rhs_op(self, connection, rhs):
-        return connection.operators["exact"] % rhs
+    def get_rhs_op(self, connection: BaseDatabaseWrapper, rhs: str) -> str:
+        # django-stubs missing BaseDatabaseWrapper.operators until:
+        # https://github.com/typeddjango/django-stubs/pull/1119
+        ops: Mapping[str, str] = connection.operators  # type: ignore [attr-defined]
+        return ops["exact"] % rhs
 
 
 @CountryField.register_lookup
@@ -482,7 +516,7 @@ class FullNameLookup(lookups.In):
     insensitive: bool = False
     escape_regex: bool = True
 
-    def get_prep_lookup(self):
+    def get_prep_lookup(self) -> Any:
         if isinstance(self.rhs, str):
             value = self.expr.format(
                 text=re.escape(self.rhs) if self.escape_regex else self.rhs
