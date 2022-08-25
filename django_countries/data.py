@@ -16,6 +16,7 @@ how to do that:
 """
 import glob
 import os
+from typing import List, Tuple
 
 from django_countries.base import CountriesBase
 
@@ -23,8 +24,8 @@ try:
     from django.utils.translation import gettext_lazy as _
 except ImportError:  # pragma: no cover
     # Allows this module to be executed without Django installed.
-    def _(x):
-        return x
+    def _(message: str) -> str:
+        return message
 
 
 # Nicely titled (and translatable) country names.
@@ -535,7 +536,7 @@ ALT_CODES = {
 
 def self_generate(
     output_filename: str, filename: str = "iso3166-1.csv"
-):  # pragma: no cover
+) -> List[Tuple[str, str, str, int]]:  # pragma: no cover
     """
     The following code can be used for self-generation of this file.
 
@@ -556,9 +557,9 @@ def self_generate(
                 countries.append((name, row[1], row[2], int(row[3])))
     with open(__file__, "r") as source_file:
         contents = source_file.read()
-    # Sort countries.
-    def sort_key(row):
 
+    # Sort countries.
+    def sort_key(row: Tuple[str, str, str, int]) -> str:
         return (
             unicodedata.normalize("NFKD", row[0])
             .encode("ascii", "ignore")
@@ -597,7 +598,7 @@ def self_generate(
     return countries
 
 
-def check_flags(verbosity: int = 1):
+def check_flags(verbosity: int = 1) -> None:
     files = {}
     this_dir = os.path.dirname(__file__)
     for path in glob.glob(os.path.join(this_dir, "static", "flags", "*.gif")):

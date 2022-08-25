@@ -18,14 +18,8 @@ from django_countries.tests import custom_countries, forms
 from django_countries.tests.models import AllowNull, MultiCountry, Person, WithProp
 
 
-# Django 3.2 introduced a db_collation attr on fields.
-def has_db_collation() -> bool:
-    major, minor = django.VERSION[0:2]
-    return (major > 3) or (major == 3 and minor >= 2)
-
-
 class TestCountryField(TestCase):
-    @skipUnless(has_db_collation(), "Django version < 3.2")
+    @skipUnless(django.VERSION >= (3, 2), "Django version < 3.2")
     def test_db_collation(self):
         # test fix for issue 338
         country = fields.CountryField()

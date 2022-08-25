@@ -2,8 +2,8 @@ try:
     from django.utils.translation import gettext_lazy as _
 except ImportError:  # pragma: no cover
     # Allows this module to be executed without Django installed.
-    def _(x):
-        return x
+    def _(message: str) -> str:
+        return message
 
 
 class CountriesBase:

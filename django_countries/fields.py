@@ -48,9 +48,9 @@ class TemporaryEscape:
 
     def __exit__(
         self,
-        exc_type: Type[BaseException] | None,
-        exc_val: BaseException | None,
-        exc_tb: TracebackType | None,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
     ) -> None:
         self.country._escape = self.original_escape
 
@@ -236,7 +236,7 @@ class CountryDescriptor:
             custom_countries=self.field.countries,
         )
 
-    def __set__(self, instance: Model, value: Country) -> None:
+    def __set__(self, instance: Model, value: Union[Country, List[Country]]) -> None:
         value = self.field.get_clean_value(value)
         instance.__dict__[self.field.name] = value
 

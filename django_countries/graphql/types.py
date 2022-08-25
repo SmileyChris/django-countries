@@ -1,7 +1,11 @@
-import graphene  # type: ignore
+from typing import Any, Optional
+
+import graphene  # type: ignore [import]
+
+from django_countries.fields import Country as RealCountry
 
 
-class Country(graphene.ObjectType):
+class Country(graphene.ObjectType):  # type: ignore [misc]
     name = graphene.String(description="Country name")
     code = graphene.String(description="ISO 3166-1 two character country code")
     alpha3 = graphene.String(description="ISO 3166-1 three character country code")
@@ -11,21 +15,21 @@ class Country(graphene.ObjectType):
     )
 
     @staticmethod
-    def resolve_name(country, info):
+    def resolve_name(country: RealCountry, info: Any) -> str:
         return country.name
 
     @staticmethod
-    def resolve_code(country, info):
+    def resolve_code(country: RealCountry, info: Any) -> str:
         return country.code
 
     @staticmethod
-    def resolve_alpha3(country, info):
+    def resolve_alpha3(country: RealCountry, info: Any) -> str:
         return country.alpha3
 
     @staticmethod
-    def resolve_numeric(country, info):
+    def resolve_numeric(country: RealCountry, info: Any) -> Optional[int]:
         return country.numeric
 
     @staticmethod
-    def resolve_ioc_code(country, info):
+    def resolve_ioc_code(country: RealCountry, info: Any) -> str:
         return country.ioc_code

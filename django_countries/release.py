@@ -3,8 +3,7 @@ This file provides zest.releaser entrypoints using when releasing new
 django-countries versions.
 """
 import os
-import re
-import shutil
+from typing import Dict
 
 from txclib.commands import cmd_pull  # type: ignore
 from txclib.utils import find_dot_tx  # type: ignore
@@ -14,7 +13,7 @@ from django.core.management import call_command
 import django_countries
 
 
-def translations(data) -> None:
+def translations(data: Dict[str, str]) -> None:
     if data["name"] != "django-countries":
         return
 

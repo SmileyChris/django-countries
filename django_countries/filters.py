@@ -1,4 +1,7 @@
+from typing import Any, Dict, Iterator, Tuple
+
 from django.contrib import admin
+from django.contrib.admin.views.main import ChangeList
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
@@ -11,10 +14,10 @@ class CountryFilter(admin.FieldListFilter):
 
     title = _("Country")
 
-    def expected_parameters(self):
+    def expected_parameters(self) -> list[str]:
         return [self.field.name]
 
-    def choices(self, changelist):
+    def choices(self, changelist: ChangeList) -> Iterator[Dict[str, Any]]:
         value = self.used_parameters.get(self.field.name)
         yield {
             "selected": value is None,
@@ -30,7 +33,7 @@ class CountryFilter(admin.FieldListFilter):
                 "display": title,
             }
 
-    def lookup_choices(self, changelist):
+    def lookup_choices(self, changelist: ChangeList) -> Iterator[Tuple[Any, Any]]:
         qs = changelist.model._default_manager.all()
         codes = set(
             qs.distinct()

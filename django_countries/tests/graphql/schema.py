@@ -1,11 +1,11 @@
-import graphene  # type: ignore
-import graphene_django  # type: ignore
+import graphene  # type: ignore [import]
+import graphene_django  # type: ignore [import]
 from django_countries.fields import Country
 from django_countries.graphql.types import Country as CountryType
 from django_countries.tests import models
 
 
-class Person(graphene_django.DjangoObjectType):
+class Person(graphene_django.DjangoObjectType):  # type: ignore [misc]
     country = graphene.Field(CountryType)
 
     class Meta:
@@ -13,7 +13,7 @@ class Person(graphene_django.DjangoObjectType):
         fields = ["name", "country"]
 
 
-class Query(graphene.ObjectType):
+class Query(graphene.ObjectType):  # type: ignore [misc]
     new_zealand = graphene.Field(CountryType)
     people = graphene.List(Person)
 
