@@ -5,6 +5,7 @@ from unittest.case import skipUnless
 
 import django
 from django.core import checks, validators
+from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.db import models
 from django.forms import Select
@@ -196,7 +197,8 @@ class TestCountryField(TestCase):
         Form().as_p()
 
     def test_model_with_prop(self):
-        with_prop = WithProp(country="FR", public_field="test")
+        with_prop = WithProp(country="FR")
+        with_prop.public_field = "test"
 
         self.assertEqual(with_prop.country.code, "FR")
         self.assertEqual(with_prop.public_field, "test")
@@ -294,11 +296,11 @@ class TestValidation(TestCase):
 
     def test_validate_empty(self):
         person = Person(name="Chris")
-        self.assertRaises(validators.ValidationError, person.full_clean)
+        self.assertRaises(ValidationError, person.full_clean)
 
     def test_validate_invalid(self):
         person = Person(name="Chris", country=":(")
-        self.assertRaises(validators.ValidationError, person.full_clean)
+        self.assertRaises(ValidationError, person.full_clean)
 
     def test_validate_multiple(self):
         person = MultiCountry(countries=["NZ", "AU"])
@@ -306,11 +308,11 @@ class TestValidation(TestCase):
 
     def test_validate_multiple_empty(self):
         person = MultiCountry()
-        self.assertRaises(validators.ValidationError, person.full_clean)
+        self.assertRaises(ValidationError, person.full_clean)
 
     def test_validate_multiple_invalid(self):
         person = MultiCountry(countries=[":(", "AU"])
-        self.assertRaises(validators.ValidationError, person.full_clean)
+        self.assertRaises(ValidationError, person.full_clean)
 
     def test_validate_multiple_uneditable(self):
         person = MultiCountry(countries="NZ", uneditable_countries="xx")

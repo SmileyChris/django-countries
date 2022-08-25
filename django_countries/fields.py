@@ -24,7 +24,14 @@ from django.utils.encoding import force_str
 from django.utils.functional import lazy
 from django.utils.html import escape as escape_html
 
-from django_countries import Countries, countries, filters, ioc_data, widgets
+from django_countries import (
+    Countries,
+    CountryCode,
+    countries,
+    filters,
+    ioc_data,
+    widgets,
+)
 from django_countries.conf import settings
 
 EXTENSIONS = dict(
@@ -58,7 +65,7 @@ class TemporaryEscape:
 class Country:
     def __init__(
         self,
-        code: str,
+        code: CountryCode,
         flag_url: Optional[str] = None,
         str_attr: str = "code",
         custom_countries: Optional[Countries] = None,
@@ -217,7 +224,7 @@ class CountryDescriptor:
 
     def __get__(
         self, instance: Optional[Model] = None, owner: Optional[type[Model]] = None
-    ) -> Union["CountryDescriptor", Country, List[Country]]:
+    ) -> Union["CountryDescriptor", Country, List[Country], None]:
         if instance is None:
             return self
         # Check in case this field was deferred.
@@ -236,7 +243,9 @@ class CountryDescriptor:
             custom_countries=self.field.countries,
         )
 
-    def __set__(self, instance: Model, value: Union[Country, List[Country]]) -> None:
+    def __set__(
+        self, instance: Model, value: Union[Country, List[Country], None]
+    ) -> None:
         value = self.field.get_clean_value(value)
         instance.__dict__[self.field.name] = value
 

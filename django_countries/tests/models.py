@@ -33,9 +33,9 @@ class WithProp(models.Model):
     _private_field = models.CharField(max_length=10)
 
     @property
-    def public_field(self):
+    def public_field(self) -> str:
         return self._private_field
 
     @public_field.setter
-    def public_field(self, value):
+    def public_field(self, value: str) -> None:
         self._private_field = value
