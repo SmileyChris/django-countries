@@ -1,10 +1,10 @@
 import inspect
 
-from django.test import TestCase
-from django.test.client import RequestFactory
 from django.contrib import admin
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.models import AnonymousUser
+from django.test import TestCase
+from django.test.client import RequestFactory
 
 from django_countries import filters
 from django_countries.tests import models

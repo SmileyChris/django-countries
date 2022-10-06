@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from django_countries import countries, data, base
+from django_countries import base, countries, data
 
 
 class TestSettings(TestCase):

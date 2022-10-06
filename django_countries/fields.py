@@ -15,10 +15,10 @@ from django.utils.html import escape as escape_html
 from django_countries import Countries, countries, filters, ioc_data, widgets
 from django_countries.conf import settings
 
-EXTENSIONS = dict(
-    (ep.name, ep.load())
+EXTENSIONS = {
+    ep.name: ep.load()
     for ep in pkg_resources.iter_entry_points("django_countries.Country")
-)
+}
 
 
 class TemporaryEscape:
@@ -92,9 +92,7 @@ class Country:
         return TemporaryEscape(self)
 
     def maybe_escape(self, text) -> str:
-        if not self.escape:
-            return text
-        return escape_html(text)
+        return escape_html(text) if self.escape else text
 
     @property
     def name(self) -> str:
@@ -325,10 +323,7 @@ class CountryField(CharField):
         "Returns field's value prepared for saving into a database."
         value = self.get_clean_value(value)
         if self.multiple:
-            if value:
-                value = ",".join(value)
-            else:
-                value = ""
+            value = ",".join(value) if value else ""
         return super(CharField, self).get_prep_value(value)
 
     def country_to_text(self, value):
@@ -394,8 +389,7 @@ class CountryField(CharField):
         )
         if "coerce" not in kwargs:
             kwargs["coerce"] = super().to_python
-        field = super().formfield(**kwargs)
-        return field
+        return super().formfield(**kwargs)
 
     def to_python(self, value):
         if not self.multiple:

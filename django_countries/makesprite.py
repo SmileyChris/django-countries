@@ -62,10 +62,14 @@ def write_coords(css_file: IO[str], width: int, height: int, prefix: str = "") -
         x, y = i * width, i * height
         code = chr(i + 97)
         css_file.write(
-            "\n%s.flag-%s {background-position-x:%s}" % (prefix, code, x and f"-{x}px")
+            "\n{}.flag-{} {{background-position-x:{}}}".format(
+                prefix, code, x and f"-{x}px"
+            )
         )
         css_file.write(
-            "\n%s.flag-_%s {background-position-y:%s}" % (prefix, code, y and f"-{y}px")
+            "\n{}.flag-_{} {{background-position-y:{}}}".format(
+                prefix, code, y and f"-{y}px"
+            )
         )
 
 

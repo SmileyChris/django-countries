@@ -12,6 +12,7 @@ from django.forms.models import modelform_factory
 from django.test import TestCase, override_settings
 from django.utils import translation
 from django.utils.encoding import force_str
+
 from django_countries import countries, data, fields
 from django_countries.fields import CountryField
 from django_countries.tests import custom_countries, forms
@@ -128,7 +129,7 @@ class TestCountryField(TestCase):
 
             errors = checks.run_checks()
             self.assertEqual([e.id for e in errors], ["django_countries.E100"] * 2)
-            errors_dict = dict((e.obj, e) for e in errors)
+            errors_dict = {e.obj: e for e in errors}
             self.assertFalse(
                 "blank=True"
                 in errors_dict[MultiNullCountry._meta.get_field("countries")].hint

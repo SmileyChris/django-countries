@@ -1,9 +1,8 @@
 from django.test import TestCase
 from django.utils import translation
 
-from django_countries import countries, Countries, CountryTuple
+from django_countries import Countries, CountryTuple, countries
 from django_countries.tests import custom_countries
-
 
 EXPECTED_COUNTRY_COUNT = 249
 FIRST_THREE_COUNTRIES = [

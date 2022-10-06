@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from django.utils.encoding import force_str
+from rest_framework import serializers
 
 from django_countries import countries
 
@@ -9,7 +9,7 @@ class CountryField(serializers.ChoiceField):
         self.country_dict = kwargs.pop("country_dict", None)
         self.name_only = kwargs.pop("name_only", None)
         field_countries = kwargs.pop("countries", None)
-        self.countries = field_countries if field_countries else countries
+        self.countries = field_countries or countries
         super().__init__(self.countries, *args, **kwargs)
 
     def to_representation(self, obj):
