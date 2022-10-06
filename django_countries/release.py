@@ -6,11 +6,12 @@ import os
 import re
 import shutil
 
-from txclib.commands import cmd_pull  # type: ignore
-from txclib.utils import find_dot_tx  # type: ignore
-from txclib.log import logger  # type: ignore
-from zest.releaser.utils import ask, execute_command  # type: ignore
 from django.core.management import call_command
+from txclib.commands import cmd_pull  # type: ignore
+from txclib.log import logger  # type: ignore
+from txclib.utils import find_dot_tx  # type: ignore
+from zest.releaser.utils import ask, execute_command  # type: ignore
+
 import django_countries
 
 

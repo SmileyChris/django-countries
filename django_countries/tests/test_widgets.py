@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.utils import safestring
 from django.utils.html import escape
 
-from django_countries import widgets, countries, fields
+from django_countries import countries, fields, widgets
 from django_countries.conf import settings
 from django_countries.tests.models import Person
 

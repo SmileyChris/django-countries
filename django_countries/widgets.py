@@ -3,8 +3,8 @@ from typing import List, Union
 from urllib import parse as urlparse
 
 from django.forms import widgets
-from django.utils.html import escape
 from django.utils.functional import Promise
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
 from django_countries.conf import settings

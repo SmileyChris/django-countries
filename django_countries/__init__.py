@@ -145,11 +145,11 @@ class Countries(CountriesBase):
                         Dict[str, Union[CountryName, None]], self._countries.copy()
                     )
                     _countries.update(override)
-                    self._countries = dict(
-                        (code, name)
+                    self._countries = {
+                        code: name
                         for code, name in _countries.items()
                         if name is not None
-                    )
+                    }
 
                 if self.get_option("common_names"):
                     for code in self.COMMON_NAMES:
@@ -309,8 +309,7 @@ class Countries(CountriesBase):
         if self.get_option("first_sort"):
             countries_first = sorted(countries_first, key=sort_key)
 
-        for item in countries_first:
-            yield item
+        yield from countries_first
 
         if self.countries_first:
             first_break = self.get_option("first_break")
@@ -326,8 +325,7 @@ class Countries(CountriesBase):
         )
 
         # Return sorted country list.
-        for item in sorted(countries, key=sort_key):
-            yield item
+        yield from sorted(countries, key=sort_key)
 
     def alpha2(self, code: CountryCode) -> str:
         """

@@ -15,8 +15,11 @@ from django.utils.html import escape as escape_html
 from django_countries import Countries, countries, filters, ioc_data, widgets
 from django_countries.conf import settings
 
-EXTENSIONS = {ep.name: ep.load() for ep in pkg_resources.iter_entry_points("django_countries.Country")}
- 
+EXTENSIONS = {
+    ep.name: ep.load()
+    for ep in pkg_resources.iter_entry_points("django_countries.Country")
+}
+
 
 class TemporaryEscape:
     __slots__ = ["country", "original_escape"]

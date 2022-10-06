@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from django.utils.encoding import force_str
+from rest_framework import serializers
 
 from django_countries import countries
 

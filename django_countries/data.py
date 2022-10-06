@@ -547,14 +547,14 @@ def self_generate(
     import unicodedata
 
     countries = []
-    with open(filename, "r") as csv_file:
+    with open(filename) as csv_file:
         for row in csv.reader(csv_file):
             name = row[0].rstrip("*")
             name = re.sub(r"\(the\)", "", name)
             name = re.sub(r" +\[(.+)\]", r" (\1)", name)
             if name:
                 countries.append((name, row[1], row[2], int(row[3])))
-    with open(__file__, "r") as source_file:
+    with open(__file__) as source_file:
         contents = source_file.read()
     # Sort countries.
     def sort_key(row):

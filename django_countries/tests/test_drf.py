@@ -1,13 +1,12 @@
 from django.test import TestCase, override_settings
+from rest_framework import serializers, views
+from rest_framework.test import APIRequestFactory
 
 from django_countries import countries
 from django_countries.fields import Country
-from django_countries.tests.models import Person, MultiCountry
-from django_countries.tests.custom_countries import FantasyCountries
 from django_countries.serializers import CountryFieldMixin
-
-from rest_framework.test import APIRequestFactory
-from rest_framework import serializers, views
+from django_countries.tests.custom_countries import FantasyCountries
+from django_countries.tests.models import MultiCountry, Person
 
 
 def countries_display(countries):

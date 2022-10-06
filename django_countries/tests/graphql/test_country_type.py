@@ -1,4 +1,5 @@
 from graphene.test import Client  # type: ignore
+
 from django_countries.tests.graphql.schema import schema
 
 

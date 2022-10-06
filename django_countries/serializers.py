@@ -1,5 +1,6 @@
-from . import fields, serializer_fields
 from rest_framework import serializers
+
+from . import fields, serializer_fields
 
 
 class CountryFieldMixin:
