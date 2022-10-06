@@ -324,7 +324,7 @@ class CountryField(CharField):
         "Returns field's value prepared for saving into a database."
         value = self.get_clean_value(value)
         if self.multiple:
-            value = ",".join(value) if value else ""
+            value = ",".join(sorted(set(value))) if value else ""
         return super(CharField, self).get_prep_value(value)
 
     def country_to_text(self, value):
@@ -349,7 +349,9 @@ class CountryField(CharField):
                 iter(value)
             except TypeError:
                 value = [value]
-        value = list(OrderedDict.fromkeys(value))  # remove duplicates while maintaining order
+        value = list(
+            OrderedDict.fromkeys(value)
+        )  # remove duplicates while maintaining order
         return list(filter(None, [self.country_to_text(c) for c in value]))
 
     def deconstruct(self):
