@@ -13,6 +13,10 @@ release, and any new translations added.
 
 - Update flag of Honduras.
 
+- Add Django 4.0 and 4.1 to the test matrix, dropping 3.0 and 3.1
+
+- Add Django Rest Framework 3.13 and 3.14, dropping 3.11.
+
 
 7.3.2 (4 March 2022)
 ====================
