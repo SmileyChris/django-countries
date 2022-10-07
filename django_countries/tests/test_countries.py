@@ -368,20 +368,22 @@ class CountriesFirstTest(BaseTest):
             translation.activate("en_Test")
             self.assertEqual(countries.name("NZ"), "New Zealand")
 
-            with self.settings(
-                COUNTRIES_OVERRIDE={"NZ": translation.gettext_lazy("Middle Earth")}
-            ):
+            # Avoid this translation with makemessages
+            gtl = translation.gettext_lazy
+            with self.settings(COUNTRIES_OVERRIDE={"NZ": gtl("Middle Earth")}):
                 del countries.countries
                 self.assertEqual(countries.name("NZ"), "Endor")
         finally:
             translation.activate(lang)
 
     def test_translation_fallback_override_names(self):
+        # Avoid this translation with makemessages
+        gtl = translation.gettext_lazy
         with self.settings(
             COUNTRIES_OVERRIDE={
                 "NZ": {
                     "names": [
-                        translation.gettext_lazy("Middle Earth"),
+                        gtl("Middle Earth"),
                         translation.gettext_lazy("New Zealand"),
                     ]
                 }
