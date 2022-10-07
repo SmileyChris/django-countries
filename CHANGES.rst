@@ -9,7 +9,7 @@ release, and any new translations added.
 7.5 (unreleased)
 ================
 
-- Nothing changed yet.
+- Fix broken translations due to last common country names fix.
 
 
 7.4 (7 October 2022)

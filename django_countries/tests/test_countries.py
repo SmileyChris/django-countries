@@ -338,10 +338,11 @@ class CountriesFirstTest(BaseTest):
 
     def test_translation_fallback_from_common_name(self):
         trans_fall_countries = custom_countries.TranslationFallbackCountries()
-        self.assertEqual(trans_fall_countries.name("NZ"), "New Zealand")
         lang = translation.get_language()
-        translation.activate("en_Test")
         try:
+            translation.activate("eo")
+            self.assertEqual(trans_fall_countries.name("NZ"), "Nov-Zelando")
+            translation.activate("en_Test")
             self.assertEqual(trans_fall_countries.name("NZ"), "Endor")
         finally:
             translation.activate(lang)
@@ -349,10 +350,11 @@ class CountriesFirstTest(BaseTest):
     def test_translation_fallback_from_old_name(self):
         trans_fall_countries = custom_countries.TranslationFallbackCountries()
 
-        self.assertEqual(trans_fall_countries.name("NZ"), "New Zealand")
         lang = translation.get_language()
-        translation.activate("en_Test")
         try:
+            translation.activate("eo")
+            self.assertEqual(trans_fall_countries.name("NZ"), "Nov-Zelando")
+            translation.activate("en_Test")
             self.assertEqual(trans_fall_countries.name("NZ"), "Endor")
         finally:
             translation.activate(lang)
@@ -386,7 +388,6 @@ class CountriesFirstTest(BaseTest):
             }
         ):
 
-            self.assertEqual(countries.name("NZ"), "New Zealand")
             lang = translation.get_language()
             try:
                 translation.activate("eo")
