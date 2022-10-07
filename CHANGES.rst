@@ -17,6 +17,9 @@ release, and any new translations added.
 
 - Add Django Rest Framework 3.13 and 3.14, dropping 3.11.
 
+- Multi-choice countries are now stored sorted and with duplicates stripped.
+  Thanks flbraun and Jens Diemer!
+
 
 7.3.2 (4 March 2022)
 ====================
