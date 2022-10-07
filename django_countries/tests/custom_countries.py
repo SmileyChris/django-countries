@@ -8,8 +8,8 @@ class FantasyCountries(Countries):
 
 
 class TranslationFallbackCountries(Countries):
-    COMMON_NAMES = {"YE": "YYYemen"}
-    OLD_NAMES = {"NZ": [_("New Zealand")]}
+    COMMON_NAMES = {"NZ": _("Middle Earth")}
+    OLD_NAMES = {"NZ": [_("Middle Earth")]}
 
 
 class GBRegionCountries(Countries):

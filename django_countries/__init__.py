@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import itertools
 import re
+from contextlib import contextmanager
+from gettext import NullTranslations
 from typing import (
     Any,
     Callable,
@@ -17,7 +19,7 @@ from typing import (
 )
 
 from django.utils.encoding import force_str
-from django.utils.translation import get_language, override
+from django.utils.translation import _trans, override
 from typing_extensions import Literal, TypedDict
 
 from django_countries.conf import settings
@@ -44,6 +46,22 @@ except ImportError:
             .encode("ascii", "ignore")
             .decode("ascii")
         )
+
+
+class EmptyFallbackTranslator(NullTranslations):
+    def gettext(self, message: str) -> str:
+        return ""
+
+
+@contextmanager
+def no_translation_fallback():
+    catalog = _trans.catalog()
+    original_fallback = catalog._fallback
+    catalog._fallback = EmptyFallbackTranslator()
+    try:
+        yield
+    finally:
+        catalog._fallback = original_fallback
 
 
 class ComplexCountryName(TypedDict):
@@ -264,21 +282,20 @@ class Countries(CountriesBase):
         else:
             country_name = name
             fallback_names = self.shadowed_names.get(code, [])
-        language = get_language()
-        if language and language.split("-")[0] != "en" and fallback_names:
-            # Check if there's an older translation available if there's no
-            # translation for the newest name.
-            with override("en"):
-                source_name = force_str(country_name)
-            country_name = force_str(country_name)
-            if country_name == source_name:
-                for fallback_name in fallback_names:
-                    with override("en"):
-                        source_fallback_name = force_str(fallback_name)
-                    fallback_name = force_str(fallback_name)
-                    if fallback_name != source_fallback_name:
-                        country_name = fallback_name
-                        break
+        if fallback_names:
+            with no_translation_fallback():
+                country_name = force_str(country_name)
+                # Check if there's an older translation available if there's no
+                # translation for the newest name.
+                if not country_name:
+                    for fallback_name in fallback_names:
+                        fallback_name = force_str(fallback_name)
+                        if fallback_name:
+                            country_name = fallback_name
+                            break
+            if not country_name:
+                # Use the translation's fallback country name.
+                country_name = force_str(country_name)
         else:
             country_name = force_str(country_name)
         return CountryTuple(code, country_name)
