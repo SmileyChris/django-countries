@@ -348,7 +348,8 @@ class CountryField(CharField):
                 iter(value)
             except TypeError:
                 value = [value]
-        return list(filter(None, [self.country_to_text(c) for c in value]))
+        # Remove duplicates and False-y values, sort.
+        return sorted(set(filter(None, (self.country_to_text(c) for c in value))))
 
     def deconstruct(self):
         """

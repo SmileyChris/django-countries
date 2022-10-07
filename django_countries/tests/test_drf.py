@@ -113,7 +113,7 @@ class TestDRF(TestCase):
     def test_multi_serialize(self):
         mc = MultiCountry(countries="NZ,AU")
         serializer = MultiCountrySerializer(mc)
-        self.assertEqual(serializer.data, {"countries": ["NZ", "AU"]})
+        self.assertEqual(serializer.data, {"countries": ["AU", "NZ"]})
 
     def test_multi_serialize_empty(self):
         mc = MultiCountry(countries="")
@@ -147,7 +147,7 @@ class TestDRF(TestCase):
         self.assertTrue(serializer.is_valid())
         saved = serializer.save()
         loaded = MultiCountry.objects.get(pk=saved.pk)
-        self.assertEqual(loaded.countries, [Country("NZ"), Country("AU")])
+        self.assertEqual(loaded.countries, [Country("AU"), Country("NZ")])
 
     def test_deserialize_blank_invalid(self):
         serializer = PersonSerializer(data={"name": "Chris", "country": ""})
