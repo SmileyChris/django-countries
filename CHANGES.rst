@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.5 (unreleased)
-================
+7.4.1 (7 October 2022)
+======================
 
 - Fix broken translations due to last common country names fix.
 
