@@ -38,7 +38,8 @@ release, and any new translations added.
 - Multi-choice countries are now stored sorted and with duplicates stripped.
   Thanks flbraun and Jens Diemer!
 
-- Fix common country names not being honoured in non-English translations.
+- Fix common country names not being honoured in non-English translations (only
+  fixed for Python 3.8+).
 
 
 7.3.2 (4 March 2022)
