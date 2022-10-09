@@ -19,7 +19,8 @@ from typing import (
 )
 
 from django.utils.encoding import force_str
-from django.utils.translation import _trans, override
+from django.utils.translation import _trans  # type: ignore
+from django.utils.translation import override
 from typing_extensions import Literal, TypedDict
 
 from django_countries.conf import settings
@@ -278,7 +279,7 @@ class Countries(CountriesBase):
         if isinstance(name, dict):
             if "names" in name:
                 fallback_names: List[str] = name["names"][1:]
-                name: str = name["names"][0]
+                name = name["names"][0]
             else:
                 fallback_names = []
                 name = name["name"]
