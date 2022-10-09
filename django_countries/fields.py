@@ -485,7 +485,7 @@ class FullNameLookup(lookups.In):
             return cast(CountryField, self.lhs.output_field).countries.by_name(
                 value, regex=True, insensitive=self.insensitive
             )
-        return super().get_prep_lookup()
+        return super().get_prep_lookup()  # pragma: no cover
 
 
 @CountryField.register_lookup

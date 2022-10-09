@@ -168,7 +168,7 @@ class TestDRFMetadata(TestCase):
             """Example view."""
 
             def post(self, request):
-                pass  # pragma: nocover
+                pass  # pragma: no cover
 
             def get_serializer(self):
                 return PersonSerializer()
