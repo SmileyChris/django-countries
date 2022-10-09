@@ -353,7 +353,7 @@ class CountriesFirstTest(BaseTest):
         try:
             translation.activate("eo")
             self.assertEqual(trans_fall_countries.name("NZ"), "Nov-Zelando")
-            translation.activate("en_Test")
+            translation.activate("en@test")
             self.assertEqual(trans_fall_countries.name("NZ"), "Endor")
         finally:
             translation.activate(lang)
@@ -369,7 +369,7 @@ class CountriesFirstTest(BaseTest):
         try:
             translation.activate("eo")
             self.assertEqual(trans_fall_countries.name("NZ"), "Nov-Zelando")
-            translation.activate("en_Test")
+            translation.activate("en@test")
             self.assertEqual(trans_fall_countries.name("NZ"), "Endor")
         finally:
             translation.activate(lang)
@@ -384,7 +384,7 @@ class CountriesFirstTest(BaseTest):
         try:
             translation.activate("eo")
             self.assertEqual(countries.name("NZ"), "Nov-Zelando")
-            translation.activate("en_Test")
+            translation.activate("en@test")
             self.assertEqual(countries.name("NZ"), "New Zealand")
 
             # Avoid this translation with makemessages
@@ -417,7 +417,7 @@ class CountriesFirstTest(BaseTest):
             try:
                 translation.activate("eo")
                 self.assertEqual(countries.name("NZ"), "Nov-Zelando")
-                translation.activate("en_Test")
+                translation.activate("en@test")
                 self.assertEqual(countries.name("NZ"), "Endor")
             finally:
                 translation.activate(lang)
