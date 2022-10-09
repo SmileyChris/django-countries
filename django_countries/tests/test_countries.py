@@ -1,7 +1,9 @@
+import pytest
 from django.test import TestCase
 from django.utils import translation
 
 from django_countries import Countries, CountryTuple, countries
+from django_countries.conf import settings
 from django_countries.tests import custom_countries
 
 EXPECTED_COUNTRY_COUNT = 249
@@ -90,6 +92,7 @@ class TestCountriesObject(BaseTest):
 
         check_common_names()
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_common_name_translation(self):
         lang = translation.get_language()
         translation.activate("de")
@@ -204,6 +207,7 @@ class TestCountriesObject(BaseTest):
         code = countries.by_name("Czech republic")
         self.assertEqual(code, "CZ")
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_fetch_by_name_i18n(self):
         code = countries.by_name("Estados Unidos", language="es")
         self.assertEqual(code, "US")
@@ -322,6 +326,7 @@ class CountriesFirstTest(BaseTest):
             unsorted_codes = [item[0] for item in countries_list[:3]]
             self.assertEqual(["NZ", "CA", "YE"], unsorted_codes)
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_sorted_countries_first_translated(self):
         with self.settings(
             COUNTRIES_FIRST=["NZ", "CA", "YE"], COUNTRIES_FIRST_SORT=True
@@ -336,6 +341,7 @@ class CountriesFirstTest(BaseTest):
             finally:
                 translation.activate(lang)
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_translation_fallback_from_common_name(self):
         trans_fall_countries = custom_countries.TranslationFallbackCountries()
         lang = translation.get_language()
@@ -347,6 +353,7 @@ class CountriesFirstTest(BaseTest):
         finally:
             translation.activate(lang)
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_translation_fallback_from_old_name(self):
         trans_fall_countries = custom_countries.TranslationFallbackCountries()
 
@@ -359,6 +366,7 @@ class CountriesFirstTest(BaseTest):
         finally:
             translation.activate(lang)
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_translation_fallback_override(self):
         lang = translation.get_language()
 
@@ -376,6 +384,19 @@ class CountriesFirstTest(BaseTest):
         finally:
             translation.activate(lang)
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
+    def test_translation_fallback_no_i18n(self):
+        with self.settings(USE_I18N=False):
+            lang = translation.get_language()
+            try:
+                translation.activate("eo")
+                self.assertEqual(countries.name("NZ"), "Nov-Zelando")
+                translation.activate("en_Test")
+                self.assertEqual(countries.name("NZ"), "New Zealand")
+            finally:
+                translation.activate(lang)
+
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_translation_fallback_override_names(self):
         # Avoid this translation with makemessages
         gtl = translation.gettext_lazy

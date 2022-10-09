@@ -9,7 +9,7 @@ release, and any new translations added.
 7.4.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fix error when using ``USE_I18N = False``.
 
 
 7.4.1 (7 October 2022)

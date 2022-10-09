@@ -4,6 +4,7 @@ from unittest import mock
 from unittest.case import skipUnless
 
 import django
+import pytest
 from django.core import checks, validators
 from django.core.management import call_command
 from django.db import models
@@ -14,6 +15,7 @@ from django.utils import translation
 from django.utils.encoding import force_str
 
 from django_countries import countries, data, fields
+from django_countries.conf import settings
 from django_countries.fields import CountryField
 from django_countries.tests import custom_countries, forms
 from django_countries.tests.models import AllowNull, MultiCountry, Person, WithProp
@@ -579,6 +581,7 @@ class TestCountryObject(TestCase):
 
 
 class TestModelForm(TestCase):
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_translated_choices(self):
         lang = translation.get_language()
         translation.activate("eo")

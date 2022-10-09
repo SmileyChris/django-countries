@@ -1,8 +1,10 @@
+import pytest
 from django.test import TestCase, override_settings
 from rest_framework import serializers, views
 from rest_framework.test import APIRequestFactory
 
 from django_countries import countries
+from django_countries.conf import settings
 from django_countries.fields import Country
 from django_countries.serializers import CountryFieldMixin
 from django_countries.tests.custom_countries import FantasyCountries
@@ -160,6 +162,7 @@ class TestDRFMetadata(TestCase):
     Tests against the DRF OPTIONS API metadata endpoint.
     """
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_actions(self):
         class ExampleView(views.APIView):
             """Example view."""

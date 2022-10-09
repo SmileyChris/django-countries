@@ -1,8 +1,10 @@
+import pytest
 from django.template import Context, Template
 from django.test import TestCase
 from django.utils import translation
 
 from django_countries import countries
+from django_countries.conf import settings
 
 
 class TestCountriesTags(TestCase):
@@ -25,6 +27,7 @@ class TestCountriesTags(TestCase):
         rendered = self.TEMPLATE_NAME.render(Context({"code": "BR"}))
         self.assertEqual(rendered, "Brazil")
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_country_name_translated(self):
         with translation.override("pt-BR"):
             rendered = self.TEMPLATE_NAME.render(Context({"code": "BR"}))

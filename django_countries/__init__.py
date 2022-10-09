@@ -55,6 +55,9 @@ class EmptyFallbackTranslator(NullTranslations):
 
 @contextmanager
 def no_translation_fallback():
+    if not settings.USE_I18N:
+        yield
+        return
     catalog = _trans.catalog()
     original_fallback = catalog._fallback
     catalog._fallback = EmptyFallbackTranslator()
