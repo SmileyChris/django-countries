@@ -30,6 +30,7 @@ class CountriesBase:
         "SZ": [_("Swaziland")],
         "TZ": [_("Tanzania, the United Republic of")],
         "FK": [_("Falkland Islands  [Malvinas]")],
+        "TR": [_("Turkey")],
     }
 
     def __getstate__(self):
