@@ -256,7 +256,7 @@ COUNTRIES = {
     "TO": _("Tonga"),
     "TT": _("Trinidad and Tobago"),
     "TN": _("Tunisia"),
-    "TR": _("Turkey"),
+    "TR": _("Türkiye"),
     "TM": _("Turkmenistan"),
     "TC": _("Turks and Caicos Islands"),
     "TV": _("Tuvalu"),
