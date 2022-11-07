@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import itertools
 import re
+import threading
 from contextlib import contextmanager
 from gettext import NullTranslations
 from typing import (
@@ -49,9 +50,18 @@ except ImportError:
         )
 
 
+translation_state = threading.local()
+translation_state.fallback = True
+
+
 class EmptyFallbackTranslator(NullTranslations):
     def gettext(self, message: str) -> str:
+        if translation_state.fallback:
+            return super().gettext(message)
         return ""
+
+
+empty_fallback_translator = EmptyFallbackTranslator()
 
 
 @contextmanager
@@ -59,13 +69,16 @@ def no_translation_fallback():
     if not settings.USE_I18N:
         yield
         return
+    # Ensure the empty fallback translator has been installed.
     catalog = _trans.catalog()
-    original_fallback = catalog._fallback
-    catalog._fallback = EmptyFallbackTranslator()
+    if not isinstance(catalog._fallback, EmptyFallbackTranslator):
+        catalog._fallback = empty_fallback_translator
+    # Set the translation state to not use a fallback while inside this context.
+    translation_state.fallback = False
     try:
         yield
     finally:
-        catalog._fallback = original_fallback
+        translation_state.fallback = True
 
 
 class ComplexCountryName(TypedDict):
