@@ -5,6 +5,7 @@ import threading
 from contextlib import contextmanager
 from gettext import NullTranslations
 from typing import (
+    TYPE_CHECKING,
     Any,
     Callable,
     Dict,
@@ -27,6 +28,9 @@ from typing_extensions import Literal, TypedDict
 from django_countries.conf import settings
 
 from .base import CountriesBase
+
+if TYPE_CHECKING:
+    from django_stubs_ext import StrPromise
 
 try:
     import pyuca  # type: ignore
@@ -82,14 +86,14 @@ def no_translation_fallback():
 
 
 class ComplexCountryName(TypedDict):
-    name: str
-    names: List[str]
+    name: "StrPromise"
+    names: "List[StrPromise]"
     alpha3: str
     numeric: int
     ioc_code: str
 
 
-CountryName = Union[str, ComplexCountryName]
+CountryName = Union["StrPromise", ComplexCountryName]
 CountryCode = Union[str, int, None]
 
 
@@ -140,7 +144,9 @@ class Countries(CountriesBase):
         The result is cached so future lookups are less work intensive.
         """
         if not hasattr(self, "_countries"):
-            only: Iterable[Union[str, Tuple[str, str]]] = self.get_option("only")
+            only: "Iterable[Union[str, Tuple[str, StrPromise]]]" = self.get_option(
+                "only"
+            )
             only_choices = True
             if only:
                 # Originally used ``only`` as a dict, still supported.
@@ -149,7 +155,7 @@ class Countries(CountriesBase):
                         if isinstance(item, str):
                             only_choices = False
                             break
-            self._shadowed_names: Dict[str, List[str]] = {}
+            self._shadowed_names: "Dict[str, List[StrPromise]]" = {}
             if only and only_choices:
                 self._countries = dict(only)  # type: ignore
             else:
@@ -264,7 +270,7 @@ class Countries(CountriesBase):
             self.countries
         return self._shadowed_names
 
-    def translate_code(self, code: str, ignore_first: List[str] = None):
+    def translate_code(self, code: str, ignore_first: Optional[List[str]] = None):
         """
         Return translated countries for a country code.
         """
@@ -291,7 +297,7 @@ class Countries(CountriesBase):
             name = self.countries[code]
         if isinstance(name, dict):
             if "names" in name:
-                fallback_names: List[str] = name["names"][1:]
+                fallback_names: "List[StrPromise]" = name["names"][1:]
                 name = name["names"][0]
             else:
                 fallback_names = []
@@ -305,9 +311,9 @@ class Countries(CountriesBase):
                 # translation for the newest name.
                 if not country_name:
                     for fallback_name in fallback_names:
-                        fallback_name = force_str(fallback_name)
-                        if fallback_name:
-                            country_name = fallback_name
+                        fallback_name_str = force_str(fallback_name)
+                        if fallback_name_str:
+                            country_name = fallback_name_str
                             break
             if not country_name:
                 # Use the translation's fallback country name.
@@ -382,7 +388,7 @@ class Countries(CountriesBase):
         elif len(code_str) == 3:
             lookup_alpha3 = code_str
 
-            def find(alt_codes):
+            def find(alt_codes) -> bool:
                 return alt_codes[0] == lookup_alpha3
 
         else:
@@ -466,7 +472,7 @@ class Countries(CountriesBase):
             for code, check_country in self.countries.items():
                 if isinstance(check_country, dict):
                     if "names" in check_country:
-                        check_names: List[str] = check_country["names"]
+                        check_names: "List[StrPromise]" = check_country["names"]
                     else:
                         check_names = [check_country["name"]]
                 else:
@@ -477,9 +483,11 @@ class Countries(CountriesBase):
                             code_list.add(code)
                     else:
                         if insensitive:
-                            name = name.lower()
-                        if country == name:
-                            return code
+                            if country == name.lower():
+                                return code
+                        else:
+                            if country == name:
+                                return code
                 if code in self.shadowed_names:
                     for shadowed_name in self.shadowed_names[code]:
                         if regex:

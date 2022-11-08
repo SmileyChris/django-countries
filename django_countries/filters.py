@@ -1,3 +1,5 @@
+from typing import cast
+
 from django.contrib import admin
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
@@ -9,7 +11,7 @@ class CountryFilter(admin.FieldListFilter):
     related to the model.
     """
 
-    title = _("Country")
+    title = _("Country")  # type: ignore
 
     def expected_parameters(self):
         return [self.field.name]
