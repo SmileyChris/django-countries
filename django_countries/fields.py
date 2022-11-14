@@ -267,6 +267,8 @@ class CountryField(CharField):
         self.countries_str_attr = kwargs.pop("countries_str_attr", "code")
         self.blank_label = kwargs.pop("blank_label", None)
         self.multiple = kwargs.pop("multiple", None)
+        self.multiple_unique = kwargs.pop("multiple_unique", True)
+        self.multiple_sort = kwargs.pop("multiple_sort", True)
         kwargs["choices"] = self.countries
         if "max_length" not in kwargs:
             # Allow explicit max_length so migrations can correctly identify
@@ -348,8 +350,20 @@ class CountryField(CharField):
                 iter(value)
             except TypeError:
                 value = [value]
-        # Remove duplicates and False-y values, sort.
-        return sorted(set(filter(None, (self.country_to_text(c) for c in value))))
+        cleaned_value = []
+        seen = set()
+        for c in value:
+            c = self.country_to_text(c)
+            if not c:
+                continue
+            if self.multiple_unique:
+                if c in seen:
+                    continue
+                seen.add(c)
+            cleaned_value.append(c)
+        if self.multiple_sort:
+            cleaned_value = sorted(cleaned_value)
+        return cleaned_value
 
     def deconstruct(self):
         """
@@ -363,6 +377,10 @@ class CountryField(CharField):
         kwargs.pop("choices", None)
         if self.multiple:  # multiple determines the length of the field
             kwargs["multiple"] = self.multiple
+        if not self.multiple_unique:
+            kwargs["multiple_unique"] = False
+        if not self.multiple_sort:
+            kwargs["multiple_sort"] = False
         if self.countries is not countries:
             # Include the countries class if it's not the default countries
             # instance.

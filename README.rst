@@ -108,6 +108,10 @@ mode. For example:
     Australia
     New Zealand
 
+By default, countries are stored sorted for data consistency, and any
+duplicates are removed. These behaviours can be overridden by using the field
+arguments ``multiple_sort=False`` and ``multiple_unique=False`` respectively.
+
 
 The ``Country`` object
 ----------------------

@@ -26,7 +26,16 @@ class AllowNull(models.Model):
 
 class MultiCountry(models.Model):
     countries = CountryField(multiple=True)
+    unsorted_countries = CountryField(multiple=True, multiple_sort=False, blank=True)
+    duplicate_countries = CountryField(multiple=True, multiple_unique=False, blank=True)
+    unsorted_duplicate_countries = CountryField(
+        multiple=True, multiple_sort=False, multiple_unique=False, blank=True
+    )
     uneditable_countries = CountryField(multiple=True, editable=False)
+
+
+class MultiCountryUnsortedDuplicates(models.Model):
+    countries = CountryField(multiple=True, multiple_sort=False, multiple_unique=False)
 
 
 class WithProp(models.Model):

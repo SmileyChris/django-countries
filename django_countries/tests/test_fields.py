@@ -18,7 +18,13 @@ from django_countries import countries, data, fields
 from django_countries.conf import settings
 from django_countries.fields import CountryField
 from django_countries.tests import custom_countries, forms
-from django_countries.tests.models import AllowNull, MultiCountry, Person, WithProp
+from django_countries.tests.models import (
+    AllowNull,
+    MultiCountry,
+    MultiCountryUnsortedDuplicates,
+    Person,
+    WithProp,
+)
 
 
 # Django 3.2 introduced a db_collation attr on fields.
@@ -426,10 +432,19 @@ class TestCountryMultiple(TestCase):
         self.assertEqual(obj.countries[1], "NZ")
 
     def test_multiple_with_duplicates(self):
-        obj = MultiCountry(countries="AU,NZ,AU")
+        codes = "NZ,AU,NZ"
+        obj = MultiCountry(
+            countries=codes,
+            unsorted_countries=codes,
+            duplicate_countries=codes,
+            unsorted_duplicate_countries=codes,
+        )
         for country in obj.countries:
             self.assertTrue(isinstance(country, fields.Country))
         self.assertEqual(obj.countries, ["AU", "NZ"])
+        self.assertEqual(obj.unsorted_countries, ["NZ", "AU"])
+        self.assertEqual(obj.duplicate_countries, ["AU", "NZ", "NZ"])
+        self.assertEqual(obj.unsorted_duplicate_countries, ["NZ", "AU", "NZ"])
 
         obj = MultiCountry(countries="")
         self.assertEqual(obj.countries, [])
