@@ -452,7 +452,7 @@ class Countries(CountriesBase):
         If no match is found, returns an empty string.
 
         If ``regex`` is set to True, then rather than returning a string
-        containing the matching country code or an empty stirng, a set of
+        containing the matching country code or an empty string, a set of
         matching country codes is returned.
 
         If ``insensitive`` is set to False (True by default), then the search

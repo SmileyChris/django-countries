@@ -34,10 +34,6 @@ class MultiCountry(models.Model):
     uneditable_countries = CountryField(multiple=True, editable=False)
 
 
-class MultiCountryUnsortedDuplicates(models.Model):
-    countries = CountryField(multiple=True, multiple_sort=False, multiple_unique=False)
-
-
 class WithProp(models.Model):
     country = CountryField()
     _private_field = models.CharField(max_length=10)

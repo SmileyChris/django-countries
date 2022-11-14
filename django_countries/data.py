@@ -16,7 +16,7 @@ how to do that:
 """
 import glob
 import os
-from typing import TYPE_CHECKING, Dict, cast
+from typing import TYPE_CHECKING, Dict
 
 from django_countries.base import CountriesBase
 
@@ -560,6 +560,7 @@ def self_generate(
                 countries.append((name, row[1], row[2], int(row[3])))
     with open(__file__) as source_file:
         contents = source_file.read()
+
     # Sort countries.
     def sort_key(row):
 

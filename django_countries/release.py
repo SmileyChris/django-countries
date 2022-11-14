@@ -3,8 +3,6 @@ This file provides zest.releaser entrypoints using when releasing new
 django-countries versions.
 """
 import os
-import re
-import shutil
 
 from django.core.management import call_command
 from txclib.commands import cmd_pull  # type: ignore

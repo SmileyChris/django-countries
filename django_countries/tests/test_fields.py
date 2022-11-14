@@ -18,13 +18,7 @@ from django_countries import countries, data, fields
 from django_countries.conf import settings
 from django_countries.fields import CountryField
 from django_countries.tests import custom_countries, forms
-from django_countries.tests.models import (
-    AllowNull,
-    MultiCountry,
-    MultiCountryUnsortedDuplicates,
-    Person,
-    WithProp,
-)
+from django_countries.tests.models import AllowNull, MultiCountry, Person, WithProp
 
 
 # Django 3.2 introduced a db_collation attr on fields.

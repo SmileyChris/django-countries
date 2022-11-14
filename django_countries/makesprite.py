@@ -6,7 +6,7 @@ import os
 import re
 from typing import IO
 
-from PIL import Image  # type: ignore
+from PIL import Image
 
 re_flag_file = re.compile(r"[a-z]{2}.gif$")
 FLAG_X, FLAG_Y = 16, 11
