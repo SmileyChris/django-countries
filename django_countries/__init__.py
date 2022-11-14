@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import itertools
 import re
-import threading
 from contextlib import contextmanager
 from gettext import NullTranslations
 from typing import (
@@ -20,9 +19,9 @@ from typing import (
     overload,
 )
 
+from asgiref.local import Local
 from django.utils.encoding import force_str
-from django.utils.translation import _trans  # type: ignore
-from django.utils.translation import override
+from django.utils.translation import override, trans_real
 from typing_extensions import Literal, TypedDict
 
 from django_countries.conf import settings
@@ -54,18 +53,15 @@ except ImportError:
         )
 
 
-translation_state = threading.local()
-translation_state.fallback = True
+_translation_state = Local()
 
 
 class EmptyFallbackTranslator(NullTranslations):
     def gettext(self, message: str) -> str:
-        if translation_state.fallback:
-            return super().gettext(message)
-        return ""
-
-
-empty_fallback_translator = EmptyFallbackTranslator()
+        if not getattr(_translation_state, "fallback", True):
+            # Interrupt the fallback chain.
+            return ""
+        return super().gettext(message)
 
 
 @contextmanager
@@ -74,15 +70,18 @@ def no_translation_fallback():
         yield
         return
     # Ensure the empty fallback translator has been installed.
-    catalog = _trans.catalog()
-    if not isinstance(catalog._fallback, EmptyFallbackTranslator):
+    catalog = trans_real.catalog()
+    original_fallback = catalog._fallback
+    if not isinstance(original_fallback, EmptyFallbackTranslator):
+        empty_fallback_translator = EmptyFallbackTranslator()
+        empty_fallback_translator._fallback = original_fallback
         catalog._fallback = empty_fallback_translator
     # Set the translation state to not use a fallback while inside this context.
-    translation_state.fallback = False
+    _translation_state.fallback = False
     try:
         yield
     finally:
-        translation_state.fallback = True
+        _translation_state.fallback = True
 
 
 class ComplexCountryName(TypedDict):
