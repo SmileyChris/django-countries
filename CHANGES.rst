@@ -9,7 +9,15 @@ release, and any new translations added.
 7.4.3 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Rename Turkey to Türkiye.
+
+- A change in v7.4 introduced multi-choice countries being stored sorted and
+  deduplicated. This remains the default behaviour going forwards, but these
+  can now be overridden via arguments on the ``CountryField``.
+
+- Improve translation fallback handling, fixing a threading race condition that
+  could cause odd translation issues. Thanks to Jan Wróblewski and Antoine
+  Fontaine for their help in resolving this.
 
 
 7.4.2 (10 October 2022)
