@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.4.3 (unreleased)
-==================
+7.5 (12 December 2022)
+======================
 
 - Rename Turkey to Türkiye.
 
