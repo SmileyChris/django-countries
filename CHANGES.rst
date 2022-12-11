@@ -20,6 +20,8 @@ release, and any new translations added.
   Fontaine for their help in resolving this.
   This also fixes translation issues with older Python 3.6/3.7 versions.
 
+- Add Python 3.11, drop Python 3.6 and Django 2.2 support.
+
 
 7.4.2 (10 October 2022)
 =======================
