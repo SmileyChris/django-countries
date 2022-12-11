@@ -18,6 +18,7 @@ release, and any new translations added.
 - Improve translation fallback handling, fixing a threading race condition that
   could cause odd translation issues. Thanks to Jan Wróblewski and Antoine
   Fontaine for their help in resolving this.
+  This also fixes translation issues with older Python 3.6/3.7 versions.
 
 
 7.4.2 (10 October 2022)

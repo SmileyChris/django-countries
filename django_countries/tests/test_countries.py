@@ -1,5 +1,3 @@
-import sys
-
 import pytest
 from django.test import TestCase
 from django.utils import translation
@@ -344,9 +342,6 @@ class CountriesFirstTest(BaseTest):
                 translation.activate(lang)
 
     @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
-    @pytest.mark.skipif(
-        sys.version_info < (3, 8), reason="Translation fallback requires Python 3.8+"
-    )
     def test_translation_fallback_from_common_name(self):
         trans_fall_countries = custom_countries.TranslationFallbackCountries()
         lang = translation.get_language()
@@ -359,9 +354,6 @@ class CountriesFirstTest(BaseTest):
             translation.activate(lang)
 
     @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
-    @pytest.mark.skipif(
-        sys.version_info < (3, 8), reason="Translation fallback requires Python 3.8+"
-    )
     def test_translation_fallback_from_old_name(self):
         trans_fall_countries = custom_countries.TranslationFallbackCountries()
 
@@ -375,9 +367,6 @@ class CountriesFirstTest(BaseTest):
             translation.activate(lang)
 
     @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
-    @pytest.mark.skipif(
-        sys.version_info < (3, 8), reason="Translation fallback requires Python 3.8+"
-    )
     def test_translation_fallback_override(self):
         lang = translation.get_language()
 
@@ -396,9 +385,6 @@ class CountriesFirstTest(BaseTest):
             translation.activate(lang)
 
     @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
-    @pytest.mark.skipif(
-        sys.version_info < (3, 8), reason="Translation fallback requires Python 3.8+"
-    )
     def test_translation_fallback_override_names(self):
         # Avoid this translation with makemessages
         gtl = translation.gettext_lazy
