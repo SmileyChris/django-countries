@@ -311,7 +311,7 @@ For example:
         'US': {'names': [
             _('United States of America'),
             _('America'),
-        ],
+        ]}
     }
 
 If you have a specific list of countries that should be used, use
