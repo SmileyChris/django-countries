@@ -1,5 +1,5 @@
 import re
-from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
+from typing import Any, Callable, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
 import pkg_resources
@@ -259,6 +259,7 @@ class CountryField(CharField):
     """
 
     descriptor_class = CountryDescriptor
+    countries: Countries
 
     def __init__(self, *args: Any, **kwargs: Any):
         countries_class: Type[Countries] = kwargs.pop("countries", None)
@@ -500,9 +501,14 @@ class FullNameLookup(lookups.In):
             value = self.expr.format(
                 text=re.escape(self.rhs) if self.escape_regex else self.rhs
             )
-            return cast(CountryField, self.lhs.output_field).countries.by_name(
+            options = cast(CountryField, self.lhs.output_field).countries.by_name(
                 value, regex=True, insensitive=self.insensitive
             )
+            if len(self.rhs) == 2 and (
+                self.rhs == self.rhs.upper() or self.insensitive
+            ):
+                options.add(self.rhs.upper())
+            return options
         return super().get_prep_lookup()  # pragma: no cover
 
 

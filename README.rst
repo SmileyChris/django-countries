@@ -82,10 +82,11 @@ forms:
 
     country = CountryField(blank_label="(select country)")
 
-You can filter using the full English country names, even though only the
-country codes are stored in the database (using contains, startswith, endswith,
-regex, and their case insensitive versions). Use ``__name`` or ``__iname`` for
-the "exact"/"iexact" equivalent:
+You can filter using the full English country names in addition to country
+codes, even though only the country codes are stored in the database by using
+the queryset lookups ``contains``, ``startswith``, ``endswith``, ``regex``, or
+their case insensitive versions. Use ``__name`` or ``__iname`` for the
+``exact``/``iexact`` equivalent:
 
 .. code:: python
 
