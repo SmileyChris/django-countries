@@ -13,6 +13,11 @@ Django Countries
 A Django application that provides country choices for use with forms, flag
 icons static files, and a country field for models.
 
+Country names are translated using Django's standard ``gettext``. If you would
+like to help by adding a translation, please visit
+https://www.transifex.com/projects/p/django-countries/
+
+
 .. contents::
     :local:
     :backlinks: none
@@ -59,7 +64,7 @@ get details of the person's country:
 
 .. code:: python
 
-    >>> person = Person(name='Chris', country='NZ')
+    >>> person = Person(name="Chris", country="NZ")
     >>> person.country
     Country(code='NZ')
     >>> person.country.name
@@ -75,7 +80,7 @@ forms:
 
 .. code:: python
 
-    country = CountryField(blank_label='(select country)')
+    country = CountryField(blank_label="(select country)")
 
 You can filter using the full English country names, even though only the
 country codes are stored in the database (using contains, startswith, endswith,
@@ -103,7 +108,7 @@ mode. For example:
         title = models.CharField(max_length=100)
         countries = CountryField(multiple=True)
 
-    >>> for country in Incident.objects.get(title='Pavlova dispute').countries:
+    >>> for country in Incident.objects.get(title="Pavlova dispute").countries:
     ...     print(country.name)
     Australia
     New Zealand
@@ -193,8 +198,8 @@ When you create your form, you can use this custom widget like normal:
     class PersonForm(forms.ModelForm):
         class Meta:
             model = models.Person
-            fields = ('name', 'country')
-            widgets = {'country': CountrySelectWidget()}
+            fields = ("name", "country")
+            widgets = {"country": CountrySelectWidget()}
 
 Pass a ``layout`` text argument to the widget to change the positioning of the
 flag and widget. The default layout is:
@@ -219,7 +224,7 @@ lazy until the widget renders:
         country = CountryField().formfield()
 
 Use ``CountryField(blank=True)`` for non-required form fields, and
-``CountryField(blank_label='(Select country)')`` to use a custom label for the
+``CountryField(blank_label="(Select country)")`` to use a custom label for the
 initial blank option.
 
 You can also use the CountrySelectWidget_ as the widget for this field if you
@@ -237,7 +242,7 @@ For example:
 .. code:: python
 
     >>> from django_countries import countries
-    >>> dict(countries)['NZ']
+    >>> dict(countries)["NZ"]
     'New Zealand'
 
     >>> for code, name in list(countries)[:3]:
@@ -247,17 +252,13 @@ For example:
     Åland Islands (AX)
     Albania (AL)
 
-Country names are translated using Django's standard ``gettext``.
-If you would like to help by adding a translation, please visit
-https://www.transifex.com/projects/p/django-countries/
-
 
 Template Tags
 =============
 
-If you have your country code stored in a different place than a `CountryField`
-you can use the template tag to get a `Country` object and have access to all
-of its properties:
+If you have your country code stored in a different place than a
+``CountryField`` you can use the template tag to get a ``Country`` object and
+have access to all of its properties:
 
 .. code:: jinja
 
@@ -321,7 +322,7 @@ If you have a specific list of countries that should be used, use
 
 .. code:: python
 
-    COUNTRIES_ONLY = ['NZ', 'AU']
+    COUNTRIES_ONLY = ["NZ", "AU"]
 
 or to specify your own country names, use a dictionary or two-tuple list
 (string items will use the standard country name):
@@ -329,10 +330,10 @@ or to specify your own country names, use a dictionary or two-tuple list
 .. code:: python
 
     COUNTRIES_ONLY = [
-        'US',
-        'GB',
-        ('NZ', _('Middle Earth')),
-        ('AU', _('Desert')),
+        "US",
+        "GB",
+        ("NZ", _("Middle Earth")),
+        ("AU", _("Desert")),
     ]
 
 
@@ -350,7 +351,7 @@ By default, these initial countries are not repeated again in the
 alphanumerically sorted list. If you would like them to be repeated, set the
 ``COUNTRIES_FIRST_REPEAT`` setting to ``True``.
 
-Finally, you can optionally separate these 'first' countries with an empty
+Finally, you can optionally separate these "first" countries with an empty
 choice by providing the choice label as the ``COUNTRIES_FIRST_BREAK`` setting.
 
 
@@ -358,19 +359,21 @@ Customize the flag URL
 ----------------------
 
 The ``COUNTRIES_FLAG_URL`` setting can be used to set the url for the flag
-image assets. It defaults to::
+image assets. It defaults to:
 
-    COUNTRIES_FLAG_URL = 'flags/{code}.gif'
+.. code:: python
+
+    COUNTRIES_FLAG_URL = "flags/{code}.gif"
 
 The URL can be relative to the STATIC_URL setting, or an absolute URL.
 
 The location is parsed using Python's string formatting and is passed the
 following arguments:
 
-    * code
-    * code_upper
+* ``code``
+* ``code_upper``
 
-For example: ``COUNTRIES_FLAG_URL = 'flags/16x10/{code_upper}.png'``
+For example: ``COUNTRIES_FLAG_URL = "flags/16x10/{code_upper}.png"``
 
 No checking is done to ensure that a static flag actually exists.
 
@@ -381,7 +384,7 @@ Alternatively, you can specify a different URL on a specific ``CountryField``:
     class Person(models.Model):
         name = models.CharField(max_length=100)
         country = CountryField(
-            countries_flag_url='//flags.example.com/{code}.png')
+            countries_flag_url="//flags.example.com/{code}.png")
 
 
 Single field customization
@@ -402,8 +405,8 @@ uses a custom country list that only includes the G8 countries:
 
     class G8Countries(Countries):
         only = [
-            'CA', 'FR', 'DE', 'IT', 'JP', 'RU', 'GB',
-            ('EU', _('European Union'))
+            "CA", "FR", "DE", "IT", "JP", "RU", "GB",
+            ("EU", _("European Union"))
         ]
 
     class Vote(models.Model):
@@ -457,7 +460,7 @@ Country instance as the sole argument).
   setup(
       ...
       entry_points={
-          'django_countries.Country': 'phone = django_countries_phone.get_phone'
+          "django_countries.Country": "phone = django_countries_phone.get_phone"
       },
       ...
   )
@@ -479,7 +482,7 @@ mixin with your model serializer:
 
         class Meta:
             model = models.Person
-            fields = ('name', 'email', 'country')
+            fields = ("name", "email", "country")
 
 This mixin handles both standard and `multi-choice`_ country fields.
 
