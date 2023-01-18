@@ -306,12 +306,14 @@ For example:
     from django.utils.translation import gettext_lazy as _
 
     COUNTRIES_OVERRIDE = {
-        'NZ': _('Middle Earth'),
-        'AU': None,
-        'US': {'names': [
-            _('United States of America'),
-            _('America'),
-        ],
+        "NZ": _("Middle Earth"),
+        "AU": None,
+        "US": {
+            "names": [
+                _("United States of America"),
+                _("America"),
+            ],
+        },
     }
 
 If you have a specific list of countries that should be used, use
