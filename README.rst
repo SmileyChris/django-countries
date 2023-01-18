@@ -15,7 +15,7 @@ icons static files, and a country field for models.
 
 Country names are translated using Django's standard ``gettext``. If you would
 like to help by adding a translation, please visit
-https://www.transifex.com/projects/p/django-countries/
+https://www.transifex.com/smileychris/django-countries/
 
 
 .. contents::
