@@ -6,6 +6,12 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
+7.6 (unreleased)
+================
+
+- Nothing changed yet.
+
+
 7.5.1 (1 February 2023)
 =======================
 
