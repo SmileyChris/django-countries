@@ -9,6 +9,9 @@ release, and any new translations added.
 7.6 (unreleased)
 ================
 
+- Make ``CountryField`` queryset filters also work with country codes in
+  addition to names.
+
 - Switch to ``pyproject.toml`` rather than ``setup.py`` to fix installation
   issues with pip 23.0+.
 
