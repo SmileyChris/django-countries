@@ -6,8 +6,8 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.6 (unreleased)
-================
+7.5.1 (1 February 2023)
+=======================
 
 - Make ``CountryField`` queryset filters also work with country codes in
   addition to names.
