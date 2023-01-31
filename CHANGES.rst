@@ -9,7 +9,8 @@ release, and any new translations added.
 7.6 (unreleased)
 ================
 
-- Nothing changed yet.
+- Switch to ``pyproject.toml`` rather than ``setup.py`` to fix installation
+  issues with pip 23.0+.
 
 
 7.5 (12 December 2022)
