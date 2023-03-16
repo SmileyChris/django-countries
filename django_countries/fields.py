@@ -1,8 +1,8 @@
+import importlib.metadata
 import re
-from typing import Any, Callable, Iterable, Optional, Tuple, Type, Union, cast
+from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
-import pkg_resources
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
@@ -17,7 +17,7 @@ from django_countries.conf import settings
 
 EXTENSIONS = {
     ep.name: ep.load()
-    for ep in pkg_resources.iter_entry_points("django_countries.Country")
+    for ep in importlib.metadata.entry_points().get("django_countries.Country", [])
 }
 
 

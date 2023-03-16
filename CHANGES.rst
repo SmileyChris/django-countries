@@ -9,7 +9,8 @@ release, and any new translations added.
 7.6 (unreleased)
 ================
 
-- Nothing changed yet.
+- Replace deprecated ``pkg_resources.iter_entry_points`` with
+  ``importlib_metadata``.
 
 
 7.5.1 (1 February 2023)
