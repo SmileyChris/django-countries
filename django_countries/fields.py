@@ -1,4 +1,3 @@
-import importlib.metadata
 import re
 from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
@@ -15,10 +14,19 @@ from django.utils.html import escape as escape_html
 from django_countries import Countries, countries, filters, ioc_data, widgets
 from django_countries.conf import settings
 
-EXTENSIONS = {
-    ep.name: ep.load()
-    for ep in importlib.metadata.entry_points().get("django_countries.Country", [])
-}
+_entry_points: Iterable[Any]
+try:
+    import importlib.metadata
+
+    _entry_points = importlib.metadata.entry_points().get(
+        "django_countries.Country", []
+    )
+except ImportError:  # Python <3.8
+    import pkg_resources
+
+    _entry_points = pkg_resources.iter_entry_points("django_countries.Country")
+
+EXTENSIONS = {ep.name: ep.load() for ep in _entry_points}  # type: ignore
 
 
 class TemporaryEscape:
