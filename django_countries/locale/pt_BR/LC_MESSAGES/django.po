@@ -102,7 +102,7 @@ msgstr "Tanzânia, República Unida da"
 
 #: base.py:32
 msgid "Falkland Islands  [Malvinas]"
-msgstr " Ilhas Malvinas"
+msgstr "Ilhas Malvinas"
 
 #: data.py:32
 msgid "Afghanistan"
