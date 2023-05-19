@@ -1008,7 +1008,7 @@ msgid "Tunisia"
 msgstr "チュニジア"
 
 #: data.py:259
-msgid "Turkey"
+msgid "Türkiye"
 msgstr "トルコ"
 
 #: data.py:260
