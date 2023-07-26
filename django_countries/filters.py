@@ -12,20 +12,20 @@ class CountryFilter(admin.FieldListFilter):
     title = _("Country")  # type: ignore
 
     def expected_parameters(self):
-        return [self.field.name]
+        return [self.field_path]
 
     def choices(self, changelist):
-        value = self.used_parameters.get(self.field.name)
+        value = self.used_parameters.get(self.field_path)
         yield {
             "selected": value is None,
-            "query_string": changelist.get_query_string({}, [self.field.name]),
+            "query_string": changelist.get_query_string({}, [self.field_path]),
             "display": _("All"),
         }
         for lookup, title in self.lookup_choices(changelist):
             yield {
                 "selected": value == force_str(lookup),
                 "query_string": changelist.get_query_string(
-                    {self.field.name: lookup}, []
+                    {self.field_path: lookup}, []
                 ),
                 "display": title,
             }
@@ -34,8 +34,8 @@ class CountryFilter(admin.FieldListFilter):
         qs = changelist.model._default_manager.all()
         codes = set(
             qs.distinct()
-            .order_by(self.field.name)
-            .values_list(self.field.name, flat=True)
+            .order_by(self.field_path)
+            .values_list(self.field_path, flat=True)
         )
         for k, v in self.field.get_choices(include_blank=False):
             if k in codes:
