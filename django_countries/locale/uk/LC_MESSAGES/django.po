@@ -658,7 +658,7 @@ msgstr "Маршаллові острови"
 
 #: data.py:171
 msgid "Martinique"
-msgstr "Мартинюк"
+msgstr "Мартиніка"
 
 #: data.py:172
 msgid "Mauritania"
@@ -778,7 +778,7 @@ msgstr "Пакистан"
 
 #: data.py:201
 msgid "Palau"
-msgstr "Palau"
+msgstr "Палау"
 
 #: data.py:202
 msgid "Palestine, State of"
@@ -874,7 +874,7 @@ msgstr "Самоа"
 
 #: data.py:225
 msgid "San Marino"
-msgstr "Сан - Маріно"
+msgstr "Сан-Марино"
 
 #: data.py:226
 msgid "Sao Tome and Principe"
@@ -926,7 +926,7 @@ msgstr "Сомалі"
 
 #: data.py:238
 msgid "South Africa"
-msgstr "ПАР"
+msgstr "Південна Африка"
 
 #: data.py:239
 msgid "South Georgia and the South Sandwich Islands"
@@ -1074,7 +1074,7 @@ msgstr "Віргінські острови (США)"
 
 #: data.py:276
 msgid "Wallis and Futuna"
-msgstr "Уолліс Футуна"
+msgstr "Уолліс і Футуна"
 
 #: data.py:277
 msgid "Western Sahara"
