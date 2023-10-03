@@ -1,5 +1,6 @@
 import importlib.metadata
 import re
+import sys
 from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
@@ -17,7 +18,11 @@ from django_countries.conf import settings
 
 _entry_points: Iterable[Any]
 
-_entry_points = importlib.metadata.entry_points().get("django_countries.Country", [])
+_entry_points = importlib.metadata.entry_points()
+if sys.version_info >= (3, 10):
+    _entry_points = _entry_points.select(group="django_countries.Country")
+else:
+    _entry_points = _entry_points.get("django_countries.Country", [])
 
 
 EXTENSIONS = {ep.name: ep.load() for ep in _entry_points}  # type: ignore

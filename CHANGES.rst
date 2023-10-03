@@ -14,6 +14,8 @@ release, and any new translations added.
 
 - Drop Python 3.7 support.
 
+- Add Python 3.12 support.
+
 
 7.5.1 (1 February 2023)
 =======================
