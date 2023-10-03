@@ -12,6 +12,8 @@ release, and any new translations added.
 - Replace deprecated ``pkg_resources.iter_entry_points`` with
   ``importlib_metadata``.
 
+- Drop Python 3.7 support.
+
 
 7.5.1 (1 February 2023)
 =======================
