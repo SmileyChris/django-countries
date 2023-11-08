@@ -15,20 +15,12 @@ from django.utils.html import escape as escape_html
 from django_countries import Countries, countries, filters, ioc_data, widgets
 from django_countries.conf import settings
 
-_entry_points: Iterable[Any]
-if sys.version_info >= (3, 8):
-    import importlib.metadata
-
-    if sys.version_info >= (3, 10):
-        _entry_points = importlib.metadata.entry_points(group="django_countries.Country")
-    else:
-        _entry_points = importlib.metadata.entry_points().get(
-            "django_countries.Country", []
-        )
+if sys.version_info >= (3, 10):
+    from importlib.metadata import entry_points
 else:
-    import pkg_resources
+    from importlib_metadata import entry_points
 
-    _entry_points = pkg_resources.iter_entry_points("django_countries.Country")
+_entry_points = entry_points(group="django_countries.Country")
 
 EXTENSIONS = {ep.name: ep.load() for ep in _entry_points}  # type: ignore
 
