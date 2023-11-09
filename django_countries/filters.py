@@ -1,3 +1,4 @@
+import django
 from django.contrib import admin
 from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
@@ -22,8 +23,12 @@ class CountryFilter(admin.FieldListFilter):
             "display": _("All"),
         }
         for lookup, title in self.lookup_choices(changelist):
+            if django.VERSION >= (5, 0):
+                selected = force_str(lookup) in value
+            else:
+                selected = force_str(lookup) == value
             yield {
-                "selected": value == force_str(lookup),
+                "selected": selected,
                 "query_string": changelist.get_query_string(
                     {self.field.name: lookup}, []
                 ),

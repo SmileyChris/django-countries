@@ -2,6 +2,7 @@ import re
 from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
+import django
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
 from django.core import checks, exceptions
@@ -229,12 +230,14 @@ class CountryDescriptor:
 
 
 class LazyChoicesMixin(widgets.LazyChoicesMixin):
-    def _set_choices(self, value):
-        """
-        Also update the widget's choices.
-        """
-        super()._set_choices(value)
-        self.widget.choices = value
+    if django.VERSION < (5, 0):
+
+        def _set_choices(self, value):
+            """
+            Also update the widget's choices.
+            """
+            super()._set_choices(value)
+            self.widget.choices = value
 
 
 _Choice = Tuple[Any, str]
@@ -278,7 +281,11 @@ class CountryField(CharField):
         self.multiple = kwargs.pop("multiple", None)
         self.multiple_unique = kwargs.pop("multiple_unique", True)
         self.multiple_sort = kwargs.pop("multiple_sort", True)
-        kwargs["choices"] = self.countries
+        if django.VERSION >= (5, 0):
+            # Use new lazy callable support
+            kwargs["choices"] = lambda: self.countries
+        else:
+            kwargs["choices"] = self.countries
         if "max_length" not in kwargs:
             # Allow explicit max_length so migrations can correctly identify
             # changes in the multiple CountryField fields when new countries are
@@ -396,19 +403,45 @@ class CountryField(CharField):
             kwargs["countries"] = self.countries.__class__
         return name, path, args, kwargs
 
-    def get_choices(self, include_blank=True, blank_choice=None, *args, **kwargs):
-        if blank_choice is None:
+    if django.VERSION >= (5, 0):
+
+        def get_choices(
+            self,
+            include_blank=True,
+            blank_choice=BLANK_CHOICE_DASH,
+            limit_choices_to=None,
+            ordering=(),
+        ):
+            if self.multiple:
+                include_blank = False
             if self.blank_label is None:
                 blank_choice = BLANK_CHOICE_DASH
             else:
                 blank_choice = [("", self.blank_label)]
-        if self.multiple:
-            include_blank = False
-        return super().get_choices(
-            include_blank=include_blank, blank_choice=blank_choice, *args, **kwargs
-        )
+            return super().get_choices(
+                include_blank=include_blank,
+                blank_choice=blank_choice,
+                limit_choices_to=limit_choices_to,
+                ordering=ordering,
+            )
 
-    get_choices = lazy(get_choices, list)
+    else:
+
+        def get_choices(  # type: ignore [misc]
+            self, include_blank=True, blank_choice=None, *args, **kwargs
+        ):
+            if blank_choice is None:
+                if self.blank_label is None:
+                    blank_choice = BLANK_CHOICE_DASH
+                else:
+                    blank_choice = [("", self.blank_label)]
+            if self.multiple:
+                include_blank = False
+            return super().get_choices(
+                include_blank=include_blank, blank_choice=blank_choice, *args, **kwargs
+            )
+
+        get_choices = lazy(get_choices, list)
 
     def formfield(self, **kwargs):
         kwargs.setdefault(
