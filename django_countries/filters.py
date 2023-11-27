@@ -13,13 +13,20 @@ class CountryFilter(admin.FieldListFilter):
     title = _("Country")  # type: ignore
 
     def expected_parameters(self):
+        if self.field.multiple:
+            return [f"{self.field.name}__contains"]
         return [self.field.name]
 
     def choices(self, changelist):
-        value = self.used_parameters.get(self.field.name)
+        if self.field.multiple:
+            field_name = f"{self.field.name}__contains"
+        else:
+            field_name = self.field.name
+
+        value = self.used_parameters.get(field_name)
         yield {
             "selected": value is None,
-            "query_string": changelist.get_query_string({}, [self.field.name]),
+            "query_string": changelist.get_query_string({}, [field_name]),
             "display": _("All"),
         }
         for lookup, title in self.lookup_choices(changelist):
@@ -29,18 +36,18 @@ class CountryFilter(admin.FieldListFilter):
                 selected = force_str(lookup) == value
             yield {
                 "selected": selected,
-                "query_string": changelist.get_query_string(
-                    {self.field.name: lookup}, []
-                ),
+                "query_string": changelist.get_query_string({field_name: lookup}, []),
                 "display": title,
             }
 
     def lookup_choices(self, changelist):
         qs = changelist.model._default_manager.all()
         codes = set(
-            qs.distinct()
-            .order_by(self.field.name)
-            .values_list(self.field.name, flat=True)
+            ",".join(
+                qs.distinct()
+                .order_by(self.field.name)
+                .values_list(self.field.name, flat=True)
+            ).split(",")
         )
         for k, v in self.field.get_choices(include_blank=False):
             if k in codes:
