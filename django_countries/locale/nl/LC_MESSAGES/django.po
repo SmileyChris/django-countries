@@ -957,7 +957,7 @@ msgstr "Suriname"
 
 #: data.py:245
 msgid "Svalbard and Jan Mayen"
-msgstr "Jan Mayen"
+msgstr "Spitsbergen en Jan Mayen"
 
 #: data.py:246
 msgid "Sweden"
