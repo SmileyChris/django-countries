@@ -1,4 +1,5 @@
 import re
+import sys
 from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
@@ -19,9 +20,12 @@ _entry_points: Iterable[Any]
 try:
     import importlib.metadata
 
-    _entry_points = importlib.metadata.entry_points().get(
-        "django_countries.Country", []
-    )
+    if sys.version_info >= (3, 10):
+        _entry_points = importlib.metadata.entry_points(group="django_countries.Country") or []
+    else:
+        _entry_points = importlib.metadata.entry_points().get(
+            "django_countries.Country", []
+        )
 except ImportError:  # Python <3.8
     import pkg_resources
 
