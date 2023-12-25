@@ -30,12 +30,13 @@ class LazyChoicesMixin:
         return self._choices
 
     def set_choices(self, value: ChoiceList):
-        self._set_choices(value)
+        # self._set_choices(value)
+        self._choices = value
 
     choices = property(get_choices, set_choices)
 
-    def _set_choices(self, value: ChoiceList):
-        self._choices = value
+    # def _set_choices(self, value: ChoiceList):
+    #     self._choices = value
 
 
 class LazySelectMixin(LazyChoicesMixin):
