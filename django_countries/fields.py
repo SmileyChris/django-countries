@@ -310,7 +310,7 @@ class CountryField(CharField):
         hint += "."
 
         return [
-            checks.Error(
+            checks.Warning(
                 "Field specifies multiple=True, so should not be null.",
                 obj=self,
                 id="django_countries.E100",
