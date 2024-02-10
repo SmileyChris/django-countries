@@ -14,6 +14,8 @@ release, and any new translations added.
 
 - Support Django 5.0.
 
+- Support Python 3.12.
+
 7.5.1 (1 February 2023)
 =======================
 
