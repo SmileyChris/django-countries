@@ -15,7 +15,10 @@ class CountryField(serializers.ChoiceField):
     def to_representation(self, obj):
         code = self.countries.alpha2(obj)
         if not code:
-            return ""
+            if self.allow_null:
+                return None
+            else:
+                return ''
         if self.name_only:
             return force_str(self.countries.name(obj))
         if not self.country_dict:
