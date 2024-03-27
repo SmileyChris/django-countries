@@ -16,6 +16,7 @@ class CountriesBase:
     COMMON_NAMES = {
         "BN": _("Brunei"),
         "BO": _("Bolivia"),
+        "FM": _("Micronesia"),
         "GB": _("United Kingdom"),
         "IR": _("Iran"),
         "KP": _("North Korea"),
