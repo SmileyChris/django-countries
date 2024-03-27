@@ -398,7 +398,6 @@ class CountriesFirstTest(BaseTest):
                 }
             }
         ):
-
             lang = translation.get_language()
             try:
                 translation.activate("eo")

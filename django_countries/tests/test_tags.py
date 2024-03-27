@@ -8,7 +8,6 @@ from django_countries.conf import settings
 
 
 class TestCountriesTags(TestCase):
-
     TEMPLATE_COUNTRY = Template(
         "{% load countries %}{% get_country code as country %}{{ country }}"
     )
