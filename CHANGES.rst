@@ -6,6 +6,18 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
+7.7 (unreleased)
+================
+
+- Nothing changed yet.
+
+
+7.6.2 (unreleased)
+==================
+
+- Nothing changed yet.
+
+
 7.6.1 (2 April 2024)
 ====================
 
