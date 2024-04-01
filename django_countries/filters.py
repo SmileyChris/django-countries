@@ -24,7 +24,7 @@ class CountryFilter(admin.FieldListFilter):
         }
         for lookup, title in self.lookup_choices(changelist):
             if django.VERSION >= (5, 0):
-                selected = force_str(lookup) in value
+                selected = value is not None and force_str(lookup) in value
             else:
                 selected = force_str(lookup) == value
             yield {
