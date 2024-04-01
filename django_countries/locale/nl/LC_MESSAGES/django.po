@@ -5,18 +5,19 @@
 # Translators:
 # Bart de Goede <bart@dispectu.com>, 2013
 # tijs <hello@tijs.org>, 2014
+# Jieter Waagmeester, 2024
 # Remco Wendt <remco.wendt@gmail.com>, 2015
 # Rik Smit <riksmithh@gmail.com>, 2017
-# Robin van der Vliet <info@robinvandervliet.nl>, 2020
+# Robin van der Vliet <info@robinvandervliet.com>, 2020
 # 30074767d5368eda142c1e994fd2139d, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: django-countries\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-26 14:14+1300\n"
-"PO-Revision-Date: 2020-08-06 01:04+0000\n"
-"Last-Translator: Robin van der Vliet <info@robinvandervliet.nl>\n"
-"Language-Team: Dutch (http://www.transifex.com/smileychris/django-countries/language/nl/)\n"
+"PO-Revision-Date: 2011-06-05 21:30+0000\n"
+"Last-Translator: Jieter Waagmeester, 2024\n"
+"Language-Team: Dutch (http://app.transifex.com/smileychris/django-countries/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -957,7 +958,7 @@ msgstr "Suriname"
 
 #: data.py:245
 msgid "Svalbard and Jan Mayen"
-msgstr "Jan Mayen"
+msgstr "Spitsbergen en Jan Mayen"
 
 #: data.py:246
 msgid "Sweden"
@@ -1008,7 +1009,7 @@ msgid "Tunisia"
 msgstr "Tunesië"
 
 #: data.py:259
-msgid "Türkiye"
+msgid "Turkey"
 msgstr "Turkije"
 
 #: data.py:260

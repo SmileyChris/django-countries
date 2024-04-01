@@ -6,10 +6,10 @@ This log shows interesting changes that happen for each version, latest
 versions first. It can be assumed that translations have been updated each
 release, and any new translations added.
 
-7.7 (unreleased)
-================
+7.6.1 (2 April 2024)
+====================
 
-- Nothing changed yet.
+- Fix a TypeError when no country is selected, introduced in the Django 5 fix.
 
 
 7.6 (27 March 2024)
