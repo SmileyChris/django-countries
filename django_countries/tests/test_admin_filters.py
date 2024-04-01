@@ -6,7 +6,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase
 from django.test.client import RequestFactory
 
-from django_countries import filters
+from django_countries import countries, filters
 from django_countries.tests import models
 
 test_site = admin.AdminSite(name="test-admin")
@@ -51,8 +51,15 @@ class TestCountryFilter(TestCase):
             list(cl.result_list), list(models.Person.objects.exclude(country="AU"))
         )
 
-    def test_choices(self):
-        request = RequestFactory().get("/person/", data={"country": "NZ"})
+    def _test_choices(self, selected_country_code="NZ"):
+        request_params = {}
+        selected_country = "All"
+
+        if selected_country_code:
+            request_params["country"] = selected_country_code
+            selected_country = countries.name(selected_country_code)
+
+        request = RequestFactory().get("/person/", data=request_params)
         request.user = AnonymousUser()
         cl = ChangeList(request, **self.get_changelist_kwargs())
         choices = list(cl.filter_specs[0].choices(cl))
@@ -60,4 +67,10 @@ class TestCountryFilter(TestCase):
             [c["display"] for c in choices], ["All", "Australia", "New Zealand"]
         )
         for choice in choices:
-            self.assertEqual(choice["selected"], choice["display"] == "New Zealand")
+            self.assertEqual(choice["selected"], choice["display"] == selected_country)
+
+    def test_choices(self):
+        return self._test_choices()
+
+    def test_choices_empty_selection(self):
+        return self._test_choices(selected_country_code=None)
