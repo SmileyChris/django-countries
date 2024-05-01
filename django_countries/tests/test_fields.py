@@ -629,6 +629,12 @@ class TestModelForm(TestCase):
             form.fields["favourite_country"].choices[0], ("AF", "Afghanistan")
         )
 
+    def test_selected_default(self):
+        form = forms.PersonForm()
+        self.assertEqual(form.fields["favourite_country"].initial, "NZ")
+        html = str(form["favourite_country"])
+        self.assertIn('<option value="NZ" selected>', html)
+
     def test_blank_choice_label(self):
         form = forms.AllowNullForm()
         self.assertEqual(form.fields["country"].choices[0], ("", "(select country)"))
