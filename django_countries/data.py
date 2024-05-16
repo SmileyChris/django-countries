@@ -563,7 +563,6 @@ def self_generate(
 
     # Sort countries.
     def sort_key(row):
-
         return (
             unicodedata.normalize("NFKD", row[0])
             .encode("ascii", "ignore")
