@@ -298,7 +298,7 @@ class CountryField(CharField):
             # added to the available countries dictionary.
             if self.multiple:
                 kwargs["max_length"] = (
-                    len(self.countries)
+                    len(self.countries.countries)
                     - 1
                     + sum(len(code) for code in self.countries.countries)
                 )
