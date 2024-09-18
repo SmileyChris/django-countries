@@ -186,7 +186,7 @@ msgstr "Barbados"
 
 #: data.py:52
 msgid "Belarus"
-msgstr "Weißrussland"
+msgstr "Belarus"
 
 #: data.py:53
 msgid "Belgium"
@@ -414,7 +414,7 @@ msgstr "Frankreich"
 
 #: data.py:109
 msgid "French Guiana"
-msgstr "Französisch Guinea"
+msgstr "Französisch-Guayana"
 
 #: data.py:110
 msgid "French Polynesia"
