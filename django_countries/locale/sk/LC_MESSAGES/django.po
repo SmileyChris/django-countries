@@ -200,7 +200,7 @@ msgstr "Bermudy"
 
 #: data.py:57
 msgid "Bhutan"
-msgstr "Bután"
+msgstr "Bhután"
 
 #: data.py:58
 msgid "Bolivia (Plurinational State of)"
@@ -388,7 +388,7 @@ msgstr "Etiópia"
 
 #: data.py:104
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Falklandy (Malvíny)"
 
 #: data.py:105
 msgid "Faroe Islands"
@@ -756,7 +756,7 @@ msgstr "Norfolk"
 
 #: data.py:196
 msgid "North Macedonia"
-msgstr ""
+msgstr "Severné Macedónsko"
 
 #: data.py:197
 msgid "Northern Mariana Islands"
@@ -828,7 +828,7 @@ msgstr "Réunion"
 
 #: data.py:214
 msgid "Romania"
-msgstr "Rumúnsko"
+msgstr "Rumunsko"
 
 #: data.py:215
 msgid "Russian Federation"
