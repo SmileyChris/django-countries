@@ -1,3 +1,166 @@
 [build-system]
-requires = ["setuptools >= 48", "wheel >= 0.29.0"]
+requires = ["setuptools >= 64", "wheel >= 0.38.0"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-countries"
+version = "7.7.dev0"
+description = "Provides a country field for Django models."
+readme = "README.rst"
+authors = [{ name = "Chris Beaven", email = "smileychris@gmail.com" }]
+license = "MIT"
+keywords = ["django", "countries", "flags"]
+requires-python = ">=3.9"
+dependencies = [
+  "asgiref",
+  "typing_extensions",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.1",
+  "Framework :: Django :: 5.2",
+]
+
+[project.urls]
+"Change Log" = "https://github.com/SmileyChris/django-countries/blob/main/CHANGES.rst"
+"Source Code" = "https://github.com/SmileyChris/django-countries"
+
+[project.optional-dependencies]
+maintainer = [
+  # transifex-client is outdated, install from https://github.com/transifex/cli
+  "django",
+  "towncrier",
+]
+dev = [
+  "tox>=4",
+  "tox-uv>=1.7",
+  "ruff>=0.4",
+  "mypy",
+  "pytest",
+  "pytest-django",
+  "djangorestframework",
+  "graphene-django",
+]
+test = [
+  "pytest",
+  "pytest-django",
+  "pytest-cov",
+  "djangorestframework",
+  "graphene-django",
+]
+pyuca = ["pyuca"]
+
+[tool.setuptools]
+include-package-data = true
+license-files = ["LICENSE"]
+
+# Towncrier configuration for change log management
+[tool.towncrier]
+directory = "changes"
+filename = "CHANGES.rst"
+title_format = "{version} ({project_date})"
+issue_format = " #{issue}"
+underlines = ["=", "-", "~"]
+
+[tool.towncrier.category.breaking]
+name = "Breaking changes"
+showcontent = true
+
+[tool.towncrier.category.feature]
+name = "Features"
+showcontent = true
+
+[tool.towncrier.category.bugfix]
+name = "Bug fixes"
+showcontent = true
+
+[tool.towncrier.category.doc]
+name = "Documentation"
+showcontent = true
+
+[tool.towncrier.category.misc]
+name = "Maintenance"
+showcontent = true
+
+[tool.setuptools.packages.find]
+include = ["django_countries*"]
+
+# Tox configuration migrated into pyproject; using tox-uv for installs.
+
+
+# Ruff configuration (formatter + linter)
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+src = ["django_countries"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "I",   # isort
+  "UP",  # pyupgrade
+  "B",   # bugbear
+]
+ignore = [
+  "E203", # slice spacing (Black compatibility)
+  "W503", # line break before binary operator (Black compatibility)
+]
+
+# mypy configuration
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+disallow_untyped_calls = true
+
+[tool.django-stubs]
+django_settings_module = "django_countries.tests.settings"
+
+# Silence missing stubs for optional GraphQL deps
+[[tool.mypy.overrides]]
+module = ["graphene.*", "graphene_django.*"]
+ignore_missing_imports = true
+
+# pytest configuration
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "django_countries.tests.settings"
+filterwarnings = [
+  "ignore::DeprecationWarning:graphene",
+]
+
+# coverage.py configuration
+[tool.coverage.run]
+source = ["django_countries"]
+omit = [
+  "django_countries/release.py",
+  "django_countries/makesprite.py",
+  "django_countries/tests/settings*.py",
+]
+parallel = true
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "@overload",
+  "if TYPE_CHECKING:",
+]
+
+# check-manifest configuration
+[tool.check-manifest]
+ignore-bad-ideas = ["*.mo"]

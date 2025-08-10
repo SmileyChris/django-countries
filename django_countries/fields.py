@@ -16,22 +16,21 @@ from django.utils.html import escape as escape_html
 from django_countries import Countries, countries, filters, ioc_data, widgets
 from django_countries.conf import settings
 
+# Load extension entry points with compatibility for legacy Python
+try:  # Python >=3.8
+    from importlib import metadata as importlib_metadata
+except Exception:  # Python <3.8
+    import importlib_metadata  # type: ignore[import-not-found,no-redef]
+
 _entry_points: Iterable[Any]
-try:
-    import importlib.metadata
-
-    if sys.version_info >= (3, 10):
-        _entry_points = importlib.metadata.entry_points(
-            group="django_countries.Country"
-        )
-    else:
-        _entry_points = importlib.metadata.entry_points().get(
-            "django_countries.Country", []
-        )
-except ImportError:  # Python <3.8
-    import pkg_resources
-
-    _entry_points = pkg_resources.iter_entry_points("django_countries.Country")
+if sys.version_info >= (3, 10):
+    _entry_points = importlib_metadata.entry_points(
+        group="django_countries.Country"
+    )
+else:
+    # Older importlib_metadata returns a mapping
+    _entry_points = getattr(importlib_metadata, "entry_points")()
+    _entry_points = _entry_points.get("django_countries.Country", [])
 
 EXTENSIONS = {ep.name: ep.load() for ep in _entry_points}  # type: ignore
 

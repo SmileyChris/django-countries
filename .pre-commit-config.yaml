@@ -8,17 +8,14 @@ repos:
       - id: check-added-large-files
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.38.4
+    rev: v3.17.0
     hooks:
       - id: pyupgrade
-        args: [--py36-plus]
+        args: [--py37-plus]
 
-  - repo: https://github.com/pycqa/isort
-    rev: "5.10.1"
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.4
     hooks:
-      - id: isort
-
-  - repo: https://github.com/psf/black
-    rev: "22.8.0"
-    hooks:
-      - id: black
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
