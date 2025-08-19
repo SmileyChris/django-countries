@@ -218,7 +218,10 @@ class CountryDescriptor:
             instance.refresh_from_db(fields=[self.field.name])
         value = instance.__dict__[self.field.name]
         if self.field.multiple:
-            return [self.country(code) for code in value]
+            if value:
+                return [self.country(code) for code in value]
+            else:
+                return None
         return self.country(value)
 
     def country(self, code):
@@ -322,7 +325,7 @@ class CountryField(CharField):
         hint += "."
 
         return [
-            checks.Error(
+            checks.Warning(
                 "Field specifies multiple=True, so should not be null.",
                 obj=self,
                 id="django_countries.E100",
