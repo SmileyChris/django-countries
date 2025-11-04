@@ -80,6 +80,37 @@ class IncidentForm(forms.ModelForm):
         fields = ['title', 'countries']
 ```
 
+### Django Admin Integration
+
+For a better user experience in Django admin, you can use Django's `FilteredSelectMultiple` widget, which provides a dual-listbox interface similar to `filter_horizontal`:
+
+```python
+from django import forms
+from django.contrib import admin
+from django.contrib.admin.widgets import FilteredSelectMultiple
+from django_countries import countries
+from myapp.models import Incident
+
+class IncidentForm(forms.ModelForm):
+    class Meta:
+        model = Incident
+        fields = '__all__'
+
+    countries = forms.MultipleChoiceField(
+        choices=list(countries),
+        widget=FilteredSelectMultiple("Countries", is_stacked=False),
+        required=False,
+    )
+
+@admin.register(Incident)
+class IncidentAdmin(admin.ModelAdmin):
+    form = IncidentForm
+```
+
+This provides a much more intuitive interface with search and filtering capabilities, making it easier to select from the full list of countries.
+
+**Note:** If the field is required, set `required=True` in the `MultipleChoiceField` definition.
+
 ## Querying
 
 You can query multiple country fields just like regular CountryFields:
