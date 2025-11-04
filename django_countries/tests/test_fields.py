@@ -1,11 +1,11 @@
 import pickle
-import tempfile
 from unittest import mock
 from unittest.case import skipUnless
 
 import django
 import pytest
 from django.core import checks, validators
+from django.core.files.temp import NamedTemporaryFile
 from django.core.management import call_command
 from django.db import models
 from django.forms import Select
@@ -629,6 +629,12 @@ class TestModelForm(TestCase):
             form.fields["favourite_country"].choices[0], ("AF", "Afghanistan")
         )
 
+    def test_selected_default(self):
+        form = forms.PersonForm()
+        self.assertEqual(form.fields["favourite_country"].initial, "NZ")
+        html = str(form["favourite_country"])
+        self.assertIn('<option value="NZ" selected>', html)
+
     def test_blank_choice_label(self):
         form = forms.AllowNullForm()
         self.assertEqual(form.fields["country"].choices[0], ("", "(select country)"))
@@ -679,7 +685,7 @@ class TestLoadData(TestCase):
     def test_basic(self):
         single = Person.objects.create(name="Chris Beaven", country="NZ")
         multi = MultiCountry.objects.create(countries=["NZ", "AU"])
-        with tempfile.NamedTemporaryFile(suffix=".json", mode="w+") as capture:
+        with NamedTemporaryFile(suffix=".json", mode="w+") as capture:
             call_command("dumpdata", "django_countries_tests", stdout=capture)
             single.delete()
             multi.delete()
