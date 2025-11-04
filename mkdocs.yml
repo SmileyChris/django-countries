@@ -46,6 +46,7 @@ nav:
           - Multiple Countries: advanced/multiple.md
   - Development:
       - Contributing: contributing.md
+      - ISO 3166-1 Formatting: iso3166-formatting.md
       - Changelog: changelog.md
 
 markdown_extensions:
