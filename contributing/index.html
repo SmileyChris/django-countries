@@ -891,15 +891,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#updating-country-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      🗺️ Updating Country Data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#development-setup" class="md-nav__link">
     <span class="md-ellipsis">
       Development Setup
@@ -1039,6 +1030,15 @@
   <a href="#prerequisites_1" class="md-nav__link">
     <span class="md-ellipsis">
       Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-country-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗺️ Updating Country Data
     </span>
   </a>
   
@@ -1225,15 +1225,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#updating-country-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      🗺️ Updating Country Data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#development-setup" class="md-nav__link">
     <span class="md-ellipsis">
       Development Setup
@@ -1379,6 +1370,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#updating-country-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗺️ Updating Country Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#quick-release-recommended" class="md-nav__link">
     <span class="md-ellipsis">
       Quick Release (Recommended)
@@ -1485,22 +1485,6 @@
 <h2 id="contributing-translations">🌍 Contributing Translations<a class="headerlink" href="#contributing-translations" title="Permanent link">&para;</a></h2>
 <p><strong>Want to help translate country names?</strong> Visit our <a href="https://explore.transifex.com/smileychris/django-countries/">Transifex project</a> to contribute translations. No coding required!</p>
 <p>Country names are translated using Django's standard i18n system. All translation work is done through Transifex, making it easy for anyone to contribute translations in their language.</p>
-<h2 id="updating-country-data">🗺️ Updating Country Data<a class="headerlink" href="#updating-country-data" title="Permanent link">&para;</a></h2>
-<p>Country data should be manually updated from the official ISO 3166-1 Online Browsing Platform (OBP) when changes occur:</p>
-<ol>
-<li>Visit: https://www.iso.org/obp/ui/</li>
-<li>Click the 'Country Codes' radio button</li>
-<li>Click the search button (🔍)</li>
-<li>Change 'Results per page' to 300</li>
-<li>Select and copy the table data</li>
-<li>Paste into a spreadsheet (LibreOffice Calc, Excel, etc.)</li>
-<li>Verify columns: Country Name, Alpha-2, Alpha-3, Numeric</li>
-<li>Delete any extra columns (like French names)</li>
-<li>Delete the header row</li>
-<li>Save as <code>django_countries/iso3166-1.csv</code></li>
-<li>Run: <code>uv run --group dev python django_countries/data.py</code> to regenerate <code>data.py</code></li>
-</ol>
-<p>The official OBP data uses specific formatting patterns documented in <a href="../iso3166-formatting/">ISO 3166-1 Country Name Formatting</a>.</p>
 <h2 id="development-setup">Development Setup<a class="headerlink" href="#development-setup" title="Permanent link">&para;</a></h2>
 <p>The rest of this guide covers code contributions. If you're contributing translations, head to Transifex instead!</p>
 <p>This project uses modern Python tooling:<br />
@@ -1665,6 +1649,22 @@
 <p>Before releasing, ensure you have:<br />
 - Your PyPI credentials in your keyring and the <code>keyring</code> tool installed (see setup below)<br />
 - The Transifex CLI installed (see installation instructions below)</p>
+<h3 id="updating-country-data">🗺️ Updating Country Data<a class="headerlink" href="#updating-country-data" title="Permanent link">&para;</a></h3>
+<p>Country data should be manually updated from the official ISO 3166-1 Online Browsing Platform (OBP) when changes occur:</p>
+<ol>
+<li>Visit: https://www.iso.org/obp/ui/</li>
+<li>Click the 'Country Codes' radio button</li>
+<li>Click the search button (🔍)</li>
+<li>Change 'Results per page' to 300</li>
+<li>Select and copy the table data</li>
+<li>Paste into a spreadsheet (LibreOffice Calc, Excel, etc.)</li>
+<li>Verify columns: Country Name, Alpha-2, Alpha-3, Numeric</li>
+<li>Delete any extra columns (like French names)</li>
+<li>Delete the header row</li>
+<li>Save as <code>django_countries/iso3166-1.csv</code></li>
+<li>Run: <code>uv run --group dev python django_countries/data.py</code> to regenerate <code>data.py</code></li>
+</ol>
+<p>The official OBP data uses specific formatting patterns documented in <a href="../iso3166-formatting/">ISO 3166-1 Country Name Formatting</a>.</p>
 <h3 id="quick-release-recommended">Quick Release (Recommended)<a class="headerlink" href="#quick-release-recommended" title="Permanent link">&para;</a></h3>
 <p>The <code>just deploy [patch|minor|major]</code> command handles the entire release process (bump type required):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># For a patch release (bug fixes: 7.7.0 -&gt; 7.7.1)</span>
