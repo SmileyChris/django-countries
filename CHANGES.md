@@ -6,6 +6,15 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+# django_countries 7.9 (4 November 2025)
+
+## Bugfixes
+
+- Fixed TypeError "unhashable type: 'list'" when using CountryField(multiple=True) in Django admin list_display. (#311)
+- Fixed CountryField(multiple=True) displaying "-" instead of country names in Django admin readonly_fields. (#463)
+- Fixed incorrect max_length calculation for CountryField(multiple=True) when using COUNTRIES_FIRST with COUNTRIES_FIRST_REPEAT. (#469)
+
+
 # django_countries 7.8 (4 November 2025)
 
 _Where'd 7.7 go? Well 7.6 was accidentally bumped to 7.8 because of the new release process!_

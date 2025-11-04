@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "django-countries"
-version = "7.8"
+version = "7.9"
 description = "Provides a country field for Django models."
 readme = "README.md"
 authors = [{ name = "Chris Beaven", email = "smileychris@gmail.com" }]
