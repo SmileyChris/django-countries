@@ -44,6 +44,9 @@ jobs:
       - name: Run tests for ${{ matrix.test-env }}
         run: just test ${{ matrix.test-env }} ${{ matrix.python-version }}
 
+      - name: List coverage files (debug)
+        run: ls -la .coverage* || echo "No coverage files found"
+
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
         with:
