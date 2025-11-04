@@ -1,7 +1,13 @@
 # Django Countries
 
-[![PyPI version](https://badge.fury.io/py/django-countries.svg)](https://badge.fury.io/py/django-countries)
-[![Build status](https://github.com/SmileyChris/django-countries/actions/workflows/tests.yml/badge.svg)](https://github.com/SmileyChris/django-countries/actions/workflows/tests.yml)
+<p align="center">
+  <img src="docs/images/logo.png" alt="Django Countries Logo" width="200">
+</p>
+
+<p align="center">
+  <a href="https://badge.fury.io/py/django-countries"><img src="https://badge.fury.io/py/django-countries.svg" alt="PyPI version"></a>
+  <a href="https://github.com/SmileyChris/django-countries/actions/workflows/tests.yml"><img src="https://github.com/SmileyChris/django-countries/actions/workflows/tests.yml/badge.svg" alt="Build status"></a>
+</p>
 
 A Django application that provides country choices for use with forms, flag icons static files, and a country field for models.
 
