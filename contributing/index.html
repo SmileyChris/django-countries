@@ -14,7 +14,7 @@
         <link rel="prev" href="../advanced/multiple/">
       
       
-        <link rel="next" href="../changelog/">
+        <link rel="next" href="../iso3166-formatting/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -1045,6 +1045,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#choosing-the-right-release-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing the Right Release Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#manual-release" class="md-nav__link">
     <span class="md-ellipsis">
       Manual Release
@@ -1113,6 +1122,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso3166-formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 3166-1 Formatting
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1332,6 +1364,15 @@
   <a href="#quick-release-recommended" class="md-nav__link">
     <span class="md-ellipsis">
       Quick Release (Recommended)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choosing-the-right-release-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing the Right Release Type
     </span>
   </a>
   
@@ -1615,6 +1656,14 @@
 11. Build final package and publish to PyPI<br />
 12. Deploy documentation to GitHub Pages</p>
 <p><strong>Note</strong>: Add changelog entries to <code>changes/</code> directory before releasing. See <code>changes/README.md</code> for details.</p>
+<h3 id="choosing-the-right-release-type">Choosing the Right Release Type<a class="headerlink" href="#choosing-the-right-release-type" title="Permanent link">&para;</a></h3>
+<p>This project follows <a href="https://semver.org/">Semantic Versioning</a>:</p>
+<ul>
+<li><strong>Patch (X.Y.Z)</strong>: Bug fixes, translations, flag updates, documentation fixes</li>
+<li><strong>Minor (X.Y.0)</strong>: New features, new Django/Python/DRF support, country name changes, performance improvements</li>
+<li><strong>Major (X.0.0)</strong>: Breaking changes, dropping Python/Django support, API changes, removing deprecated features</li>
+</ul>
+<p><strong>Key Rule</strong>: Adding version support = minor. Dropping version support = major.</p>
 <p>After the release, remember to bump to the next development version:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uv<span class="w"> </span>version<span class="w"> </span>--bump<span class="w"> </span>minor
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># Manually edit pyproject.toml to change version from X.Y.0 to X.Y.dev0</span>

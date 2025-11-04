@@ -11,7 +11,7 @@
       
       
       
-        <link rel="prev" href="../contributing/">
+        <link rel="prev" href="../iso3166-formatting/">
       
       
       
@@ -850,6 +850,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../iso3166-formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 3166-1 Formatting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -929,26 +952,51 @@ versions first. It can be assumed that translations have been updated each<br />
 release, and any new translations added.</p>
 <!-- towncrier release notes start -->
 
-<h1 id="django_countries-791-4-november-2025">django_countries 7.9.1 (4 November 2025)<a class="headerlink" href="#django_countries-791-4-november-2025" title="Permanent link">&para;</a></h1>
+<h1 id="django_countries-800-4-november-2025">django_countries 8.0.0 (4 November 2025)<a class="headerlink" href="#django_countries-800-4-november-2025" title="Permanent link">&para;</a></h1>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Added common names for six additional countries/territories: Democratic Republic of the Congo (CD), South Georgia (GS), Netherlands (NL), Palestine (PS), Saint Helena (SH), and Vatican City (VA). These provide friendlier, shorter names when <code>COUNTRIES_COMMON_NAMES</code> is enabled (default).</li>
+</ul>
 <h2 id="bugfixes">Bugfixes<a class="headerlink" href="#bugfixes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Updated country names to match ISO 3166-1 OBP: Bahamas (The) and Netherlands (Kingdom of the). Also improved self_generate() regex to handle type hints in dictionary declarations.</li>
+</ul>
+<h2 id="improved-documentation">Improved Documentation<a class="headerlink" href="#improved-documentation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Added documentation warning that CountryField does not support Django's <code>autocomplete_fields</code> in admin or third-party admin filter packages like <code>more_admin_filters</code>. (#473)</li>
+<li>Added comprehensive documentation on ISO 3166-1 country name formatting, explaining parentheses vs commas usage, capitalization of "the", and addressing common political objections about territories like Taiwan, Kosovo, Hong Kong, and Palestine.</li>
+</ul>
+<h2 id="deprecations-and-removals">Deprecations and Removals<a class="headerlink" href="#deprecations-and-removals" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Drop Python 3.7 support. Python 3.7 reached end-of-life in June 2023. The minimum supported Python version is now 3.8.</li>
+</ul>
+<h2 id="misc">Misc<a class="headerlink" href="#misc" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix unnecessary list comprehension in test_tags.py</li>
+</ul>
+<h1 id="django_countries-791-4-november-2025-yanked">django_countries 7.9.1 (4 November 2025) [YANKED]<a class="headerlink" href="#django_countries-791-4-november-2025-yanked" title="Permanent link">&para;</a></h1>
+<h2 id="bugfixes_1">Bugfixes<a class="headerlink" href="#bugfixes_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Fix <code>COUNTRIES_OVERRIDE</code> to support custom country codes that are 3 characters long. Previously, 3-character codes were incorrectly treated as alpha3 codes and resolved to existing countries. (#474)</li>
 </ul>
-<h1 id="django_countries-79-4-november-2025">django_countries 7.9 (4 November 2025)<a class="headerlink" href="#django_countries-79-4-november-2025" title="Permanent link">&para;</a></h1>
-<h2 id="bugfixes_1">Bugfixes<a class="headerlink" href="#bugfixes_1" title="Permanent link">&para;</a></h2>
+<p><strong>Note</strong>: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.</p>
+<h1 id="django_countries-79-4-november-2025-yanked">django_countries 7.9 (4 November 2025) [YANKED]<a class="headerlink" href="#django_countries-79-4-november-2025-yanked" title="Permanent link">&para;</a></h1>
+<h2 id="bugfixes_2">Bugfixes<a class="headerlink" href="#bugfixes_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Fixed TypeError "unhashable type: 'list'" when using CountryField(multiple=True) in Django admin list_display. (#311)</li>
 <li>Fixed CountryField(multiple=True) displaying "-" instead of country names in Django admin readonly_fields. (#463)</li>
 <li>Fixed incorrect max_length calculation for CountryField(multiple=True) when using COUNTRIES_FIRST with COUNTRIES_FIRST_REPEAT. (#469)</li>
 </ul>
-<h1 id="django_countries-78-4-november-2025">django_countries 7.8 (4 November 2025)<a class="headerlink" href="#django_countries-78-4-november-2025" title="Permanent link">&para;</a></h1>
+<p><strong>Note</strong>: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.</p>
+<h1 id="django_countries-78-4-november-2025-yanked">django_countries 7.8 (4 November 2025) [YANKED]<a class="headerlink" href="#django_countries-78-4-november-2025-yanked" title="Permanent link">&para;</a></h1>
 <p><em>Where'd 7.7 go? Well 7.6 was accidentally bumped to 7.8 because of the new release process!</em></p>
-<h2 id="improved-documentation">Improved Documentation<a class="headerlink" href="#improved-documentation" title="Permanent link">&para;</a></h2>
+<p><strong>Note</strong>: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.</p>
+<h2 id="improved-documentation_1">Improved Documentation<a class="headerlink" href="#improved-documentation_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Added MkDocs documentation site and simplified README to focus on quick start with link to full documentation.</li>
 <li>Consolidated release documentation into CONTRIBUTING.md and improved development setup instructions.</li>
 </ul>
-<h2 id="misc">Misc<a class="headerlink" href="#misc" title="Permanent link">&para;</a></h2>
+<h2 id="misc_1">Misc<a class="headerlink" href="#misc_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Expanded test matrix to cover Python 3.8-3.13 and Django 3.2-5.1 with improved test infrastructure.</li>
 <li>Fixed various code quality issues identified by ruff linter, including improved string formatting and file handling.</li>

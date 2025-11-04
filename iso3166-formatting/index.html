@@ -1,0 +1,1865 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A Django application for country choices and fields">
+      
+      
+      
+      
+        <link rel="prev" href="../contributing/">
+      
+      
+        <link rel="next" href="../changelog/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>ISO 3166-1 Formatting - Django Countries</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#iso-3166-1-country-name-formatting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Django Countries" class="md-header__button md-logo" aria-label="Django Countries" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Django Countries
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ISO 3166-1 Formatting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SmileyChris/django-countries" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SmileyChris/django-countries
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../usage/field/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../contributing/" class="md-tabs__link">
+          
+  
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Django Countries" class="md-nav__button md-logo" aria-label="Django Countries" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Django Countries
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SmileyChris/django-countries" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SmileyChris/django-countries
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Welcome
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/field/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CountryField
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Forms & Widgets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Template Tags
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Integrations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/drf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Django REST Framework
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/graphql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GraphQL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/customization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Customization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/multiple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multiple Countries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    ISO 3166-1 Formatting
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 3166-1 Formatting
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parentheses-vs-commas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parentheses vs Commas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parentheses vs Commas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observed-pattern-obp-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observed Pattern (OBP Data)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-iso-says" class="md-nav__link">
+    <span class="md-ellipsis">
+      What ISO Says
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentary-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentary Sources
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capitalization-of-the" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capitalization of "The"
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capitalization of &#34;The&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observed-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observed Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reason" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reason
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#countries-with-the-in-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      Countries with "(the)" in Names
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure-in-iso-3166-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure in ISO 3166-1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#un-influence-and-historical-politics" class="md-nav__link">
+    <span class="md-ellipsis">
+      UN Influence and Historical Politics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table-of-formatting-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary Table of Formatting Logic
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implications-for-django-countries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implications for django-countries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implications for django-countries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-stripping-of-the" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Stripping of "(the)"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#special-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Special Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-names-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Names Feature
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#political-objections-and-the-country-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Political Objections and the "Country" Definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Political Objections and the &#34;Country&#34; Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-objection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Objection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-django-countries-follows-iso-3166-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why django-countries Follows ISO 3166-1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-for-your-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing for Your Use Case
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#our-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Our Position
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See Also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parentheses-vs-commas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parentheses vs Commas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parentheses vs Commas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observed-pattern-obp-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observed Pattern (OBP Data)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-iso-says" class="md-nav__link">
+    <span class="md-ellipsis">
+      What ISO Says
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentary-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentary Sources
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capitalization-of-the" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capitalization of "The"
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capitalization of &#34;The&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observed-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observed Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reason" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reason
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#countries-with-the-in-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      Countries with "(the)" in Names
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure-in-iso-3166-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure in ISO 3166-1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#un-influence-and-historical-politics" class="md-nav__link">
+    <span class="md-ellipsis">
+      UN Influence and Historical Politics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table-of-formatting-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary Table of Formatting Logic
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implications-for-django-countries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implications for django-countries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implications for django-countries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-stripping-of-the" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Stripping of "(the)"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#special-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Special Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-names-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Names Feature
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#political-objections-and-the-country-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Political Objections and the "Country" Definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Political Objections and the &#34;Country&#34; Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-objection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Objection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-django-countries-follows-iso-3166-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why django-countries Follows ISO 3166-1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-for-your-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing for Your Use Case
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#our-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Our Position
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See Also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="iso-3166-1-country-name-formatting">ISO 3166-1 Country Name Formatting<a class="headerlink" href="#iso-3166-1-country-name-formatting" title="Permanent link">&para;</a></h1>
+<p>This document explains the formatting patterns, inconsistencies, and historical context of country names in the ISO 3166-1 standard, as used by django-countries.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>ISO 3166-1 defines short names for countries and territories used in coding (e.g., alpha-2, alpha-3). While the <strong>codes</strong> are rigidly defined, the <strong>names</strong> in the Online Browsing Platform (OBP) have stylistic irregularities—most notably:</p>
+<ul>
+<li>Inconsistent use of <strong>parentheses vs commas</strong></li>
+<li>Inconsistent <strong>capitalization</strong> of "The"</li>
+</ul>
+<p>These quirks stem from how ISO derives its names from <strong>United Nations sources (UNTERM)</strong> and applies <strong>sorting conventions</strong> described in the standard itself.</p>
+<h2 id="parentheses-vs-commas">Parentheses vs Commas<a class="headerlink" href="#parentheses-vs-commas" title="Permanent link">&para;</a></h2>
+<h3 id="observed-pattern-obp-data">Observed Pattern (OBP Data)<a class="headerlink" href="#observed-pattern-obp-data" title="Permanent link">&para;</a></h3>
+<p><strong>Parentheses:</strong> ~41 countries</p>
+<p>Used for:<br />
+- <strong>Qualifiers / state designations</strong><br />
+  - "Bolivia (Plurinational State of)"<br />
+  - "Iran (Islamic Republic of)"<br />
+  - "Netherlands (Kingdom of the)"<br />
+- <strong>Articles</strong><br />
+  - "Gambia (the)"<br />
+  - "Niger (the)"<br />
+- <strong>Alternative or political names</strong><br />
+  - "Falkland Islands (the) [Malvinas]"</p>
+<p><strong>Commas:</strong> Only 4 countries</p>
+<ol>
+<li><strong>Bonaire, Sint Eustatius and Saba</strong> – multi-territory list</li>
+<li><strong>Palestine, State of</strong> – state designation inversion</li>
+<li><strong>Saint Helena, Ascension and Tristan da Cunha</strong> – multi-territory list</li>
+<li><strong>Tanzania, the United Republic of</strong> – formal name inversion</li>
+</ol>
+<h3 id="what-iso-says">What ISO Says<a class="headerlink" href="#what-iso-says" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ISO 3166-1:2020 allows names to be <strong>"inverted… allowing the distinctive word to appear first"</strong> for alphabetical sorting (Annex F).</li>
+<li>The <strong>comma</strong> signals such inversion: moving the distinctive term first and appending the descriptor after.</li>
+<li>Therefore:</li>
+<li><strong>Comma → inversion for sorting</strong> (distinctive word first)</li>
+<li><strong>Parentheses → qualifiers or articles</strong>, not part of inversion logic</li>
+</ul>
+<h3 id="documentary-sources">Documentary Sources<a class="headerlink" href="#documentary-sources" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Change Origin</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bonaire, Sint Eustatius and Saba</td>
+<td>ISO 3166-1 Newsletter VI-8 (2010-12-15)</td>
+<td>New multi-territory name after Netherlands Antilles dissolution</td>
+</tr>
+<tr>
+<td>Palestine, State of</td>
+<td>ISO 3166-1 Newsletter VI-14 (2013-02-06)</td>
+<td>Updated following UN recognition; inverted for "distinctive word first"</td>
+</tr>
+<tr>
+<td>Saint Helena, Ascension and Tristan da Cunha</td>
+<td>ISO 3166-1 Newsletter VI-7 (2010-02-22)</td>
+<td>Adopted new name listing all three territories</td>
+</tr>
+<tr>
+<td>Tanzania, the United Republic of</td>
+<td>Pre-newsletter era</td>
+<td>Inverted per Annex F rule ("distinctive word first")</td>
+</tr>
+</tbody>
+</table>
+<h2 id="capitalization-of-the">Capitalization of "The"<a class="headerlink" href="#capitalization-of-the" title="Permanent link">&para;</a></h2>
+<h3 id="observed-pattern">Observed Pattern<a class="headerlink" href="#observed-pattern" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Count</th>
+<th>Example</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(The)</strong> (capital T)</td>
+<td>1</td>
+<td>Bahamas (The) – BS</td>
+<td>Only case where article is capitalized</td>
+</tr>
+<tr>
+<td><strong>(the)</strong> (lower t)</td>
+<td>31</td>
+<td>Gambia (the), Congo (the), Philippines (the)…</td>
+<td>All others use lowercase</td>
+</tr>
+<tr>
+<td><strong>, the</strong></td>
+<td>1</td>
+<td>Tanzania, the United Republic of</td>
+<td>Comma + lowercase article</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reason">Reason<a class="headerlink" href="#reason" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"<strong>The Bahamas</strong>" is officially capitalized in both national and UN usage; even the UN Blue Book lists <strong>Bahamas (The)</strong>.</li>
+<li>For most other countries (e.g., "the Gambia"), ISO aligns with <strong>UNTERM</strong>, which lowercases the article.</li>
+<li>An ISO newsletter (for Gambia) explicitly noted a change for "<strong>alignment of the English short name (lower case) with UNTERM</strong>".</li>
+</ul>
+<h3 id="interpretation">Interpretation<a class="headerlink" href="#interpretation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ISO uses <strong>UNTERM as the authoritative source</strong>, adopting its casing.</li>
+<li>The Bahamas is an exception honoring <strong>country-preferred capitalization</strong> ("The Bahamas").</li>
+</ul>
+<h2 id="countries-with-the-in-names">Countries with "(the)" in Names<a class="headerlink" href="#countries-with-the-in-names" title="Permanent link">&para;</a></h2>
+<p>31 countries have lowercase "(the)" in their official ISO 3166-1 names:</p>
+<ol>
+<li>British Indian Ocean Territory (the)</li>
+<li>Cayman Islands (the)</li>
+<li>Central African Republic (the)</li>
+<li>Cocos (Keeling) Islands (the)</li>
+<li>Comoros (the)</li>
+<li>Congo (the)</li>
+<li>Congo (the Democratic Republic of the)</li>
+<li>Cook Islands (the)</li>
+<li>Dominican Republic (the)</li>
+<li>Falkland Islands (the) [Malvinas]</li>
+<li>Faroe Islands (the)</li>
+<li>French Southern Territories (the)</li>
+<li>Gambia (the)</li>
+<li>Holy See (the)</li>
+<li>Korea (the Democratic People's Republic of)</li>
+<li>Korea (the Republic of)</li>
+<li>Lao People's Democratic Republic (the)</li>
+<li>Marshall Islands (the)</li>
+<li>Moldova (the Republic of)</li>
+<li>Niger (the)</li>
+<li>Northern Mariana Islands (the)</li>
+<li>Philippines (the)</li>
+<li>Russian Federation (the)</li>
+<li>Sudan (the)</li>
+<li>Syrian Arab Republic (the)</li>
+<li>Turks and Caicos Islands (the)</li>
+<li>United Arab Emirates (the)</li>
+<li>United Kingdom of Great Britain and Northern Ireland (the)</li>
+<li>United States Minor Outlying Islands (the)</li>
+<li>United States of America (the)</li>
+<li>Tanzania, the United Republic of (comma format)</li>
+</ol>
+<h2 id="structure-in-iso-3166-1">Structure in ISO 3166-1<a class="headerlink" href="#structure-in-iso-3166-1" title="Permanent link">&para;</a></h2>
+<p>From the standard itself:</p>
+<ul>
+<li><strong>Short name (title case)</strong> – used in OBP, shows parentheses for moved articles and qualifiers.</li>
+<li><strong>Short NAME (uppercase)</strong> – used in code lists; may invert elements using commas for alphabetical order.</li>
+</ul>
+<p>Thus, the punctuation difference partially comes from maintaining <strong>dual representations</strong> (display vs sort forms).</p>
+<h2 id="un-influence-and-historical-politics">UN Influence and Historical Politics<a class="headerlink" href="#un-influence-and-historical-politics" title="Permanent link">&para;</a></h2>
+<p>ISO's names follow <strong>UNTERM / UN Statistics Division</strong> forms. Parentheses often trace back to UN practice for:</p>
+<ul>
+<li>Politically sensitive dual names (e.g., <em>Falkland Islands (the) [Malvinas]</em>)</li>
+<li>Optional or variant designations</li>
+</ul>
+<p>Commas arise when the UN or ISO Maintenance Agency needs an <strong>inverted form</strong> for cataloging (rare).</p>
+<h2 id="summary-table-of-formatting-logic">Summary Table of Formatting Logic<a class="headerlink" href="#summary-table-of-formatting-logic" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Typical Function</th>
+<th>Example</th>
+<th>Underlying Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>( )</strong></td>
+<td>Article or qualifier moved after main noun; sometimes alternate name</td>
+<td><em>Korea (the Republic of)</em></td>
+<td>Not inversion; mirrors UNTERM "short name"</td>
+</tr>
+<tr>
+<td>**, **</td>
+<td>Indicates ISO inversion for sorting distinctive word first</td>
+<td><em>Tanzania, the United Republic of</em></td>
+<td>Annex F F.2 inversion rule</td>
+</tr>
+<tr>
+<td><strong>(The)</strong> vs <strong>(the)</strong></td>
+<td>Capitalized only when article is part of official name</td>
+<td><em>Bahamas (The)</em></td>
+<td>Exception aligned to country's preference</td>
+</tr>
+<tr>
+<td><strong>Multi-territory commas</strong></td>
+<td>List of distinct geographic units</td>
+<td><em>Saint Helena, Ascension and Tristan da Cunha</em></td>
+<td>Literal list, not inversion</td>
+</tr>
+</tbody>
+</table>
+<h2 id="implications-for-django-countries">Implications for django-countries<a class="headerlink" href="#implications-for-django-countries" title="Permanent link">&para;</a></h2>
+<h3 id="automatic-stripping-of-the">Automatic Stripping of "(the)"<a class="headerlink" href="#automatic-stripping-of-the" title="Permanent link">&para;</a></h3>
+<p>The <code>data.py</code> self-generation script automatically strips standalone <code>(the)</code> from country names:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\(the\)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</code></pre></div>
+<p>This means:<br />
+- <code>"Gambia (the)"</code> → <code>"Gambia"</code><br />
+- <code>"Niger (the)"</code> → <code>"Niger"</code><br />
+- <code>"United States of America (the)"</code> → <code>"United States of America"</code></p>
+<p>However, it <strong>does not</strong> strip "the" when it's part of a longer phrase:<br />
+- <code>"Congo (the Democratic Republic of the)"</code> → keeps as-is (doesn't match the regex)<br />
+- <code>"Netherlands (Kingdom of the)"</code> → keeps as-is</p>
+<h3 id="special-cases">Special Cases<a class="headerlink" href="#special-cases" title="Permanent link">&para;</a></h3>
+<p><strong>Bahamas (The)</strong>: The only country with capitalized "(The)" is <strong>not</strong> stripped by the regex (which only matches lowercase). This is intentional to preserve the official capitalization preference.</p>
+<p><strong>Netherlands</strong>: Recently updated in OBP from "Netherlands" to "Netherlands (Kingdom of the)" to reflect the official constitutional name.</p>
+<h3 id="common-names-feature">Common Names Feature<a class="headerlink" href="#common-names-feature" title="Permanent link">&para;</a></h3>
+<p>The <code>COMMON_NAMES</code> dictionary in <code>base.py</code> provides user-friendly alternatives for countries with verbose official names:</p>
+<ul>
+<li>Primarily used for state designations: "Bolivia" instead of "Bolivia (Plurinational State of)"</li>
+<li>Also used for political simplification: "North Korea" / "South Korea" instead of "Korea (the Democratic People's Republic of)" / "Korea (the Republic of)"</li>
+<li><strong>Not needed</strong> for countries with standalone "(the)" as these are automatically stripped</li>
+</ul>
+<p>When <code>COUNTRIES_COMMON_NAMES</code> setting is enabled (default: <code>True</code>), these friendly names replace the official ISO names in dropdown lists and displays.</p>
+<h2 id="political-objections-and-the-country-definition">Political Objections and the "Country" Definition<a class="headerlink" href="#political-objections-and-the-country-definition" title="Permanent link">&para;</a></h2>
+<h3 id="common-objection">Common Objection<a class="headerlink" href="#common-objection" title="Permanent link">&para;</a></h3>
+<p>A frequent objection to django-countries is that certain territories listed in ISO 3166-1 are "not countries" according to some political viewpoints. These objections have appeared repeatedly in GitHub issues:</p>
+<p><strong>Taiwan naming</strong> (<a href="https://github.com/SmileyChris/django-countries/issues/16">#16</a>, <a href="https://github.com/SmileyChris/django-countries/issues/29">#29</a>, <a href="https://github.com/SmileyChris/django-countries/issues/60">#60</a>, <a href="https://github.com/SmileyChris/django-countries/issues/342">#342</a>):<br />
+- Listed as "Taiwan, Province of China" in ISO 3166-1<br />
+- Some users find this offensive and request "Taiwan" or "Republic of China"<br />
+- Others request "Taiwan, China" or "Chinese Taipei"</p>
+<p><strong>Kosovo</strong> (<a href="https://github.com/SmileyChris/django-countries/issues/5">#5</a>, <a href="https://github.com/SmileyChris/django-countries/issues/25">#25</a>, <a href="https://github.com/SmileyChris/django-countries/issues/107">#107</a>, <a href="https://github.com/SmileyChris/django-countries/issues/139">#139</a>, <a href="https://github.com/SmileyChris/django-countries/issues/214">#214</a>, <a href="https://github.com/SmileyChris/django-countries/issues/239">#239</a>, <a href="https://github.com/SmileyChris/django-countries/issues/314">#314</a>, <a href="https://github.com/SmileyChris/django-countries/issues/423">#423</a>):<br />
+- Not in ISO 3166-1 (uses temporary code XK)<br />
+- Repeatedly requested for inclusion despite not being in the standard<br />
+- Now available via <code>COUNTRIES_OVERRIDE</code> customization</p>
+<p><strong>Other territories</strong>:<br />
+- <strong>Hong Kong</strong> - Special Administrative Region of China<br />
+- <strong>Macao</strong> - Special Administrative Region of China<br />
+- <strong>Palestine</strong> - Listed as "Palestine, State of"<br />
+- <strong>Tibet</strong> - Not recognized as separate from China in ISO 3166-1<br />
+- <strong>Vatican City</strong> - Listed as "Holy See (the)"</p>
+<p>Users sometimes request that these be:<br />
+- Removed from the list entirely<br />
+- Renamed (e.g., "Taiwan, China" or "Chinese Taipei")<br />
+- Reclassified in some way</p>
+<h3 id="why-django-countries-follows-iso-3166-1">Why django-countries Follows ISO 3166-1<a class="headerlink" href="#why-django-countries-follows-iso-3166-1" title="Permanent link">&para;</a></h3>
+<p><strong>ISO 3166-1 is not about political "countries"</strong> - it's about <strong>coding areas</strong> for data processing and standardization. The standard itself carefully avoids the term "country" in favor of:</p>
+<ul>
+<li>"Country name" (referring to the short name used for coding)</li>
+<li>"Entity" or "territory"</li>
+<li>"Areas of geographical interest"</li>
+</ul>
+<p>ISO 3166-1 includes:</p>
+<ul>
+<li>Sovereign states (e.g., France, Japan)</li>
+<li>Dependent territories (e.g., Guam, French Guiana)</li>
+<li>Special Administrative Regions (e.g., Hong Kong, Macao)</li>
+<li>Disputed territories (e.g., Western Sahara)</li>
+<li>Administrative regions (e.g., Taiwan)</li>
+</ul>
+<p><strong>Why ISO, not political definitions:</strong></p>
+<ol>
+<li><strong>Neutrality</strong> - ISO 3166-1 is maintained by an international standards body, not any single government</li>
+<li><strong>Stability</strong> - Political definitions change; ISO provides stable codes for data interchange</li>
+<li><strong>Universality</strong> - Used globally for postal codes, domain names (ccTLDs), currency codes, etc.</li>
+<li><strong>Practical utility</strong> - Shipping addresses, phone numbers, and payment processing require these regions to be coded</li>
+</ol>
+<h3 id="customizing-for-your-use-case">Customizing for Your Use Case<a class="headerlink" href="#customizing-for-your-use-case" title="Permanent link">&para;</a></h3>
+<p>If your application has specific political requirements or regional considerations, django-countries provides extensive customization options:</p>
+<p><strong>Remove territories:</strong><br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">COUNTRIES_ONLY</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;MX&#39;</span><span class="p">]</span>  <span class="c1"># North America only</span>
+</code></pre></div></p>
+<p><strong>Rename territories:</strong><br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">COUNTRIES_OVERRIDE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s1">&#39;TW&#39;</span><span class="p">:</span> <span class="s1">&#39;Taiwan, China&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s1">&#39;HK&#39;</span><span class="p">:</span> <span class="s1">&#39;Hong Kong SAR, China&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s1">&#39;MO&#39;</span><span class="p">:</span> <span class="s1">&#39;Macao SAR, China&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Exclude specific territories:</strong><br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">COUNTRIES_OVERRIDE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s1">&#39;TW&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Removes Taiwan from list</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>See the <a href="../advanced/customization/">Customization Guide</a> for complete details.</p>
+<h3 id="our-position">Our Position<a class="headerlink" href="#our-position" title="Permanent link">&para;</a></h3>
+<p>django-countries <strong>follows ISO 3166-1 by default</strong> because:</p>
+<ol>
+<li>It's the international standard for territorial coding</li>
+<li>It's politically neutral (maintained by ISO, not any government)</li>
+<li>It's what most developers expect and need</li>
+<li>It's easily customizable for those with different requirements</li>
+</ol>
+<p>We recognize that ISO 3166-1 includes territories that are politically disputed or not universally recognized as independent countries. This is intentional - the standard serves as a coding system for <strong>practical data interchange</strong>, not a political statement about sovereignty.</p>
+<p>If the ISO list doesn't match your application's requirements, please use the customization features rather than requesting changes to the default list.</p>
+<h2 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>No single "rule" document</strong> exists for commas vs parentheses; ISO 3166-1's Annex F allows discretion to invert names for sorting.</li>
+<li><strong>Parentheses</strong> mark <strong>qualifiers, articles, or alternate names</strong>, mirroring UNTERM.</li>
+<li><strong>Commas</strong> mark <strong>inversions</strong> or <strong>multi-territory enumerations</strong>; only four examples appear in the current OBP.</li>
+<li><strong>Capitalized "The"</strong> appears solely in <em>Bahamas (The)</em> due to <strong>official self-designation</strong>.</li>
+<li><strong>All other lowercase articles</strong> follow <strong>UNTERM normalization</strong> (confirmed in a Gambia newsletter).</li>
+<li><strong>ISO 3166-1 is a coding standard, not a political definition</strong> - it includes territories regardless of sovereignty status for practical data interchange purposes.</li>
+</ol>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>ISO 3166-1:2020, Clauses 3.14–3.16 &amp; Annex F (sorting/inversion rules)</li>
+<li>ISO 3166-1 Newsletters VI-7, VI-8, VI-14 (2010–2013)</li>
+<li>UN TERM / UN Blue Book country listings</li>
+<li>GitHub discussions highlighting developer confusion about formatting inconsistencies</li>
+<li>ANSI blog "ISO 3166-1:2020 – Country Codes Standard Changes"</li>
+</ul>
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="settings.md#countries_common_names">Common Names</a> - Using friendly country names</li>
+<li><a href="../advanced/customization/">Customization</a> - Overriding country names</li>
+<li><a href="../contributing/#updating-country-data">Contributing</a> - How to update country data from ISO OBP</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -990,6 +990,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../iso3166-formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 3166-1 Formatting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../changelog/" class="md-nav__link">
         
   
@@ -1203,6 +1226,11 @@
 </code></pre></div>
 <h2 id="admin">Admin<a class="headerlink" href="#admin" title="Permanent link">&para;</a></h2>
 <p>The country field works out of the box in Django admin with a searchable dropdown.</p>
+<div class="admonition note">
+<p class="admonition-title">Django Admin Limitations</p>
+<p><code>CountryField</code> does not currently support Django's <code>autocomplete_fields</code> feature. If you need autocomplete functionality, you'll need to use a custom form with a different widget.</p>
+<p>The field may also not work correctly with third-party admin filter packages like <code>more_admin_filters</code> that expect specific field types.</p>
+</div>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../usage/field/">CountryField Details</a> - Learn about all field options</li>
