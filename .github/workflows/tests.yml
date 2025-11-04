@@ -51,10 +51,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.python-version }}-${{ matrix.test-env }}
-          path: |
-            .coverage
-            .coverage.*
-          if-no-files-found: ignore
+          path: .coverage*
+          if-no-files-found: warn
 
   lint-and-type-check:
     runs-on: ubuntu-latest
@@ -116,8 +114,13 @@ jobs:
 
       - name: Combine and check coverage
         run: |
+          # List all downloaded coverage files
+          echo "Coverage files found:"
+          ls -la .coverage* || echo "No coverage files found"
+          echo ""
+
           # Check if any coverage files exist
-          if ls .coverage.* 1> /dev/null 2>&1; then
+          if ls .coverage* 1> /dev/null 2>&1; then
             coverage combine
             echo "Test coverage (must be 100%):"
             coverage report --include="django_countries/tests/*" --fail-under=100 -m
