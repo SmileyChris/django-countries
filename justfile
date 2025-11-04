@@ -1,0 +1,290 @@
+# django-countries justfile - Modern development commands using uv
+
+# Default recipe - show available commands
+default:
+    @just --list
+
+# Run tests - smart command that handles multiple scenarios
+# Usage:
+#   just test                                          -> run all test matrices + coverage
+#   just test quick                                    -> quick test with current Python (no coverage)
+#   just test [latest|previous|legacy|latest-pyuca|latest-noi18n]              -> run specific env
+#   just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.8-3.13]   -> run specific env + python
+test *ARGS='':
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    # Pass ARGS from just to bash script
+    ARGS=({{ ARGS }})
+
+    if [ ${#ARGS[@]} -eq 0 ]; then
+        # No args: run all test matrices + coverage
+        echo "Running all test environments..."
+        just _test-matrix
+        echo ""
+        echo "Generating coverage report..."
+        just _coverage-report
+    elif [ ${#ARGS[@]} -eq 1 ]; then
+        # One arg: could be "quick" or environment name
+        ENV="${ARGS[0]}"
+        if [ "$ENV" = "quick" ]; then
+            echo "Running quick test with current Python..."
+            uv run --group test pytest
+        else
+            case "$ENV" in
+                legacy)      PYTHON="3.8" ;;
+                previous)    PYTHON="3.10" ;;
+                latest|latest-pyuca|latest-noi18n) PYTHON="3.13" ;;
+                *)           echo "Unknown environment: $ENV"; exit 1 ;;
+            esac
+            just _test-env "$ENV" "$PYTHON"
+        fi
+    elif [ ${#ARGS[@]} -eq 2 ]; then
+        # Two args: environment and python version
+        just _test-env "${ARGS[0]}" "${ARGS[1]}"
+    else
+        echo "Usage: just test [ENV [PYTHON]]"
+        exit 1
+    fi
+
+# Run all test environments (internal)
+_test-matrix:
+    @echo "Cleaning old coverage files..."
+    @rm -rf .coverage* htmlcov
+    @just _test-env legacy 3.8
+    @just _test-env previous 3.10
+    @just _test-env latest 3.13
+    @just _test-env latest-pyuca 3.13
+    @just _test-env latest-noi18n 3.13
+
+# Run a specific test environment (internal)
+_test-env ENV PYTHON:
+    @echo ""
+    @echo "========================================="
+    @echo "Testing: Python {{ PYTHON }} - {{ ENV }}"
+    @echo "========================================="
+    @case "{{ ENV }}" in \
+        legacy) \
+            uv run --python {{ PYTHON }} \
+                   --with "Django==3.2.*" \
+                   --with "djangorestframework==3.11.*" \
+                   --with "pyuca" \
+                   --group test \
+                   coverage run -m pytest \
+            ;; \
+        previous) \
+            uv run --python {{ PYTHON }} \
+                   --with "Django==4.2.*" \
+                   --with "djangorestframework==3.14.*" \
+                   --group test \
+                   coverage run -m pytest \
+            ;; \
+        latest) \
+            uv run --python {{ PYTHON }} \
+                   --with "Django==5.1.*" \
+                   --with "djangorestframework==3.15.*" \
+                   --with "graphene-django==3.0.*" \
+                   --group test \
+                   coverage run -m pytest \
+            ;; \
+        latest-pyuca) \
+            uv run --python {{ PYTHON }} \
+                   --with "Django==5.1.*" \
+                   --with "djangorestframework==3.15.*" \
+                   --with "graphene-django==3.0.*" \
+                   --with "pyuca" \
+                   --group test \
+                   coverage run -m pytest \
+            ;; \
+        latest-noi18n) \
+            DJANGO_SETTINGS_MODULE=django_countries.tests.settings_noi18n \
+            uv run --python {{ PYTHON }} \
+                   --with "Django==5.1.*" \
+                   --with "djangorestframework==3.15.*" \
+                   --with "graphene-django==3.0.*" \
+                   --group test \
+                   coverage run -m pytest \
+            ;; \
+        *) \
+            echo "Unknown environment: {{ ENV }}"; exit 1 \
+            ;; \
+    esac
+
+# Generate coverage report (internal)
+_coverage-report:
+    @uv run --group test coverage combine .coverage* 2>/dev/null || true
+    @echo ""
+    @echo "Test coverage (must be 100%):"
+    @uv run --group test coverage report --include="django_countries/tests/*" --fail-under=100 -m
+    @echo ""
+    @echo "Source coverage (must be 90%+):"
+    @uv run --group test coverage report --omit="django_countries/tests/*" --fail-under=90 -m
+    @uv run --group test coverage html
+    @echo ""
+    @echo "Coverage report saved to htmlcov/index.html"
+
+# Run all checks (format, lint, type, docs, test)
+check:
+    @echo "Running all checks..."
+    @echo ""
+    @echo "→ Checking code formatting..."
+    ruff check --select I django_countries
+    ruff format --check django_countries
+    @echo "✓ Formatting OK"
+    @echo ""
+    @echo "→ Running linters..."
+    ruff check django_countries
+    bandit -r django_countries -x tests
+    @echo "✓ Linting OK"
+    @echo ""
+    @echo "→ Type checking..."
+    mypy django_countries
+    @echo "✓ Type checking OK"
+    @echo ""
+    @echo "→ Validating documentation..."
+    uv run --group docs mkdocs build --strict
+    @echo "✓ Documentation OK"
+    @echo ""
+    @echo "→ Running tests..."
+    just test
+    @echo ""
+    @echo "======================================"
+    @echo "✓ All checks passed!"
+    @echo "======================================"
+
+# Serve documentation locally at http://127.0.0.1:8080
+docs:
+    uv run --group docs mkdocs serve --livereload --dev-addr 127.0.0.1:8080
+
+# Pull translations from Transifex and compile message catalogs
+tx-pull:
+    @echo "Pulling translations from Transifex..."
+    tx pull -a --minimum-perc=60
+    @echo "Compiling message catalogs..."
+    uv run --group dev django-admin compilemessages
+    @echo "✓ Translations updated and compiled"
+
+# Deploy a new release to PyPI
+# Usage: just deploy [patch|minor|major]
+# Default: patch
+deploy BUMP="patch":
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    echo "======================================"
+    echo "django-countries Release Process"
+    echo "======================================"
+    echo ""
+
+    # Check git status
+    if ! git diff-index --quiet HEAD --; then
+        echo "❌ Error: Working directory has uncommitted changes"
+        echo "Please commit or stash your changes first"
+        exit 1
+    fi
+
+    # Pull latest
+    echo "→ Pulling latest changes..."
+    git pull
+    echo ""
+
+    # Pull and commit translations
+    echo "→ Pulling translations from Transifex..."
+    tx pull -a --minimum-perc=60
+    echo "→ Compiling message catalogs..."
+    uv run --group dev django-admin compilemessages
+    if ! git diff-index --quiet HEAD --; then
+        git add django_countries/locale
+        git commit -m "Update translations from Transifex"
+        echo "✓ Translations committed"
+    else
+        echo "✓ No translation changes"
+    fi
+    echo ""
+
+    # Get current version
+    CURRENT_VERSION=$(uv version --short)
+    echo "Current version: $CURRENT_VERSION"
+
+    # Preview changelog to verify fragments exist
+    echo "→ Previewing changelog..."
+    uv run --group dev towncrier build --draft --version "NEXT" 2>&1 | head -20 || {
+        echo "⚠ Warning: No changelog fragments found in changes/"
+        read -p "Continue anyway? (y/N) " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            exit 1
+        fi
+    }
+    echo ""
+
+    # Bump version
+    echo "→ Bumping version ({{ BUMP }})..."
+    uv version --bump {{ BUMP }}
+    NEW_VERSION=$(uv version --short)
+    echo "New version: $NEW_VERSION"
+    echo ""
+
+    # Run pre-commit checks on version bump
+    echo "→ Running pre-commit checks..."
+    if command -v pre-commit &> /dev/null; then
+        git add pyproject.toml
+        pre-commit run --files pyproject.toml || {
+            echo "❌ Pre-commit checks failed on pyproject.toml"
+            exit 1
+        }
+    fi
+    echo ""
+
+    # Build package to verify everything works BEFORE modifying changelog
+    echo "→ Building package (verification)..."
+    rm -rf dist
+    uv build || {
+        echo "❌ Package build failed"
+        echo "Please fix the issues and try again."
+        exit 1
+    }
+    echo "✓ Package built successfully"
+    echo ""
+
+    # Now build changelog and commit atomically
+    echo "→ Building changelog and committing..."
+    TODAY=$(date "+%-d %B %Y")
+    uv run --group dev towncrier build --version "$NEW_VERSION" --date "$TODAY" --yes
+    git add pyproject.toml CHANGES.md changes/
+    git commit -m "Preparing release $NEW_VERSION"
+    echo "✓ Version bump and changelog committed"
+    echo ""
+
+    # Create and push tag
+    echo "→ Creating git tag v$NEW_VERSION..."
+    git tag -a "v$NEW_VERSION" -m "Release v$NEW_VERSION"
+    git push --tags
+    git push
+    echo "✓ Tag pushed"
+    echo ""
+
+    # Build final package and publish
+    echo "→ Building final package..."
+    rm -rf dist
+    uv build
+    echo "→ Publishing to PyPI..."
+    uv publish
+    echo ""
+
+    # Deploy documentation
+    echo "→ Deploying documentation to GitHub Pages..."
+    uv run --group docs mkdocs gh-deploy --force
+    echo "✓ Documentation deployed"
+    echo ""
+
+    echo "======================================"
+    echo "✓ Release $NEW_VERSION published!"
+    echo "======================================"
+    echo ""
+    echo "Don't forget to bump to dev version:"
+    echo "  uv version --bump minor"
+    echo "  # Edit pyproject.toml to change X.Y.0 to X.Y.dev0"
+    echo "  git add pyproject.toml"
+    echo "  git commit -m 'Back to development: X.Y.dev0'"
+    echo "  git push"
