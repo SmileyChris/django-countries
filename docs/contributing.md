@@ -8,24 +8,6 @@ Thank you for considering contributing to django-countries!
 
 Country names are translated using Django's standard i18n system. All translation work is done through Transifex, making it easy for anyone to contribute translations in their language.
 
-## 🗺️ Updating Country Data
-
-Country data should be manually updated from the official ISO 3166-1 Online Browsing Platform (OBP) when changes occur:
-
-1. Visit: https://www.iso.org/obp/ui/
-2. Click the 'Country Codes' radio button
-3. Click the search button (🔍)
-4. Change 'Results per page' to 300
-5. Select and copy the table data
-6. Paste into a spreadsheet (LibreOffice Calc, Excel, etc.)
-7. Verify columns: Country Name, Alpha-2, Alpha-3, Numeric
-8. Delete any extra columns (like French names)
-9. Delete the header row
-10. Save as `django_countries/iso3166-1.csv`
-11. Run: `uv run --group dev python django_countries/data.py` to regenerate `data.py`
-
-The official OBP data uses specific formatting patterns documented in [ISO 3166-1 Country Name Formatting](iso3166-formatting.md).
-
 ## Development Setup
 
 The rest of this guide covers code contributions. If you're contributing translations, head to Transifex instead!
@@ -197,6 +179,24 @@ If you previously used `tox`, here's the command mapping:
 Before releasing, ensure you have:
 - Your PyPI credentials in your keyring and the `keyring` tool installed (see setup below)
 - The Transifex CLI installed (see installation instructions below)
+
+### 🗺️ Updating Country Data
+
+Country data should be manually updated from the official ISO 3166-1 Online Browsing Platform (OBP) when changes occur:
+
+1. Visit: https://www.iso.org/obp/ui/
+2. Click the 'Country Codes' radio button
+3. Click the search button (🔍)
+4. Change 'Results per page' to 300
+5. Select and copy the table data
+6. Paste into a spreadsheet (LibreOffice Calc, Excel, etc.)
+7. Verify columns: Country Name, Alpha-2, Alpha-3, Numeric
+8. Delete any extra columns (like French names)
+9. Delete the header row
+10. Save as `django_countries/iso3166-1.csv`
+11. Run: `uv run --group dev python django_countries/data.py` to regenerate `data.py`
+
+The official OBP data uses specific formatting patterns documented in [ISO 3166-1 Country Name Formatting](iso3166-formatting.md).
 
 ### Quick Release (Recommended)
 
