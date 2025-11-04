@@ -1591,7 +1591,7 @@
 - Your PyPI credentials in your keyring and the <code>keyring</code> tool installed (see setup below)<br />
 - The Transifex CLI installed (see installation instructions below)</p>
 <h3 id="quick-release-recommended">Quick Release (Recommended)<a class="headerlink" href="#quick-release-recommended" title="Permanent link">&para;</a></h3>
-<p>The <code>just deploy</code> command handles the entire release process:</p>
+<p>The <code>just deploy [patch|minor|major]</code> command handles the entire release process (bump type required):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># For a patch release (bug fixes: 7.7.0 -&gt; 7.7.1)</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>just<span class="w"> </span>deploy<span class="w"> </span>patch
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
