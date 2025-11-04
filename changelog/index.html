@@ -929,8 +929,13 @@ versions first. It can be assumed that translations have been updated each<br />
 release, and any new translations added.</p>
 <!-- towncrier release notes start -->
 
-<h1 id="django_countries-79-4-november-2025">django_countries 7.9 (4 November 2025)<a class="headerlink" href="#django_countries-79-4-november-2025" title="Permanent link">&para;</a></h1>
+<h1 id="django_countries-791-4-november-2025">django_countries 7.9.1 (4 November 2025)<a class="headerlink" href="#django_countries-791-4-november-2025" title="Permanent link">&para;</a></h1>
 <h2 id="bugfixes">Bugfixes<a class="headerlink" href="#bugfixes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix <code>COUNTRIES_OVERRIDE</code> to support custom country codes that are 3 characters long. Previously, 3-character codes were incorrectly treated as alpha3 codes and resolved to existing countries. (#474)</li>
+</ul>
+<h1 id="django_countries-79-4-november-2025">django_countries 7.9 (4 November 2025)<a class="headerlink" href="#django_countries-79-4-november-2025" title="Permanent link">&para;</a></h1>
+<h2 id="bugfixes_1">Bugfixes<a class="headerlink" href="#bugfixes_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Fixed TypeError "unhashable type: 'list'" when using CountryField(multiple=True) in Django admin list_display. (#311)</li>
 <li>Fixed CountryField(multiple=True) displaying "-" instead of country names in Django admin readonly_fields. (#463)</li>
