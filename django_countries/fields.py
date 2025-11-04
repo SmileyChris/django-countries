@@ -193,6 +193,53 @@ class Country:
         raise AttributeError()
 
 
+class MultipleCountriesDescriptor:
+    """
+    A list-like wrapper that provides proper string representation for Django admin.
+
+    This makes CountryField(multiple=True) work correctly in admin list_display
+    and readonly_fields by providing a comma-separated string of country names.
+
+    Note: This does NOT inherit from list to avoid Django admin's special handling
+    of list/tuple types in display_for_value, which would show codes instead of names.
+    """
+
+    def __init__(self, countries_iter):
+        self._countries = list(countries_iter)
+
+    def __str__(self):
+        """Return comma-separated country names for admin display."""
+        if not self._countries:
+            return ""
+        return ", ".join(str(country.name) for country in self._countries)
+
+    def __repr__(self):
+        """Maintain list representation for debugging."""
+        return f"[{', '.join(repr(country) for country in self._countries)}]"
+
+    def __iter__(self):
+        """Allow iteration over countries."""
+        return iter(self._countries)
+
+    def __getitem__(self, index):
+        """Allow indexing."""
+        return self._countries[index]
+
+    def __len__(self):
+        """Return number of countries."""
+        return len(self._countries)
+
+    def __bool__(self):
+        """Return True if there are countries."""
+        return bool(self._countries)
+
+    def __eq__(self, other):
+        """Check equality."""
+        if isinstance(other, MultipleCountriesDescriptor):
+            return self._countries == other._countries
+        return self._countries == other
+
+
 class CountryDescriptor:
     """
     A descriptor for country fields on a model instance. Returns a Country when
@@ -219,7 +266,9 @@ class CountryDescriptor:
             instance.refresh_from_db(fields=[self.field.name])
         value = instance.__dict__[self.field.name]
         if self.field.multiple:
-            return [self.country(code) for code in value]
+            return MultipleCountriesDescriptor(
+                self.country(code) for code in value
+            )
         return self.country(value)
 
     def country(self, code):
@@ -349,6 +398,20 @@ class CountryField(CharField):
         if self.multiple:
             value = ",".join(value) if value else ""
         return super(CharField, self).get_prep_value(value)
+
+    @property
+    def flatchoices(self):
+        """
+        Override flatchoices to prevent admin choice lookups for multiple fields.
+
+        For multiple=True fields, Django admin's display_for_field tries to
+        look up the value in flatchoices. Since the value is a
+        MultipleCountriesDescriptor, we return None so Django skips the
+        choice lookup and uses str() instead.
+        """
+        if self.multiple:
+            return None
+        return super().flatchoices
 
     def country_to_text(self, value):
         if hasattr(value, "code"):
