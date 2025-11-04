@@ -6,6 +6,30 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+# django_countries 8.0.0 (4 November 2025)
+
+## Features
+
+- Added common names for six additional countries/territories: Democratic Republic of the Congo (CD), South Georgia (GS), Netherlands (NL), Palestine (PS), Saint Helena (SH), and Vatican City (VA). These provide friendlier, shorter names when `COUNTRIES_COMMON_NAMES` is enabled (default).
+
+## Bugfixes
+
+- Updated country names to match ISO 3166-1 OBP: Bahamas (The) and Netherlands (Kingdom of the). Also improved self_generate() regex to handle type hints in dictionary declarations.
+
+## Improved Documentation
+
+- Added documentation warning that CountryField does not support Django's `autocomplete_fields` in admin or third-party admin filter packages like `more_admin_filters`. (#473)
+- Added comprehensive documentation on ISO 3166-1 country name formatting, explaining parentheses vs commas usage, capitalization of "the", and addressing common political objections about territories like Taiwan, Kosovo, Hong Kong, and Palestine.
+
+## Deprecations and Removals
+
+- Drop Python 3.7 support. Python 3.7 reached end-of-life in June 2023. The minimum supported Python version is now 3.8.
+
+## Misc
+
+- Fix unnecessary list comprehension in test_tags.py
+
+
 # django_countries 7.9.1 (4 November 2025) [YANKED]
 
 ## Bugfixes

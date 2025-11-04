@@ -1,1 +1,0 @@
-Added common names for six additional countries/territories: Democratic Republic of the Congo (CD), South Georgia (GS), Netherlands (NL), Palestine (PS), Saint Helena (SH), and Vatican City (VA). These provide friendlier, shorter names when `COUNTRIES_COMMON_NAMES` is enabled (default).
