@@ -6,6 +6,21 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+# django_countries 7.8 (4 November 2025)
+
+## Improved Documentation
+
+- Added MkDocs documentation site and simplified README to focus on quick start with link to full documentation.
+- Consolidated release documentation into CONTRIBUTING.md and improved development setup instructions.
+
+## Misc
+
+- Expanded test matrix to cover Python 3.8-3.13 and Django 3.2-5.1 with improved test infrastructure.
+- Fixed various code quality issues identified by ruff linter, including improved string formatting and file handling.
+- Migrated build system from setuptools to uv_build for faster and more modern package building.
+- Simplified release process with automated `just deploy` command and towncrier for changelog management.
+
+
 ## 7.6.1 (2 April 2024)
 
 - Fix a TypeError when no country is selected, introduced in the Django 5 fix.
