@@ -929,7 +929,15 @@ versions first. It can be assumed that translations have been updated each<br />
 release, and any new translations added.</p>
 <!-- towncrier release notes start -->
 
+<h1 id="django_countries-79-4-november-2025">django_countries 7.9 (4 November 2025)<a class="headerlink" href="#django_countries-79-4-november-2025" title="Permanent link">&para;</a></h1>
+<h2 id="bugfixes">Bugfixes<a class="headerlink" href="#bugfixes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fixed TypeError "unhashable type: 'list'" when using CountryField(multiple=True) in Django admin list_display. (#311)</li>
+<li>Fixed CountryField(multiple=True) displaying "-" instead of country names in Django admin readonly_fields. (#463)</li>
+<li>Fixed incorrect max_length calculation for CountryField(multiple=True) when using COUNTRIES_FIRST with COUNTRIES_FIRST_REPEAT. (#469)</li>
+</ul>
 <h1 id="django_countries-78-4-november-2025">django_countries 7.8 (4 November 2025)<a class="headerlink" href="#django_countries-78-4-november-2025" title="Permanent link">&para;</a></h1>
+<p><em>Where'd 7.7 go? Well 7.6 was accidentally bumped to 7.8 because of the new release process!</em></p>
 <h2 id="improved-documentation">Improved Documentation<a class="headerlink" href="#improved-documentation" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Added MkDocs documentation site and simplified README to focus on quick start with link to full documentation.</li>
