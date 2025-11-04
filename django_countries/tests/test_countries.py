@@ -144,6 +144,32 @@ class TestCountriesObject(BaseTest):
         with self.settings(COUNTRIES_OVERRIDE={"XX": "Neverland"}):
             self.assertEqual(countries.alpha2("XX"), "XX")
 
+    def test_alpha2_override_three_char_code(self):
+        """Test that 3-character custom country codes work correctly.
+
+        This reproduces issue #474 where a custom country code "IND" would be
+        incorrectly resolved to "IN" (India) because it matched India's alpha3 code.
+        """
+        with self.settings(
+            COUNTRIES_OVERRIDE={
+                "ID": None,  # Remove Indonesia
+                "IND": {  # Add custom 3-char code
+                    "names": ["Indonesia"],
+                    "ioc_code": "INA",
+                    "flag_code": "id",
+                },
+            }
+        ):
+            # IND should be treated as a direct country code, not as India's alpha3
+            self.assertEqual(countries.alpha2("IND"), "IND")
+            self.assertEqual(countries.name("IND"), "Indonesia")
+            # ID should be removed
+            self.assertEqual(countries.alpha2("ID"), "")
+            self.assertEqual(countries.name("ID"), "")
+            # IN (India) should still work normally
+            self.assertEqual(countries.alpha2("IN"), "IN")
+            self.assertEqual(countries.name("IN"), "India")
+
     def test_ioc_code(self):
         self.assertEqual(countries.ioc_code("BS"), "BAH")
 

@@ -372,6 +372,12 @@ class Countries(CountriesBase):
         """
         find: Optional[Callable]
         code_str = force_str(code).upper()
+        # Check if the code exists directly in countries first, before trying
+        # to resolve it as an alternative code (alpha3/numeric). This allows
+        # custom country codes in COUNTRIES_OVERRIDE to work correctly, even
+        # if they match the format of alternative codes (issue #474).
+        if code_str in self.countries:
+            return code_str
         if code_str.isdigit():
             lookup_numeric = int(code_str)
 
