@@ -266,9 +266,7 @@ class CountryDescriptor:
             instance.refresh_from_db(fields=[self.field.name])
         value = instance.__dict__[self.field.name]
         if self.field.multiple:
-            return MultipleCountriesDescriptor(
-                self.country(code) for code in value
-            )
+            return MultipleCountriesDescriptor(self.country(code) for code in value)
         return self.country(value)
 
     def country(self, code):
@@ -347,7 +345,7 @@ class CountryField(CharField):
             # added to the available countries dictionary.
             if self.multiple:
                 kwargs["max_length"] = (
-                    len(self.countries)
+                    len(self.countries.countries)
                     - 1
                     + sum(len(code) for code in self.countries.countries)
                 )

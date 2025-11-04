@@ -492,6 +492,25 @@ class TestCountryMultiple(TestCase):
         self.assertEqual(list(qs), [obj])
 
 
+class TestCountryFieldFirstRepeatMultiple(TestCase):
+    def setUp(self):
+        del countries.countries
+
+    def tearDown(self):
+        del countries.countries
+
+    @override_settings(COUNTRIES_FIRST=["NZ", "AU"], COUNTRIES_FIRST_REPEAT=True)
+    def test_max_length(self):
+        field = CountryField(multiple=True)
+
+        # verify there are two additional choices
+        self.assertEqual(len(list(field.get_choices())), len(data.COUNTRIES) + 2)
+
+        # but they should not change the field's max_length
+        expected_max_length = len(data.COUNTRIES) * 3 - 1
+        self.assertEqual(field.max_length, expected_max_length)
+
+
 class TestCountryObject(TestCase):
     def test_hash(self):
         country = fields.Country(code="XX", flag_url="")
