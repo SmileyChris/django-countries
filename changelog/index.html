@@ -1,0 +1,2514 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A Django application for country choices and fields">
+      
+      
+      
+      
+        <link rel="prev" href="../contributing/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Changelog - Django Countries</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#change-log" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Django Countries" class="md-header__button md-logo" aria-label="Django Countries" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Django Countries
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SmileyChris/django-countries" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SmileyChris/django-countries
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../usage/field/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../contributing/" class="md-tabs__link">
+          
+  
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Django Countries" class="md-nav__button md-logo" aria-label="Django Countries" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Django Countries
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SmileyChris/django-countries" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SmileyChris/django-countries
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Welcome
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/field/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CountryField
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Forms & Widgets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Template Tags
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Integrations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/drf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Django REST Framework
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/graphql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GraphQL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/customization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Customization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/multiple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multiple Countries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#761-2-april-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.1 (2 April 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76-27-march-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6 (27 March 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#751-1-february-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5.1 (1 February 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75-12-december-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5 (12 December 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#742-10-october-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4.2 (10 October 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#741-7-october-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4.1 (7 October 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74-7-october-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4 (7 October 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#732-4-march-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3.2 (4 March 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#731-1-march-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3.1 (1 March 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73-28-february-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 (28 February 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#721-11-may-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2.1 (11 May 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-10-may-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 (10 May 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-17-march-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 (17 March 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#70-5-december-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.0 (5 December 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#613-18-august-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.3 (18 August 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#612-26-march-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.2 (26 March 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#611-26-march-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.1 (26 March 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-20-march-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 (20 March 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#60-28-february-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.0 (28 February 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-11-september-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 (11 September 2019)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-11-august-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 (11 August 2019)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#533-16-february-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.3 (16 February 2019)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#532-27-august-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.2 (27 August 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#531-12-june-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.1 (12 June 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-20-april-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 (20 April 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-9-march-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 (9 March 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#511-31-january-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1.1 (31 January 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-30-january-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 (30 January 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50-10-october-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.0 (10 October 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#462-16-june-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6.2 (16 June 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#461-16-june-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6.1 (16 June 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-16-june-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6 (16 June 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-18-april-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 (18 April 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-6-april-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 (6 April 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-29-march-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 (29 March 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-10-march-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 (10 March 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-22-february-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 (22 February 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#401-16-august-2016" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.0.1 (16 August 2016)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40-16-august-2016" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.0 (16 August 2016)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#341-22-october-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 (22 October 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-22-october-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 (22 October 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-30-mar-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 (30 Mar 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-24-feb-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 (24 Feb 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#311-15-jan-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.1 (15 Jan 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-15-jan-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 (15 Jan 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#302-29-dec-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.0.2 (29 Dec 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#301-27-oct-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.0.1 (27 Oct 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-22-oct-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.0 (22 Oct 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-28-mar-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.2 (28 Mar 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-28-mar-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.1 (28 Mar 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-24-mar-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 (24 Mar 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-18-feb-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.0 (18 Feb 2014)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#761-2-april-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.1 (2 April 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76-27-march-2024" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6 (27 March 2024)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#751-1-february-2023" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5.1 (1 February 2023)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75-12-december-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5 (12 December 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#742-10-october-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4.2 (10 October 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#741-7-october-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4.1 (7 October 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74-7-october-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4 (7 October 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#732-4-march-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3.2 (4 March 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#731-1-march-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3.1 (1 March 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73-28-february-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 (28 February 2022)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#721-11-may-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2.1 (11 May 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-10-may-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 (10 May 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-17-march-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 (17 March 2021)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#70-5-december-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.0 (5 December 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#613-18-august-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.3 (18 August 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#612-26-march-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.2 (26 March 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#611-26-march-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1.1 (26 March 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-20-march-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 (20 March 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#60-28-february-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.0 (28 February 2020)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-11-september-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 (11 September 2019)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-11-august-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 (11 August 2019)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#533-16-february-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.3 (16 February 2019)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#532-27-august-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.2 (27 August 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#531-12-june-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.1 (12 June 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-20-april-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 (20 April 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-9-march-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 (9 March 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#511-31-january-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1.1 (31 January 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-30-january-2018" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 (30 January 2018)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50-10-october-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.0 (10 October 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#462-16-june-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6.2 (16 June 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#461-16-june-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6.1 (16 June 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-16-june-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6 (16 June 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-18-april-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 (18 April 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-6-april-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 (6 April 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-29-march-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 (29 March 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-10-march-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 (10 March 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-22-february-2017" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 (22 February 2017)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#401-16-august-2016" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.0.1 (16 August 2016)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#40-16-august-2016" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.0 (16 August 2016)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#341-22-october-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 (22 October 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-22-october-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 (22 October 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-30-mar-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 (30 Mar 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-24-feb-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 (24 Feb 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#311-15-jan-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.1 (15 Jan 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-15-jan-2015" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 (15 Jan 2015)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#302-29-dec-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.0.2 (29 Dec 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#301-27-oct-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.0.1 (27 Oct 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-22-oct-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.0 (22 Oct 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-28-mar-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.2 (28 Mar 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-28-mar-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1.1 (28 Mar 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-24-mar-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 (24 Mar 2014)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-18-feb-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.0 (18 Feb 2014)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="change-log">Change Log<a class="headerlink" href="#change-log" title="Permanent link">&para;</a></h1>
+<p>This log shows interesting changes that happen for each version, latest<br />
+versions first. It can be assumed that translations have been updated each<br />
+release, and any new translations added.</p>
+<!-- towncrier release notes start -->
+
+<h2 id="761-2-april-2024">7.6.1 (2 April 2024)<a class="headerlink" href="#761-2-april-2024" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix a TypeError when no country is selected, introduced in the Django 5 fix.</li>
+</ul>
+<h2 id="76-27-march-2024">7.6 (27 March 2024)<a class="headerlink" href="#76-27-march-2024" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Replace deprecated <code>pkg_resources.iter_entry_points</code> with<br />
+<code>importlib_metadata</code>.</p>
+</li>
+<li>
+<p>Support Django 5.0.</p>
+</li>
+</ul>
+<h2 id="751-1-february-2023">7.5.1 (1 February 2023)<a class="headerlink" href="#751-1-february-2023" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Make <code>CountryField</code> queryset filters also work with country codes in<br />
+  addition to names.</p>
+</li>
+<li>
+<p>Switch to <code>pyproject.toml</code> rather than <code>setup.py</code> to fix installation<br />
+  issues with pip 23.0+.</p>
+</li>
+</ul>
+<h2 id="75-12-december-2022">7.5 (12 December 2022)<a class="headerlink" href="#75-12-december-2022" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Rename Turkey to Türkiye.</p>
+</li>
+<li>
+<p>A change in v7.4 introduced multi-choice countries being stored sorted and<br />
+  deduplicated. This remains the default behaviour going forwards, but these<br />
+  can now be overridden via arguments on the <code>CountryField</code>.</p>
+</li>
+<li>
+<p>Improve translation fallback handling, fixing a threading race condition that<br />
+  could cause odd translation issues. Thanks to Jan Wróblewski and Antoine<br />
+  Fontaine for their help in resolving this.<br />
+  This also fixes translation issues with older Python 3.6/3.7 versions.</p>
+</li>
+<li>
+<p>Add Python 3.11, drop Python 3.6 and Django 2.2 support.</p>
+</li>
+</ul>
+<h2 id="742-10-october-2022">7.4.2 (10 October 2022)<a class="headerlink" href="#742-10-october-2022" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix error when using <code>USE_I18N = False</code>.</li>
+</ul>
+<h2 id="741-7-october-2022">7.4.1 (7 October 2022)<a class="headerlink" href="#741-7-october-2022" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix broken translations due to last common country names fix.</li>
+</ul>
+<h2 id="74-7-october-2022">7.4 (7 October 2022)<a class="headerlink" href="#74-7-october-2022" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Fixed Traditional Chinese translation (needed to be <code>locale/zh_Hant</code>).</p>
+</li>
+<li>
+<p>Update flag of Honduras.</p>
+</li>
+<li>
+<p>Add Django 4.0 and 4.1 to the test matrix, dropping 3.0 and 3.1</p>
+</li>
+<li>
+<p>Add Django Rest Framework 3.13 and 3.14, dropping 3.11.</p>
+</li>
+<li>
+<p>Multi-choice countries are now stored sorted and with duplicates stripped.<br />
+  Thanks flbraun and Jens Diemer!</p>
+</li>
+<li>
+<p>Fix common country names not being honoured in non-English translations (only<br />
+  fixed for Python 3.8+).</p>
+</li>
+</ul>
+<h2 id="732-4-march-2022">7.3.2 (4 March 2022)<a class="headerlink" href="#732-4-march-2022" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix slowdown introduced in v7.3 caused by always using country name lookups<br />
+  for field comparisons. <code>filter(country="New Zealand")</code> will no longer match<br />
+  now, but instead new <code>__name</code> and <code>__iname</code> filters have been added to<br />
+  achieve this.</li>
+</ul>
+<h2 id="731-1-march-2022">7.3.1 (1 March 2022)<a class="headerlink" href="#731-1-march-2022" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Typing compatibility fixes for Python &lt;3.9.</li>
+</ul>
+<h2 id="73-28-february-2022">7.3 (28 February 2022)<a class="headerlink" href="#73-28-february-2022" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Make full English country names work in database lookups, for example,<br />
+<code>Person.objects.filter(country__icontains="zealand")</code>.</li>
+</ul>
+<h2 id="721-11-may-2021">7.2.1 (11 May 2021)<a class="headerlink" href="#721-11-may-2021" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix Latin translations.</li>
+</ul>
+<h2 id="72-10-may-2021">7.2 (10 May 2021)<a class="headerlink" href="#72-10-may-2021" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Allow the character field to work with custom country codes that are not 2<br />
+  characters (such as "GB-WLS").</p>
+</li>
+<li>
+<p>Fix compatibility with <code>django-migrations-ignore-attrs</code> library.</p>
+</li>
+</ul>
+<h2 id="71-17-march-2021">7.1 (17 March 2021)<a class="headerlink" href="#71-17-march-2021" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Allow customising the <code>str_attr</code> of Country objects returned from a<br />
+  CountryField via a new <code>countries_str_attr</code> keyword argument (thanks C.<br />
+  Quentin).</p>
+</li>
+<li>
+<p>Add <code>pyuca</code> as an extra dependency, so that it can be installed like<br />
+<code>pip install django-countries[pyuca]</code>.</p>
+</li>
+<li>
+<p>Add Django 3.2 support.</p>
+</li>
+</ul>
+<h2 id="70-5-december-2020">7.0 (5 December 2020)<a class="headerlink" href="#70-5-december-2020" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Add <code>name_only</code> as an option to the Django Rest Framework serializer field<br />
+  (thanks Miguel Marques).</p>
+</li>
+<li>
+<p>Add in Python typing.</p>
+</li>
+<li>
+<p>Add Python 3.9, Django 3.1, and Django Rest Framework 3.12 support.</p>
+</li>
+<li>
+<p>Drop Python 3.5 support.</p>
+</li>
+<li>
+<p>Improve IOC code functionality, allowing them to be overridden in<br />
+<code>COUNTRIES_OVERRIDE</code> using the complex dictionary format.</p>
+</li>
+</ul>
+<h2 id="613-18-august-2020">6.1.3 (18 August 2020)<a class="headerlink" href="#613-18-august-2020" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Update flag of Mauritania.</p>
+</li>
+<li>
+<p>Add flag for Kosovo (under its temporary code of XK).</p>
+</li>
+</ul>
+<h2 id="612-26-march-2020">6.1.2 (26 March 2020)<a class="headerlink" href="#612-26-march-2020" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix Python 3.5 syntax error (no f-strings just yet...).</li>
+</ul>
+<h2 id="611-26-march-2020">6.1.1 (26 March 2020)<a class="headerlink" href="#611-26-march-2020" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Change ISO country import so that "Falkland Islands  [Malvinas]" =&gt; "Falkland Islands (Malvinas)".</li>
+</ul>
+<h2 id="61-20-march-2020">6.1 (20 March 2020)<a class="headerlink" href="#61-20-march-2020" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Add a GraphQL object type for a django <code>Country</code> object.</li>
+</ul>
+<h2 id="60-28-february-2020">6.0 (28 February 2020)<a class="headerlink" href="#60-28-february-2020" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Make DRF CountryField respect <code>blank=False</code>. This is a backwards incompatible change since blank input will now<br />
+  return a validation error (unless <code>blank</code> is explicitly set to <code>True</code>).</p>
+</li>
+<li>
+<p>Fix <code>COUNTRIES_OVERRIDE</code> when using the complex dictionary format and a single name.</p>
+</li>
+<li>
+<p>Add bandit to the test suite for basic security analysis.</p>
+</li>
+<li>
+<p>Drop Python 2.7 and Python 3.4 support.</p>
+</li>
+<li>
+<p>Add Rest Framework 3.10 and 3.11 to the test matrix, remove 3.8.</p>
+</li>
+<li>
+<p>Fix a memory leak when using PyUCA. Thanks Meiyer (aka interDist)!</p>
+</li>
+</ul>
+<h2 id="55-11-september-2019">5.5 (11 September 2019)<a class="headerlink" href="#55-11-september-2019" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Django 3.0 compatibility.</p>
+</li>
+<li>
+<p>Plugin system for extending the <code>Country</code> object.</p>
+</li>
+</ul>
+<h2 id="54-11-august-2019">5.4 (11 August 2019)<a class="headerlink" href="#54-11-august-2019" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Renamed Macedonia -&gt; North Macedonia.</p>
+</li>
+<li>
+<p>Fix an outlying <code>makemigrations</code> error.</p>
+</li>
+<li>
+<p>Pulled in new translations which were provided but missing from previous<br />
+  version.</p>
+</li>
+<li>
+<p>Fixed Simplified Chinese translation (needed to be <code>locale/zh_Hans</code>).</p>
+</li>
+<li>
+<p>Introduce an optional complex format for <code>COUNTRIES_ONLY</code> and<br />
+<code>COUNTRIES_OVERRIDE</code> to allow for multiple names for a country, a custom<br />
+  three character code, and a custom numeric country code.</p>
+</li>
+</ul>
+<h2 id="533-16-february-2019">5.3.3 (16 February 2019)<a class="headerlink" href="#533-16-february-2019" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Add test coverage for Django Rest Framework 3.9.</li>
+</ul>
+<h2 id="532-27-august-2018">5.3.2 (27 August 2018)<a class="headerlink" href="#532-27-august-2018" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Tests for Django 2.1 and Django Rest Framework 3.8.</li>
+</ul>
+<h2 id="531-12-june-2018">5.3.1 (12 June 2018)<a class="headerlink" href="#531-12-june-2018" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix <code>dumpdata</code> and <code>loaddata</code> for <code>CountryField(multiple=True)</code>.</li>
+</ul>
+<h2 id="53-20-april-2018">5.3 (20 April 2018)<a class="headerlink" href="#53-20-april-2018" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Iterating a <code>Countries</code> object now returns named tuples. This makes things<br />
+  nicer when using <code>{% get_countries %}</code> or using the country list elsewhere<br />
+  in your code.</li>
+</ul>
+<h2 id="52-9-march-2018">5.2 (9 March 2018)<a class="headerlink" href="#52-9-march-2018" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Ensure Django 2.1 compatibility for <code>CountrySelectWidget</code>.</p>
+</li>
+<li>
+<p>Fix regression introduced into 5.1 when using Django 1.8 and certain queryset<br />
+  lookup types (like <code>__in</code>).</p>
+</li>
+</ul>
+<h2 id="511-31-january-2018">5.1.1 (31 January 2018)<a class="headerlink" href="#511-31-january-2018" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix some translations that were included in 5.1 but not compiled.</li>
+</ul>
+<h2 id="51-30-january-2018">5.1 (30 January 2018)<a class="headerlink" href="#51-30-january-2018" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Tests now also cover Django Rest Framework 3.7 and Django 2.0.</p>
+</li>
+<li>
+<p>Allow for creating country fields using (valid) alpha-3 or numeric codes.</p>
+</li>
+<li>
+<p>Fix migration error with blank default (thanks Jens Diemer).</p>
+</li>
+<li>
+<p>Add a <code>{% get_countries %}</code> template tag (thanks Matija Čvrk).</p>
+</li>
+</ul>
+<h2 id="50-10-october-2017">5.0 (10 October 2017)<a class="headerlink" href="#50-10-october-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>No longer allow <code>multiple=True</code> and <code>null=True</code> together. This causes<br />
+  problems saving the field, and <code>null</code> shouldn't really be used anyway<br />
+  because the country field is a subclass of <code>CharField</code>.</li>
+</ul>
+<h2 id="462-16-june-2017">4.6.2 (16 June 2017)<a class="headerlink" href="#462-16-june-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Use transparency layer for flag sprites.</li>
+</ul>
+<h2 id="461-16-june-2017">4.6.1 (16 June 2017)<a class="headerlink" href="#461-16-june-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix invalid reStructuredText in CHANGES.</li>
+</ul>
+<h2 id="46-16-june-2017">4.6 (16 June 2017)<a class="headerlink" href="#46-16-june-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Add a <code>CountryFieldMixin</code> Django Rest Framework serializer mixin that<br />
+  automatically picks the right field type for a <code>CountryField</code> (both single<br />
+  and multi-choice).</p>
+</li>
+<li>
+<p>Validation for Django Rest Framework field (thanks Simon Meers).</p>
+</li>
+<li>
+<p>Allow case-insensitive <code>.by_name()</code> matching (thanks again, Simon).</p>
+</li>
+<li>
+<p>Ensure a multiple-choice <code>CountryField.max_length</code> is enough to hold all<br />
+  countries.</p>
+</li>
+<li>
+<p>Fix inefficient pickling of countries (thanks Craig de Stigter for the report<br />
+  and tests).</p>
+</li>
+<li>
+<p>Stop adding a blank choice when dealing with a multi-choice <code>CountryField</code>.</p>
+</li>
+<li>
+<p>Tests now cover multiple Django Rest Framework versions (back to 3.3).</p>
+</li>
+</ul>
+<h2 id="45-18-april-2017">4.5 (18 April 2017)<a class="headerlink" href="#45-18-april-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Change rest framework field to be based on <code>ChoiceField</code>.</p>
+</li>
+<li>
+<p>Allow for the rest framework field to deserialize by full country name<br />
+  (specifically the English name for now).</p>
+</li>
+</ul>
+<h2 id="44-6-april-2017">4.4 (6 April 2017)<a class="headerlink" href="#44-6-april-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Fix for broken CountryField on certain models in Django 1.11.<br />
+  Thanks aktiur for the test case.</p>
+</li>
+<li>
+<p>Update tests to cover Django 1.11</p>
+</li>
+</ul>
+<h2 id="43-29-march-2017">4.3 (29 March 2017)<a class="headerlink" href="#43-29-march-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Handle "Czechia" translations in a nicer way (fall back to "Czech Republic"<br />
+  until new translations are available).</p>
+</li>
+<li>
+<p>Fix for an import error in Django 1.9+ due to use of non-lazy <code>ugettext</code> in<br />
+  the django-countries custom admin filter.</p>
+</li>
+<li>
+<p>Back to 100% test coverage.</p>
+</li>
+</ul>
+<h2 id="42-10-march-2017">4.2 (10 March 2017)<a class="headerlink" href="#42-10-march-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Add sprite flag files (and <code>Country.flag_css</code> property) to help minimize<br />
+  HTTP requests.</li>
+</ul>
+<h2 id="41-22-february-2017">4.1 (22 February 2017)<a class="headerlink" href="#41-22-february-2017" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Better default Django admin filter when filtering a country field in a<br />
+<code>ModelAdmin</code>.</p>
+</li>
+<li>
+<p>Fix settings to support Django 1.11</p>
+</li>
+<li>
+<p>Fix when using a model instance with a deferred country field.</p>
+</li>
+<li>
+<p>Allow <code>CountryField</code> to handle multiple countries at once!</p>
+</li>
+<li>
+<p>Allow CountryField to still work if Deferred.</p>
+</li>
+<li>
+<p>Fix a field with customized country list. Thanks pilmie!</p>
+</li>
+</ul>
+<h2 id="401-16-august-2016">4.0.1 (16 August 2016)<a class="headerlink" href="#401-16-august-2016" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix tests for <code>COUNTRIES_FIRST_SORT</code> (feature still worked, tests didn't).</li>
+</ul>
+<h2 id="40-16-august-2016">4.0 (16 August 2016)<a class="headerlink" href="#40-16-august-2016" title="Permanent link">&para;</a></h2>
+<p>Django supported versions are now 1.8+</p>
+<ul>
+<li>
+<p>Drop legacy code</p>
+</li>
+<li>
+<p>Fix tests, 100% coverage</p>
+</li>
+<li>
+<p>IOS / OSX unicode flags function</p>
+</li>
+<li>
+<p>Fix widget choices on Django 1.9+</p>
+</li>
+<li>
+<p>Add <code>COUNTRIES_FIRST_SORT</code>. Thanks Edraak!</p>
+</li>
+</ul>
+<h2 id="341-22-october-2015">3.4.1 (22 October 2015)<a class="headerlink" href="#341-22-october-2015" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix minor packaging error.</li>
+</ul>
+<h2 id="34-22-october-2015">3.4 (22 October 2015)<a class="headerlink" href="#34-22-october-2015" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Extend test suite to cover Django 1.8</p>
+</li>
+<li>
+<p>Fix XSS escaping issue in CountrySelectWidget</p>
+</li>
+<li>
+<p>Common name changes: fix typo of Moldova, add United Kingdom</p>
+</li>
+<li>
+<p>Add <code>{% get_country %}</code> template tag.</p>
+</li>
+<li>
+<p>New <code>CountryField</code> Django Rest Framework serializer field.</p>
+</li>
+</ul>
+<h2 id="33-30-mar-2015">3.3 (30 Mar 2015)<a class="headerlink" href="#33-30-mar-2015" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Add the attributes to <code>Countries</code> class that can override the default<br />
+  settings.</p>
+</li>
+<li>
+<p>CountriesField can now be passed a custom countries subclass to use, which<br />
+  combined with the previous change allows for different country choices for<br />
+  different fields.</p>
+</li>
+<li>
+<p>Allow <code>COUNTRIES_ONLY</code> to also accept just country codes in its list<br />
+  (rather than only two-tuples), looking up the translatable country name from<br />
+  the full country list.</p>
+</li>
+<li>
+<p>Fix Montenegro flag size (was 12px high rather than the standard 11px).</p>
+</li>
+<li>
+<p>Fix outdated ISO country name formatting for Bolivia, Gambia, Holy See,<br />
+  Iran, Micronesia, and Venezuela.</p>
+</li>
+</ul>
+<h2 id="32-24-feb-2015">3.2 (24 Feb 2015)<a class="headerlink" href="#32-24-feb-2015" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Fixes initial iteration failing for a fresh <code>Countries</code> object.</p>
+</li>
+<li>
+<p>Fix widget's flag URLs (and use ensure widget is HTML encoded safely).</p>
+</li>
+<li>
+<p>Add <code>countries.by_name(country, language='en')</code> method, allowing lookup of<br />
+  a country code by its full country name. Thanks Josh Schneier.</p>
+</li>
+</ul>
+<h2 id="311-15-jan-2015">3.1.1 (15 Jan 2015)<a class="headerlink" href="#311-15-jan-2015" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Packaging fix (<code>CHANGES.rst</code> wasn't in the manifest)</li>
+</ul>
+<h2 id="31-15-jan-2015">3.1 (15 Jan 2015)<a class="headerlink" href="#31-15-jan-2015" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Start change log :)</p>
+</li>
+<li>
+<p>Add a <code>COUNTRIES_FIRST</code> setting (and some other related ones) to allow for<br />
+  specific countries to be shown before the entire alphanumeric list.</p>
+</li>
+<li>
+<p>Add a <code>blank_label</code> argument to <code>CountryField</code> to allow customization of<br />
+  the label shown in the initial blank choice shown in the select widget.</p>
+</li>
+</ul>
+<h2 id="302-29-dec-2014">3.0.2 (29 Dec 2014)<a class="headerlink" href="#302-29-dec-2014" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix <code>CountrySelectWidget</code> failing when used with a model form that is<br />
+  passed a model instance.</li>
+</ul>
+<h2 id="301-27-oct-2014">3.0.1 (27 Oct 2014)<a class="headerlink" href="#301-27-oct-2014" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Revert descriptor to always return a Country object.</p>
+</li>
+<li>
+<p>Fix the <code>CountryField</code> widget choices appearing empty due to a translation<br />
+  change in v3.0.</p>
+</li>
+</ul>
+<h2 id="30-22-oct-2014">3.0 (22 Oct 2014)<a class="headerlink" href="#30-22-oct-2014" title="Permanent link">&para;</a></h2>
+<p>Django supported versions are now 1.4 (LTS) and 1.6+</p>
+<ul>
+<li>
+<p>Add <code>COUNTRIES_ONLY</code> setting to restrict to a specific list of countries.</p>
+</li>
+<li>
+<p>Optimize country name translations to avoid exessive translation calls that<br />
+  were causing a notable performance impact.</p>
+</li>
+<li>
+<p>PyUCA integration, allowing for more accurate sorting across all locales.<br />
+  Also, a better sorting method when PyUCA isn't installed.</p>
+</li>
+<li>
+<p>Better tests (now at 100% test coverage).</p>
+</li>
+<li>
+<p>Add a <code>COUNTRIES_FLAG_URL</code> setting to allow custom flag urls.</p>
+</li>
+<li>
+<p>Support both IOC and numeric country codes, allowing more flexible lookup of<br />
+  countries and specific code types.</p>
+</li>
+<li>
+<p>Field descriptor now returns <code>None</code> if no country matches (<em>reverted in<br />
+  v3.0.1</em>)</p>
+</li>
+</ul>
+<h2 id="212-28-mar-2014">2.1.2 (28 Mar 2014)<a class="headerlink" href="#212-28-mar-2014" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix Python 3 compatibility.</li>
+</ul>
+<h2 id="211-28-mar-2014">2.1.1 (28 Mar 2014)<a class="headerlink" href="#211-28-mar-2014" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fix issue with translations getting evaluated early.</li>
+</ul>
+<h2 id="21-24-mar-2014">2.1 (24 Mar 2014)<a class="headerlink" href="#21-24-mar-2014" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Add IOC (3 letter) country codes.</p>
+</li>
+<li>
+<p>Fix bug when loading fixtures.</p>
+</li>
+</ul>
+<h2 id="20-18-feb-2014">2.0 (18 Feb 2014)<a class="headerlink" href="#20-18-feb-2014" title="Permanent link">&para;</a></h2>
+<p>This is the first entry to the change log. The previous was 1.5,<br />
+released 19 Nov 2012.</p>
+<ul>
+<li>
+<p>Optimized flag images, adding flags missing from original source.</p>
+</li>
+<li>
+<p>Better storage of settings and country list.</p>
+</li>
+<li>
+<p>New country list format for fields.</p>
+</li>
+<li>
+<p>Better tests.</p>
+</li>
+<li>
+<p>Changed <code>COUNTRIES_FLAG_STATIC</code> setting to <code>COUNTRIES_FLAG_URL</code>.</p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
