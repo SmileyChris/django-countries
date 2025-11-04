@@ -38,12 +38,14 @@ class CountriesBase:
     }
 
     OLD_NAMES = {
+        "BS": [_("Bahamas")],
         "CZ": [_("Czech Republic")],
-        "MK": [_("Macedonia"), _("Macedonia (the former Yugoslav Republic of)")],
-        "SZ": [_("Swaziland")],
-        "TZ": [_("Tanzania, the United Republic of")],
         "FK": [_("Falkland Islands  [Malvinas]")],
+        "MK": [_("Macedonia"), _("Macedonia (the former Yugoslav Republic of)")],
+        "NL": [_("Netherlands")],
+        "SZ": [_("Swaziland")],
         "TR": [_("Turkey")],
+        "TZ": [_("Tanzania, the United Republic of")],
     }
 
     def __getstate__(self):

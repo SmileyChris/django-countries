@@ -81,11 +81,25 @@ Country data should be manually updated from the official ISO 3166-1 Online Brow
 
 The official OBP data uses specific formatting (parentheses vs commas) documented in `docs/iso3166-formatting.md`.
 
-### Release Commands (for Maintainers)
+### Translation Commands (for Maintainers)
 ```bash
+# Update English source file with new translatable strings (after editing data.py or base.py)
+just tx-makemessages
+
 # Pull and compile translations from Transifex
 just tx-pull
+```
 
+**Translation Workflow**:
+1. When country names change in `data.py` or `base.py`, run `just tx-makemessages`
+2. This generates/updates `django_countries/locale/en/LC_MESSAGES/django.po` (English source)
+3. Commit the English source file
+4. Push to Transifex with `tx push -s` (done automatically in deploy)
+5. Translators update translations on Transifex
+6. Pull translations with `just tx-pull`
+
+### Release Commands (for Maintainers)
+```bash
 # Deploy a release to PyPI (fully automated, requires bump type)
 just deploy patch   # For bug fixes (7.7.0 -> 7.7.1)
 just deploy minor   # For new features (7.7.0 -> 7.8.0)
@@ -93,7 +107,9 @@ just deploy major   # For breaking changes (7.7.0 -> 8.0.0)
 ```
 
 The `just deploy [patch|minor|major]` command handles the entire release process:
-- Pulls latest changes and translations
+- Pulls latest changes
+- Updates English translation source file and pushes to Transifex
+- Pulls latest translations from Transifex
 - Bumps version and builds changelog from `changes/` fragments using towncrier
 - Creates git tag and pushes
 - Builds and publishes to PyPI

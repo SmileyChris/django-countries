@@ -156,12 +156,26 @@ check:
 docs:
     uv run --group docs mkdocs serve --livereload --dev-addr 127.0.0.1:8080
 
+# Update English translation source file with new translatable strings
+tx-makemessages:
+    @echo "Updating English translation source file..."
+    @cd django_countries && DJANGO_SETTINGS_MODULE=django_countries.tests.settings \
+        uv run --group dev django-admin makemessages --locale=en --no-obsolete
+    @echo "✓ English source file updated (django_countries/locale/en/LC_MESSAGES/django.po)"
+    @echo ""
+    @echo "Next steps:"
+    @echo "  1. Review changes: git diff django_countries/locale/en/"
+    @echo "  2. Commit changes: git add django_countries/locale/en/ && git commit -m 'Update English translation source file'"
+    @echo "  3. Push source to Transifex: tx push -s"
+    @echo "  4. Wait for translators to update translations on Transifex"
+    @echo "  5. Pull updated translations: just tx-pull"
+
 # Pull translations from Transifex and compile message catalogs
 tx-pull:
     @echo "Pulling translations from Transifex..."
     tx pull -a --minimum-perc=60
-    @echo "Compiling message catalogs..."
-    uv run --group dev django-admin compilemessages
+    @echo "Compiling message catalogs (excluding English source)..."
+    @cd django_countries && uv run --group dev django-admin compilemessages --exclude=en
     @echo "✓ Translations updated and compiled"
 
 # Deploy a new release to PyPI
@@ -187,11 +201,29 @@ deploy BUMP:
     git pull
     echo ""
 
-    # Pull and commit translations
+    # Update English translation source file
+    echo "→ Updating English translation source file..."
+    cd django_countries && DJANGO_SETTINGS_MODULE=django_countries.tests.settings \
+        uv run --group dev django-admin makemessages --locale=en --no-obsolete
+    cd ..
+    if ! git diff-index --quiet HEAD -- django_countries/locale/en/; then
+        git add django_countries/locale/en/
+        git commit -m "Update English translation source file"
+        echo "✓ English source file updated"
+        echo "→ Pushing source strings to Transifex..."
+        tx push -s
+        echo "✓ Source strings pushed to Transifex"
+    else
+        echo "✓ No source file changes"
+    fi
+    echo ""
+
+    # Pull and commit translations from Transifex
     echo "→ Pulling translations from Transifex..."
     tx pull -a --minimum-perc=60
-    echo "→ Compiling message catalogs..."
-    uv run --group dev django-admin compilemessages
+    echo "→ Compiling message catalogs (excluding English source)..."
+    cd django_countries && uv run --group dev django-admin compilemessages --exclude=en
+    cd ..
     if ! git diff-index --quiet HEAD --; then
         git add django_countries/locale
         git commit -m "Update translations from Transifex"
