@@ -1,0 +1,70 @@
+site_name: Django Countries
+site_description: A Django application for country choices and fields
+repo_url: https://github.com/SmileyChris/django-countries
+repo_name: SmileyChris/django-countries
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home:
+      - Welcome: index.md
+      - Installation: installation.md
+      - Quick Start: quickstart.md
+  - Usage:
+      - CountryField: usage/field.md
+      - Forms & Widgets: usage/forms.md
+      - Template Tags: usage/templates.md
+      - Settings: usage/settings.md
+      - Integrations:
+          - Django REST Framework: integrations/drf.md
+          - GraphQL: integrations/graphql.md
+      - Advanced:
+          - Customization: advanced/customization.md
+          - Multiple Countries: advanced/multiple.md
+  - Development:
+      - Contributing: contributing.md
+      - Changelog: changelog.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: ["docs", "."]
+      check_paths: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - markdown.extensions.nl2br
+
+plugins:
+  - search

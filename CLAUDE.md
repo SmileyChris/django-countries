@@ -1,0 +1,189 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+**django-countries** is a Django application that provides country choices for use with forms, flag icons static files, and a country field for models. It provides all ISO 3166-1 countries as choices with support for translations via Django's gettext.
+
+## Development Commands
+
+This project uses **uv** (fast package manager) and **just** (command runner). See `docs/contributing.md` for setup instructions.
+
+### Testing
+```bash
+# Run all test environments + coverage (recommended)
+just test
+
+# Quick test with current Python (no coverage matrix)
+just test quick
+
+# Run specific test environment
+just test [latest|previous|legacy|latest-pyuca|latest-noi18n]
+
+# Examples:
+just test latest           # Python 3.13 + Django 5.1
+just test previous         # Python 3.10 + Django 4.2
+just test legacy           # Python 3.8 + Django 3.2
+just test latest-pyuca     # With Unicode collation
+just test latest-noi18n    # Without i18n
+
+# Run specific environment with custom Python version
+just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.8-3.13]
+
+# Example:
+just test latest 3.12      # Latest Django with Python 3.12
+
+# Run a single test file
+uv run --group test pytest django_countries/tests/test_fields.py
+
+# Run a specific test
+uv run --group test pytest django_countries/tests/test_fields.py::TestCountryField::test_name
+```
+
+### Code Quality
+```bash
+# Run ALL checks (format, lint, type, docs, tests)
+just check
+
+# Run individual tools directly
+uv run ruff format django_countries           # Format code
+uv run ruff check django_countries            # Lint code
+uv run mypy django_countries                  # Type check
+uv run bandit -r django_countries -x tests    # Security scan
+```
+
+### Coverage
+Coverage is automatically generated when running `just test`. View the HTML report at `htmlcov/index.html`.
+
+### Documentation
+```bash
+just docs  # Serve documentation locally at http://127.0.0.1:8080
+```
+
+Documentation is built with MkDocs and automatically deployed to GitHub Pages during `just deploy`.
+
+### Release Commands (for Maintainers)
+```bash
+# Pull and compile translations from Transifex
+just tx-pull
+
+# Deploy a release to PyPI (fully automated)
+just deploy patch   # For bug fixes (7.7.0 -> 7.7.1)
+just deploy minor   # For new features (7.7.0 -> 7.8.0)
+just deploy major   # For breaking changes (7.7.0 -> 8.0.0)
+```
+
+The `just deploy` command handles the entire release process:
+- Pulls latest changes and translations
+- Bumps version and builds changelog from `changes/` fragments using towncrier
+- Creates git tag and pushes
+- Builds and publishes to PyPI
+
+**Changelog Management**: This project uses [towncrier](https://pypi.org/project/towncrier/) for changelog management. Add fragments to `changes/` directory during development (see `changes/README.md`).
+
+**One-time setup**: Install Transifex CLI with `curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash`
+
+See the "Releasing (for Maintainers)" section in `docs/contributing.md` for the complete release workflow.
+
+## Build System
+
+The project uses **uv_build** as the build backend (uv's native build system for pure Python packages). Configuration in `pyproject.toml`:
+
+```toml
+[build-system]
+requires = ["uv_build>=0.9.6,<0.10.0"]
+build-backend = "uv_build"
+```
+
+**Version Management**: Version is stored in `pyproject.toml` and managed using `uv version --bump [major|minor|patch]`.
+
+**Building**: Use `uv build` to create wheel and source distributions, or `just deploy` to build and publish.
+
+## Architecture
+
+### Core Components
+
+**Countries Class (`__init__.py`)**: The central `Countries` class manages the list of available countries. It handles:
+- Loading country data from `iso3166-1.csv` and `data.py`
+- Applying settings like `COUNTRIES_OVERRIDE`, `COUNTRIES_ONLY`, `COUNTRIES_FIRST`
+- Translation of country names with fallback handling
+- Optional pyuca sorting for better Unicode collation
+- Alternative country codes (alpha3, numeric, IOC)
+
+**Country Object (`fields.py`)**: A lightweight wrapper around a country code that provides:
+- Lazy loading of country properties (name, flag, alpha3, numeric, ioc_code)
+- Unicode flag emoji via `unicode_flag` property
+- Extension points via entry_points mechanism for third-party plugins
+- HTML escaping support for safe rendering
+
+**CountryField (`fields.py`)**: A Django model field based on CharField that:
+- Stores 2-character ISO country codes (or comma-separated for multiple)
+- Supports multiple country selection with `multiple=True`
+- Custom lookups: `__name`, `__iname` for filtering by country name
+- Integration with Django admin filters via `filters.py`
+
+**Settings (`conf.py`)**: App-specific settings with COUNTRIES_ prefix:
+- `COUNTRIES_FLAG_URL`: Template for flag image URLs
+- `COUNTRIES_COMMON_NAMES`: Use friendlier names (e.g., "Bolivia" vs "Bolivia, Plurinational State of")
+- `COUNTRIES_OVERRIDE`: Override specific country names
+- `COUNTRIES_ONLY`: Restrict to specific countries
+- `COUNTRIES_FIRST`: Show certain countries at top of list
+- `COUNTRIES_FIRST_REPEAT`, `COUNTRIES_FIRST_BREAK`, `COUNTRIES_FIRST_SORT`: Control first-countries behavior
+
+### Integration Points
+
+**Django REST Framework** (`serializers.py`, `serializer_fields.py`):
+- `CountryFieldMixin`: Mixin for model serializers with CountryField
+- `CountryField` serializer field with configurable output format
+- Supports `country_dict=True` for verbose `{code, name}` output
+- Supports `name_only=True` for country name output
+
+**GraphQL** (`graphql/`):
+- Country object type with schema support for graphene-django
+- Provides fields: code, name, alpha3, numeric, iocCode
+
+**Template Tags** (`templatetags/`):
+- `{% get_country 'CODE' as var %}` - Get Country object from code
+- `{% get_countries %}` - Get full list of countries
+
+**Widgets** (`widgets.py`):
+- `CountrySelectWidget`: Select widget with flag image display
+
+### Data Flow
+
+1. Country codes are stored in the database as 2-character strings
+2. When accessed via model instances, codes are wrapped in Country objects
+3. Country objects lazily load properties from the Countries singleton
+4. The Countries singleton applies settings and handles translations
+5. Translations use Django's standard gettext with fallback handling
+
+### Testing Structure
+
+Tests are in `django_countries/tests/`:
+- `test_fields.py`: CountryField model field tests (most comprehensive)
+- `test_countries.py`: Countries class and Country object tests
+- `test_drf.py`: Django REST Framework integration tests
+- `test_admin_filters.py`: Admin filter tests
+- `test_widgets.py`: Widget rendering tests
+- `test_tags.py`: Template tag tests
+- `graphql/`: GraphQL integration tests
+- `settings.py` and `settings_noi18n.py`: Test settings
+
+Test models are defined in `tests/models.py` and the test app is configured in `tests/apps.py`.
+
+## Important Notes
+
+- The package maintains 100% test coverage for tests themselves and 90%+ for main code
+- Country names are translated using Django's i18n; test with both i18n enabled and disabled
+- Pre-commit hooks enforce: ruff (linting + formatting)
+- The project uses modern pyproject.toml-only build with uv_build backend
+- Type hints are checked with mypy using django-stubs
+- Multiple country selection stores countries as comma-separated string by default (sorted, with duplicates removed)
+- The Countries class can be subclassed for per-field customization
+- Translations are managed via Transifex and pulled using `just tx-pull`
+- Releases use `uv version` for version management and `just deploy` for publishing
+- Supported versions:
+  - Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
+  - Django 3.2 (LTS), 4.2 (LTS), 5.0, 5.1
+  - DRF 3.11+
