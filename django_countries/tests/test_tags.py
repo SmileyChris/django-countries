@@ -43,7 +43,5 @@ class TestCountriesTags(TestCase):
         rendered = self.TEMPLATE_COUNTRIES.render(Context())
         self.assertEqual(
             rendered,
-            Template("{{ expected }}").render(
-                Context({"expected": [(code, name) for code, name in countries]})
-            ),
+            Template("{{ expected }}").render(Context({"expected": list(countries)})),
         )

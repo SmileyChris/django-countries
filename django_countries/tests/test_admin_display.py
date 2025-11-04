@@ -1,5 +1,5 @@
 """Tests for displaying CountryField(multiple=True) in Django admin."""
-from django.contrib import admin
+
 from django.contrib.admin.utils import display_for_field
 from django.test import TestCase
 
