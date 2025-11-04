@@ -8,6 +8,8 @@ release, and any new translations added.
 
 # django_countries 7.8 (4 November 2025)
 
+_Where'd 7.7 go? Well 7.6 was accidentally bumped to 7.8 because of the new release process!_
+
 ## Improved Documentation
 
 - Added MkDocs documentation site and simplified README to focus on quick start with link to full documentation.
