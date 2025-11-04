@@ -50,7 +50,7 @@ COUNTRIES: "Dict[str, StrPromise]" = {
     "AU": _("Australia"),
     "AT": _("Austria"),
     "AZ": _("Azerbaijan"),
-    "BS": _("Bahamas"),
+    "BS": _("Bahamas (The)"),
     "BH": _("Bahrain"),
     "BD": _("Bangladesh"),
     "BB": _("Barbados"),
@@ -190,7 +190,7 @@ COUNTRIES: "Dict[str, StrPromise]" = {
     "NA": _("Namibia"),
     "NR": _("Nauru"),
     "NP": _("Nepal"),
-    "NL": _("Netherlands"),
+    "NL": _("Netherlands (Kingdom of the)"),
     "NC": _("New Caledonia"),
     "NZ": _("New Zealand"),
     "NI": _("Nicaragua"),
@@ -573,7 +573,9 @@ def self_generate(
     countries = sorted(countries, key=sort_key)
 
     # Write countries.
-    match = re.match(r"(.*\nCOUNTRIES = \{\n)(.*?)(\n\}.*)", contents, re.DOTALL)
+    match = re.match(
+        r"(.*\nCOUNTRIES(?:: [^\n]+)? = \{\n)(.*?)(\n\}.*)", contents, re.DOTALL
+    )
     if not match:
         raise ValueError('Expected a "COUNTRIES =" section in the source file!')
     bits = match.groups()
@@ -584,7 +586,9 @@ def self_generate(
     content = bits[0]
     content += "\n".join(country_list)
     # Write alt codes.
-    alt_match = re.match(r"(.*\nALT_CODES = \{\n)(.*)(\n\}.*)", bits[2], re.DOTALL)
+    alt_match = re.match(
+        r"(.*\nALT_CODES(?:: [^\n]+)? = \{\n)(.*)(\n\}.*)", bits[2], re.DOTALL
+    )
     if not alt_match:
         raise ValueError('Expected an "ALT_CODES =" section in the source file!')
     alt_bits = alt_match.groups()
