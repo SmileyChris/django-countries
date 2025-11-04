@@ -63,6 +63,24 @@ just docs  # Serve documentation locally at http://127.0.0.1:8080
 
 Documentation is built with MkDocs and automatically deployed to GitHub Pages during `just deploy`.
 
+### Updating Country Data
+
+Country data should be manually updated from the official ISO 3166-1 Online Browsing Platform (OBP):
+
+1. Visit: https://www.iso.org/obp/ui/
+2. Click the 'Country Codes' radio button
+3. Click the search button (🔍)
+4. Change 'Results per page' to 300
+5. Select and copy the table data
+6. Paste into a spreadsheet (LibreOffice Calc, Excel, etc.)
+7. Verify columns: Country Name, Alpha-2, Alpha-3, Numeric
+8. Delete any extra columns (like French names)
+9. Delete the header row
+10. Save as `django_countries/iso3166-1.csv`
+11. Run: `uv run --group dev python django_countries/data.py` to regenerate `data.py`
+
+The official OBP data uses specific formatting (parentheses vs commas) documented in `docs/iso3166-formatting.md`.
+
 ### Release Commands (for Maintainers)
 ```bash
 # Pull and compile translations from Transifex
@@ -80,7 +98,23 @@ The `just deploy [patch|minor|major]` command handles the entire release process
 - Creates git tag and pushes
 - Builds and publishes to PyPI
 
-**Changelog Management**: This project uses [towncrier](https://pypi.org/project/towncrier/) for changelog management. Add fragments to `changes/` directory during development (see `changes/README.md`).
+**Changelog Management**: This project uses [towncrier](https://pypi.org/project/towncrier/) for changelog management.
+
+**IMPORTANT**: When making significant changes, **always create a changelog fragment**:
+
+```bash
+# If fixing/implementing an issue or PR, use the number:
+changes/342.bugfix.md
+changes/423.feature.md
+
+# Otherwise, use descriptive unique names:
+changes/+20251104-common-names.feature.md
+changes/+20251104-iso-docs.doc.md
+```
+
+Fragment types: `feature`, `bugfix`, `doc`, `removal`, `misc`
+
+See `changes/README.md` for details.
 
 **One-time setup**: Install Transifex CLI with `curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash`
 
