@@ -61,6 +61,7 @@ dev = [
     "mypy",
     "django-stubs",
     "djangorestframework-stubs",
+    "Pillow",
     "types-Pillow",
     "bandit",
     "docutils",
