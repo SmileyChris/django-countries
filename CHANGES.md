@@ -6,6 +6,13 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+# django_countries 7.9.1 (4 November 2025)
+
+## Bugfixes
+
+- Fix `COUNTRIES_OVERRIDE` to support custom country codes that are 3 characters long. Previously, 3-character codes were incorrectly treated as alpha3 codes and resolved to existing countries. (#474)
+
+
 # django_countries 7.9 (4 November 2025)
 
 ## Bugfixes
