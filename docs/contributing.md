@@ -211,6 +211,16 @@ This will:
 
 **Note**: Add changelog entries to `changes/` directory before releasing. See `changes/README.md` for details.
 
+### Choosing the Right Release Type
+
+This project follows [Semantic Versioning](https://semver.org/):
+
+- **Patch (X.Y.Z)**: Bug fixes, translations, flag updates, documentation fixes
+- **Minor (X.Y.0)**: New features, new Django/Python/DRF support, country name changes, performance improvements
+- **Major (X.0.0)**: Breaking changes, dropping Python/Django support, API changes, removing deprecated features
+
+**Key Rule**: Adding version support = minor. Dropping version support = major.
+
 After the release, remember to bump to the next development version:
 
 ```bash

@@ -6,14 +6,16 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
-# django_countries 7.9.1 (4 November 2025)
+# django_countries 7.9.1 (4 November 2025) [YANKED]
 
 ## Bugfixes
 
 - Fix `COUNTRIES_OVERRIDE` to support custom country codes that are 3 characters long. Previously, 3-character codes were incorrectly treated as alpha3 codes and resolved to existing countries. (#474)
 
+**Note**: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.
 
-# django_countries 7.9 (4 November 2025)
+
+# django_countries 7.9 (4 November 2025) [YANKED]
 
 ## Bugfixes
 
@@ -21,10 +23,14 @@ release, and any new translations added.
 - Fixed CountryField(multiple=True) displaying "-" instead of country names in Django admin readonly_fields. (#463)
 - Fixed incorrect max_length calculation for CountryField(multiple=True) when using COUNTRIES_FIRST with COUNTRIES_FIRST_REPEAT. (#469)
 
+**Note**: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.
 
-# django_countries 7.8 (4 November 2025)
+
+# django_countries 7.8 (4 November 2025) [YANKED]
 
 _Where'd 7.7 go? Well 7.6 was accidentally bumped to 7.8 because of the new release process!_
+
+**Note**: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.
 
 ## Improved Documentation
 
