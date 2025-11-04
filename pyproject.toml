@@ -38,7 +38,7 @@ dependencies = ["asgiref", "typing_extensions"]
 
 [project.urls]
 Homepage = "https://github.com/SmileyChris/django-countries/"
-"Change Log" = "https://github.com/SmileyChris/django-countries/blob/main/CHANGES.rst"
+"Change Log" = "https://github.com/SmileyChris/django-countries/blob/main/CHANGES.md"
 "Source Code" = "https://github.com/SmileyChris/django-countries"
 Translations = "https://explore.transifex.com/smileychris/django-countries/"
 
