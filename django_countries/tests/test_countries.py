@@ -71,7 +71,7 @@ class TestCountriesObject(BaseTest):
                 raise ValueError("Can't evaluate lazy_gettext yet")
 
         with self.settings(COUNTRIES_OVERRIDE={"AU": FakeLazyGetText()}):
-            countries.countries
+            countries.countries  # noqa: B018
 
     def test_ioc_countries(self):
         from ..ioc_data import check_ioc_countries
@@ -398,7 +398,6 @@ class CountriesFirstTest(BaseTest):
                 }
             }
         ):
-
             lang = translation.get_language()
             try:
                 translation.activate("eo")

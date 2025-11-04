@@ -28,8 +28,8 @@ try:
         _entry_points = importlib.metadata.entry_points().get(
             "django_countries.Country", []
         )
-except ImportError:  # Python <3.8
-    import pkg_resources
+except ImportError:  # Python <3.8  # pragma: no cover
+    import pkg_resources  # type: ignore
 
     _entry_points = pkg_resources.iter_entry_points("django_countries.Country")
 
@@ -444,7 +444,7 @@ class CountryField(CharField):
             if self.multiple:
                 include_blank = False
             return super().get_choices(
-                include_blank=include_blank, blank_choice=blank_choice, *args, **kwargs
+                *args, include_blank=include_blank, blank_choice=blank_choice, **kwargs
             )
 
         get_choices = lazy(get_choices, list)
@@ -479,7 +479,7 @@ class CountryField(CharField):
 
         if not self.editable:
             # Skip validation for non-editable fields.
-            return
+            return None
 
         if value:
             choices = [option_key for option_key, option_value in self.choices]
@@ -493,6 +493,7 @@ class CountryField(CharField):
 
         if not self.blank and value in self.empty_values:
             raise exceptions.ValidationError(self.error_messages["blank"], code="blank")
+        return None
 
     def value_to_string(self, obj):
         """

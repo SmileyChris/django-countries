@@ -2,6 +2,7 @@
 """
 Builds all flags into a single sprite image (along with some css).
 """
+
 import os
 import re
 from typing import IO
@@ -26,35 +27,29 @@ def main() -> None:
     img.save(os.path.join(flag_path, "sprite-hq.png"))
     img = img.quantize(method=2, kmeans=1)
     img.save(os.path.join(flag_path, "sprite.png"))
-    css_file = open(os.path.join(flag_path, "sprite.css"), "w")
-    css_hq_file = open(os.path.join(flag_path, "sprite-hq.css"), "w")
     initial_css = (
-        ".flag-sprite {display: inline-block;width:%(x)spx;height:%(y)spx;"
+        f".flag-sprite {{display: inline-block;width:{FLAG_X}px;height:{FLAG_Y}px;"
         "image-rendering:-moz-crisp-edges;image-rendering:pixelated;"
         "image-rendering:-o-crisp-edges;"
         "-ms-interpolation-mode:nearest-neighbor;"
-        "background-image:url('%%s')}" % {"x": FLAG_X, "y": FLAG_Y}
+        "background-image:url('%s')}}"
     )
-    css_file.write(initial_css % "sprite.png")
-    write_coords(css_file, FLAG_X, FLAG_Y)
-    css_hq_file.write(initial_css % "sprite-hq.png")
-    write_coords(css_hq_file, FLAG_X, FLAG_Y)
-    for mult in range(2, 5):
-        css_hq_file.write(
-            "\n.flag%sx {background-size:%spx %spx}"
-            "\n.flag%sx.flag-sprite {width:%spx;height:%spx;}"
-            % (
-                mult,
-                26 * FLAG_X * mult,
-                26 * FLAG_Y * mult,
-                mult,
-                FLAG_X * mult,
-                FLAG_Y * mult,
+    with open(os.path.join(flag_path, "sprite.css"), "w") as css_file:
+        css_file.write(initial_css % "sprite.png")
+        write_coords(css_file, FLAG_X, FLAG_Y)
+    with open(os.path.join(flag_path, "sprite-hq.css"), "w") as css_hq_file:
+        css_hq_file.write(initial_css % "sprite-hq.png")
+        write_coords(css_hq_file, FLAG_X, FLAG_Y)
+        for mult in range(2, 5):
+            bg_size = f"{26 * FLAG_X * mult}px {26 * FLAG_Y * mult}px"
+            size = f"{FLAG_X * mult}px;height:{FLAG_Y * mult}px"
+            css_hq_file.write(
+                f"\n.flag{mult}x {{background-size:{bg_size}}}"
+                f"\n.flag{mult}x.flag-sprite {{width:{size};}}"
             )
-        )
-        write_coords(
-            css_hq_file, FLAG_X * mult, FLAG_Y * mult, prefix=".flag%sx" % mult
-        )
+            write_coords(
+                css_hq_file, FLAG_X * mult, FLAG_Y * mult, prefix=f".flag{mult}x"
+            )
 
 
 def write_coords(css_file: IO[str], width: int, height: int, prefix: str = "") -> None:

@@ -1,9 +1,0 @@
-include *.rst
-include LICENSE
-include django_countries/py.typed
-graft django_countries/static/flags
-graft django_countries/locale
-exclude tox.ini
-exclude .isort.cfg
-exclude .pre-commit-config.yaml
-prune .tx

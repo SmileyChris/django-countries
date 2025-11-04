@@ -143,18 +143,15 @@ class Countries(CountriesBase):
         The result is cached so future lookups are less work intensive.
         """
         if not hasattr(self, "_countries"):
-            only: "Iterable[Union[str, Tuple[str, StrPromise]]]" = self.get_option(
-                "only"
-            )
+            only: Iterable[Union[str, Tuple[str, StrPromise]]] = self.get_option("only")
             only_choices = True
-            if only:
-                # Originally used ``only`` as a dict, still supported.
-                if not isinstance(only, dict):
-                    for item in only:
-                        if isinstance(item, str):
-                            only_choices = False
-                            break
-            self._shadowed_names: "Dict[str, List[StrPromise]]" = {}
+            # Originally used ``only`` as a dict, still supported.
+            if only and not isinstance(only, dict):
+                for item in only:
+                    if isinstance(item, str):
+                        only_choices = False
+                        break
+            self._shadowed_names: Dict[str, List[StrPromise]] = {}
             if only and only_choices:
                 self._countries = dict(only)  # type: ignore
             else:
@@ -266,7 +263,7 @@ class Countries(CountriesBase):
     def shadowed_names(self):
         if not getattr(self, "_shadowed_names", False):
             # Getting countries populates shadowed names.
-            self.countries
+            self.countries  # noqa: B018
         return self._shadowed_names
 
     def translate_code(self, code: str, ignore_first: Optional[List[str]] = None):
@@ -275,10 +272,7 @@ class Countries(CountriesBase):
         """
         country = self.countries[code]
         if isinstance(country, dict):
-            if "names" in country:
-                names = country["names"]
-            else:
-                names = [country["name"]]
+            names = country["names"] if "names" in country else [country["name"]]
         else:
             names = [country]
         if ignore_first and code in ignore_first:
@@ -296,7 +290,7 @@ class Countries(CountriesBase):
             name = self.countries[code]
         if isinstance(name, dict):
             if "names" in name:
-                fallback_names: "List[StrPromise]" = name["names"][1:]
+                fallback_names: List[StrPromise] = name["names"][1:]
                 name = name["names"][0]
             else:
                 fallback_names = []
@@ -421,8 +415,7 @@ class Countries(CountriesBase):
         regex: Literal[False] = False,
         language: str = "en",
         insensitive: bool = True,
-    ) -> str:
-        ...
+    ) -> str: ...
 
     @overload
     def by_name(
@@ -432,8 +425,7 @@ class Countries(CountriesBase):
         regex: Literal[True],
         language: str = "en",
         insensitive: bool = True,
-    ) -> Set[str]:
-        ...
+    ) -> Set[str]: ...
 
     def by_name(
         self,
@@ -471,7 +463,7 @@ class Countries(CountriesBase):
             for code, check_country in self.countries.items():
                 if isinstance(check_country, dict):
                     if "names" in check_country:
-                        check_names: "List[StrPromise]" = check_country["names"]
+                        check_names: List[StrPromise] = check_country["names"]
                     else:
                         check_names = [check_country["name"]]
                 else:
@@ -518,14 +510,12 @@ class Countries(CountriesBase):
     @overload
     def numeric(
         self, code: Union[str, int, None], padded: Literal[False] = False
-    ) -> Optional[int]:
-        ...
+    ) -> Optional[int]: ...
 
     @overload
     def numeric(
         self, code: Union[str, int, None], padded: Literal[True]
-    ) -> Optional[str]:
-        ...
+    ) -> Optional[str]: ...
 
     def numeric(self, code: Union[str, int, None], padded: bool = False):
         """
@@ -545,7 +535,7 @@ class Countries(CountriesBase):
         if num is None:
             return None
         if padded:
-            return "%03d" % num
+            return f"{num:03d}"
         return num
 
     def ioc_code(self, code: CountryCode) -> str:

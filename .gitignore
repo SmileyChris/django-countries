@@ -48,9 +48,11 @@ coverage.xml
 # Translations
 #*.mo
 *.pot
+tx
 
-# Sphinx documentation
+# Documentation
 docs/_build/
+site/
 
 # PyBuilder
 target/
@@ -67,3 +69,13 @@ Thumbs.db
 # Virtual environment
 venv/
 virtualenv/
+.venv/
+
+# UV
+uv.lock
+
+# Ruff cache
+.ruff_cache/
+
+# Mypy cache
+.mypy_cache/

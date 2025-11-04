@@ -8,9 +8,12 @@ from django.utils.html import escape
 from django_countries import countries, fields, widgets
 from django_countries.conf import settings
 from django_countries.tests.models import Person
+from django_countries.widgets import CountrySelectWidget
 
 
-def person_form(widgets={"country": widgets.CountrySelectWidget}, **kwargs):
+def person_form(widgets=None, **kwargs):
+    if widgets is None:
+        widgets = {"country": CountrySelectWidget}
     return modelform_factory(Person, fields=["country"], widgets=widgets, **kwargs)
 
 

@@ -14,6 +14,7 @@ how to do that:
 7. Save as a CSV file in django_countries/iso3166-1.csv
 8. Run this script from the command line
 """
+
 import glob
 import os
 from typing import TYPE_CHECKING, Dict
@@ -563,7 +564,6 @@ def self_generate(
 
     # Sort countries.
     def sort_key(row):
-
         return (
             unicodedata.normalize("NFKD", row[0])
             .encode("ascii", "ignore")
