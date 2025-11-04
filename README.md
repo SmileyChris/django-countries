@@ -1,7 +1,7 @@
 # Django Countries
 
 <p align="center">
-  <img src="docs/images/logo.png" alt="Django Countries Logo" width="200">
+  <img src="docs/images/logo.png" alt="Django Countries Logo" width="164">
 </p>
 
 <p align="center">
