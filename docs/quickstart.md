@@ -77,6 +77,11 @@ Access country properties in templates:
 
 The country field works out of the box in Django admin with a searchable dropdown.
 
+!!! note "Django Admin Limitations"
+    `CountryField` does not currently support Django's `autocomplete_fields` feature. If you need autocomplete functionality, you'll need to use a custom form with a different widget.
+
+    The field may also not work correctly with third-party admin filter packages like `more_admin_filters` that expect specific field types.
+
 ## Next Steps
 
 - [CountryField Details](usage/field.md) - Learn about all field options

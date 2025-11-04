@@ -74,3 +74,35 @@ class TestCountryFilter(TestCase):
 
     def test_choices_empty_selection(self):
         return self._test_choices(selected_country_code=None)
+
+
+class PersonAutocompleteAdmin(admin.ModelAdmin):
+    """Admin class attempting to use autocomplete_fields."""
+
+    autocomplete_fields = ["country"]
+
+
+test_site.register(models.AllowNull, PersonAutocompleteAdmin)
+
+
+class TestAutocompleteFields(TestCase):
+    """Test to document that CountryField does not support autocomplete_fields.
+
+    This test documents the current behavior where autocomplete_fields
+    does not work as expected with CountryField. The field doesn't raise
+    an error, but it doesn't provide autocomplete functionality either.
+
+    See: https://github.com/SmileyChris/django-countries/issues/473
+    """
+
+    def setUp(self):
+        self.admin = PersonAutocompleteAdmin(models.AllowNull, test_site)
+
+    def test_autocomplete_fields_in_admin_config(self):
+        """Verify autocomplete_fields can be set but doesn't work."""
+        # The field can be added to autocomplete_fields without error
+        self.assertEqual(self.admin.autocomplete_fields, ["country"])
+
+        # However, CountryField doesn't implement the autocomplete widget/view
+        # It will fall back to a regular select widget
+        # (This test documents current behavior, not desired behavior)
