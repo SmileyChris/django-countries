@@ -48,7 +48,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.python-version }}-${{ matrix.test-env }}
-          path: .coverage.*
+          path: |
+            .coverage
+            .coverage.*
           if-no-files-found: ignore
 
   lint-and-type-check:
@@ -66,26 +68,25 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install just
-        uses: extractions/setup-just@v2
-
       - name: Install dependencies
         run: uv sync --group dev
 
       - name: Check formatting
-        run: just format-check
+        run: |
+          uv run ruff check --select I django_countries
+          uv run ruff format --check django_countries
 
       - name: Run linters
-        run: just lint
+        run: uv run ruff check django_countries
 
       - name: Run type checker
-        run: just typecheck
+        run: uv run mypy django_countries
 
       - name: Check documentation
-        run: just check-docs
+        run: uv run --group docs mkdocs build --strict
 
       - name: Run security scan
-        run: just security
+        run: uv run bandit -r django_countries -x tests
 
   coverage:
     needs: tests
@@ -112,13 +113,19 @@ jobs:
 
       - name: Combine and check coverage
         run: |
-          coverage combine
-          echo "Test coverage (must be 100%):"
-          coverage report --include="django_countries/tests/*" --fail-under=100 -m
-          echo ""
-          echo "Source coverage (must be 90%+):"
-          coverage report --omit="django_countries/tests/*" --fail-under=90 -m
-          coverage html
+          # Check if any coverage files exist
+          if ls .coverage.* 1> /dev/null 2>&1; then
+            coverage combine
+            echo "Test coverage (must be 100%):"
+            coverage report --include="django_countries/tests/*" --fail-under=100 -m
+            echo ""
+            echo "Source coverage (must be 90%+):"
+            coverage report --omit="django_countries/tests/*" --fail-under=90 -m
+            coverage html
+          else
+            echo "No coverage data found"
+            exit 1
+          fi
 
       - name: Upload coverage HTML
         uses: actions/upload-artifact@v4
