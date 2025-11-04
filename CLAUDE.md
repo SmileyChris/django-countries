@@ -22,7 +22,7 @@ just test quick
 just test [latest|previous|legacy|latest-pyuca|latest-noi18n]
 
 # Examples:
-just test latest           # Python 3.13 + Django 5.1
+just test latest           # Python 3.13 + Django 5.2
 just test previous         # Python 3.10 + Django 4.2
 just test legacy           # Python 3.8 + Django 3.2
 just test latest-pyuca     # With Unicode collation
@@ -185,5 +185,5 @@ Test models are defined in `tests/models.py` and the test app is configured in `
 - Releases use `uv version` for version management and `just deploy` for publishing
 - Supported versions:
   - Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
-  - Django 3.2 (LTS), 4.2 (LTS), 5.0, 5.1
+  - Django 3.2 (LTS), 4.2 (LTS), 5.0, 5.1, 5.2
   - DRF 3.11+
