@@ -4,7 +4,7 @@ A Django application that provides country choices for use with forms, flag icon
 
 ## Features
 
-- **Country Field**: Django model field with all ISO 3166-1 countries
+- **Country Field**: Django model field with all [ISO 3166-1](iso3166-formatting.md) countries
 - **Translated Names**: Country names translated using Django's i18n system
 - **Flag Icons**: Static flag image files for all countries
 - **REST Framework**: Full Django REST Framework integration

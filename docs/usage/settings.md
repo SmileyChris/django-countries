@@ -13,7 +13,7 @@ All settings are optional and have sensible defaults. Add them to your Django pr
 
 Controls whether to use common/friendly country names instead of official ISO 3166-1 names.
 
-When `True`, uses friendlier names like "Bolivia" instead of "Bolivia, Plurinational State of".
+When `True`, uses friendlier names like "Bolivia" instead of "Bolivia, Plurinational State of". See [ISO 3166-1 Country Name Formatting](../iso3166-formatting.md) for details on the official naming patterns.
 
 ```python
 # Use official ISO 3166-1 names
@@ -198,5 +198,6 @@ See [Single Field Customization](../advanced/customization.md#single-field-custo
 ## See Also
 
 - [Customization Guide](../advanced/customization.md) - Detailed customization examples
+- [ISO 3166-1 Formatting](../iso3166-formatting.md) - Understanding official country name conventions
 - [CountryField Reference](field.md) - Learn about the country field
 - [Forms & Widgets](forms.md) - Use countries in forms

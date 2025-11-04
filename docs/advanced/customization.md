@@ -2,7 +2,7 @@
 
 ## Customize the Country List
 
-Country names are taken from the official ISO 3166-1 list, with some country names being replaced with their more common usage (such as "Bolivia" instead of "Bolivia, Plurinational State of").
+Country names are taken from the official ISO 3166-1 list, with some country names being replaced with their more common usage (such as "Bolivia" instead of "Bolivia, Plurinational State of"). See [ISO 3166-1 Country Name Formatting](../iso3166-formatting.md) for details on the official naming conventions and quirks.
 
 ### Use Official ISO Names
 
@@ -288,5 +288,6 @@ Then in your code:
 ## See Also
 
 - [Settings Reference](../usage/settings.md) - Complete list of all settings
+- [ISO 3166-1 Formatting](../iso3166-formatting.md) - Understanding official country name conventions
 - [CountryField Reference](../usage/field.md) - Learn about the country field
 - [Multiple Countries](multiple.md) - Handle multiple country selection

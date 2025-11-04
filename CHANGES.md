@@ -6,62 +6,74 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
-# django_countries 8.0.0 (4 November 2025)
+## 8.0.0 (4 November 2025)
 
-## Features
+**Note**: This release includes all changes from the yanked versions 7.8, 7.9, and 7.9.1, which were yanked because they inadvertently dropped Python 3.7 support without a major version bump.
+
+### Features
 
 - Added common names for six additional countries/territories: Democratic Republic of the Congo (CD), South Georgia (GS), Netherlands (NL), Palestine (PS), Saint Helena (SH), and Vatican City (VA). These provide friendlier, shorter names when `COUNTRIES_COMMON_NAMES` is enabled (default).
 
-## Bugfixes
+### Bugfixes
 
+- Fix `COUNTRIES_OVERRIDE` to support custom country codes that are 3 characters long. Previously, 3-character codes were incorrectly treated as alpha3 codes and resolved to existing countries. ([#474](https://github.com/SmileyChris/django-countries/issues/474))
+- Fixed TypeError "unhashable type: 'list'" when using CountryField(multiple=True) in Django admin list_display. ([#311](https://github.com/SmileyChris/django-countries/issues/311))
+- Fixed CountryField(multiple=True) displaying "-" instead of country names in Django admin readonly_fields. ([#463](https://github.com/SmileyChris/django-countries/issues/463))
+- Fixed incorrect max_length calculation for CountryField(multiple=True) when using COUNTRIES_FIRST with COUNTRIES_FIRST_REPEAT. ([#469](https://github.com/SmileyChris/django-countries/issues/469))
 - Updated country names to match ISO 3166-1 OBP: Bahamas (The) and Netherlands (Kingdom of the). Also improved self_generate() regex to handle type hints in dictionary declarations.
 
-## Improved Documentation
+### Improved Documentation
 
-- Added documentation warning that CountryField does not support Django's `autocomplete_fields` in admin or third-party admin filter packages like `more_admin_filters`. (#473)
+- Added MkDocs documentation site and simplified README to focus on quick start with link to full documentation.
+- Consolidated release documentation into CONTRIBUTING.md and improved development setup instructions.
+- Added documentation warning that CountryField does not support Django's `autocomplete_fields` in admin or third-party admin filter packages like `more_admin_filters`. ([#473](https://github.com/SmileyChris/django-countries/issues/473))
 - Added comprehensive documentation on ISO 3166-1 country name formatting, explaining parentheses vs commas usage, capitalization of "the", and addressing common political objections about territories like Taiwan, Kosovo, Hong Kong, and Palestine.
 
-## Deprecations and Removals
+### Deprecations and Removals
 
 - Drop Python 3.7 support. Python 3.7 reached end-of-life in June 2023. The minimum supported Python version is now 3.8.
 
-## Misc
+### Misc
 
+- Expanded test matrix to cover Python 3.8-3.13 and Django 3.2-5.1 with improved test infrastructure.
+- Fixed various code quality issues identified by ruff linter, including improved string formatting and file handling.
+- Migrated build system from setuptools to uv_build for faster and more modern package building.
+- Simplified release process with automated `just deploy` command and towncrier for changelog management.
 - Fix unnecessary list comprehension in test_tags.py
 
 
-# django_countries 7.9.1 (4 November 2025) [YANKED]
+## 7.9.1 (4 November 2025) [YANKED]
 
-## Bugfixes
+### Bugfixes
 
-- Fix `COUNTRIES_OVERRIDE` to support custom country codes that are 3 characters long. Previously, 3-character codes were incorrectly treated as alpha3 codes and resolved to existing countries. (#474)
-
-**Note**: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.
-
-
-# django_countries 7.9 (4 November 2025) [YANKED]
-
-## Bugfixes
-
-- Fixed TypeError "unhashable type: 'list'" when using CountryField(multiple=True) in Django admin list_display. (#311)
-- Fixed CountryField(multiple=True) displaying "-" instead of country names in Django admin readonly_fields. (#463)
-- Fixed incorrect max_length calculation for CountryField(multiple=True) when using COUNTRIES_FIRST with COUNTRIES_FIRST_REPEAT. (#469)
+- Fix `COUNTRIES_OVERRIDE` to support custom country codes that are 3 characters long. Previously, 3-character codes were incorrectly treated as alpha3 codes and resolved to existing countries. ([#474](https://github.com/SmileyChris/django-countries/issues/474))
 
 **Note**: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.
 
 
-# django_countries 7.8 (4 November 2025) [YANKED]
+## 7.9 (4 November 2025) [YANKED]
+
+### Bugfixes
+
+- Fixed TypeError "unhashable type: 'list'" when using CountryField(multiple=True) in Django admin list_display. ([#311](https://github.com/SmileyChris/django-countries/issues/311))
+- Fixed CountryField(multiple=True) displaying "-" instead of country names in Django admin readonly_fields. ([#463](https://github.com/SmileyChris/django-countries/issues/463))
+- Fixed incorrect max_length calculation for CountryField(multiple=True) when using COUNTRIES_FIRST with COUNTRIES_FIRST_REPEAT. ([#469](https://github.com/SmileyChris/django-countries/issues/469))
+
+**Note**: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.
+
+
+## 7.8 (4 November 2025) [YANKED]
 
 _Where'd 7.7 go? Well 7.6 was accidentally bumped to 7.8 because of the new release process!_
 
 **Note**: This release was yanked because it inadvertently dropped Python 3.7 support without a major version bump. Use 8.0.0 or later instead.
 
-## Improved Documentation
+### Improved Documentation
 
 - Added MkDocs documentation site and simplified README to focus on quick start with link to full documentation.
 - Consolidated release documentation into CONTRIBUTING.md and improved development setup instructions.
 
-## Misc
+### Misc
 
 - Expanded test matrix to cover Python 3.8-3.13 and Django 3.2-5.1 with improved test infrastructure.
 - Fixed various code quality issues identified by ruff linter, including improved string formatting and file handling.

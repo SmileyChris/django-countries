@@ -115,3 +115,5 @@ exclude_dirs = ["/tests"]
 package = "django_countries"
 filename = "CHANGES.md"
 directory = "changes"
+issue_format = "[#{issue}](https://github.com/SmileyChris/django-countries/issues/{issue})"
+title_format = "## {version} ({project_date})"

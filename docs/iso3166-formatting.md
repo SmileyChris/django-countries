@@ -281,6 +281,6 @@ If the ISO list doesn't match your application's requirements, please use the cu
 
 ## See Also
 
-* [Common Names](settings.md#countries_common_names) - Using friendly country names
+* [Common Names](usage/settings.md#countries_common_names) - Using friendly country names
 * [Customization](advanced/customization.md) - Overriding country names
-* [Contributing](contributing.md#updating-country-data) - How to update country data from ISO OBP
+* [Updating Country Data](contributing.md#updating-country-data) - How to update country data from ISO OBP
