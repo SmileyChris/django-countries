@@ -68,13 +68,13 @@ Documentation is built with MkDocs and automatically deployed to GitHub Pages du
 # Pull and compile translations from Transifex
 just tx-pull
 
-# Deploy a release to PyPI (fully automated)
+# Deploy a release to PyPI (fully automated, requires bump type)
 just deploy patch   # For bug fixes (7.7.0 -> 7.7.1)
 just deploy minor   # For new features (7.7.0 -> 7.8.0)
 just deploy major   # For breaking changes (7.7.0 -> 8.0.0)
 ```
 
-The `just deploy` command handles the entire release process:
+The `just deploy [patch|minor|major]` command handles the entire release process:
 - Pulls latest changes and translations
 - Bumps version and builds changelog from `changes/` fragments using towncrier
 - Creates git tag and pushes
@@ -98,7 +98,7 @@ build-backend = "uv_build"
 
 **Version Management**: Version is stored in `pyproject.toml` and managed using `uv version --bump [major|minor|patch]`.
 
-**Building**: Use `uv build` to create wheel and source distributions, or `just deploy` to build and publish.
+**Building**: Use `uv build` to create wheel and source distributions, or `just deploy [patch|minor|major]` to build and publish.
 
 ## Architecture
 

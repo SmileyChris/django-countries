@@ -166,8 +166,7 @@ tx-pull:
 
 # Deploy a new release to PyPI
 # Usage: just deploy [patch|minor|major]
-# Default: patch
-deploy BUMP="patch":
+deploy BUMP:
     #!/usr/bin/env bash
     set -euo pipefail
 
@@ -227,9 +226,9 @@ deploy BUMP="patch":
 
     # Run pre-commit checks on version bump
     echo "→ Running pre-commit checks..."
-    if command -v pre-commit &> /dev/null; then
+    if command -v uvx &> /dev/null; then
         git add pyproject.toml
-        pre-commit run --files pyproject.toml || {
+        uvx pre-commit run --files pyproject.toml || {
             echo "❌ Pre-commit checks failed on pyproject.toml"
             exit 1
         }

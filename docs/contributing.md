@@ -182,7 +182,7 @@ Before releasing, ensure you have:
 
 ### Quick Release (Recommended)
 
-The `just deploy` command handles the entire release process:
+The `just deploy [patch|minor|major]` command handles the entire release process (bump type required):
 
 ```bash
 # For a patch release (bug fixes: 7.7.0 -> 7.7.1)
