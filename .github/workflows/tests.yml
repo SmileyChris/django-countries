@@ -44,15 +44,13 @@ jobs:
       - name: Run tests for ${{ matrix.test-env }}
         run: just test ${{ matrix.test-env }} ${{ matrix.python-version }}
 
-      - name: List coverage files (debug)
-        run: ls -la .coverage* || echo "No coverage files found"
-
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.python-version }}-${{ matrix.test-env }}
-          path: .coverage*
-          if-no-files-found: warn
+          path: .coverage.*
+          include-hidden-files: true
+          if-no-files-found: error
 
   lint-and-type-check:
     runs-on: ubuntu-latest
@@ -114,24 +112,13 @@ jobs:
 
       - name: Combine and check coverage
         run: |
-          # List all downloaded coverage files
-          echo "Coverage files found:"
-          ls -la .coverage* || echo "No coverage files found"
+          coverage combine
+          echo "Test coverage (must be 100%):"
+          coverage report --include="django_countries/tests/*" --fail-under=100 -m
           echo ""
-
-          # Check if any coverage files exist
-          if ls .coverage* 1> /dev/null 2>&1; then
-            coverage combine
-            echo "Test coverage (must be 100%):"
-            coverage report --include="django_countries/tests/*" --fail-under=100 -m
-            echo ""
-            echo "Source coverage (must be 90%+):"
-            coverage report --omit="django_countries/tests/*" --fail-under=90 -m
-            coverage html
-          else
-            echo "No coverage data found"
-            exit 1
-          fi
+          echo "Source coverage (must be 90%+):"
+          coverage report --omit="django_countries/tests/*" --fail-under=90 -m
+          coverage html
 
       - name: Upload coverage HTML
         uses: actions/upload-artifact@v4
