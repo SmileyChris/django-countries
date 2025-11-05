@@ -128,17 +128,17 @@ check:
     @echo "Running all checks..."
     @echo ""
     @echo "→ Checking code formatting..."
-    ruff check --select I django_countries
-    ruff format --check django_countries
+    uv run ruff check --select I django_countries
+    uv run ruff format --check django_countries
     @echo "✓ Formatting OK"
     @echo ""
     @echo "→ Running linters..."
-    ruff check django_countries
-    bandit -r django_countries -x tests
+    uv run ruff check django_countries
+    uv run bandit -r django_countries -x tests
     @echo "✓ Linting OK"
     @echo ""
     @echo "→ Type checking..."
-    mypy django_countries
+    uv run mypy django_countries
     @echo "✓ Type checking OK"
     @echo ""
     @echo "→ Validating documentation..."

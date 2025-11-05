@@ -1,5 +1,5 @@
 import copy
-from typing import List, Union
+from typing import Dict, List, Union
 from urllib import parse as urlparse
 
 import django
@@ -42,6 +42,8 @@ class LazyChoicesMixin:
 
 
 class LazySelectMixin(LazyChoicesMixin):
+    attrs: Dict[str, str]
+
     if django.VERSION < (5, 0):
 
         def __deepcopy__(self, memo):

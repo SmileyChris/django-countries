@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.utils.encoding import force_str
 from rest_framework import serializers
 
@@ -10,7 +12,11 @@ class CountryField(serializers.ChoiceField):
         self.name_only = kwargs.pop("name_only", None)
         field_countries = kwargs.pop("countries", None)
         self.countries = field_countries or countries
-        super().__init__(self.countries, *args, **kwargs)
+        super().__init__(
+            self.countries,  # type: ignore
+            *args,
+            **kwargs,
+        )
 
     def to_representation(self, obj):
         code = self.countries.alpha2(obj)
@@ -22,7 +28,7 @@ class CountryField(serializers.ChoiceField):
             return code
         return {"code": code, "name": force_str(self.countries.name(obj))}
 
-    def to_internal_value(self, data):
+    def to_internal_value(self, data: Any):
         if not self.allow_blank and data == "":
             self.fail("invalid_choice", input=data)
 

@@ -6,14 +6,15 @@ from gettext import NullTranslations
 from typing import (
     TYPE_CHECKING,
     Any,
-    Callable,
     Dict,
     Iterable,
     List,
+    Literal,
     NamedTuple,
     Optional,
     Set,
     Tuple,
+    TypedDict,
     Union,
     cast,
     overload,
@@ -22,7 +23,6 @@ from typing import (
 from asgiref.local import Local
 from django.utils.encoding import force_str
 from django.utils.translation import override, trans_real
-from typing_extensions import Literal, TypedDict
 
 from django_countries.conf import settings
 
@@ -30,6 +30,20 @@ from .base import CountriesBase
 
 if TYPE_CHECKING:
     from django_stubs_ext import StrPromise
+
+    class ComplexCountryName(TypedDict):
+        name: "StrPromise"
+        names: "List[StrPromise]"
+        alpha3: str
+        numeric: int
+        ioc_code: str
+
+    CountryName = Union[
+        StrPromise,  # type: ignore
+        ComplexCountryName,
+    ]
+    CountryCode = Union[str, int, None]
+
 
 try:
     import pyuca  # type: ignore
@@ -71,29 +85,17 @@ def no_translation_fallback():
         return
     # Ensure the empty fallback translator has been installed.
     catalog = trans_real.catalog()
-    original_fallback = catalog._fallback
+    original_fallback = catalog._fallback  # type: ignore
     if not isinstance(original_fallback, EmptyFallbackTranslator):
         empty_fallback_translator = EmptyFallbackTranslator()
-        empty_fallback_translator._fallback = original_fallback
-        catalog._fallback = empty_fallback_translator
+        empty_fallback_translator._fallback = original_fallback  # type: ignore
+        catalog._fallback = empty_fallback_translator  # type: ignore
     # Set the translation state to not use a fallback while inside this context.
     _translation_state.fallback = False
     try:
         yield
     finally:
         _translation_state.fallback = True
-
-
-class ComplexCountryName(TypedDict):
-    name: "StrPromise"
-    names: "List[StrPromise]"
-    alpha3: str
-    numeric: int
-    ioc_code: str
-
-
-CountryName = Union["StrPromise", ComplexCountryName]
-CountryCode = Union[str, int, None]
 
 
 class AltCodes(NamedTuple):
@@ -121,7 +123,7 @@ class Countries(CountriesBase):
     the country ``code`` and ``name``), sorted by name.
     """
 
-    _countries: Dict[str, CountryName]
+    _countries: Dict[str, "CountryName"]
     _alt_codes: Dict[str, AltCodes]
 
     def get_option(self, option: str):
@@ -135,7 +137,7 @@ class Countries(CountriesBase):
         return getattr(settings, f"COUNTRIES_{option.upper()}")
 
     @property
-    def countries(self) -> Dict[str, CountryName]:
+    def countries(self) -> Dict[str, "CountryName"]:
         """
         Return the a dictionary of countries, modified by any overriding
         options.
@@ -179,7 +181,7 @@ class Countries(CountriesBase):
                 )
                 if override:
                     _countries = cast(
-                        Dict[str, Union[CountryName, None]], self._countries.copy()
+                        "Dict[str, Union[CountryName, None]]", self._countries.copy()
                     )
                     _countries.update(override)
                     self._countries = {
@@ -280,7 +282,7 @@ class Countries(CountriesBase):
         for name in names:
             yield self.translate_pair(code, name)
 
-    def translate_pair(self, code: str, name: Optional[CountryName] = None):
+    def translate_pair(self, code: str, name: Optional["CountryName"] = None):
         """
         Force a country to the current activated translation.
 
@@ -359,7 +361,7 @@ class Countries(CountriesBase):
         # Return sorted country list.
         yield from sorted(countries, key=sort_key)
 
-    def alpha2(self, code: CountryCode) -> str:
+    def alpha2(self, code: "CountryCode") -> str:
         """
         Return the normalized country code when passed any type of ISO 3166-1
         country code.
@@ -370,7 +372,6 @@ class Countries(CountriesBase):
 
         If no match is found, returns an empty string.
         """
-        find: Optional[Callable]
         code_str = force_str(code).upper()
         # Check if the code exists directly in countries first, before trying
         # to resolve it as an alternative code (alpha3/numeric). This allows
@@ -378,31 +379,30 @@ class Countries(CountriesBase):
         # if they match the format of alternative codes (issue #474).
         if code_str in self.countries:
             return code_str
+
+        find_index: Optional[int]
+        find_value: Union[str, int, None]
+
         if code_str.isdigit():
-            lookup_numeric = int(code_str)
-
-            def find(alt_codes):
-                return alt_codes[1] == lookup_numeric
-
+            find_index = 1
+            find_value = int(code_str)
         elif len(code_str) == 3:
-            lookup_alpha3 = code_str
-
-            def find(alt_codes) -> bool:
-                return alt_codes[0] == lookup_alpha3
-
+            find_index = 0
+            find_value = code_str
         else:
-            find = None
-        if find:
+            find_index = None
+            find_value = None
+        if find_index is not None:
             code_str = ""
             for alpha2, alt_codes in self.alt_codes.items():
-                if find(alt_codes):
+                if alt_codes[find_index] == find_value:
                     code_str = alpha2
                     break
         if code_str in self.countries:
             return code_str
         return ""
 
-    def name(self, code: CountryCode) -> str:
+    def name(self, code: "CountryCode") -> str:
         """
         Return the name of a country, based on the code.
 
@@ -499,7 +499,7 @@ class Countries(CountriesBase):
             return code_list
         return ""
 
-    def alpha3(self, code: CountryCode) -> str:
+    def alpha3(self, code: "CountryCode") -> str:
         """
         Return the ISO 3166-1 three letter country code matching the provided
         country code.
@@ -514,14 +514,10 @@ class Countries(CountriesBase):
         return alpha3 or ""
 
     @overload
-    def numeric(
-        self, code: Union[str, int, None], padded: Literal[False] = False
-    ) -> Optional[int]: ...
+    def numeric(self, code: Union[str, int, None]) -> Optional[int]: ...
 
     @overload
-    def numeric(
-        self, code: Union[str, int, None], padded: Literal[True]
-    ) -> Optional[str]: ...
+    def numeric(self, code: Union[str, int, None], padded=True) -> Optional[str]: ...
 
     def numeric(self, code: Union[str, int, None], padded: bool = False):
         """
@@ -544,7 +540,7 @@ class Countries(CountriesBase):
             return f"{num:03d}"
         return num
 
-    def ioc_code(self, code: CountryCode) -> str:
+    def ioc_code(self, code: "CountryCode") -> str:
         """
         Return the International Olympic Committee three letter code matching
         the provided ISO 3166-1 country code.

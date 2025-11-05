@@ -592,11 +592,10 @@ def self_generate(
     if not alt_match:
         raise ValueError('Expected an "ALT_CODES =" section in the source file!')
     alt_bits = alt_match.groups()
-    alt_list = []
-    for country_row in countries:
-        alt_list.append(
-            f'    "{country_row[1]}": ("{country_row[2]}", {country_row[3]}),'
-        )
+    alt_list = [
+        f'    "{country_row[1]}": ("{country_row[2]}", {country_row[3]}),'
+        for country_row in countries
+    ]
     content += alt_bits[0]
     content += "\n".join(alt_list)
     content += alt_bits[2]

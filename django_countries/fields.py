@@ -1,7 +1,12 @@
 import re
 import sys
-from typing import Any, Iterable, Optional, Tuple, Type, Union, cast
+from typing import TYPE_CHECKING, Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
+
+if TYPE_CHECKING:
+    from typing import overload
+
+    from typing_extensions import Self
 
 import django
 from django import forms
@@ -39,17 +44,17 @@ EXTENSIONS = {ep.name: ep.load() for ep in _entry_points}  # type: ignore
 class TemporaryEscape:
     __slots__ = ["country", "original_escape"]
 
-    def __init__(self, country):
+    def __init__(self, country: "Country") -> None:
         self.country = country
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return self.country._escape
 
-    def __enter__(self):
+    def __enter__(self) -> None:
         self.original_escape = self.country._escape
         self.country._escape = True
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, type: Any, value: Any, traceback: Any) -> None:
         self.country._escape = self.original_escape
 
 
@@ -103,7 +108,7 @@ class Country:
         return self.custom_countries or countries
 
     @property
-    def escape(self):
+    def escape(self) -> TemporaryEscape:
         return TemporaryEscape(self)
 
     def maybe_escape(self, text) -> str:
@@ -177,7 +182,9 @@ class Country:
         return chr(points[0]) + chr(points[1])
 
     @staticmethod
-    def country_from_ioc(ioc_code, flag_url=""):
+    def country_from_ioc(
+        ioc_code: str, flag_url: Optional[str] = None
+    ) -> Optional["Country"]:
         code = ioc_data.IOC_TO_ISO.get(ioc_code, "")
         if code == "":
             return None
@@ -190,7 +197,7 @@ class Country:
     def __getattr__(self, attr):
         if attr in EXTENSIONS:
             return EXTENSIONS[attr](self)
-        raise AttributeError()
+        raise AttributeError
 
 
 class MultipleCountriesDescriptor:
@@ -255,8 +262,21 @@ class CountryDescriptor:
         '/static/flags/nz.gif'
     """
 
-    def __init__(self, field):
+    field: "CountryField"
+
+    def __init__(self, field: "CountryField") -> None:
         self.field = field
+
+    # Type-only overloads for descriptor protocol
+    if TYPE_CHECKING:
+
+        @overload
+        def __get__(self, instance: None, owner: Any) -> "Self": ...
+
+        @overload
+        def __get__(
+            self, instance: Any, owner: Any
+        ) -> Union[Country, MultipleCountriesDescriptor]: ...
 
     def __get__(self, instance=None, owner=None):
         if instance is None:
@@ -283,6 +303,8 @@ class CountryDescriptor:
 
 
 class LazyChoicesMixin(widgets.LazyChoicesMixin):
+    widget: Type[forms.widgets.ChoiceWidget]
+
     if django.VERSION < (5, 0):
 
         def _set_choices(self, value):
@@ -290,7 +312,7 @@ class LazyChoicesMixin(widgets.LazyChoicesMixin):
             Also update the widget's choices.
             """
             super()._set_choices(value)
-            self.widget.choices = value
+            self.widget.choices = value  # type: ignore
 
 
 _Choice = Tuple[Any, str]
@@ -494,7 +516,7 @@ class CountryField(CharField):
 
     else:
 
-        def get_choices(  # type: ignore [misc]
+        def _get_choices_legacy(
             self, include_blank=True, blank_choice=None, *args, **kwargs
         ):
             if blank_choice is None:
@@ -508,7 +530,7 @@ class CountryField(CharField):
                 *args, include_blank=include_blank, blank_choice=blank_choice, **kwargs
             )
 
-        get_choices = lazy(get_choices, list)
+        get_choices = lazy(_get_choices_legacy, list)
 
     def formfield(self, **kwargs):
         kwargs.setdefault(
@@ -526,10 +548,10 @@ class CountryField(CharField):
             return value
         if isinstance(value, str):
             value = value.split(",")
-        output = []
-        for item in value:
-            output.append(super().to_python(item))
-        return output
+        # Store reference to parent's to_python for use in list comprehension
+        # (super() doesn't work in comprehensions in Python 3.8)
+        parent_to_python = super().to_python
+        return [parent_to_python(v) for v in value if v]
 
     def validate(self, value, model_instance):
         """
@@ -542,7 +564,7 @@ class CountryField(CharField):
             # Skip validation for non-editable fields.
             return None
 
-        if value:
+        if value and self.choices is not None:
             choices = [option_key for option_key, option_value in self.choices]
             for single_value in value:
                 if single_value not in choices:
@@ -586,7 +608,7 @@ class ExactNameLookup(lookups.Exact):
     insensitive: bool = False
 
     def get_prep_lookup(self):
-        return cast(CountryField, self.lhs.output_field).countries.by_name(
+        return cast("CountryField", self.lhs.output_field).countries.by_name(
             force_str(self.rhs), insensitive=self.insensitive
         )
 
@@ -610,7 +632,7 @@ class FullNameLookup(lookups.In):
             value = self.expr.format(
                 text=re.escape(self.rhs) if self.escape_regex else self.rhs
             )
-            options = cast(CountryField, self.lhs.output_field).countries.by_name(
+            options = cast("CountryField", self.lhs.output_field).countries.by_name(
                 value, regex=True, insensitive=self.insensitive
             )
             if len(self.rhs) == 2 and (

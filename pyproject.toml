@@ -58,7 +58,7 @@ dev = [
     { include-group = "test" },
     "ruff",
     "django",
-    "mypy",
+    "mypy>=1.12,<1.16",
     "django-stubs",
     "djangorestframework-stubs",
     "Pillow",
@@ -89,6 +89,7 @@ exclude_lines = ["pragma: no cover", "@overload", "if TYPE_CHECKING:"]
 [tool.mypy]
 plugins = ["mypy_django_plugin.main"]
 disallow_untyped_calls = true
+python_version = "3.9"
 
 [[tool.mypy.overrides]]
 module = "mypy_django_plugin.*"
@@ -103,7 +104,42 @@ target-version = "py38"
 
 [tool.ruff.lint]
 # Enable pycodestyle (E, W), Pyflakes (F), isort (I), pyupgrade (UP)
-select = ["E", "F", "W", "I", "UP", "B", "C4", "PIE", "RET", "SIM"]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # Pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "PIE",  # flake8-pie
+    "RET",  # flake8-return
+    "SIM",  # flake8-simplify
+    "PERF", # Performance anti-patterns
+    "TCH",  # Type-checking optimizations
+    "RSE",  # Raise statement improvements
+    "DJ",   # Django best practices
+    "T20",  # Print statement detection
+]
+
+ignore = [
+    "DJ008", # Model __str__ not critical for test models
+]
+
+[tool.ruff.lint.per-file-ignores]
+"django_countries/tests/**" = [
+    "S101", # Allow asserts in tests
+    "ARG",  # Allow unused arguments in tests
+    "N802", # Allow test names matching settings
+    "N806", # Allow Form class variables
+]
+"django_countries/data.py" = ["T201"] # Allow prints in data generation script
+"django_countries/ioc_data.py" = [
+    "T201",
+] # Allow prints in data generation script
+"django_countries/graphql/**" = [
+    "ARG004",
+] # GraphQL resolvers must match signature
 
 [tool.ruff.lint.isort]
 known-first-party = ["django_countries"]

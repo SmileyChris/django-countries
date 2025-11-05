@@ -17,16 +17,18 @@ class CountryFilter(admin.FieldListFilter):
 
     def choices(self, changelist):
         value = self.used_parameters.get(self.field.name)
+        # In Django 5.x, query parameters may come as lists
+        if isinstance(value, list) and len(value) == 1:
+            value = value[0]
         yield {
             "selected": value is None,
             "query_string": changelist.get_query_string({}, [self.field.name]),
             "display": _("All"),
         }
         for lookup, title in self.lookup_choices(changelist):
+            selected = force_str(lookup) == value
             if django.VERSION >= (5, 0):
-                selected = value is not None and force_str(lookup) in value
-            else:
-                selected = force_str(lookup) == value
+                selected = value is not None and selected
             yield {
                 "selected": selected,
                 "query_string": changelist.get_query_string(
