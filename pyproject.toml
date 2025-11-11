@@ -90,6 +90,9 @@ exclude_lines = ["pragma: no cover", "@overload", "if TYPE_CHECKING:"]
 plugins = ["mypy_django_plugin.main"]
 disallow_untyped_calls = true
 python_version = "3.9"
+exclude = [
+    'django_countries/tests/',
+]
 
 [[tool.mypy.overrides]]
 module = "mypy_django_plugin.*"
