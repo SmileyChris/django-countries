@@ -359,10 +359,15 @@ class CountryField(CharField):
         self.multiple = kwargs.pop("multiple", None)
         self.multiple_unique = kwargs.pop("multiple_unique", True)
         self.multiple_sort = kwargs.pop("multiple_sort", True)
+        # Django 5.0+ supports callable choices for lazy evaluation. We use
+        # a lambda wrapper to defer choice evaluation until access time, allowing
+        # choices to respect the current language and settings. With per-language
+        # caching in Countries.__iter__() (issue #454), this is now performant.
         if django.VERSION >= (5, 0):
-            # Use new lazy callable support
+            # Use callable to enable lazy evaluation with per-language caching
             kwargs["choices"] = lambda: self.countries
         else:
+            # Django < 5.0: direct assignment (evaluated once at field init)
             kwargs["choices"] = self.countries
         if "max_length" not in kwargs:
             # Allow explicit max_length so migrations can correctly identify

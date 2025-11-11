@@ -22,7 +22,7 @@ from typing import (
 
 from asgiref.local import Local
 from django.utils.encoding import force_str
-from django.utils.translation import override, trans_real
+from django.utils.translation import get_language, override, trans_real
 
 from django_countries.conf import settings
 
@@ -222,6 +222,8 @@ class Countries(CountriesBase):
             del self._ioc_codes
         if hasattr(self, "_shadowed_names"):
             del self._shadowed_names
+        if hasattr(self, "_iter_cache"):
+            del self._iter_cache
 
     @property
     def alt_codes(self) -> Dict[str, AltCodes]:
@@ -317,6 +319,13 @@ class Countries(CountriesBase):
             country_name = force_str(name)
         return CountryTuple(code, country_name)
 
+    def __call__(self):
+        """
+        Make Countries callable to support Django 5.0+ lazy callable choices.
+        Returns self to enable deferred evaluation while maintaining caching.
+        """
+        return self
+
     def __iter__(self):
         """
         Iterate through countries, sorted by name.
@@ -333,7 +342,25 @@ class Countries(CountriesBase):
 
         The first countries can be separated from the sorted list by the
         value provided in ``settings.COUNTRIES_FIRST_BREAK``.
+
+        Results are cached per language to avoid expensive re-translation
+        and re-sorting on every iteration (issue #454).
         """
+        # Get current language for cache key
+        cache_key = get_language()
+
+        # Initialize cache if needed
+        if not hasattr(self, "_iter_cache"):
+            self._iter_cache: Dict[Optional[str], List[CountryTuple]] = {}
+
+        # Return cached results if available for this language
+        if cache_key in self._iter_cache:
+            yield from self._iter_cache[cache_key]
+            return
+
+        # Build the country list (original logic)
+        results = []
+
         # Initializes countries_first, so needs to happen first.
         countries = self.countries
 
@@ -343,23 +370,27 @@ class Countries(CountriesBase):
         if self.get_option("first_sort"):
             countries_first = sorted(countries_first, key=sort_key)
 
-        yield from countries_first
+        results.extend(countries_first)
 
         if self.countries_first:
             first_break = self.get_option("first_break")
             if first_break:
-                yield CountryTuple("", force_str(first_break))
+                results.append(CountryTuple("", force_str(first_break)))
 
         # Force translation before sorting.
         ignore_first = None if self.get_option("first_repeat") else self.countries_first
-        countries = tuple(
+        countries_translated = tuple(
             itertools.chain.from_iterable(
                 self.translate_code(code, ignore_first) for code in countries
             )
         )
 
-        # Return sorted country list.
-        yield from sorted(countries, key=sort_key)
+        # Add sorted country list.
+        results.extend(sorted(countries_translated, key=sort_key))
+
+        # Cache and return results
+        self._iter_cache[cache_key] = results
+        yield from results
 
     def alpha2(self, code: "CountryCode") -> str:
         """

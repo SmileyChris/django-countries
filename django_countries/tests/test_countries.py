@@ -454,6 +454,61 @@ class CountriesFirstTest(BaseTest):
         )
 
 
+class TestCountriesPerformance(BaseTest):
+    def test_iter_caching(self):
+        """Test that Countries.__iter__ caches results per language (issue #454)."""
+        import time
+
+        # First iteration should build and cache results
+        start = time.time()
+        first_result = list(countries)
+        first_time = time.time() - start
+
+        # Second iteration should be much faster (using cache)
+        start = time.time()
+        second_result = list(countries)
+        second_time = time.time() - start
+
+        # Results should be identical
+        self.assertEqual(first_result, second_result)
+
+        # Second call should be at least 5x faster (realistically >10x)
+        # Use a conservative threshold to avoid flaky tests
+        speedup = first_time / second_time if second_time > 0 else float("inf")
+        self.assertGreater(
+            speedup,
+            5.0,
+            f"Caching not working: speedup was only {speedup:.1f}x "
+            f"(first: {first_time:.4f}s, second: {second_time:.4f}s)",
+        )
+
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
+    def test_iter_caching_per_language(self):
+        """Test that cache is per-language, not global (issue #454)."""
+        # Get countries in English (should cache for 'en')
+        lang = translation.get_language()
+        try:
+            translation.activate("en")
+            countries_en = list(countries)
+            de_name_en = [name for code, name in countries_en if code == "DE"][0]
+
+            # Get countries in German (should cache separately for 'de')
+            translation.activate("de")
+            countries_de = list(countries)
+            de_name_de = [name for code, name in countries_de if code == "DE"][0]
+
+            # Names should be different (translated)
+            self.assertNotEqual(
+                de_name_en,
+                de_name_de,
+                "Cache should be per-language, but got same name in both languages",
+            )
+            self.assertEqual(de_name_en, "Germany")
+            self.assertEqual(de_name_de, "Deutschland")
+        finally:
+            translation.activate(lang)
+
+
 class TestCountriesCustom(BaseTest):
     def test_countries_limit(self):
         fantasy_countries = custom_countries.FantasyCountries()
