@@ -476,6 +476,16 @@ class TestCountryMultiple(TestCase):
         obj.countries = [fields.Country("NZ"), fields.Country("AU")]
         self.assertEqual(obj.countries, ["AU", "NZ"])
 
+    def test_add_countries(self):
+        obj = MultiCountry()
+        obj.countries += [fields.Country("NZ"), fields.Country("AU")]
+        self.assertEqual(obj.countries, ["AU", "NZ"])
+
+    def test_add_country_codes(self):
+        obj = MultiCountry()
+        obj.countries += ["NZ", "AU"]
+        self.assertEqual(obj.countries, ["AU", "NZ"])
+
     def test_all_countries(self):
         all_codes = sorted(c[0] for c in countries)
         MultiCountry.objects.create(countries=all_codes)
