@@ -119,8 +119,13 @@ class TestCountryField(TestCase):
         person = AllowNull.objects.get(pk=person.pk)
         self.assertIsNone(person.country.code)
 
-    @override_settings(SILENCED_SYSTEM_CHECKS=["django_countries.E100"])
-    def test_multi_null_country(self):
+    def test_multi_null_country_allowed(self):
+        """
+        Test that multiple=True with null=True is now allowed.
+
+        Historical note: This used to raise django_countries.E100 error,
+        but that check has been removed. E100 should not be reused.
+        """
         try:
 
             class MultiNullCountry(models.Model):
@@ -129,25 +134,25 @@ class TestCountryField(TestCase):
             class MultiNullCountryNoBlank(models.Model):
                 countries = fields.CountryField(multiple=True, null=True)
 
+            # Should not have E100 errors anymore
             errors = checks.run_checks()
-            self.assertEqual([e.id for e in errors], ["django_countries.E100"] * 2)
-            errors_dict = {e.obj: e for e in errors}
-            self.assertFalse(
-                "blank=True"
-                in errors_dict[MultiNullCountry._meta.get_field("countries")].hint
-            )
-            self.assertTrue(
-                "blank=True"
-                in errors_dict[
-                    MultiNullCountryNoBlank._meta.get_field("countries")
-                ].hint
-            )
+            e100_errors = [e for e in errors if e.id == "django_countries.E100"]
+            self.assertEqual(e100_errors, [])
+
+            # Verify fields work correctly
+            field1 = MultiNullCountry._meta.get_field("countries")
+            field2 = MultiNullCountryNoBlank._meta.get_field("countries")
+            self.assertTrue(field1.null)
+            self.assertTrue(field2.null)
+            self.assertTrue(field1.multiple)
+            self.assertTrue(field2.multiple)
+
         finally:
             from django.apps import apps
 
             test_config = apps.get_app_config("django_countries_tests")
-            test_config.models.pop("multinullcountry")
-            test_config.models.pop("multinullcountrynoblank")
+            test_config.models.pop("multinullcountry", None)
+            test_config.models.pop("multinullcountrynoblank", None)
 
     def test_deferred(self):
         Person.objects.create(name="Person", country="NZ")
@@ -168,7 +173,11 @@ class TestCountryField(TestCase):
         person = Person(name="Chris Beaven", country="NZ")
         self.assertEqual(len(person.country), 2)
 
+        # Both None and empty string should have length 0
         person = Person(name="The Outsider", country=None)
+        self.assertEqual(len(person.country), 0)
+
+        person = Person(name="The Outsider", country="")
         self.assertEqual(len(person.country), 0)
 
     def test_lookup_text(self):

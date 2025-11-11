@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 import django
 from django import forms
 from django.contrib.admin.filters import FieldListFilter
-from django.core import checks, exceptions
+from django.core import exceptions
 from django.db.models import lookups
 from django.db.models.fields import BLANK_CHOICE_DASH, CharField
 from django.utils.encoding import force_str
@@ -286,6 +286,9 @@ class CountryDescriptor:
             instance.refresh_from_db(fields=[self.field.name])
         value = instance.__dict__[self.field.name]
         if self.field.multiple:
+            # Return None for NULL values on nullable multiple fields
+            if value is None:
+                return None
             return MultipleCountriesDescriptor(self.country(code) for code in value)
         return self.country(value)
 
@@ -376,29 +379,6 @@ class CountryField(CharField):
                     len(code) for code in self.countries.countries
                 )
         super().__init__(*args, **kwargs)
-
-    def check(self, **kwargs):
-        errors = super().check(**kwargs)
-        errors.extend(self._check_multiple())
-        return errors
-
-    def _check_multiple(self):
-        if not self.multiple or not self.null:
-            return []
-
-        hint = "Remove null=True argument on the field"
-        if not self.blank:
-            hint += " (just add blank=True if you want to allow no selection)"
-        hint += "."
-
-        return [
-            checks.Error(
-                "Field specifies multiple=True, so should not be null.",
-                obj=self,
-                id="django_countries.E100",
-                hint=hint,
-            )
-        ]
 
     def get_internal_type(self):
         return "CharField"
