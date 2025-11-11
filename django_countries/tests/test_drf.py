@@ -192,3 +192,174 @@ class TestDRFMetadata(TestCase):
             response = view(request=request)
             fantasy_choices_fr = _choices(response, "fantasy_country")
             self.assertNotEqual(fantasy_choices_en, fantasy_choices_fr)
+
+
+class TestDRFSchemaGeneration(TestCase):
+    """
+    Tests for OpenAPI schema generation with CountryField.
+    """
+
+    def test_country_dict_schema_annotation(self):
+        """
+        Test that CountryField with country_dict=True provides correct schema
+        annotation. This is used by drf-spectacular for OpenAPI schema generation.
+        """
+        from django_countries.serializer_fields import CountryField
+
+        # Test country_dict=True
+        field = CountryField(country_dict=True)
+        self.assertTrue(hasattr(field, "_spectacular_annotation"))
+        annotation = field._spectacular_annotation
+        self.assertIsNotNone(annotation)
+        self.assertIn("field", annotation)
+        schema = annotation["field"]
+        self.assertEqual(schema["type"], "object")
+        self.assertIn("properties", schema)
+        self.assertIn("code", schema["properties"])
+        self.assertIn("name", schema["properties"])
+        self.assertEqual(schema["properties"]["code"]["type"], "string")
+        self.assertEqual(schema["properties"]["name"]["type"], "string")
+        self.assertEqual(schema["required"], ["code", "name"])
+
+    def test_country_dict_schema_annotation_nullable(self):
+        """
+        Test that nullable CountryField with country_dict=True includes null in schema.
+        """
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=True, allow_null=True)
+        self.assertTrue(hasattr(field, "_spectacular_annotation"))
+        annotation = field._spectacular_annotation
+        self.assertIn("field", annotation)
+        schema = annotation["field"]
+        self.assertIsNotNone(schema)
+        self.assertIn("oneOf", schema)
+        # Should have object type and null type
+        self.assertEqual(len(schema["oneOf"]), 2)
+        # Check that one of them is the object schema
+        object_schema = next(s for s in schema["oneOf"] if s.get("type") == "object")
+        self.assertIn("properties", object_schema)
+        self.assertIn("code", object_schema["properties"])
+        # Check that one of them is null
+        null_schema = next(s for s in schema["oneOf"] if s.get("type") == "null")
+        self.assertEqual(null_schema["type"], "null")
+
+    def test_name_only_schema_annotation(self):
+        """
+        Test that CountryField with name_only=True provides correct schema annotation.
+        """
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(name_only=True)
+        self.assertTrue(hasattr(field, "_spectacular_annotation"))
+        annotation = field._spectacular_annotation
+        self.assertIn("field", annotation)
+        schema = annotation["field"]
+        self.assertIsNotNone(schema)
+        self.assertEqual(schema["type"], "string")
+
+    def test_name_only_schema_annotation_nullable(self):
+        """
+        Test that nullable CountryField with name_only=True includes null in schema.
+        """
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(name_only=True, allow_null=True)
+        self.assertTrue(hasattr(field, "_spectacular_annotation"))
+        annotation = field._spectacular_annotation
+        self.assertIn("field", annotation)
+        schema = annotation["field"]
+        self.assertIsNotNone(schema)
+        self.assertIn("oneOf", schema)
+        self.assertEqual(len(schema["oneOf"]), 2)
+
+    def test_standard_field_schema_annotation(self):
+        """
+        Test that standard CountryField doesn't set annotation.
+        This allows the default ChoiceField enum handling to work.
+        """
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField()
+        # Standard field should not have _spectacular_annotation set
+        self.assertFalse(hasattr(field, "_spectacular_annotation"))
+
+
+class TestDRFSpectacularIntegration(TestCase):
+    """
+    Integration tests with drf-spectacular for OpenAPI schema generation.
+    """
+
+    def test_spectacular_country_dict_generates_object_schema(self):
+        """
+        Test that drf-spectacular generates an object schema (not enum)
+        for country_dict=True.
+        """
+        try:
+            from drf_spectacular.openapi import AutoSchema
+        except ImportError:
+            self.skipTest("drf-spectacular not installed")
+
+        from django_countries.serializer_fields import CountryField
+
+        class TestSerializer(serializers.Serializer):
+            country = CountryField(country_dict=True)
+
+        # Use AutoSchema to map the field
+        auto_schema = AutoSchema()
+        field = TestSerializer().fields["country"]
+        schema = auto_schema._map_serializer_field(field, "request", None)
+
+        # Should be an object type, not an enum
+        self.assertEqual(schema.get("type"), "object")
+        self.assertIn("properties", schema)
+        self.assertIn("code", schema["properties"])
+        self.assertIn("name", schema["properties"])
+        self.assertNotIn("enum", schema)
+
+    def test_spectacular_name_only_generates_string_schema(self):
+        """
+        Test that drf-spectacular generates a string schema (not enum)
+        for name_only=True.
+        """
+        try:
+            from drf_spectacular.openapi import AutoSchema
+        except ImportError:
+            self.skipTest("drf-spectacular not installed")
+
+        from django_countries.serializer_fields import CountryField
+
+        class TestSerializer(serializers.Serializer):
+            country = CountryField(name_only=True)
+
+        auto_schema = AutoSchema()
+        field = TestSerializer().fields["country"]
+        schema = auto_schema._map_serializer_field(field, "request", None)
+
+        # Should be a string type, not an enum
+        self.assertEqual(schema.get("type"), "string")
+        self.assertNotIn("enum", schema)
+
+    def test_spectacular_standard_field_generates_enum_schema(self):
+        """
+        Test that drf-spectacular generates an enum schema for standard CountryField.
+        """
+        try:
+            from drf_spectacular.openapi import AutoSchema
+        except ImportError:
+            self.skipTest("drf-spectacular not installed")
+
+        from django_countries.serializer_fields import CountryField
+
+        class TestSerializer(serializers.Serializer):
+            country = CountryField()
+
+        auto_schema = AutoSchema()
+        field = TestSerializer().fields["country"]
+        schema = auto_schema._map_serializer_field(field, "request", None)
+
+        # Should be an enum
+        self.assertIn("enum", schema)
+        # Should have country codes
+        self.assertIn("NZ", schema["enum"])
+        self.assertIn("US", schema["enum"])

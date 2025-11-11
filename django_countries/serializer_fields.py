@@ -17,6 +17,8 @@ class CountryField(serializers.ChoiceField):
             *args,
             **kwargs,
         )
+        # Set up drf-spectacular annotation
+        self._setup_spectacular_annotation()
 
     def to_representation(self, obj):
         code = self.countries.alpha2(obj)
@@ -43,3 +45,43 @@ class CountryField(serializers.ChoiceField):
             if not country:
                 self.fail("invalid_choice", input=data)
         return country
+
+    def _get_country_dict_schema(self):
+        """Return schema for country_dict representation."""
+        schema = {
+            "type": "object",
+            "properties": {
+                "code": {"type": "string", "minLength": 2, "maxLength": 2},
+                "name": {"type": "string"},
+            },
+            "required": ["code", "name"],
+        }
+        if self.allow_null:
+            schema = {"oneOf": [schema, {"type": "null"}]}
+        return schema
+
+    def _get_name_only_schema(self):
+        """Return schema for name_only representation."""
+        schema = {"type": "string"}
+        if self.allow_null:
+            schema = {"oneOf": [schema, {"type": "null"}]}
+        return schema
+
+    def _setup_spectacular_annotation(self):
+        """
+        Set up schema annotation for drf-spectacular.
+
+        This sets the _spectacular_annotation attribute that drf-spectacular
+        checks when generating OpenAPI schemas. When country_dict=True or
+        name_only=True, we override the default ChoiceField enum schema
+        with the appropriate schema for the actual representation.
+        """
+        if self.country_dict:
+            schema = self._get_country_dict_schema()
+            # Store as 'field' key like extend_schema_field decorator does
+            self._spectacular_annotation = {"field": schema}
+        elif self.name_only:
+            schema = self._get_name_only_schema()
+            self._spectacular_annotation = {"field": schema}
+        # For standard code output, don't set annotation to allow
+        # default ChoiceField enum handling

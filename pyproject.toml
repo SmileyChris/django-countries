@@ -53,6 +53,7 @@ test = [
     "djangorestframework",
     "graphene-django",
     "coverage",
+    "drf-spectacular",
 ]
 dev = [
     { include-group = "test" },
