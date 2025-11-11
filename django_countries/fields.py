@@ -246,6 +246,10 @@ class MultipleCountriesDescriptor:
             return self._countries == other._countries
         return self._countries == other
 
+    def __add__(self, other):
+        """Implement the + operator."""
+        return MultipleCountriesDescriptor(self._countries + other)
+
 
 class CountryDescriptor:
     """
