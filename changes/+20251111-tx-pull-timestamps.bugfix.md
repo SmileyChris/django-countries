@@ -1,0 +1,1 @@
+Fixed Transifex translation pull workflow to use git commit timestamps instead of filesystem modification times, preventing translations from being incorrectly skipped. Updated German (de), Afrikaans (af), Slovak (sk), and Slovenian (sl) translations.

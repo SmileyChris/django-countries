@@ -173,7 +173,7 @@ tx-makemessages:
 # Pull translations from Transifex and compile message catalogs
 tx-pull:
     @echo "Pulling translations from Transifex..."
-    tx pull -a --minimum-perc=60
+    tx pull -a --minimum-perc=60 --use-git-timestamps
     @echo "Compiling message catalogs (excluding English source)..."
     @cd django_countries && uv run --group dev django-admin compilemessages --exclude=en
     @echo "✓ Translations updated and compiled"
@@ -220,7 +220,7 @@ deploy BUMP:
 
     # Pull and commit translations from Transifex
     echo "→ Pulling translations from Transifex..."
-    tx pull -a --minimum-perc=60
+    tx pull -a --minimum-perc=60 --use-git-timestamps
     echo "→ Compiling message catalogs (excluding English source)..."
     cd django_countries && uv run --group dev django-admin compilemessages --exclude=en
     cd ..
