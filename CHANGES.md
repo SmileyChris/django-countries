@@ -6,6 +6,18 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+## 8.0.1 (11 November 2025)
+
+### Bugfixes
+
+- Fixed `required` attribute not being rendered on form widgets when using `COUNTRIES_FIRST_BREAK` setting. The separator option now correctly allows the field to remain required for HTML5 validation. ([#280](https://github.com/SmileyChris/django-countries/issues/280))
+- Fixed Transifex translation pull workflow to use git commit timestamps instead of filesystem modification times, preventing translations from being incorrectly skipped. Updated German (de), Afrikaans (af), Slovak (sk), and Slovenian (sl) translations.
+
+### Misc
+
+- Add OLD_NAMES for Bahamas and Netherlands to support translation fallback when country names change. Updated translation workflow to generate English source locale and automatically push to Transifex during releases.
+
+
 ## 8.0.0 (4 November 2025)
 
 **Note**: This release includes all changes from the yanked versions 7.8, 7.9, and 7.9.1, which were yanked because they inadvertently dropped Python 3.7 support without a major version bump.

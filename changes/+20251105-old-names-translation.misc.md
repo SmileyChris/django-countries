@@ -1,1 +1,0 @@
-Add OLD_NAMES for Bahamas and Netherlands to support translation fallback when country names change. Updated translation workflow to generate English source locale and automatically push to Transifex during releases.
