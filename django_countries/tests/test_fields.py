@@ -486,6 +486,11 @@ class TestCountryMultiple(TestCase):
         obj.countries += ["NZ", "AU"]
         self.assertEqual(obj.countries, ["AU", "NZ"])
 
+    def test_add_invalid_country(self):
+        obj = MultiCountry()
+        with self.assertRaises(ValueError):
+            obj.countries += [":("]
+
     def test_all_countries(self):
         all_codes = sorted(c[0] for c in countries)
         MultiCountry.objects.create(countries=all_codes)

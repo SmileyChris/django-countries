@@ -248,6 +248,8 @@ class MultipleCountriesDescriptor:
 
     def __add__(self, other):
         """Implement the + operator."""
+        if not all(isinstance(item, Country) or item in countries for item in other):
+            raise ValueError(f"{other} is not a valid list of countries")
         return MultipleCountriesDescriptor(self._countries + other)
 
 
