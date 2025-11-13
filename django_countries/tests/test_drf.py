@@ -5,7 +5,7 @@ from django.test import TestCase, override_settings
 from rest_framework import serializers, views
 from rest_framework.test import APIRequestFactory
 
-from django_countries import countries
+from django_countries import Countries, countries
 from django_countries.conf import settings
 from django_countries.fields import Country
 from django_countries.serializers import CountryFieldMixin
@@ -202,6 +202,154 @@ class TestDRF(TestCase):
         )
         self.assertTrue(serializer.is_valid())
         self.assertEqual(serializer.validated_data["country"], "NZ")
+
+
+class TestCountryDictCustomization(TestCase):
+    """Tests for customizable country_dict output with optional fields."""
+
+    def test_country_dict_with_single_extra_key(self):
+        """Test country_dict iterable with a single extra key."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=("code", "alpha3"))
+        result = field.to_representation("NZ")
+        self.assertEqual(result["code"], "NZ")
+        self.assertEqual(result["alpha3"], "NZL")
+
+    def test_country_dict_with_numeric_key(self):
+        """Test country_dict iterable includes numeric code."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=("numeric", "name"))
+        result = field.to_representation("NZ")
+        self.assertEqual(result["numeric"], 554)
+        self.assertEqual(result["name"], "New Zealand")
+
+    def test_country_dict_with_unicode_flag_key(self):
+        """Test unicode_flag key output."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=("unicode_flag",))
+        result = field.to_representation("NZ")
+        self.assertEqual(result["unicode_flag"], "🇳🇿")
+
+    def test_country_dict_with_ioc_code_key(self):
+        """Test ioc_code key output."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=("ioc_code",))
+        result = field.to_representation("NZ")
+        self.assertEqual(result["ioc_code"], "NZL")
+
+    def test_country_dict_with_all_keys(self):
+        """Test iterable specifying all optional keys."""
+        from django_countries.serializer_fields import CountryField
+
+        keys = ("code", "name", "alpha3", "numeric", "unicode_flag", "ioc_code")
+        field = CountryField(country_dict=keys)
+        result = field.to_representation("US")
+        self.assertEqual(result["code"], "US")
+        self.assertEqual(result["name"], "United States of America")
+        self.assertEqual(result["alpha3"], "USA")
+        self.assertEqual(result["numeric"], 840)
+        self.assertEqual(result["unicode_flag"], "🇺🇸")
+        self.assertEqual(result["ioc_code"], "USA")
+
+    def test_country_dict_with_iterable_keys(self):
+        """Test country_dict iterable controls returned keys and order."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=("name", "alpha3"))
+        result = field.to_representation("NZ")
+        self.assertEqual(list(result.keys()), ["name", "alpha3"])
+        self.assertEqual(result["name"], "New Zealand")
+        self.assertEqual(result["alpha3"], "NZL")
+
+    def test_country_dict_with_string_key(self):
+        """Test country_dict accepts a single string key."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict="alpha3")
+        result = field.to_representation("NZ")
+        self.assertEqual(result, {"alpha3": "NZL"})
+
+    def test_country_dict_invalid_key_raises(self):
+        """Invalid country_dict keys should raise ValueError."""
+        from django_countries.serializer_fields import CountryField
+
+        with pytest.raises(ValueError):
+            CountryField(country_dict=("code", "invalid_key"))
+
+    def test_country_dict_non_string_key_raises(self):
+        """Non-string keys raise TypeError."""
+        from django_countries.serializer_fields import CountryField
+
+        with pytest.raises(TypeError):
+            CountryField(country_dict=("code", 123))  # type: ignore[arg-type]
+
+    def test_country_dict_uses_custom_countries_for_optional_fields(self):
+        """Ensure optional fields respect custom Countries instances."""
+        from django_countries.serializer_fields import CountryField
+
+        class CustomCountries(Countries):
+            only = ["NZ"]
+
+            def alpha3(self, code):
+                return "CUST3"
+
+            def numeric(self, code, padded=False):
+                value = 123
+                return f"{value:03d}" if padded else value
+
+            def ioc_code(self, code):
+                return "CIO"
+
+        custom_countries = CustomCountries()
+        field = CountryField(
+            country_dict=("code", "name", "alpha3", "numeric", "ioc_code"),
+            countries=custom_countries,
+        )
+        result = field.to_representation("NZ")
+        self.assertEqual(result["alpha3"], "CUST3")
+        self.assertEqual(result["numeric"], 123)
+        self.assertEqual(result["ioc_code"], "CIO")
+
+    def test_country_dict_default_no_extra_fields(self):
+        """Test that default country_dict doesn't include extra fields."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=True)
+        result = field.to_representation("NZ")
+        self.assertEqual(result, {"code": "NZ", "name": "New Zealand"})
+        self.assertNotIn("alpha3", result)
+        self.assertNotIn("numeric", result)
+        self.assertNotIn("unicode_flag", result)
+        self.assertNotIn("ioc_code", result)
+
+    def test_country_dict_schema_with_optional_fields(self):
+        """Test that OpenAPI schema includes optional fields."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=("code", "name", "alpha3", "unicode_flag"))
+        schema = field._get_country_dict_schema()
+        self.assertEqual(schema["type"], "object")
+        self.assertIn("code", schema["properties"])
+        self.assertIn("name", schema["properties"])
+        self.assertIn("alpha3", schema["properties"])
+        self.assertIn("unicode_flag", schema["properties"])
+        self.assertIn("code", schema["required"])
+        self.assertIn("name", schema["required"])
+        self.assertIn("alpha3", schema["required"])
+        self.assertIn("unicode_flag", schema["required"])
+
+    def test_country_dict_schema_with_iterable_keys(self):
+        """Test schema matches custom iterable keys."""
+        from django_countries.serializer_fields import CountryField
+
+        field = CountryField(country_dict=("name", "alpha3", "code"))
+        schema = field._get_country_dict_schema()
+        self.assertEqual(schema["required"], ["name", "alpha3", "code"])
+        self.assertEqual(list(schema["properties"].keys()), ["name", "alpha3", "code"])
 
 
 class TestDRFMetadata(TestCase):

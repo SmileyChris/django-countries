@@ -109,6 +109,28 @@ This results in the following output structure:
 }
 ```
 
+Instead of a boolean you can also pass an iterable (or even a single string)
+to `country_dict` to control which keys are included, in the order you
+specify. Supported keys are `code`, `name`, `alpha3`, `numeric`,
+`unicode_flag`, and `ioc_code`.
+
+```python
+class PersonSerializer(serializers.Serializer):
+    country = CountryField(country_dict=("name", "alpha3"))
+```
+
+```json
+{
+  "country": {
+    "name": "New Zealand",
+    "alpha3": "NZL"
+  }
+}
+```
+
+Legacy `include_*` keyword arguments have been removed in favour of this
+explicit key list.
+
 ### Input Acceptance
 
 Regardless of the `country_dict` argument's value, both the country code string and the verbose dictionary structure are acceptable as input:
