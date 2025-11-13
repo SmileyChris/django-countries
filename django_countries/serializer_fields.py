@@ -1,6 +1,7 @@
 from typing import Any
 
 from django.utils.encoding import force_str
+from django.utils.translation import get_language
 from rest_framework import serializers
 
 from django_countries import countries
@@ -41,7 +42,12 @@ class CountryField(serializers.ChoiceField):
             data = data.get("code")
         country = self.countries.alpha2(data)
         if data and not country:
-            country = self.countries.by_name(force_str(data))
+            # Use current language for localized country name deserialization
+            current_language = get_language() or "en"
+            country = self.countries.by_name(force_str(data), language=current_language)
+            # Fallback to English if not found in current language
+            if not country and current_language != "en":
+                country = self.countries.by_name(force_str(data), language="en")
             if not country:
                 self.fail("invalid_choice", input=data)
         return country

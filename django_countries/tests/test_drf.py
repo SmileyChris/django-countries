@@ -161,6 +161,48 @@ class TestDRF(TestCase):
         self.assertFalse(serializer.is_valid())
         self.assertEqual(serializer.errors["country"], ['"" is not a valid choice.'])
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
+    @override_settings(LANGUAGE_CODE="fr")
+    def test_deserialize_by_name_localized_french(self):
+        """Test deserialization with French country name."""
+        serializer = PersonSerializer(
+            data={
+                "name": "Pierre",
+                "country": "Allemagne",  # Germany in French
+                "fantasy_country": "NV",
+            }
+        )
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(serializer.validated_data["country"], "DE")
+
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
+    @override_settings(LANGUAGE_CODE="de")
+    def test_deserialize_by_name_localized_german(self):
+        """Test deserialization with German country name."""
+        serializer = PersonSerializer(
+            data={
+                "name": "Hans",
+                "country": "Neuseeland",  # New Zealand in German
+                "fantasy_country": "NV",
+            }
+        )
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(serializer.validated_data["country"], "NZ")
+
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
+    @override_settings(LANGUAGE_CODE="fr")
+    def test_deserialize_by_name_english_fallback(self):
+        """Test that English names still work in non-English locales."""
+        serializer = PersonSerializer(
+            data={
+                "name": "Chris",
+                "country": "New Zealand",  # English name in French locale
+                "fantasy_country": "NV",
+            }
+        )
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(serializer.validated_data["country"], "NZ")
+
 
 class TestDRFMetadata(TestCase):
     """

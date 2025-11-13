@@ -119,6 +119,18 @@ Regardless of the `country_dict` argument's value, both the country code string 
 {"country": {"code": "NZ", "name": "New Zealand"}}
 ```
 
+Country names are also accepted and will respect Django's active language:
+
+```python
+# With LANGUAGE_CODE="fr"
+{"country": "Allemagne"}  # Resolves to "DE"
+
+# With LANGUAGE_CODE="en"
+{"country": "Germany"}    # Also resolves to "DE"
+```
+
+Note: English names are always accepted as fallback, regardless of the active language.
+
 ## OPTIONS Request
 
 When you request OPTIONS against a resource (using the DRF [metadata support](http://www.django-rest-framework.org/api-guide/metadata/)), the countries will be returned in the response as choices:
