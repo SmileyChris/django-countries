@@ -206,7 +206,7 @@ deploy BUMP:
     cd django_countries && DJANGO_SETTINGS_MODULE=django_countries.tests.settings \
         uv run --group dev django-admin makemessages --locale=en --no-obsolete
     cd ..
-    if ! git diff-index --quiet HEAD -- django_countries/locale/en/; then
+    if ! git diff --quiet django_countries/locale/en/; then
         git add django_countries/locale/en/
         git commit -m "Update English translation source file"
         echo "✓ English source file updated"
@@ -224,7 +224,7 @@ deploy BUMP:
     echo "→ Compiling message catalogs (excluding English source)..."
     cd django_countries && uv run --group dev django-admin compilemessages --exclude=en
     cd ..
-    if ! git diff-index --quiet HEAD --; then
+    if ! git diff --quiet; then
         git add django_countries/locale
         git commit -m "Update translations from Transifex"
         echo "✓ Translations committed"
