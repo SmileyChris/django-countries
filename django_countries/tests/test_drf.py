@@ -352,6 +352,138 @@ class TestCountryDictCustomization(TestCase):
         self.assertEqual(list(schema["properties"].keys()), ["name", "alpha3", "code"])
 
 
+class TestCountryFieldMixinExtraKwargs(TestCase):
+    """Tests for CountryFieldMixin with extra_kwargs support."""
+
+    def test_mixin_with_name_only_via_extra_kwargs(self):
+        """Test CountryFieldMixin respects name_only from extra_kwargs."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = Person
+                fields = ("name", "country")
+                extra_kwargs = {"country": {"name_only": True}}
+
+        person = Person(name="Alice", country="FR")
+        serializer = TestSerializer(person)
+        self.assertEqual(serializer.data["country"], "France")
+
+    def test_mixin_with_country_dict_via_extra_kwargs(self):
+        """Test CountryFieldMixin respects country_dict from extra_kwargs."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = Person
+                fields = ("name", "country")
+                extra_kwargs = {"country": {"country_dict": True}}
+
+        person = Person(name="Bob", country="GB")
+        serializer = TestSerializer(person)
+        self.assertEqual(serializer.data["country"]["code"], "GB")
+        self.assertEqual(serializer.data["country"]["name"], "United Kingdom")
+
+    def test_mixin_with_country_dict_iterable_via_extra_kwargs(self):
+        """Test CountryFieldMixin supports iterable country_dict keys."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = Person
+                fields = ("name", "country")
+                extra_kwargs = {"country": {"country_dict": ("name", "alpha3")}}
+
+        person = Person(name="Dana", country="CA")
+        serializer = TestSerializer(person)
+        result = serializer.data["country"]
+        self.assertEqual(list(result.keys()), ["name", "alpha3"])
+        self.assertEqual(result["name"], "Canada")
+        self.assertEqual(result["alpha3"], "CAN")
+
+    def test_mixin_with_country_dict_multiple_keys(self):
+        """Test CountryFieldMixin with country_dict specifying multiple keys."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = Person
+                fields = ("name", "country")
+                extra_kwargs = {
+                    "country": {
+                        "country_dict": ("code", "name", "alpha3", "unicode_flag"),
+                    }
+                }
+
+        person = Person(name="Charlie", country="DE")
+        serializer = TestSerializer(person)
+        result = serializer.data["country"]
+        self.assertEqual(result["code"], "DE")
+        self.assertEqual(result["name"], "Germany")
+        self.assertEqual(result["alpha3"], "DEU")
+        self.assertEqual(result["unicode_flag"], "🇩🇪")
+
+    def test_mixin_with_multiple_field_name_only(self):
+        """Test CountryFieldMixin with multiple=True and name_only."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = MultiCountry
+                fields = ("countries",)
+                extra_kwargs = {"countries": {"name_only": True}}
+
+        mc = MultiCountry(countries="NZ,AU")
+        serializer = TestSerializer(mc)
+        # Multiple fields with name_only should return list of names
+        self.assertEqual(serializer.data["countries"], ["Australia", "New Zealand"])
+
+    def test_mixin_with_multiple_field_country_dict(self):
+        """Test CountryFieldMixin with multiple=True and country_dict."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = MultiCountry
+                fields = ("countries",)
+                extra_kwargs = {
+                    "countries": {
+                        "country_dict": ("code", "name", "alpha3"),
+                    }
+                }
+
+        mc = MultiCountry(countries="US,CA")
+        serializer = TestSerializer(mc)
+        countries = serializer.data["countries"]
+        self.assertEqual(len(countries), 2)
+        # Should be sorted: CA, US
+        self.assertEqual(countries[0]["code"], "CA")
+        self.assertEqual(countries[0]["name"], "Canada")
+        self.assertEqual(countries[0]["alpha3"], "CAN")
+        self.assertEqual(countries[1]["code"], "US")
+        self.assertEqual(countries[1]["alpha3"], "USA")
+
+    def test_mixin_deserialize_with_name_only(self):
+        """Test deserialization still works with name_only in extra_kwargs."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = Person
+                fields = ("name", "country")
+                extra_kwargs = {"country": {"name_only": True}}
+
+        serializer = TestSerializer(data={"name": "Dave", "country": "Japan"})
+        self.assertTrue(serializer.is_valid())
+        self.assertEqual(serializer.validated_data["country"], "JP")
+
+    def test_mixin_without_extra_kwargs_still_works(self):
+        """Test that CountryFieldMixin still works without extra_kwargs."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = Person
+                fields = ("name", "country")
+
+        person = Person(name="Eve", country="IT")
+        serializer = TestSerializer(person)
+        # Should return country code by default
+        self.assertEqual(serializer.data["country"], "IT")
+
+
 class TestDRFMetadata(TestCase):
     """
     Tests against the DRF OPTIONS API metadata endpoint.

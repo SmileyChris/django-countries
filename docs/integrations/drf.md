@@ -19,6 +19,20 @@ class PersonSerializer(CountryFieldMixin, serializers.ModelSerializer):
 
 This mixin handles both standard and [multi-choice](../advanced/multiple.md) country fields automatically.
 
+You can customize the serializer output using `Meta.extra_kwargs` to pass any of
+the `CountryField` keyword arguments (such as `country_dict`, `name_only`, or
+`country_dict` key lists) without redefining fields:
+
+```python
+class PersonSerializer(CountryFieldMixin, serializers.ModelSerializer):
+    class Meta:
+        model = models.Person
+        fields = ("name", "email", "country")
+        extra_kwargs = {
+            "country": {"country_dict": ("name", "alpha3")},
+        }
+```
+
 ## CountryField Serializer Field
 
 For lower level use (or when not dealing with model fields), you can use the included `CountryField` serializer field:
