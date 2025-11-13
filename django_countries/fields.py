@@ -247,9 +247,13 @@ class MultipleCountriesDescriptor:
         return self._countries == other
 
     def __add__(self, other):
-        """Implement the + operator."""
-        if not all(isinstance(item, Country) or item in countries for item in other):
-            raise ValueError(f"{other} is not a valid list of countries")
+        """
+        Implement the + operator.
+
+        Accepts country codes (strings) or Country objects. Validation and
+        normalization is handled later by the field's get_clean_value() method
+        when the result is assigned via __set__.
+        """
         return MultipleCountriesDescriptor(self._countries + other)
 
 
