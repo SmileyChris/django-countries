@@ -1,3 +1,5 @@
+import importlib.util
+
 import pytest
 from django.test import TestCase, override_settings
 from rest_framework import serializers, views
@@ -9,6 +11,9 @@ from django_countries.fields import Country
 from django_countries.serializers import CountryFieldMixin
 from django_countries.tests.custom_countries import FantasyCountries
 from django_countries.tests.models import MultiCountry, Person
+
+# Check for optional dependency for OpenAPI schema tests
+HAS_DRF_SPECTACULAR = importlib.util.find_spec("drf_spectacular") is not None
 
 
 def countries_display(countries):
@@ -285,6 +290,7 @@ class TestDRFSchemaGeneration(TestCase):
         self.assertFalse(hasattr(field, "_spectacular_annotation"))
 
 
+@pytest.mark.skipif(not HAS_DRF_SPECTACULAR, reason="drf-spectacular not installed")
 class TestDRFSpectacularIntegration(TestCase):
     """
     Integration tests with drf-spectacular for OpenAPI schema generation.
@@ -295,10 +301,7 @@ class TestDRFSpectacularIntegration(TestCase):
         Test that drf-spectacular generates an object schema (not enum)
         for country_dict=True.
         """
-        try:
-            from drf_spectacular.openapi import AutoSchema
-        except ImportError:
-            self.skipTest("drf-spectacular not installed")
+        from drf_spectacular.openapi import AutoSchema
 
         from django_countries.serializer_fields import CountryField
 
@@ -322,10 +325,7 @@ class TestDRFSpectacularIntegration(TestCase):
         Test that drf-spectacular generates a string schema (not enum)
         for name_only=True.
         """
-        try:
-            from drf_spectacular.openapi import AutoSchema
-        except ImportError:
-            self.skipTest("drf-spectacular not installed")
+        from drf_spectacular.openapi import AutoSchema
 
         from django_countries.serializer_fields import CountryField
 
@@ -344,10 +344,7 @@ class TestDRFSpectacularIntegration(TestCase):
         """
         Test that drf-spectacular generates an enum schema for standard CountryField.
         """
-        try:
-            from drf_spectacular.openapi import AutoSchema
-        except ImportError:
-            self.skipTest("drf-spectacular not installed")
+        from drf_spectacular.openapi import AutoSchema
 
         from django_countries.serializer_fields import CountryField
 
