@@ -46,6 +46,7 @@ nav:
       - Integrations:
           - Django REST Framework: integrations/drf.md
           - GraphQL: integrations/graphql.md
+          - django-filter: integrations/django_filters.md
       - Advanced:
           - Customization: advanced/customization.md
           - Multiple Countries: advanced/multiple.md

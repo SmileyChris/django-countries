@@ -1,5 +1,6 @@
 import inspect
 
+import pytest
 from django.contrib import admin
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.models import AnonymousUser
@@ -106,3 +107,96 @@ class TestAutocompleteFields(TestCase):
         # However, CountryField doesn't implement the autocomplete widget/view
         # It will fall back to a regular select widget
         # (This test documents current behavior, not desired behavior)
+
+
+class TestDjangoFiltersIntegration(TestCase):
+    """Tests for django_countries.django_filters.CountryFilter."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.django_filters = pytest.importorskip("django_filters")
+        from django_countries.django_filters import CountryFilter
+
+        cls.country_filter = CountryFilter
+
+    def setUp(self):
+        models.Person.objects.create(name="Alice", country="NZ")
+        models.Person.objects.create(name="Bob", country="AU")
+        models.Person.objects.create(name="Charlie", country="US")
+
+    def test_django_filters_country_filter_basic(self):
+        """Test basic usage of the integration CountryFilter."""
+
+        filter_class = self.country_filter
+
+        class PersonFilterSet(self.django_filters.FilterSet):
+            country = filter_class()
+
+            class Meta:
+                model = models.Person
+                fields = ["country"]
+
+        # Test filtering by country
+        filterset = PersonFilterSet(
+            data={"country": "NZ"}, queryset=models.Person.objects.all()
+        )
+        self.assertTrue(filterset.is_valid())
+        results = list(filterset.qs)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].name, "Alice")
+
+    def test_django_filters_country_filter_with_empty_label(self):
+        """Test integration CountryFilter with custom empty_label."""
+
+        filter_class = self.country_filter
+
+        class PersonFilterSet(self.django_filters.FilterSet):
+            country = filter_class(empty_label="Any Country")
+
+            class Meta:
+                model = models.Person
+                fields = ["country"]
+
+        filterset = PersonFilterSet(queryset=models.Person.objects.all())
+        # Check that the filter was created successfully
+        self.assertIn("country", filterset.filters)
+        # Check that empty_label was set
+        self.assertEqual(filterset.filters["country"].empty_label, "Any Country")
+
+    def test_django_filters_country_filter_has_choices(self):
+        """Test that integration CountryFilter has country choices."""
+
+        filter_class = self.country_filter
+
+        class PersonFilterSet(self.django_filters.FilterSet):
+            country = filter_class()
+
+            class Meta:
+                model = models.Person
+                fields = ["country"]
+
+        filterset = PersonFilterSet(queryset=models.Person.objects.all())
+        choices = list(filterset.filters["country"].field.choices)
+        # Should have many country choices
+        self.assertGreater(len(choices), 200)
+        # Check specific countries are in choices
+        country_codes = [code for code, name in choices]
+        self.assertIn("NZ", country_codes)
+        self.assertIn("AU", country_codes)
+        self.assertIn("US", country_codes)
+
+    def test_django_filters_country_filter_no_filter_returns_all(self):
+        """Test that not applying filter returns all results."""
+
+        filter_class = self.country_filter
+
+        class PersonFilterSet(self.django_filters.FilterSet):
+            country = filter_class()
+
+            class Meta:
+                model = models.Person
+                fields = ["country"]
+
+        filterset = PersonFilterSet(data={}, queryset=models.Person.objects.all())
+        self.assertEqual(filterset.qs.count(), 3)
