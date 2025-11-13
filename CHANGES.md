@@ -6,6 +6,22 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+## 8.1.0 (13 November 2025)
+
+### Features
+
+- DRF serializer fields now respect the `allow_null` parameter, returning `None` for NULL values when `allow_null=True`.
+  This enables better API consistency and is particularly useful with `unique=True` constraints, which allow multiple NULL values but not multiple empty strings in the database. ([#453](https://github.com/SmileyChris/django-countries/issues/453))
+- Add support for `null=True` on multiple country fields, allowing This nullable unique constraints on multiple country fields.
+  `CountryField(multiple=True, null=True)` now returns `None` for NULL database values instead of crashing and the historical system check `E100` that blocked `multiple=True` + `null=True` has been removed. ([#453](https://github.com/SmileyChris/django-countries/issues/453))
+
+### Bugfixes
+
+- Fixed OpenAPI schema generation for `CountryField` when using `country_dict=True` or `name_only=True`. The field now correctly generates an object schema (with `code` and `name` properties) for `country_dict=True` and a string schema for `name_only=True`, instead of incorrectly generating an enum schema. This fixes schema generation for both DRF's built-in OpenAPI support and drf-spectacular, enabling accurate TypeScript client generation and other API tooling. ([#441](https://github.com/SmileyChris/django-countries/issues/441))
+- Major performance enhancement for Django admin. Added per-language caching to `Countries.__iter__()`, delivering 20-40× speedup when displaying `CountryField` in `list_display` (admin changelist now renders in <0.5s instead of 6-10s). ([#454](https://github.com/SmileyChris/django-countries/issues/454))
+- Fixed a regression where a country field allowing for selection of multiple countries could not be added to using the + operator. ([#455](https://github.com/SmileyChris/django-countries/issues/455))
+
+
 ## 8.0.1 (11 November 2025)
 
 ### Bugfixes
