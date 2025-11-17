@@ -161,8 +161,8 @@ class TestDjangoFiltersIntegration(TestCase):
         filterset = PersonFilterSet(queryset=models.Person.objects.all())
         # Check that the filter was created successfully
         self.assertIn("country", filterset.filters)
-        # Check that empty_label was set
-        self.assertEqual(filterset.filters["country"].empty_label, "Any Country")
+        # Check that empty_label was set on the field
+        self.assertEqual(filterset.filters["country"].field.empty_label, "Any Country")
 
     def test_django_filters_country_filter_has_choices(self):
         """Test that integration CountryFilter has country choices."""
