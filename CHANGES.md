@@ -6,6 +6,13 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+## 8.1.1 (18 November 2025)
+
+### Bugfixes
+
+- Fixed `CountryField(multiple=True)` not marking selected options in Django forms. ([#480](https://github.com/SmileyChris/django-countries/issues/480))
+
+
 ## 8.1.0 (13 November 2025)
 
 ### Features
