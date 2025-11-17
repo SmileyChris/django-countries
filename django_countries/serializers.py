@@ -1,5 +1,6 @@
 from typing import Any, Dict
 
+from django.core.exceptions import FieldDoesNotExist
 from rest_framework import serializers
 
 from . import fields, serializer_fields
@@ -35,8 +36,8 @@ class CountryFieldMixin:
                         # to ListField
                         for option in self._country_field_options:
                             field_extra_kwargs.pop(option, None)
-                except Exception:
-                    # If we can't get the field, just continue
+                except FieldDoesNotExist:
+                    # Field doesn't exist on model, skip it
                     pass
 
         return extra_kwargs
