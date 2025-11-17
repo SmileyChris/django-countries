@@ -683,6 +683,31 @@ class TestModelForm(TestCase):
         form = forms.MultiCountryForm(data={"countries": ["NZ", "AU"]})
         self.assertEqual(form.errors, {})
 
+    def test_multiple_selected_options(self):
+        """Test that selected countries are marked as selected in the rendered form."""
+        # Create an instance with multiple countries
+        multi = MultiCountry.objects.create(countries=["DE", "NZ", "AU"])
+
+        # Create a form from this instance
+        form = forms.MultiCountryForm(instance=multi)
+
+        # Render the countries field
+        html = str(form["countries"])
+
+        # Check that the selected countries have the 'selected' attribute
+        self.assertIn('<option value="DE" selected>', html)
+        self.assertIn('<option value="NZ" selected>', html)
+        self.assertIn('<option value="AU" selected>', html)
+
+        # Check that a non-selected country doesn't have the 'selected' attribute
+        # Use a regex to ensure we're checking the right thing
+        import re
+
+        # Find the US option and verify it's not selected
+        us_match = re.search(r'<option value="US"[^>]*>', html)
+        self.assertIsNotNone(us_match)
+        self.assertNotIn("selected", us_match.group(0))
+
 
 class TestPickling(TestCase):
     def test_standard_country_pickling(self):

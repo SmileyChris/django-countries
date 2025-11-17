@@ -246,6 +246,16 @@ class MultipleCountriesDescriptor:
             return self._countries == other._countries
         return self._countries == other
 
+    def __contains__(self, item):
+        """
+        Check if a country code or Country object is in the descriptor.
+
+        This is essential for Django form widgets (especially SelectMultiple) to
+        correctly mark options as selected. The widget checks if each option value
+        (a string country code) is in the list of selected values.
+        """
+        return any(country == item for country in self._countries)
+
     def __add__(self, other):
         """
         Implement the + operator.
@@ -349,6 +359,26 @@ class LazyTypedMultipleChoiceField(LazyChoicesMixin, forms.TypedMultipleChoiceFi
 
     choices: Any
     widget = widgets.LazySelectMultiple
+
+    def prepare_value(self, value):
+        """
+        Convert Country objects or MultipleCountriesDescriptor to a list of codes.
+
+        This is essential for form widgets to correctly mark options as selected
+        when the form is initialized from a model instance (issue #480).
+
+        The widget expects a list of strings (country codes), but when a form is
+        initialized from an instance, CountryField(multiple=True) returns a
+        MultipleCountriesDescriptor containing Country objects.
+        """
+        if value is None:
+            return []
+        # Handle MultipleCountriesDescriptor or any iterable of Country objects
+        if hasattr(value, "__iter__") and not isinstance(value, str):
+            # Convert each item to a string (Country objects use __str__
+            # which returns the code)
+            return [force_str(v) for v in value]
+        return super().prepare_value(value)
 
 
 class CountryField(CharField):
