@@ -557,14 +557,61 @@ class CountryField(CharField):
 
         get_choices = lazy(_get_choices_legacy, list)
 
-    def formfield(self, **kwargs):
-        kwargs.setdefault(
-            "choices_form_class",
-            LazyTypedMultipleChoiceField if self.multiple else LazyTypedChoiceField,
-        )
+    def formfield(
+        self,
+        form_class: Optional[Type[forms.Field]] = None,
+        choices_form_class: Optional[Type[forms.ChoiceField]] = None,
+        **kwargs: Any,
+    ) -> Optional[forms.Field]:
+        """
+        Return a form field for this model field.
+
+        Args:
+            form_class: The form field class to use (passed to parent).
+            choices_form_class: The choice field class to use (passed to parent).
+            **kwargs: Additional arguments passed to the parent formfield method.
+                     Accepts an extra 'empty_label' keyword argument to customize
+                     the blank choice label when blank=True. Pass an empty string
+                     "" to show no label, or a custom string like "Select a country".
+                     If not provided, uses Django's default "---------" label.
+
+        Returns:
+            A form field (LazyTypedChoiceField or LazyTypedMultipleChoiceField).
+        """
+        # Extract empty_label from kwargs (not part of parent signature)
+        empty_label: Optional[str] = kwargs.pop("empty_label", None)
+
+        if choices_form_class is None:
+            choices_form_class = cast(
+                "Type[forms.ChoiceField]",
+                LazyTypedMultipleChoiceField if self.multiple else LazyTypedChoiceField,
+            )
         if "coerce" not in kwargs:
             kwargs["coerce"] = super().to_python
-        return super().formfield(**kwargs)
+
+        form_field = super().formfield(
+            form_class=form_class, choices_form_class=choices_form_class, **kwargs
+        )
+
+        # Apply custom empty_label if provided and field has blank choice
+        if (
+            empty_label is not None
+            and self.blank
+            and form_field is not None
+            and hasattr(form_field, "choices")
+        ):
+            # Get the choices - could be lazy, so we need to handle that
+            choices = form_field.choices  # type: ignore[attr-defined]
+            # Convert lazy choices to list to modify them
+            base_choices = getattr(choices, "_choices", list(choices))
+
+            # Check if first choice is the blank choice
+            if base_choices and base_choices[0][0] == "":
+                # Replace the blank choice with custom label
+                base_choices = [("", empty_label), *base_choices[1:]]
+                form_field.choices = base_choices  # type: ignore[attr-defined]
+
+        return form_field
 
     def to_python(self, value):
         if not self.multiple:

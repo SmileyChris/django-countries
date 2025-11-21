@@ -304,6 +304,55 @@ class TestCountryField(TestCase):
         self.assertEqual(list(Person.objects.filter(country__regex="mp")), [])
         self.assertEqual(list(Person.objects.filter(country__iregex="mp")), [pp])
 
+    def test_formfield_empty_label_default(self):
+        """Test that formfield() uses default '---------' blank label."""
+        field = fields.CountryField(blank=True)
+        form_field = field.formfield()
+        choices = list(form_field.choices)
+        self.assertEqual(choices[0], ("", "---------"))
+
+    def test_formfield_empty_label_custom(self):
+        """Test that formfield() accepts custom empty_label."""
+        field = fields.CountryField(blank=True)
+        form_field = field.formfield(empty_label="Select a country")
+        choices = list(form_field.choices)
+        self.assertEqual(choices[0], ("", "Select a country"))
+
+    def test_formfield_empty_label_empty_string(self):
+        """Test that formfield() accepts empty string as empty_label (issue #466)."""
+        field = fields.CountryField(blank=True)
+        form_field = field.formfield(empty_label="")
+        choices = list(form_field.choices)
+        self.assertEqual(choices[0], ("", ""))
+
+    def test_formfield_empty_label_none(self):
+        """Test that empty_label=None keeps the default blank label."""
+        field = fields.CountryField(blank=True)
+        form_field = field.formfield(empty_label=None)
+        choices = list(form_field.choices)
+        # None should keep the default '---------'
+        self.assertEqual(choices[0], ("", "---------"))
+
+    def test_formfield_empty_label_without_blank(self):
+        """Test that empty_label is ignored when field is not blank."""
+        field = fields.CountryField(blank=False)
+        form_field = field.formfield(empty_label="Custom")
+        choices = list(form_field.choices)
+        # When blank=False, empty_label should be ignored
+        # (though Django still adds a blank choice for required fields without defaults)
+        # The empty_label customization should only work when blank=True
+        self.assertEqual(choices[0], ("", "---------"))
+
+    def test_formfield_empty_label_multiple_field(self):
+        """Test that multiple=True fields don't have a blank choice."""
+        # Multiple choice fields don't have a blank choice by design
+        # (you can just select nothing), so empty_label doesn't apply
+        field = fields.CountryField(blank=True, multiple=True)
+        form_field = field.formfield(empty_label="Select countries")
+        choices = list(form_field.choices)
+        # First choice should be a country, not a blank option
+        self.assertEqual(choices[0][0], "AF")  # Afghanistan
+
 
 class TestValidation(TestCase):
     def test_validate(self):
