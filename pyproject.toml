@@ -99,6 +99,10 @@ python_version = "3.9"
 module = "mypy_django_plugin.*"
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "_pytest.*"
+follow_imports = "skip"
+
 [tool.django-stubs]
 django_settings_module = "django_countries.tests.settings"
 
