@@ -535,6 +535,28 @@ class TestCountryMultiple(TestCase):
         obj.countries += ["NZ", "AU"]
         self.assertEqual(obj.countries, ["AU", "NZ"])
 
+    def test_contains_country_code(self):
+        """Test __contains__ method with country codes."""
+        obj = MultiCountry.objects.create(countries=["NZ", "AU", "DE"])
+        # Verify we have a MultipleCountriesDescriptor
+        from django_countries.fields import MultipleCountriesDescriptor
+
+        self.assertIsInstance(obj.countries, MultipleCountriesDescriptor)
+        # Test with country code string
+        self.assertIn("NZ", obj.countries)
+        self.assertIn("AU", obj.countries)
+        self.assertIn("DE", obj.countries)
+        self.assertNotIn("US", obj.countries)
+        self.assertNotIn("FR", obj.countries)
+
+    def test_contains_country_object(self):
+        """Test __contains__ method with Country objects."""
+        obj = MultiCountry.objects.create(countries=["NZ", "AU"])
+        # Test with Country object
+        self.assertIn(fields.Country("NZ"), obj.countries)
+        self.assertIn(fields.Country("AU"), obj.countries)
+        self.assertNotIn(fields.Country("US"), obj.countries)
+
     def test_all_countries(self):
         all_codes = sorted(c[0] for c in countries)
         MultiCountry.objects.create(countries=all_codes)
@@ -731,6 +753,15 @@ class TestModelForm(TestCase):
     def test_validation(self):
         form = forms.MultiCountryForm(data={"countries": ["NZ", "AU"]})
         self.assertEqual(form.errors, {})
+
+    def test_multiple_form_initial_string(self):
+        """Test form with string initial value to trigger prepare_value fallback."""
+        # When initial data is a string (not a list), prepare_value should handle it
+        form = forms.MultiCountryForm(initial={"countries": "NZ"})
+        # The form should still render correctly
+        html = str(form["countries"])
+        # Check that the field is rendered (basic sanity check)
+        self.assertIn('name="countries"', html)
 
     def test_multiple_selected_options(self):
         """Test that selected countries are marked as selected in the rendered form."""

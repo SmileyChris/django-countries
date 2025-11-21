@@ -20,6 +20,13 @@ class PersonAdmin(admin.ModelAdmin):
 test_site.register(models.Person, PersonAdmin)
 
 
+class MultiCountryAdmin(admin.ModelAdmin):
+    list_filter = [("countries", filters.CountryFilter)]
+
+
+test_site.register(models.MultiCountry, MultiCountryAdmin)
+
+
 class TestCountryFilter(TestCase):
     def get_changelist_kwargs(self):
         m = self.person_admin
@@ -200,3 +207,90 @@ class TestDjangoFiltersIntegration(TestCase):
 
         filterset = PersonFilterSet(data={}, queryset=models.Person.objects.all())
         self.assertEqual(filterset.qs.count(), 3)
+
+
+class TestMultiCountryFilter(TestCase):
+    """Tests for CountryFilter with multiple=True fields."""
+
+    def get_changelist_kwargs(self):
+        m = self.multi_country_admin
+        sig = inspect.signature(ChangeList.__init__)
+        kwargs = {"model_admin": m}
+        for arg in list(sig.parameters)[2:]:
+            if hasattr(m, arg):
+                kwargs[arg] = getattr(m, arg)
+        return kwargs
+
+    def setUp(self):
+        models.MultiCountry.objects.create(countries=["NZ"])
+        models.MultiCountry.objects.create(countries=["FR", "AU"])
+        models.MultiCountry.objects.create(countries=["FR", "NZ"])
+        self.multi_country_admin = MultiCountryAdmin(models.MultiCountry, test_site)
+
+    def test_filter_none(self):
+        """Test that no filter returns all records."""
+        request = RequestFactory().get("/multi_country/")
+        request.user = AnonymousUser()
+        cl = ChangeList(request, **self.get_changelist_kwargs())
+        cl.get_results(request)
+        self.assertEqual(len(cl.result_list), models.MultiCountry.objects.count())
+
+    def test_filter_country(self):
+        """Test filtering by a single country using __contains lookup."""
+        request = RequestFactory().get(
+            "/multi_country/", data={"countries__contains": "NZ"}
+        )
+        request.user = AnonymousUser()
+        cl = ChangeList(request, **self.get_changelist_kwargs())
+        cl.get_results(request)
+        # Should return records containing NZ (excluding the one with only FR,AU)
+        expected = models.MultiCountry.objects.filter(countries__contains="NZ")
+        self.assertQuerySetEqual(
+            cl.result_list,
+            expected,
+            ordered=False,
+        )
+
+    def test_filter_different_country(self):
+        """Test filtering by a different country."""
+        request = RequestFactory().get(
+            "/multi_country/", data={"countries__contains": "FR"}
+        )
+        request.user = AnonymousUser()
+        cl = ChangeList(request, **self.get_changelist_kwargs())
+        cl.get_results(request)
+        expected = models.MultiCountry.objects.filter(countries__contains="FR")
+        self.assertQuerySetEqual(
+            cl.result_list,
+            expected,
+            ordered=False,
+        )
+
+    def _test_choices(self, selected_country_code="NZ"):
+        """Helper to test filter choices display correctly."""
+        request_params = {}
+        selected_country = "All"
+
+        if selected_country_code:
+            request_params["countries__contains"] = selected_country_code
+            selected_country = countries.name(selected_country_code)
+
+        request = RequestFactory().get("/multi_country/", data=request_params)
+        request.user = AnonymousUser()
+        cl = ChangeList(request, **self.get_changelist_kwargs())
+        choices = list(cl.filter_specs[0].choices(cl))
+        # Should show all countries that appear in the data
+        self.assertEqual(
+            [c["display"] for c in choices],
+            ["All", "Australia", "France", "New Zealand"],
+        )
+        for choice in choices:
+            self.assertEqual(choice["selected"], choice["display"] == selected_country)
+
+    def test_choices(self):
+        """Test filter choices with a selected country."""
+        return self._test_choices()
+
+    def test_choices_empty_selection(self):
+        """Test filter choices with no country selected."""
+        return self._test_choices(selected_country_code=None)

@@ -113,7 +113,7 @@ This provides a much more intuitive interface with search and filtering capabili
 
 ## Querying
 
-You can query multiple country fields just like regular CountryFields:
+You can query multiple country fields using the `__contains` lookup to match individual countries within the comma-separated list:
 
 ```python
 # Find incidents involving New Zealand
@@ -123,7 +123,27 @@ You can query multiple country fields just like regular CountryFields:
 >>> Incident.objects.filter(countries__name='Australia')
 ```
 
-Note that the contains lookup matches the country code within the comma-separated string.
+Note that `__contains` performs a substring match on the stored comma-separated codes.
+
+### Django Admin Filtering
+
+The `CountryFilter` in Django admin automatically works with `multiple=True` fields:
+
+```python
+from django.contrib import admin
+from django_countries.filters import CountryFilter
+from myapp.models import Incident
+
+@admin.register(Incident)
+class IncidentAdmin(admin.ModelAdmin):
+    list_filter = [('countries', CountryFilter)]
+```
+
+The admin filter will:
+
+- Show only countries that exist in your data
+- Use `__contains` lookup to match countries in comma-separated lists
+- Display country names in the filter dropdown for easy selection
 
 ## Example Use Cases
 

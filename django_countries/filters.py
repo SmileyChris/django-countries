@@ -13,16 +13,24 @@ class CountryFilter(admin.FieldListFilter):
     title = _("Country")  # type: ignore
 
     def expected_parameters(self):
+        if self.field.multiple:
+            return [f"{self.field.name}__contains"]
         return [self.field.name]
 
     def choices(self, changelist):
-        value = self.used_parameters.get(self.field.name)
+        # Use __contains lookup for multiple country fields
+        if self.field.multiple:
+            field_name = f"{self.field.name}__contains"
+        else:
+            field_name = self.field.name
+
+        value = self.used_parameters.get(field_name)
         # In Django 5.x, query parameters may come as lists
         if isinstance(value, list) and len(value) == 1:
             value = value[0]
         yield {
             "selected": value is None,
-            "query_string": changelist.get_query_string({}, [self.field.name]),
+            "query_string": changelist.get_query_string({}, [field_name]),
             "display": _("All"),
         }
         for lookup, title in self.lookup_choices(changelist):
@@ -31,19 +39,29 @@ class CountryFilter(admin.FieldListFilter):
                 selected = value is not None and selected
             yield {
                 "selected": selected,
-                "query_string": changelist.get_query_string(
-                    {self.field.name: lookup}, []
-                ),
+                "query_string": changelist.get_query_string({field_name: lookup}, []),
                 "display": title,
             }
 
     def lookup_choices(self, changelist):
         qs = changelist.model._default_manager.all()
-        codes = set(
+        values = (
             qs.distinct()
             .order_by(self.field.name)
             .values_list(self.field.name, flat=True)
         )
+
+        # For multiple country fields, split comma-separated values
+        codes = set()
+        if self.field.multiple:
+            for value in values:
+                if value:  # Handle None/empty values
+                    codes.update(
+                        code.strip() for code in value.split(",") if code.strip()
+                    )
+        else:
+            codes = set(values)
+
         for k, v in self.field.get_choices(include_blank=False):
             if k in codes:
                 yield k, v
