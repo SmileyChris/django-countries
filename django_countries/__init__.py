@@ -31,12 +31,13 @@ from .base import CountriesBase
 if TYPE_CHECKING:
     from django_stubs_ext import StrPromise
 
-    class ComplexCountryName(TypedDict):
+    class ComplexCountryName(TypedDict, total=False):
         name: "StrPromise"
         names: "List[StrPromise]"
         alpha3: str
         numeric: int
         ioc_code: str
+        flag_url: str
 
     CountryName = Union[
         StrPromise,  # type: ignore
@@ -183,7 +184,37 @@ class Countries(CountriesBase):
                     _countries = cast(
                         "Dict[str, Union[CountryName, None]]", self._countries.copy()
                     )
-                    _countries.update(override)
+                    for code, override_value in override.items():
+                        if override_value is None:
+                            # Remove the country
+                            _countries[code] = None
+                        elif isinstance(override_value, dict):
+                            # Check if the dict has name/names
+                            if (
+                                "name" not in override_value
+                                and "names" not in override_value
+                            ):
+                                # Merge with existing country data
+                                existing = _countries.get(code)
+                                if existing and isinstance(existing, dict):
+                                    # Merge the dicts
+                                    merged = existing.copy()  # type: ignore
+                                    merged.update(override_value)  # type: ignore
+                                    _countries[code] = merged  # type: ignore
+                                elif existing:
+                                    # Convert existing string to dict with name
+                                    merged = {"name": existing}  # type: ignore
+                                    merged.update(override_value)  # type: ignore
+                                    _countries[code] = merged  # type: ignore
+                                else:
+                                    # New country with only metadata, no name
+                                    _countries[code] = override_value
+                            else:
+                                # Full replacement with new name
+                                _countries[code] = override_value
+                        else:
+                            # String override
+                            _countries[code] = override_value
                     self._countries = {
                         code: name
                         for code, name in _countries.items()
@@ -220,6 +251,8 @@ class Countries(CountriesBase):
             del self._alt_codes
         if hasattr(self, "_ioc_codes"):
             del self._ioc_codes
+        if hasattr(self, "_flag_urls"):
+            del self._flag_urls
         if hasattr(self, "_shadowed_names"):
             del self._shadowed_names
         if hasattr(self, "_iter_cache"):
@@ -262,6 +295,15 @@ class Countries(CountriesBase):
                         altered = True
                     self._ioc_codes[code] = country["ioc_code"]
         return self._ioc_codes
+
+    @property
+    def flag_urls(self) -> Dict[str, str]:
+        if not hasattr(self, "_flag_urls"):
+            self._flag_urls: Dict[str, str] = {}
+            for code, country in self.countries.items():
+                if isinstance(country, dict) and "flag_url" in country:
+                    self._flag_urls[code] = country["flag_url"]
+        return self._flag_urls
 
     @property
     def shadowed_names(self):
@@ -580,6 +622,15 @@ class Countries(CountriesBase):
         """
         alpha2 = self.alpha2(code)
         return self.ioc_codes.get(alpha2, "")
+
+    def flag_url(self, code: "CountryCode") -> str:
+        """
+        Return the custom flag URL for the provided country code.
+
+        If no custom flag URL is found, returns an empty string.
+        """
+        alpha2 = self.alpha2(code)
+        return self.flag_urls.get(alpha2, "")
 
     def __len__(self):
         """

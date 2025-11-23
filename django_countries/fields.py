@@ -136,7 +136,9 @@ class Country:
             return ""
         flag_url = self.flag_url
         if flag_url is None:
-            flag_url = settings.COUNTRIES_FLAG_URL
+            # Check if there's a custom flag_url for this country code
+            custom_flag_url = self.countries.flag_url(self.code)
+            flag_url = custom_flag_url or settings.COUNTRIES_FLAG_URL
         url = flag_url.format(code_upper=self.code, code=self.code.lower())
         if not url:
             return ""

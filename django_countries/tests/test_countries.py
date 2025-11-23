@@ -213,6 +213,52 @@ class TestCountriesObject(BaseTest):
                 "Should use IOC code for a custom country that provides a code",
             )
 
+    def test_flag_url_override(self):
+        with self.settings(
+            COUNTRIES_OVERRIDE={
+                "BS": "Bahamas in Pajamas",
+                "AU": None,
+                "NZ": {"flag_url": "custom/nz.png"},
+                "XX": "Neverland",
+                "US": {"flag_url": "flags/usa.gif"},
+                "IND": {
+                    "names": ["Indonesia"],
+                    "ioc_code": "INA",
+                    "flag_url": "flags/id.gif",
+                },
+            }
+        ):
+            self.assertEqual(
+                countries.flag_url("BS"),
+                "",
+                "Should be empty if only name changed",
+            )
+            self.assertEqual(
+                countries.flag_url("AU"),
+                "",
+                "Should be empty since country was marked not present",
+            )
+            self.assertEqual(
+                countries.flag_url("NZ"),
+                "custom/nz.png",
+                "Should use custom flag_url",
+            )
+            self.assertEqual(
+                countries.flag_url("XX"),
+                "",
+                "Should be empty for a custom country with no flag_url",
+            )
+            self.assertEqual(
+                countries.flag_url("US"),
+                "flags/usa.gif",
+                "Should use provided custom flag_url",
+            )
+            self.assertEqual(
+                countries.flag_url("IND"),
+                "flags/id.gif",
+                "Should use flag_url for a custom country code",
+            )
+
     def test_fetch_by_name(self):
         code = countries.by_name("Brunei")
         self.assertEqual(code, "BN")

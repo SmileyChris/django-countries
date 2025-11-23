@@ -63,8 +63,24 @@ COUNTRIES_OVERRIDE = {
             _("USA"),
         ],
     },
+    "IND": {
+        "names": [_("Indonesia")],
+        "ioc_code": "INA",
+        "flag_url": "flags/id.gif",  # Use id.gif instead of ind.gif
+    },
 }
 ```
+
+You can override the following metadata for each country:
+
+- **names** or **name**: Custom display names (translatable)
+- **alpha3**: Custom ISO 3166-1 alpha-3 code
+- **numeric**: Custom ISO 3166-1 numeric code
+- **ioc_code**: Custom IOC (International Olympic Committee) code
+- **flag_url**: Custom flag image URL (useful for custom country codes that need to reference existing flags)
+
+!!! tip
+    When specifying only metadata fields (like `flag_url`, `ioc_code`) without providing `name` or `names`, the original country name is preserved. This allows you to customize flags or codes without losing the standard country name.
 
 See [Customization](../advanced/customization.md#override-specific-countries) for more details.
 

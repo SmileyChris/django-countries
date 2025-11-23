@@ -230,6 +230,35 @@ COUNTRIES_OVERRIDE = {
 }
 ```
 
+### flag_url (optional)
+
+A custom flag image URL for this country. This is particularly useful when using custom country codes that need to reference existing flag images:
+
+```python
+COUNTRIES_OVERRIDE = {
+    "ID": None,  # Remove Indonesia
+    "IND": {
+        "names": [_("Indonesia")],
+        "ioc_code": "INA",
+        "flag_url": "flags/id.gif",  # Points to id.gif instead of ind.gif
+    },
+}
+```
+
+The flag URL supports the same placeholders as `COUNTRIES_FLAG_URL`:
+
+- `{code}` - lowercase country code
+- `{code_upper}` - uppercase country code
+
+!!! tip
+    When specifying only metadata fields (like `flag_url`, `ioc_code`) without providing `name` or `names`, the original country name is preserved. This allows you to customize flags or codes without losing the standard country name:
+
+    ```python
+    COUNTRIES_OVERRIDE = {
+        "NZ": {"flag_url": "custom/nz.png"},  # Keeps "New Zealand" name
+    }
+    ```
+
 ### Complete Example
 
 ```python
@@ -247,6 +276,7 @@ COUNTRIES_OVERRIDE = {
         "alpha3": "XXX",
         "numeric": 900,
         "ioc_code": "",
+        "flag_url": "flags/custom/{code}.png",
     },
 }
 ```

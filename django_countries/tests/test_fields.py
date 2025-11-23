@@ -97,6 +97,58 @@ class TestCountryField(TestCase):
         ):
             self.assertEqual(person.country.flag, "https://flags.example.com/NZ.PNG")
 
+    def test_COUNTRIES_OVERRIDE_flag_url(self):
+        # Test custom flag_url from COUNTRIES_OVERRIDE
+        from django_countries import countries
+
+        with self.settings(
+            COUNTRIES_OVERRIDE={
+                "ID": None,
+                "IND": {
+                    "names": ["Indonesia"],
+                    "ioc_code": "INA",
+                    "flag_url": "flags/id.gif",
+                },
+                "NZ": {"flag_url": "custom/nz.png"},
+            },
+            STATIC_URL="/static-assets/",
+        ):
+            # Clear the countries cache
+            del countries.countries
+            # Test custom country code with custom flag_url
+            person_ind = Person(name="Test User", country="IND")
+            self.assertEqual(person_ind.country.flag, "/static-assets/flags/id.gif")
+            # Test existing country with custom flag_url
+            person_nz = Person(name="Chris Beaven", country="NZ")
+            self.assertEqual(person_nz.country.flag, "/static-assets/custom/nz.png")
+            # Test that default flag_url is used for countries without override
+            person_au = Person(name="Test User", country="AU")
+            self.assertEqual(person_au.country.flag, "/static-assets/flags/au.gif")
+        # Clear the cache after the test to prevent affecting other tests
+        del countries.countries
+
+    def test_COUNTRIES_OVERRIDE_flag_url_with_placeholders(self):
+        # Test that flag_url supports {code} and {code_upper} placeholders
+        from django_countries import countries
+
+        with self.settings(
+            COUNTRIES_OVERRIDE={
+                "US": {"flag_url": "flags/{code_upper}.png"},
+                "GB": {"flag_url": "custom/{code}.svg"},
+            },
+            STATIC_URL="/static-assets/",
+        ):
+            # Clear the countries cache
+            del countries.countries
+            # Test {code_upper} placeholder
+            person_us = Person(name="Test User", country="US")
+            self.assertEqual(person_us.country.flag, "/static-assets/flags/US.png")
+            # Test {code} placeholder (lowercase)
+            person_gb = Person(name="Test User", country="GB")
+            self.assertEqual(person_gb.country.flag, "/static-assets/custom/gb.svg")
+        # Clear the cache after the test
+        del countries.countries
+
     def test_flag_css(self):
         person = Person(name="Chris Beaven", country="NZ")
         self.assertEqual(person.country.flag_css, "flag-sprite flag-n flag-_z")
