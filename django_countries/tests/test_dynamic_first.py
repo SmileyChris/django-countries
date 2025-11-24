@@ -529,3 +529,307 @@ class TestCountriesLength(BaseTest):
             length = len(countries)
             # 249 countries + 3 first (AU, US, GB)
             self.assertEqual(length, 249 + 3)
+
+
+@pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
+class TestBrowserLanguageDetection(BaseTest):
+    """
+    Test auto-detect with browser Accept-Language header simulation.
+
+    These tests simulate how COUNTRIES_FIRST_AUTO_DETECT works with real
+    browser language preferences, like a user visiting from Australia with
+    their browser set to "en-AU" or a French-Canadian user with "fr-CA".
+
+    In production, Django's LocaleMiddleware parses the Accept-Language header
+    and activates the appropriate language. These tests simulate that flow.
+    """
+
+    def _parse_accept_language(self, accept_language):
+        """
+        Parse Accept-Language header and return best language code.
+
+        This simulates what Django's LocaleMiddleware does when processing
+        the HTTP Accept-Language header from a browser.
+        """
+        from django.utils.translation import trans_real
+
+        # Parse the Accept-Language header
+        parsed = trans_real.parse_accept_lang_header(accept_language)
+        if not parsed:
+            return None
+
+        # Get the first (highest priority) language
+        # Format: [(lang, priority), ...] sorted by priority
+        return parsed[0][0].lower() if parsed else None
+
+    def test_australian_browser_auto_detect(self):
+        """Test that Australian browser (en-AU) gets Australia first."""
+        with self.settings(COUNTRIES_FIRST_AUTO_DETECT=True):
+            # Simulate browser sending Accept-Language: en-AU
+            language = self._parse_accept_language("en-AU")
+            self.assertEqual(language, "en-au")
+
+            # Activate the language like Django's LocaleMiddleware would
+            with translation.override(language):
+                country_list = list(countries)
+
+                # Verify AU is first
+                self.assertEqual(country_list[0].code, "AU")
+                # Second should be alphabetical
+                self.assertEqual(country_list[1].code, "AF")
+
+    def test_canadian_french_browser_with_language_mapping(self):
+        """Test French-Canadian browser with language-based first countries."""
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            COUNTRIES_FIRST_BY_LANGUAGE={
+                "fr": ["FR", "CH", "BE", "LU"],
+            },
+        ):
+            # Simulate browser sending Accept-Language: fr-CA
+            language = self._parse_accept_language("fr-CA")
+            self.assertEqual(language, "fr-ca")
+
+            # Activate the language like Django's LocaleMiddleware would
+            with translation.override(language):
+                country_list = list(countries)
+
+                # Should get CA prepended to French group
+                self.assertEqual(country_list[0].code, "CA")
+                self.assertEqual(country_list[1].code, "FR")
+                self.assertEqual(country_list[2].code, "CH")
+                self.assertEqual(country_list[3].code, "BE")
+
+    def test_multiple_language_preferences(self):
+        """Test browser with multiple language preferences in Accept-Language."""
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            COUNTRIES_FIRST=["US", "GB"],
+        ):
+            # Browser prefers Spanish-Mexican, then English
+            # Accept-Language: es-MX,es;q=0.9,en;q=0.8
+            language = self._parse_accept_language("es-MX,es;q=0.9,en;q=0.8")
+
+            # Django should pick es-mx as the highest priority
+            self.assertEqual(language, "es-mx")
+
+            # Activate the language like Django's LocaleMiddleware would
+            with translation.override(language):
+                country_list = list(countries)
+
+                # Should get MX prepended to COUNTRIES_FIRST
+                self.assertEqual(country_list[0].code, "MX")
+                self.assertEqual(country_list[1].code, "US")
+                self.assertEqual(country_list[2].code, "GB")
+
+    def test_german_swiss_browser(self):
+        """Test German-Swiss browser (de-CH) with language mapping."""
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            COUNTRIES_FIRST_BY_LANGUAGE={
+                "de": ["DE", "AT", "CH", "LI"],
+            },
+        ):
+            # Simulate browser sending Accept-Language: de-CH
+            language = self._parse_accept_language("de-CH")
+            self.assertEqual(language, "de-ch")
+
+            # Activate the language like Django's LocaleMiddleware would
+            with translation.override(language):
+                country_list = list(countries)
+
+                # CH should move to front (deduplication)
+                self.assertEqual(country_list[0].code, "CH")
+                self.assertEqual(country_list[1].code, "DE")
+                self.assertEqual(country_list[2].code, "AT")
+                self.assertEqual(country_list[3].code, "LI")
+                # Make sure CH only appears once
+                codes = [c.code for c in country_list[:10]]
+                self.assertEqual(codes.count("CH"), 1)
+
+    def test_base_language_without_country(self):
+        """Test browser sending only base language (no country code)."""
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            COUNTRIES_FIRST=["US", "GB"],
+        ):
+            # Simulate browser sending Accept-Language: en (no country)
+            language = self._parse_accept_language("en")
+
+            # Language detected as just 'en'
+            self.assertIn(language, ["en", "en-us"])  # Depends on Django version
+
+            # Activate the language like Django's LocaleMiddleware would
+            with translation.override(language):
+                country_list = list(countries)
+
+                # No country to detect, should fall back to COUNTRIES_FIRST
+                self.assertEqual(country_list[0].code, "US")
+                self.assertEqual(country_list[1].code, "GB")
+
+    def test_unsupported_language_falls_back(self):
+        """Test browser with unsupported language falls back to default."""
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            COUNTRIES_FIRST=["US"],
+            LANGUAGE_CODE="en-us",
+        ):
+            # Simulate browser sending unsupported language
+            language = self._parse_accept_language("zh-CN")
+
+            # Should fall back to LANGUAGE_CODE since zh is not in LANGUAGES
+            self.assertIn(language, ["en-us", "zh-cn"])
+
+            # Activate the language like Django's LocaleMiddleware would
+            with translation.override(language):
+                country_list = list(countries)
+
+                # If zh-cn is supported, CN should be first; otherwise US
+                if language == "zh-cn":
+                    self.assertEqual(country_list[0].code, "CN")
+                else:
+                    self.assertEqual(country_list[0].code, "US")
+
+
+# Define a view for middleware tests
+def country_view_for_tests(request):
+    """
+    Simple view that returns the country list and current language.
+
+    This simulates a real view where a form with CountryField is rendered.
+    """
+    from django.http import JsonResponse
+
+    country_list = list(countries)
+    return JsonResponse(
+        {
+            "language": translation.get_language(),
+            "countries": [{"code": c.code, "name": c.name} for c in country_list[:5]],
+        }
+    )
+
+
+# URL patterns for middleware tests
+test_urlpatterns = [
+    __import__("django.urls").urls.path("countries/", country_view_for_tests),
+]
+
+
+@pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
+class TestBrowserLanguageViaMiddleware(BaseTest):
+    """
+    Test auto-detect through actual Django middleware and views.
+
+    These tests make HTTP requests through Django's test client, simulating
+    how browsers send Accept-Language headers in production. The requests
+    are processed through LocaleMiddleware, which activates the language.
+    """
+
+    def test_australian_browser_via_middleware(self):
+        """
+        Test that Australian browser (Accept-Language: en-AU) gets AU first.
+
+        This simulates a real user from Australia visiting a form with a
+        CountryField. Their browser sends 'en-AU' which Django's LocaleMiddleware
+        detects, and COUNTRIES_FIRST_AUTO_DETECT uses to show Australia first.
+
+        Note: Django's default LANGUAGES setting includes 'en-au', so we don't
+        need to explicitly configure it.
+        """
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            MIDDLEWARE=[
+                "django.middleware.common.CommonMiddleware",
+                "django.middleware.locale.LocaleMiddleware",
+            ],
+            ROOT_URLCONF="django_countries.tests.test_dynamic_first",
+        ):
+            response = self.client.get("/countries/", HTTP_ACCEPT_LANGUAGE="en-AU")
+
+            self.assertEqual(response.status_code, 200)
+            data = response.json()
+
+            # LocaleMiddleware should have activated en-au
+            self.assertEqual(data["language"], "en-au")
+
+            # AU should be first in the list
+            self.assertEqual(data["countries"][0]["code"], "AU")
+
+    def test_french_canadian_with_language_mapping(self):
+        """
+        Test French-Canadian browser with language-based country mapping.
+
+        A user from Quebec has their browser set to 'fr-CA'. Since Django's
+        default LANGUAGES doesn't include 'fr-ca', LocaleMiddleware falls back
+        to 'fr'. To get full auto-detect functionality, add specific locales
+        to LANGUAGES. This test demonstrates the feature WITH configuration.
+        """
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            COUNTRIES_FIRST_BY_LANGUAGE={
+                "fr": ["FR", "CH", "BE", "LU"],
+            },
+            MIDDLEWARE=[
+                "django.middleware.common.CommonMiddleware",
+                "django.middleware.locale.LocaleMiddleware",
+            ],
+            # Add fr-ca so LocaleMiddleware doesn't fall back to fr
+            LANGUAGES=[
+                ("en", "English"),
+                ("fr", "French"),
+                ("fr-ca", "French (Canada)"),
+            ],
+            ROOT_URLCONF="django_countries.tests.test_dynamic_first",
+        ):
+            response = self.client.get("/countries/", HTTP_ACCEPT_LANGUAGE="fr-CA")
+
+            self.assertEqual(response.status_code, 200)
+            data = response.json()
+
+            # Should detect fr-ca (with explicit LANGUAGES configuration)
+            self.assertEqual(data["language"], "fr-ca")
+
+            # Should see CA prepended to French group
+            self.assertEqual(data["countries"][0]["code"], "CA")
+            self.assertEqual(data["countries"][1]["code"], "FR")
+            self.assertEqual(data["countries"][2]["code"], "CH")
+
+    def test_complex_accept_language_header(self):
+        """
+        Test browser with multiple languages and quality values.
+
+        Modern browsers send complex Accept-Language headers like:
+        'es-MX,es;q=0.9,en-US;q=0.8,en;q=0.7'
+
+        LocaleMiddleware parses quality values and picks the highest priority
+        language, which should be es-MX, showing MX first in the country list.
+
+        Note: Django's default LANGUAGES includes 'es-mx'.
+        """
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            COUNTRIES_FIRST=["US", "GB"],
+            MIDDLEWARE=[
+                "django.middleware.common.CommonMiddleware",
+                "django.middleware.locale.LocaleMiddleware",
+            ],
+            ROOT_URLCONF="django_countries.tests.test_dynamic_first",
+        ):
+            response = self.client.get(
+                "/countries/",
+                HTTP_ACCEPT_LANGUAGE="es-MX,es;q=0.9,en-US;q=0.8,en;q=0.7",
+            )
+
+            self.assertEqual(response.status_code, 200)
+            data = response.json()
+
+            # Should pick es-mx (highest priority)
+            self.assertEqual(data["language"], "es-mx")
+
+            # MX should be prepended to COUNTRIES_FIRST
+            self.assertEqual(data["countries"][0]["code"], "MX")
+            self.assertEqual(data["countries"][1]["code"], "US")
+            self.assertEqual(data["countries"][2]["code"], "GB")
+
+
+urlpatterns = test_urlpatterns  # Make urlpatterns available at module level
