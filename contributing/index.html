@@ -665,6 +665,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrations/django_filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    django-filter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -729,6 +752,29 @@
   
   <span class="md-ellipsis">
     Customization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/dynamic-ordering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dynamic Ordering
     
   </span>
   
@@ -1676,19 +1722,24 @@
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># For a major release (breaking changes: 7.7.0 -&gt; 8.0.0)</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>just<span class="w"> </span>deploy<span class="w"> </span>major
 </code></pre></div>
+<p>To rehearse a release without touching the repository or PyPI, set <code>DRY_RUN=1</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">DRY_RUN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>just<span class="w"> </span>deploy<span class="w"> </span>patch
+</code></pre></div>
+<p>Dry runs perform the same read-only validation (git status, changelog preview, version bump preview via <code>uv version --dry-run</code>) while skipping every mutating step (translations, version bump, documentation edits, commits, tagging, publishing, etc.).</p>
 <p>This will:<br />
 1. Check for uncommitted changes (must have clean working directory)<br />
 2. Pull latest changes from git<br />
 3. Pull and compile translations from Transifex<br />
 4. Commit translation updates (if any)<br />
 5. Preview changelog to verify fragments exist<br />
-6. Bump version in pyproject.toml<br />
-7. Run pre-commit checks on version bump<br />
-8. Build package to verify everything works<br />
-9. Build changelog from fragments and commit atomically<br />
-10. Create and push git tag<br />
-11. Build final package and publish to PyPI<br />
-12. Deploy documentation to GitHub Pages</p>
+6. Bump version in <code>pyproject.toml</code><br />
+7. Replace all “New in development version” doc callouts with “New in version X.Y.Z”<br />
+8. Run pre-commit checks on version bump<br />
+9. Build package to verify everything works<br />
+10. Build changelog from fragments and commit atomically<br />
+11. Create and push git tag<br />
+12. Build final package and publish to PyPI<br />
+13. Deploy documentation to GitHub Pages</p>
 <p><strong>Note</strong>: Add changelog entries to <code>changes/</code> directory before releasing. See <code>changes/README.md</code> for details.</p>
 <h3 id="choosing-the-right-release-type">Choosing the Right Release Type<a class="headerlink" href="#choosing-the-right-release-type" title="Permanent link">&para;</a></h3>
 <p>This project follows <a href="https://semver.org/">Semantic Versioning</a>:</p>
@@ -1699,50 +1750,50 @@
 </ul>
 <p><strong>Key Rule</strong>: Adding version support = minor. Dropping version support = major.</p>
 <p>After the release, remember to bump to the next development version:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uv<span class="w"> </span>version<span class="w"> </span>--bump<span class="w"> </span>minor
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># Manually edit pyproject.toml to change version from X.Y.0 to X.Y.dev0</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Back to development: X.Y.dev0&quot;</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>git<span class="w"> </span>push
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>uv<span class="w"> </span>version<span class="w"> </span>--bump<span class="w"> </span>minor
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># Manually edit pyproject.toml to change version from X.Y.0 to X.Y.dev0</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Back to development: X.Y.dev0&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>git<span class="w"> </span>push
 </code></pre></div>
 <h3 id="manual-release">Manual Release<a class="headerlink" href="#manual-release" title="Permanent link">&para;</a></h3>
 <p>If you prefer manual control, you can do each step individually:</p>
 <p><strong>1. Prepare translations</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>just<span class="w"> </span>tx-pull
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>git<span class="w"> </span>add<span class="w"> </span>django_countries/locale
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update translations from Transifex&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>just<span class="w"> </span>tx-pull
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>git<span class="w"> </span>add<span class="w"> </span>django_countries/locale
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update translations from Transifex&quot;</span>
 </code></pre></div>
 <p><strong>2. Bump version</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>uv<span class="w"> </span>version<span class="w"> </span>--bump<span class="w"> </span>patch<span class="w">   </span><span class="c1"># or minor/major</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>uv<span class="w"> </span>version<span class="w"> </span>--bump<span class="w"> </span>patch<span class="w">   </span><span class="c1"># or minor/major</span>
 </code></pre></div>
 <p><strong>3. Build changelog</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>uv<span class="w"> </span>run<span class="w"> </span>--group<span class="w"> </span>dev<span class="w"> </span>towncrier<span class="w"> </span>build<span class="w"> </span>--version<span class="w"> </span><span class="k">$(</span>uv<span class="w"> </span>version<span class="w"> </span>--short<span class="k">)</span><span class="w"> </span>--date<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="w"> </span><span class="s1">&#39;+%-d %B %Y&#39;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>--yes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>uv<span class="w"> </span>run<span class="w"> </span>--group<span class="w"> </span>dev<span class="w"> </span>towncrier<span class="w"> </span>build<span class="w"> </span>--version<span class="w"> </span><span class="k">$(</span>uv<span class="w"> </span>version<span class="w"> </span>--short<span class="k">)</span><span class="w"> </span>--date<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="w"> </span><span class="s1">&#39;+%-d %B %Y&#39;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>--yes
 </code></pre></div>
 <p><strong>4. Commit and tag</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml<span class="w"> </span>CHANGES.md<span class="w"> </span>changes/
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Preparing release </span><span class="k">$(</span>uv<span class="w"> </span>version<span class="w"> </span>--short<span class="k">)</span><span class="s2">&quot;</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>v<span class="k">$(</span>uv<span class="w"> </span>version<span class="w"> </span>--short<span class="k">)</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Release v</span><span class="k">$(</span>uv<span class="w"> </span>version<span class="w"> </span>--short<span class="k">)</span><span class="s2">&quot;</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>git<span class="w"> </span>push<span class="w"> </span>--tags
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>git<span class="w"> </span>push
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml<span class="w"> </span>CHANGES.md<span class="w"> </span>changes/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Preparing release </span><span class="k">$(</span>uv<span class="w"> </span>version<span class="w"> </span>--short<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>v<span class="k">$(</span>uv<span class="w"> </span>version<span class="w"> </span>--short<span class="k">)</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Release v</span><span class="k">$(</span>uv<span class="w"> </span>version<span class="w"> </span>--short<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>git<span class="w"> </span>push<span class="w"> </span>--tags
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>git<span class="w"> </span>push
 </code></pre></div>
 <p><strong>5. Build and publish</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>dist
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>uv<span class="w"> </span>build
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>uv<span class="w"> </span>publish
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>dist
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>uv<span class="w"> </span>build
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>uv<span class="w"> </span>publish
 </code></pre></div>
 <h3 id="setting-up-pypi-credentials">Setting Up PyPI Credentials<a class="headerlink" href="#setting-up-pypi-credentials" title="Permanent link">&para;</a></h3>
 <p>Install keyring (used by uv for publishing) and set your credentials:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>keyring
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>keyring<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="s1">&#39;https://upload.pypi.org/legacy/&#39;</span><span class="w"> </span>__token__
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>keyring
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>keyring<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="s1">&#39;https://upload.pypi.org/legacy/&#39;</span><span class="w"> </span>__token__
 </code></pre></div>
 <p>Next, add these environment variables (e.g., in your <code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">UV_KEYRING_PROVIDER</span><span class="o">=</span>subprocess
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">UV_PUBLISH_USERNAME</span><span class="o">=</span>__token__
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">UV_KEYRING_PROVIDER</span><span class="o">=</span>subprocess
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">UV_PUBLISH_USERNAME</span><span class="o">=</span>__token__
 </code></pre></div>
 <h3 id="installing-transifex-cli">Installing Transifex CLI<a class="headerlink" href="#installing-transifex-cli" title="Permanent link">&para;</a></h3>
 <p>The Transifex CLI is required for pulling translations before a release:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Install using the official installer</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/transifex/cli/master/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Install using the official installer</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/transifex/cli/master/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </code></pre></div>
 <p>See the <a href="https://github.com/transifex/cli">Transifex CLI documentation</a> for alternative installation methods.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
@@ -1763,11 +1814,11 @@
 <p>All PRs must pass CI checks (formatting, linting, type checking, tests).</p>
 <h3 id="adding-changelog-entries">Adding Changelog Entries<a class="headerlink" href="#adding-changelog-entries" title="Permanent link">&para;</a></h3>
 <p>For changes that should appear in the release notes, create a file in the <code>changes/</code> directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># With issue/PR number</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Your change description&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>changes/123.bugfix.rst
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Without issue/PR (prefix with +)</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Your change description&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>changes/+20250104.misc.rst
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># With issue/PR number</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Your change description&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>changes/123.bugfix.rst
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># Without issue/PR (prefix with +)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Your change description&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>changes/+20250104.misc.rst
 </code></pre></div>
 <p>Types: <code>feature</code>, <code>bugfix</code>, <code>doc</code>, <code>removal</code>, <code>misc</code></p>
 <p>See <code>changes/README.md</code> for full details.</p>

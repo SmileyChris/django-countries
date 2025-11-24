@@ -1,0 +1,1759 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A Django application for country choices and fields">
+      
+      
+      
+      
+        <link rel="prev" href="../customization/">
+      
+      
+        <link rel="next" href="../multiple/">
+      
+      
+      <link rel="icon" href="../../images/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Dynamic Ordering - Django Countries</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dynamic-country-ordering" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Django Countries" class="md-header__button md-logo" aria-label="Django Countries" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Django Countries
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dynamic Ordering
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SmileyChris/django-countries" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SmileyChris/django-countries
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../usage/field/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Django Countries" class="md-nav__button md-logo" aria-label="Django Countries" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Django Countries
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SmileyChris/django-countries" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SmileyChris/django-countries
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Welcome
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/field/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CountryField
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Forms & Widgets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Template Tags
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Integrations
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/drf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Django REST Framework
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/graphql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GraphQL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/django_filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    django-filter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Customization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Dynamic Ordering
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dynamic Ordering
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-dynamic-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Dynamic Ordering?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-detection-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Detection Only
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#language-based-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Language-Based Ordering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Language-Based Ordering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smart-locale-auto-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Smart Locale Auto-Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicit-locale-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit Locale Overrides
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fallback-to-static-setting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fallback to Static Setting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programmatic-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Programmatic Ordering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Programmatic Ordering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority System
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#per-field-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-Field Customization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Behavior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-world-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-World Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e-commerce-site-with-shipping-regions" class="md-nav__link">
+    <span class="md-ellipsis">
+      E-commerce Site with Shipping Regions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-tenant-saas-with-region-preferences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Tenant SaaS with Region Preferences
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#form-with-user-specific-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Form with User-Specific Ordering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#django-rest-framework-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Django REST Framework Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Considerations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See Also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multiple Countries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iso3166-formatting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISO 3166-1 Formatting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-dynamic-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Dynamic Ordering?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-detection-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Detection Only
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#language-based-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Language-Based Ordering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Language-Based Ordering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smart-locale-auto-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Smart Locale Auto-Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicit-locale-overrides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit Locale Overrides
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fallback-to-static-setting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fallback to Static Setting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programmatic-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Programmatic Ordering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Programmatic Ordering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority System
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#per-field-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-Field Customization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Behavior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-world-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-World Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e-commerce-site-with-shipping-regions" class="md-nav__link">
+    <span class="md-ellipsis">
+      E-commerce Site with Shipping Regions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-tenant-saas-with-region-preferences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Tenant SaaS with Region Preferences
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#form-with-user-specific-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Form with User-Specific Ordering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#django-rest-framework-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Django REST Framework Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Considerations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See Also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="dynamic-country-ordering">Dynamic Country Ordering<a class="headerlink" href="#dynamic-country-ordering" title="Permanent link">&para;</a></h1>
+<p><strong>New in development version</strong></p>
+<p>Django-countries supports dynamic country ordering based on user language, preferences, or other contextual factors. This allows you to automatically show relevant countries first in dropdowns and forms.</p>
+<div class="admonition note">
+<p class="admonition-title">First countries behavior settings</p>
+<p>Several settings control how "first" countries are displayed:</p>
+<ul>
+<li><strong><code>COUNTRIES_FIRST_REPEAT</code></strong> (default: <code>False</code>) - Whether first countries are repeated in the main alphabetical list. When <code>False</code>, France shown first won't appear again under 'F'.</li>
+<li><strong><code>COUNTRIES_FIRST_SORT</code></strong> (default: <code>False</code>) - Whether to alphabetically sort the first countries instead of using the specified order.</li>
+<li><strong><code>COUNTRIES_FIRST_BREAK</code></strong> (default: <code>None</code>) - Optional separator text between first countries and the main list (e.g., <code>"─────"</code>).</li>
+</ul>
+<p>These settings apply to all dynamic ordering methods (<code>COUNTRIES_FIRST_BY_LANGUAGE</code>, <code>COUNTRIES_FIRST_AUTO_DETECT</code>, and <code>countries_context()</code>).</p>
+</div>
+<h2 id="why-dynamic-ordering">Why Dynamic Ordering?<a class="headerlink" href="#why-dynamic-ordering" title="Permanent link">&para;</a></h2>
+<p>Different users need different countries prominently displayed:</p>
+<ul>
+<li><strong>French users</strong> might expect France, Belgium, Switzerland first</li>
+<li><strong>German users</strong> might expect Germany, Austria, Switzerland first</li>
+<li><strong>French Canadian users</strong> might expect Canada before France</li>
+<li><strong>Users with saved preferences</strong> might have specific countries they frequently use</li>
+</ul>
+<p>Static settings like <code>COUNTRIES_FIRST</code> show the same countries for all users. Dynamic ordering adapts to each user's context.</p>
+<h2 id="auto-detection-only">Auto-Detection Only<a class="headerlink" href="#auto-detection-only" title="Permanent link">&para;</a></h2>
+<p>The simplest form of dynamic ordering is auto-detection. This feature is <strong>independent</strong> from language-based ordering and <strong>combines with</strong> <code>COUNTRIES_FIRST</code> by prepending the auto-detected country:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># settings.py</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">COUNTRIES_FIRST_AUTO_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>Results:</strong><br />
+- <code>en-AU</code> user → <code>['AU', 'US', 'GB']</code> (Australia prepended to COUNTRIES_FIRST)<br />
+- <code>en-GB</code> user → <code>['GB', 'US']</code> (GB moved to front, deduplicated)<br />
+- <code>fr-CA</code> user → <code>['CA', 'US', 'GB']</code> (Canada prepended to COUNTRIES_FIRST)<br />
+- <code>en</code> user (no country code) → <code>['US', 'GB']</code> (no auto-detection, uses static)</p>
+<p><strong>Without <code>COUNTRIES_FIRST</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">COUNTRIES_FIRST_AUTO_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># en-AU → [&#39;AU&#39;] only</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># en → alphabetical</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Independent from language-based ordering</p>
+<p><code>COUNTRIES_FIRST_AUTO_DETECT</code> and <code>COUNTRIES_FIRST_BY_LANGUAGE</code> are independent features. <code>BY_LANGUAGE</code> determines <strong>which</strong> list to show (language group or <code>COUNTRIES_FIRST</code>). <code>AUTO_DETECT</code> prepends the user's country to <strong>whichever</strong> list was chosen.</p>
+</div>
+<p>This provides a simple solution for most use cases. If you need more control (like showing regional countries), use language-based ordering.</p>
+<h2 id="language-based-ordering">Language-Based Ordering<a class="headerlink" href="#language-based-ordering" title="Permanent link">&para;</a></h2>
+<h3 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h3>
+<p>The <code>COUNTRIES_FIRST_BY_LANGUAGE</code> setting maps language codes to country lists. When a language matches, it <strong>completely replaces</strong> <code>COUNTRIES_FIRST</code> (does not combine with it):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># settings.py</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">],</span>  <span class="c1"># Francophone countries</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s1">&#39;de&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;DE&#39;</span><span class="p">,</span> <span class="s1">&#39;AT&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;LI&#39;</span><span class="p">],</span>  <span class="c1"># Germanic countries</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="s1">&#39;es&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ES&#39;</span><span class="p">,</span> <span class="s1">&#39;MX&#39;</span><span class="p">,</span> <span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;CL&#39;</span><span class="p">],</span>  <span class="c1"># Hispanic countries</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">]</span>  <span class="c1"># Ignored for fr/de/es users, used for others</span>
+</code></pre></div>
+<p><strong>Results:</strong><br />
+- <code>fr</code> user → <code>['FR', 'CH', 'BE', 'LU']</code> (language mapping, COUNTRIES_FIRST ignored)<br />
+- <code>de</code> user → <code>['DE', 'AT', 'CH', 'LI']</code> (language mapping, COUNTRIES_FIRST ignored)<br />
+- <code>en</code> user → <code>['US', 'GB']</code> (no language match, falls back to COUNTRIES_FIRST)</p>
+<h3 id="smart-locale-auto-detection">Smart Locale Auto-Detection<a class="headerlink" href="#smart-locale-auto-detection" title="Permanent link">&para;</a></h3>
+<p>When <code>COUNTRIES_FIRST_AUTO_DETECT = True</code>, the user's country is automatically extracted from their locale (like <code>fr-CA</code> → <code>CA</code>) and prepended to the first countries list. This works with both language-based groups and static <code>COUNTRIES_FIRST</code>.</p>
+<p><strong>With language groups:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">],</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">COUNTRIES_FIRST_AUTO_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># Results for different users:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># fr       → FR, CH, BE, LU           (no country in locale)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># fr-CA    → CA, FR, CH, BE, LU       (CA auto-prepended to group)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># fr-BE    → BE, FR, CH, LU           (BE moved to front, no duplicate)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># fr-CH    → CH, FR, BE, LU           (CH moved to front)</span>
+</code></pre></div>
+<p><strong>Without AUTO_DETECT enabled:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">],</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># COUNTRIES_FIRST_AUTO_DETECT not set (defaults to False)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Results:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># fr       → FR, CH, BE, LU           (base language group)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># fr-CA    → FR, CH, BE, LU           (NO auto-prepend, uses base group)</span>
+</code></pre></div>
+<p><strong>With auto-detect only:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">COUNTRIES_FIRST_AUTO_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">]</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Results:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># en-AU → AU, US, GB  (AU auto-prepended)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># en-GB → GB, US      (GB moved to front)</span>
+</code></pre></div>
+<p>This automatic behavior means:</p>
+<ol>
+<li><strong>Requires <code>COUNTRIES_FIRST_AUTO_DETECT = True</code></strong> to enable</li>
+<li>Users see their <strong>own country first</strong> (extracted from locale)</li>
+<li>Followed by either <strong>related countries</strong> from the language group OR static <code>COUNTRIES_FIRST</code></li>
+<li>No duplicate entries (existing countries move to the front)</li>
+<li>Works with both <code>-</code> and <code>_</code> locale separators (<code>fr-CA</code> and <code>fr_CA</code>)</li>
+</ol>
+<h3 id="explicit-locale-overrides">Explicit Locale Overrides<a class="headerlink" href="#explicit-locale-overrides" title="Permanent link">&para;</a></h3>
+<p>You can override the auto-prepend behavior for specific locales:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">],</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="s1">&#39;fr-CA&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;US&#39;</span><span class="p">],</span>           <span class="c1"># Canadians see CA and US, not the French group</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">,</span> <span class="s1">&#39;AU&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">],</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="s1">&#39;en-GB&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;GB&#39;</span><span class="p">,</span> <span class="s1">&#39;IE&#39;</span><span class="p">],</span>           <span class="c1"># British see GB and Ireland only</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="fallback-to-static-setting">Fallback to Static Setting<a class="headerlink" href="#fallback-to-static-setting" title="Permanent link">&para;</a></h3>
+<p>Languages not in the mapping fall back to <code>COUNTRIES_FIRST</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">],</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="s1">&#39;de&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;DE&#39;</span><span class="p">,</span> <span class="s1">&#39;AT&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;LI&#39;</span><span class="p">],</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">}</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">]</span>  <span class="c1"># Used for other languages</span>
+</code></pre></div>
+<h2 id="programmatic-ordering">Programmatic Ordering<a class="headerlink" href="#programmatic-ordering" title="Permanent link">&para;</a></h2>
+<p>For cases where language-based ordering isn't sufficient (user preferences, IP geolocation, A/B testing), use the <code>countries_context()</code> context manager.</p>
+<h3 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries</span><span class="w"> </span><span class="kn">import</span> <span class="n">countries_context</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">checkout_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="c1"># Show countries based on user&#39;s saved preferences</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        <span class="n">preferred</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">preferred_countries</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="n">preferred</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="k">with</span> <span class="n">countries_context</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="n">preferred</span><span class="p">):</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        <span class="n">form</span> <span class="o">=</span> <span class="n">CheckoutForm</span><span class="p">()</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;checkout.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span>
+</code></pre></div>
+<p><code>countries_context()</code> supports all country options (<code>first</code>, <code>only</code>, <code>first_sort</code>, <code>first_repeat</code>, <code>first_break</code>, <code>first_by_language</code>, <code>first_auto_detect</code>). Each option independently overrides its corresponding setting with the highest priority.</p>
+<div class="admonition info">
+<p class="admonition-title">See full documentation</p>
+<p>For complete details, examples (middleware, regional restrictions, explicit overrides, etc.), and advanced usage, see the <strong><a href="../customization/#temporary-context-based-customization">Temporary Context-Based Customization</a></strong> section in the Customization guide.</p>
+</div>
+<h2 id="priority-system">Priority System<a class="headerlink" href="#priority-system" title="Permanent link">&para;</a></h2>
+<p>Country ordering follows this priority (highest to lowest):</p>
+<ol>
+<li><strong>Thread-local context</strong> - Set via <code>countries_context()</code> → <strong>Each option overrides its corresponding setting</strong></li>
+<li><strong>Exact locale match</strong> - e.g., <code>'fr-CA'</code> key in <code>COUNTRIES_FIRST_BY_LANGUAGE</code> → <strong>Overrides COUNTRIES_FIRST</strong></li>
+<li><strong>Auto-detect + base language</strong> - e.g., <code>fr-CA</code> with <code>AUTO_DETECT=True</code> → <code>['CA']</code> + <code>['FR', 'CH', 'BE', 'LU']</code> (when base language exists) → <strong>Overrides COUNTRIES_FIRST</strong></li>
+<li><strong>Base language match</strong> - e.g., <code>'fr'</code> key in <code>COUNTRIES_FIRST_BY_LANGUAGE</code> → <strong>Overrides COUNTRIES_FIRST</strong></li>
+<li><strong>Pure auto-detect</strong> - <code>COUNTRIES_FIRST_AUTO_DETECT = True</code> → <strong>Prepends to COUNTRIES_FIRST</strong></li>
+<li><strong>Static setting</strong> - <code>COUNTRIES_FIRST</code> → Used as-is</li>
+<li><strong>Alphabetical</strong> - Default country order</li>
+</ol>
+<p><strong>Key behaviors:</strong></p>
+<ul>
+<li><strong><code>COUNTRIES_FIRST_BY_LANGUAGE</code></strong> → <strong>Overrides</strong> <code>COUNTRIES_FIRST</code> when language matches</li>
+<li><strong><code>COUNTRIES_FIRST_AUTO_DETECT</code></strong> → <strong>Independent</strong> feature that prepends user's country</li>
+<li><strong>Both settings enabled</strong> → Auto-detect prepends to whichever list was chosen (language group or <code>COUNTRIES_FIRST</code>)</li>
+</ul>
+<p><strong>Examples of how they work together:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Example 1: BY_LANGUAGE overrides COUNTRIES_FIRST</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">]}</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">]</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># fr user → [&#39;FR&#39;, &#39;CH&#39;, &#39;BE&#39;, &#39;LU&#39;]  (BY_LANGUAGE overrides)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># en user → [&#39;US&#39;, &#39;GB&#39;]              (falls back to COUNTRIES_FIRST)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Example 2: AUTO_DETECT prepends to the chosen list</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">]}</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">COUNTRIES_FIRST_AUTO_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">]</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># fr user    → [&#39;FR&#39;, &#39;CH&#39;, &#39;BE&#39;, &#39;LU&#39;]     (BY_LANGUAGE, no country to detect)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># fr-CA user → [&#39;CA&#39;, &#39;FR&#39;, &#39;CH&#39;, &#39;BE&#39;, &#39;LU&#39;] (AUTO_DETECT prepends to BY_LANGUAGE)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1"># en user    → [&#39;US&#39;, &#39;GB&#39;]                  (COUNTRIES_FIRST, no country to detect)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1"># en-AU user → [&#39;AU&#39;, &#39;US&#39;, &#39;GB&#39;]            (AUTO_DETECT prepends to COUNTRIES_FIRST)</span>
+</code></pre></div>
+<p>This design allows you to:<br />
+- Use <code>BY_LANGUAGE</code> for specific regional groupings that completely replace defaults<br />
+- Use <code>AUTO_DETECT</code> to automatically prioritize the user's own country<br />
+- Combine both for comprehensive, user-aware country ordering</p>
+<h2 id="per-field-customization">Per-Field Customization<a class="headerlink" href="#per-field-customization" title="Permanent link">&para;</a></h2>
+<p>Different fields can have different language mappings or auto-detection:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries</span><span class="w"> </span><span class="kn">import</span> <span class="n">Countries</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryField</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">ShippingCountries</span><span class="p">(</span><span class="n">Countries</span><span class="p">):</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Countries we ship to, with regional grouping.&quot;&quot;&quot;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="n">first_by_language</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">,</span> <span class="s1">&#39;AU&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">],</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        <span class="s1">&#39;de&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;DE&#39;</span><span class="p">,</span> <span class="s1">&#39;AT&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">],</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>        <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">],</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="p">}</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="n">only</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">,</span> <span class="s1">&#39;AU&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;DE&#39;</span><span class="p">,</span> <span class="s1">&#39;AT&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">]</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="k">class</span><span class="w"> </span><span class="nc">SimpleAutoDetect</span><span class="p">(</span><span class="n">Countries</span><span class="p">):</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Just auto-detect user&#39;s country, no language groups.&quot;&quot;&quot;</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="n">first_auto_detect</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="k">class</span><span class="w"> </span><span class="nc">Order</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>    <span class="n">shipping_country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">countries</span><span class="o">=</span><span class="n">ShippingCountries</span><span class="p">)</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>    <span class="n">billing_country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">countries</span><span class="o">=</span><span class="n">SimpleAutoDetect</span><span class="p">)</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>    <span class="n">origin_country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">()</span>  <span class="c1"># Uses global settings</span>
+</code></pre></div>
+<h2 id="caching-behavior">Caching Behavior<a class="headerlink" href="#caching-behavior" title="Permanent link">&para;</a></h2>
+<p>Country lists are <strong>cached per language and per ordering configuration</strong>. This means:</p>
+<ul>
+<li>Changing language triggers a new cache entry</li>
+<li>Changing first countries (via context) triggers a new cache entry</li>
+<li>Within the same language and ordering, the cache is reused</li>
+<li>No expensive re-sorting on every iteration</li>
+</ul>
+<p>The cache is thread-safe and automatically invalidates when the configuration changes.</p>
+<h2 id="real-world-examples">Real-World Examples<a class="headerlink" href="#real-world-examples" title="Permanent link">&para;</a></h2>
+<h3 id="e-commerce-site-with-shipping-regions">E-commerce Site with Shipping Regions<a class="headerlink" href="#e-commerce-site-with-shipping-regions" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># settings.py</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">,</span> <span class="s1">&#39;AU&#39;</span><span class="p">],</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="s1">&#39;en-GB&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;GB&#39;</span><span class="p">,</span> <span class="s1">&#39;IE&#39;</span><span class="p">],</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">],</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="s1">&#39;de&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;DE&#39;</span><span class="p">,</span> <span class="s1">&#39;AT&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">],</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="s1">&#39;es&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ES&#39;</span><span class="p">,</span> <span class="s1">&#39;MX&#39;</span><span class="p">,</span> <span class="s1">&#39;AR&#39;</span><span class="p">],</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="multi-tenant-saas-with-region-preferences">Multi-Tenant SaaS with Region Preferences<a class="headerlink" href="#multi-tenant-saas-with-region-preferences" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># middleware.py</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">TenantCountriesMiddleware</span><span class="p">:</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="n">tenant</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">tenant</span>  <span class="c1"># From django-tenant-schemas or similar</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        <span class="c1"># Use tenant&#39;s preferred countries</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="n">first</span> <span class="o">=</span> <span class="n">tenant</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;preferred_countries&#39;</span><span class="p">,</span> <span class="p">[])</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>        <span class="k">with</span> <span class="n">countries_context</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="n">first</span><span class="p">):</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>        <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+<h3 id="form-with-user-specific-ordering">Form with User-Specific Ordering<a class="headerlink" href="#form-with-user-specific-ordering" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># forms.py</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries</span><span class="w"> </span><span class="kn">import</span> <span class="n">countries_context</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">ProfileForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>        <span class="c1"># Set ordering based on user&#39;s previous selections</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        <span class="n">previous_countries</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>        <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>            <span class="c1"># Get user&#39;s 3 most recently used countries</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>            <span class="n">previous_countries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>                <span class="n">user</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>                <span class="o">.</span><span class="n">distinct</span><span class="p">()[:</span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>            <span class="p">)</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>        <span class="k">with</span> <span class="n">countries_context</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="n">previous_countries</span><span class="p">):</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="django-rest-framework-integration">Django REST Framework Integration<a class="headerlink" href="#django-rest-framework-integration" title="Permanent link">&para;</a></h2>
+<p>Dynamic ordering works seamlessly with DRF serializers:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">serializers</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryFieldMixin</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">OrderSerializer</span><span class="p">(</span><span class="n">CountryFieldMixin</span><span class="p">,</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Order</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;shipping_country&#39;</span><span class="p">,</span> <span class="s1">&#39;billing_country&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>The serializer will use the current language and any active <code>countries_context()</code> when rendering country choices.</p>
+<h2 id="performance-considerations">Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>First call cost</strong>: The first iteration in a given language/ordering requires translation and sorting</li>
+<li><strong>Subsequent calls</strong>: Fully cached, very fast</li>
+<li><strong>Memory</strong>: Each language/ordering combination gets one cache entry</li>
+<li><strong>Thread safety</strong>: Uses <code>asgiref.local.Local</code> for thread-local context</li>
+</ul>
+<p>For high-traffic sites, the caching ensures minimal performance impact even with complex language-based ordering.</p>
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../customization/">Customization Guide</a> - Complete <code>countries_context()</code> documentation and other customization patterns</li>
+<li><a href="../../usage/settings/">Settings Reference</a> - All configuration options</li>
+<li><a href="../../usage/field/">CountryField Reference</a> - Field options</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

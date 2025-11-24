@@ -702,6 +702,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#countries_first_by_language" class="md-nav__link">
+    <span class="md-ellipsis">
+      COUNTRIES_FIRST_BY_LANGUAGE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#countries_first_auto_detect" class="md-nav__link">
+    <span class="md-ellipsis">
+      COUNTRIES_FIRST_AUTO_DETECT
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -859,6 +877,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/django_filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    django-filter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -926,6 +967,29 @@
   
   <span class="md-ellipsis">
     Customization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../advanced/dynamic-ordering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dynamic Ordering
     
   </span>
   
@@ -1207,6 +1271,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#countries_first_by_language" class="md-nav__link">
+    <span class="md-ellipsis">
+      COUNTRIES_FIRST_BY_LANGUAGE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#countries_first_auto_detect" class="md-nav__link">
+    <span class="md-ellipsis">
+      COUNTRIES_FIRST_AUTO_DETECT
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1327,8 +1409,27 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="n">_</span><span class="p">(</span><span class="s2">&quot;USA&quot;</span><span class="p">),</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="p">],</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="p">},</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="s2">&quot;IND&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Indonesia&quot;</span><span class="p">)],</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="s2">&quot;ioc_code&quot;</span><span class="p">:</span> <span class="s2">&quot;INA&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="s2">&quot;flag_url&quot;</span><span class="p">:</span> <span class="s2">&quot;flags/id.gif&quot;</span><span class="p">,</span>  <span class="c1"># Use id.gif instead of ind.gif</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="p">},</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="p">}</span>
 </code></pre></div>
+<p>You can override the following metadata for each country:</p>
+<ul>
+<li><strong>names</strong> or <strong>name</strong>: Custom display names (translatable)</li>
+<li><strong>alpha3</strong>: Custom ISO 3166-1 alpha-3 code</li>
+<li><strong>numeric</strong>: Custom ISO 3166-1 numeric code</li>
+<li><strong>ioc_code</strong>: Custom IOC (International Olympic Committee) code</li>
+<li><strong>flag_url</strong>: Custom flag image URL (useful for custom country codes that need to reference existing flags)</li>
+</ul>
+<p><strong>New in development version</strong></p>
+<p>Per-country <code>flag_url</code> overrides allow custom country codes to reuse existing flag image assets or point to bespoke flags without affecting the global <code>COUNTRIES_FLAG_URL</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When specifying only metadata fields (like <code>flag_url</code>, <code>ioc_code</code>) without providing <code>name</code> or <code>names</code>, the original country name is preserved. This allows you to customize flags or codes without losing the standard country name.</p>
+</div>
 <p>See <a href="../../advanced/customization/#override-specific-countries">Customization</a> for more details.</p>
 <h2 id="display-order-settings">Display Order Settings<a class="headerlink" href="#display-order-settings" title="Permanent link">&para;</a></h2>
 <h3 id="countries_first">COUNTRIES_FIRST<a class="headerlink" href="#countries_first" title="Permanent link">&para;</a></h3>
@@ -1338,6 +1439,10 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Show US, UK, and Canada first</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">,</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span> <span class="s2">&quot;CA&quot;</span><span class="p">]</span>
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Dynamic ordering</p>
+<p>For language-based or automatic country ordering, see <a href="#countries_first_by_language"><code>COUNTRIES_FIRST_BY_LANGUAGE</code></a> and <a href="#countries_first_auto_detect"><code>COUNTRIES_FIRST_AUTO_DETECT</code></a> below, or the full <a href="../../advanced/dynamic-ordering/">Dynamic Ordering Guide</a>.</p>
+</div>
 <h3 id="countries_first_sort">COUNTRIES_FIRST_SORT<a class="headerlink" href="#countries_first_sort" title="Permanent link">&para;</a></h3>
 <p><strong>Type:</strong> <code>bool</code><br />
 <strong>Default:</strong> <code>False</code></p>
@@ -1359,6 +1464,53 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">,</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span> <span class="s2">&quot;CA&quot;</span><span class="p">]</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">COUNTRIES_FIRST_BREAK</span> <span class="o">=</span> <span class="s2">&quot;───────────&quot;</span>  <span class="c1"># Adds visual separator</span>
 </code></pre></div>
+<h3 id="countries_first_by_language">COUNTRIES_FIRST_BY_LANGUAGE<a class="headerlink" href="#countries_first_by_language" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> <code>dict</code><br />
+<strong>Default:</strong> <code>{}</code></p>
+<p><strong>New in development version</strong></p>
+<p>Map language codes to lists of countries to show first. Enables dynamic country ordering based on the user's current language. <strong>Overrides</strong> <code>COUNTRIES_FIRST</code> when a language matches.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;LU&#39;</span><span class="p">],</span>      <span class="c1"># French users</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="s1">&#39;de&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;DE&#39;</span><span class="p">,</span> <span class="s1">&#39;AT&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;LI&#39;</span><span class="p">],</span>      <span class="c1"># German users</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="s1">&#39;es&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ES&#39;</span><span class="p">,</span> <span class="s1">&#39;MX&#39;</span><span class="p">,</span> <span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;CL&#39;</span><span class="p">],</span>      <span class="c1"># Spanish users</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Basic behavior:</strong></p>
+<ul>
+<li><code>fr</code> user → <code>FR, CH, BE, LU</code> (uses language group)</li>
+<li><code>en</code> user → falls back to <code>COUNTRIES_FIRST</code> if set</li>
+</ul>
+<p><strong>With <code>COUNTRIES_FIRST_AUTO_DETECT = True</code>:</strong> When a user's locale includes a country code (e.g., <code>'fr-CA'</code>), that country is automatically prepended:</p>
+<ul>
+<li><code>fr-CA</code> user → <code>CA, FR, CH, BE, LU</code> (CA auto-prepended)</li>
+<li><code>fr-BE</code> user → <code>BE, FR, CH, LU</code> (BE moved to front)</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">See the full guide</p>
+<p>For complete details, examples, and advanced usage including the <code>countries_context()</code> API for programmatic control, see the <strong><a href="../../advanced/dynamic-ordering/">Dynamic Ordering Guide</a></strong>.</p>
+</div>
+<h3 id="countries_first_auto_detect">COUNTRIES_FIRST_AUTO_DETECT<a class="headerlink" href="#countries_first_auto_detect" title="Permanent link">&para;</a></h3>
+<p><strong>Type:</strong> <code>bool</code><br />
+<strong>Default:</strong> <code>False</code></p>
+<p><strong>New in development version</strong></p>
+<p>Enable automatic country detection from the user's locale. Auto-detected countries are <strong>prepended</strong> to <code>COUNTRIES_FIRST</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">COUNTRIES_FIRST_AUTO_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>Results:</strong><br />
+- <code>en-AU</code> user → <code>['AU', 'US', 'GB']</code> (AU prepended)<br />
+- <code>en-GB</code> user → <code>['GB', 'US']</code> (GB moved to front)<br />
+- <code>fr-CA</code> user → <code>['CA', 'US', 'GB']</code> (CA prepended)<br />
+- <code>en</code> user (no country) → <code>['US', 'GB']</code> (no auto-detection, uses static)</p>
+<p>Without <code>COUNTRIES_FIRST</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">COUNTRIES_FIRST_AUTO_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># en-AU user → [&#39;AU&#39;]</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># en user → alphabetical</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This setting is <strong>independent</strong> from <code>COUNTRIES_FIRST_BY_LANGUAGE</code>. When both are enabled, auto-detection prepends the user's country to whichever list is chosen (language group or <code>COUNTRIES_FIRST</code>). See the <a href="../../advanced/dynamic-ordering/">Dynamic Ordering Guide</a> for detailed examples.</p>
+</div>
 <h2 id="flag-settings">Flag Settings<a class="headerlink" href="#flag-settings" title="Permanent link">&para;</a></h2>
 <h3 id="countries_flag_url">COUNTRIES_FLAG_URL<a class="headerlink" href="#countries_flag_url" title="Permanent link">&para;</a></h3>
 <p><strong>Type:</strong> <code>str</code><br />
@@ -1367,11 +1519,11 @@
 <p>Available placeholders:<br />
 - <code>{code}</code> - lowercase country code<br />
 - <code>{code_upper}</code> - uppercase country code</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Use PNG flags in a subdirectory</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">COUNTRIES_FLAG_URL</span> <span class="o">=</span> <span class="s2">&quot;flags/16x10/</span><span class="si">{code_upper}</span><span class="s2">.png&quot;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Use absolute URL</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">COUNTRIES_FLAG_URL</span> <span class="o">=</span> <span class="s2">&quot;https://cdn.example.com/flags/</span><span class="si">{code}</span><span class="s2">.svg&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Use PNG flags in a subdirectory</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">COUNTRIES_FLAG_URL</span> <span class="o">=</span> <span class="s2">&quot;flags/16x10/</span><span class="si">{code_upper}</span><span class="s2">.png&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Use absolute URL</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">COUNTRIES_FLAG_URL</span> <span class="o">=</span> <span class="s2">&quot;https://cdn.example.com/flags/</span><span class="si">{code}</span><span class="s2">.svg&quot;</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1379,50 +1531,64 @@
 </div>
 <h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
 <p>Here's a complete example showing multiple settings working together:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.utils.translation</span><span class="w"> </span><span class="kn">import</span> <span class="n">gettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Use common names</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">COUNTRIES_COMMON_NAMES</span> <span class="o">=</span> <span class="kc">True</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># Limit to North American countries</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">COUNTRIES_ONLY</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">,</span> <span class="s2">&quot;CA&quot;</span><span class="p">,</span> <span class="s2">&quot;MX&quot;</span><span class="p">]</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># Show US first</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">]</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="n">COUNTRIES_FIRST_BREAK</span> <span class="o">=</span> <span class="s2">&quot;───────────&quot;</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="c1"># Custom flag location</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="n">COUNTRIES_FLAG_URL</span> <span class="o">=</span> <span class="s2">&quot;images/flags/</span><span class="si">{code_upper}</span><span class="s2">.png&quot;</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="c1"># Override US display</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="n">COUNTRIES_OVERRIDE</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    <span class="s2">&quot;US&quot;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>        <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;United States&quot;</span><span class="p">),</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;USA&quot;</span><span class="p">)],</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>    <span class="p">},</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.utils.translation</span><span class="w"> </span><span class="kn">import</span> <span class="n">gettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># Use common names</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">COUNTRIES_COMMON_NAMES</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1"># Limit to North American countries</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">COUNTRIES_ONLY</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">,</span> <span class="s2">&quot;CA&quot;</span><span class="p">,</span> <span class="s2">&quot;MX&quot;</span><span class="p">]</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1"># Show US first</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="n">COUNTRIES_FIRST</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">]</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="n">COUNTRIES_FIRST_BREAK</span> <span class="o">=</span> <span class="s2">&quot;───────────&quot;</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="c1"># Custom flag location</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="n">COUNTRIES_FLAG_URL</span> <span class="o">=</span> <span class="s2">&quot;images/flags/</span><span class="si">{code_upper}</span><span class="s2">.png&quot;</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="c1"># Override US display</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="n">COUNTRIES_OVERRIDE</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>    <span class="s2">&quot;US&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>        <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;United States&quot;</span><span class="p">),</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;USA&quot;</span><span class="p">)],</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>    <span class="p">},</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="p">}</span>
 </code></pre></div>
 <h2 id="per-field-settings">Per-Field Settings<a class="headerlink" href="#per-field-settings" title="Permanent link">&para;</a></h2>
 <p>Instead of project-wide settings, you can customize individual fields by creating a custom <code>Countries</code> class:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.utils.translation</span><span class="w"> </span><span class="kn">import</span> <span class="n">gettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries</span><span class="w"> </span><span class="kn">import</span> <span class="n">Countries</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryField</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">EUCountries</span><span class="p">(</span><span class="n">Countries</span><span class="p">):</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">only</span> <span class="o">=</span> <span class="p">[</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>        <span class="s2">&quot;AT&quot;</span><span class="p">,</span> <span class="s2">&quot;BE&quot;</span><span class="p">,</span> <span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;HR&quot;</span><span class="p">,</span> <span class="s2">&quot;CY&quot;</span><span class="p">,</span> <span class="s2">&quot;CZ&quot;</span><span class="p">,</span> <span class="s2">&quot;DK&quot;</span><span class="p">,</span> <span class="s2">&quot;EE&quot;</span><span class="p">,</span> <span class="s2">&quot;FI&quot;</span><span class="p">,</span> <span class="s2">&quot;FR&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        <span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;GR&quot;</span><span class="p">,</span> <span class="s2">&quot;HU&quot;</span><span class="p">,</span> <span class="s2">&quot;IE&quot;</span><span class="p">,</span> <span class="s2">&quot;IT&quot;</span><span class="p">,</span> <span class="s2">&quot;LV&quot;</span><span class="p">,</span> <span class="s2">&quot;LT&quot;</span><span class="p">,</span> <span class="s2">&quot;LU&quot;</span><span class="p">,</span> <span class="s2">&quot;MT&quot;</span><span class="p">,</span> <span class="s2">&quot;NL&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>        <span class="s2">&quot;PL&quot;</span><span class="p">,</span> <span class="s2">&quot;PT&quot;</span><span class="p">,</span> <span class="s2">&quot;RO&quot;</span><span class="p">,</span> <span class="s2">&quot;SK&quot;</span><span class="p">,</span> <span class="s2">&quot;SI&quot;</span><span class="p">,</span> <span class="s2">&quot;ES&quot;</span><span class="p">,</span> <span class="s2">&quot;SE&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="p">]</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">first</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;IT&quot;</span><span class="p">]</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="n">first_break</span> <span class="o">=</span> <span class="s2">&quot;───────────&quot;</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">countries</span><span class="o">=</span><span class="n">EUCountries</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.utils.translation</span><span class="w"> </span><span class="kn">import</span> <span class="n">gettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries</span><span class="w"> </span><span class="kn">import</span> <span class="n">Countries</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryField</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">EUCountries</span><span class="p">(</span><span class="n">Countries</span><span class="p">):</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="n">only</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        <span class="s2">&quot;AT&quot;</span><span class="p">,</span> <span class="s2">&quot;BE&quot;</span><span class="p">,</span> <span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;HR&quot;</span><span class="p">,</span> <span class="s2">&quot;CY&quot;</span><span class="p">,</span> <span class="s2">&quot;CZ&quot;</span><span class="p">,</span> <span class="s2">&quot;DK&quot;</span><span class="p">,</span> <span class="s2">&quot;EE&quot;</span><span class="p">,</span> <span class="s2">&quot;FI&quot;</span><span class="p">,</span> <span class="s2">&quot;FR&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        <span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;GR&quot;</span><span class="p">,</span> <span class="s2">&quot;HU&quot;</span><span class="p">,</span> <span class="s2">&quot;IE&quot;</span><span class="p">,</span> <span class="s2">&quot;IT&quot;</span><span class="p">,</span> <span class="s2">&quot;LV&quot;</span><span class="p">,</span> <span class="s2">&quot;LT&quot;</span><span class="p">,</span> <span class="s2">&quot;LU&quot;</span><span class="p">,</span> <span class="s2">&quot;MT&quot;</span><span class="p">,</span> <span class="s2">&quot;NL&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        <span class="s2">&quot;PL&quot;</span><span class="p">,</span> <span class="s2">&quot;PT&quot;</span><span class="p">,</span> <span class="s2">&quot;RO&quot;</span><span class="p">,</span> <span class="s2">&quot;SK&quot;</span><span class="p">,</span> <span class="s2">&quot;SI&quot;</span><span class="p">,</span> <span class="s2">&quot;ES&quot;</span><span class="p">,</span> <span class="s2">&quot;SE&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="p">]</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="n">first</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DE&quot;</span><span class="p">,</span> <span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;IT&quot;</span><span class="p">]</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    <span class="n">first_break</span> <span class="o">=</span> <span class="s2">&quot;───────────&quot;</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">countries</span><span class="o">=</span><span class="n">EUCountries</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>New in development version</strong></p>
+<p><strong>Language-based ordering per field:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">RegionalCountries</span><span class="p">(</span><span class="n">Countries</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="n">first_by_language</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>        <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;GB&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;AU&#39;</span><span class="p">],</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="s1">&#39;de&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;DE&#39;</span><span class="p">,</span> <span class="s1">&#39;AT&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">],</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>        <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;BE&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">],</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="p">}</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Customer</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">countries</span><span class="o">=</span><span class="n">RegionalCountries</span><span class="p">)</span>
 </code></pre></div>
 <p>See <a href="../../advanced/customization/#single-field-customization">Single Field Customization</a> for more details.</p>
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="../../advanced/dynamic-ordering/">Dynamic Ordering Guide</a> - Language-based and programmatic country ordering</li>
 <li><a href="../../advanced/customization/">Customization Guide</a> - Detailed customization examples</li>
 <li><a href="../../iso3166-formatting/">ISO 3166-1 Formatting</a> - Understanding official country name conventions</li>
 <li><a href="../field/">CountryField Reference</a> - Learn about the country field</li>

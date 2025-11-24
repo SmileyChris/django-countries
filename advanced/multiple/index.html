@@ -11,7 +11,7 @@
       
       
       
-        <link rel="prev" href="../customization/">
+        <link rel="prev" href="../dynamic-ordering/">
       
       
         <link rel="next" href="../../contributing/">
@@ -673,6 +673,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/django_filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    django-filter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -742,6 +765,29 @@
   
   <span class="md-ellipsis">
     Customization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-ordering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dynamic Ordering
     
   </span>
   
@@ -922,6 +968,21 @@
       Querying
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Querying">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#django-admin-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Django Admin Filtering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1227,6 +1288,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Querying">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#django-admin-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Django Admin Filtering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1345,14 +1421,31 @@
 <p>This provides a much more intuitive interface with search and filtering capabilities, making it easier to select from the full list of countries.</p>
 <p><strong>Note:</strong> If the field is required, set <code>required=True</code> in the <code>MultipleChoiceField</code> definition.</p>
 <h2 id="querying">Querying<a class="headerlink" href="#querying" title="Permanent link">&para;</a></h2>
-<p>You can query multiple country fields just like regular CountryFields:</p>
+<p>You can query multiple country fields using the <code>__contains</code> lookup to match individual countries within the comma-separated list:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Find incidents involving New Zealand</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Incident</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">countries__contains</span><span class="o">=</span><span class="s1">&#39;NZ&#39;</span><span class="p">)</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Find incidents involving Australia</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Incident</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">countries__name</span><span class="o">=</span><span class="s1">&#39;Australia&#39;</span><span class="p">)</span>
 </code></pre></div>
-<p>Note that the contains lookup matches the country code within the comma-separated string.</p>
+<p>Note that <code>__contains</code> performs a substring match on the stored comma-separated codes.</p>
+<h3 id="django-admin-filtering">Django Admin Filtering<a class="headerlink" href="#django-admin-filtering" title="Permanent link">&para;</a></h3>
+<p><strong>New in development version</strong></p>
+<p>The <code>CountryFilter</code> in Django admin automatically works with <code>multiple=True</code> fields:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryFilter</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">myapp.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Incident</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Incident</span><span class="p">)</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">IncidentAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">list_filter</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;countries&#39;</span><span class="p">,</span> <span class="n">CountryFilter</span><span class="p">)]</span>
+</code></pre></div>
+<p>The admin filter will:</p>
+<ul>
+<li>Show only countries that exist in your data</li>
+<li>Use <code>__contains</code> lookup to match countries in comma-separated lists</li>
+<li>Display country names in the filter dropdown for easy selection</li>
+</ul>
 <h2 id="example-use-cases">Example Use Cases<a class="headerlink" href="#example-use-cases" title="Permanent link">&para;</a></h2>
 <p>Multiple country selection is useful for scenarios like:</p>
 <ul>
