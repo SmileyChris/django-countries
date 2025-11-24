@@ -127,9 +127,11 @@ Note that `__contains` performs a substring match on the stored comma-separated 
 
 ### Django Admin Filtering
 
-**New in development version**
+!!! info "New in development version"
 
-The `CountryFilter` in Django admin automatically works with `multiple=True` fields:
+    The `CountryFilter` in Django admin automatically works with `multiple=True` fields.
+
+The `CountryFilter` in Django admin can be used with `multiple=True` fields:
 
 ```python
 from django.contrib import admin

@@ -156,6 +156,16 @@ check:
 docs:
     uv run --group docs mkdocs serve --livereload --dev-addr 127.0.0.1:8080
 
+# Build and deploy documentation to GitHub Pages
+deploy_docs:
+    @echo "Building documentation..."
+    uv run --group docs mkdocs build --strict
+    @echo "✓ Documentation builds successfully"
+    @echo ""
+    @echo "Deploying to GitHub Pages..."
+    uv run --group docs mkdocs gh-deploy --force
+    @echo "✓ Documentation deployed"
+
 # Update English translation source file with new translatable strings
 tx-makemessages:
     @echo "Updating English translation source file..."

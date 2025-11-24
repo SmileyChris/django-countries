@@ -58,17 +58,38 @@ Coverage is automatically generated when running `just test`. View the HTML repo
 
 ### Documentation
 ```bash
-just docs  # Serve documentation locally at http://127.0.0.1:8080
+just docs         # Serve documentation locally at http://127.0.0.1:8080
+just deploy_docs  # Build and deploy documentation to GitHub Pages
 ```
 
-Documentation is built with MkDocs and automatically deployed to GitHub Pages during `just deploy`.
+Documentation is built with MkDocs. Use `just deploy_docs` to manually deploy to GitHub Pages, or it will be automatically deployed during `just deploy`.
 
-**When adding new features to documentation**, mark them with version callouts:
+**When adding new features to documentation**, mark them with version callouts using the `!!! info` admonition format:
 
 ```markdown
-**New in development version**
+!!! info "New in development version"
 
-Description of the new feature...
+Full description of the feature continues here...
+```
+
+For subsection-level features (like specific setting options), use an indented brief description inside the admonition, then continue with full documentation outside:
+
+```markdown
+!!! info "New in development version"
+
+    Brief description of what's specifically new about this option.
+
+Full documentation of the option continues here with examples, code blocks, etc.
+```
+
+Example:
+```markdown
+!!! info "flag_url: New in development version"
+
+    Per-country `flag_url` overrides allow custom country codes to reuse existing flag image assets.
+
+A custom flag image URL for this country. Usage examples:
+...
 ```
 
 During release, the deployment script automatically replaces all "New in development version" markers with "New in version X.Y.Z" based on the release version. This ensures users know which version introduced each feature.

@@ -156,7 +156,7 @@ When creating a custom `Countries` subclass, you can override these settings (wi
 
 ## Temporary Context-Based Customization
 
-**New in development version**
+!!! info "New in development version"
 
 For per-request or temporary overrides (such as in views or middleware), use the `countries_context()` context manager. This allows you to temporarily override any country option without modifying global settings or creating custom subclasses.
 
@@ -367,7 +367,9 @@ COUNTRIES_OVERRIDE = {
 
 ### flag_url (optional)
 
-**New in development version**
+!!! info "New in development version"
+
+    Per-country `flag_url` overrides allow custom country codes to reuse existing flag image assets or point to bespoke flags.
 
 A custom flag image URL for this country. This is particularly useful when using custom country codes that need to reference existing flag images:
 
