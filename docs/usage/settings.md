@@ -98,6 +98,9 @@ List of country codes to show at the beginning of the country list, before the a
 COUNTRIES_FIRST = ["US", "GB", "CA"]
 ```
 
+!!! tip "Dynamic ordering"
+    For language-based or automatic country ordering, see [`COUNTRIES_FIRST_BY_LANGUAGE`](#countries_first_by_language) and [`COUNTRIES_FIRST_AUTO_DETECT`](#countries_first_auto_detect) below, or the full [Dynamic Ordering Guide](../advanced/dynamic-ordering.md).
+
 ### COUNTRIES_FIRST_SORT
 
 **Type:** `bool`
@@ -133,6 +136,67 @@ Label for an empty separator choice between "first" countries and the main list.
 COUNTRIES_FIRST = ["US", "GB", "CA"]
 COUNTRIES_FIRST_BREAK = "───────────"  # Adds visual separator
 ```
+
+### COUNTRIES_FIRST_BY_LANGUAGE
+
+**Type:** `dict`
+**Default:** `{}`
+
+**New in version 8.2**
+
+Map language codes to lists of countries to show first. Enables dynamic country ordering based on the user's current language. **Overrides** `COUNTRIES_FIRST` when a language matches.
+
+```python
+COUNTRIES_FIRST_BY_LANGUAGE = {
+    'fr': ['FR', 'CH', 'BE', 'LU'],      # French users
+    'de': ['DE', 'AT', 'CH', 'LI'],      # German users
+    'es': ['ES', 'MX', 'AR', 'CL'],      # Spanish users
+}
+```
+
+**Basic behavior:**
+
+- `fr` user → `FR, CH, BE, LU` (uses language group)
+- `en` user → falls back to `COUNTRIES_FIRST` if set
+
+**With `COUNTRIES_FIRST_AUTO_DETECT = True`:** When a user's locale includes a country code (e.g., `'fr-CA'`), that country is automatically prepended:
+
+- `fr-CA` user → `CA, FR, CH, BE, LU` (CA auto-prepended)
+- `fr-BE` user → `BE, FR, CH, LU` (BE moved to front)
+
+!!! info "See the full guide"
+    For complete details, examples, and advanced usage including the `countries_context()` API for programmatic control, see the **[Dynamic Ordering Guide](../advanced/dynamic-ordering.md)**.
+
+### COUNTRIES_FIRST_AUTO_DETECT
+
+**Type:** `bool`
+**Default:** `False`
+
+**New in version 8.2**
+
+Enable automatic country detection from the user's locale. Auto-detected countries are **prepended** to `COUNTRIES_FIRST`.
+
+```python
+COUNTRIES_FIRST_AUTO_DETECT = True
+COUNTRIES_FIRST = ['US', 'GB']
+```
+
+**Results:**
+- `en-AU` user → `['AU', 'US', 'GB']` (AU prepended)
+- `en-GB` user → `['GB', 'US']` (GB moved to front)
+- `fr-CA` user → `['CA', 'US', 'GB']` (CA prepended)
+- `en` user (no country) → `['US', 'GB']` (no auto-detection, uses static)
+
+Without `COUNTRIES_FIRST`:
+
+```python
+COUNTRIES_FIRST_AUTO_DETECT = True
+# en-AU user → ['AU']
+# en user → alphabetical
+```
+
+!!! note
+    This setting is **independent** from `COUNTRIES_FIRST_BY_LANGUAGE`. When both are enabled, auto-detection prepends the user's country to whichever list is chosen (language group or `COUNTRIES_FIRST`). See the [Dynamic Ordering Guide](../advanced/dynamic-ordering.md) for detailed examples.
 
 ## Flag Settings
 
@@ -209,10 +273,26 @@ class Product(models.Model):
     country = CountryField(countries=EUCountries)
 ```
 
+**Language-based ordering per field:**
+
+```python
+class RegionalCountries(Countries):
+    first_by_language = {
+        'en': ['US', 'GB', 'CA', 'AU'],
+        'de': ['DE', 'AT', 'CH'],
+        'fr': ['FR', 'BE', 'CH', 'CA'],
+    }
+
+class Customer(models.Model):
+    name = models.CharField(max_length=100)
+    country = CountryField(countries=RegionalCountries)
+```
+
 See [Single Field Customization](../advanced/customization.md#single-field-customization) for more details.
 
 ## See Also
 
+- [Dynamic Ordering Guide](../advanced/dynamic-ordering.md) - Language-based and programmatic country ordering
 - [Customization Guide](../advanced/customization.md) - Detailed customization examples
 - [ISO 3166-1 Formatting](../iso3166-formatting.md) - Understanding official country name conventions
 - [CountryField Reference](field.md) - Learn about the country field

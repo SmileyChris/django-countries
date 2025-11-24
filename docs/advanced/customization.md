@@ -57,40 +57,25 @@ COUNTRIES_ONLY = [
 ]
 ```
 
-## Show Certain Countries First
+## Dynamic Country Ordering
 
-Provide a list of country codes as the `COUNTRIES_FIRST` setting and they will be shown first in the countries list (in the order specified) before all the alphanumerically sorted countries:
+For language-based ordering, automatic locale detection, and showing certain countries first, see the **[Dynamic Ordering Guide](dynamic-ordering.md)**.
 
-```python
-COUNTRIES_FIRST = ["US", "GB", "CA"]
-```
-
-### Sort First Countries
-
-If you want to sort these initial countries too, set the `COUNTRIES_FIRST_SORT` setting to `True`:
+Quick example of static first countries:
 
 ```python
-COUNTRIES_FIRST = ["US", "GB", "CA"]
-COUNTRIES_FIRST_SORT = True
+COUNTRIES_FIRST = ["US", "GB", "CA"]  # Show these countries first
+COUNTRIES_FIRST_SORT = True           # Sort them alphabetically
+COUNTRIES_FIRST_REPEAT = True         # Repeat in main list
+COUNTRIES_FIRST_BREAK = "───────────" # Add separator
 ```
 
-### Repeat First Countries
+The Dynamic Ordering guide covers:
 
-By default, these initial countries are not repeated again in the alphanumerically sorted list. If you would like them to be repeated, set the `COUNTRIES_FIRST_REPEAT` setting to `True`:
-
-```python
-COUNTRIES_FIRST = ["US", "GB", "CA"]
-COUNTRIES_FIRST_REPEAT = True
-```
-
-### Add Separator
-
-You can optionally separate these "first" countries with an empty choice by providing the choice label as the `COUNTRIES_FIRST_BREAK` setting:
-
-```python
-COUNTRIES_FIRST = ["US", "GB", "CA"]
-COUNTRIES_FIRST_BREAK = "───────────"
-```
+- **Static ordering** - `COUNTRIES_FIRST` and related settings
+- **Language-based ordering** - Show different countries first based on user's language
+- **Auto-detection** - Automatically prioritize user's country from locale
+- **Programmatic control** - Use `countries_context()` for per-request customization
 
 ## Customize the Flag URL
 
@@ -168,6 +153,156 @@ When creating a custom `Countries` subclass, you can override these settings (wi
 - `first_break` - Equivalent to `COUNTRIES_FIRST_BREAK`
 - `flag_url` - Equivalent to `COUNTRIES_FLAG_URL`
 - `common_names` - Equivalent to `COUNTRIES_COMMON_NAMES`
+
+## Temporary Context-Based Customization
+
+**New in version 8.2**
+
+For per-request or temporary overrides (such as in views or middleware), use the `countries_context()` context manager. This allows you to temporarily override any country option without modifying global settings or creating custom subclasses.
+
+### Basic Usage
+
+```python
+from django_countries import countries_context
+
+def checkout_view(request):
+    # Temporarily override settings for this request
+    with countries_context(first=['US', 'CA']):
+        form = CheckoutForm()
+    return render(request, 'checkout.html', {'form': form})
+```
+
+### Available Options
+
+`countries_context()` supports all country configuration options:
+
+- **`first`** - List of countries to show first
+- **`only`** - Limit to specific countries
+- **`first_sort`** - Sort first countries alphabetically
+- **`first_repeat`** - Repeat first countries in main list
+- **`first_break`** - Separator text between first and main list
+- **`first_by_language`** - Language-based country ordering mapping
+- **`first_auto_detect`** - Auto-detect country from locale
+
+**How options work:**
+
+Each option independently overrides its corresponding setting. For example:
+- `first` overrides `COUNTRIES_FIRST`
+- `first_by_language` overrides `COUNTRIES_FIRST_BY_LANGUAGE`
+- `first_auto_detect` overrides `COUNTRIES_FIRST_AUTO_DETECT`
+
+To disable a language-based mapping for a specific request, explicitly set it to an empty dict:
+
+```python
+# With COUNTRIES_FIRST_BY_LANGUAGE = {'fr': ['FR', 'CH']} in settings
+with countries_context(first=['US', 'CA'], first_by_language={}):
+    form = MyForm()  # Uses US, CA (not FR, CH) even for French users
+```
+
+### Common Use Cases
+
+**User preferences:**
+
+```python
+def profile_view(request):
+    if request.user.is_authenticated:
+        preferred = request.user.profile.favorite_countries
+    else:
+        preferred = []
+
+    with countries_context(first=preferred):
+        form = ProfileForm()
+    return render(request, 'profile.html', {'form': form})
+```
+
+**Regional restrictions:**
+
+```python
+def regional_signup(request):
+    # Only show North American countries
+    with countries_context(only=['US', 'CA', 'MX'], first=['US']):
+        form = SignupForm()
+    return render(request, 'signup.html', {'form': form})
+```
+
+**IP-based geolocation (via middleware):**
+
+```python
+from django_countries import countries_context
+import geoip2.database
+
+class GeolocationMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+        self.reader = geoip2.database.Reader('/path/to/GeoLite2-Country.mmdb')
+
+    def __call__(self, request):
+        # Detect country from IP
+        try:
+            response = self.reader.country(request.META['REMOTE_ADDR'])
+            detected_country = [response.country.iso_code]
+        except Exception:
+            detected_country = []
+
+        # Apply for all forms in this request
+        with countries_context(first=detected_country):
+            return self.get_response(request)
+```
+
+**Sorting options:**
+
+```python
+def sorted_countries_view(request):
+    # Show first countries alphabetically
+    with countries_context(first=['US', 'GB', 'AU'], first_sort=True):
+        form = MyForm()  # Shows: AU, GB, US (sorted)
+    return render(request, 'form.html', {'form': form})
+```
+
+### Nested Contexts
+
+Contexts can be nested, with the innermost context taking precedence:
+
+```python
+with countries_context(first=['US', 'CA']):
+    form1 = MyForm()  # US, CA first
+
+    with countries_context(first=['FR', 'DE']):
+        form2 = MyForm()  # FR, DE first (overrides outer context)
+
+    form3 = MyForm()  # Back to US, CA first
+```
+
+### Priority
+
+Each option in `countries_context()` independently overrides its corresponding setting with the **highest priority**:
+
+| Context Option | Overrides (in order) |
+|----------------|---------------------|
+| `first` | Custom `Countries.first` → `COUNTRIES_FIRST` |
+| `first_by_language` | Custom `Countries.first_by_language` → `COUNTRIES_FIRST_BY_LANGUAGE` |
+| `first_auto_detect` | Custom `Countries.first_auto_detect` → `COUNTRIES_FIRST_AUTO_DETECT` |
+| `only` | Custom `Countries.only` → `COUNTRIES_ONLY` |
+| `first_sort` | Custom `Countries.first_sort` → `COUNTRIES_FIRST_SORT` |
+| `first_repeat` | Custom `Countries.first_repeat` → `COUNTRIES_FIRST_REPEAT` |
+| `first_break` | Custom `Countries.first_break` → `COUNTRIES_FIRST_BREAK` |
+
+**Important:** Options work independently. Setting `first` in the context does **not** automatically disable `COUNTRIES_FIRST_BY_LANGUAGE`. To disable language-based ordering, explicitly set `first_by_language={}`:
+
+```python
+# Language-based ordering still applies
+with countries_context(first=['US']):
+    pass  # French users still see FR, CH, BE, LU (from BY_LANGUAGE)
+
+# Language-based ordering disabled
+with countries_context(first=['US'], first_by_language={}):
+    pass  # All users see US first
+```
+
+This explicit design makes it ideal for request-specific customization where you need precise control over which settings to override.
+
+!!! tip "Thread-safe"
+    `countries_context()` uses thread-local storage, making it safe to use in multi-threaded environments like Django views and middleware.
 
 ## Complex Dictionary Format
 
@@ -317,6 +452,7 @@ Then in your code:
 
 ## See Also
 
+- [Dynamic Ordering](dynamic-ordering.md) - Language-based and automatic country ordering
 - [Settings Reference](../usage/settings.md) - Complete list of all settings
 - [ISO 3166-1 Formatting](../iso3166-formatting.md) - Understanding official country name conventions
 - [CountryField Reference](../usage/field.md) - Learn about the country field

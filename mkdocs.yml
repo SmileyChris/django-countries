@@ -49,6 +49,7 @@ nav:
           - django-filter: integrations/django_filters.md
       - Advanced:
           - Customization: advanced/customization.md
+          - Dynamic Ordering: advanced/dynamic-ordering.md
           - Multiple Countries: advanced/multiple.md
   - Development:
       - Contributing: contributing.md

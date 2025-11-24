@@ -102,5 +102,71 @@ class Settings(AppSettings):
     order in :attr:`COUNTRIES_FIRST`.
     """
 
+    COUNTRIES_FIRST_BY_LANGUAGE: Dict[str, List[str]] = {}
+    """
+    A dictionary mapping language codes to lists of countries to show first.
+
+    When set, countries will be ordered based on the user's current language.
+    Overrides :attr:`COUNTRIES_FIRST` when a language match is found.
+
+    The dictionary keys can be:
+    - Base language codes (e.g., 'fr', 'de', 'en')
+    - Full locale codes (e.g., 'en-US', 'fr-CA', 'de-AT')
+
+    The lookup follows this priority:
+    1. Exact locale match (e.g., 'en-AU')
+    2. Auto-detect from locale + prepend to base language group (requires AUTO_DETECT)
+    3. Base language match (e.g., 'en')
+    4. Fallback to :attr:`COUNTRIES_FIRST`
+
+    Auto-detection (requires :attr:`COUNTRIES_FIRST_AUTO_DETECT`):
+    When AUTO_DETECT is enabled and a full locale code like 'fr-CA' is used,
+    the country code (CA) will be automatically extracted and prepended to the
+    base language group. For example:
+    - User language: 'fr-CA'
+    - Settings: {'fr': ['FR', 'CH', 'BE', 'LU']} + AUTO_DETECT = True
+    - Result: ['CA', 'FR', 'CH', 'BE', 'LU'] (CA auto-prepended)
+
+    If the auto-detected country is already in the list, it will be moved to the front:
+    - User language: 'fr-BE'
+    - Settings: {'fr': ['FR', 'CH', 'BE', 'LU']} + AUTO_DETECT = True
+    - Result: ['BE', 'FR', 'CH', 'LU'] (BE moved to front)
+
+    Example::
+
+        COUNTRIES_FIRST_BY_LANGUAGE = {
+            'fr': ['FR', 'CH', 'BE', 'LU'],  # Francophone countries
+            'de': ['DE', 'AT', 'CH', 'LI'],  # Germanic countries
+            'en-GB': ['GB', 'IE'],           # Override for British English
+        }
+    """
+
+    COUNTRIES_FIRST_AUTO_DETECT = False
+    """
+    Enable automatic country detection from the user's locale.
+
+    When ``True``, automatically extracts the country code from locale codes and
+    prepends it to the current first countries list. This is an **independent**
+    feature that works with both :attr:`COUNTRIES_FIRST` and
+    :attr:`COUNTRIES_FIRST_BY_LANGUAGE`.
+
+    With :attr:`COUNTRIES_FIRST` only::
+
+        COUNTRIES_FIRST_AUTO_DETECT = True
+        COUNTRIES_FIRST = ['US', 'GB']
+        # en-AU users see: AU, US, GB  (AU prepended)
+        # en users see: US, GB         (no country to detect)
+
+    With :attr:`COUNTRIES_FIRST_BY_LANGUAGE`::
+
+        COUNTRIES_FIRST_AUTO_DETECT = True
+        COUNTRIES_FIRST_BY_LANGUAGE = {'fr': ['FR', 'CH', 'BE', 'LU']}
+        # fr-CA users see: CA, FR, CH, BE, LU  (CA prepended to language group)
+        # fr users see: FR, CH, BE, LU         (no country to detect)
+
+    Without this setting, locale country codes are NOT auto-detected, even when
+    using :attr:`COUNTRIES_FIRST_BY_LANGUAGE`.
+    """
+
 
 settings = Settings()
