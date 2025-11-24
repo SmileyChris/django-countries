@@ -14,15 +14,15 @@ class CountryFilter(admin.FieldListFilter):
 
     def expected_parameters(self):
         if self.field.multiple:
-            return [f"{self.field.name}__contains"]
-        return [self.field.name]
+            return [f"{self.field_path}__contains"]
+        return [self.field_path]
 
     def choices(self, changelist):
         # Use __contains lookup for multiple country fields
         if self.field.multiple:
-            field_name = f"{self.field.name}__contains"
+            field_name = f"{self.field_path}__contains"
         else:
-            field_name = self.field.name
+            field_name = self.field_path
 
         value = self.used_parameters.get(field_name)
         # In Django 5.x, query parameters may come as lists
@@ -47,8 +47,8 @@ class CountryFilter(admin.FieldListFilter):
         qs = changelist.model._default_manager.all()
         values = (
             qs.distinct()
-            .order_by(self.field.name)
-            .values_list(self.field.name, flat=True)
+            .order_by(self.field_path)
+            .values_list(self.field_path, flat=True)
         )
 
         # For multiple country fields, split comma-separated values

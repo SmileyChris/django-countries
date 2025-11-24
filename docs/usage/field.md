@@ -52,6 +52,103 @@ You can filter using the full English country names in addition to country codes
 1
 ```
 
+## Django Admin
+
+### Basic Usage
+
+`CountryField` works out of the box in Django admin with a searchable dropdown. Simply register your model:
+
+```python
+from django.contrib import admin
+from myapp.models import Person
+
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ['name', 'country']
+    search_fields = ['name', 'country']  # Search by country code or name
+```
+
+The field displays correctly in `list_display`, `readonly_fields`, and forms.
+
+### Admin Filtering
+
+You can filter by country in Django admin using the `CountryFilter`:
+
+```python
+from django.contrib import admin
+from django_countries.filters import CountryFilter
+
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    list_filter = [('country', CountryFilter)]
+```
+
+The admin filter will:
+
+- Show only countries that exist in your data
+- Display country names in the filter dropdown for easy selection
+
+#### Filtering Through Relations
+
+!!! info "New in development version"
+
+    `CountryFilter` now supports filtering on `CountryField` through related models.
+
+You can filter on country fields through foreign key relations:
+
+```python
+from django.contrib import admin
+from django_countries.filters import CountryFilter
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    country = CountryField()
+
+class Payment(models.Model):
+    contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    # Filter payments by the country of the related contact
+    list_filter = [('contact__country', CountryFilter)]
+```
+
+This works with any relation depth (e.g., `organization__contact__country`).
+
+### Custom Admin Form with Flag Widget
+
+To show a flag image next to the country dropdown in admin, use `CountrySelectWidget`:
+
+```python
+from django import forms
+from django.contrib import admin
+from django_countries.widgets import CountrySelectWidget
+from myapp.models import Person
+
+class PersonAdminForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'
+        widgets = {
+            'country': CountrySelectWidget()
+        }
+
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    form = PersonAdminForm
+```
+
+The flag image will update automatically when the country selection changes.
+
+### Limitations
+
+!!! warning "Known Limitations"
+
+    **Autocomplete fields**: `CountryField` does not currently support Django's `autocomplete_fields` feature. The field will fall back to a regular select widget if added to `autocomplete_fields`.
+
+    **Third-party filters**: Some third-party admin filter packages may not work correctly with `CountryField`. Use the built-in `CountryFilter` for reliable filtering.
+
 ## The Country Object
 
 An object used to represent a country, instantiated with a two character country code, three character code, or numeric code.

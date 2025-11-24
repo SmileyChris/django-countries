@@ -27,6 +27,15 @@ class MultiCountryAdmin(admin.ModelAdmin):
 test_site.register(models.MultiCountry, MultiCountryAdmin)
 
 
+class PaymentAdmin(admin.ModelAdmin):
+    """Admin for Payment model that filters through contact__country relation."""
+
+    list_filter = [("contact__country", filters.CountryFilter)]
+
+
+test_site.register(models.Payment, PaymentAdmin)
+
+
 class TestCountryFilter(TestCase):
     def get_changelist_kwargs(self):
         m = self.person_admin
@@ -292,3 +301,79 @@ class TestMultiCountryFilter(TestCase):
     def test_choices_empty_selection(self):
         """Test filter choices with no country selected."""
         return self._test_choices(selected_country_code=None)
+
+
+class TestRelatedCountryFilter(TestCase):
+    """Tests for CountryFilter on related fields (issue #432)."""
+
+    def get_changelist_kwargs(self):
+        m = self.payment_admin
+        sig = inspect.signature(ChangeList.__init__)
+        kwargs = {"model_admin": m}
+        for arg in list(sig.parameters)[2:]:
+            if hasattr(m, arg):
+                kwargs[arg] = getattr(m, arg)
+        return kwargs
+
+    def setUp(self):
+        # Create contacts with countries
+        contact_nz = models.Contact.objects.create(name="Alice", country="NZ")
+        contact_au = models.Contact.objects.create(name="Bob", country="AU")
+        contact_us = models.Contact.objects.create(name="Charlie", country="US")
+
+        # Create payments linked to contacts
+        models.Payment.objects.create(contact=contact_nz, amount=100)
+        models.Payment.objects.create(contact=contact_au, amount=200)
+        models.Payment.objects.create(contact=contact_nz, amount=150)
+        models.Payment.objects.create(contact=contact_us, amount=300)
+
+        self.payment_admin = PaymentAdmin(models.Payment, test_site)
+
+    def test_filter_none(self):
+        """Test that no filter returns all payments."""
+        request = RequestFactory().get("/payment/")
+        request.user = AnonymousUser()
+        cl = ChangeList(request, **self.get_changelist_kwargs())
+        cl.get_results(request)
+        self.assertEqual(list(cl.result_list), list(models.Payment.objects.all()))
+
+    def test_filter_related_country(self):
+        """Test filtering payments by contact__country."""
+        request = RequestFactory().get("/payment/", data={"contact__country": "NZ"})
+        request.user = AnonymousUser()
+        cl = ChangeList(request, **self.get_changelist_kwargs())
+        cl.get_results(request)
+        # Should return only payments from New Zealand contacts
+        expected = models.Payment.objects.filter(contact__country="NZ")
+        self.assertEqual(list(cl.result_list), list(expected))
+
+    def test_expected_parameters(self):
+        """Test that expected_parameters returns the correct field path."""
+        request = RequestFactory().get("/payment/")
+        request.user = AnonymousUser()
+        cl = ChangeList(request, **self.get_changelist_kwargs())
+        filter_spec = cl.filter_specs[0]
+
+        # Should expect 'contact__country' not just 'country'
+        expected = filter_spec.expected_parameters()
+        self.assertEqual(expected, ["contact__country"])
+
+    def test_choices_related_field(self):
+        """Test that filter choices work for related country fields."""
+        request = RequestFactory().get("/payment/", data={"contact__country": "AU"})
+        request.user = AnonymousUser()
+        cl = ChangeList(request, **self.get_changelist_kwargs())
+        choices = list(cl.filter_specs[0].choices(cl))
+
+        # Should show all countries that appear in the related contacts
+        self.assertEqual(
+            [c["display"] for c in choices],
+            ["All", "Australia", "New Zealand", "United States of America"],
+        )
+
+        # Australia should be selected
+        for choice in choices:
+            if choice["display"] == "Australia":
+                self.assertTrue(choice["selected"])
+            else:
+                self.assertFalse(choice["selected"])

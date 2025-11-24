@@ -149,6 +149,8 @@ The admin filter will:
 - Use `__contains` lookup to match countries in comma-separated lists
 - Display country names in the filter dropdown for easy selection
 
+See the [Django Admin](../usage/field.md#django-admin) section for more details, including filtering through relations.
+
 ## Example Use Cases
 
 Multiple country selection is useful for scenarios like:

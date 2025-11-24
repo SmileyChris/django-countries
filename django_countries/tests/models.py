@@ -45,3 +45,23 @@ class WithProp(models.Model):
     @public_field.setter
     def public_field(self, value):
         self._private_field = value
+
+
+class Contact(models.Model):
+    """Model with a CountryField to test related field filtering."""
+
+    name = models.CharField(max_length=100)
+    country = CountryField(blank=True, null=True)
+
+    class Meta:
+        ordering = ("name",)
+
+
+class Payment(models.Model):
+    """Model with a ForeignKey to test filtering through relations."""
+
+    contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        ordering = ("id",)
