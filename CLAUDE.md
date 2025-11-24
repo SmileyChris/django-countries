@@ -100,19 +100,45 @@ just tx-pull
 
 ### Release Commands (for Maintainers)
 ```bash
-# Deploy a release to PyPI (fully automated, requires bump type)
-just deploy patch   # For bug fixes (7.7.0 -> 7.7.1)
-just deploy minor   # For new features (7.7.0 -> 7.8.0)
-just deploy major   # For breaking changes (7.7.0 -> 8.0.0)
+# Deploy a release to PyPI (fully automated)
+just deploy          # Interactive prompt for version bump
+just deploy patch    # For bug fixes (7.7.0 -> 7.7.1)
+just deploy minor    # For new features (7.7.0 -> 7.8.0)
+just deploy major    # For breaking changes (7.7.0 -> 8.0.0)
+
+# Dry-run mode to preview and validate changes
+DRY_RUN=1 just deploy
+DRY_RUN=1 just deploy patch
+
+# Allow uncommitted changes (not recommended)
+just deploy patch --allow-dirty
+DRY_RUN=1 just deploy --allow-dirty
 ```
 
-The `just deploy [patch|minor|major]` command handles the entire release process:
+The `just deploy [patch|minor|major]` command runs `scripts/deploy.py` (a Python script using click) that handles the entire release process:
 - Pulls latest changes
 - Updates English translation source file and pushes to Transifex
 - Pulls latest translations from Transifex
 - Bumps version and builds changelog from `changes/` fragments using towncrier
 - Creates git tag and pushes
 - Builds and publishes to PyPI
+- Deploys documentation to GitHub Pages
+
+**Interactive Mode**: Running `just deploy` without arguments will show an interactive prompt with version options (e.g., "8.1.1 → 8.2.0") to help you choose the right bump type.
+
+**Dry-Run Mode**: The `DRY_RUN=1` environment variable enables dry-run mode that:
+- Checks for uncommitted changes (same as real run)
+- Actually builds and validates the package
+- Builds and validates documentation
+- Shows full changelog preview (30 lines)
+- Runs pre-commit checks
+- Checks if version exists on PyPI
+- Shows what would be pushed to git
+- Displays translation status from Transifex
+- Provides a summary of all steps at the end
+- Does NOT modify files, create commits/tags, or publish anything
+
+**Allow Dirty Working Directory**: The `--allow-dirty` flag bypasses the git status check, allowing deployment with uncommitted changes. This is not recommended for production releases but can be useful for testing.
 
 **Changelog Management**: This project uses [towncrier](https://pypi.org/project/towncrier/) for changelog management.
 
