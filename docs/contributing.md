@@ -213,19 +213,28 @@ just deploy minor
 just deploy major
 ```
 
+To rehearse a release without touching the repository or PyPI, set `DRY_RUN=1`:
+
+```bash
+DRY_RUN=1 just deploy patch
+```
+
+Dry runs perform the same read-only validation (git status, changelog preview, version bump preview via `uv version --dry-run`) while skipping every mutating step (translations, version bump, documentation edits, commits, tagging, publishing, etc.).
+
 This will:
 1. Check for uncommitted changes (must have clean working directory)
 2. Pull latest changes from git
 3. Pull and compile translations from Transifex
 4. Commit translation updates (if any)
 5. Preview changelog to verify fragments exist
-6. Bump version in pyproject.toml
-7. Run pre-commit checks on version bump
-8. Build package to verify everything works
-9. Build changelog from fragments and commit atomically
-10. Create and push git tag
-11. Build final package and publish to PyPI
-12. Deploy documentation to GitHub Pages
+6. Bump version in `pyproject.toml`
+7. Replace all “New in development version” doc callouts with “New in version X.Y.Z”
+8. Run pre-commit checks on version bump
+9. Build package to verify everything works
+10. Build changelog from fragments and commit atomically
+11. Create and push git tag
+12. Build final package and publish to PyPI
+13. Deploy documentation to GitHub Pages
 
 **Note**: Add changelog entries to `changes/` directory before releasing. See `changes/README.md` for details.
 
