@@ -63,6 +63,16 @@ just docs  # Serve documentation locally at http://127.0.0.1:8080
 
 Documentation is built with MkDocs and automatically deployed to GitHub Pages during `just deploy`.
 
+**When adding new features to documentation**, mark them with version callouts:
+
+```markdown
+**New in development version**
+
+Description of the new feature...
+```
+
+During release, the deployment script automatically replaces all "New in development version" markers with "New in version X.Y.Z" based on the release version. This ensures users know which version introduced each feature.
+
 ### Updating Country Data
 
 Country data should be manually updated from the official ISO 3166-1 Online Browsing Platform (OBP):
