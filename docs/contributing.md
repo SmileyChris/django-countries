@@ -228,7 +228,7 @@ This will:
 4. Commit translation updates (if any)
 5. Preview changelog to verify fragments exist
 6. Bump version in `pyproject.toml`
-7. Replace all “New in development version” doc callouts with “New in version X.Y.Z”
+7. Replace all “New in version 8.2.0” doc callouts with “New in version X.Y.Z”
 8. Run pre-commit checks on version bump
 9. Build package to verify everything works
 10. Build changelog from fragments and commit atomically

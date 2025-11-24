@@ -79,7 +79,7 @@ You can override the following metadata for each country:
 - **ioc_code**: Custom IOC (International Olympic Committee) code
 - **flag_url**: Custom flag image URL (useful for custom country codes that need to reference existing flags)
 
-    !!! info "flag_url: New in development version"
+    !!! info "flag_url: New in version 8.2.0"
 
         Per-country `flag_url` overrides allow custom country codes to reuse existing flag image assets or point to bespoke flags without affecting the global `COUNTRIES_FLAG_URL`.
 
@@ -146,7 +146,7 @@ COUNTRIES_FIRST_BREAK = "───────────"  # Adds visual separ
 **Type:** `dict`
 **Default:** `{}`
 
-!!! info "New in development version"
+!!! info "New in version 8.2.0"
 
 Map language codes to lists of countries to show first. Enables dynamic country ordering based on the user's current language. **Overrides** `COUNTRIES_FIRST` when a language matches.
 
@@ -176,7 +176,7 @@ COUNTRIES_FIRST_BY_LANGUAGE = {
 **Type:** `bool`
 **Default:** `False`
 
-!!! info "New in development version"
+!!! info "New in version 8.2.0"
 
 Enable automatic country detection from the user's locale. Auto-detected countries are **prepended** to `COUNTRIES_FIRST`.
 
@@ -277,7 +277,7 @@ class Product(models.Model):
     country = CountryField(countries=EUCountries)
 ```
 
-!!! info "New in development version"
+!!! info "New in version 8.2.0"
 
     **Language-based ordering per field:**
 

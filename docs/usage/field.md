@@ -90,7 +90,7 @@ The admin filter will:
 
 #### Filtering Through Relations
 
-!!! info "New in development version"
+!!! info "New in version 8.2.0"
 
     `CountryFilter` now supports filtering on `CountryField` through related models.
 

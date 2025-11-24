@@ -1,6 +1,6 @@
 # Dynamic Country Ordering
 
-!!! info "New in development version"
+!!! info "New in version 8.2.0"
 
 Django-countries supports dynamic country ordering based on user language, preferences, or other contextual factors. This allows you to automatically show relevant countries first in dropdowns and forms.
 

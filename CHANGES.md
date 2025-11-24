@@ -6,6 +6,49 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+## 8.2.0 (25 November 2025)
+
+### Features
+
+- Add `django_countries.django_filters.CountryFilter` for django-filters integration with support for custom `empty_label`. This filter automatically sets country choices and seamlessly integrates with django-filters FilterSets, making it easier to add country filtering to your views. ([#307](https://github.com/SmileyChris/django-countries/issues/307))
+- Enable `CountryFieldMixin` to accept `name_only`, `country_dict`, and output customization options via `Meta.extra_kwargs`. You can now configure country field serialization behavior without explicitly declaring serializer fields, making it easier to customize output for both single and multiple country fields. ([#414](https://github.com/SmileyChris/django-countries/issues/414))
+- `CountryField(country_dict=...)` now accepts either a boolean (existing behaviour) or an iterable/string of keys so you can control exactly which values appear in the serialized country dict (for example `("code", "name", "alpha3")` or just `"alpha3"`). ([#416](https://github.com/SmileyChris/django-countries/issues/416))
+- Add `COUNTRIES_FIRST_BY_LANGUAGE` and `COUNTRIES_FIRST_AUTO_DETECT` settings for dynamic country ordering based on user language. Countries can now be automatically reordered based on the current language, with locale-based auto-detection (e.g., `fr-CA` users see Canada prepended to the French country group). ([#418](https://github.com/SmileyChris/django-countries/issues/418))
+- Add support for custom `flag_url` in `COUNTRIES_OVERRIDE` setting. You can now specify a custom flag URL for overridden countries:
+
+  ```python
+  COUNTRIES_OVERRIDE = {
+      "IND": {
+          "names": ["Indonesia"],
+          "ioc_code": "INA",
+          "flag_url": "flags/id.gif",
+      },
+  }
+  ```
+
+  This is particularly useful when using custom country codes that need to reference existing flag images. ([#449](https://github.com/SmileyChris/django-countries/issues/449))
+- Add `countries_context()` context manager for temporary, thread-local override of country configuration options. Supports all country options (`first`, `only`, `first_sort`, `first_repeat`, `first_break`, `first_by_language`, `first_auto_detect`), enabling per-request customization based on user preferences, IP geolocation, or other dynamic factors. Each option independently overrides its corresponding setting with the highest priority.
+
+### Bugfixes
+
+- Fix `CountryField` serializer to respect current language when deserializing localized country names. The field now automatically uses Django's `get_language()` to detect the active language and falls back to English if the country name is not found in the current language. ([#407](https://github.com/SmileyChris/django-countries/issues/407))
+- Fixed `CountryFilter` to support filtering on `CountryField` through relations (e.g., `list_filter = [("contact__country", CountryFilter)]`). Previously this would fail with a `FieldError`. ([#432](https://github.com/SmileyChris/django-countries/issues/432))
+- Fixed `CountryFilter` admin filter to work correctly with `CountryField(multiple=True)`. The filter now uses the `__contains` lookup instead of exact matching to properly find records where the selected country appears in the comma-separated country list. ([#445](https://github.com/SmileyChris/django-countries/issues/445))
+- Added support for `empty_label` parameter in `CountryField.formfield()` to customize the blank choice label in form fields. This allows using `empty_label=""` for an empty label or `empty_label="Custom text"` for custom text, resolving the issue where `empty_label` was previously ignored. ([#466](https://github.com/SmileyChris/django-countries/issues/466))
+- Fixed type annotation for `CountryField.countries` parameter in stub file to accept `type[Countries]` instead of `Countries` instance, resolving mypy errors when using custom Countries subclasses. Also removed unnecessary exclusion of tests from mypy checking. ([#482](https://github.com/SmileyChris/django-countries/issues/482))
+
+### Misc
+
+- Refactored deployment script from bash (244 lines) to Python using click for better maintainability and testability. The script is now in `scripts/deploy.py` with these improvements:
+
+  - **Interactive mode**: Run `just deploy` without arguments to get an interactive prompt showing version options (e.g., "8.1.1 → 8.2.0")
+  - **Enhanced dry-run**: `DRY_RUN=1` now validates package builds, documentation builds, runs pre-commit checks, shows full changelog preview, checks PyPI for existing versions, displays translation status, and checks for uncommitted changes (same as real run)
+  - **Comprehensive summary**: Shows a detailed list of completed steps at the end of each run
+  - **Allow dirty**: `--allow-dirty` flag to bypass git status check when needed (not recommended for production)
+  - **Better error handling**: Clear error messages with proper exception types
+  - **Colorful output**: Uses click's styling for better readability
+
+
 ## 8.1.1 (18 November 2025)
 
 ### Bugfixes
