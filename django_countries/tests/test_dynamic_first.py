@@ -1,8 +1,10 @@
 # ruff: noqa: SIM117
+import pytest
 from django.test import TestCase
 from django.utils import translation
 
 from django_countries import Countries, countries, countries_context
+from django_countries.conf import settings
 
 
 class BaseTest(TestCase):
@@ -13,6 +15,7 @@ class BaseTest(TestCase):
         del countries.countries
 
 
+@pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
 class TestCountriesFirstByLanguage(BaseTest):
     """Test COUNTRIES_FIRST_BY_LANGUAGE setting with smart auto-prepend."""
 
@@ -207,6 +210,7 @@ class TestCountriesContext(BaseTest):
             country_list = list(countries)
             self.assertEqual(country_list[0].code, "US")
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_context_overrides_language_mapping(self):
         """Test that context can override language mapping explicitly."""
         with self.settings(
@@ -314,6 +318,7 @@ class TestCountriesContext(BaseTest):
                 self.assertEqual(country_list[2].name, "───────")
 
 
+@pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
 class TestPerFieldCustomization(BaseTest):
     """Test that custom Countries classes work with language mapping."""
 
@@ -357,6 +362,7 @@ class TestPerFieldCustomization(BaseTest):
                 self.assertEqual(custom_list[1].code, "FR")
 
 
+@pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
 class TestCountriesAutoDetect(BaseTest):
     """Test COUNTRIES_FIRST_AUTO_DETECT setting."""
 
@@ -484,6 +490,7 @@ class TestCountriesAutoDetect(BaseTest):
 class TestCountriesLength(BaseTest):
     """Test that __len__ works correctly with dynamic first countries."""
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_len_with_language_mapping(self):
         """Test that length calculation works with language-based first countries."""
         with self.settings(
@@ -503,6 +510,7 @@ class TestCountriesLength(BaseTest):
             length = len(countries)
             self.assertEqual(length, 249 + 2)
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_len_with_auto_detect(self):
         """Test that length calculation works with auto-detect."""
         with self.settings(COUNTRIES_FIRST_AUTO_DETECT=True):
@@ -511,6 +519,7 @@ class TestCountriesLength(BaseTest):
                 # 249 countries + 1 auto-detected
                 self.assertEqual(length, 249 + 1)
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_len_with_auto_detect_and_countries_first(self):
         """Test length with auto-detect combined with COUNTRIES_FIRST."""
         with self.settings(
