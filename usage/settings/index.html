@@ -1425,7 +1425,7 @@
 <li>
 <p><strong>flag_url</strong>: Custom flag image URL (useful for custom country codes that need to reference existing flags)</p>
 <div class="admonition info">
-<p class="admonition-title">flag_url: New in development version</p>
+<p class="admonition-title">flag_url: New in version 8.2.0</p>
 <p>Per-country <code>flag_url</code> overrides allow custom country codes to reuse existing flag image assets or point to bespoke flags without affecting the global <code>COUNTRIES_FLAG_URL</code>.</p>
 </div>
 </li>
@@ -1472,7 +1472,7 @@
 <p><strong>Type:</strong> <code>dict</code><br />
 <strong>Default:</strong> <code>{}</code></p>
 <div class="admonition info">
-<p class="admonition-title">New in development version</p>
+<p class="admonition-title">New in version 8.2.0</p>
 </div>
 <p>Map language codes to lists of countries to show first. Enables dynamic country ordering based on the user's current language. <strong>Overrides</strong> <code>COUNTRIES_FIRST</code> when a language matches.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">COUNTRIES_FIRST_BY_LANGUAGE</span> <span class="o">=</span> <span class="p">{</span>
@@ -1499,7 +1499,7 @@
 <p><strong>Type:</strong> <code>bool</code><br />
 <strong>Default:</strong> <code>False</code></p>
 <div class="admonition info">
-<p class="admonition-title">New in development version</p>
+<p class="admonition-title">New in version 8.2.0</p>
 </div>
 <p>Enable automatic country detection from the user's locale. Auto-detected countries are <strong>prepended</strong> to <code>COUNTRIES_FIRST</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">COUNTRIES_FIRST_AUTO_DETECT</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1581,7 +1581,7 @@
 <a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">(</span><span class="n">countries</span><span class="o">=</span><span class="n">EUCountries</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition info">
-<p class="admonition-title">New in development version</p>
+<p class="admonition-title">New in version 8.2.0</p>
 <p><strong>Language-based ordering per field:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">RegionalCountries</span><span class="p">(</span><span class="n">Countries</span><span class="p">):</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="n">first_by_language</span> <span class="o">=</span> <span class="p">{</span>

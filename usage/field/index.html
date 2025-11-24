@@ -597,6 +597,72 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#django-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Django Admin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Django Admin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Admin Filtering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Admin Filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtering-through-relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering Through Relations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-admin-form-with-flag-widget" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Admin Form with Flag Widget
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-country-object" class="md-nav__link">
     <span class="md-ellipsis">
       The Country Object
@@ -1253,6 +1319,72 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#django-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Django Admin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Django Admin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Admin Filtering
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Admin Filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtering-through-relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering Through Relations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-admin-form-with-flag-widget" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Admin Form with Flag Widget
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-country-object" class="md-nav__link">
     <span class="md-ellipsis">
       The Country Object
@@ -1434,79 +1566,154 @@
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">country__icontains</span><span class="o">=</span><span class="s2">&quot;zealand&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="mi">1</span>
 </code></pre></div>
+<h2 id="django-admin">Django Admin<a class="headerlink" href="#django-admin" title="Permanent link">&para;</a></h2>
+<h3 id="basic-usage_1">Basic Usage<a class="headerlink" href="#basic-usage_1" title="Permanent link">&para;</a></h3>
+<p><code>CountryField</code> works out of the box in Django admin with a searchable dropdown. Simply register your model:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">myapp.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Person</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Person</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">PersonAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">list_display</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">]</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">search_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">]</span>  <span class="c1"># Search by country code or name</span>
+</code></pre></div>
+<p>The field displays correctly in <code>list_display</code>, <code>readonly_fields</code>, and forms.</p>
+<h3 id="admin-filtering">Admin Filtering<a class="headerlink" href="#admin-filtering" title="Permanent link">&para;</a></h3>
+<p>You can filter by country in Django admin using the <code>CountryFilter</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryFilter</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Person</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">PersonAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">list_filter</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="n">CountryFilter</span><span class="p">)]</span>
+</code></pre></div>
+<p>The admin filter will:</p>
+<ul>
+<li>Show only countries that exist in your data</li>
+<li>Display country names in the filter dropdown for easy selection</li>
+</ul>
+<h4 id="filtering-through-relations">Filtering Through Relations<a class="headerlink" href="#filtering-through-relations" title="Permanent link">&para;</a></h4>
+<div class="admonition info">
+<p class="admonition-title">New in version 8.2.0</p>
+<p><code>CountryFilter</code> now supports filtering on <code>CountryField</code> through related models.</p>
+</div>
+<p>You can filter on country fields through foreign key relations:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryFilter</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Contact</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">country</span> <span class="o">=</span> <span class="n">CountryField</span><span class="p">()</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Payment</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">contact</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Contact</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="n">amount</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Payment</span><span class="p">)</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="k">class</span><span class="w"> </span><span class="nc">PaymentAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="c1"># Filter payments by the country of the related contact</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="n">list_filter</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;contact__country&#39;</span><span class="p">,</span> <span class="n">CountryFilter</span><span class="p">)]</span>
+</code></pre></div>
+<p>This works with any relation depth (e.g., <code>organization__contact__country</code>).</p>
+<h3 id="custom-admin-form-with-flag-widget">Custom Admin Form with Flag Widget<a class="headerlink" href="#custom-admin-form-with-flag-widget" title="Permanent link">&para;</a></h3>
+<p>To show a flag image next to the country dropdown in admin, use <code>CountrySelectWidget</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django</span><span class="w"> </span><span class="kn">import</span> <span class="n">forms</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountrySelectWidget</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">myapp.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Person</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">PersonAdminForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Person</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>            <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="n">CountrySelectWidget</span><span class="p">()</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="p">}</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Person</span><span class="p">)</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="k">class</span><span class="w"> </span><span class="nc">PersonAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>    <span class="n">form</span> <span class="o">=</span> <span class="n">PersonAdminForm</span>
+</code></pre></div>
+<p>The flag image will update automatically when the country selection changes.</p>
+<h3 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Known Limitations</p>
+<p><strong>Autocomplete fields</strong>: <code>CountryField</code> does not currently support Django's <code>autocomplete_fields</code> feature. The field will fall back to a regular select widget if added to <code>autocomplete_fields</code>.</p>
+<p><strong>Third-party filters</strong>: Some third-party admin filter packages may not work correctly with <code>CountryField</code>. Use the built-in <code>CountryFilter</code> for reliable filtering.</p>
+</div>
 <h2 id="the-country-object">The Country Object<a class="headerlink" href="#the-country-object" title="Permanent link">&para;</a></h2>
 <p>An object used to represent a country, instantiated with a two character country code, three character code, or numeric code.</p>
 <p>It can be compared to other objects as if it was a string containing the country code and when evaluated as text, returns the country code.</p>
 <h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
 <h4 id="name">name<a class="headerlink" href="#name" title="Permanent link">&para;</a></h4>
 <p>Contains the full country name.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">name</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s1">&#39;New Zealand&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">name</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="s1">&#39;New Zealand&#39;</span>
 </code></pre></div>
 <h4 id="flag">flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h4>
 <p>Contains a URL to the flag. If your page could have lots of different flags then consider using <code>flag_css</code> instead to avoid excessive HTTP requests.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">flag</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="s1">&#39;/static/flags/nz.gif&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">flag</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="s1">&#39;/static/flags/nz.gif&#39;</span>
 </code></pre></div>
 <h4 id="flag_css">flag_css<a class="headerlink" href="#flag_css" title="Permanent link">&para;</a></h4>
 <p>Output the css classes needed to display an HTML element as the correct flag from within a single sprite image that contains all flags. For example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="x">&lt;link rel=&quot;stylesheet&quot; href=&quot;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s1">&#39;flags/sprite.css&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="x">&lt;i class=&quot;</span><span class="cp">{{</span> <span class="nv">country.flag_css</span> <span class="cp">}}</span><span class="x">&quot;&gt;&lt;/i&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="x">&lt;link rel=&quot;stylesheet&quot; href=&quot;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s1">&#39;flags/sprite.css&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="x">&lt;i class=&quot;</span><span class="cp">{{</span> <span class="nv">country.flag_css</span> <span class="cp">}}</span><span class="x">&quot;&gt;&lt;/i&gt;</span>
 </code></pre></div>
 <p>For multiple flag resolutions, use <code>sprite-hq.css</code> instead and add the <code>flag2x</code>, <code>flag3x</code>, or <code>flag4x</code> class. For example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="x">&lt;link rel=&quot;stylesheet&quot; href=&quot;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s1">&#39;flags/sprite-hq.css&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="x">Normal: &lt;i class=&quot;</span><span class="cp">{{</span> <span class="nv">country.flag_css</span> <span class="cp">}}</span><span class="x">&quot;&gt;&lt;/i&gt;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="x">Bigger: &lt;i class=&quot;flag2x </span><span class="cp">{{</span> <span class="nv">country.flag_css</span> <span class="cp">}}</span><span class="x">&quot;&gt;&lt;/i&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="x">&lt;link rel=&quot;stylesheet&quot; href=&quot;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s1">&#39;flags/sprite-hq.css&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="x">Normal: &lt;i class=&quot;</span><span class="cp">{{</span> <span class="nv">country.flag_css</span> <span class="cp">}}</span><span class="x">&quot;&gt;&lt;/i&gt;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="x">Bigger: &lt;i class=&quot;flag2x </span><span class="cp">{{</span> <span class="nv">country.flag_css</span> <span class="cp">}}</span><span class="x">&quot;&gt;&lt;/i&gt;</span>
 </code></pre></div>
 <p>You might also want to consider using <code>aria-label</code> for better accessibility:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="x">&lt;i class=&quot;</span><span class="cp">{{</span> <span class="nv">country.flag_css</span> <span class="cp">}}</span><span class="x">&quot;</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="x">    aria-label=&quot;</span><span class="cp">{%</span> <span class="k">blocktrans</span> <span class="k">with</span> <span class="nv">country_code</span><span class="o">=</span><span class="nv">country.code</span> <span class="cp">%}</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="x">        </span><span class="cp">{{</span> <span class="nv">country_code</span> <span class="cp">}}</span><span class="x"> flag</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="x">    </span><span class="cp">{%</span> <span class="k">endblocktrans</span> <span class="cp">%}</span><span class="x">&quot;&gt;&lt;/i&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="x">&lt;i class=&quot;</span><span class="cp">{{</span> <span class="nv">country.flag_css</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="x">    aria-label=&quot;</span><span class="cp">{%</span> <span class="k">blocktrans</span> <span class="k">with</span> <span class="nv">country_code</span><span class="o">=</span><span class="nv">country.code</span> <span class="cp">%}</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="x">        </span><span class="cp">{{</span> <span class="nv">country_code</span> <span class="cp">}}</span><span class="x"> flag</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="x">    </span><span class="cp">{%</span> <span class="k">endblocktrans</span> <span class="cp">%}</span><span class="x">&quot;&gt;&lt;/i&gt;</span>
 </code></pre></div>
 <h4 id="unicode_flag">unicode_flag<a class="headerlink" href="#unicode_flag" title="Permanent link">&para;</a></h4>
 <p>A unicode glyph for the flag for this country. Currently well-supported in iOS and OS X. See <a href="https://en.wikipedia.org/wiki/Regional_Indicator_Symbol">Regional Indicator Symbol</a> for details.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unicode_flag</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="s1">&#39;🇳🇿&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">unicode_flag</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="s1">&#39;🇳🇿&#39;</span>
 </code></pre></div>
 <h4 id="code">code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h4>
 <p>The two letter country code for this country.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">code</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="s1">&#39;NZ&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">code</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="s1">&#39;NZ&#39;</span>
 </code></pre></div>
 <h4 id="alpha3">alpha3<a class="headerlink" href="#alpha3" title="Permanent link">&para;</a></h4>
 <p>The three letter country code for this country.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">alpha3</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="s1">&#39;NZL&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">alpha3</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="s1">&#39;NZL&#39;</span>
 </code></pre></div>
 <h4 id="numeric">numeric<a class="headerlink" href="#numeric" title="Permanent link">&para;</a></h4>
 <p>The numeric country code for this country (as an integer).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">numeric</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="mi">554</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">numeric</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="mi">554</span>
 </code></pre></div>
 <h4 id="numeric_padded">numeric_padded<a class="headerlink" href="#numeric_padded" title="Permanent link">&para;</a></h4>
 <p>The numeric country code as a three character 0-padded string.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">numeric_padded</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="s1">&#39;554&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">numeric_padded</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="s1">&#39;554&#39;</span>
 </code></pre></div>
 <h4 id="ioc_code">ioc_code<a class="headerlink" href="#ioc_code" title="Permanent link">&para;</a></h4>
 <p>The three letter International Olympic Committee country code.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">ioc_code</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="s1">&#39;NZL&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">ioc_code</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="s1">&#39;NZL&#39;</span>
 </code></pre></div>
 <h2 id="getting-countries-from-python">Getting Countries from Python<a class="headerlink" href="#getting-countries-from-python" title="Permanent link">&para;</a></h2>
 <p>Use the <code>django_countries.countries</code> object instance as an iterator of ISO 3166-1 country codes and names (sorted by name).</p>
 <p>For example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">django_countries</span><span class="w"> </span><span class="kn">import</span> <span class="n">countries</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">dict</span><span class="p">(</span><span class="n">countries</span><span class="p">)[</span><span class="s2">&quot;NZ&quot;</span><span class="p">]</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="s1">&#39;New Zealand&#39;</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">code</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">countries</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]:</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="o">...</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="n">Afghanistan</span> <span class="p">(</span><span class="n">AF</span><span class="p">)</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="n">Åland</span> <span class="n">Islands</span> <span class="p">(</span><span class="n">AX</span><span class="p">)</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="n">Albania</span> <span class="p">(</span><span class="n">AL</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">django_countries</span><span class="w"> </span><span class="kn">import</span> <span class="n">countries</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">dict</span><span class="p">(</span><span class="n">countries</span><span class="p">)[</span><span class="s2">&quot;NZ&quot;</span><span class="p">]</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="s1">&#39;New Zealand&#39;</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">code</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">countries</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]:</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="o">...</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="n">Afghanistan</span> <span class="p">(</span><span class="n">AF</span><span class="p">)</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="n">Åland</span> <span class="n">Islands</span> <span class="p">(</span><span class="n">AX</span><span class="p">)</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="n">Albania</span> <span class="p">(</span><span class="n">AL</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
