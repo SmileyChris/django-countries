@@ -1430,8 +1430,11 @@
 </code></pre></div>
 <p>Note that <code>__contains</code> performs a substring match on the stored comma-separated codes.</p>
 <h3 id="django-admin-filtering">Django Admin Filtering<a class="headerlink" href="#django-admin-filtering" title="Permanent link">&para;</a></h3>
-<p><strong>New in development version</strong></p>
-<p>The <code>CountryFilter</code> in Django admin automatically works with <code>multiple=True</code> fields:</p>
+<div class="admonition info">
+<p class="admonition-title">New in development version</p>
+<p>The <code>CountryFilter</code> in Django admin automatically works with <code>multiple=True</code> fields.</p>
+</div>
+<p>The <code>CountryFilter</code> in Django admin can be used with <code>multiple=True</code> fields:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django_countries.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountryFilter</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">myapp.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Incident</span>
