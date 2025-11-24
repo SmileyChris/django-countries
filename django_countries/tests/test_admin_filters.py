@@ -245,10 +245,9 @@ class TestMultiCountryFilter(TestCase):
         cl.get_results(request)
         # Should return records containing NZ (excluding the one with only FR,AU)
         expected = models.MultiCountry.objects.filter(countries__contains="NZ")
-        self.assertQuerySetEqual(
-            cl.result_list,
-            expected,
-            ordered=False,
+        self.assertCountEqual(
+            list(cl.result_list),
+            list(expected),
         )
 
     def test_filter_different_country(self):
@@ -260,10 +259,9 @@ class TestMultiCountryFilter(TestCase):
         cl = ChangeList(request, **self.get_changelist_kwargs())
         cl.get_results(request)
         expected = models.MultiCountry.objects.filter(countries__contains="FR")
-        self.assertQuerySetEqual(
-            cl.result_list,
-            expected,
-            ordered=False,
+        self.assertCountEqual(
+            list(cl.result_list),
+            list(expected),
         )
 
     def _test_choices(self, selected_country_code="NZ"):

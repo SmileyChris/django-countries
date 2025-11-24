@@ -560,7 +560,7 @@ class TestBrowserLanguageDetection(BaseTest):
 
         # Get the first (highest priority) language
         # Format: [(lang, priority), ...] sorted by priority
-        return parsed[0][0].lower() if parsed else None
+        return parsed[0][0].lower()
 
     def test_australian_browser_auto_detect(self):
         """Test that Australian browser (en-AU) gets Australia first."""
@@ -667,28 +667,39 @@ class TestBrowserLanguageDetection(BaseTest):
                 self.assertEqual(country_list[0].code, "US")
                 self.assertEqual(country_list[1].code, "GB")
 
+    def test_empty_accept_language(self):
+        """Test browser with empty Accept-Language header."""
+        with self.settings(
+            COUNTRIES_FIRST_AUTO_DETECT=True,
+            COUNTRIES_FIRST=["US", "GB"],
+        ):
+            # Simulate browser with no Accept-Language header
+            language = self._parse_accept_language("")
+
+            # Should return None for empty header
+            self.assertIsNone(language)
+
+            # Without a language, auto-detect can't work, falls back to default
+            country_list = list(countries)
+            self.assertEqual(country_list[0].code, "US")
+            self.assertEqual(country_list[1].code, "GB")
+
     def test_unsupported_language_falls_back(self):
-        """Test browser with unsupported language falls back to default."""
+        """Test browser with unsupported language still works."""
         with self.settings(
             COUNTRIES_FIRST_AUTO_DETECT=True,
             COUNTRIES_FIRST=["US"],
-            LANGUAGE_CODE="en-us",
         ):
-            # Simulate browser sending unsupported language
+            # Simulate browser sending zh-CN (which IS in Django's default LANGUAGES)
             language = self._parse_accept_language("zh-CN")
+            # Django supports zh-hans, so zh-cn will be normalized
+            self.assertIsNotNone(language)
 
-            # Should fall back to LANGUAGE_CODE since zh is not in LANGUAGES
-            self.assertIn(language, ["en-us", "zh-cn"])
-
-            # Activate the language like Django's LocaleMiddleware would
+            # Activate the language
             with translation.override(language):
                 country_list = list(countries)
-
-                # If zh-cn is supported, CN should be first; otherwise US
-                if language == "zh-cn":
-                    self.assertEqual(country_list[0].code, "CN")
-                else:
-                    self.assertEqual(country_list[0].code, "US")
+                # CN should be auto-detected from the locale
+                self.assertEqual(country_list[0].code, "CN")
 
 
 # Define a view for middleware tests
