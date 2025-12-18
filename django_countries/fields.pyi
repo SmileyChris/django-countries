@@ -5,9 +5,10 @@ This stub file provides enhanced type hints for better IDE support.
 The actual implementation is in fields.py.
 """
 
-from typing import Any, Iterable, Literal, overload
+from typing import Any, Iterable, Iterator, Literal, overload
 
 from django.db import models
+from django.utils.functional import _StrPromise
 from typing_extensions import Self, TypeAlias
 
 from django_countries import Countries
@@ -36,13 +37,15 @@ class Country:
     def __eq__(self, other: object) -> bool: ...
     def __hash__(self) -> int: ...
     @property
-    def name(self) -> str | None: ...
+    def name(self) -> str: ...
     @property
-    def alpha3(self) -> str | None: ...
+    def alpha3(self) -> str: ...
     @property
-    def numeric(self) -> str | None: ...
+    def numeric(self) -> int | None: ...
     @property
-    def ioc_code(self) -> str | None: ...
+    def numeric_padded(self) -> str | None: ...
+    @property
+    def ioc_code(self) -> str: ...
     @property
     def unicode_flag(self) -> str: ...
     @property
@@ -54,8 +57,12 @@ class MultipleCountriesDescriptor:
     def __init__(self, countries_iter: Iterable[Country]) -> None: ...
     def __str__(self) -> str: ...
     def __repr__(self) -> str: ...
-    def __iter__(self) -> Any: ...
+    def __iter__(self) -> Iterator[Country]: ...
     def __getitem__(self, index: int) -> Country: ...
+    def __contains__(self, item: object) -> bool: ...
+    def __add__(
+        self, other: Iterable[Country | str]
+    ) -> MultipleCountriesDescriptor: ...
     def __len__(self) -> int: ...
     def __bool__(self) -> bool: ...
     def __eq__(self, other: object) -> bool: ...
@@ -104,11 +111,17 @@ class CountryField(models.CharField):
 
     descriptor_class: type[CountryDescriptor]
     multiple: bool
+    blank_label: str | None
+    countries: Countries
+    countries_flag_url: str | None
+    countries_str_attr: str
 
     # Overload for single, non-nullable (most common)
     @overload
     def __init__(
         self,
+        verbose_name: str | _StrPromise | None = None,
+        name: str | None = None,
         *,
         multiple: Literal[False] = False,
         null: Literal[False] = False,
@@ -124,6 +137,8 @@ class CountryField(models.CharField):
     @overload
     def __init__(
         self,
+        verbose_name: str | _StrPromise | None = None,
+        name: str | None = None,
         *,
         multiple: Literal[False] = False,
         null: Literal[True],
@@ -139,6 +154,8 @@ class CountryField(models.CharField):
     @overload
     def __init__(
         self,
+        verbose_name: str | _StrPromise | None = None,
+        name: str | None = None,
         *,
         multiple: Literal[True],
         null: Literal[False] = False,
@@ -148,13 +165,16 @@ class CountryField(models.CharField):
         countries: type[Countries] | None = None,
         countries_flag_url: str | None = None,
         countries_str_attr: str = "code",
+        blank_label: str | None = None,
         **kwargs: Any,
     ) -> None: ...
 
-    # Overload for multiple, nullable (new in PR #453)
+    # Overload for multiple, nullable
     @overload
     def __init__(
         self,
+        verbose_name: str | _StrPromise | None = None,
+        name: str | None = None,
         *,
         multiple: Literal[True],
         null: Literal[True],
@@ -164,5 +184,6 @@ class CountryField(models.CharField):
         countries: type[Countries] | None = None,
         countries_flag_url: str | None = None,
         countries_str_attr: str = "code",
+        blank_label: str | None = None,
         **kwargs: Any,
     ) -> None: ...
