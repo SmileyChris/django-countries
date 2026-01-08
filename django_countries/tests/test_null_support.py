@@ -256,6 +256,42 @@ class TestDRFSerializerAllowNull(TestCase):
 
         self.assertEqual(serializer.data["country"], "US")
 
+    def test_serializer_null_from_database(self):
+        """
+        Test serializer with actual NULL value from database.
+
+        This tests the full round-trip: save NULL to DB, fetch it back,
+        and serialize. This verifies the descriptor returns None and
+        the serializer handles it correctly.
+        """
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = AllowNull
+                fields = ("country",)
+
+        # Create and save to database
+        obj = AllowNull.objects.create(country=None)
+        # Fetch fresh from database
+        obj = AllowNull.objects.get(pk=obj.pk)
+
+        serializer = TestSerializer(obj)
+        self.assertIsNone(serializer.data["country"])
+
+    def test_serializer_value_from_database(self):
+        """Test serializer with value from database."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = AllowNull
+                fields = ("country",)
+
+        obj = AllowNull.objects.create(country="AU")
+        obj = AllowNull.objects.get(pk=obj.pk)
+
+        serializer = TestSerializer(obj)
+        self.assertEqual(serializer.data["country"], "AU")
+
 
 # Document expected behavior for unique constraints
 """
