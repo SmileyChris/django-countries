@@ -21,12 +21,12 @@ _CountryCode: TypeAlias = str
 _FlagURL: TypeAlias = str
 
 class Country:
-    code: _CountryCode | None
+    code: _CountryCode
     flag_url: _FlagURL | None
 
     def __init__(
         self,
-        code: _CountryCode | None,
+        code: _CountryCode,
         flag_url: _FlagURL | None = None,
         str_attr: str = "code",
         custom_countries: Countries | None = None,
@@ -72,7 +72,8 @@ class CountryDescriptor:
     Descriptor that returns Country objects or MultipleCountriesDescriptor.
 
     Return type depends on field configuration:
-    - Single field (multiple=False): Returns Country (code may be None)
+    - Single field (multiple=False, null=False): Returns Country
+    - Single field (multiple=False, null=True): Returns Country | None
     - Multiple field (multiple=True, null=False):
       Returns MultipleCountriesDescriptor
     - Multiple field (multiple=True, null=True):
@@ -99,7 +100,8 @@ class CountryField(models.CharField):
     A Django field for storing country codes.
 
     Type inference notes:
-    - When multiple=False: Instance access returns Country
+    - When multiple=False, null=False: Instance access returns Country
+    - When multiple=False, null=True: Instance access returns Country | None
     - When multiple=True, null=False:
       Instance access returns MultipleCountriesDescriptor
     - When multiple=True, null=True:

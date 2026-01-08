@@ -165,11 +165,11 @@ class TestCountryField(TestCase):
         self.assertEqual(person.country.code, "")
 
     def test_null(self):
-        person = AllowNull.objects.create(country=None)
-        self.assertIsNone(person.country.code)
+        obj = AllowNull.objects.create(country=None)
+        self.assertIsNone(obj.country)
 
-        person = AllowNull.objects.get(pk=person.pk)
-        self.assertIsNone(person.country.code)
+        obj = AllowNull.objects.get(pk=obj.pk)
+        self.assertIsNone(obj.country)
 
     def test_multi_null_country_allowed(self):
         """
@@ -218,8 +218,8 @@ class TestCountryField(TestCase):
 
     def test_nullable_deferred(self):
         AllowNull.objects.create(country=None)
-        person = AllowNull.objects.defer("country").get()
-        self.assertIsNone(person.country.code)
+        obj = AllowNull.objects.defer("country").get()
+        self.assertIsNone(obj.country)
 
     def test_len(self):
         person = Person(name="Chris Beaven", country="NZ")

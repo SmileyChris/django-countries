@@ -41,6 +41,40 @@ Use `blank_label` to set the label for the initial blank choice shown in forms:
 country = CountryField(blank_label="(select country)")
 ```
 
+### Nullable Fields
+
+!!! info "New in development version"
+
+    Nullable `CountryField` now returns `None` instead of `Country(code=None)`.
+
+When using `null=True` on a `CountryField`, accessing the field on a model instance returns `None` when the database value is NULL:
+
+```python
+class Person(models.Model):
+    country = CountryField(null=True, blank=True)
+
+person = Person.objects.create(country=None)
+person.country  # Returns None, not Country(code=None)
+```
+
+This allows for cleaner type checking:
+
+```python
+# Check for null
+if person.country is None:
+    print("No country set")
+else:
+    print(person.country.name)
+
+# The common boolean check still works
+if person.country:
+    print(person.country.name)
+```
+
+!!! warning "Breaking Change"
+
+    Prior to this version, nullable fields returned `Country(code=None)`. Code that checked `obj.country.code is None` should now check `obj.country is None`.
+
 ## Querying
 
 You can filter using the full English country names in addition to country codes, even though only the country codes are stored in the database by using the queryset lookups `contains`, `startswith`, `endswith`, `regex`, or their case insensitive versions. Use `__name` or `__iname` for the `exact`/`iexact` equivalent:
