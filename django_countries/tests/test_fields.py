@@ -653,6 +653,68 @@ class TestCountryFieldFirstRepeatMultiple(TestCase):
         self.assertEqual(field.max_length, expected_max_length)
 
 
+class TestCountryFieldCountriesOnlyMaxLength(TestCase):
+    """
+    Regression test for issue #300: COUNTRIES_ONLY and migrations.
+
+    Verifies that changing COUNTRIES_ONLY settings produces different max_length
+    values in deconstruct(), ensuring Django's migration system will detect the
+    change and generate a new migration.
+    """
+
+    def setUp(self):
+        del countries.countries
+
+    def tearDown(self):
+        del countries.countries
+
+    @override_settings(COUNTRIES_ONLY=["US", "CA"])
+    def test_deconstruct_with_countries_only(self):
+        """With COUNTRIES_ONLY, max_length should be based on restricted set."""
+        field = CountryField(multiple=True)
+        _, _, _, kwargs = field.deconstruct()
+        # 2 countries * 2 chars + 1 comma = 5
+        self.assertEqual(kwargs["max_length"], 5)
+
+    def test_deconstruct_without_countries_only(self):
+        """Without COUNTRIES_ONLY, max_length should be based on all countries."""
+        field = CountryField(multiple=True)
+        _, _, _, kwargs = field.deconstruct()
+        expected_max_length = len(data.COUNTRIES) * 3 - 1
+        self.assertEqual(kwargs["max_length"], expected_max_length)
+
+    @override_settings(COUNTRIES_ONLY=["US"])
+    def test_max_length_differs_with_settings_change(self):
+        """
+        Changing COUNTRIES_ONLY must produce different deconstruct output.
+
+        This ensures Django's migration autodetector will detect the change
+        and generate a new migration to update max_length.
+        """
+        # Get deconstruct with COUNTRIES_ONLY
+        field_restricted = CountryField(multiple=True)
+        _, _, _, kwargs_restricted = field_restricted.deconstruct()
+
+        # Clear cache and get deconstruct without COUNTRIES_ONLY
+        del countries.countries
+
+        # Temporarily remove the override to simulate removing COUNTRIES_ONLY
+        with override_settings(COUNTRIES_ONLY=None):
+            del countries.countries
+            field_full = CountryField(multiple=True)
+            _, _, _, kwargs_full = field_full.deconstruct()
+
+        # The max_length values must differ
+        self.assertNotEqual(
+            kwargs_restricted["max_length"],
+            kwargs_full["max_length"],
+            "max_length should differ when COUNTRIES_ONLY changes, "
+            "allowing Django to detect migration changes",
+        )
+        # Verify the restricted one is smaller
+        self.assertLess(kwargs_restricted["max_length"], kwargs_full["max_length"])
+
+
 class TestCountryObject(TestCase):
     def test_hash(self):
         country = fields.Country(code="XX", flag_url="")
