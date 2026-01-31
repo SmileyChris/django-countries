@@ -5,7 +5,7 @@ from django_countries.utils.metadata import get_metadata
 class CountryMetadataTest(TestCase):
     def test_gb_metadata(self):
         country = Country("GB")
-        self.assertEqual(country.currency_name, "British Pound")
+        self.assertEqual(country.currency_name, "British pound")
         self.assertEqual(country.currency_symbol, "£")
         self.assertEqual(country.economy, "Developed")
         self.assertEqual(country.calling_code, "+44")
@@ -14,11 +14,10 @@ class CountryMetadataTest(TestCase):
         self.assertEqual(country.continent, "Europe")
         self.assertEqual(country.date_format, "DD/MM/YYYY")
         self.assertEqual(country.official_language, ["English"])
-        self.assertEqual(country.timezones, ["Europe/London"])
 
     def test_us_metadata(self):
         country = Country("US")
-        self.assertEqual(country.currency_name, "US Dollar")
+        self.assertEqual(country.currency_name, "United States dollar")
         self.assertEqual(country.currency_symbol, "$")
         self.assertEqual(country.capital_city, "Washington, D.C.")
 

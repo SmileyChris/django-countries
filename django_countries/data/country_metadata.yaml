@@ -1,33 +1,3405 @@
+AD:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+376'
+  utc_offset: +01:00
+  capital_city: Andorra la Vella
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Catalan
+  timezones: []
+AE:
+  currency_name: United Arab Emirates dirham
+  currency_symbol: د.إ
+  economy: Emerging/Developing
+  calling_code: '+971'
+  utc_offset: +04:00
+  capital_city: Abu Dhabi
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+04
+AF:
+  currency_name: Afghan afghani
+  currency_symbol: ؋
+  economy: Emerging/Developing
+  calling_code: '+93'
+  utc_offset: +04:30
+  capital_city: Kabul
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Dari
+  - Pashto
+  - Turkmen
+  timezones:
+  - UTC+04:30
+AG:
+  currency_name: Eastern Caribbean dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1268'
+  utc_offset: -04:00
+  capital_city: Saint John's
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+AI:
+  currency_name: Eastern Caribbean dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1264'
+  utc_offset: null
+  capital_city: The Valley
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+AL:
+  currency_name: Albanian lek
+  currency_symbol: L
+  economy: Emerging/Developing
+  calling_code: '+355'
+  utc_offset: +01:00
+  capital_city: Tirana
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Albanian
+  timezones:
+  - UTC+01:00
+AM:
+  currency_name: Armenian dram
+  currency_symbol: ֏
+  economy: Emerging/Developing
+  calling_code: '+374'
+  utc_offset: +04:00
+  capital_city: Yerevan
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Armenian
+  timezones:
+  - UTC+04:00
+AO:
+  currency_name: Angolan kwanza
+  currency_symbol: Kz
+  economy: Emerging/Developing
+  calling_code: '+244'
+  utc_offset: +01:00
+  capital_city: Luanda
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  timezones:
+  - UTC+01:00
+AQ:
+  currency_name: null
+  currency_symbol: null
+  economy: Emerging/Developing
+  calling_code: null
+  utc_offset: null
+  capital_city: null
+  continent: Antarctic
+  date_format: DD/MM/YYYY
+  official_language: []
+  timezones: []
+AR:
+  currency_name: Argentine peso
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+54'
+  utc_offset: -03:00
+  capital_city: Buenos Aires
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Guaraní
+  - Spanish
+  timezones:
+  - UTC−03:00
+AS:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1684'
+  utc_offset: null
+  capital_city: Pago Pago
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Samoan
+  timezones: []
+AT:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+43'
+  utc_offset: +01:00
+  capital_city: Vienna
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Austro-Bavarian German
+  timezones:
+  - UTC+01:00
+AU:
+  currency_name: Australian dollar
+  currency_symbol: $
+  economy: Developed
+  calling_code: '+61'
+  utc_offset: +05:00
+  capital_city: Canberra
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC+05:00
+  - UTC+06:30
+  - UTC+07:00
+  - UTC+08:00
+  - UTC+09:30
+  - UTC+10:00
+  - UTC+10:30
+  - UTC+11:30
+AW:
+  currency_name: Aruban florin
+  currency_symbol: ƒ
+  economy: Emerging/Developing
+  calling_code: '+297'
+  utc_offset: null
+  capital_city: Oranjestad
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Dutch
+  - Papiamento
+  timezones: []
+AX:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+35818'
+  utc_offset: null
+  capital_city: Mariehamn
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Swedish
+  timezones: []
+AZ:
+  currency_name: Azerbaijani manat
+  currency_symbol: ₼
+  economy: Emerging/Developing
+  calling_code: '+994'
+  utc_offset: +04:00
+  capital_city: Baku
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Azerbaijani
+  - Russian
+  timezones:
+  - UTC+04:00
+BA:
+  currency_name: Bosnia and Herzegovina convertible mark
+  currency_symbol: KM
+  economy: Emerging/Developing
+  calling_code: '+387'
+  utc_offset: +01:00
+  capital_city: Sarajevo
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Bosnian
+  - Croatian
+  - Serbian
+  timezones:
+  - UTC+01:00
+BB:
+  currency_name: Barbadian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1246'
+  utc_offset: -04:00
+  capital_city: Bridgetown
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+BD:
+  currency_name: Bangladeshi taka
+  currency_symbol: ৳
+  economy: Emerging/Developing
+  calling_code: '+880'
+  utc_offset: +06:00
+  capital_city: Dhaka
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Bengali
+  timezones:
+  - UTC+06:00
+BE:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+32'
+  utc_offset: +01:00
+  capital_city: Brussels
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - German
+  - French
+  - Dutch
+  timezones:
+  - UTC+01:00
+BF:
+  currency_name: West African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+226'
+  utc_offset: +00:00
+  capital_city: Ouagadougou
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC
+BG:
+  currency_name: Bulgarian lev
+  currency_symbol: лв
+  economy: Emerging/Developing
+  calling_code: '+359'
+  utc_offset: +02:00
+  capital_city: Sofia
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Bulgarian
+  timezones:
+  - UTC+02:00
+BH:
+  currency_name: Bahraini dinar
+  currency_symbol: .د.ب
+  economy: Emerging/Developing
+  calling_code: '+973'
+  utc_offset: +03:00
+  capital_city: Manama
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+03:00
+BI:
+  currency_name: Burundian franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+257'
+  utc_offset: +02:00
+  capital_city: Gitega
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  - Kirundi
+  timezones:
+  - UTC+02:00
+BJ:
+  currency_name: West African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+229'
+  utc_offset: +01:00
+  capital_city: Porto-Novo
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC+01:00
+BL:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+590'
+  utc_offset: null
+  capital_city: Gustavia
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+BM:
+  currency_name: Bermudian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1441'
+  utc_offset: null
+  capital_city: Hamilton
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+BN:
+  currency_name: Brunei dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+673'
+  utc_offset: +08:00
+  capital_city: Bandar Seri Begawan
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Malay
+  timezones:
+  - UTC+08:00
+BO:
+  currency_name: Bolivian boliviano
+  currency_symbol: Bs.
+  economy: Emerging/Developing
+  calling_code: '+591'
+  utc_offset: -04:00
+  capital_city: Sucre
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Aymara
+  - Guaraní
+  - Quechua
+  - Spanish
+  timezones:
+  - UTC−04:00
+BQ:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+599'
+  utc_offset: null
+  capital_city: Kralendijk
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Dutch
+  - Papiamento
+  timezones: []
+BR:
+  currency_name: Brazilian real
+  currency_symbol: R$
+  economy: Emerging/Developing
+  calling_code: '+55'
+  utc_offset: -05:00
+  capital_city: Brasília
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  timezones:
+  - UTC−05:00
+  - UTC−04:00
+  - UTC−03:00
+  - UTC−02:00
+BS:
+  currency_name: Bahamian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1242'
+  utc_offset: -05:00
+  capital_city: Nassau
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−05:00
+BT:
+  currency_name: Bhutanese ngultrum
+  currency_symbol: Nu.
+  economy: Emerging/Developing
+  calling_code: '+975'
+  utc_offset: +06:00
+  capital_city: Thimphu
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Dzongkha
+  timezones:
+  - UTC+06:00
+BV:
+  currency_name: null
+  currency_symbol: null
+  economy: Emerging/Developing
+  calling_code: '+47'
+  utc_offset: null
+  capital_city: null
+  continent: Antarctic
+  date_format: DD/MM/YYYY
+  official_language:
+  - Norwegian
+  timezones: []
+BW:
+  currency_name: Botswana pula
+  currency_symbol: P
+  economy: Emerging/Developing
+  calling_code: '+267'
+  utc_offset: +02:00
+  capital_city: Gaborone
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Tswana
+  timezones:
+  - UTC+02:00
+BY:
+  currency_name: Belarusian ruble
+  currency_symbol: Br
+  economy: Emerging/Developing
+  calling_code: '+375'
+  utc_offset: +03:00
+  capital_city: Minsk
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Belarusian
+  - Russian
+  timezones:
+  - UTC+03:00
+BZ:
+  currency_name: Belize dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+501'
+  utc_offset: -06:00
+  capital_city: Belmopan
+  continent: Americas
+  date_format: MM/DD/YYYY
+  official_language:
+  - Belizean Creole
+  - English
+  - Spanish
+  timezones:
+  - UTC−06:00
+CA:
+  currency_name: Canadian dollar
+  currency_symbol: $
+  economy: Developed
+  calling_code: '+1'
+  utc_offset: -08:00
+  capital_city: Ottawa
+  continent: Americas
+  date_format: YYYY-MM-DD
+  official_language:
+  - English
+  - French
+  timezones:
+  - UTC−08:00
+  - UTC−07:00
+  - UTC−06:00
+  - UTC−05:00
+  - UTC−04:00
+  - UTC−03:30
+CC:
+  currency_name: Australian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+61'
+  utc_offset: null
+  capital_city: West Island
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+CD:
+  currency_name: Congolese franc
+  currency_symbol: FC
+  economy: Emerging/Developing
+  calling_code: '+243'
+  utc_offset: +01:00
+  capital_city: Kinshasa
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  - Kikongo
+  - Lingala
+  - Tshiluba
+  - Swahili
+  timezones:
+  - UTC+01:00
+  - UTC+02:00
+CF:
+  currency_name: Central African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+236'
+  utc_offset: +01:00
+  capital_city: Bangui
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  - Sango
+  timezones:
+  - UTC+01:00
+CG:
+  currency_name: Central African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+242'
+  utc_offset: +01:00
+  capital_city: Brazzaville
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  - Kikongo
+  - Lingala
+  timezones:
+  - UTC+01:00
+CH:
+  currency_name: Swiss franc
+  currency_symbol: Fr.
+  economy: Developed
+  calling_code: '+41'
+  utc_offset: +01:00
+  capital_city: Bern
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  - Swiss German
+  - Italian
+  - Romansh
+  timezones:
+  - UTC+01:00
+CI:
+  currency_name: West African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+225'
+  utc_offset: +00:00
+  capital_city: Yamoussoukro
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC
+CK:
+  currency_name: Cook Islands dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+682'
+  utc_offset: null
+  capital_city: Avarua
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Cook Islands Māori
+  timezones: []
+CL:
+  currency_name: Chilean peso
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+56'
+  utc_offset: -06:00
+  capital_city: Santiago
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−06:00
+  - UTC−04:00
+CM:
+  currency_name: Central African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+237'
+  utc_offset: +01:00
+  capital_city: Yaoundé
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - French
+  timezones:
+  - UTC+01:00
+CN:
+  currency_name: Chinese yuan
+  currency_symbol: ¥
+  economy: Emerging/Developing
+  calling_code: '+86'
+  utc_offset: +08:00
+  capital_city: Beijing
+  continent: Asia
+  date_format: YYYY/MM/DD
+  official_language:
+  - Chinese
+  timezones:
+  - UTC+08:00
+CO:
+  currency_name: Colombian peso
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+57'
+  utc_offset: -05:00
+  capital_city: Bogotá
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−05:00
+CR:
+  currency_name: Costa Rican colón
+  currency_symbol: ₡
+  economy: Emerging/Developing
+  calling_code: '+506'
+  utc_offset: -06:00
+  capital_city: San José
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−06:00
+CU:
+  currency_name: Cuban convertible peso
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+53'
+  utc_offset: -05:00
+  capital_city: Havana
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−05:00
+CV:
+  currency_name: Cape Verdean escudo
+  currency_symbol: Esc
+  economy: Emerging/Developing
+  calling_code: '+238'
+  utc_offset: -01:00
+  capital_city: Praia
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  timezones:
+  - UTC−01:00
+CW:
+  currency_name: Netherlands Antillean guilder
+  currency_symbol: ƒ
+  economy: Emerging/Developing
+  calling_code: '+599'
+  utc_offset: null
+  capital_city: Willemstad
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Dutch
+  - Papiamento
+  timezones: []
+CX:
+  currency_name: Australian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+61'
+  utc_offset: null
+  capital_city: Flying Fish Cove
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+CY:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+357'
+  utc_offset: +02:00
+  capital_city: Nicosia
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Greek
+  - Turkish
+  timezones:
+  - UTC+02:00
+CZ:
+  currency_name: Czech koruna
+  currency_symbol: Kč
+  economy: Developed
+  calling_code: '+420'
+  utc_offset: +01:00
+  capital_city: Prague
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Czech
+  - Slovak
+  timezones:
+  - UTC+01:00
+DE:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+49'
+  utc_offset: +01:00
+  capital_city: Berlin
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - German
+  timezones:
+  - UTC+01:00
+DJ:
+  currency_name: Djiboutian franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+253'
+  utc_offset: +03:00
+  capital_city: Djibouti
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - French
+  timezones:
+  - UTC+03:00
+DK:
+  currency_name: Danish krone
+  currency_symbol: kr
+  economy: Developed
+  calling_code: '+45'
+  utc_offset: -04:00
+  capital_city: Copenhagen
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Danish
+  timezones:
+  - UTC−04:00
+  - UTC−03:00
+  - UTC−01:00
+  - UTC
+  - UTC+01:00
+DM:
+  currency_name: Eastern Caribbean dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1767'
+  utc_offset: -04:00
+  capital_city: Roseau
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+DO:
+  currency_name: Dominican peso
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1'
+  utc_offset: -04:00
+  capital_city: Santo Domingo
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−04:00
+DZ:
+  currency_name: Algerian dinar
+  currency_symbol: د.ج
+  economy: Emerging/Developing
+  calling_code: '+213'
+  utc_offset: +01:00
+  capital_city: Algiers
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+01:00
+EC:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+593'
+  utc_offset: -06:00
+  capital_city: Quito
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−06:00
+  - UTC−05:00
+EE:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+372'
+  utc_offset: +02:00
+  capital_city: Tallinn
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Estonian
+  timezones:
+  - UTC+02:00
+EG:
+  currency_name: Egyptian pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+20'
+  utc_offset: +02:00
+  capital_city: Cairo
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+02:00
+EH:
+  currency_name: Algerian dinar
+  currency_symbol: دج
+  economy: Emerging/Developing
+  calling_code: '+2'
+  utc_offset: null
+  capital_city: El Aaiún
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Berber
+  - Hassaniya
+  - Spanish
+  timezones: []
+ER:
+  currency_name: Eritrean nakfa
+  currency_symbol: Nfk
+  economy: Emerging/Developing
+  calling_code: '+291'
+  utc_offset: +03:00
+  capital_city: Asmara
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - English
+  - Tigrinya
+  timezones:
+  - UTC+03:00
+ES:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+34'
+  utc_offset: +00:00
+  capital_city: Madrid
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC
+  - UTC+01:00
+ET:
+  currency_name: Ethiopian birr
+  currency_symbol: Br
+  economy: Emerging/Developing
+  calling_code: '+251'
+  utc_offset: +03:00
+  capital_city: Addis Ababa
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Amharic
+  timezones:
+  - UTC+03:00
+FI:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+358'
+  utc_offset: +02:00
+  capital_city: Helsinki
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Finnish
+  - Swedish
+  timezones:
+  - UTC+02:00
+FJ:
+  currency_name: Fijian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+679'
+  utc_offset: '+12:00'
+  capital_city: Suva
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Fijian
+  - Fiji Hindi
+  timezones:
+  - UTC+12:00
+FK:
+  currency_name: Falkland Islands pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+500'
+  utc_offset: null
+  capital_city: Stanley
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+FM:
+  currency_name: US Dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+691'
+  utc_offset: '+10:00'
+  capital_city: Palikir
+  continent: Oceania
+  date_format: MM/DD/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC+10:00
+  - UTC+11
+FO:
+  currency_name: Danish krone
+  currency_symbol: kr
+  economy: Emerging/Developing
+  calling_code: '+298'
+  utc_offset: null
+  capital_city: Tórshavn
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Danish
+  - Faroese
+  timezones: []
+FR:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+33'
+  utc_offset: '-10:00'
+  capital_city: Paris
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC−10:00
+  - UTC−09:30
+  - UTC−09:00
+  - UTC−08:00
+  - UTC−04:00
+  - UTC−03:00
+  - UTC+01:00
+  - UTC+03:00
+  - UTC+04:00
+  - UTC+05:00
+  - UTC+11:00
+  - UTC+12:00
+GA:
+  currency_name: Central African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+241'
+  utc_offset: +01:00
+  capital_city: Libreville
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC+01:00
 GB:
-  currency_name: "British Pound"
-  currency_symbol: "£"
-  economy: "Developed"
-  calling_code: "+44"
-  utc_offset: "+00:00"
-  capital_city: "London"
-  continent: "Europe"
-  date_format: "DD/MM/YYYY"
-  official_language: ["English"]
-  timezones: ["Europe/London"]
-US:
-  currency_name: "US Dollar"
-  currency_symbol: "$"
-  economy: "Developed"
-  calling_code: "+1"
-  utc_offset: "-05:00"
-  capital_city: "Washington, D.C."
-  continent: "North America"
-  date_format: "MM/DD/YYYY"
-  official_language: ["English"]
-  timezones: ["America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles"]
+  currency_name: British pound
+  currency_symbol: £
+  economy: Developed
+  calling_code: '+44'
+  utc_offset: +00:00
+  capital_city: London
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+GD:
+  currency_name: Eastern Caribbean dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1473'
+  utc_offset: -04:00
+  capital_city: St. George's
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+GE:
+  currency_name: lari
+  currency_symbol: ₾
+  economy: Emerging/Developing
+  calling_code: '+995'
+  utc_offset: null
+  capital_city: Tbilisi
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Georgian
+  timezones: []
+GF:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+594'
+  utc_offset: null
+  capital_city: Cayenne
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+GG:
+  currency_name: British pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+44'
+  utc_offset: null
+  capital_city: St. Peter Port
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - French
+  - Guernésiais
+  timezones: []
+GH:
+  currency_name: Ghanaian cedi
+  currency_symbol: ₵
+  economy: Emerging/Developing
+  calling_code: '+233'
+  utc_offset: +00:00
+  capital_city: Accra
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC
+GI:
+  currency_name: Gibraltar pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+350'
+  utc_offset: null
+  capital_city: Gibraltar
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+GL:
+  currency_name: krone
+  currency_symbol: kr.
+  economy: Emerging/Developing
+  calling_code: '+299'
+  utc_offset: null
+  capital_city: Nuuk
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Greenlandic
+  timezones: []
+GM:
+  currency_name: dalasi
+  currency_symbol: D
+  economy: Emerging/Developing
+  calling_code: '+220'
+  utc_offset: null
+  capital_city: Banjul
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+GN:
+  currency_name: Guinean franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+224'
+  utc_offset: +00:00
+  capital_city: Conakry
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC
+GP:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+590'
+  utc_offset: null
+  capital_city: Basse-Terre
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+GQ:
+  currency_name: Central African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+240'
+  utc_offset: +01:00
+  capital_city: Malabo
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  - Portuguese
+  - Spanish
+  timezones:
+  - UTC+01:00
+GR:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+30'
+  utc_offset: +02:00
+  capital_city: Athens
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Greek
+  timezones:
+  - UTC+02:00
+GS:
+  currency_name: Saint Helena pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+500'
+  utc_offset: null
+  capital_city: King Edward Point
+  continent: Antarctic
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+GT:
+  currency_name: Guatemalan quetzal
+  currency_symbol: Q
+  economy: Emerging/Developing
+  calling_code: '+502'
+  utc_offset: -06:00
+  capital_city: Guatemala City
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−06:00
+GU:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1671'
+  utc_offset: null
+  capital_city: Hagåtña
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - Chamorro
+  - English
+  - Spanish
+  timezones: []
+GW:
+  currency_name: West African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+245'
+  utc_offset: +00:00
+  capital_city: Bissau
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  - Upper Guinea Creole
+  timezones:
+  - UTC
+GY:
+  currency_name: Guyanese dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+592'
+  utc_offset: -04:00
+  capital_city: Georgetown
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+HK:
+  currency_name: Hong Kong dollar
+  currency_symbol: $
+  economy: Developed
+  calling_code: '+852'
+  utc_offset: +08:00
+  capital_city: City of Victoria
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Chinese
+  timezones:
+  - UTC+08:00
+HM:
+  currency_name: Australian Dollar
+  currency_symbol: A$
+  economy: Emerging/Developing
+  calling_code: null
+  utc_offset: null
+  capital_city: null
+  continent: Antarctic
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+HN:
+  currency_name: Honduran lempira
+  currency_symbol: L
+  economy: Emerging/Developing
+  calling_code: '+504'
+  utc_offset: -06:00
+  capital_city: Tegucigalpa
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−06:00
+HR:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+385'
+  utc_offset: +01:00
+  capital_city: Zagreb
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Croatian
+  timezones:
+  - UTC+01:00
+HT:
+  currency_name: Haitian gourde
+  currency_symbol: G
+  economy: Emerging/Developing
+  calling_code: '+509'
+  utc_offset: -05:00
+  capital_city: Port-au-Prince
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  - Haitian Creole
+  timezones:
+  - UTC−05:00
+HU:
+  currency_name: Hungarian forint
+  currency_symbol: Ft
+  economy: Emerging/Developing
+  calling_code: '+36'
+  utc_offset: +01:00
+  capital_city: Budapest
+  continent: Europe
+  date_format: YYYY/MM/DD
+  official_language:
+  - Hungarian
+  timezones:
+  - UTC+01:00
+ID:
+  currency_name: Indonesian rupiah
+  currency_symbol: Rp
+  economy: Emerging/Developing
+  calling_code: '+62'
+  utc_offset: +07:00
+  capital_city: Jakarta
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Indonesian
+  timezones:
+  - UTC+07:00
+  - UTC+08:00
+  - UTC+09:00
+IE:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+353'
+  utc_offset: +00:00
+  capital_city: Dublin
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Irish
+  timezones:
+  - UTC
+IL:
+  currency_name: Israeli new shekel
+  currency_symbol: ₪
+  economy: Developed
+  calling_code: '+972'
+  utc_offset: +02:00
+  capital_city: Jerusalem
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - Hebrew
+  timezones:
+  - UTC+02:00
+IM:
+  currency_name: British pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+44'
+  utc_offset: null
+  capital_city: Douglas
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Manx
+  timezones: []
+IN:
+  currency_name: Indian rupee
+  currency_symbol: ₹
+  economy: Emerging/Developing
+  calling_code: '+91'
+  utc_offset: +05:30
+  capital_city: New Delhi
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Hindi
+  - Tamil
+  timezones:
+  - UTC+05:30
+IO:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+246'
+  utc_offset: null
+  capital_city: Diego Garcia
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+IQ:
+  currency_name: Iraqi dinar
+  currency_symbol: ع.د
+  economy: Emerging/Developing
+  calling_code: '+964'
+  utc_offset: +03:00
+  capital_city: Baghdad
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - Aramaic
+  - Sorani
+  timezones:
+  - UTC+03:00
+IR:
+  currency_name: Iranian rial
+  currency_symbol: ﷼
+  economy: Emerging/Developing
+  calling_code: '+98'
+  utc_offset: +03:30
+  capital_city: Tehran
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Persian (Farsi)
+  timezones:
+  - UTC+03:30
+IS:
+  currency_name: Icelandic króna
+  currency_symbol: kr
+  economy: Developed
+  calling_code: '+354'
+  utc_offset: +00:00
+  capital_city: Reykjavik
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Icelandic
+  timezones:
+  - UTC
+IT:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+39'
+  utc_offset: +01:00
+  capital_city: Rome
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Italian
+  timezones:
+  - UTC+01:00
+JE:
+  currency_name: British pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+44'
+  utc_offset: null
+  capital_city: Saint Helier
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - French
+  - Jèrriais
+  timezones: []
+JM:
+  currency_name: Jamaican dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1876'
+  utc_offset: -05:00
+  capital_city: Kingston
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Jamaican Patois
+  timezones:
+  - UTC−05:00
+JO:
+  currency_name: Jordanian dinar
+  currency_symbol: د.ا
+  economy: Emerging/Developing
+  calling_code: '+962'
+  utc_offset: +03:00
+  capital_city: Amman
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+03:00
+JP:
+  currency_name: Japanese yen
+  currency_symbol: ¥
+  economy: Developed
+  calling_code: '+81'
+  utc_offset: +09:00
+  capital_city: Tokyo
+  continent: Asia
+  date_format: YYYY/MM/DD
+  official_language:
+  - Japanese
+  timezones:
+  - UTC+09:00
+KE:
+  currency_name: Kenyan shilling
+  currency_symbol: Sh
+  economy: Emerging/Developing
+  calling_code: '+254'
+  utc_offset: +03:00
+  capital_city: Nairobi
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Swahili
+  timezones:
+  - UTC+03:00
+KG:
+  currency_name: Kyrgyzstani som
+  currency_symbol: с
+  economy: Emerging/Developing
+  calling_code: '+996'
+  utc_offset: +06:00
+  capital_city: Bishkek
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Kyrgyz
+  - Russian
+  timezones:
+  - UTC+06:00
+KH:
+  currency_name: Cambodian riel
+  currency_symbol: ៛
+  economy: Emerging/Developing
+  calling_code: '+855'
+  utc_offset: +07:00
+  capital_city: Phnom Penh
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Khmer
+  timezones:
+  - UTC+07:00
+KI:
+  currency_name: Australian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+686'
+  utc_offset: '+12:00'
+  capital_city: South Tarawa
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Gilbertese
+  timezones:
+  - UTC+12:00
+  - UTC+13:00
+  - UTC+14:00
+KM:
+  currency_name: Comorian franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+269'
+  utc_offset: +03:00
+  capital_city: Moroni
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - French
+  - Comorian
+  timezones:
+  - UTC+03:00
+KN:
+  currency_name: Eastern Caribbean dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1869'
+  utc_offset: -04:00
+  capital_city: Basseterre
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+KP:
+  currency_name: North Korean won
+  currency_symbol: ₩
+  economy: Emerging/Developing
+  calling_code: '+850'
+  utc_offset: +09:00
+  capital_city: Pyongyang
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Korean
+  timezones:
+  - UTC+09:00
+KR:
+  currency_name: South Korean won
+  currency_symbol: ₩
+  economy: Developed
+  calling_code: '+82'
+  utc_offset: +09:00
+  capital_city: Seoul
+  continent: Asia
+  date_format: YYYY/MM/DD
+  official_language:
+  - Korean
+  timezones:
+  - UTC+09:00
+KW:
+  currency_name: Kuwaiti dinar
+  currency_symbol: د.ك
+  economy: Emerging/Developing
+  calling_code: '+965'
+  utc_offset: +03:00
+  capital_city: Kuwait City
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+03:00
+KY:
+  currency_name: Cayman Islands dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1345'
+  utc_offset: null
+  capital_city: George Town
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+KZ:
+  currency_name: Kazakhstani tenge
+  currency_symbol: ₸
+  economy: Emerging/Developing
+  calling_code: '+7'
+  utc_offset: +05:00
+  capital_city: Astana
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Kazakh
+  - Russian
+  timezones:
+  - UTC+05:00
+  - UTC+06:00
+LA:
+  currency_name: Lao kip
+  currency_symbol: ₭
+  economy: Emerging/Developing
+  calling_code: '+856'
+  utc_offset: +07:00
+  capital_city: Vientiane
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Lao
+  timezones:
+  - UTC+07:00
+LB:
+  currency_name: Lebanese pound
+  currency_symbol: ل.ل
+  economy: Emerging/Developing
+  calling_code: '+961'
+  utc_offset: +02:00
+  capital_city: Beirut
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - French
+  timezones:
+  - UTC+02:00
+LC:
+  currency_name: Eastern Caribbean dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1758'
+  utc_offset: -04:00
+  capital_city: Castries
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+LI:
+  currency_name: Swiss franc
+  currency_symbol: Fr
+  economy: Developed
+  calling_code: '+423'
+  utc_offset: +01:00
+  capital_city: Vaduz
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - German
+  timezones:
+  - UTC+01:00
+LK:
+  currency_name: Sri Lankan rupee
+  currency_symbol: Rs රු
+  economy: Emerging/Developing
+  calling_code: '+94'
+  utc_offset: +05:30
+  capital_city: Colombo
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Sinhala
+  - Tamil
+  timezones:
+  - UTC+05:30
+LR:
+  currency_name: Liberian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+231'
+  utc_offset: +00:00
+  capital_city: Monrovia
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC
+LS:
+  currency_name: Lesotho loti
+  currency_symbol: L
+  economy: Emerging/Developing
+  calling_code: '+266'
+  utc_offset: +02:00
+  capital_city: Maseru
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Sotho
+  timezones:
+  - UTC+02:00
+LT:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+370'
+  utc_offset: +02:00
+  capital_city: Vilnius
+  continent: Europe
+  date_format: YYYY-MM-DD
+  official_language:
+  - Lithuanian
+  timezones:
+  - UTC+02:00
+LU:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+352'
+  utc_offset: +01:00
+  capital_city: Luxembourg
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - German
+  - French
+  - Luxembourgish
+  timezones:
+  - UTC+01:00
+LV:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+371'
+  utc_offset: +02:00
+  capital_city: Riga
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Latvian
+  timezones:
+  - UTC+02:00
+LY:
+  currency_name: Libyan dinar
+  currency_symbol: ل.د
+  economy: Emerging/Developing
+  calling_code: '+218'
+  utc_offset: +01:00
+  capital_city: Tripoli
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+01:00
+MA:
+  currency_name: Moroccan dirham
+  currency_symbol: د.م.
+  economy: Emerging/Developing
+  calling_code: '+212'
+  utc_offset: +00:00
+  capital_city: Rabat
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - Berber
+  timezones:
+  - UTC
+MC:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+377'
+  utc_offset: +01:00
+  capital_city: Monaco
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC+01:00
+MD:
+  currency_name: Moldovan leu
+  currency_symbol: L
+  economy: Emerging/Developing
+  calling_code: '+373'
+  utc_offset: +02:00
+  capital_city: Chișinău
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Moldavian
+  timezones:
+  - UTC+02:00
+ME:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+382'
+  utc_offset: null
+  capital_city: Podgorica
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Montenegrin
+  timezones: []
+MF:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+590'
+  utc_offset: null
+  capital_city: Marigot
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+MG:
+  currency_name: Malagasy ariary
+  currency_symbol: Ar
+  economy: Emerging/Developing
+  calling_code: '+261'
+  utc_offset: +03:00
+  capital_city: Antananarivo
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  - Malagasy
+  timezones:
+  - UTC+03:00
+MH:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+692'
+  utc_offset: '+12:00'
+  capital_city: Majuro
+  continent: Oceania
+  date_format: MM/DD/YYYY
+  official_language:
+  - English
+  - Marshallese
+  timezones:
+  - UTC+12:00
+MK:
+  currency_name: denar
+  currency_symbol: den
+  economy: Emerging/Developing
+  calling_code: '+389'
+  utc_offset: +01:00
+  capital_city: Skopje
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Macedonian
+  timezones:
+  - UTC+01:00
+ML:
+  currency_name: West African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+223'
+  utc_offset: +00:00
+  capital_city: Bamako
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC
+MM:
+  currency_name: Burmese kyat
+  currency_symbol: Ks
+  economy: Emerging/Developing
+  calling_code: '+95'
+  utc_offset: null
+  capital_city: Naypyidaw
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Burmese
+  timezones: []
+MN:
+  currency_name: Mongolian tögrög
+  currency_symbol: ₮
+  economy: Emerging/Developing
+  calling_code: '+976'
+  utc_offset: +07:00
+  capital_city: Ulan Bator
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Mongolian
+  timezones:
+  - UTC+07:00
+  - UTC+08:00
+MO:
+  currency_name: Macanese pataca
+  currency_symbol: P
+  economy: Emerging/Developing
+  calling_code: '+853'
+  utc_offset: +08:00
+  capital_city: null
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  - Chinese
+  timezones:
+  - UTC+08:00
+MP:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1670'
+  utc_offset: null
+  capital_city: Saipan
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - Carolinian
+  - Chamorro
+  - English
+  timezones: []
+MQ:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+596'
+  utc_offset: null
+  capital_city: Fort-de-France
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+MR:
+  currency_name: Mauritanian ouguiya
+  currency_symbol: UM
+  economy: Emerging/Developing
+  calling_code: '+222'
+  utc_offset: +00:00
+  capital_city: Nouakchott
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC
+MS:
+  currency_name: Eastern Caribbean dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1664'
+  utc_offset: null
+  capital_city: Plymouth
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+MT:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+356'
+  utc_offset: +01:00
+  capital_city: Valletta
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Maltese
+  timezones:
+  - UTC+01:00
+MU:
+  currency_name: Mauritian rupee
+  currency_symbol: ₨
+  economy: Emerging/Developing
+  calling_code: '+230'
+  utc_offset: +04:00
+  capital_city: Port Louis
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - French
+  - Mauritian Creole
+  timezones:
+  - UTC+04:00
+MV:
+  currency_name: Maldivian rufiyaa
+  currency_symbol: .ރ
+  economy: Emerging/Developing
+  calling_code: '+960'
+  utc_offset: +05:00
+  capital_city: Malé
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Maldivian
+  timezones:
+  - UTC+05:00
+MW:
+  currency_name: Malawian kwacha
+  currency_symbol: MK
+  economy: Emerging/Developing
+  calling_code: '+265'
+  utc_offset: +02:00
+  capital_city: Lilongwe
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Chewa
+  timezones:
+  - UTC+02:00
+MX:
+  currency_name: Mexican peso
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+52'
+  utc_offset: -08:00
+  capital_city: Mexico City
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−08:00
+  - UTC−07:00
+  - UTC−06:00
+MY:
+  currency_name: Malaysian ringgit
+  currency_symbol: RM
+  economy: Emerging/Developing
+  calling_code: '+60'
+  utc_offset: +08:00
+  capital_city: Kuala Lumpur
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Malay
+  timezones:
+  - UTC+08:00
+MZ:
+  currency_name: Mozambican metical
+  currency_symbol: MT
+  economy: Emerging/Developing
+  calling_code: '+258'
+  utc_offset: +02:00
+  capital_city: Maputo
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  timezones:
+  - UTC+02:00
+NA:
+  currency_name: Namibian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+264'
+  utc_offset: +01:00
+  capital_city: Windhoek
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Afrikaans
+  - German
+  - English
+  - Herero
+  - Khoekhoe
+  - Kwangali
+  - Lozi
+  - Ndonga
+  - Tswana
+  timezones:
+  - UTC+01:00
+NC:
+  currency_name: CFP franc
+  currency_symbol: ₣
+  economy: Emerging/Developing
+  calling_code: '+687'
+  utc_offset: null
+  capital_city: Nouméa
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+NE:
+  currency_name: West African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+227'
+  utc_offset: +01:00
+  capital_city: Niamey
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC+01:00
+NF:
+  currency_name: Australian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+672'
+  utc_offset: null
+  capital_city: Kingston
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Norfuk
+  timezones: []
 NG:
-  currency_name: "Naira"
-  currency_symbol: "₦"
-  economy: "Emerging"
-  calling_code: "+234"
-  utc_offset: "+01:00"
-  capital_city: "Abuja"
-  continent: "Africa"
-  date_format: "DD/MM/YYYY"
-  official_language: ["English"]
-  timezones: ["Africa/Lagos"]
+  currency_name: Naira
+  currency_symbol: ₦
+  economy: Emerging/Developing
+  calling_code: '+234'
+  utc_offset: +01:00
+  capital_city: Abuja
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC+01:00
+NI:
+  currency_name: Nicaraguan córdoba
+  currency_symbol: C$
+  economy: Emerging/Developing
+  calling_code: '+505'
+  utc_offset: -06:00
+  capital_city: Managua
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−06:00
+NL:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+31'
+  utc_offset: null
+  capital_city: Amsterdam
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Dutch
+  timezones: []
+'NO':
+  currency_name: Norwegian krone
+  currency_symbol: kr
+  economy: Developed
+  calling_code: '+47'
+  utc_offset: +01:00
+  capital_city: Oslo
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Norwegian Nynorsk
+  - Norwegian Bokmål
+  - Sami
+  timezones:
+  - UTC+01:00
+NP:
+  currency_name: Nepalese rupee
+  currency_symbol: ₨
+  economy: Emerging/Developing
+  calling_code: '+977'
+  utc_offset: +05:45
+  capital_city: Kathmandu
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Nepali
+  timezones:
+  - UTC+05:45
+NR:
+  currency_name: Australian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+674'
+  utc_offset: '+12:00'
+  capital_city: Yaren
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Nauru
+  timezones:
+  - UTC+12:00
+NU:
+  currency_name: New Zealand dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+683'
+  utc_offset: null
+  capital_city: Alofi
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Niuean
+  timezones: []
+NZ:
+  currency_name: New Zealand dollar
+  currency_symbol: $
+  economy: Developed
+  calling_code: '+64'
+  utc_offset: '-11:00'
+  capital_city: Wellington
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Māori
+  - New Zealand Sign Language
+  timezones:
+  - UTC−11:00
+  - UTC−10:00
+  - UTC+12:00
+  - UTC+12:45
+  - UTC+13:00
+OM:
+  currency_name: Omani rial
+  currency_symbol: ر.ع.
+  economy: Emerging/Developing
+  calling_code: '+968'
+  utc_offset: +04:00
+  capital_city: Muscat
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+04:00
+PA:
+  currency_name: Panamanian balboa
+  currency_symbol: B/.
+  economy: Emerging/Developing
+  calling_code: '+507'
+  utc_offset: -05:00
+  capital_city: Panama City
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−05:00
+PE:
+  currency_name: Peruvian sol
+  currency_symbol: S/.
+  economy: Emerging/Developing
+  calling_code: '+51'
+  utc_offset: -05:00
+  capital_city: Lima
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Aymara
+  - Quechua
+  - Spanish
+  timezones:
+  - UTC−05:00
+PF:
+  currency_name: CFP franc
+  currency_symbol: ₣
+  economy: Emerging/Developing
+  calling_code: '+689'
+  utc_offset: null
+  capital_city: Papeetē
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+PG:
+  currency_name: Papua New Guinean kina
+  currency_symbol: K
+  economy: Emerging/Developing
+  calling_code: '+675'
+  utc_offset: '+10:00'
+  capital_city: Port Moresby
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Hiri Motu
+  - Tok Pisin
+  timezones:
+  - UTC+10:00
+PH:
+  currency_name: Philippine peso
+  currency_symbol: ₱
+  economy: Emerging/Developing
+  calling_code: '+63'
+  utc_offset: +08:00
+  capital_city: Manila
+  continent: Asia
+  date_format: MM/DD/YYYY
+  official_language:
+  - English
+  - Filipino
+  timezones:
+  - UTC+08:00
+PK:
+  currency_name: Pakistani rupee
+  currency_symbol: ₨
+  economy: Emerging/Developing
+  calling_code: '+92'
+  utc_offset: +05:00
+  capital_city: Islamabad
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Urdu
+  timezones:
+  - UTC+05:00
+PL:
+  currency_name: Polish złoty
+  currency_symbol: zł
+  economy: Emerging/Developing
+  calling_code: '+48'
+  utc_offset: +01:00
+  capital_city: Warsaw
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Polish
+  timezones:
+  - UTC+01:00
+PM:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+508'
+  utc_offset: null
+  capital_city: Saint-Pierre
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+PN:
+  currency_name: New Zealand dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+64'
+  utc_offset: null
+  capital_city: Adamstown
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+PR:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Developed
+  calling_code: '+1'
+  utc_offset: null
+  capital_city: San Juan
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Spanish
+  timezones: []
+PS:
+  currency_name: Egyptian pound
+  currency_symbol: E£
+  economy: Emerging/Developing
+  calling_code: '+970'
+  utc_offset: null
+  capital_city: Ramallah
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones: []
+PT:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+351'
+  utc_offset: -01:00
+  capital_city: Lisbon
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  timezones:
+  - UTC−01:00
+  - UTC
+PW:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+680'
+  utc_offset: +09:00
+  capital_city: Ngerulmud
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Palauan
+  timezones:
+  - UTC+09:00
+PY:
+  currency_name: Paraguayan guaraní
+  currency_symbol: ₲
+  economy: Emerging/Developing
+  calling_code: '+595'
+  utc_offset: -04:00
+  capital_city: Asunción
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Guaraní
+  - Spanish
+  timezones:
+  - UTC−04:00
+QA:
+  currency_name: Qatari riyal
+  currency_symbol: ر.ق
+  economy: Emerging/Developing
+  calling_code: '+974'
+  utc_offset: +03:00
+  capital_city: Doha
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+03:00
+RE:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+262'
+  utc_offset: null
+  capital_city: Saint-Denis
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+RO:
+  currency_name: Romanian leu
+  currency_symbol: lei
+  economy: Emerging/Developing
+  calling_code: '+40'
+  utc_offset: +02:00
+  capital_city: Bucharest
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Romanian
+  timezones:
+  - UTC+02:00
+RS:
+  currency_name: Serbian dinar
+  currency_symbol: дин.
+  economy: Emerging/Developing
+  calling_code: '+381'
+  utc_offset: +01:00
+  capital_city: Belgrade
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Serbian
+  timezones:
+  - UTC+01:00
+  - UTC+02:00
+RU:
+  currency_name: Russian ruble
+  currency_symbol: ₽
+  economy: Emerging/Developing
+  calling_code: '+7'
+  utc_offset: +03:00
+  capital_city: Moscow
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Russian
+  timezones:
+  - UTC+03:00
+  - UTC+04:00
+  - UTC+06:00
+  - UTC+07:00
+  - UTC+08:00
+  - UTC+09:00
+  - UTC+10:00
+  - UTC+11:00
+  - UTC+12:00
+RW:
+  currency_name: Rwandan franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+250'
+  utc_offset: +02:00
+  capital_city: Kigali
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - French
+  - Kinyarwanda
+  timezones:
+  - UTC+02:00
+SA:
+  currency_name: Saudi riyal
+  currency_symbol: ر.س
+  economy: Emerging/Developing
+  calling_code: '+966'
+  utc_offset: +03:00
+  capital_city: Riyadh
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+03:00
+SB:
+  currency_name: Solomon Islands dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+677'
+  utc_offset: '+11:00'
+  capital_city: Honiara
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC+11:00
+SC:
+  currency_name: Seychellois rupee
+  currency_symbol: ₨
+  economy: Emerging/Developing
+  calling_code: '+248'
+  utc_offset: +04:00
+  capital_city: Victoria
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Seychellois Creole
+  - English
+  - French
+  timezones:
+  - UTC+04:00
+SD:
+  currency_name: Sudanese pound
+  currency_symbol: PT
+  economy: Emerging/Developing
+  calling_code: '+249'
+  utc_offset: +03:00
+  capital_city: Khartoum
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - English
+  timezones:
+  - UTC+03:00
+SE:
+  currency_name: Swedish krona
+  currency_symbol: kr
+  economy: Developed
+  calling_code: '+46'
+  utc_offset: +01:00
+  capital_city: Stockholm
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Swedish
+  timezones:
+  - UTC+01:00
+SG:
+  currency_name: Singapore dollar
+  currency_symbol: $
+  economy: Developed
+  calling_code: '+65'
+  utc_offset: +08:00
+  capital_city: Singapore
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Malay
+  - Tamil
+  - Chinese
+  timezones:
+  - UTC+08:00
+SH:
+  currency_name: Pound sterling
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+2'
+  utc_offset: null
+  capital_city: Jamestown
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+SI:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+386'
+  utc_offset: +01:00
+  capital_city: Ljubljana
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Slovene
+  timezones:
+  - UTC+01:00
+SJ:
+  currency_name: krone
+  currency_symbol: kr
+  economy: Emerging/Developing
+  calling_code: '+4779'
+  utc_offset: null
+  capital_city: Longyearbyen
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Norwegian
+  timezones: []
+SK:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+421'
+  utc_offset: +01:00
+  capital_city: Bratislava
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Slovak
+  timezones:
+  - UTC+01:00
+SL:
+  currency_name: Sierra Leonean leone
+  currency_symbol: Le
+  economy: Emerging/Developing
+  calling_code: '+232'
+  utc_offset: +00:00
+  capital_city: Freetown
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC
+SM:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Developed
+  calling_code: '+378'
+  utc_offset: +01:00
+  capital_city: City of San Marino
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Italian
+  timezones:
+  - UTC+01:00
+SN:
+  currency_name: West African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+221'
+  utc_offset: +00:00
+  capital_city: Dakar
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC
+SO:
+  currency_name: Somali shilling
+  currency_symbol: Sh
+  economy: Emerging/Developing
+  calling_code: '+252'
+  utc_offset: +03:00
+  capital_city: Mogadishu
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - Somali
+  timezones:
+  - UTC+03:00
+SR:
+  currency_name: Surinamese dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+597'
+  utc_offset: -03:00
+  capital_city: Paramaribo
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Dutch
+  timezones:
+  - UTC−03:00
+SS:
+  currency_name: South Sudanese pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+211'
+  utc_offset: +03:00
+  capital_city: Juba
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC+03:00
+ST:
+  currency_name: São Tomé and Príncipe dobra
+  currency_symbol: Db
+  economy: Emerging/Developing
+  calling_code: '+239'
+  utc_offset: +00:00
+  capital_city: São Tomé
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  timezones:
+  - UTC
+SV:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+503'
+  utc_offset: -06:00
+  capital_city: San Salvador
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−06:00
+SX:
+  currency_name: Netherlands Antillean guilder
+  currency_symbol: ƒ
+  economy: Emerging/Developing
+  calling_code: '+1721'
+  utc_offset: null
+  capital_city: Philipsburg
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - French
+  - Dutch
+  timezones: []
+SY:
+  currency_name: Syrian pound
+  currency_symbol: £
+  economy: Emerging/Developing
+  calling_code: '+963'
+  utc_offset: +02:00
+  capital_city: Damascus
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+02:00
+SZ:
+  currency_name: Swazi lilangeni
+  currency_symbol: L
+  economy: Emerging/Developing
+  calling_code: '+268'
+  utc_offset: +02:00
+  capital_city: Lobamba
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Swazi
+  timezones:
+  - UTC+02:00
+TC:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1649'
+  utc_offset: null
+  capital_city: Cockburn Town
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+TD:
+  currency_name: Central African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+235'
+  utc_offset: +01:00
+  capital_city: N'Djamena
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  - French
+  timezones:
+  - UTC+01:00
+TF:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+262'
+  utc_offset: null
+  capital_city: Port-aux-Français
+  continent: Antarctic
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+TG:
+  currency_name: West African CFA franc
+  currency_symbol: Fr
+  economy: Emerging/Developing
+  calling_code: '+228'
+  utc_offset: +00:00
+  capital_city: Lomé
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones:
+  - UTC
+TH:
+  currency_name: Thai baht
+  currency_symbol: ฿
+  economy: Emerging/Developing
+  calling_code: '+66'
+  utc_offset: +07:00
+  capital_city: Bangkok
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Thai
+  timezones:
+  - UTC+07:00
+TJ:
+  currency_name: Tajikistani somoni
+  currency_symbol: ЅМ
+  economy: Emerging/Developing
+  calling_code: '+992'
+  utc_offset: +05:00
+  capital_city: Dushanbe
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Russian
+  - Tajik
+  timezones:
+  - UTC+05:00
+TK:
+  currency_name: New Zealand dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+690'
+  utc_offset: null
+  capital_city: Fakaofo
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Samoan
+  - Tokelauan
+  timezones: []
+TL:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+670'
+  utc_offset: +09:00
+  capital_city: Dili
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Portuguese
+  - Tetum
+  timezones:
+  - UTC+09:00
+TM:
+  currency_name: Turkmenistan manat
+  currency_symbol: m
+  economy: Emerging/Developing
+  calling_code: '+993'
+  utc_offset: +05:00
+  capital_city: Ashgabat
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Russian
+  - Turkmen
+  timezones:
+  - UTC+05:00
+TN:
+  currency_name: Tunisian dinar
+  currency_symbol: د.ت
+  economy: Emerging/Developing
+  calling_code: '+216'
+  utc_offset: +01:00
+  capital_city: Tunis
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+01:00
+TO:
+  currency_name: Tongan paʻanga
+  currency_symbol: T$
+  economy: Emerging/Developing
+  calling_code: '+676'
+  utc_offset: '+13:00'
+  capital_city: Nuku'alofa
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Tongan
+  timezones:
+  - UTC+13:00
+TR:
+  currency_name: Turkish lira
+  currency_symbol: ₺
+  economy: Emerging/Developing
+  calling_code: '+90'
+  utc_offset: +02:00
+  capital_city: Ankara
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Turkish
+  timezones:
+  - UTC+02:00
+TT:
+  currency_name: Trinidad and Tobago dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1868'
+  utc_offset: -04:00
+  capital_city: Port of Spain
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+TV:
+  currency_name: Australian dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+688'
+  utc_offset: '+12:00'
+  capital_city: Funafuti
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Tuvaluan
+  timezones:
+  - UTC+12:00
+TW:
+  currency_name: New Taiwan dollar
+  currency_symbol: $
+  economy: Developed
+  calling_code: '+886'
+  utc_offset: +08:00
+  capital_city: Taipei
+  continent: Asia
+  date_format: YYYY/MM/DD
+  official_language:
+  - Chinese
+  timezones:
+  - UTC+08:00
+TZ:
+  currency_name: Tanzanian shilling
+  currency_symbol: Sh
+  economy: Emerging/Developing
+  calling_code: '+255'
+  utc_offset: +03:00
+  capital_city: Dodoma
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Swahili
+  timezones:
+  - UTC+03:00
+UA:
+  currency_name: Ukrainian hryvnia
+  currency_symbol: ₴
+  economy: Emerging/Developing
+  calling_code: '+380'
+  utc_offset: +02:00
+  capital_city: Kyiv
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Ukrainian
+  timezones:
+  - UTC+02:00
+UG:
+  currency_name: Ugandan shilling
+  currency_symbol: Sh
+  economy: Emerging/Developing
+  calling_code: '+256'
+  utc_offset: +03:00
+  capital_city: Kampala
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Swahili
+  timezones:
+  - UTC+03:00
+UM:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+268'
+  utc_offset: null
+  capital_city: null
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+US:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Developed
+  calling_code: '+1'
+  utc_offset: -05:00
+  capital_city: Washington, D.C.
+  continent: Americas
+  date_format: MM/DD/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−12:00
+  - UTC−11:00
+  - UTC−10:00
+  - UTC−09:00
+  - UTC−08:00
+  - UTC−07:00
+  - UTC−06:00
+  - UTC−05:00
+  - UTC−04:00
+  - UTC+10:00
+  - UTC+12:00
+UY:
+  currency_name: Uruguayan peso
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+598'
+  utc_offset: -03:00
+  capital_city: Montevideo
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−03:00
+UZ:
+  currency_name: Uzbekistani soʻm
+  currency_symbol: so'm
+  economy: Emerging/Developing
+  calling_code: '+998'
+  utc_offset: +05:00
+  capital_city: Tashkent
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Russian
+  - Uzbek
+  timezones:
+  - UTC+05:00
+VA:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+3'
+  utc_offset: null
+  capital_city: Vatican City
+  continent: Europe
+  date_format: DD/MM/YYYY
+  official_language:
+  - Italian
+  - Latin
+  timezones: []
+VC:
+  currency_name: Eastern Caribbean dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1784'
+  utc_offset: -04:00
+  capital_city: Kingstown
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC−04:00
+VE:
+  currency_name: Venezuelan bolívar soberano
+  currency_symbol: Bs.S.
+  economy: Emerging/Developing
+  calling_code: '+58'
+  utc_offset: -04:30
+  capital_city: Caracas
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - Spanish
+  timezones:
+  - UTC−04:30
+VG:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1284'
+  utc_offset: null
+  capital_city: Road Town
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+VI:
+  currency_name: United States dollar
+  currency_symbol: $
+  economy: Emerging/Developing
+  calling_code: '+1340'
+  utc_offset: null
+  capital_city: Charlotte Amalie
+  continent: Americas
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones: []
+VN:
+  currency_name: Vietnamese đồng
+  currency_symbol: ₫
+  economy: Emerging/Developing
+  calling_code: '+84'
+  utc_offset: +07:00
+  capital_city: Hanoi
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Vietnamese
+  timezones:
+  - UTC+07:00
+VU:
+  currency_name: Vanuatu vatu
+  currency_symbol: Vt
+  economy: Emerging/Developing
+  calling_code: '+678'
+  utc_offset: '+11:00'
+  capital_city: Port Vila
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - Bislama
+  - English
+  - French
+  timezones:
+  - UTC+11:00
+WF:
+  currency_name: CFP franc
+  currency_symbol: ₣
+  economy: Emerging/Developing
+  calling_code: '+681'
+  utc_offset: null
+  capital_city: Mata-Utu
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+WS:
+  currency_name: Samoan tālā
+  currency_symbol: T
+  economy: Emerging/Developing
+  calling_code: '+685'
+  utc_offset: '+13:00'
+  capital_city: Apia
+  continent: Oceania
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  - Samoan
+  timezones:
+  - UTC+13:00
+YE:
+  currency_name: Yemeni rial
+  currency_symbol: ﷼
+  economy: Emerging/Developing
+  calling_code: '+967'
+  utc_offset: +03:00
+  capital_city: Sana'a
+  continent: Asia
+  date_format: DD/MM/YYYY
+  official_language:
+  - Arabic
+  timezones:
+  - UTC+03:00
+YT:
+  currency_name: Euro
+  currency_symbol: €
+  economy: Emerging/Developing
+  calling_code: '+262'
+  utc_offset: null
+  capital_city: Mamoudzou
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - French
+  timezones: []
+ZA:
+  currency_name: South African rand
+  currency_symbol: R
+  economy: Emerging/Developing
+  calling_code: '+27'
+  utc_offset: +02:00
+  capital_city: Pretoria
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Afrikaans
+  - English
+  - Southern Ndebele
+  - Northern Sotho
+  - Southern Sotho
+  - Swazi
+  - Tswana
+  - Tsonga
+  - Venda
+  - Xhosa
+  - Zulu
+  timezones:
+  - UTC+02:00
+ZM:
+  currency_name: Zambian kwacha
+  currency_symbol: ZK
+  economy: Emerging/Developing
+  calling_code: '+260'
+  utc_offset: +02:00
+  capital_city: Lusaka
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - English
+  timezones:
+  - UTC+02:00
+ZW:
+  currency_name: Botswana pula
+  currency_symbol: P
+  economy: Emerging/Developing
+  calling_code: '+263'
+  utc_offset: +02:00
+  capital_city: Harare
+  continent: Africa
+  date_format: DD/MM/YYYY
+  official_language:
+  - Chibarwe
+  - English
+  - Kalanga
+  - Khoisan
+  - Ndau
+  - Northern Ndebele
+  - Chewa
+  - Shona
+  - Sotho
+  - Tonga
+  - Tswana
+  - Tsonga
+  - Venda
+  - Xhosa
+  - Zimbabwean Sign Language
+  timezones:
+  - UTC+02:00
