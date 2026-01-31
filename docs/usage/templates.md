@@ -201,6 +201,10 @@ Here's a complete example combining multiple template tags:
         <dd>{{ country.numeric }}</dd>
         <dt>IOC:</dt>
         <dd>{{ country.ioc_code }}</dd>
+        <dt>Currency:</dt>
+        <dd>{{ country.currency_symbol }} ({{ country.currency_name }})</dd>
+        <dt>Capital:</dt>
+        <dd>{{ country.capital_city }}</dd>
       </dl>
     </div>
   {% endfor %}

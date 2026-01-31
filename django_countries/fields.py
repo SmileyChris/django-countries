@@ -19,6 +19,7 @@ from django.utils.functional import lazy
 from django.utils.html import escape as escape_html
 
 from django_countries import Countries, countries, filters, ioc_data, widgets
+from django_countries.utils.metadata import get_country_metadata
 from django_countries.conf import settings
 
 _entry_points: Iterable[Any]
@@ -195,6 +196,46 @@ class Country:
     @property
     def ioc_code(self):
         return self.countries.ioc_code(self.code)
+
+    @property
+    def currency_name(self) -> Optional[str]:
+        return get_country_metadata(self.code).get("currency_name")
+
+    @property
+    def currency_symbol(self) -> Optional[str]:
+        return get_country_metadata(self.code).get("currency_symbol")
+
+    @property
+    def economy(self) -> Optional[str]:
+        return get_country_metadata(self.code).get("economy")
+
+    @property
+    def calling_code(self) -> Optional[str]:
+        return get_country_metadata(self.code).get("calling_code")
+
+    @property
+    def utc_offset(self) -> Optional[str]:
+        return get_country_metadata(self.code).get("utc_offset")
+
+    @property
+    def capital_city(self) -> Optional[str]:
+        return get_country_metadata(self.code).get("capital_city")
+
+    @property
+    def continent(self) -> Optional[str]:
+        return get_country_metadata(self.code).get("continent")
+
+    @property
+    def date_format(self) -> Optional[str]:
+        return get_country_metadata(self.code).get("date_format")
+
+    @property
+    def official_language(self) -> Optional[list]:
+        return get_country_metadata(self.code).get("official_language")
+
+    @property
+    def timezones(self) -> Optional[list]:
+        return get_country_metadata(self.code).get("timezones")
 
     def __getattr__(self, attr):
         if attr in EXTENSIONS:

@@ -1,0 +1,33 @@
+GB:
+  currency_name: "British Pound"
+  currency_symbol: "£"
+  economy: "Developed"
+  calling_code: "+44"
+  utc_offset: "+00:00"
+  capital_city: "London"
+  continent: "Europe"
+  date_format: "DD/MM/YYYY"
+  official_language: ["English"]
+  timezones: ["Europe/London"]
+US:
+  currency_name: "US Dollar"
+  currency_symbol: "$"
+  economy: "Developed"
+  calling_code: "+1"
+  utc_offset: "-05:00"
+  capital_city: "Washington, D.C."
+  continent: "North America"
+  date_format: "MM/DD/YYYY"
+  official_language: ["English"]
+  timezones: ["America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles"]
+NG:
+  currency_name: "Naira"
+  currency_symbol: "₦"
+  economy: "Emerging"
+  calling_code: "+234"
+  utc_offset: "+01:00"
+  capital_city: "Abuja"
+  continent: "Africa"
+  date_format: "DD/MM/YYYY"
+  official_language: ["English"]
+  timezones: ["Africa/Lagos"]

@@ -255,6 +255,35 @@ The three letter International Olympic Committee country code.
 'NZL'
 ```
 
+### Metadata Properties
+
+The following properties provide additional metadata for each country, loaded from a local data file:
+
+- `currency_name`: The name of the country's currency (e.g., 'British Pound').
+- `currency_symbol`: The symbol for the currency (e.g., '£').
+- `economy`: Economic status (e.g., 'Developed', 'Emerging').
+- `calling_code`: International calling code (e.g., '+44').
+- `utc_offset`: UTC time offset (e.g., '+00:00').
+- `capital_city`: The capital city (e.g., 'London').
+- `continent`: The continent name (e.g., 'Europe').
+- `date_format`: Standard date format (e.g., 'DD/MM/YYYY').
+- `official_language`: A list of official languages.
+- `timezones`: A list of timezones.
+
+Example usage:
+
+```python
+>>> from django_countries.fields import Country
+>>> country = Country("GB")
+>>> country.currency_symbol
+'£'
+>>> country.capital_city
+'London'
+```
+
+!!! note
+    These properties will raise a `KeyError` if the country code is not found in the metadata file.
+
 ## Getting Countries from Python
 
 Use the `django_countries.countries` object instance as an iterator of ISO 3166-1 country codes and names (sorted by name).

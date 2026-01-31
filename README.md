@@ -38,6 +38,17 @@ class Person(models.Model):
     country = CountryField()
 ```
 
+## Country Metadata
+
+Access additional metadata like currency, capital, and timezones:
+
+```python
+from django_countries.fields import Country
+country = Country("GB")
+print(country.currency_symbol)  # Output: £
+print(country.capital_city)     # Output: London
+```
+
 ## Features
 
 - **Country Field**: Django model field with all ISO 3166-1 countries
