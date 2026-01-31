@@ -206,10 +206,6 @@ class Country:
         return get_country_metadata(self.code).get("currency_symbol")
 
     @property
-    def economy(self) -> Optional[str]:
-        return get_country_metadata(self.code).get("economy")
-
-    @property
     def calling_code(self) -> Optional[str]:
         return get_country_metadata(self.code).get("calling_code")
 

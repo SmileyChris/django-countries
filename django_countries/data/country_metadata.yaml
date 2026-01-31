@@ -1,7 +1,6 @@
 AD:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+376'
   utc_offset: +01:00
   capital_city: Andorra la Vella
@@ -13,7 +12,6 @@ AD:
 AE:
   currency_name: United Arab Emirates dirham
   currency_symbol: د.إ
-  economy: Emerging/Developing
   calling_code: '+971'
   utc_offset: +04:00
   capital_city: Abu Dhabi
@@ -26,7 +24,6 @@ AE:
 AF:
   currency_name: Afghan afghani
   currency_symbol: ؋
-  economy: Emerging/Developing
   calling_code: '+93'
   utc_offset: +04:30
   capital_city: Kabul
@@ -41,7 +38,6 @@ AF:
 AG:
   currency_name: Eastern Caribbean dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1268'
   utc_offset: -04:00
   capital_city: Saint John's
@@ -54,7 +50,6 @@ AG:
 AI:
   currency_name: Eastern Caribbean dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1264'
   utc_offset: null
   capital_city: The Valley
@@ -66,7 +61,6 @@ AI:
 AL:
   currency_name: Albanian lek
   currency_symbol: L
-  economy: Emerging/Developing
   calling_code: '+355'
   utc_offset: +01:00
   capital_city: Tirana
@@ -79,7 +73,6 @@ AL:
 AM:
   currency_name: Armenian dram
   currency_symbol: ֏
-  economy: Emerging/Developing
   calling_code: '+374'
   utc_offset: +04:00
   capital_city: Yerevan
@@ -92,7 +85,6 @@ AM:
 AO:
   currency_name: Angolan kwanza
   currency_symbol: Kz
-  economy: Emerging/Developing
   calling_code: '+244'
   utc_offset: +01:00
   capital_city: Luanda
@@ -105,7 +97,6 @@ AO:
 AQ:
   currency_name: null
   currency_symbol: null
-  economy: Emerging/Developing
   calling_code: null
   utc_offset: null
   capital_city: null
@@ -116,7 +107,6 @@ AQ:
 AR:
   currency_name: Argentine peso
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+54'
   utc_offset: -03:00
   capital_city: Buenos Aires
@@ -130,7 +120,6 @@ AR:
 AS:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1684'
   utc_offset: null
   capital_city: Pago Pago
@@ -143,7 +132,6 @@ AS:
 AT:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+43'
   utc_offset: +01:00
   capital_city: Vienna
@@ -156,7 +144,6 @@ AT:
 AU:
   currency_name: Australian dollar
   currency_symbol: $
-  economy: Developed
   calling_code: '+61'
   utc_offset: +05:00
   capital_city: Canberra
@@ -176,7 +163,6 @@ AU:
 AW:
   currency_name: Aruban florin
   currency_symbol: ƒ
-  economy: Emerging/Developing
   calling_code: '+297'
   utc_offset: null
   capital_city: Oranjestad
@@ -189,7 +175,6 @@ AW:
 AX:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+35818'
   utc_offset: null
   capital_city: Mariehamn
@@ -201,7 +186,6 @@ AX:
 AZ:
   currency_name: Azerbaijani manat
   currency_symbol: ₼
-  economy: Emerging/Developing
   calling_code: '+994'
   utc_offset: +04:00
   capital_city: Baku
@@ -215,7 +199,6 @@ AZ:
 BA:
   currency_name: Bosnia and Herzegovina convertible mark
   currency_symbol: KM
-  economy: Emerging/Developing
   calling_code: '+387'
   utc_offset: +01:00
   capital_city: Sarajevo
@@ -230,7 +213,6 @@ BA:
 BB:
   currency_name: Barbadian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1246'
   utc_offset: -04:00
   capital_city: Bridgetown
@@ -243,7 +225,6 @@ BB:
 BD:
   currency_name: Bangladeshi taka
   currency_symbol: ৳
-  economy: Emerging/Developing
   calling_code: '+880'
   utc_offset: +06:00
   capital_city: Dhaka
@@ -256,7 +237,6 @@ BD:
 BE:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+32'
   utc_offset: +01:00
   capital_city: Brussels
@@ -271,7 +251,6 @@ BE:
 BF:
   currency_name: West African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+226'
   utc_offset: +00:00
   capital_city: Ouagadougou
@@ -284,7 +263,6 @@ BF:
 BG:
   currency_name: Bulgarian lev
   currency_symbol: лв
-  economy: Emerging/Developing
   calling_code: '+359'
   utc_offset: +02:00
   capital_city: Sofia
@@ -297,7 +275,6 @@ BG:
 BH:
   currency_name: Bahraini dinar
   currency_symbol: .د.ب
-  economy: Emerging/Developing
   calling_code: '+973'
   utc_offset: +03:00
   capital_city: Manama
@@ -310,7 +287,6 @@ BH:
 BI:
   currency_name: Burundian franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+257'
   utc_offset: +02:00
   capital_city: Gitega
@@ -324,7 +300,6 @@ BI:
 BJ:
   currency_name: West African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+229'
   utc_offset: +01:00
   capital_city: Porto-Novo
@@ -337,7 +312,6 @@ BJ:
 BL:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+590'
   utc_offset: null
   capital_city: Gustavia
@@ -349,7 +323,6 @@ BL:
 BM:
   currency_name: Bermudian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1441'
   utc_offset: null
   capital_city: Hamilton
@@ -361,7 +334,6 @@ BM:
 BN:
   currency_name: Brunei dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+673'
   utc_offset: +08:00
   capital_city: Bandar Seri Begawan
@@ -374,7 +346,6 @@ BN:
 BO:
   currency_name: Bolivian boliviano
   currency_symbol: Bs.
-  economy: Emerging/Developing
   calling_code: '+591'
   utc_offset: -04:00
   capital_city: Sucre
@@ -390,7 +361,6 @@ BO:
 BQ:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+599'
   utc_offset: null
   capital_city: Kralendijk
@@ -404,7 +374,6 @@ BQ:
 BR:
   currency_name: Brazilian real
   currency_symbol: R$
-  economy: Emerging/Developing
   calling_code: '+55'
   utc_offset: -05:00
   capital_city: Brasília
@@ -420,7 +389,6 @@ BR:
 BS:
   currency_name: Bahamian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1242'
   utc_offset: -05:00
   capital_city: Nassau
@@ -433,7 +401,6 @@ BS:
 BT:
   currency_name: Bhutanese ngultrum
   currency_symbol: Nu.
-  economy: Emerging/Developing
   calling_code: '+975'
   utc_offset: +06:00
   capital_city: Thimphu
@@ -446,7 +413,6 @@ BT:
 BV:
   currency_name: null
   currency_symbol: null
-  economy: Emerging/Developing
   calling_code: '+47'
   utc_offset: null
   capital_city: null
@@ -458,7 +424,6 @@ BV:
 BW:
   currency_name: Botswana pula
   currency_symbol: P
-  economy: Emerging/Developing
   calling_code: '+267'
   utc_offset: +02:00
   capital_city: Gaborone
@@ -472,7 +437,6 @@ BW:
 BY:
   currency_name: Belarusian ruble
   currency_symbol: Br
-  economy: Emerging/Developing
   calling_code: '+375'
   utc_offset: +03:00
   capital_city: Minsk
@@ -486,7 +450,6 @@ BY:
 BZ:
   currency_name: Belize dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+501'
   utc_offset: -06:00
   capital_city: Belmopan
@@ -501,7 +464,6 @@ BZ:
 CA:
   currency_name: Canadian dollar
   currency_symbol: $
-  economy: Developed
   calling_code: '+1'
   utc_offset: -08:00
   capital_city: Ottawa
@@ -520,7 +482,6 @@ CA:
 CC:
   currency_name: Australian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+61'
   utc_offset: null
   capital_city: West Island
@@ -532,7 +493,6 @@ CC:
 CD:
   currency_name: Congolese franc
   currency_symbol: FC
-  economy: Emerging/Developing
   calling_code: '+243'
   utc_offset: +01:00
   capital_city: Kinshasa
@@ -550,7 +510,6 @@ CD:
 CF:
   currency_name: Central African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+236'
   utc_offset: +01:00
   capital_city: Bangui
@@ -564,7 +523,6 @@ CF:
 CG:
   currency_name: Central African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+242'
   utc_offset: +01:00
   capital_city: Brazzaville
@@ -579,7 +537,6 @@ CG:
 CH:
   currency_name: Swiss franc
   currency_symbol: Fr.
-  economy: Developed
   calling_code: '+41'
   utc_offset: +01:00
   capital_city: Bern
@@ -595,7 +552,6 @@ CH:
 CI:
   currency_name: West African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+225'
   utc_offset: +00:00
   capital_city: Yamoussoukro
@@ -608,7 +564,6 @@ CI:
 CK:
   currency_name: Cook Islands dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+682'
   utc_offset: null
   capital_city: Avarua
@@ -621,7 +576,6 @@ CK:
 CL:
   currency_name: Chilean peso
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+56'
   utc_offset: -06:00
   capital_city: Santiago
@@ -635,7 +589,6 @@ CL:
 CM:
   currency_name: Central African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+237'
   utc_offset: +01:00
   capital_city: Yaoundé
@@ -649,7 +602,6 @@ CM:
 CN:
   currency_name: Chinese yuan
   currency_symbol: ¥
-  economy: Emerging/Developing
   calling_code: '+86'
   utc_offset: +08:00
   capital_city: Beijing
@@ -662,7 +614,6 @@ CN:
 CO:
   currency_name: Colombian peso
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+57'
   utc_offset: -05:00
   capital_city: Bogotá
@@ -675,7 +626,6 @@ CO:
 CR:
   currency_name: Costa Rican colón
   currency_symbol: ₡
-  economy: Emerging/Developing
   calling_code: '+506'
   utc_offset: -06:00
   capital_city: San José
@@ -688,7 +638,6 @@ CR:
 CU:
   currency_name: Cuban convertible peso
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+53'
   utc_offset: -05:00
   capital_city: Havana
@@ -701,7 +650,6 @@ CU:
 CV:
   currency_name: Cape Verdean escudo
   currency_symbol: Esc
-  economy: Emerging/Developing
   calling_code: '+238'
   utc_offset: -01:00
   capital_city: Praia
@@ -714,7 +662,6 @@ CV:
 CW:
   currency_name: Netherlands Antillean guilder
   currency_symbol: ƒ
-  economy: Emerging/Developing
   calling_code: '+599'
   utc_offset: null
   capital_city: Willemstad
@@ -728,7 +675,6 @@ CW:
 CX:
   currency_name: Australian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+61'
   utc_offset: null
   capital_city: Flying Fish Cove
@@ -740,7 +686,6 @@ CX:
 CY:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+357'
   utc_offset: +02:00
   capital_city: Nicosia
@@ -754,7 +699,6 @@ CY:
 CZ:
   currency_name: Czech koruna
   currency_symbol: Kč
-  economy: Developed
   calling_code: '+420'
   utc_offset: +01:00
   capital_city: Prague
@@ -768,7 +712,6 @@ CZ:
 DE:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+49'
   utc_offset: +01:00
   capital_city: Berlin
@@ -781,7 +724,6 @@ DE:
 DJ:
   currency_name: Djiboutian franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+253'
   utc_offset: +03:00
   capital_city: Djibouti
@@ -795,7 +737,6 @@ DJ:
 DK:
   currency_name: Danish krone
   currency_symbol: kr
-  economy: Developed
   calling_code: '+45'
   utc_offset: -04:00
   capital_city: Copenhagen
@@ -812,7 +753,6 @@ DK:
 DM:
   currency_name: Eastern Caribbean dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1767'
   utc_offset: -04:00
   capital_city: Roseau
@@ -825,7 +765,6 @@ DM:
 DO:
   currency_name: Dominican peso
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1'
   utc_offset: -04:00
   capital_city: Santo Domingo
@@ -838,7 +777,6 @@ DO:
 DZ:
   currency_name: Algerian dinar
   currency_symbol: د.ج
-  economy: Emerging/Developing
   calling_code: '+213'
   utc_offset: +01:00
   capital_city: Algiers
@@ -851,7 +789,6 @@ DZ:
 EC:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+593'
   utc_offset: -06:00
   capital_city: Quito
@@ -865,7 +802,6 @@ EC:
 EE:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+372'
   utc_offset: +02:00
   capital_city: Tallinn
@@ -878,7 +814,6 @@ EE:
 EG:
   currency_name: Egyptian pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+20'
   utc_offset: +02:00
   capital_city: Cairo
@@ -891,7 +826,6 @@ EG:
 EH:
   currency_name: Algerian dinar
   currency_symbol: دج
-  economy: Emerging/Developing
   calling_code: '+2'
   utc_offset: null
   capital_city: El Aaiún
@@ -905,7 +839,6 @@ EH:
 ER:
   currency_name: Eritrean nakfa
   currency_symbol: Nfk
-  economy: Emerging/Developing
   calling_code: '+291'
   utc_offset: +03:00
   capital_city: Asmara
@@ -920,7 +853,6 @@ ER:
 ES:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+34'
   utc_offset: +00:00
   capital_city: Madrid
@@ -934,7 +866,6 @@ ES:
 ET:
   currency_name: Ethiopian birr
   currency_symbol: Br
-  economy: Emerging/Developing
   calling_code: '+251'
   utc_offset: +03:00
   capital_city: Addis Ababa
@@ -947,7 +878,6 @@ ET:
 FI:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+358'
   utc_offset: +02:00
   capital_city: Helsinki
@@ -961,7 +891,6 @@ FI:
 FJ:
   currency_name: Fijian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+679'
   utc_offset: '+12:00'
   capital_city: Suva
@@ -976,7 +905,6 @@ FJ:
 FK:
   currency_name: Falkland Islands pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+500'
   utc_offset: null
   capital_city: Stanley
@@ -988,7 +916,6 @@ FK:
 FM:
   currency_name: US Dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+691'
   utc_offset: '+10:00'
   capital_city: Palikir
@@ -1002,7 +929,6 @@ FM:
 FO:
   currency_name: Danish krone
   currency_symbol: kr
-  economy: Emerging/Developing
   calling_code: '+298'
   utc_offset: null
   capital_city: Tórshavn
@@ -1015,7 +941,6 @@ FO:
 FR:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+33'
   utc_offset: '-10:00'
   capital_city: Paris
@@ -1039,7 +964,6 @@ FR:
 GA:
   currency_name: Central African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+241'
   utc_offset: +01:00
   capital_city: Libreville
@@ -1052,7 +976,6 @@ GA:
 GB:
   currency_name: British pound
   currency_symbol: £
-  economy: Developed
   calling_code: '+44'
   utc_offset: +00:00
   capital_city: London
@@ -1064,7 +987,6 @@ GB:
 GD:
   currency_name: Eastern Caribbean dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1473'
   utc_offset: -04:00
   capital_city: St. George's
@@ -1077,7 +999,6 @@ GD:
 GE:
   currency_name: lari
   currency_symbol: ₾
-  economy: Emerging/Developing
   calling_code: '+995'
   utc_offset: null
   capital_city: Tbilisi
@@ -1089,7 +1010,6 @@ GE:
 GF:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+594'
   utc_offset: null
   capital_city: Cayenne
@@ -1101,7 +1021,6 @@ GF:
 GG:
   currency_name: British pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+44'
   utc_offset: null
   capital_city: St. Peter Port
@@ -1115,7 +1034,6 @@ GG:
 GH:
   currency_name: Ghanaian cedi
   currency_symbol: ₵
-  economy: Emerging/Developing
   calling_code: '+233'
   utc_offset: +00:00
   capital_city: Accra
@@ -1128,7 +1046,6 @@ GH:
 GI:
   currency_name: Gibraltar pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+350'
   utc_offset: null
   capital_city: Gibraltar
@@ -1140,7 +1057,6 @@ GI:
 GL:
   currency_name: krone
   currency_symbol: kr.
-  economy: Emerging/Developing
   calling_code: '+299'
   utc_offset: null
   capital_city: Nuuk
@@ -1152,7 +1068,6 @@ GL:
 GM:
   currency_name: dalasi
   currency_symbol: D
-  economy: Emerging/Developing
   calling_code: '+220'
   utc_offset: null
   capital_city: Banjul
@@ -1164,7 +1079,6 @@ GM:
 GN:
   currency_name: Guinean franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+224'
   utc_offset: +00:00
   capital_city: Conakry
@@ -1177,7 +1091,6 @@ GN:
 GP:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+590'
   utc_offset: null
   capital_city: Basse-Terre
@@ -1189,7 +1102,6 @@ GP:
 GQ:
   currency_name: Central African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+240'
   utc_offset: +01:00
   capital_city: Malabo
@@ -1204,7 +1116,6 @@ GQ:
 GR:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+30'
   utc_offset: +02:00
   capital_city: Athens
@@ -1217,7 +1128,6 @@ GR:
 GS:
   currency_name: Saint Helena pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+500'
   utc_offset: null
   capital_city: King Edward Point
@@ -1229,7 +1139,6 @@ GS:
 GT:
   currency_name: Guatemalan quetzal
   currency_symbol: Q
-  economy: Emerging/Developing
   calling_code: '+502'
   utc_offset: -06:00
   capital_city: Guatemala City
@@ -1242,7 +1151,6 @@ GT:
 GU:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1671'
   utc_offset: null
   capital_city: Hagåtña
@@ -1256,7 +1164,6 @@ GU:
 GW:
   currency_name: West African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+245'
   utc_offset: +00:00
   capital_city: Bissau
@@ -1270,7 +1177,6 @@ GW:
 GY:
   currency_name: Guyanese dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+592'
   utc_offset: -04:00
   capital_city: Georgetown
@@ -1283,7 +1189,6 @@ GY:
 HK:
   currency_name: Hong Kong dollar
   currency_symbol: $
-  economy: Developed
   calling_code: '+852'
   utc_offset: +08:00
   capital_city: City of Victoria
@@ -1297,7 +1202,6 @@ HK:
 HM:
   currency_name: Australian Dollar
   currency_symbol: A$
-  economy: Emerging/Developing
   calling_code: null
   utc_offset: null
   capital_city: null
@@ -1309,7 +1213,6 @@ HM:
 HN:
   currency_name: Honduran lempira
   currency_symbol: L
-  economy: Emerging/Developing
   calling_code: '+504'
   utc_offset: -06:00
   capital_city: Tegucigalpa
@@ -1322,7 +1225,6 @@ HN:
 HR:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+385'
   utc_offset: +01:00
   capital_city: Zagreb
@@ -1335,7 +1237,6 @@ HR:
 HT:
   currency_name: Haitian gourde
   currency_symbol: G
-  economy: Emerging/Developing
   calling_code: '+509'
   utc_offset: -05:00
   capital_city: Port-au-Prince
@@ -1349,7 +1250,6 @@ HT:
 HU:
   currency_name: Hungarian forint
   currency_symbol: Ft
-  economy: Emerging/Developing
   calling_code: '+36'
   utc_offset: +01:00
   capital_city: Budapest
@@ -1362,7 +1262,6 @@ HU:
 ID:
   currency_name: Indonesian rupiah
   currency_symbol: Rp
-  economy: Emerging/Developing
   calling_code: '+62'
   utc_offset: +07:00
   capital_city: Jakarta
@@ -1377,7 +1276,6 @@ ID:
 IE:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+353'
   utc_offset: +00:00
   capital_city: Dublin
@@ -1391,7 +1289,6 @@ IE:
 IL:
   currency_name: Israeli new shekel
   currency_symbol: ₪
-  economy: Developed
   calling_code: '+972'
   utc_offset: +02:00
   capital_city: Jerusalem
@@ -1405,7 +1302,6 @@ IL:
 IM:
   currency_name: British pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+44'
   utc_offset: null
   capital_city: Douglas
@@ -1418,7 +1314,6 @@ IM:
 IN:
   currency_name: Indian rupee
   currency_symbol: ₹
-  economy: Emerging/Developing
   calling_code: '+91'
   utc_offset: +05:30
   capital_city: New Delhi
@@ -1433,7 +1328,6 @@ IN:
 IO:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+246'
   utc_offset: null
   capital_city: Diego Garcia
@@ -1445,7 +1339,6 @@ IO:
 IQ:
   currency_name: Iraqi dinar
   currency_symbol: ع.د
-  economy: Emerging/Developing
   calling_code: '+964'
   utc_offset: +03:00
   capital_city: Baghdad
@@ -1460,7 +1353,6 @@ IQ:
 IR:
   currency_name: Iranian rial
   currency_symbol: ﷼
-  economy: Emerging/Developing
   calling_code: '+98'
   utc_offset: +03:30
   capital_city: Tehran
@@ -1473,7 +1365,6 @@ IR:
 IS:
   currency_name: Icelandic króna
   currency_symbol: kr
-  economy: Developed
   calling_code: '+354'
   utc_offset: +00:00
   capital_city: Reykjavik
@@ -1486,7 +1377,6 @@ IS:
 IT:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+39'
   utc_offset: +01:00
   capital_city: Rome
@@ -1499,7 +1389,6 @@ IT:
 JE:
   currency_name: British pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+44'
   utc_offset: null
   capital_city: Saint Helier
@@ -1513,7 +1402,6 @@ JE:
 JM:
   currency_name: Jamaican dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1876'
   utc_offset: -05:00
   capital_city: Kingston
@@ -1527,7 +1415,6 @@ JM:
 JO:
   currency_name: Jordanian dinar
   currency_symbol: د.ا
-  economy: Emerging/Developing
   calling_code: '+962'
   utc_offset: +03:00
   capital_city: Amman
@@ -1540,7 +1427,6 @@ JO:
 JP:
   currency_name: Japanese yen
   currency_symbol: ¥
-  economy: Developed
   calling_code: '+81'
   utc_offset: +09:00
   capital_city: Tokyo
@@ -1553,7 +1439,6 @@ JP:
 KE:
   currency_name: Kenyan shilling
   currency_symbol: Sh
-  economy: Emerging/Developing
   calling_code: '+254'
   utc_offset: +03:00
   capital_city: Nairobi
@@ -1567,7 +1452,6 @@ KE:
 KG:
   currency_name: Kyrgyzstani som
   currency_symbol: с
-  economy: Emerging/Developing
   calling_code: '+996'
   utc_offset: +06:00
   capital_city: Bishkek
@@ -1581,7 +1465,6 @@ KG:
 KH:
   currency_name: Cambodian riel
   currency_symbol: ៛
-  economy: Emerging/Developing
   calling_code: '+855'
   utc_offset: +07:00
   capital_city: Phnom Penh
@@ -1594,7 +1477,6 @@ KH:
 KI:
   currency_name: Australian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+686'
   utc_offset: '+12:00'
   capital_city: South Tarawa
@@ -1610,7 +1492,6 @@ KI:
 KM:
   currency_name: Comorian franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+269'
   utc_offset: +03:00
   capital_city: Moroni
@@ -1625,7 +1506,6 @@ KM:
 KN:
   currency_name: Eastern Caribbean dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1869'
   utc_offset: -04:00
   capital_city: Basseterre
@@ -1638,7 +1518,6 @@ KN:
 KP:
   currency_name: North Korean won
   currency_symbol: ₩
-  economy: Emerging/Developing
   calling_code: '+850'
   utc_offset: +09:00
   capital_city: Pyongyang
@@ -1651,7 +1530,6 @@ KP:
 KR:
   currency_name: South Korean won
   currency_symbol: ₩
-  economy: Developed
   calling_code: '+82'
   utc_offset: +09:00
   capital_city: Seoul
@@ -1664,7 +1542,6 @@ KR:
 KW:
   currency_name: Kuwaiti dinar
   currency_symbol: د.ك
-  economy: Emerging/Developing
   calling_code: '+965'
   utc_offset: +03:00
   capital_city: Kuwait City
@@ -1677,7 +1554,6 @@ KW:
 KY:
   currency_name: Cayman Islands dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1345'
   utc_offset: null
   capital_city: George Town
@@ -1689,7 +1565,6 @@ KY:
 KZ:
   currency_name: Kazakhstani tenge
   currency_symbol: ₸
-  economy: Emerging/Developing
   calling_code: '+7'
   utc_offset: +05:00
   capital_city: Astana
@@ -1704,7 +1579,6 @@ KZ:
 LA:
   currency_name: Lao kip
   currency_symbol: ₭
-  economy: Emerging/Developing
   calling_code: '+856'
   utc_offset: +07:00
   capital_city: Vientiane
@@ -1717,7 +1591,6 @@ LA:
 LB:
   currency_name: Lebanese pound
   currency_symbol: ل.ل
-  economy: Emerging/Developing
   calling_code: '+961'
   utc_offset: +02:00
   capital_city: Beirut
@@ -1731,7 +1604,6 @@ LB:
 LC:
   currency_name: Eastern Caribbean dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1758'
   utc_offset: -04:00
   capital_city: Castries
@@ -1744,7 +1616,6 @@ LC:
 LI:
   currency_name: Swiss franc
   currency_symbol: Fr
-  economy: Developed
   calling_code: '+423'
   utc_offset: +01:00
   capital_city: Vaduz
@@ -1757,7 +1628,6 @@ LI:
 LK:
   currency_name: Sri Lankan rupee
   currency_symbol: Rs රු
-  economy: Emerging/Developing
   calling_code: '+94'
   utc_offset: +05:30
   capital_city: Colombo
@@ -1771,7 +1641,6 @@ LK:
 LR:
   currency_name: Liberian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+231'
   utc_offset: +00:00
   capital_city: Monrovia
@@ -1784,7 +1653,6 @@ LR:
 LS:
   currency_name: Lesotho loti
   currency_symbol: L
-  economy: Emerging/Developing
   calling_code: '+266'
   utc_offset: +02:00
   capital_city: Maseru
@@ -1798,7 +1666,6 @@ LS:
 LT:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+370'
   utc_offset: +02:00
   capital_city: Vilnius
@@ -1811,7 +1678,6 @@ LT:
 LU:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+352'
   utc_offset: +01:00
   capital_city: Luxembourg
@@ -1826,7 +1692,6 @@ LU:
 LV:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+371'
   utc_offset: +02:00
   capital_city: Riga
@@ -1839,7 +1704,6 @@ LV:
 LY:
   currency_name: Libyan dinar
   currency_symbol: ل.د
-  economy: Emerging/Developing
   calling_code: '+218'
   utc_offset: +01:00
   capital_city: Tripoli
@@ -1852,7 +1716,6 @@ LY:
 MA:
   currency_name: Moroccan dirham
   currency_symbol: د.م.
-  economy: Emerging/Developing
   calling_code: '+212'
   utc_offset: +00:00
   capital_city: Rabat
@@ -1866,7 +1729,6 @@ MA:
 MC:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+377'
   utc_offset: +01:00
   capital_city: Monaco
@@ -1879,7 +1741,6 @@ MC:
 MD:
   currency_name: Moldovan leu
   currency_symbol: L
-  economy: Emerging/Developing
   calling_code: '+373'
   utc_offset: +02:00
   capital_city: Chișinău
@@ -1892,7 +1753,6 @@ MD:
 ME:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+382'
   utc_offset: null
   capital_city: Podgorica
@@ -1904,7 +1764,6 @@ ME:
 MF:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+590'
   utc_offset: null
   capital_city: Marigot
@@ -1916,7 +1775,6 @@ MF:
 MG:
   currency_name: Malagasy ariary
   currency_symbol: Ar
-  economy: Emerging/Developing
   calling_code: '+261'
   utc_offset: +03:00
   capital_city: Antananarivo
@@ -1930,7 +1788,6 @@ MG:
 MH:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+692'
   utc_offset: '+12:00'
   capital_city: Majuro
@@ -1944,7 +1801,6 @@ MH:
 MK:
   currency_name: denar
   currency_symbol: den
-  economy: Emerging/Developing
   calling_code: '+389'
   utc_offset: +01:00
   capital_city: Skopje
@@ -1957,7 +1813,6 @@ MK:
 ML:
   currency_name: West African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+223'
   utc_offset: +00:00
   capital_city: Bamako
@@ -1970,7 +1825,6 @@ ML:
 MM:
   currency_name: Burmese kyat
   currency_symbol: Ks
-  economy: Emerging/Developing
   calling_code: '+95'
   utc_offset: null
   capital_city: Naypyidaw
@@ -1982,7 +1836,6 @@ MM:
 MN:
   currency_name: Mongolian tögrög
   currency_symbol: ₮
-  economy: Emerging/Developing
   calling_code: '+976'
   utc_offset: +07:00
   capital_city: Ulan Bator
@@ -1996,7 +1849,6 @@ MN:
 MO:
   currency_name: Macanese pataca
   currency_symbol: P
-  economy: Emerging/Developing
   calling_code: '+853'
   utc_offset: +08:00
   capital_city: null
@@ -2010,7 +1862,6 @@ MO:
 MP:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1670'
   utc_offset: null
   capital_city: Saipan
@@ -2024,7 +1875,6 @@ MP:
 MQ:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+596'
   utc_offset: null
   capital_city: Fort-de-France
@@ -2036,7 +1886,6 @@ MQ:
 MR:
   currency_name: Mauritanian ouguiya
   currency_symbol: UM
-  economy: Emerging/Developing
   calling_code: '+222'
   utc_offset: +00:00
   capital_city: Nouakchott
@@ -2049,7 +1898,6 @@ MR:
 MS:
   currency_name: Eastern Caribbean dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1664'
   utc_offset: null
   capital_city: Plymouth
@@ -2061,7 +1909,6 @@ MS:
 MT:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+356'
   utc_offset: +01:00
   capital_city: Valletta
@@ -2075,7 +1922,6 @@ MT:
 MU:
   currency_name: Mauritian rupee
   currency_symbol: ₨
-  economy: Emerging/Developing
   calling_code: '+230'
   utc_offset: +04:00
   capital_city: Port Louis
@@ -2090,7 +1936,6 @@ MU:
 MV:
   currency_name: Maldivian rufiyaa
   currency_symbol: .ރ
-  economy: Emerging/Developing
   calling_code: '+960'
   utc_offset: +05:00
   capital_city: Malé
@@ -2103,7 +1948,6 @@ MV:
 MW:
   currency_name: Malawian kwacha
   currency_symbol: MK
-  economy: Emerging/Developing
   calling_code: '+265'
   utc_offset: +02:00
   capital_city: Lilongwe
@@ -2117,7 +1961,6 @@ MW:
 MX:
   currency_name: Mexican peso
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+52'
   utc_offset: -08:00
   capital_city: Mexico City
@@ -2132,7 +1975,6 @@ MX:
 MY:
   currency_name: Malaysian ringgit
   currency_symbol: RM
-  economy: Emerging/Developing
   calling_code: '+60'
   utc_offset: +08:00
   capital_city: Kuala Lumpur
@@ -2146,7 +1988,6 @@ MY:
 MZ:
   currency_name: Mozambican metical
   currency_symbol: MT
-  economy: Emerging/Developing
   calling_code: '+258'
   utc_offset: +02:00
   capital_city: Maputo
@@ -2159,7 +2000,6 @@ MZ:
 NA:
   currency_name: Namibian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+264'
   utc_offset: +01:00
   capital_city: Windhoek
@@ -2180,7 +2020,6 @@ NA:
 NC:
   currency_name: CFP franc
   currency_symbol: ₣
-  economy: Emerging/Developing
   calling_code: '+687'
   utc_offset: null
   capital_city: Nouméa
@@ -2192,7 +2031,6 @@ NC:
 NE:
   currency_name: West African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+227'
   utc_offset: +01:00
   capital_city: Niamey
@@ -2205,7 +2043,6 @@ NE:
 NF:
   currency_name: Australian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+672'
   utc_offset: null
   capital_city: Kingston
@@ -2218,7 +2055,6 @@ NF:
 NG:
   currency_name: Naira
   currency_symbol: ₦
-  economy: Emerging/Developing
   calling_code: '+234'
   utc_offset: +01:00
   capital_city: Abuja
@@ -2231,7 +2067,6 @@ NG:
 NI:
   currency_name: Nicaraguan córdoba
   currency_symbol: C$
-  economy: Emerging/Developing
   calling_code: '+505'
   utc_offset: -06:00
   capital_city: Managua
@@ -2244,7 +2079,6 @@ NI:
 NL:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+31'
   utc_offset: null
   capital_city: Amsterdam
@@ -2256,7 +2090,6 @@ NL:
 'NO':
   currency_name: Norwegian krone
   currency_symbol: kr
-  economy: Developed
   calling_code: '+47'
   utc_offset: +01:00
   capital_city: Oslo
@@ -2271,7 +2104,6 @@ NL:
 NP:
   currency_name: Nepalese rupee
   currency_symbol: ₨
-  economy: Emerging/Developing
   calling_code: '+977'
   utc_offset: +05:45
   capital_city: Kathmandu
@@ -2284,7 +2116,6 @@ NP:
 NR:
   currency_name: Australian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+674'
   utc_offset: '+12:00'
   capital_city: Yaren
@@ -2298,7 +2129,6 @@ NR:
 NU:
   currency_name: New Zealand dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+683'
   utc_offset: null
   capital_city: Alofi
@@ -2311,7 +2141,6 @@ NU:
 NZ:
   currency_name: New Zealand dollar
   currency_symbol: $
-  economy: Developed
   calling_code: '+64'
   utc_offset: '-11:00'
   capital_city: Wellington
@@ -2330,7 +2159,6 @@ NZ:
 OM:
   currency_name: Omani rial
   currency_symbol: ر.ع.
-  economy: Emerging/Developing
   calling_code: '+968'
   utc_offset: +04:00
   capital_city: Muscat
@@ -2343,7 +2171,6 @@ OM:
 PA:
   currency_name: Panamanian balboa
   currency_symbol: B/.
-  economy: Emerging/Developing
   calling_code: '+507'
   utc_offset: -05:00
   capital_city: Panama City
@@ -2356,7 +2183,6 @@ PA:
 PE:
   currency_name: Peruvian sol
   currency_symbol: S/.
-  economy: Emerging/Developing
   calling_code: '+51'
   utc_offset: -05:00
   capital_city: Lima
@@ -2371,7 +2197,6 @@ PE:
 PF:
   currency_name: CFP franc
   currency_symbol: ₣
-  economy: Emerging/Developing
   calling_code: '+689'
   utc_offset: null
   capital_city: Papeetē
@@ -2383,7 +2208,6 @@ PF:
 PG:
   currency_name: Papua New Guinean kina
   currency_symbol: K
-  economy: Emerging/Developing
   calling_code: '+675'
   utc_offset: '+10:00'
   capital_city: Port Moresby
@@ -2398,7 +2222,6 @@ PG:
 PH:
   currency_name: Philippine peso
   currency_symbol: ₱
-  economy: Emerging/Developing
   calling_code: '+63'
   utc_offset: +08:00
   capital_city: Manila
@@ -2412,7 +2235,6 @@ PH:
 PK:
   currency_name: Pakistani rupee
   currency_symbol: ₨
-  economy: Emerging/Developing
   calling_code: '+92'
   utc_offset: +05:00
   capital_city: Islamabad
@@ -2426,7 +2248,6 @@ PK:
 PL:
   currency_name: Polish złoty
   currency_symbol: zł
-  economy: Emerging/Developing
   calling_code: '+48'
   utc_offset: +01:00
   capital_city: Warsaw
@@ -2439,7 +2260,6 @@ PL:
 PM:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+508'
   utc_offset: null
   capital_city: Saint-Pierre
@@ -2451,7 +2271,6 @@ PM:
 PN:
   currency_name: New Zealand dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+64'
   utc_offset: null
   capital_city: Adamstown
@@ -2463,7 +2282,6 @@ PN:
 PR:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Developed
   calling_code: '+1'
   utc_offset: null
   capital_city: San Juan
@@ -2476,7 +2294,6 @@ PR:
 PS:
   currency_name: Egyptian pound
   currency_symbol: E£
-  economy: Emerging/Developing
   calling_code: '+970'
   utc_offset: null
   capital_city: Ramallah
@@ -2488,7 +2305,6 @@ PS:
 PT:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+351'
   utc_offset: -01:00
   capital_city: Lisbon
@@ -2502,7 +2318,6 @@ PT:
 PW:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+680'
   utc_offset: +09:00
   capital_city: Ngerulmud
@@ -2516,7 +2331,6 @@ PW:
 PY:
   currency_name: Paraguayan guaraní
   currency_symbol: ₲
-  economy: Emerging/Developing
   calling_code: '+595'
   utc_offset: -04:00
   capital_city: Asunción
@@ -2530,7 +2344,6 @@ PY:
 QA:
   currency_name: Qatari riyal
   currency_symbol: ر.ق
-  economy: Emerging/Developing
   calling_code: '+974'
   utc_offset: +03:00
   capital_city: Doha
@@ -2543,7 +2356,6 @@ QA:
 RE:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+262'
   utc_offset: null
   capital_city: Saint-Denis
@@ -2555,7 +2367,6 @@ RE:
 RO:
   currency_name: Romanian leu
   currency_symbol: lei
-  economy: Emerging/Developing
   calling_code: '+40'
   utc_offset: +02:00
   capital_city: Bucharest
@@ -2568,7 +2379,6 @@ RO:
 RS:
   currency_name: Serbian dinar
   currency_symbol: дин.
-  economy: Emerging/Developing
   calling_code: '+381'
   utc_offset: +01:00
   capital_city: Belgrade
@@ -2582,7 +2392,6 @@ RS:
 RU:
   currency_name: Russian ruble
   currency_symbol: ₽
-  economy: Emerging/Developing
   calling_code: '+7'
   utc_offset: +03:00
   capital_city: Moscow
@@ -2603,7 +2412,6 @@ RU:
 RW:
   currency_name: Rwandan franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+250'
   utc_offset: +02:00
   capital_city: Kigali
@@ -2618,7 +2426,6 @@ RW:
 SA:
   currency_name: Saudi riyal
   currency_symbol: ر.س
-  economy: Emerging/Developing
   calling_code: '+966'
   utc_offset: +03:00
   capital_city: Riyadh
@@ -2631,7 +2438,6 @@ SA:
 SB:
   currency_name: Solomon Islands dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+677'
   utc_offset: '+11:00'
   capital_city: Honiara
@@ -2644,7 +2450,6 @@ SB:
 SC:
   currency_name: Seychellois rupee
   currency_symbol: ₨
-  economy: Emerging/Developing
   calling_code: '+248'
   utc_offset: +04:00
   capital_city: Victoria
@@ -2659,7 +2464,6 @@ SC:
 SD:
   currency_name: Sudanese pound
   currency_symbol: PT
-  economy: Emerging/Developing
   calling_code: '+249'
   utc_offset: +03:00
   capital_city: Khartoum
@@ -2673,7 +2477,6 @@ SD:
 SE:
   currency_name: Swedish krona
   currency_symbol: kr
-  economy: Developed
   calling_code: '+46'
   utc_offset: +01:00
   capital_city: Stockholm
@@ -2686,7 +2489,6 @@ SE:
 SG:
   currency_name: Singapore dollar
   currency_symbol: $
-  economy: Developed
   calling_code: '+65'
   utc_offset: +08:00
   capital_city: Singapore
@@ -2702,7 +2504,6 @@ SG:
 SH:
   currency_name: Pound sterling
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+2'
   utc_offset: null
   capital_city: Jamestown
@@ -2714,7 +2515,6 @@ SH:
 SI:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+386'
   utc_offset: +01:00
   capital_city: Ljubljana
@@ -2727,7 +2527,6 @@ SI:
 SJ:
   currency_name: krone
   currency_symbol: kr
-  economy: Emerging/Developing
   calling_code: '+4779'
   utc_offset: null
   capital_city: Longyearbyen
@@ -2739,7 +2538,6 @@ SJ:
 SK:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+421'
   utc_offset: +01:00
   capital_city: Bratislava
@@ -2752,7 +2550,6 @@ SK:
 SL:
   currency_name: Sierra Leonean leone
   currency_symbol: Le
-  economy: Emerging/Developing
   calling_code: '+232'
   utc_offset: +00:00
   capital_city: Freetown
@@ -2765,7 +2562,6 @@ SL:
 SM:
   currency_name: Euro
   currency_symbol: €
-  economy: Developed
   calling_code: '+378'
   utc_offset: +01:00
   capital_city: City of San Marino
@@ -2778,7 +2574,6 @@ SM:
 SN:
   currency_name: West African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+221'
   utc_offset: +00:00
   capital_city: Dakar
@@ -2791,7 +2586,6 @@ SN:
 SO:
   currency_name: Somali shilling
   currency_symbol: Sh
-  economy: Emerging/Developing
   calling_code: '+252'
   utc_offset: +03:00
   capital_city: Mogadishu
@@ -2805,7 +2599,6 @@ SO:
 SR:
   currency_name: Surinamese dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+597'
   utc_offset: -03:00
   capital_city: Paramaribo
@@ -2818,7 +2611,6 @@ SR:
 SS:
   currency_name: South Sudanese pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+211'
   utc_offset: +03:00
   capital_city: Juba
@@ -2831,7 +2623,6 @@ SS:
 ST:
   currency_name: São Tomé and Príncipe dobra
   currency_symbol: Db
-  economy: Emerging/Developing
   calling_code: '+239'
   utc_offset: +00:00
   capital_city: São Tomé
@@ -2844,7 +2635,6 @@ ST:
 SV:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+503'
   utc_offset: -06:00
   capital_city: San Salvador
@@ -2857,7 +2647,6 @@ SV:
 SX:
   currency_name: Netherlands Antillean guilder
   currency_symbol: ƒ
-  economy: Emerging/Developing
   calling_code: '+1721'
   utc_offset: null
   capital_city: Philipsburg
@@ -2871,7 +2660,6 @@ SX:
 SY:
   currency_name: Syrian pound
   currency_symbol: £
-  economy: Emerging/Developing
   calling_code: '+963'
   utc_offset: +02:00
   capital_city: Damascus
@@ -2884,7 +2672,6 @@ SY:
 SZ:
   currency_name: Swazi lilangeni
   currency_symbol: L
-  economy: Emerging/Developing
   calling_code: '+268'
   utc_offset: +02:00
   capital_city: Lobamba
@@ -2898,7 +2685,6 @@ SZ:
 TC:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1649'
   utc_offset: null
   capital_city: Cockburn Town
@@ -2910,7 +2696,6 @@ TC:
 TD:
   currency_name: Central African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+235'
   utc_offset: +01:00
   capital_city: N'Djamena
@@ -2924,7 +2709,6 @@ TD:
 TF:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+262'
   utc_offset: null
   capital_city: Port-aux-Français
@@ -2936,7 +2720,6 @@ TF:
 TG:
   currency_name: West African CFA franc
   currency_symbol: Fr
-  economy: Emerging/Developing
   calling_code: '+228'
   utc_offset: +00:00
   capital_city: Lomé
@@ -2949,7 +2732,6 @@ TG:
 TH:
   currency_name: Thai baht
   currency_symbol: ฿
-  economy: Emerging/Developing
   calling_code: '+66'
   utc_offset: +07:00
   capital_city: Bangkok
@@ -2962,7 +2744,6 @@ TH:
 TJ:
   currency_name: Tajikistani somoni
   currency_symbol: ЅМ
-  economy: Emerging/Developing
   calling_code: '+992'
   utc_offset: +05:00
   capital_city: Dushanbe
@@ -2976,7 +2757,6 @@ TJ:
 TK:
   currency_name: New Zealand dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+690'
   utc_offset: null
   capital_city: Fakaofo
@@ -2990,7 +2770,6 @@ TK:
 TL:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+670'
   utc_offset: +09:00
   capital_city: Dili
@@ -3004,7 +2783,6 @@ TL:
 TM:
   currency_name: Turkmenistan manat
   currency_symbol: m
-  economy: Emerging/Developing
   calling_code: '+993'
   utc_offset: +05:00
   capital_city: Ashgabat
@@ -3018,7 +2796,6 @@ TM:
 TN:
   currency_name: Tunisian dinar
   currency_symbol: د.ت
-  economy: Emerging/Developing
   calling_code: '+216'
   utc_offset: +01:00
   capital_city: Tunis
@@ -3031,7 +2808,6 @@ TN:
 TO:
   currency_name: Tongan paʻanga
   currency_symbol: T$
-  economy: Emerging/Developing
   calling_code: '+676'
   utc_offset: '+13:00'
   capital_city: Nuku'alofa
@@ -3045,7 +2821,6 @@ TO:
 TR:
   currency_name: Turkish lira
   currency_symbol: ₺
-  economy: Emerging/Developing
   calling_code: '+90'
   utc_offset: +02:00
   capital_city: Ankara
@@ -3058,7 +2833,6 @@ TR:
 TT:
   currency_name: Trinidad and Tobago dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1868'
   utc_offset: -04:00
   capital_city: Port of Spain
@@ -3071,7 +2845,6 @@ TT:
 TV:
   currency_name: Australian dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+688'
   utc_offset: '+12:00'
   capital_city: Funafuti
@@ -3085,7 +2858,6 @@ TV:
 TW:
   currency_name: New Taiwan dollar
   currency_symbol: $
-  economy: Developed
   calling_code: '+886'
   utc_offset: +08:00
   capital_city: Taipei
@@ -3098,7 +2870,6 @@ TW:
 TZ:
   currency_name: Tanzanian shilling
   currency_symbol: Sh
-  economy: Emerging/Developing
   calling_code: '+255'
   utc_offset: +03:00
   capital_city: Dodoma
@@ -3112,7 +2883,6 @@ TZ:
 UA:
   currency_name: Ukrainian hryvnia
   currency_symbol: ₴
-  economy: Emerging/Developing
   calling_code: '+380'
   utc_offset: +02:00
   capital_city: Kyiv
@@ -3125,7 +2895,6 @@ UA:
 UG:
   currency_name: Ugandan shilling
   currency_symbol: Sh
-  economy: Emerging/Developing
   calling_code: '+256'
   utc_offset: +03:00
   capital_city: Kampala
@@ -3139,7 +2908,6 @@ UG:
 UM:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+268'
   utc_offset: null
   capital_city: null
@@ -3151,7 +2919,6 @@ UM:
 US:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Developed
   calling_code: '+1'
   utc_offset: -05:00
   capital_city: Washington, D.C.
@@ -3174,7 +2941,6 @@ US:
 UY:
   currency_name: Uruguayan peso
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+598'
   utc_offset: -03:00
   capital_city: Montevideo
@@ -3187,7 +2953,6 @@ UY:
 UZ:
   currency_name: Uzbekistani soʻm
   currency_symbol: so'm
-  economy: Emerging/Developing
   calling_code: '+998'
   utc_offset: +05:00
   capital_city: Tashkent
@@ -3201,7 +2966,6 @@ UZ:
 VA:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+3'
   utc_offset: null
   capital_city: Vatican City
@@ -3214,7 +2978,6 @@ VA:
 VC:
   currency_name: Eastern Caribbean dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1784'
   utc_offset: -04:00
   capital_city: Kingstown
@@ -3227,7 +2990,6 @@ VC:
 VE:
   currency_name: Venezuelan bolívar soberano
   currency_symbol: Bs.S.
-  economy: Emerging/Developing
   calling_code: '+58'
   utc_offset: -04:30
   capital_city: Caracas
@@ -3240,7 +3002,6 @@ VE:
 VG:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1284'
   utc_offset: null
   capital_city: Road Town
@@ -3252,7 +3013,6 @@ VG:
 VI:
   currency_name: United States dollar
   currency_symbol: $
-  economy: Emerging/Developing
   calling_code: '+1340'
   utc_offset: null
   capital_city: Charlotte Amalie
@@ -3264,7 +3024,6 @@ VI:
 VN:
   currency_name: Vietnamese đồng
   currency_symbol: ₫
-  economy: Emerging/Developing
   calling_code: '+84'
   utc_offset: +07:00
   capital_city: Hanoi
@@ -3277,7 +3036,6 @@ VN:
 VU:
   currency_name: Vanuatu vatu
   currency_symbol: Vt
-  economy: Emerging/Developing
   calling_code: '+678'
   utc_offset: '+11:00'
   capital_city: Port Vila
@@ -3292,7 +3050,6 @@ VU:
 WF:
   currency_name: CFP franc
   currency_symbol: ₣
-  economy: Emerging/Developing
   calling_code: '+681'
   utc_offset: null
   capital_city: Mata-Utu
@@ -3304,7 +3061,6 @@ WF:
 WS:
   currency_name: Samoan tālā
   currency_symbol: T
-  economy: Emerging/Developing
   calling_code: '+685'
   utc_offset: '+13:00'
   capital_city: Apia
@@ -3318,7 +3074,6 @@ WS:
 YE:
   currency_name: Yemeni rial
   currency_symbol: ﷼
-  economy: Emerging/Developing
   calling_code: '+967'
   utc_offset: +03:00
   capital_city: Sana'a
@@ -3331,7 +3086,6 @@ YE:
 YT:
   currency_name: Euro
   currency_symbol: €
-  economy: Emerging/Developing
   calling_code: '+262'
   utc_offset: null
   capital_city: Mamoudzou
@@ -3343,7 +3097,6 @@ YT:
 ZA:
   currency_name: South African rand
   currency_symbol: R
-  economy: Emerging/Developing
   calling_code: '+27'
   utc_offset: +02:00
   capital_city: Pretoria
@@ -3366,7 +3119,6 @@ ZA:
 ZM:
   currency_name: Zambian kwacha
   currency_symbol: ZK
-  economy: Emerging/Developing
   calling_code: '+260'
   utc_offset: +02:00
   capital_city: Lusaka
@@ -3379,7 +3131,6 @@ ZM:
 ZW:
   currency_name: Botswana pula
   currency_symbol: P
-  economy: Emerging/Developing
   calling_code: '+263'
   utc_offset: +02:00
   capital_city: Harare

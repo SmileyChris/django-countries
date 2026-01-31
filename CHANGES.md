@@ -10,7 +10,7 @@ release, and any new translations added.
 
 ### Features
 
-- Added additional metadata features to the `Country` class, including currency, economy, calling code, capital city, continent, date format, and timezones. Metadata is loaded from a local YAML file and cached for performance.
+- Added additional metadata features to the `Country` class, including currency, calling code, capital city, continent, date format, and timezones. Metadata is loaded from a local YAML file and cached for performance.
 
 ## 8.2.0 (25 November 2025)
 

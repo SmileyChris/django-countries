@@ -7,7 +7,6 @@ class CountryMetadataTest(TestCase):
         country = Country("GB")
         self.assertEqual(country.currency_name, "British pound")
         self.assertEqual(country.currency_symbol, "£")
-        self.assertEqual(country.economy, "Developed")
         self.assertEqual(country.calling_code, "+44")
         self.assertEqual(country.utc_offset, "+00:00")
         self.assertEqual(country.capital_city, "London")

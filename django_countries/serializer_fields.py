@@ -16,6 +16,15 @@ class CountryField(serializers.ChoiceField):
         "numeric",
         "unicode_flag",
         "ioc_code",
+        "currency_name",
+        "currency_symbol",
+        "calling_code",
+        "utc_offset",
+        "capital_city",
+        "continent",
+        "date_format",
+        "official_language",
+        "timezones",
     }
     _KEY_SCHEMAS = {
         "code": {"type": "string", "minLength": 2, "maxLength": 2},
@@ -24,6 +33,15 @@ class CountryField(serializers.ChoiceField):
         "numeric": {"type": "integer"},
         "unicode_flag": {"type": "string"},
         "ioc_code": {"type": "string"},
+        "currency_name": {"type": "string"},
+        "currency_symbol": {"type": "string"},
+        "calling_code": {"type": "string"},
+        "utc_offset": {"type": "string"},
+        "capital_city": {"type": "string"},
+        "continent": {"type": "string"},
+        "date_format": {"type": "string"},
+        "official_language": {"type": "array", "items": {"type": "string"}},
+        "timezones": {"type": "array", "items": {"type": "string"}},
     }
 
     def __init__(self, *args, **kwargs):
@@ -78,6 +96,8 @@ class CountryField(serializers.ChoiceField):
                 result["unicode_flag"] = get_country_obj().unicode_flag
             elif key == "ioc_code":
                 result["ioc_code"] = get_country_obj().ioc_code
+            else:
+                result[key] = getattr(get_country_obj(), key)
 
         return result
 

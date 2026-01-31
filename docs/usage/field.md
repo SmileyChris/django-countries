@@ -261,7 +261,6 @@ The following properties provide additional metadata for each country, loaded fr
 
 - `currency_name`: The name of the country's currency (e.g., 'British Pound').
 - `currency_symbol`: The symbol for the currency (e.g., '£').
-- `economy`: Economic status (e.g., 'Developed', 'Emerging').
 - `calling_code`: International calling code (e.g., '+44').
 - `utc_offset`: UTC time offset (e.g., '+00:00').
 - `capital_city`: The capital city (e.g., 'London').
