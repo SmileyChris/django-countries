@@ -22,17 +22,17 @@ just test quick
 just test [latest|previous|legacy|latest-pyuca|latest-noi18n]
 
 # Examples:
-just test latest           # Python 3.13 + Django 5.2
-just test previous         # Python 3.10 + Django 4.2
-just test legacy           # Python 3.8 + Django 3.2
+just test latest           # Python 3.14 + Django 6.0
+just test previous         # Python 3.13 + Django 5.2
+just test legacy           # Python 3.10 + Django 4.2
 just test latest-pyuca     # With Unicode collation
 just test latest-noi18n    # Without i18n
 
 # Run specific environment with custom Python version
-just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.8-3.13]
+just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.10-3.14]
 
 # Example:
-just test latest 3.12      # Latest Django with Python 3.12
+just test latest 3.14      # Latest Django with Python 3.14
 
 # Run a single test file
 uv run --group test pytest django_countries/tests/test_fields.py
@@ -291,6 +291,6 @@ Test models are defined in `tests/models.py` and the test app is configured in `
 - Translations are managed via Transifex and pulled using `just tx-pull`
 - Releases use `uv version` for version management and `just deploy` for publishing
 - Supported versions:
-  - Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
-  - Django 3.2 (LTS), 4.2 (LTS), 5.0, 5.1, 5.2
+  - Python 3.10, 3.11, 3.12, 3.13, 3.14
+  - Django 4.2 (LTS), 5.2 (LTS), 6.0
   - DRF 3.11+
