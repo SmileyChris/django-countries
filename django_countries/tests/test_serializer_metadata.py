@@ -1,18 +1,30 @@
 from django.test import TestCase
 from rest_framework import serializers
-from django_countries.serializer_fields import CountryField
+
 from django_countries.fields import Country
+from django_countries.serializer_fields import CountryField
+
 
 class CountrySerializerMetadataTest(TestCase):
     class CountrySerializer(serializers.Serializer):
         country = CountryField(country_dict=True)
 
     class AllMetadataSerializer(serializers.Serializer):
-        country = CountryField(country_dict=[
-            "code", "name", "currency_name", "currency_symbol", 
-            "calling_code", "utc_offset", "capital_city", 
-            "continent", "date_format", "official_language", "timezones"
-        ])
+        country = CountryField(
+            country_dict=[
+                "code",
+                "name",
+                "currency_name",
+                "currency_symbol",
+                "calling_code",
+                "utc_offset",
+                "capital_city",
+                "continent",
+                "date_format",
+                "official_language",
+                "timezones",
+            ]
+        )
 
     def test_country_dict_default_metadata(self):
         serializer = self.CountrySerializer(instance={"country": "GB"})
@@ -23,7 +35,7 @@ class CountrySerializerMetadataTest(TestCase):
     def test_all_metadata_keys(self):
         serializer = self.AllMetadataSerializer(instance={"country": "GB"})
         data = serializer.data["country"]
-        
+
         self.assertEqual(data["code"], "GB")
         self.assertEqual(data["name"], "United Kingdom")
         self.assertEqual(data["currency_name"], "British pound")

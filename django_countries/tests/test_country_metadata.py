@@ -1,6 +1,8 @@
 from django.test import TestCase
+
 from django_countries.fields import Country
 from django_countries.utils.metadata import get_metadata
+
 
 class CountryMetadataTest(TestCase):
     def test_gb_metadata(self):
@@ -32,9 +34,6 @@ class CountryMetadataTest(TestCase):
             _ = country.currency_name
 
     def test_caching(self):
-        # Access metadata once
         metadata1 = get_metadata()
-        # Access metadata again
         metadata2 = get_metadata()
-        # They should be the same object (cached)
         self.assertIs(metadata1, metadata2)

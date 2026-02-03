@@ -1,6 +1,7 @@
 import re
 import sys
-from typing import TYPE_CHECKING, Any, Iterable, Optional, Tuple, Type, Union, cast
+from typing import (TYPE_CHECKING, Any, Iterable, Optional, Tuple, Type, Union,
+                    cast)
 from urllib import parse as urlparse
 
 if TYPE_CHECKING:
@@ -19,8 +20,8 @@ from django.utils.functional import lazy
 from django.utils.html import escape as escape_html
 
 from django_countries import Countries, countries, filters, ioc_data, widgets
-from django_countries.utils.metadata import get_country_metadata
 from django_countries.conf import settings
+from django_countries.utils.metadata import get_country_metadata
 
 _entry_points: Iterable[Any]
 try:

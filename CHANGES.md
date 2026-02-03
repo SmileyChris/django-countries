@@ -6,12 +6,6 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
-## 8.3.0 (31 January 2026)
-
-### Features
-
-- Added additional metadata features to the `Country` class, including currency, calling code, capital city, continent, date format, and timezones. Metadata is loaded from a local YAML file and cached for performance.
-
 ## 8.2.0 (25 November 2025)
 
 ### Features

@@ -3,22 +3,9 @@ import itertools
 import re
 from contextlib import contextmanager
 from gettext import NullTranslations
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Dict,
-    Iterable,
-    List,
-    Literal,
-    NamedTuple,
-    Optional,
-    Set,
-    Tuple,
-    TypedDict,
-    Union,
-    cast,
-    overload,
-)
+from typing import (TYPE_CHECKING, Any, Dict, Iterable, List, Literal,
+                    NamedTuple, Optional, Set, Tuple, TypedDict, Union, cast,
+                    overload)
 
 from asgiref.local import Local
 from django.utils.encoding import force_str

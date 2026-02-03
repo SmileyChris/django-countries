@@ -205,6 +205,18 @@ Here's a complete example combining multiple template tags:
         <dd>{{ country.currency_symbol }} ({{ country.currency_name }})</dd>
         <dt>Capital:</dt>
         <dd>{{ country.capital_city }}</dd>
+        <dt>Calling Code:</dt>
+        <dd>{{ country.calling_code }}</dd>
+        <dt>UTC Offset:</dt>
+        <dd>{{ country.utc_offset }}</dd>
+        <dt>Continent:</dt>
+        <dd>{{ country.continent }}</dd>
+        <dt>Date Format:</dt>
+        <dd>{{ country.date_format }}</dd>
+        <dt>Official Language:</dt>
+        <dd>{{ country.official_language }}</dd>
+        <dt>Timezones:</dt>
+        <dd>{{ country.timezones }}</dd>
       </dl>
     </div>
   {% endfor %}

@@ -96,7 +96,7 @@ class CountryField(serializers.ChoiceField):
                 result["unicode_flag"] = get_country_obj().unicode_flag
             elif key == "ioc_code":
                 result["ioc_code"] = get_country_obj().ioc_code
-            else:
+            elif hasattr(get_country_obj(), key):
                 result[key] = getattr(get_country_obj(), key)
 
         return result
