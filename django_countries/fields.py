@@ -1,7 +1,6 @@
 import re
 import sys
-from typing import (TYPE_CHECKING, Any, Iterable, Optional, Tuple, Type, Union,
-                    cast)
+from typing import TYPE_CHECKING, Any, Iterable, Optional, Tuple, Type, Union, cast
 from urllib import parse as urlparse
 
 if TYPE_CHECKING:

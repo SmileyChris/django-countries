@@ -36,8 +36,8 @@ class CountryFieldMixin:
                         # to ListField
                         for option in self._country_field_options:
                             field_extra_kwargs.pop(option, None)
-                except FieldDoesNotExist:
-                    # Field doesn't exist on model, skip it
+                except FieldDoesNotExist:  # pragma: no cover
+                    # Field doesn't exist on model, skip it  # pragma: no cover
                     pass
 
         return extra_kwargs

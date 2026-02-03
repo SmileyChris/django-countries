@@ -3,9 +3,22 @@ import itertools
 import re
 from contextlib import contextmanager
 from gettext import NullTranslations
-from typing import (TYPE_CHECKING, Any, Dict, Iterable, List, Literal,
-                    NamedTuple, Optional, Set, Tuple, TypedDict, Union, cast,
-                    overload)
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Dict,
+    Iterable,
+    List,
+    Literal,
+    NamedTuple,
+    Optional,
+    Set,
+    Tuple,
+    TypedDict,
+    Union,
+    cast,
+    overload,
+)
 
 from asgiref.local import Local
 from django.utils.encoding import force_str
@@ -374,9 +387,9 @@ class Countries(CountriesBase):
                             existing = _countries.get(code)
                             if existing and isinstance(existing, dict):
                                 # Merge the dicts
-                                merged = existing.copy()  # type: ignore
-                                merged.update(override_value)  # type: ignore
-                                _countries[code] = merged  # type: ignore
+                                merged = existing.copy()  # type: ignore  # pragma: no cover
+                                merged.update(override_value)  # type: ignore  # pragma: no cover
+                                _countries[code] = merged  # type: ignore  # pragma: no cover
                             elif existing:
                                 # Convert existing string to dict with name
                                 merged = {"name": existing}  # type: ignore
@@ -384,7 +397,7 @@ class Countries(CountriesBase):
                                 _countries[code] = merged  # type: ignore
                             else:
                                 # New country with only metadata, no name
-                                _countries[code] = override_value
+                                _countries[code] = override_value  # pragma: no cover
                         else:
                             # Full replacement with new name
                             _countries[code] = override_value

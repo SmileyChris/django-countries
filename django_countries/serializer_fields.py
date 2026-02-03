@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any, Dict, List
 
 from django.utils.encoding import force_str
 from django.utils.translation import get_language
@@ -44,7 +44,7 @@ class CountryField(serializers.ChoiceField):
         "timezones": {"type": "array", "items": {"type": "string"}},
     }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.country_dict = kwargs.pop("country_dict", None)
         self.name_only = kwargs.pop("name_only", None)
         field_countries = kwargs.pop("countries", None)
@@ -119,11 +119,11 @@ class CountryField(serializers.ChoiceField):
                 self.fail("invalid_choice", input=data)
         return country
 
-    def _get_country_dict_schema(self):
+    def _get_country_dict_schema(self) -> Dict[str, Any]:
         """Return schema for country_dict representation."""
         properties = {key: self._KEY_SCHEMAS[key] for key in self.country_dict_keys}
         required = list(self.country_dict_keys)
-        schema = {
+        schema: Dict[str, Any] = {
             "type": "object",
             "properties": properties,
             "required": required,
@@ -132,14 +132,14 @@ class CountryField(serializers.ChoiceField):
             schema = {"oneOf": [schema, {"type": "null"}]}
         return schema
 
-    def _get_name_only_schema(self):
+    def _get_name_only_schema(self) -> Dict[str, Any]:
         """Return schema for name_only representation."""
-        schema = {"type": "string"}
+        schema: Dict[str, Any] = {"type": "string"}
         if self.allow_null:
             schema = {"oneOf": [schema, {"type": "null"}]}
         return schema
 
-    def _setup_spectacular_annotation(self):
+    def _setup_spectacular_annotation(self) -> None:
         """
         Set up schema annotation for drf-spectacular.
 

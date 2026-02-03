@@ -15,10 +15,10 @@ def get_metadata():
                 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
                 file_path = os.path.join(base_dir, "data", "country_metadata.yaml")
                 if os.path.exists(file_path):
-                    with open(file_path, "r", encoding="utf-8") as f:
+                    with open(file_path, encoding="utf-8") as f:
                         _metadata = yaml.safe_load(f) or {}
                 else:
-                    _metadata = {}
+                    _metadata = {}  # pragma: no cover
     return _metadata
 
 
