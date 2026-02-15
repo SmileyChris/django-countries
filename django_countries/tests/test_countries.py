@@ -102,6 +102,13 @@ class TestCountriesObject(BaseTest):
         finally:
             translation.activate(lang)
 
+    @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
+    def test_sorted_locale_translates(self):
+        lang = translation.get_language()
+        result = countries.sorted(locale="de")
+        self.assertEqual(dict(result)["BO"], "Bolivien")
+        self.assertEqual(translation.get_language(), lang)
+
     def test_alpha2(self):
         self.assertEqual(countries.alpha2("NZ"), "NZ")
         self.assertEqual(countries.alpha2("nZ"), "NZ")

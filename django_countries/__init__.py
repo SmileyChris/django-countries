@@ -657,6 +657,19 @@ class Countries(CountriesBase):
         self._iter_cache[cache_key] = results
         yield from results
 
+    def sorted(self, *, locale: Optional[str] = None) -> List[CountryTuple]:
+        """
+        Return a list of countries sorted by translated name for a locale.
+
+        This respects the same ordering rules as iteration (first countries,
+        overrides, and context options). When no locale is provided, the
+        current active language is used.
+        """
+        if locale:
+            with override(locale):
+                return list(self)
+        return list(self)
+
     def alpha2(self, code: "CountryCode") -> str:
         """
         Return the normalized country code when passed any type of ISO 3166-1
