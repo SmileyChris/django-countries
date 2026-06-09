@@ -28,7 +28,7 @@ classifiers = [
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = ["asgiref", "typing_extensions"]
 
 [project.urls]
