@@ -293,4 +293,4 @@ Test models are defined in `tests/models.py` and the test app is configured in `
 - Supported versions:
   - Python 3.10, 3.11, 3.12, 3.13, 3.14
   - Django 4.2 (LTS), 5.2 (LTS), 6.0
-  - DRF 3.13+
+  - DRF 3.14+

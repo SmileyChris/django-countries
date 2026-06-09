@@ -82,7 +82,7 @@ just test previous 3.13    # Django 5.2 with Python 3.13
 ```
 
 Test environments:
-- **legacy**: Python 3.10 + Django 4.2 + DRF 3.13
+- **legacy**: Python 3.10 + Django 4.2 + DRF 3.14
 - **previous**: Python 3.13 + Django 5.2 + DRF 3.16
 - **latest**: Python 3.14 + Django 6.0 + DRF 3.17
 - **latest-pyuca**: Latest + pyuca (Unicode collation)

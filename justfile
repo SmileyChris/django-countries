@@ -67,7 +67,7 @@ _test-env ENV PYTHON:
         legacy) \
             uv run --python {{ PYTHON }} \
                    --with "Django==4.2.*" \
-                   --with "djangorestframework==3.13.*" \
+                   --with "djangorestframework==3.14.*" \
                    --with "pyuca" \
                    --group test \
                    coverage run -m pytest \
