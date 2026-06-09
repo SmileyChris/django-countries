@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import builtins as _builtins
 import itertools
 import re
 from contextlib import contextmanager
@@ -6,6 +7,7 @@ from gettext import NullTranslations
 from typing import (
     TYPE_CHECKING,
     Any,
+    Callable,
     Dict,
     Iterable,
     List,
@@ -656,6 +658,41 @@ class Countries(CountriesBase):
         # Cache and return results
         self._iter_cache[cache_key] = results
         yield from results
+
+    def sorted(
+        self,
+        *,
+        locale: Optional[str] = None,
+        key: Optional[Callable] = None,
+        reverse: bool = False,
+    ) -> List[CountryTuple]:
+        """
+        Return a list of countries sorted by translated name for a locale.
+
+        This respects the same ordering rules as iteration (first countries,
+        overrides, and context options). When no locale is provided, the
+        current active language is used.
+
+        When ``key`` is provided, it is forwarded to the built-in
+        :func:`sorted` as a secondary sort applied on top of the
+        locale-ordered list. Note that this re-sorts the entire list and
+        ignores the :setting:`COUNTRIES_FIRST` grouping — use this when you
+        want a uniform custom ordering.
+
+        When only ``reverse`` is provided (without ``key``), the
+        locale-ordered list is simply reversed in place, preserving
+        :setting:`COUNTRIES_FIRST` as a trailing group.
+        """
+        if locale:
+            with override(locale):
+                result = list(self)
+        else:
+            result = list(self)
+        if key is not None:
+            return _builtins.sorted(result, key=key, reverse=reverse)
+        if reverse:
+            result.reverse()
+        return result
 
     def alpha2(self, code: "CountryCode") -> str:
         """

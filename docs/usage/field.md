@@ -274,6 +274,31 @@ Afghanistan (AF)
 Albania (AL)
 ```
 
+!!! info "New in development version"
+
+    Use `countries.sorted(locale=...)` to return a list sorted by translated
+    display names for a specific locale:
+
+```python
+>>> from django_countries import countries
+>>> de_list = countries.sorted(locale="de")
+>>> dict(de_list)["BO"]
+"Bolivien"
+```
+
+The ``key`` and ``reverse`` parameters are forwarded to the built-in
+:func:`sorted` as a secondary sort on top of the locale-ordered list.
+
+When ``key`` is provided, the list is re-sorted uniformly (ignoring
+:setting:`COUNTRIES_FIRST` grouping). When only ``reverse`` is given
+without ``key``, the list is reversed in place, preserving the first
+countries at the end:
+
+```python
+>>> by_code = countries.sorted(key=lambda item: item[0])
+>>> reversed_list = countries.sorted(reverse=True)
+```
+
 ## See Also
 
 - [Multiple Countries](../advanced/multiple.md) - Select multiple countries in a single field
