@@ -9,7 +9,7 @@ default:
 #   just test                                          -> run all test matrices + coverage
 #   just test quick                                    -> quick test with current Python (no coverage)
 #   just test [latest|previous|legacy|latest-pyuca|latest-noi18n]              -> run specific env
-#   just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.8-3.13]   -> run specific env + python
+#   just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.10-3.14]  -> run specific env + python
 test *ARGS='':
     #!/usr/bin/env bash
     set -euo pipefail
@@ -32,9 +32,9 @@ test *ARGS='':
             uv run --group test pytest
         else
             case "$ENV" in
-                legacy)      PYTHON="3.8" ;;
-                previous)    PYTHON="3.10" ;;
-                latest|latest-pyuca|latest-noi18n) PYTHON="3.13" ;;
+                legacy)      PYTHON="3.10" ;;
+                previous)    PYTHON="3.13" ;;
+                latest|latest-pyuca|latest-noi18n) PYTHON="3.14" ;;
                 *)           echo "Unknown environment: $ENV"; exit 1 ;;
             esac
             just _test-env "$ENV" "$PYTHON"
@@ -51,11 +51,11 @@ test *ARGS='':
 _test-matrix:
     @echo "Cleaning old coverage files..."
     @rm -rf .coverage* htmlcov
-    @just _test-env legacy 3.8
-    @just _test-env previous 3.10
-    @just _test-env latest 3.13
-    @just _test-env latest-pyuca 3.13
-    @just _test-env latest-noi18n 3.13
+    @just _test-env legacy 3.10
+    @just _test-env previous 3.13
+    @just _test-env latest 3.14
+    @just _test-env latest-pyuca 3.14
+    @just _test-env latest-noi18n 3.14
 
 # Run a specific test environment (internal)
 _test-env ENV PYTHON:
@@ -66,31 +66,31 @@ _test-env ENV PYTHON:
     @case "{{ ENV }}" in \
         legacy) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==3.2.*" \
-                   --with "djangorestframework==3.11.*" \
+                   --with "Django==4.2.*" \
+                   --with "djangorestframework==3.14.*" \
                    --with "pyuca" \
                    --group test \
                    coverage run -m pytest \
             ;; \
         previous) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==4.2.*" \
-                   --with "djangorestframework==3.14.*" \
+                   --with "Django==5.2.*" \
+                   --with "djangorestframework==3.16.*" \
                    --group test \
                    coverage run -m pytest \
             ;; \
         latest) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==5.1.*" \
-                   --with "djangorestframework==3.15.*" \
+                   --with "Django==6.0.*" \
+                   --with "djangorestframework==3.17.*" \
                    --with "graphene-django==3.0.*" \
                    --group test \
                    coverage run -m pytest \
             ;; \
         latest-pyuca) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==5.1.*" \
-                   --with "djangorestframework==3.15.*" \
+                   --with "Django==6.0.*" \
+                   --with "djangorestframework==3.17.*" \
                    --with "graphene-django==3.0.*" \
                    --with "pyuca" \
                    --group test \
@@ -99,8 +99,8 @@ _test-env ENV PYTHON:
         latest-noi18n) \
             DJANGO_SETTINGS_MODULE=django_countries.tests.settings_noi18n \
             uv run --python {{ PYTHON }} \
-                   --with "Django==5.1.*" \
-                   --with "djangorestframework==3.15.*" \
+                   --with "Django==6.0.*" \
+                   --with "djangorestframework==3.17.*" \
                    --with "graphene-django==3.0.*" \
                    --group test \
                    coverage run -m pytest \
