@@ -286,6 +286,19 @@ Albania (AL)
 "Bolivien"
 ```
 
+The ``key`` and ``reverse`` parameters are forwarded to the built-in
+:func:`sorted` as a secondary sort on top of the locale-ordered list.
+
+When ``key`` is provided, the list is re-sorted uniformly (ignoring
+:setting:`COUNTRIES_FIRST` grouping). When only ``reverse`` is given
+without ``key``, the list is reversed in place, preserving the first
+countries at the end:
+
+```python
+>>> by_code = countries.sorted(key=lambda item: item[0])
+>>> reversed_list = countries.sorted(reverse=True)
+```
+
 ## See Also
 
 - [Multiple Countries](../advanced/multiple.md) - Select multiple countries in a single field

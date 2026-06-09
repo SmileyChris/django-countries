@@ -109,6 +109,16 @@ class TestCountriesObject(BaseTest):
         self.assertEqual(dict(result)["BO"], "Bolivien")
         self.assertEqual(translation.get_language(), lang)
 
+    def test_sorted_key(self):
+        result = countries.sorted(key=lambda item: item[0])
+        codes = [c[0] for c in result]
+        self.assertEqual(codes, sorted(codes))
+
+    def test_sorted_reverse(self):
+        result = countries.sorted(reverse=True)
+        normal = countries.sorted()
+        self.assertEqual(result, list(reversed(normal)))
+
     def test_alpha2(self):
         self.assertEqual(countries.alpha2("NZ"), "NZ")
         self.assertEqual(countries.alpha2("nZ"), "NZ")
