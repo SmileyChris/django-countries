@@ -42,6 +42,9 @@ class CountryField(serializers.ChoiceField):
         self._setup_spectacular_annotation()
 
     def to_representation(self, obj):
+        # Handle None explicitly for nullable fields
+        if obj is None:
+            return None if self.allow_null else ""
         code = self.countries.alpha2(obj)
         if not code:
             # Respect allow_null setting for empty values

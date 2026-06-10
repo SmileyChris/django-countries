@@ -312,6 +312,9 @@ class CountryDescriptor:
             if value is None:
                 return None
             return MultipleCountriesDescriptor(self.country(code) for code in value)
+        # Return None for NULL values on nullable single fields
+        if self.field.null and value is None:
+            return None
         return self.country(value)
 
     def country(self, code):

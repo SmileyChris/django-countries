@@ -18,21 +18,18 @@ from django_countries.tests.models import AllowNull
 class TestNullBehavior(TestCase):
     """Test that null=True fields properly handle NULL values."""
 
-    def test_null_field_returns_country_with_none_code(self):
+    def test_null_field_returns_none(self):
         """
         When a field has null=True and the database value is NULL,
-        the descriptor returns Country(code=None), which is falsy.
+        the descriptor returns None (not Country(code=None)).
         """
         obj = AllowNull.objects.create(country=None)
 
         # Refresh from database to ensure we're testing descriptor behavior
         obj = AllowNull.objects.get(pk=obj.pk)
 
-        # Should return Country object with code=None
-        self.assertIsInstance(obj.country, Country)
-        self.assertIsNone(obj.country.code)
-        # Should be falsy for boolean checks
-        self.assertFalse(obj.country)
+        # Should return None, not Country
+        self.assertIsNone(obj.country)
 
     def test_null_field_with_value_returns_country(self):
         """
@@ -62,18 +59,15 @@ class TestNullBehavior(TestCase):
         obj.save()
 
         obj = AllowNull.objects.get(pk=obj.pk)
-        self.assertIsNone(obj.country.code)
-        self.assertFalse(obj.country)  # Should be falsy
+        self.assertIsNone(obj.country)
 
-    def test_nullable_deferred_returns_country_with_none(self):
-        """Test that deferred loading also returns Country(code=None)."""
+    def test_nullable_deferred_returns_none(self):
+        """Test that deferred loading also returns None for null values."""
         AllowNull.objects.create(country=None)
         obj = AllowNull.objects.defer("country").get()
 
-        # Should return Country with code=None
-        self.assertIsInstance(obj.country, Country)
-        self.assertIsNone(obj.country.code)
-        self.assertFalse(obj.country)
+        # Should return None
+        self.assertIsNone(obj.country)
 
 
 class TestNullWithUnique(TestCase):
@@ -101,13 +95,11 @@ class TestNullWithUnique(TestCase):
         obj1 = AllowNull.objects.create(country=None)
         obj2 = AllowNull.objects.create(country=None)
 
-        # Both should have Country(code=None)
+        # Both should return None
         country1 = AllowNull.objects.get(pk=obj1.pk).country
         country2 = AllowNull.objects.get(pk=obj2.pk).country
-        self.assertIsNone(country1.code)
-        self.assertIsNone(country2.code)
-        self.assertFalse(country1)
-        self.assertFalse(country2)
+        self.assertIsNone(country1)
+        self.assertIsNone(country2)
 
     def test_multiple_empty_strings_allowed_without_unique(self):
         """
@@ -263,6 +255,42 @@ class TestDRFSerializerAllowNull(TestCase):
         serializer = TestSerializer(obj)
 
         self.assertEqual(serializer.data["country"], "US")
+
+    def test_serializer_null_from_database(self):
+        """
+        Test serializer with actual NULL value from database.
+
+        This tests the full round-trip: save NULL to DB, fetch it back,
+        and serialize. This verifies the descriptor returns None and
+        the serializer handles it correctly.
+        """
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = AllowNull
+                fields = ("country",)
+
+        # Create and save to database
+        obj = AllowNull.objects.create(country=None)
+        # Fetch fresh from database
+        obj = AllowNull.objects.get(pk=obj.pk)
+
+        serializer = TestSerializer(obj)
+        self.assertIsNone(serializer.data["country"])
+
+    def test_serializer_value_from_database(self):
+        """Test serializer with value from database."""
+
+        class TestSerializer(CountryFieldMixin, serializers.ModelSerializer):
+            class Meta:
+                model = AllowNull
+                fields = ("country",)
+
+        obj = AllowNull.objects.create(country="AU")
+        obj = AllowNull.objects.get(pk=obj.pk)
+
+        serializer = TestSerializer(obj)
+        self.assertEqual(serializer.data["country"], "AU")
 
 
 # Document expected behavior for unique constraints
