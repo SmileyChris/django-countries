@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `CountryField` can allow multiple selections of countries, which are saved as a comma-separated string. The field will always output a list of countries in this mode.
+The `CountryField` can allow multiple selections of countries, which are saved as a comma-separated string. Accessing the field returns a sequence of `Country` objects.
 
 ## Basic Usage
 
@@ -17,7 +17,8 @@ class Incident(models.Model):
 
 ## Working with Multiple Countries
 
-When you access the field, it returns a list of `Country` objects:
+Accessing the field returns a `MultipleCountriesDescriptor`, a list-like
+object of `Country` objects.
 
 ```python
 >>> incident = Incident.objects.get(title="Pavlova dispute")
@@ -25,6 +26,17 @@ When you access the field, it returns a list of `Country` objects:
 ...     print(country.name)
 Australia
 New Zealand
+>>> len(incident.countries)
+2
+>>> incident.countries[0].name
+'Australia'
+```
+
+If you need a plain `list`, call `list()` on it:
+
+```python
+>>> list(incident.countries)
+[Country('AU'), Country('NZ')]
 ```
 
 ## Data Storage Behavior
