@@ -1572,7 +1572,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>just<span class="w"> </span>--list
 </code></pre></div></p>
 <h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Run all test environments (Python 3.8-3.13, Django 3.2-5.2)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Run all test environments (Python 3.10-3.14, Django 4.2-6.0)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>just<span class="w"> </span><span class="nb">test</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Quick test with current Python (no coverage matrix)</span>
@@ -1582,21 +1582,21 @@
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">[</span>latest<span class="p">|</span>previous<span class="p">|</span>legacy<span class="p">|</span>latest-pyuca<span class="p">|</span>latest-noi18n<span class="o">]</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Examples:</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>latest<span class="w">           </span><span class="c1"># Latest Django/DRF with Python 3.13</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>previous<span class="w">         </span><span class="c1"># Django 4.2 with Python 3.10</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>legacy<span class="w">           </span><span class="c1"># Django 3.2 with Python 3.8</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>latest<span class="w">           </span><span class="c1"># Latest Django/DRF with Python 3.14</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>previous<span class="w">         </span><span class="c1"># Django 5.2 with Python 3.13</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>legacy<span class="w">           </span><span class="c1"># Django 4.2 with Python 3.10</span>
 <a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
 <a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># Run specific environment with custom Python version</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">[</span>latest<span class="p">|</span>previous<span class="p">|</span>legacy<span class="p">|</span>latest-pyuca<span class="p">|</span>latest-noi18n<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3</span>.8-3.13<span class="o">]</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">[</span>latest<span class="p">|</span>previous<span class="p">|</span>legacy<span class="p">|</span>latest-pyuca<span class="p">|</span>latest-noi18n<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">3</span>.10-3.14<span class="o">]</span>
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># Examples:</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>latest<span class="w"> </span><span class="m">3</span>.12<span class="w">      </span><span class="c1"># Latest Django with Python 3.12</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>previous<span class="w"> </span><span class="m">3</span>.9<span class="w">     </span><span class="c1"># Django 4.2 with Python 3.9</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>latest<span class="w"> </span><span class="m">3</span>.14<span class="w">      </span><span class="c1"># Latest Django with Python 3.14</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>just<span class="w"> </span><span class="nb">test</span><span class="w"> </span>previous<span class="w"> </span><span class="m">3</span>.13<span class="w">    </span><span class="c1"># Django 5.2 with Python 3.13</span>
 </code></pre></div>
 <p>Test environments:<br />
-- <strong>legacy</strong>: Python 3.8 + Django 3.2 + DRF 3.11<br />
-- <strong>previous</strong>: Python 3.10 + Django 4.2 + DRF 3.14<br />
-- <strong>latest</strong>: Python 3.13 + Django 5.2 + DRF 3.15<br />
+- <strong>legacy</strong>: Python 3.10 + Django 4.2 + DRF 3.14<br />
+- <strong>previous</strong>: Python 3.13 + Django 5.2 + DRF 3.16<br />
+- <strong>latest</strong>: Python 3.14 + Django 6.0 + DRF 3.17<br />
 - <strong>latest-pyuca</strong>: Latest + pyuca (Unicode collation)<br />
 - <strong>latest-noi18n</strong>: Latest + i18n disabled</p>
 <p>Coverage is automatically generated when running <code>just test</code>.</p>
