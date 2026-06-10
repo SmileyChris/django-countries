@@ -43,7 +43,7 @@ country = CountryField(blank_label="(select country)")
 
 ### Nullable Fields
 
-!!! info "New in development version"
+!!! info "New in version 9.0.0"
 
     Nullable `CountryField` now returns `None` instead of `Country(code=None)`.
 
@@ -308,7 +308,7 @@ Afghanistan (AF)
 Albania (AL)
 ```
 
-!!! info "New in development version"
+!!! info "New in version 9.0.0"
 
     Use `countries.sorted(locale=...)` to return a list sorted by translated
     display names for a specific locale:

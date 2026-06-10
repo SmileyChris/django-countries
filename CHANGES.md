@@ -6,6 +6,26 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+## 9.0.0 (10 June 2026)
+
+### Features
+
+- Nullable `CountryField` (with `null=True`) now returns `None` instead of `Country(code=None)` when the database value is NULL. This makes the nullability explicit at the field level rather than inside the `Country` object, resulting in cleaner typing where `Country.code` is always a `str` (never `None`).
+
+  **Breaking change:** Code that previously checked `obj.country.code is None` should now check `obj.country is None`. The common pattern `if obj.country:` continues to work unchanged. ([#481](https://github.com/SmileyChris/django-countries/issues/481))
+- Add Django 6.0 and Python 3.14 support. Drop Django 3.2, 5.0, 5.1 and Python 3.8, 3.9. Minimum DRF bumped to 3.14.
+- Add an opt-in `Countries.sorted(locale=...)` helper to return country choices sorted by translated display names.
+
+### Bugfixes
+
+- Fix multiple type stub issues in `fields.pyi`: correct return types for `Country.name`, `Country.alpha3`, `Country.ioc_code` (now `str` instead of `str | None`), `Country.numeric` (now `int | None` instead of `str | None`), and `MultipleCountriesDescriptor.__iter__` (now `Iterator[Country]` instead of `Any`). Also add missing `blank_label` attribute and accept positional `verbose_name` argument in `CountryField.__init__` overloads. ([#483](https://github.com/SmileyChris/django-countries/issues/483))
+- Exclude .mypy_cache directory from source distributions (was 73% of the sdist). ([#490](https://github.com/SmileyChris/django-countries/issues/490))
+
+### Improved Documentation
+
+- Clarify that multiple=True returns a MultipleCountriesDescriptor, not a plain list. ([#485](https://github.com/SmileyChris/django-countries/issues/485))
+
+
 ## 8.2.0 (25 November 2025)
 
 ### Features
