@@ -73,6 +73,7 @@ docs = ["mkdocs", "mkdocs-material"]
 [tool.uv.build-backend]
 module-root = ""
 source-include = ["LICENSE", "CHANGES.md"]
+source-exclude = [".mypy_cache"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "django_countries.tests.settings"
