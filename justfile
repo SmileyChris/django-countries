@@ -66,7 +66,7 @@ _test-env ENV PYTHON:
     @case "{{ ENV }}" in \
         legacy) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==4.2.*" \
+                   --with "Django==5.2.*" \
                    --with "djangorestframework==3.14.*" \
                    --with "pyuca" \
                    --group test \
@@ -74,14 +74,14 @@ _test-env ENV PYTHON:
             ;; \
         previous) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==5.2.*" \
+                   --with "Django==6.0.*" \
                    --with "djangorestframework==3.16.*" \
                    --group test \
                    coverage run -m pytest \
             ;; \
         latest) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==6.0.*" \
+                   --with "Django==6.1.*" \
                    --with "djangorestframework==3.17.*" \
                    --with "graphene-django==3.0.*" \
                    --group test \
@@ -89,7 +89,7 @@ _test-env ENV PYTHON:
             ;; \
         latest-pyuca) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==6.0.*" \
+                   --with "Django==6.1.*" \
                    --with "djangorestframework==3.17.*" \
                    --with "graphene-django==3.0.*" \
                    --with "pyuca" \
@@ -99,7 +99,7 @@ _test-env ENV PYTHON:
         latest-noi18n) \
             DJANGO_SETTINGS_MODULE=django_countries.tests.settings_noi18n \
             uv run --python {{ PYTHON }} \
-                   --with "Django==6.0.*" \
+                   --with "Django==6.1.*" \
                    --with "djangorestframework==3.17.*" \
                    --with "graphene-django==3.0.*" \
                    --group test \

@@ -11,13 +11,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Legacy: Python 3.10 + Django 4.2
+          # Legacy: Python 3.10 + Django 5.2
           - python-version: "3.10"
             test-env: legacy
-          # Previous: Python 3.13 + Django 5.2
+          # Previous: Python 3.13 + Django 6.0
           - python-version: "3.13"
             test-env: previous
-          # Latest: Python 3.14 + Django 6.0
+          # Latest: Python 3.14 + Django 6.1
           - python-version: "3.14"
             test-env: latest
           - python-version: "3.14"

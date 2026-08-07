@@ -59,7 +59,7 @@ just --list
 ### Testing
 
 ```bash
-# Run all test environments (Python 3.10-3.14, Django 4.2-6.0)
+# Run all test environments (Python 3.10-3.14, Django 5.2-6.1)
 just test
 
 # Quick test with current Python (no coverage matrix)
@@ -70,8 +70,8 @@ just test [latest|previous|legacy|latest-pyuca|latest-noi18n]
 
 # Examples:
 just test latest           # Latest Django/DRF with Python 3.14
-just test previous         # Django 5.2 with Python 3.13
-just test legacy           # Django 4.2 with Python 3.10
+just test previous         # Django 6.0 with Python 3.13
+just test legacy           # Django 5.2 with Python 3.10
 
 # Run specific environment with custom Python version
 just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.10-3.14]
@@ -82,9 +82,9 @@ just test previous 3.13    # Django 5.2 with Python 3.13
 ```
 
 Test environments:
-- **legacy**: Python 3.10 + Django 4.2 + DRF 3.14
-- **previous**: Python 3.13 + Django 5.2 + DRF 3.16
-- **latest**: Python 3.14 + Django 6.0 + DRF 3.17
+- **legacy**: Python 3.10 + Django 5.2 + DRF 3.14
+- **previous**: Python 3.13 + Django 6.0 + DRF 3.16
+- **latest**: Python 3.14 + Django 6.1 + DRF 3.17
 - **latest-pyuca**: Latest + pyuca (Unicode collation)
 - **latest-noi18n**: Latest + i18n disabled
 
