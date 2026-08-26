@@ -188,7 +188,7 @@ COUNTRIES: "Dict[str, StrPromise]" = {
     "MZ": _("Mozambique"),
     "MM": _("Myanmar"),
     "NA": _("Namibia"),
-    "NR": _("Nauru"),
+    "NR": _("Naoero"),
     "NP": _("Nepal"),
     "NL": _("Netherlands (Kingdom of the)"),
     "NC": _("New Caledonia"),
