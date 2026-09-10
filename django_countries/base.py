@@ -43,6 +43,7 @@ class CountriesBase:
         "FK": [_("Falkland Islands  [Malvinas]")],
         "MK": [_("Macedonia"), _("Macedonia (the former Yugoslav Republic of)")],
         "NL": [_("Netherlands")],
+        "NR": [_("Nauru")],
         "SZ": [_("Swaziland")],
         "TR": [_("Turkey")],
         "TZ": [_("Tanzania, the United Republic of")],
