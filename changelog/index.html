@@ -972,6 +972,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#910-11-september-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1.0 (11 September 2026)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1.0 (11 September 2026)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#900-10-june-2026" class="md-nav__link">
     <span class="md-ellipsis">
       9.0.0 (10 June 2026)
@@ -982,7 +1006,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#features_1" class="md-nav__link">
     <span class="md-ellipsis">
       Features
     </span>
@@ -1024,7 +1048,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features_1" class="md-nav__link">
+  <a href="#features_2" class="md-nav__link">
     <span class="md-ellipsis">
       Features
     </span>
@@ -1090,7 +1114,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features_2" class="md-nav__link">
+  <a href="#features_3" class="md-nav__link">
     <span class="md-ellipsis">
       Features
     </span>
@@ -1156,7 +1180,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features_3" class="md-nav__link">
+  <a href="#features_4" class="md-nav__link">
     <span class="md-ellipsis">
       Features
     </span>
@@ -1797,6 +1821,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#910-11-september-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1.0 (11 September 2026)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1.0 (11 September 2026)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#900-10-june-2026" class="md-nav__link">
     <span class="md-ellipsis">
       9.0.0 (10 June 2026)
@@ -1807,7 +1855,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#features_1" class="md-nav__link">
     <span class="md-ellipsis">
       Features
     </span>
@@ -1849,7 +1897,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features_1" class="md-nav__link">
+  <a href="#features_2" class="md-nav__link">
     <span class="md-ellipsis">
       Features
     </span>
@@ -1915,7 +1963,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features_2" class="md-nav__link">
+  <a href="#features_3" class="md-nav__link">
     <span class="md-ellipsis">
       Features
     </span>
@@ -1981,7 +2029,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features_3" class="md-nav__link">
+  <a href="#features_4" class="md-nav__link">
     <span class="md-ellipsis">
       Features
     </span>
@@ -2604,8 +2652,16 @@ versions first. It can be assumed that translations have been updated each<br />
 release, and any new translations added.</p>
 <!-- towncrier release notes start -->
 
-<h2 id="900-10-june-2026">9.0.0 (10 June 2026)<a class="headerlink" href="#900-10-june-2026" title="Permanent link">&para;</a></h2>
+<h2 id="910-11-september-2026">9.1.0 (11 September 2026)<a class="headerlink" href="#910-11-september-2026" title="Permanent link">&para;</a></h2>
 <h3 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add Django 6.1 support. Django 4.2 remains supported for now, despite reaching<br />
+  end of life in April 2026; it will be dropped in the next major release. (<a href="https://github.com/SmileyChris/django-countries/issues/494">#494</a>)</li>
+<li>Rename Nauru to Naoero, falling back to the old name's translation until<br />
+  translators catch up. (<a href="https://github.com/SmileyChris/django-countries/issues/496">#496</a>)</li>
+</ul>
+<h2 id="900-10-june-2026">9.0.0 (10 June 2026)<a class="headerlink" href="#900-10-june-2026" title="Permanent link">&para;</a></h2>
+<h3 id="features_1">Features<a class="headerlink" href="#features_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Nullable <code>CountryField</code> (with <code>null=True</code>) now returns <code>None</code> instead of <code>Country(code=None)</code> when the database value is NULL. This makes the nullability explicit at the field level rather than inside the <code>Country</code> object, resulting in cleaner typing where <code>Country.code</code> is always a <code>str</code> (never <code>None</code>).</li>
 </ul>
@@ -2622,7 +2678,7 @@ release, and any new translations added.</p>
 <li>Clarify that multiple=True returns a MultipleCountriesDescriptor, not a plain list. (<a href="https://github.com/SmileyChris/django-countries/issues/485">#485</a>)</li>
 </ul>
 <h2 id="820-25-november-2025">8.2.0 (25 November 2025)<a class="headerlink" href="#820-25-november-2025" title="Permanent link">&para;</a></h2>
-<h3 id="features_1">Features<a class="headerlink" href="#features_1" title="Permanent link">&para;</a></h3>
+<h3 id="features_2">Features<a class="headerlink" href="#features_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add <code>django_countries.django_filters.CountryFilter</code> for django-filters integration with support for custom <code>empty_label</code>. This filter automatically sets country choices and seamlessly integrates with django-filters FilterSets, making it easier to add country filtering to your views. (<a href="https://github.com/SmileyChris/django-countries/issues/307">#307</a>)</li>
 <li>Enable <code>CountryFieldMixin</code> to accept <code>name_only</code>, <code>country_dict</code>, and output customization options via <code>Meta.extra_kwargs</code>. You can now configure country field serialization behavior without explicitly declaring serializer fields, making it easier to customize output for both single and multiple country fields. (<a href="https://github.com/SmileyChris/django-countries/issues/414">#414</a>)</li>
@@ -2668,7 +2724,7 @@ release, and any new translations added.</p>
 <li>Fixed <code>CountryField(multiple=True)</code> not marking selected options in Django forms. (<a href="https://github.com/SmileyChris/django-countries/issues/480">#480</a>)</li>
 </ul>
 <h2 id="810-13-november-2025">8.1.0 (13 November 2025)<a class="headerlink" href="#810-13-november-2025" title="Permanent link">&para;</a></h2>
-<h3 id="features_2">Features<a class="headerlink" href="#features_2" title="Permanent link">&para;</a></h3>
+<h3 id="features_3">Features<a class="headerlink" href="#features_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>DRF serializer fields now respect the <code>allow_null</code> parameter, returning <code>None</code> for NULL values when <code>allow_null=True</code>.<br />
   This enables better API consistency and is particularly useful with <code>unique=True</code> constraints, which allow multiple NULL values but not multiple empty strings in the database. (<a href="https://github.com/SmileyChris/django-countries/issues/453">#453</a>)</li>
@@ -2693,7 +2749,7 @@ release, and any new translations added.</p>
 </ul>
 <h2 id="800-4-november-2025">8.0.0 (4 November 2025)<a class="headerlink" href="#800-4-november-2025" title="Permanent link">&para;</a></h2>
 <p><strong>Note</strong>: This release includes all changes from the yanked versions 7.8, 7.9, and 7.9.1, which were yanked because they inadvertently dropped Python 3.7 support without a major version bump.</p>
-<h3 id="features_3">Features<a class="headerlink" href="#features_3" title="Permanent link">&para;</a></h3>
+<h3 id="features_4">Features<a class="headerlink" href="#features_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Added common names for six additional countries/territories: Democratic Republic of the Congo (CD), South Georgia (GS), Netherlands (NL), Palestine (PS), Saint Helena (SH), and Vatican City (VA). These provide friendlier, shorter names when <code>COUNTRIES_COMMON_NAMES</code> is enabled (default).</li>
 </ul>
