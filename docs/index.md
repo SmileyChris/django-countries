@@ -41,7 +41,7 @@ Country names are translated using Django's standard `gettext` and imported from
 ## Support
 
 - **Python**: 3.10, 3.11, 3.12, 3.13, 3.14
-- **Django**: 4.2 (LTS), 5.2 (LTS), 6.0
+- **Django**: 4.2 (LTS), 5.2 (LTS), 6.0, 6.1
 - **Django REST Framework**: 3.13+
 
 ## License

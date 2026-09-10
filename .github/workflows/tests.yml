@@ -17,7 +17,7 @@ jobs:
           # Previous: Python 3.13 + Django 5.2
           - python-version: "3.13"
             test-env: previous
-          # Latest: Python 3.14 + Django 6.0
+          # Latest: Python 3.14 + Django 6.1
           - python-version: "3.14"
             test-env: latest
           - python-version: "3.14"
