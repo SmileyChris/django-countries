@@ -6,6 +6,16 @@ release, and any new translations added.
 
 <!-- towncrier release notes start -->
 
+## 9.1.0 (11 September 2026)
+
+### Features
+
+- Add Django 6.1 support. Django 4.2 remains supported for now, despite reaching
+  end of life in April 2026; it will be dropped in the next major release. ([#494](https://github.com/SmileyChris/django-countries/issues/494))
+- Rename Nauru to Naoero, falling back to the old name's translation until
+  translators catch up. ([#496](https://github.com/SmileyChris/django-countries/issues/496))
+
+
 ## 9.0.0 (10 June 2026)
 
 ### Features
