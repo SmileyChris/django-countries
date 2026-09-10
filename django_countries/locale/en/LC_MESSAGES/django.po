@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 19:38-0500\n"
+"POT-Creation-Date: 2026-09-10 17:23-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,14 +123,18 @@ msgid "Macedonia (the former Yugoslav Republic of)"
 msgstr ""
 
 #: base.py:46
-msgid "Swaziland"
+msgid "Nauru"
 msgstr ""
 
 #: base.py:47
+msgid "Swaziland"
+msgstr ""
+
+#: base.py:48
 msgid "Turkey"
 msgstr ""
 
-#: base.py:48 data.py:256
+#: base.py:49 data.py:256
 msgid "Tanzania, the United Republic of"
 msgstr ""
 
@@ -751,7 +755,7 @@ msgid "Namibia"
 msgstr ""
 
 #: data.py:191
-msgid "Nauru"
+msgid "Naoero"
 msgstr ""
 
 #: data.py:192
