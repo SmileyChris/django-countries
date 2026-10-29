@@ -30,7 +30,7 @@ classifiers = [
     "Framework :: Django :: 6.1",
 ]
 requires-python = ">=3.10"
-dependencies = ["asgiref", "typing_extensions"]
+dependencies = ["Django>=4.2", "asgiref", "typing_extensions"]
 
 [project.urls]
 Homepage = "https://github.com/SmileyChris/django-countries/"
