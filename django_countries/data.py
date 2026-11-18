@@ -17,7 +17,7 @@ how to do that:
 
 import glob
 import os
-from typing import TYPE_CHECKING, Dict
+from typing import TYPE_CHECKING
 
 from django_countries.base import CountriesBase
 
@@ -33,7 +33,7 @@ except ImportError:  # pragma: no cover
 
 
 # Nicely titled (and translatable) country names.
-COUNTRIES: "Dict[str, StrPromise]" = {
+COUNTRIES: "dict[str, StrPromise]" = {
     "AF": _("Afghanistan"),
     "AX": _("Åland Islands"),
     "AL": _("Albania"),

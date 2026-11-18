@@ -9,7 +9,7 @@ default:
 #   just test                                          -> run all test matrices + coverage
 #   just test quick                                    -> quick test with current Python (no coverage)
 #   just test [latest|previous|legacy|latest-pyuca|latest-noi18n]              -> run specific env
-#   just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.10-3.14]  -> run specific env + python
+#   just test [latest|previous|legacy|latest-pyuca|latest-noi18n] [3.11-3.14]  -> run specific env + python
 test *ARGS='':
     #!/usr/bin/env bash
     set -euo pipefail
@@ -32,7 +32,7 @@ test *ARGS='':
             uv run --group test pytest
         else
             case "$ENV" in
-                legacy)      PYTHON="3.10" ;;
+                legacy)      PYTHON="3.11" ;;
                 previous)    PYTHON="3.13" ;;
                 latest|latest-pyuca|latest-noi18n) PYTHON="3.14" ;;
                 *)           echo "Unknown environment: $ENV"; exit 1 ;;
@@ -51,7 +51,7 @@ test *ARGS='':
 _test-matrix:
     @echo "Cleaning old coverage files..."
     @rm -rf .coverage* htmlcov
-    @just _test-env legacy 3.10
+    @just _test-env legacy 3.11
     @just _test-env previous 3.13
     @just _test-env latest 3.14
     @just _test-env latest-pyuca 3.14
@@ -66,16 +66,16 @@ _test-env ENV PYTHON:
     @case "{{ ENV }}" in \
         legacy) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==4.2.*" \
-                   --with "djangorestframework==3.14.*" \
+                   --with "Django==5.2.*" \
+                   --with "djangorestframework==3.16.*" \
                    --with "pyuca" \
                    --group test \
                    coverage run -m pytest \
             ;; \
         previous) \
             uv run --python {{ PYTHON }} \
-                   --with "Django==5.2.*" \
-                   --with "djangorestframework==3.16.*" \
+                   --with "Django==6.1.*" \
+                   --with "djangorestframework==3.18.*" \
                    --group test \
                    coverage run -m pytest \
             ;; \

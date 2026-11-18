@@ -106,12 +106,15 @@ class TestCountriesFirstByLanguage(BaseTest):
 
     def test_underscore_locale_format(self):
         """Test that fr_CA format works the same as fr-CA."""
-        with self.settings(
-            COUNTRIES_FIRST_BY_LANGUAGE={
-                "fr": ["FR", "CH", "BE", "LU"],
-            },
-            COUNTRIES_FIRST_AUTO_DETECT=True,
-        ), translation.override("fr_CA"):
+        with (
+            self.settings(
+                COUNTRIES_FIRST_BY_LANGUAGE={
+                    "fr": ["FR", "CH", "BE", "LU"],
+                },
+                COUNTRIES_FIRST_AUTO_DETECT=True,
+            ),
+            translation.override("fr_CA"),
+        ):
             country_list = list(countries)
             self.assertEqual(country_list[0].code, "CA")
             self.assertEqual(country_list[1].code, "FR")
@@ -213,11 +216,14 @@ class TestCountriesContext(BaseTest):
     @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_context_overrides_language_mapping(self):
         """Test that context can override language mapping explicitly."""
-        with self.settings(
-            COUNTRIES_FIRST_BY_LANGUAGE={
-                "fr": ["FR", "CH", "BE", "LU"],
-            }
-        ), translation.override("fr"):
+        with (
+            self.settings(
+                COUNTRIES_FIRST_BY_LANGUAGE={
+                    "fr": ["FR", "CH", "BE", "LU"],
+                }
+            ),
+            translation.override("fr"),
+        ):
             # Without context, should use language mapping
             country_list = list(countries)
             self.assertEqual(country_list[0].code, "FR")
@@ -493,11 +499,14 @@ class TestCountriesLength(BaseTest):
     @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_len_with_language_mapping(self):
         """Test that length calculation works with language-based first countries."""
-        with self.settings(
-            COUNTRIES_FIRST_BY_LANGUAGE={
-                "fr": ["FR", "CH", "BE"],
-            }
-        ), translation.override("fr"):
+        with (
+            self.settings(
+                COUNTRIES_FIRST_BY_LANGUAGE={
+                    "fr": ["FR", "CH", "BE"],
+                }
+            ),
+            translation.override("fr"),
+        ):
             # Length should account for first countries
             length = len(countries)
             # Base countries (249) + first countries (3) = 252
@@ -522,10 +531,13 @@ class TestCountriesLength(BaseTest):
     @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
     def test_len_with_auto_detect_and_countries_first(self):
         """Test length with auto-detect combined with COUNTRIES_FIRST."""
-        with self.settings(
-            COUNTRIES_FIRST_AUTO_DETECT=True,
-            COUNTRIES_FIRST=["US", "GB"],
-        ), translation.override("en-AU"):
+        with (
+            self.settings(
+                COUNTRIES_FIRST_AUTO_DETECT=True,
+                COUNTRIES_FIRST=["US", "GB"],
+            ),
+            translation.override("en-AU"),
+        ):
             length = len(countries)
             # 249 countries + 3 first (AU, US, GB)
             self.assertEqual(length, 249 + 3)

@@ -5,11 +5,11 @@ This stub file provides enhanced type hints for better IDE support.
 The actual implementation is in fields.py.
 """
 
-from typing import Any, Iterable, Iterator, Literal, overload
+from collections.abc import Iterable, Iterator
+from typing import Any, Literal, Self, TypeAlias, overload
 
 from django.db import models
 from django.utils.functional import _StrPromise
-from typing_extensions import Self, TypeAlias
 
 from django_countries import Countries
 

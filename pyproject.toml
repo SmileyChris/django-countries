@@ -18,19 +18,17 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Framework :: Django",
-    "Framework :: Django :: 4.2",
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
     "Framework :: Django :: 6.1",
 ]
-requires-python = ">=3.10"
-dependencies = ["Django>=4.2", "asgiref", "typing_extensions"]
+requires-python = ">=3.11"
+dependencies = ["Django>=5.2", "asgiref", "typing_extensions"]
 
 [project.urls]
 Homepage = "https://github.com/SmileyChris/django-countries/"
@@ -57,8 +55,7 @@ dev = [
     "ruff",
     "django",
     "mypy>=1.12,<1.16",
-    "django-stubs>=4.2.7,<5; python_version < '3.9'",
-    "django-stubs>=5.0.0; python_version >= '3.9'",
+    "django-stubs>=5.0.0",
     "djangorestframework-stubs",
     "Pillow",
     "types-Pillow",
@@ -91,7 +88,7 @@ exclude_lines = ["pragma: no cover", "@overload", "if TYPE_CHECKING:"]
 [tool.mypy]
 plugins = ["mypy_django_plugin.main"]
 disallow_untyped_calls = true
-python_version = "3.9"
+python_version = "3.11"
 
 [[tool.mypy.overrides]]
 module = "mypy_django_plugin.*"
@@ -106,7 +103,7 @@ django_settings_module = "django_countries.tests.settings"
 
 [tool.ruff]
 line-length = 88
-target-version = "py38"
+target-version = "py311"
 
 [tool.ruff.lint]
 # Enable pycodestyle (E, W), Pyflakes (F), isort (I), pyupgrade (UP)
