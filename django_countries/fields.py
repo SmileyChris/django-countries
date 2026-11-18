@@ -23,9 +23,7 @@ _entry_points: Iterable[Any]
 try:
     import importlib.metadata
 
-    _entry_points = importlib.metadata.entry_points(
-        group="django_countries.Country"
-    )
+    _entry_points = importlib.metadata.entry_points(group="django_countries.Country")
 except ImportError:  # Python <3.8  # pragma: no cover
     import pkg_resources  # type: ignore
 
