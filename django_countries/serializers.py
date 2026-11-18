@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any
 
 from django.core.exceptions import FieldDoesNotExist
 from rest_framework import serializers
@@ -43,7 +43,7 @@ class CountryFieldMixin:
         return extra_kwargs
 
     def build_standard_field(self, field_name, model_field):
-        field_kwargs: Dict[str, Any]
+        field_kwargs: dict[str, Any]
         field_class, field_kwargs = super().build_standard_field(  # type: ignore
             field_name, model_field
         )

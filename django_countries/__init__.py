@@ -2,22 +2,16 @@
 import builtins as _builtins
 import itertools
 import re
+from collections.abc import Callable, Iterable
 from contextlib import contextmanager
 from gettext import NullTranslations
 from typing import (
     TYPE_CHECKING,
     Any,
-    Callable,
-    Dict,
-    Iterable,
-    List,
     Literal,
     NamedTuple,
     Optional,
-    Set,
-    Tuple,
     TypedDict,
-    Union,
     cast,
     overload,
 )
@@ -35,17 +29,14 @@ if TYPE_CHECKING:
 
     class ComplexCountryName(TypedDict, total=False):
         name: "StrPromise"
-        names: "List[StrPromise]"
+        names: "list[StrPromise]"
         alpha3: str
         numeric: int
         ioc_code: str
         flag_url: str
 
-    CountryName = Union[
-        StrPromise,  # type: ignore
-        ComplexCountryName,
-    ]
-    CountryCode = Union[str, int, None]
+    CountryName = StrPromise | ComplexCountryName  # type: ignore
+    CountryCode = str | int | None
 
 
 try:
@@ -54,7 +45,7 @@ try:
     collator = pyuca.Collator()
 
     # Use UCA sorting if it's available.
-    def sort_key(item: Tuple[str, str]) -> Any:
+    def sort_key(item: tuple[str, str]) -> Any:
         return collator.sort_key(item[1])
 
 except ImportError:
@@ -62,7 +53,7 @@ except ImportError:
     import unicodedata
 
     # Cheap and dirty method to sort against ASCII characters only.
-    def sort_key(item: Tuple[str, str]) -> Any:
+    def sort_key(item: tuple[str, str]) -> Any:
         return (
             unicodedata.normalize("NFKD", item[1])
             .encode("ascii", "ignore")
@@ -164,7 +155,7 @@ def no_translation_fallback():
 
 class AltCodes(NamedTuple):
     alpha3: str
-    numeric: Optional[int]
+    numeric: int | None
 
 
 class CountryTuple(NamedTuple):
@@ -187,10 +178,10 @@ class Countries(CountriesBase):
     the country ``code`` and ``name``), sorted by name.
     """
 
-    _countries: Dict[str, "CountryName"]
-    _alt_codes: Dict[str, AltCodes]
+    _countries: dict[str, "CountryName"]
+    _alt_codes: dict[str, AltCodes]
 
-    def _resolve_first_countries(self) -> List[str]:
+    def _resolve_first_countries(self) -> list[str]:
         """
         Resolve which countries should be shown first.
 
@@ -217,7 +208,7 @@ class Countries(CountriesBase):
         auto_detect: bool = self.get_option("first_auto_detect") or False
 
         # Get language-based mapping (checks context, instance, then settings)
-        by_language: Dict[str, List[str]] = self.get_option("first_by_language") or {}
+        by_language: dict[str, list[str]] = self.get_option("first_by_language") or {}
 
         if by_language:
             language = get_language()
@@ -274,7 +265,7 @@ class Countries(CountriesBase):
                     country_code = parts[1].upper()
                     if country_code:
                         # Combine auto-detected with COUNTRIES_FIRST
-                        fallback_first: List[str] = self.get_option("first") or []
+                        fallback_first: list[str] = self.get_option("first") or []
                         # Prepend auto-detected country, removing duplicates
                         result = [country_code]
                         for code in fallback_first:
@@ -306,7 +297,7 @@ class Countries(CountriesBase):
         return getattr(settings, f"COUNTRIES_{option.upper()}")
 
     @property
-    def countries(self) -> Dict[str, "CountryName"]:
+    def countries(self) -> dict[str, "CountryName"]:
         """
         Return the a dictionary of countries, modified by any overriding
         options.
@@ -326,13 +317,13 @@ class Countries(CountriesBase):
             self._countries = self._build_countries_dict()
         return self._countries
 
-    def _build_countries_dict(self) -> Dict[str, "CountryName"]:
+    def _build_countries_dict(self) -> dict[str, "CountryName"]:
         """
         Build the countries dictionary based on current options.
         This is called by the countries property and may be cached or not
         depending on whether context is active.
         """
-        only: Iterable[Union[str, Tuple[str, StrPromise]]] = self.get_option("only")
+        only: Iterable[str | tuple[str, StrPromise]] = self.get_option("only")
         only_choices = True
         # Originally used ``only`` as a dict, still supported.
         if only and not isinstance(only, dict):
@@ -342,9 +333,9 @@ class Countries(CountriesBase):
                     break
 
         if not hasattr(self, "_shadowed_names"):
-            self._shadowed_names: Dict[str, List[StrPromise]] = {}
+            self._shadowed_names: dict[str, list[StrPromise]] = {}
 
-        result_countries: Dict[str, CountryName]
+        result_countries: dict[str, CountryName]
 
         if only and only_choices:
             result_countries = dict(only)  # type: ignore
@@ -370,10 +361,10 @@ class Countries(CountriesBase):
                     if code in result_countries:
                         result_countries[code] = name
 
-            override: Dict[str, Union[CountryName, None]] = self.get_option("override")
+            override: dict[str, CountryName | None] = self.get_option("override")
             if override:
                 _countries = cast(
-                    "Dict[str, Union[CountryName, None]]", result_countries.copy()
+                    "dict[str, CountryName | None]", result_countries.copy()
                 )
                 for code, override_value in override.items():
                     if override_value is None:
@@ -420,7 +411,7 @@ class Countries(CountriesBase):
                     country_shadowed.extend(names)
 
         self.countries_first = []
-        first: List[str] = self.get_option("first") or []
+        first: list[str] = self.get_option("first") or []
         for code in first:
             # Just uppercase the code - don't use alpha2() to avoid recursion
             code_upper = force_str(code).upper()
@@ -450,7 +441,7 @@ class Countries(CountriesBase):
             del self._iter_cache
 
     @property
-    def alt_codes(self) -> Dict[str, AltCodes]:
+    def alt_codes(self) -> dict[str, AltCodes]:
         if not hasattr(self, "_alt_codes"):
             # Again, local import so data is not loaded unless it's needed.
             from django_countries.data import ALT_CODES
@@ -473,7 +464,7 @@ class Countries(CountriesBase):
         return self._alt_codes
 
     @property
-    def ioc_codes(self) -> Dict[str, str]:
+    def ioc_codes(self) -> dict[str, str]:
         if not hasattr(self, "_ioc_codes"):
             from django_countries.ioc_data import ISO_TO_IOC
 
@@ -488,9 +479,9 @@ class Countries(CountriesBase):
         return self._ioc_codes
 
     @property
-    def flag_urls(self) -> Dict[str, str]:
+    def flag_urls(self) -> dict[str, str]:
         if not hasattr(self, "_flag_urls"):
-            self._flag_urls: Dict[str, str] = {}
+            self._flag_urls: dict[str, str] = {}
             for code, country in self.countries.items():
                 if isinstance(country, dict) and "flag_url" in country:
                     self._flag_urls[code] = country["flag_url"]
@@ -503,7 +494,7 @@ class Countries(CountriesBase):
             self.countries  # noqa: B018
         return self._shadowed_names
 
-    def translate_code(self, code: str, ignore_first: Optional[List[str]] = None):
+    def translate_code(self, code: str, ignore_first: list[str] | None = None):
         """
         Return translated countries for a country code.
         """
@@ -527,7 +518,7 @@ class Countries(CountriesBase):
             name = self.countries[code]
         if isinstance(name, dict):
             if "names" in name:
-                fallback_names: List[StrPromise] = name["names"][1:]
+                fallback_names: list[StrPromise] = name["names"][1:]
                 name = name["names"][0]
             else:
                 fallback_names = []
@@ -608,8 +599,8 @@ class Countries(CountriesBase):
 
         # Initialize cache if needed
         if not hasattr(self, "_iter_cache"):
-            self._iter_cache: Dict[
-                Tuple[Optional[str], Tuple[str, ...], Tuple], List[CountryTuple]
+            self._iter_cache: dict[
+                tuple[str | None, tuple[str, ...], tuple], list[CountryTuple]
             ] = {}
 
         # Return cached results if available for this language + first countries
@@ -662,10 +653,10 @@ class Countries(CountriesBase):
     def sorted(
         self,
         *,
-        locale: Optional[str] = None,
-        key: Optional[Callable] = None,
+        locale: str | None = None,
+        key: Callable | None = None,
         reverse: bool = False,
-    ) -> List[CountryTuple]:
+    ) -> list[CountryTuple]:
         """
         Return a list of countries sorted by translated name for a locale.
 
@@ -713,8 +704,8 @@ class Countries(CountriesBase):
         if code_str in self.countries:
             return code_str
 
-        find_index: Optional[int]
-        find_value: Union[str, int, None]
+        find_index: int | None
+        find_value: str | int | None
 
         if code_str.isdigit():
             find_index = 1
@@ -764,7 +755,7 @@ class Countries(CountriesBase):
         regex: Literal[True],
         language: str = "en",
         insensitive: bool = True,
-    ) -> Set[str]: ...
+    ) -> set[str]: ...
 
     def by_name(
         self,
@@ -773,7 +764,7 @@ class Countries(CountriesBase):
         regex: bool = False,
         language: str = "en",
         insensitive: bool = True,
-    ) -> Union[str, Set[str]]:
+    ) -> str | set[str]:
         """
         Fetch a country's ISO3166-1 two letter country code from its name.
 
@@ -802,7 +793,7 @@ class Countries(CountriesBase):
             for code, check_country in self.countries.items():
                 if isinstance(check_country, dict):
                     if "names" in check_country:
-                        check_names: List[StrPromise] = check_country["names"]
+                        check_names: list[StrPromise] = check_country["names"]
                     else:
                         check_names = [check_country["name"]]
                 else:
@@ -847,12 +838,12 @@ class Countries(CountriesBase):
         return alpha3 or ""
 
     @overload
-    def numeric(self, code: Union[str, int, None]) -> Optional[int]: ...
+    def numeric(self, code: str | int | None) -> int | None: ...
 
     @overload
-    def numeric(self, code: Union[str, int, None], padded=True) -> Optional[str]: ...
+    def numeric(self, code: str | int | None, padded=True) -> str | None: ...
 
-    def numeric(self, code: Union[str, int, None], padded: bool = False):
+    def numeric(self, code: str | int | None, padded: bool = False):
         """
         Return the ISO 3166-1 numeric country code matching the provided
         country code.

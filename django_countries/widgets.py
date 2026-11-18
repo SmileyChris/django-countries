@@ -1,5 +1,4 @@
 import copy
-from typing import Dict, List, Union
 from urllib import parse as urlparse
 
 import django
@@ -17,7 +16,7 @@ COUNTRY_CHANGE_HANDLER = (
     ".replace('{code_upper}', this.value.toUpperCase() || '__');"
 )
 
-ChoiceList = List[List[Union[int, str]]]
+ChoiceList = list[list[int | str]]
 
 
 class LazyChoicesMixin:
@@ -42,7 +41,7 @@ class LazyChoicesMixin:
 
 
 class LazySelectMixin(LazyChoicesMixin):
-    attrs: Dict[str, str]
+    attrs: dict[str, str]
 
     if django.VERSION < (5, 0):
 

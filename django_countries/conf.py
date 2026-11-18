@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any
 
 import django.conf
 
@@ -45,7 +45,7 @@ class Settings(AppSettings):
         "Taiwan" instead of "Taiwan (Province of China)"
     """
 
-    COUNTRIES_OVERRIDE: Dict[str, Any] = {}
+    COUNTRIES_OVERRIDE: dict[str, Any] = {}
     """
     A dictionary of names to override the defaults.
 
@@ -60,7 +60,7 @@ class Settings(AppSettings):
         }
     """
 
-    COUNTRIES_ONLY: Dict[str, Any] = {}
+    COUNTRIES_ONLY: dict[str, Any] = {}
     """
     Similar to COUNTRIES_OVERRIDE
     A dictionary of names to include in selection.
@@ -75,7 +75,7 @@ class Settings(AppSettings):
         }
     """
 
-    COUNTRIES_FIRST: List[str] = []
+    COUNTRIES_FIRST: list[str] = []
     """
     Countries matching the country codes provided in this list will be shown
     first in the countries list (in the order specified) before all the
@@ -102,7 +102,7 @@ class Settings(AppSettings):
     order in :attr:`COUNTRIES_FIRST`.
     """
 
-    COUNTRIES_FIRST_BY_LANGUAGE: Dict[str, List[str]] = {}
+    COUNTRIES_FIRST_BY_LANGUAGE: dict[str, list[str]] = {}
     """
     A dictionary mapping language codes to lists of countries to show first.
 

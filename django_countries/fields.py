@@ -1,12 +1,10 @@
 import re
-import sys
-from typing import TYPE_CHECKING, Any, Iterable, Optional, Tuple, Type, Union, cast
+from collections.abc import Iterable
+from typing import TYPE_CHECKING, Any, Optional, cast
 from urllib import parse as urlparse
 
 if TYPE_CHECKING:
-    from typing import overload
-
-    from typing_extensions import Self
+    from typing import Self, overload
 
 import django
 from django import forms
@@ -25,14 +23,9 @@ _entry_points: Iterable[Any]
 try:
     import importlib.metadata
 
-    if sys.version_info >= (3, 10):
-        _entry_points = importlib.metadata.entry_points(
-            group="django_countries.Country"
-        )
-    else:
-        _entry_points = importlib.metadata.entry_points().get(
-            "django_countries.Country", []
-        )
+    _entry_points = importlib.metadata.entry_points(
+        group="django_countries.Country"
+    )
 except ImportError:  # Python <3.8  # pragma: no cover
     import pkg_resources  # type: ignore
 
@@ -62,9 +55,9 @@ class Country:
     def __init__(
         self,
         code: str,
-        flag_url: Optional[str] = None,
+        flag_url: str | None = None,
         str_attr: str = "code",
-        custom_countries: Optional[Countries] = None,
+        custom_countries: Countries | None = None,
     ):
         self.flag_url = flag_url
         self._escape = False
@@ -123,11 +116,11 @@ class Country:
         return self.countries.alpha3(self.code)
 
     @property
-    def numeric(self) -> Optional[int]:
+    def numeric(self) -> int | None:
         return self.countries.numeric(self.code)
 
     @property
-    def numeric_padded(self) -> Optional[str]:
+    def numeric_padded(self) -> str | None:
         return self.countries.numeric(self.code, padded=True)
 
     @property
@@ -185,7 +178,7 @@ class Country:
 
     @staticmethod
     def country_from_ioc(
-        ioc_code: str, flag_url: Optional[str] = None
+        ioc_code: str, flag_url: str | None = None
     ) -> Optional["Country"]:
         code = ioc_data.IOC_TO_ISO.get(ioc_code, "")
         if code == "":
@@ -298,7 +291,7 @@ class CountryDescriptor:
         @overload
         def __get__(
             self, instance: Any, owner: Any
-        ) -> Union[Country, MultipleCountriesDescriptor]: ...
+        ) -> Country | MultipleCountriesDescriptor: ...
 
     def __get__(self, instance=None, owner=None):
         if instance is None:
@@ -331,7 +324,7 @@ class CountryDescriptor:
 
 
 class LazyChoicesMixin(widgets.LazyChoicesMixin):
-    widget: Type[forms.widgets.ChoiceWidget]
+    widget: type[forms.widgets.ChoiceWidget]
 
     if django.VERSION < (5, 0):
 
@@ -343,9 +336,9 @@ class LazyChoicesMixin(widgets.LazyChoicesMixin):
             self.widget.choices = value  # type: ignore
 
 
-_Choice = Tuple[Any, str]
-_ChoiceNamedGroup = Tuple[str, Iterable[_Choice]]
-_FieldChoices = Iterable[Union[_Choice, _ChoiceNamedGroup]]
+_Choice = tuple[Any, str]
+_ChoiceNamedGroup = tuple[str, Iterable[_Choice]]
+_FieldChoices = Iterable[_Choice | _ChoiceNamedGroup]
 
 
 class LazyTypedChoiceField(LazyChoicesMixin, forms.TypedChoiceField):
@@ -396,7 +389,7 @@ class CountryField(CharField):
     countries: Countries
 
     def __init__(self, *args: Any, **kwargs: Any):
-        countries_class: Type[Countries] = kwargs.pop("countries", None)
+        countries_class: type[Countries] = kwargs.pop("countries", None)
         self.countries = countries_class() if countries_class else countries
         self.countries_flag_url = kwargs.pop("countries_flag_url", None)
         self.countries_str_attr = kwargs.pop("countries_str_attr", "code")
@@ -564,10 +557,10 @@ class CountryField(CharField):
 
     def formfield(
         self,
-        form_class: Optional[Type[forms.Field]] = None,
-        choices_form_class: Optional[Type[forms.ChoiceField]] = None,
+        form_class: type[forms.Field] | None = None,
+        choices_form_class: type[forms.ChoiceField] | None = None,
         **kwargs: Any,
-    ) -> Optional[forms.Field]:
+    ) -> forms.Field | None:
         """
         Return a form field for this model field.
 
@@ -584,11 +577,11 @@ class CountryField(CharField):
             A form field (LazyTypedChoiceField or LazyTypedMultipleChoiceField).
         """
         # Extract empty_label from kwargs (not part of parent signature)
-        empty_label: Optional[str] = kwargs.pop("empty_label", None)
+        empty_label: str | None = kwargs.pop("empty_label", None)
 
         if choices_form_class is None:
             choices_form_class = cast(
-                "Type[forms.ChoiceField]",
+                "type[forms.ChoiceField]",
                 LazyTypedMultipleChoiceField if self.multiple else LazyTypedChoiceField,
             )
         if "coerce" not in kwargs:

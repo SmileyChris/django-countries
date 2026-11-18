@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 from django.utils.encoding import force_str
 from django.utils.translation import get_language
@@ -141,10 +141,10 @@ class CountryField(serializers.ChoiceField):
         # For standard code output, don't set annotation to allow
         # default ChoiceField enum handling
 
-    def _build_country_dict_keys(self) -> List[str]:
+    def _build_country_dict_keys(self) -> list[str]:
         return self._normalize_country_dict_option(self.country_dict)
 
-    def _normalize_country_dict_option(self, option) -> List[str]:
+    def _normalize_country_dict_option(self, option) -> list[str]:
         if not option:
             return []
         if option is True:
@@ -160,7 +160,7 @@ class CountryField(serializers.ChoiceField):
                 ) from exc
         if not candidate:
             raise ValueError("country_dict iterable must include at least one key.")
-        normalized: List[str] = []
+        normalized: list[str] = []
         seen = set()
         for raw_key in candidate:
             if not isinstance(raw_key, str):
