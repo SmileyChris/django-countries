@@ -317,6 +317,23 @@ class TestCountriesContext(BaseTest):
                 self.assertEqual(country_list[2].code, "")
                 self.assertEqual(country_list[2].name, "───────")
 
+    def test_context_with_first_by_language_mapping(self):
+        language = translation.get_language()
+        with countries_context(first_by_language={language: ["FR", "CH"]}):
+            codes = [c.code for c in countries]
+        self.assertEqual(codes[:2], ["FR", "CH"])
+
+    def test_context_with_sets(self):
+        with countries_context(first={"CA"}):
+            codes = [c.code for c in countries]
+        self.assertEqual(codes[0], "CA")
+
+    def test_context_with_only_before_countries_loaded(self):
+        fresh = Countries()
+        with countries_context(only=["US", "CA"], first=["CA"]):
+            self.assertEqual([c.code for c in fresh], ["CA", "US"])
+            self.assertEqual(len(fresh), 3)
+
 
 @pytest.mark.skipif(not settings.USE_I18N, reason="No i18n")
 class TestPerFieldCustomization(BaseTest):

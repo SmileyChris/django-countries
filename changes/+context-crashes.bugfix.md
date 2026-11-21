@@ -1,0 +1,1 @@
+Fix `countries_context()` raising a `TypeError` for options holding sets or nested lists (such as `first_by_language`), and an `AttributeError` when `only` was used before the country list had been loaded.

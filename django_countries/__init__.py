@@ -134,6 +134,20 @@ def countries_context(**options):
             del _countries_context.options
 
 
+def _hashable(value: Any) -> Any:
+    """
+    Recursively convert context option values into something usable as a
+    cache key (e.g. ``first_by_language`` is a dict of lists).
+    """
+    if isinstance(value, dict):
+        return tuple(sorted((k, _hashable(v)) for k, v in value.items()))
+    if isinstance(value, (set, frozenset)):
+        return frozenset(_hashable(v) for v in value)
+    if isinstance(value, (list, tuple)):
+        return tuple(_hashable(v) for v in value)
+    return value
+
+
 class EmptyFallbackTranslator(NullTranslations):
     def gettext(self, message: str) -> str:
         if not getattr(_translation_state, "fallback", True):
@@ -589,20 +603,7 @@ class Countries(CountriesBase):
         # Include all context options in cache key to ensure correct caching
         # when context overrides settings
         context_options = getattr(_countries_context, "options", None)
-        if context_options:
-            # Convert unhashable types to hashable for cache key
-            hashable_options = {}
-            for key, value in context_options.items():
-                if isinstance(value, list):
-                    hashable_options[key] = tuple(value)
-                elif isinstance(value, dict):
-                    # Convert dict to tuple of sorted items
-                    hashable_options[key] = tuple(sorted(value.items()))
-                else:
-                    hashable_options[key] = value
-            context_key = tuple(sorted(hashable_options.items()))
-        else:
-            context_key = ()
+        context_key = _hashable(context_options) if context_options else ()
 
         cache_key = (language, resolved_first, context_key)
 
@@ -628,7 +629,7 @@ class Countries(CountriesBase):
         first_codes = []
         for code in resolved_first:
             code = self.alpha2(code)
-            if code in self._countries:
+            if code in countries:
                 first_codes.append(code)
 
         # Yield countries that should be displayed first.
@@ -897,14 +898,15 @@ class Countries(CountriesBase):
         len() used by several third party applications to calculate the length
         of choices. This will solve a bug related to generating fixtures.
         """
-        count = len(self.countries)
+        countries = self.countries
+        count = len(countries)
         # Add first countries, and the break if necessary.
         resolved_first = self._resolve_first_countries()
         # Normalize country codes
         first_codes = []
         for code in resolved_first:
             code = self.alpha2(code)
-            if code in self._countries:
+            if code in countries:
                 first_codes.append(code)
         count += len(first_codes)
         if first_codes and self.get_option("first_break"):
