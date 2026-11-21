@@ -120,9 +120,11 @@ def countries_context(**options):
     """
     # Store previous context
     previous_context = getattr(_countries_context, "options", None)
+    previous_countries = getattr(_countries_context, "countries", None)
 
-    # Set new context
+    # Set new context, with an empty cache of countries built for it
     _countries_context.options = options
+    _countries_context.countries = {}
 
     try:
         yield
@@ -130,8 +132,12 @@ def countries_context(**options):
         # Restore previous context
         if previous_context is not None:
             _countries_context.options = previous_context
-        elif hasattr(_countries_context, "options"):
-            del _countries_context.options
+            _countries_context.countries = previous_countries
+        else:
+            if hasattr(_countries_context, "options"):
+                del _countries_context.options
+            if hasattr(_countries_context, "countries"):
+                del _countries_context.countries
 
 
 class EmptyFallbackTranslator(NullTranslations):
@@ -312,15 +318,19 @@ class Countries(CountriesBase):
         options.
 
         The result is cached so future lookups are less work intensive.
-        When context overrides 'only', we skip the cache to ensure correct results.
+        When context overrides 'only', the result is only cached for the
+        duration of that context.
         """
-        # Check if context overrides 'only' - if so, build fresh without caching
         context_options = getattr(_countries_context, "options", None)
         context_has_only = context_options and "only" in context_options
 
         if context_has_only:
-            # Build countries dict without caching when context overrides 'only'
-            return self._build_countries_dict()
+            context_cache = getattr(_countries_context, "countries", None)
+            if context_cache is None:
+                return self._build_countries_dict()
+            if self not in context_cache:
+                context_cache[self] = self._build_countries_dict()
+            return context_cache[self]
 
         if not hasattr(self, "_countries"):
             self._countries = self._build_countries_dict()
@@ -410,14 +420,16 @@ class Countries(CountriesBase):
                     code: name for code, name in _countries.items() if name is not None
                 }
 
+            # Built from scratch so repeated builds don't keep appending names.
+            shadowed: Dict[str, List[StrPromise]] = {}
             if self.get_option("common_names"):
                 for code in self.COMMON_NAMES:
                     if code in result_countries and code not in override:
-                        self._shadowed_names[code] = [countries_dict[code]]
+                        shadowed[code] = [countries_dict[code]]
             for code, names in self.OLD_NAMES.items():
                 if code in result_countries and code not in override:
-                    country_shadowed = self._shadowed_names.setdefault(code, [])
-                    country_shadowed.extend(names)
+                    shadowed[code] = shadowed.get(code, []) + names
+            self._shadowed_names.update(shadowed)
 
         self.countries_first = []
         first: List[str] = self.get_option("first") or []
@@ -448,6 +460,7 @@ class Countries(CountriesBase):
             del self._shadowed_names
         if hasattr(self, "_iter_cache"):
             del self._iter_cache
+        (getattr(_countries_context, "countries", None) or {}).pop(self, None)
 
     @property
     def alt_codes(self) -> Dict[str, AltCodes]:
