@@ -143,6 +143,7 @@ class TestMultipleCountryAdminDisplay(TestCase):
         # Single fields should have flatchoices
         flatchoices = field.flatchoices
         self.assertIsNotNone(flatchoices)
+        self.assertEqual(flatchoices, list(field.choices))
 
         # display_for_field should work normally for single fields
         result = display_for_field(person.country, field, "-")

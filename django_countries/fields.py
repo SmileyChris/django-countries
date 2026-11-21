@@ -458,10 +458,14 @@ class CountryField(CharField):
         look up the value in flatchoices. Since the value is a
         MultipleCountriesDescriptor, we return None so Django skips the
         choice lookup and uses str() instead.
+
+        For single fields, the countries are already a flat list, so this skips
+        Django's generic choice normalization (slow when run for every row of
+        an admin changelist).
         """
         if self.multiple:
             return None
-        return super().flatchoices
+        return list(self.countries)
 
     def country_to_text(self, value):
         if hasattr(value, "code"):
