@@ -81,13 +81,16 @@ class Country:
         return force_str(getattr(self, self._str_attr) or "")
 
     def __eq__(self, other):
+        # Compare codes, str() of a Country depends on str_attr.
+        if isinstance(other, Country):
+            other = other.code
         return force_str(self.code or "") == force_str(other or "")
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __hash__(self):
-        return hash(force_str(self))
+        return hash(force_str(self.code or ""))
 
     def __repr__(self):
         args = [f"code={self.code!r}"]
