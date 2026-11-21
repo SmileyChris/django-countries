@@ -1,4 +1,6 @@
 # ruff: noqa: SIM117
+from unittest import mock
+
 import pytest
 from django.test import TestCase
 from django.utils import translation
@@ -192,6 +194,23 @@ class TestCountriesFirstByLanguage(BaseTest):
 
 class TestCountriesContext(BaseTest):
     """Test countries_context() context manager."""
+
+    def test_context_with_only_builds_countries_once(self):
+        fresh = Countries()
+        build = fresh._build_countries_dict
+        with mock.patch.object(fresh, "_build_countries_dict", wraps=build) as m:
+            with countries_context(only=["US", "TR"]):
+                for _ in range(3):
+                    self.assertEqual(fresh.name("US"), "United States of America")
+                    self.assertEqual(fresh.alpha2("CA"), "")
+            self.assertEqual(m.call_count, 1)
+            # A new context doesn't reuse the previous one's countries.
+            with countries_context(only=["CA"]):
+                self.assertEqual(fresh.alpha2("CA"), "CA")
+                self.assertEqual(fresh.alpha2("US"), "")
+            self.assertEqual(m.call_count, 2)
+        self.assertEqual(fresh.alpha2("CA"), "CA")
+        self.assertEqual(len(fresh.shadowed_names["TR"]), 1)
 
     def test_context_override(self):
         """Test that context manager overrides settings."""
