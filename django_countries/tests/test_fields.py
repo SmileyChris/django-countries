@@ -720,6 +720,26 @@ class TestCountryObject(TestCase):
         country = fields.Country(code="XX", flag_url="")
         self.assertEqual(hash(country), hash("XX"))
 
+    def test_hash_str_attr(self):
+        country = fields.Country(code="NZ", str_attr="name")
+        self.assertEqual(hash(country), hash("NZ"))
+        self.assertIn(country, {"NZ"})
+
+    def test_eq_str_attr(self):
+        country = fields.Country(code="NZ", str_attr="name")
+        self.assertEqual(country, fields.Country(code="NZ", str_attr="name"))
+        self.assertEqual(country, fields.Country(code="NZ"))
+        self.assertNotEqual(country, fields.Country(code="AU", str_attr="name"))
+
+    def test_admin_display_str_attr(self):
+        from django.contrib.admin.utils import display_for_field
+
+        person = Person(name="Chris Beaven", str_attr_country="NZ")
+        field = Person._meta.get_field("str_attr_country")
+        self.assertEqual(
+            display_for_field(person.str_attr_country, field, "-"), "New Zealand"
+        )
+
     def test_repr(self):
         country1 = fields.Country(code="XX")
         country2 = fields.Country(code="XX", flag_url="")
